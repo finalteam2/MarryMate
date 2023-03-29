@@ -69,21 +69,21 @@
 				</table>
 			</div>
 			<div>
-				<table width="320" align="center" border="1" cellspacing="0">
-					<tr height="350">
+				<table width="320" height="550" align="center" border="1" cellspacing="0">
+					<tr>
 						<td>무엇을 도와드릴까요?</td>
 					</tr>
 					<tr height="50">
-						<td>질문1</td>
+						<td><input type="button" value="질문1"></td>
 					</tr>
 					<tr height="50">
-						<td>질문2</td>
+						<td><input type="button" value="질문2"></td>
 					</tr>
 					<tr height="50">
-						<td>질문3</td>
+						<td><input type="button" value="질문3"></td>
 					</tr>
 					<tr height="50">
-						<td>1:1 채팅하기</td>
+						<td><input type="button" value="1:1 채팅하기"></td>
 					</tr>
 				</table>
 			</div>
