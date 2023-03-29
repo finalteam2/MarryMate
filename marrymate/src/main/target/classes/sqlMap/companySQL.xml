@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marry.company">
+	<insert id="companyInsert" parameterType="com.marry.company.model.CompanyDTO">
+		insert into
+			company
+		values(
+			company_cidx.nextval,
+			#{cname},
+			#{kind},
+			#{id},
+			#{pwd},
+			#{tel},
+			#{email},
+			#{juso},
+			#{sjuso},
+			#{url},
+			#{sido},
+			#{sigungu},
+			#{intro},
+			#{pay},
+			#{cnum},
+			#{cfile},
+			0,
+			0,
+			0
+		)
+	</insert>
+</mapper>
