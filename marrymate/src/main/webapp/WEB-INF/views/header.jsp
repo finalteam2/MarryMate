@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- NAVIGATION -->
-<header id="header">
+<a name="header"><header id="header"></a>
 			<nav id="nav-bar">
 					<!--LOGO -->
 					<div id="menu">

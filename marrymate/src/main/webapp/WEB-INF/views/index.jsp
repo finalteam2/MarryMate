@@ -26,7 +26,7 @@
 	<div><a href=""><img src="/marrymate/img/ex3.png"></a></div>
 </section>
 
-
+<%@include file="chatbot.jsp" %>
 <%@include file="footer.jsp" %>
 </body>
 </html>
