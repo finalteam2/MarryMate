@@ -4,7 +4,7 @@ public class SearchDTO {
 
 	private String sido;
 	private String sigungu;
-	private int[] hallType;
+	private String[] hallType;
 	private int foodMin;
 	private int foodMax;
 	private int guestMin;
@@ -40,7 +40,7 @@ public class SearchDTO {
 		super();
 	}
 
-	public SearchDTO(String sido, String sigungu, int[] hallType, int foodMin, int foodMax, int guestMin, int guestMax,
+	public SearchDTO(String sido, String sigungu, String[] hallType, int foodMin, int foodMax, int guestMin, int guestMax,
 			String name, String sort, int view) {
 		super();
 		this.sido = sido;
@@ -71,11 +71,11 @@ public class SearchDTO {
 		this.sigungu = sigungu;
 	}
 
-	public int[] getHallType() {
+	public String[] getHallType() {
 		return hallType;
 	}
 
-	public void setHallType(int[] hallType) {
+	public void setHallType(String[] hallType) {
 		this.hallType = hallType;
 	}
 

@@ -1,11 +1,14 @@
 package com.marry.search.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.marry.company.model.CompanyDTO;
 
 public class SearchDAOImple implements SearchDAO {
 	
@@ -22,14 +25,19 @@ public class SearchDAOImple implements SearchDAO {
 	@Override
 	public int searchTest() {
 		int result = sqlMap.selectOne("searchTest");
-//		System.out.println("dao 테스트 결과 : " + result);
 		return result;
 	}
 
 	@Override
 	public List searchTest2(SearchDTO dto) {
 		List<String> result = sqlMap.selectList("searchTest2", dto);
-//		System.out.println("dao 테스트 결과 : " + result.get(0));
 		return result;
+	}
+	
+	@Override
+	public List<CompanyDTO> searchAll(SearchDTO dto) {
+		List arr = new ArrayList();
+		arr = sqlMap.selectList("searchAll", dto);
+		return arr;
 	}
 }
