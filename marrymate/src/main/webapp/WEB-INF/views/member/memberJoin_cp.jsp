@@ -192,10 +192,8 @@
 			<form name="join_cp" action="join_cp.do" method="post">
 			<div class="box">
 				<div id="iBox">
-					<div class="hClear">사업자등록번호</div>
-					<input type="text" name="cname">&nbsp;<input type="file" name=""><br>
 					<div class="hTagBox">아이디</div>
-					<input type="text" name="coid">
+					<input type="text" name="cid">
 					<input type="button" value="중복확인"><br>
 					<div class="hClear">비밀번호</div>
 					<input type="password" name="pwd"><br>
@@ -212,11 +210,13 @@
 				</div>
 				<div id="aBox">
 					<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;기업 정보</h3>
-					<input type="hidden" name="colevel" value="0">
+					<input type="hidden" name="clevel" value="0">
 					<input type="hidden" name="blind" value="0">
 					<input type="hidden" name="watch" value="0">
+					<div class="hTagBox">사업자등록번호</div>
+					<input type="text" name="cnum">&nbsp;<input type="file" name=""><br>
 					<div class="hClear">기업명</div>
-					<input type="text" name="coname"><br>
+					<input type="text" name="cname"><br>
 					<div class="hTagBox">지역</div>
 					<select name="sido">
 						<option value="서울">서울</option>
