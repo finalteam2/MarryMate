@@ -1,4 +1,4 @@
-package com.admin.admin_cs.model;
+package com.marry.admin_cs.model;
 
 public class Admin_csDTO {
 	
