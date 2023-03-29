@@ -5,50 +5,46 @@ import org.springframework.web.multipart.MultipartFile;
 public class CompanyDTO {
 	
 	private int cidx;
-	private String cname;
 	private String kind;
-	private String cid;
+	private String cname;
+	private String intro;
+	private String id;
 	private String pwd;
 	private String tel;
 	private String email;
 	private String juso;
 	private String sjuso;
-	private String curl;
-	private String sido;
-	private String sigungu;
-	private String intro;
 	private int pay;
-	private String cnum;
-	private MultipartFile cfile;
-	private int clvel;
+	private int cnum;
+	private String cfile;
+	private int clevel;
 	private int blind;
+	private int watch;
 	
 	public CompanyDTO() {
 		super();
 	}
 
-	public CompanyDTO(int cidx, String cname, String kind, String cid, String pwd, String tel, String email,
-			String juso, String sjuso, String curl, String sido, String sigungu, String intro, int pay, String cnum,
-			MultipartFile cfile, int clvel, int blind) {
+	public CompanyDTO(int cidx, String kind, String cname, String intro, String id, String pwd, String tel,
+			String email, String juso, String sjuso, int pay, int cnum, String cfile, int clevel, int blind,
+			int watch) {
 		super();
 		this.cidx = cidx;
-		this.cname = cname;
 		this.kind = kind;
-		this.cid = cid;
+		this.cname = cname;
+		this.intro = intro;
+		this.id = id;
 		this.pwd = pwd;
 		this.tel = tel;
 		this.email = email;
 		this.juso = juso;
 		this.sjuso = sjuso;
-		this.curl = curl;
-		this.sido = sido;
-		this.sigungu = sigungu;
-		this.intro = intro;
 		this.pay = pay;
 		this.cnum = cnum;
 		this.cfile = cfile;
-		this.clvel = clvel;
+		this.clevel = clevel;
 		this.blind = blind;
+		this.watch = watch;
 	}
 
 	public int getCidx() {
@@ -59,14 +55,6 @@ public class CompanyDTO {
 		this.cidx = cidx;
 	}
 
-	public String getCname() {
-		return cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
 	public String getKind() {
 		return kind;
 	}
@@ -75,12 +63,28 @@ public class CompanyDTO {
 		this.kind = kind;
 	}
 
-	public String getCid() {
-		return cid;
+	public String getCname() {
+		return cname;
 	}
 
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getPwd() {
@@ -123,38 +127,6 @@ public class CompanyDTO {
 		this.sjuso = sjuso;
 	}
 
-	public String getCurl() {
-		return curl;
-	}
-
-	public void setCurl(String curl) {
-		this.curl = curl;
-	}
-
-	public String getSido() {
-		return sido;
-	}
-
-	public void setSido(String sido) {
-		this.sido = sido;
-	}
-
-	public String getSigungu() {
-		return sigungu;
-	}
-
-	public void setSigungu(String sigungu) {
-		this.sigungu = sigungu;
-	}
-
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-
 	public int getPay() {
 		return pay;
 	}
@@ -163,28 +135,28 @@ public class CompanyDTO {
 		this.pay = pay;
 	}
 
-	public String getCnum() {
+	public int getCnum() {
 		return cnum;
 	}
 
-	public void setCnum(String cnum) {
+	public void setCnum(int cnum) {
 		this.cnum = cnum;
 	}
 
-	public MultipartFile getCfile() {
+	public String getCfile() {
 		return cfile;
 	}
 
-	public void setCfile(MultipartFile cfile) {
+	public void setCfile(String cfile) {
 		this.cfile = cfile;
 	}
 
-	public int getClvel() {
-		return clvel;
+	public int getClevel() {
+		return clevel;
 	}
 
-	public void setClvel(int clvel) {
-		this.clvel = clvel;
+	public void setClevel(int clevel) {
+		this.clevel = clevel;
 	}
 
 	public int getBlind() {
@@ -193,6 +165,14 @@ public class CompanyDTO {
 
 	public void setBlind(int blind) {
 		this.blind = blind;
+	}
+
+	public int getWatch() {
+		return watch;
+	}
+
+	public void setWatch(int watch) {
+		this.watch = watch;
 	}
 	
 }

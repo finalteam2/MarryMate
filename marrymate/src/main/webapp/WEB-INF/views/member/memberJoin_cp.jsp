@@ -213,8 +213,9 @@
 					<input type="hidden" name="clevel" value="0">
 					<input type="hidden" name="blind" value="0">
 					<input type="hidden" name="watch" value="0">
+					<input type="radio" name="kind" value="예식장">예식장<br>
 					<div class="hTagBox">사업자등록번호</div>
-					<input type="text" name="cnum">&nbsp;<input type="file" name=""><br>
+					<input type="text" name="cnum">&nbsp;<input type="file" name="cfile"><br>
 					<div class="hClear">기업명</div>
 					<input type="text" name="cname"><br>
 					<div class="hTagBox">지역</div>
@@ -227,11 +228,9 @@
 					<div class="hClear">기업소개</div>
 					<textarea class="ta" rows="11" cols="50"></textarea>
 					<div class="hTagBox">기업 웹사이트</div>
-					<input type="text" name="url"><br>
+					<input type="text" name="curl"><br>
 					<div class="hClear">상품 가격</div>
 					<input type="text" name="pay"><br>
-					<div class="hTagBox">사진</div>
-					<input type="file" name="img"><br> 
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="정보입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

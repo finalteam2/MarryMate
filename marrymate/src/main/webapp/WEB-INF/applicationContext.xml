@@ -27,4 +27,8 @@
 	<bean id="searchDAO" class="com.marry.search.model.SearchDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="memberDao" class="com.marry.member.model.MemberDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>
