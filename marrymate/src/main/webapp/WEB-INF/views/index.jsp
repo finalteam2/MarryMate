@@ -28,8 +28,5 @@
 
 
 <%@include file="footer.jsp" %>
-<a href="myInfo_m.do"><h2>마이페이지</h2></a>
-<a href="join.do">회원가입</a>
-<a href="join_cp.do">기업 회원가입</a>
 </body>
 </html>
