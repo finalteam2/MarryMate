@@ -131,7 +131,7 @@
 				<div class="hTagBox">상세주소</div>
 				<input type="text" name="sjuso" required><br>
 				<div class="hTagBox">지역</div>
-				<select name="local">
+				 <select name="local">
 					<option value="서울">서울</option>
 					<option value="경기">경기</option>
 					<option value="인천">인천</option>
