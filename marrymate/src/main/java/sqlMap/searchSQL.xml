@@ -3,24 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marry.search">
-	<select id="searchTest" resultType="Integer">
-	 	select
-	 		count(cidx)
-	 	from
-	 		company
-		where
-			cidx >= 1
-		order by
-			cidx desc
-	</select>
-	<select id="searchTest2" resultType="String">
-	 	select
-	 		cname
-	 	from
-	 		company
-		order by
-			cidx desc
-	</select>
 	<select id="searchAll" parameterType="com.marry.search.model.SearchDTO" resultType="com.marry.company.model.CompanyDTO">
 	 	select
 	 		*
@@ -30,7 +12,25 @@
  		<if test="name != null and name != ''">
  			and cname like '%' || #{name} || '%'
  		</if>
-		<if test="sort == 1">
+ 		<if test="sido != null and sido != '전국'">
+ 			and sido = #{sido}
+ 		</if>
+ 		<if test="sigungu != null and sigungu != '시군구'">
+ 			and sigungu = #{sigungu}
+ 		</if>
+ 		<if test="payMin != null and payMin != 0">
+ 			and pay <![CDATA[>=]]> #{payMin}
+ 		</if>
+ 		<if test="payMax != null and payMax != 0">
+ 			and pay <![CDATA[<=]]> #{payMax}
+ 		</if>
+ 		<if test="guestMin != null and guestMin != 0">
+ 			and guest_num <![CDATA[>=]]> #{guestMin}
+ 		</if>
+ 		<if test="guestMax != null and guestMax != 0">
+ 			and guest_num <![CDATA[<=]]> #{guestMax}
+ 		</if>
+		<if test="sort == null or sort == 1">
 		order by
 			cname asc, cidx desc
 		</if>

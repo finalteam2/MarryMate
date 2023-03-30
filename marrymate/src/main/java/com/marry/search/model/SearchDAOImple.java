@@ -23,18 +23,6 @@ public class SearchDAOImple implements SearchDAO {
 	}
 
 	@Override
-	public int searchTest() {
-		int result = sqlMap.selectOne("searchTest");
-		return result;
-	}
-
-	@Override
-	public List searchTest2(SearchDTO dto) {
-		List<String> result = sqlMap.selectList("searchTest2", dto);
-		return result;
-	}
-	
-	@Override
 	public List<CompanyDTO> searchAll(SearchDTO dto) {
 		List arr = new ArrayList();
 		arr = sqlMap.selectList("searchAll", dto);

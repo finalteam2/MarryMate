@@ -4,9 +4,8 @@ public class SearchDTO {
 
 	private String sido;
 	private String sigungu;
-	private String[] hallType;
-	private int foodMin;
-	private int foodMax;
+	private int payMin;
+	private int payMax;
 	private int guestMin;
 	private int guestMax;
 	private String name;
@@ -18,15 +17,8 @@ public class SearchDTO {
 		System.out.println("==SearchDTO==");
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
-		System.out.print("hallType : ");
-		if(hallType!=null && hallType.length != 0) {
-			for(int i = 0; i < hallType.length; i++) {
-				System.out.print(hallType[i]);
-			}
-		}
-		System.out.println();
-		System.out.println("foodMin : " + foodMin);
-		System.out.println("foodMax : " + foodMax);
+		System.out.println("payMin : " + payMin);
+		System.out.println("payMax : " + payMax);
 		System.out.println("guestMin : " + guestMin);
 		System.out.println("guestMax : " + guestMax);
 		System.out.println("name : " + name);
@@ -40,14 +32,13 @@ public class SearchDTO {
 		super();
 	}
 
-	public SearchDTO(String sido, String sigungu, String[] hallType, int foodMin, int foodMax, int guestMin, int guestMax,
+	public SearchDTO(String sido, String sigungu, int payMin, int payMax, int guestMin, int guestMax,
 			String name, String sort, int view) {
 		super();
 		this.sido = sido;
 		this.sigungu = sigungu;
-		this.hallType = hallType;
-		this.foodMin = foodMin;
-		this.foodMax = foodMax;
+		this.payMin = payMin;
+		this.payMax = payMax;
 		this.guestMin = guestMin;
 		this.guestMax = guestMax;
 		this.name = name;
@@ -71,28 +62,20 @@ public class SearchDTO {
 		this.sigungu = sigungu;
 	}
 
-	public String[] getHallType() {
-		return hallType;
+	public int getPayMin() {
+		return payMin;
 	}
 
-	public void setHallType(String[] hallType) {
-		this.hallType = hallType;
+	public void setPayMin(int payMin) {
+		this.payMin = payMin;
 	}
 
-	public int getFoodMin() {
-		return foodMin;
+	public int getPayMax() {
+		return payMax;
 	}
 
-	public void setFoodMin(int foodMin) {
-		this.foodMin = foodMin;
-	}
-
-	public int getFoodMax() {
-		return foodMax;
-	}
-
-	public void setFoodMax(int foodMax) {
-		this.foodMax = foodMax;
+	public void setPayMax(int payMax) {
+		this.payMax = payMax;
 	}
 
 	public int getGuestMin() {

@@ -47,52 +47,56 @@ public class SearchController {
 	
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.POST)
 	public ModelAndView searchHall(
-			@RequestParam(name = "sido",defaultValue = "")String sido,
-			@RequestParam(name = "sigungu",defaultValue = "")String sigungu,
-			@RequestParam(name = "hallType",required = false)String[] hallType,
-			@RequestParam(name = "foodMin",defaultValue = "")String fMin,
-			@RequestParam(name = "foodMax",defaultValue = "")String fMax,
-			@RequestParam(name = "guestMin",defaultValue = "")String gMin,
-			@RequestParam(name = "guestMax",defaultValue = "")String gMax,
-			@RequestParam(name = "name",defaultValue = "강남예식장")String name,
-			@RequestParam(name = "sort",defaultValue = "name")String sort,
+			@RequestParam(name = "sido",defaultValue = "전국")String sido,
+			@RequestParam(name = "sigungu",defaultValue = "시군구")String sigungu,
+			@RequestParam(name = "payMin",defaultValue = "0")String pMin,
+			@RequestParam(name = "payMax",defaultValue = "0")String pMax,
+			@RequestParam(name = "guestMin",defaultValue = "0")String gMin,
+			@RequestParam(name = "guestMax",defaultValue = "0")String gMax,
+			@RequestParam(name = "name",defaultValue = "")String name,
+			@RequestParam(name = "sort",defaultValue = "")String sort,
 			@RequestParam(name = "view",defaultValue = "5")int view
 			) {
-		int foodMin = stToInt(fMin);
-		int foodMax = stToInt(fMax);
+		int payMin = stToInt(pMin);
+		int payMax = stToInt(pMax);
 		int guestMin = stToInt(gMin);
 		int guestMax = stToInt(gMax);
-		SearchDTO dto = new SearchDTO(sido, sigungu, hallType, foodMin, foodMax, guestMin, guestMax, name, sort, view);
+		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, view);
 		dto.toString();
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
-		String msg = "{\"companylist\":[";
+		String json = "{\"companylist\":[";
 		for(int i = 0; i < arr.size(); i++) {
-			msg += "{";
-			msg += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
-			msg += "\"kind\":\"" + arr.get(i).getKind() + "\",";
-			msg += "\"cname\":\"" + arr.get(i).getCname() + "\",";
-			msg += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
-			msg += "\"id\":\"" + arr.get(i).getId() + "\",";
-			msg += "\"pwd\":\"" + arr.get(i).getPwd() + "\",";
-			msg += "\"tel\":\"" + arr.get(i).getTel() + "\",";
-			msg += "\"email\":\"" + arr.get(i).getEmail() + "\",";
-			msg += "\"juso\":\"" + arr.get(i).getJuso() + "\",";
-			msg += "\"sjuso\":\"" + arr.get(i).getSjuso() + "\",";
-			msg += "\"pay\":\"" + arr.get(i).getPay() + "\",";
-			msg += "\"cnum\":\"" + arr.get(i).getCnum() + "\",";
-			msg += "\"cfile\":\"" + arr.get(i).getCfile() + "\",";
-			msg += "\"clevel\":\"" + arr.get(i).getClevel() + "\",";
-			msg += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
-			msg += "\"watch\":\"" + arr.get(i).getWatch() + "\"";
-			msg += "}";
+			json += "{";
+			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
+			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
+			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
+			json += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
+			json += "\"id\":\"" + arr.get(i).getId() + "\",";
+			json += "\"pwd\":\"" + arr.get(i).getPwd() + "\",";
+			json += "\"tel\":\"" + arr.get(i).getTel() + "\",";
+			json += "\"email\":\"" + arr.get(i).getEmail() + "\",";
+			json += "\"juso\":\"" + arr.get(i).getJuso() + "\",";
+			json += "\"sjuso\":\"" + arr.get(i).getSjuso() + "\",";
+			json += "\"curl\":\"" + arr.get(i).getCurl() + "\",";
+			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";
+			json += "\"sigungu\":\"" + arr.get(i).getSigungu() + "\",";
+			json += "\"pay\":\"" + arr.get(i).getPay() + "\",";
+			json += "\"guest_num\":\"" + arr.get(i).getGuest_num() + "\",";
+			json += "\"cnum\":\"" + arr.get(i).getCnum() + "\",";
+			json += "\"cfile\":\"" + arr.get(i).getCfile() + "\",";
+			json += "\"clevel\":\"" + arr.get(i).getClevel() + "\",";
+			json += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
+			json += "\"watch\":\"" + arr.get(i).getWatch() + "\",";
+			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
+			json += "}";
 			if(i+1 != arr.size()) {
-				msg += ",";
+				json += ",";
 			}
 		}
-		msg += "]}";
-		System.out.println(msg);
+		json += "]}";
+		System.out.println(json);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", msg);
+		mav.addObject("json", json);
 		mav.setViewName("search/result");
 		return mav;
 	}
@@ -105,5 +109,60 @@ public class SearchController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/searchEtc.do", method = RequestMethod.POST)
+	public ModelAndView searchEtc(
+			@RequestParam(name = "sido",defaultValue = "")String sido,
+			@RequestParam(name = "sigungu",defaultValue = "")String sigungu,
+			@RequestParam(name = "payMin",defaultValue = "")String pMin,
+			@RequestParam(name = "payMax",defaultValue = "")String pMax,
+			@RequestParam(name = "guestMin",defaultValue = "")String gMin,
+			@RequestParam(name = "guestMax",defaultValue = "")String gMax,
+			@RequestParam(name = "name",defaultValue = "")String name,
+			@RequestParam(name = "sort",defaultValue = "")String sort,
+			@RequestParam(name = "view",defaultValue = "5")int view
+			) {
+		int payMin = stToInt(pMin);
+		int payMax = stToInt(pMax);
+		int guestMin = stToInt(gMin);
+		int guestMax = stToInt(gMax);
+		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, view);
+		dto.toString();
+		List<CompanyDTO> arr = searchDAO.searchAll(dto);
+		String json = "{\"companylist\":[";
+		for(int i = 0; i < arr.size(); i++) {
+			json += "{";
+			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
+			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
+			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
+			json += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
+			json += "\"id\":\"" + arr.get(i).getId() + "\",";
+			json += "\"pwd\":\"" + arr.get(i).getPwd() + "\",";
+			json += "\"tel\":\"" + arr.get(i).getTel() + "\",";
+			json += "\"email\":\"" + arr.get(i).getEmail() + "\",";
+			json += "\"juso\":\"" + arr.get(i).getJuso() + "\",";
+			json += "\"sjuso\":\"" + arr.get(i).getSjuso() + "\",";
+			json += "\"curl\":\"" + arr.get(i).getCurl() + "\",";
+			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";
+			json += "\"sigungu\":\"" + arr.get(i).getSigungu() + "\",";
+			json += "\"pay\":\"" + arr.get(i).getPay() + "\",";
+			json += "\"guest_num\":\"" + arr.get(i).getGuest_num() + "\",";
+			json += "\"cnum\":\"" + arr.get(i).getCnum() + "\",";
+			json += "\"cfile\":\"" + arr.get(i).getCfile() + "\",";
+			json += "\"clevel\":\"" + arr.get(i).getClevel() + "\",";
+			json += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
+			json += "\"watch\":\"" + arr.get(i).getWatch() + "\",";
+			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
+			json += "}";
+			if(i+1 != arr.size()) {
+				json += ",";
+			}
+		}
+		json += "]}";
+		System.out.println(json);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("json", json);
+		mav.setViewName("search/result");
+		return mav;
+	}
 	
 }
