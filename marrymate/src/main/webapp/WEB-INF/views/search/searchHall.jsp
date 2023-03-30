@@ -8,6 +8,17 @@
 <title>MarryMate</title>
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <style>
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'SUIT-Regular';
+}
+
 .searchbox {
 	
 	border:1px solid;
@@ -51,7 +62,7 @@
 </style>
 <script src="/marrymate/js/httpRequest.js"></script>
 <script>
-function searchHall(){
+function searchHall(page){
 	var param = '';
 	var name = document.getElementById('name').value;
 	param += 'name=' + name;
@@ -76,6 +87,7 @@ function searchHall(){
 			param += sorts[i].value;
 		}
 	}
+	param += '&page=' + page;
 	sendRequest('searchHall.do',param,'POST',searchResult);
 }
 function searchResult(){
@@ -84,12 +96,12 @@ function searchResult(){
 			var data = XHR.responseText;
 			//window.alert(data);
 			data = JSON.parse(data);
+			var companylist = data.companylist;
 			//window.alert(data);
 			
-			var companylist = data.companylist;
-			var msg = '검색 결과 : ' + companylist.length + '개\n';
-			
-			
+			var cnt = data.cnt;
+			var totalCntNode = document.getElementById('totalCnt');
+			totalCntNode.innerHTML='검색 결과 : 총' + cnt + ' 건';
 			//컨테이너 비우기
 			var containerNode = document.getElementById('container');
 			var childNodes = containerNode.childNodes;
@@ -162,11 +174,10 @@ function searchResult(){
 		}
 	}
 }
-
 </script>
 
 </head>
-<body>
+<body onload="searchHall('1')">
 <%@include file="../header.jsp" %>
 <h1>웨딩홀 검색</h1>
 
@@ -208,7 +219,11 @@ function searchResult(){
 </tr>
 <tr>
 	<td colspan="2">
-		<input type="button" value="검색" onclick="searchHall()">
+		<input type="button" value="검색" onclick="searchHall('1')">
+		<input type="button" value="검색2" onclick="searchHall('2')">
+		<input type="button" value="검색3" onclick="searchHall('3')">
+		<input type="button" value="검색4" onclick="searchHall('4')">
+		<input type="button" value="검색5" onclick="searchHall('5')">
 		<input type="reset" value="다시입력">
 	</td>
 </tr>
@@ -227,18 +242,8 @@ function searchResult(){
 </tr>
 </table>
 </div>
+<span id="totalCnt"></span>
 <div class="container" id="container">
-<c:forEach var="com" items="${arr }" >
-	<div class="item">
-		<img class="img" alt="default_img" src="/marrymate/img/noimg.jpg">
-		<div class="info">
-			<span class="name">${com.cname }</span><br>
-			<span class="sido">${com.sido }${com.sigungu } / </span><span class="kind">${com.kind }</span><br>
-			<span class="pay">식대비용 : ${com.pay }</span><br>
-			<span class="guest">하객보증인원 : ${com.guest_num }</span>
-		</div>
-	</div>
-</c:forEach>
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>

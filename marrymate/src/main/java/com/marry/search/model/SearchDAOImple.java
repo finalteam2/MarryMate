@@ -28,4 +28,11 @@ public class SearchDAOImple implements SearchDAO {
 		arr = sqlMap.selectList("searchAll", dto);
 		return arr;
 	}
+	
+	@Override
+	public int totalCnt(SearchDTO dto) {
+		int cnt = sqlMap.selectOne("totalCnt", dto);
+		return cnt;
+	}
+	
 }

@@ -4,8 +4,66 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marry.search">
 	<select id="searchAll" parameterType="com.marry.search.model.SearchDTO" resultType="com.marry.company.model.CompanyDTO">
+ 	select 
+ 		*
+ 	from
+ 		(
 	 	select
-	 		*
+	 		a.*, rownum as rnum
+ 		from
+ 			(
+		 	select
+		 		*
+		 	from
+		 		company
+	 		where 1=1
+	 		<if test="name != null and name != ''">
+	 			and cname like '%' || #{name} || '%'
+	 		</if>
+	 		<if test="sido != null and sido != '전국'">
+	 			and sido = #{sido}
+	 		</if>
+	 		<if test="sigungu != null and sigungu != '시군구'">
+	 			and sigungu = #{sigungu}
+	 		</if>
+	 		<if test="payMin != null and payMin != 0">
+	 			and pay <![CDATA[>=]]> #{payMin}
+	 		</if>
+	 		<if test="payMax != null and payMax != 0">
+	 			and pay <![CDATA[<=]]> #{payMax}
+	 		</if>
+	 		<if test="guestMin != null and guestMin != 0">
+	 			and guest_num <![CDATA[>=]]> #{guestMin}
+	 		</if>
+	 		<if test="guestMax != null and guestMax != 0">
+	 			and guest_num <![CDATA[<=]]> #{guestMax}
+	 		</if>
+			<if test="sort == null or sort == 1">
+			order by
+				cname asc, cidx desc
+			</if>
+			<if test="sort == 2">
+			order by
+				watch desc, cidx desc
+			</if>
+			<if test="sort == 3">
+			order by
+				pay asc, cidx desc
+			</if>
+			<if test="sort == 4">
+			order by
+				pay desc, cidx desc
+			</if>
+		)a)b
+	<if test="start != null and end != null">
+	where 
+		rnum <![CDATA[>=]]> #{start}
+		and rnum <![CDATA[<=]]> #{end}
+	</if>
+	</select>
+	<select id="totalCnt" parameterType="com.marry.search.model.SearchDTO" resultType="Integer">
+	 	select
+	 		count(*)
 	 	from
 	 		company
  		where 1=1
@@ -47,4 +105,8 @@
 			pay desc, cidx desc
 		</if>
 	</select>
+
+	
+	
+	
 </mapper>

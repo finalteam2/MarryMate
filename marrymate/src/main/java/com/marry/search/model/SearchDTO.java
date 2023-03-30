@@ -11,6 +11,8 @@ public class SearchDTO {
 	private String name;
 	private String sort;
 	private int view;
+	private int start;
+	private int end;
 	
 	@Override
 	public String toString() {
@@ -24,16 +26,18 @@ public class SearchDTO {
 		System.out.println("name : " + name);
 		System.out.println("sort : " + sort);
 		System.out.println("view : " + view);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		System.out.println("==/SearchDTO==");
 		return super.toString();
 	}
-	
+
 	public SearchDTO() {
 		super();
 	}
 
-	public SearchDTO(String sido, String sigungu, int payMin, int payMax, int guestMin, int guestMax,
-			String name, String sort, int view) {
+	public SearchDTO(String sido, String sigungu, int payMin, int payMax, int guestMin, int guestMax, String name,
+			String sort, int view, int start, int end) {
 		super();
 		this.sido = sido;
 		this.sigungu = sigungu;
@@ -44,6 +48,8 @@ public class SearchDTO {
 		this.name = name;
 		this.sort = sort;
 		this.view = view;
+		this.start = start;
+		this.end = end;
 	}
 
 	public String getSido() {
@@ -116,6 +122,22 @@ public class SearchDTO {
 
 	public void setView(int view) {
 		this.view = view;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 	
 }
