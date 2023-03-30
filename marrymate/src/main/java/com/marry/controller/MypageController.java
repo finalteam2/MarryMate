@@ -15,4 +15,14 @@ public class MypageController {
 	public String myInfo_c() {
 		return "/mypage/myInfo_c";
 	}
+	
+	@RequestMapping("/reserve.do")
+	public String reserve() {
+		return "/mypage/reserve";
+	}
+	
+	@RequestMapping("/qna.do")
+	public String qna() {
+		return "/mypage/qna";
+	}
 }

@@ -17,6 +17,8 @@
 						<a href="myInfo_c.do">마이페이지(기업)</a>
 						<a href="join.do">회원가입</a>
 						<a href="join_cp.do">기업 회원가입</a>
+						<a href="reserve.do">예약내역</a>
+						<a href="qna.do">문의내역</a>
 					</div>
 					<div class="clearboth"></div>
 			</nav>
