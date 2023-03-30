@@ -1,7 +1,5 @@
 package com.marry.company.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class CompanyDTO {
 	
 	private int cidx;
@@ -14,20 +12,25 @@ public class CompanyDTO {
 	private String email;
 	private String juso;
 	private String sjuso;
+	private String curl;
+	private String sido;
+	private String sigungu;
 	private int pay;
+	private int guest_num;
 	private int cnum;
 	private String cfile;
 	private int clevel;
 	private int blind;
 	private int watch;
+	private int topfix;
 	
 	public CompanyDTO() {
 		super();
 	}
 
 	public CompanyDTO(int cidx, String kind, String cname, String intro, String id, String pwd, String tel,
-			String email, String juso, String sjuso, int pay, int cnum, String cfile, int clevel, int blind,
-			int watch) {
+			String email, String juso, String sjuso, String curl, String sido, String sigungu, int pay, int guest_num,
+			int cnum, String cfile, int clevel, int blind, int watch, int topfix) {
 		super();
 		this.cidx = cidx;
 		this.kind = kind;
@@ -39,12 +42,17 @@ public class CompanyDTO {
 		this.email = email;
 		this.juso = juso;
 		this.sjuso = sjuso;
+		this.curl = curl;
+		this.sido = sido;
+		this.sigungu = sigungu;
 		this.pay = pay;
+		this.guest_num = guest_num;
 		this.cnum = cnum;
 		this.cfile = cfile;
 		this.clevel = clevel;
 		this.blind = blind;
 		this.watch = watch;
+		this.topfix = topfix;
 	}
 
 	public int getCidx() {
@@ -127,12 +135,44 @@ public class CompanyDTO {
 		this.sjuso = sjuso;
 	}
 
+	public String getCurl() {
+		return curl;
+	}
+
+	public void setCurl(String curl) {
+		this.curl = curl;
+	}
+
+	public String getSido() {
+		return sido;
+	}
+
+	public void setSido(String sido) {
+		this.sido = sido;
+	}
+
+	public String getSigungu() {
+		return sigungu;
+	}
+
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
+	}
+
 	public int getPay() {
 		return pay;
 	}
 
 	public void setPay(int pay) {
 		this.pay = pay;
+	}
+
+	public int getGuest_num() {
+		return guest_num;
+	}
+
+	public void setGuest_num(int guest_num) {
+		this.guest_num = guest_num;
 	}
 
 	public int getCnum() {
@@ -173,6 +213,14 @@ public class CompanyDTO {
 
 	public void setWatch(int watch) {
 		this.watch = watch;
+	}
+
+	public int getTopfix() {
+		return topfix;
+	}
+
+	public void setTopfix(int topfix) {
+		this.topfix = topfix;
 	}
 	
 }
