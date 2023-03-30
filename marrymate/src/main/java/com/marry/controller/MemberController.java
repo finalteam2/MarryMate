@@ -33,10 +33,5 @@ public class MemberController {
 		return mav;
 
 	}
-
-	@RequestMapping(value = "/join_cp.do", method = RequestMethod.GET)
-	public String joinForm_cp() {
-		return "member/memberJoin_cp";
-	}
 	
 }

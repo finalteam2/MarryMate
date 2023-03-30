@@ -30,5 +30,8 @@
 	<bean id="memberDao" class="com.marry.member.model.MemberDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="companyDao" class="com.marry.company.model.CompanyDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
 	
 </beans>

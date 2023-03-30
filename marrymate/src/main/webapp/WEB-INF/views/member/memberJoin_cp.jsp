@@ -76,6 +76,17 @@
 		text-align: right;
 		font-size: 13px;
 	}
+	.buBox{
+		width: 100px;
+		height: 30px;
+		font-size: 10px;
+		font-weight: bold;
+		padding-bottom: 10px;
+		text-align: center;
+		border: 1px solid black;
+		float: left;
+		margin: 1px;
+	}
 	.jcBox input:required {
 		font-size: 13px;
 	}
@@ -160,15 +171,18 @@
 	}
 	#iBox {
 		width: 600px;
-		height: 420px;
-		margin: 50px auto;
+		height: 350px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 50px;
+		margin-top: 20px;
 		padding-left: 100px;
 		line-height: 45px;
 		border-bottom: 2px dashed black;
 	}
 	#aBox {
 		width: 600px;
-		height: 500px;
+		height: 600px;
 		margin-top: -30px;
 		margin-left: auto;
 		margin-right: auto;
@@ -183,39 +197,61 @@
 		padding-top: 30px;
 		text-align: center;
 	}
+	#headTagBox {
+		width: 120px;
+		height: 45px;
+		text-align: center;
+		float: left;
+		font-size: 13px;
+		margin-top: 10px;
+	}
+	#head {
+		width: 700px;
+		height: 45px;
+		float: left;
+		margin-top: 15px;
+	}
 </style>
 </head>
 <body>
 	<section>
 		<article>
 			<h2>회원가입</h2>
-			<form name="join_cp" action="join_cp.do" method="post">
+			<form name="join_cp" action="join_cp.do" method="post" enctype="multipart/form-data">
 			<div class="box">
 				<div id="iBox">
 					<div class="hTagBox">아이디</div>
-					<input type="text" name="cid">
+					<input type="text" name="id">
 					<input type="button" value="중복확인"><br>
 					<div class="hClear">비밀번호</div>
 					<input type="password" name="pwd"><br>
 					<div class="hTagBox">비밀번호 확인</div>
-					<input type="password" name="pwd2"><br>
+					<input type="password" name="pwd"><br>
 					<div class="hClear">전화번호</div>
 					<input type="text" name="tel"><br>
 					<div class="hTagBox">이메일</div>
 					<input type="text" name="email"><br>
 					<div class="hClear">주소</div>
-					<input type="password" id="juso"><br>
+					<input type="text" name="juso"><br>
 					<div class="hTagBox">상세주소</div>
 					<input type="text" name="sjuso">
 				</div>
 				<div id="aBox">
 					<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;기업 정보</h3>
-					<input type="hidden" name="clevel" value="0">
-					<input type="hidden" name="blind" value="0">
-					<input type="hidden" name="watch" value="0">
-					<input type="radio" name="kind" value="예식장">예식장<br>
+					<div class="buBox">업종 카테고리 선택</div>
+					<div class="buBox"><input type="radio" name="kind" value="예식장">예식장</div>
+					<div class="buBox"><input type="radio" name="kind" value="스튜디오">스튜디오</div>
+					<div class="buBox"><input type="radio" name="kind" value="드레스">드레스</div>
+					<div class="buBox"><input type="radio" name="kind" value="헤어/메이크업">헤어/메이크업</div>
+					<div class="buBox"><input type="radio" name="kind" value="사진">사진</div>
+					<div class="buBox"><input type="radio" name="kind" value="DVD">DVD</div>
+					<div class="buBox"><input type="radio" name="kind" value="주례">주례</div>
+					<div class="buBox"><input type="radio" name="kind" value="사회">사회</div>
+					<div class="buBox"><input type="radio" name="kind" value="축가">축가</div>
+					<div id="head">
 					<div class="hTagBox">사업자등록번호</div>
-					<input type="text" name="cnum">&nbsp;<input type="file" name="cfile"><br>
+					<input type="text" name="cnum">&nbsp;<input type="file" name="afile"><br>
+					</div>
 					<div class="hClear">기업명</div>
 					<input type="text" name="cname"><br>
 					<div class="hTagBox">지역</div>
@@ -226,7 +262,7 @@
 						<option value="서초구">서초구</option>
 					</select>
 					<div class="hClear">기업소개</div>
-					<textarea class="ta" rows="11" cols="50"></textarea>
+					<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
 					<div class="hTagBox">기업 웹사이트</div>
 					<input type="text" name="curl"><br>
 					<div class="hClear">상품 가격</div>

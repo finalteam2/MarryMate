@@ -13,7 +13,7 @@ public class MemberDAOImple implements MemberDAO {
 	@Override
 	public int memberJoin(MemberDTO dto) {
 		
-		int count=sqlMap.insert("memberInsert", dto);
+		int count=sqlMap.insert("memberJoin", dto);
 		return count;
 		
 	}
