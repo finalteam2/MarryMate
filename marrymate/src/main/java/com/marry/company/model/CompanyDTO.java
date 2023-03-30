@@ -17,7 +17,7 @@ public class CompanyDTO {
 	private String sigungu;
 	private int pay;
 	private int guest_num;
-	private int cnum;
+	private String cnum;
 	private String cfile;
 	private int clevel;
 	private int blind;

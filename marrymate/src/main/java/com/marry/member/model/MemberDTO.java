@@ -9,6 +9,7 @@ public class MemberDTO {
     private String nick;
     private String id;
     private String pwd;
+    private String tel;
     private String juso;
     private String sjuso;
     private String gname;
@@ -24,7 +25,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(int midx, String name, String birthday, String gender, String nick, String id, String pwd,
-			String juso, String sjuso, String gname, int point, String joindate, char e_check, String img,
+			String tel, String juso, String sjuso, String gname, int point, String joindate, char e_check, String img,
 			String marrydate, String pname) {
 		super();
 		this.midx = midx;
@@ -34,6 +35,7 @@ public class MemberDTO {
 		this.nick = nick;
 		this.id = id;
 		this.pwd = pwd;
+		this.tel = tel;
 		this.juso = juso;
 		this.sjuso = sjuso;
 		this.gname = gname;
@@ -99,6 +101,14 @@ public class MemberDTO {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public String getJuso() {
