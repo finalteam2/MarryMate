@@ -62,5 +62,15 @@ public class IndexController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/collection_a.do")
+	public String collection_a() {
+		return "collection_a";
+	}
+	
+	@RequestMapping("/book_a.do")
+	public String bookn_a() {
+		return "book_a";
+	}
 
 }
