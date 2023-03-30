@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,25 +69,17 @@
 					</tr>
 				</table>
 			</div>
-			<div>
-				<table width="320" height="550" align="center" border="1" cellspacing="0">
-					<tr>
-						<td>무엇을 도와드릴까요?</td>
-					</tr>
-					<tr height="50">
-						<td><input type="button" value="질문1"></td>
-					</tr>
-					<tr height="50">
-						<td><input type="button" value="질문2"></td>
-					</tr>
-					<tr height="50">
-						<td><input type="button" value="질문3"></td>
-					</tr>
-					<tr height="50">
-						<td><input type="button" value="1:1 채팅하기"></td>
-					</tr>
-				</table>
-			</div>
+			<c:if test="${empty sessionScope.maidx}">
+				<c:if test="${empty sessionScope.caidx}">
+					<%@include file="chat.jsp" %>
+				</c:if>
+			</c:if>
+			<c:if test="${!empty sessionScope.maidx}">
+				<%@include file="chat2.jsp" %>
+			</c:if>
+			<c:if test="${!empty sessionScope.caidx}">
+				<%@include file="chat2.jsp" %>
+			</c:if>
         </div>
 	</div>
 </div>
