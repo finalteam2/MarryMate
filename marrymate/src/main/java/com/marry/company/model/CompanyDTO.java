@@ -30,7 +30,7 @@ public class CompanyDTO {
 
 	public CompanyDTO(int cidx, String kind, String cname, String intro, String id, String pwd, String tel,
 			String email, String juso, String sjuso, String curl, String sido, String sigungu, int pay, int guest_num,
-			int cnum, String cfile, int clevel, int blind, int watch, int topfix) {
+			String cnum, String cfile, int clevel, int blind, int watch, int topfix) {
 		super();
 		this.cidx = cidx;
 		this.kind = kind;
@@ -175,11 +175,11 @@ public class CompanyDTO {
 		this.guest_num = guest_num;
 	}
 
-	public int getCnum() {
+	public String getCnum() {
 		return cnum;
 	}
 
-	public void setCnum(int cnum) {
+	public void setCnum(String cnum) {
 		this.cnum = cnum;
 	}
 
