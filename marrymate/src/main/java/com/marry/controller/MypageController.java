@@ -25,4 +25,9 @@ public class MypageController {
 	public String qna() {
 		return "/mypage/qna";
 	}
+	
+	@RequestMapping("/point.do")
+	public String point() {
+		return "/mypage/myPoint";
+	}
 }

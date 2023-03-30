@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의내역</title>
+<title>My 포인트</title>
 <style>
 @font-face {
     font-family: 'SUIT-Regular';
@@ -28,9 +28,6 @@ article table thead th{
 	font-size: 20px;
 	font-weight: bold;
 }
-.t{
-	background-color: white;
-}
 article table tbody td{
 	font-family: 'SUIT-Regular';
 	font-size: 20px;
@@ -45,30 +42,26 @@ h2{
 <body>
 <section>
 	<article>
-		<h2>문 의 내 역</h2>
+		<h2>My 포 인 트</h2>
 		<hr>
 		<br>
 		<table>
-			<thead height="60">
+			<thead>
 				<tr>
-					<th>제 목</th>
-					<th>작성자</th>
-					<th>작성날짜</th>
-					<th>답변여부</th>
+					<th>Date.</th>
+					<th>업체명</th>
+					<th>포인트</th>
+					<th>적립/차감</th>
+					<th>구분</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>문의 드려요.</td>
-					<td>임토토</td>
-					<td>2023-03-30</td>
-					<td style="color: red;">답변대기</td>
-				</tr>
-				<tr>
-					<td>문의!</td>
-					<td>우성진</td>
-					<td>2023-03-28</td>
-					<td style="color: blue;">답변완료</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>

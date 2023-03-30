@@ -19,6 +19,7 @@
 						<a href="join_cp.do">기업 회원가입</a>
 						<a href="reserve.do">예약내역</a>
 						<a href="qna.do">문의내역</a>
+						<a href="point.do">My 포인트</a>
 					</div>
 					<div class="clearboth"></div>
 			</nav>
