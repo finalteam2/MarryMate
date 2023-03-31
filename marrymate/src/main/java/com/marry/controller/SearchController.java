@@ -71,7 +71,7 @@ public class SearchController {
 		int end = (page * view);
 		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, kind, view, start, end);
 		//dto.toString();
-		System.out.println("page : " + page);
+		//System.out.println("page : " + page);
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
 		int cnt = searchDAO.totalCnt(dto);
 		String paging = pageModule.makePage("searchHall", cnt, view, 5, page);
