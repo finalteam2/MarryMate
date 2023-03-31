@@ -27,6 +27,7 @@ public class SearchController {
 	public ModelAndView searchHall() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("search/searchHall");
+		mav.addObject("kind", "웨딩홀");
 		return mav;
 	}
 
@@ -58,6 +59,7 @@ public class SearchController {
 			@RequestParam(name = "guestMax",defaultValue = "0")String gMax,
 			@RequestParam(name = "name",defaultValue = "")String name,
 			@RequestParam(name = "sort",defaultValue = "")String sort,
+			@RequestParam(name = "kind",defaultValue = "")String kind,
 			@RequestParam(name = "view",defaultValue = "4")int view,
 			@RequestParam(name = "page",defaultValue = "1")int page
 			) {
@@ -67,13 +69,14 @@ public class SearchController {
 		int guestMax = stToInt(gMax);
 		int start = (page - 1) * view + 1;
 		int end = (page * view);
-		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, view, start, end);
-		dto.toString();
+		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, kind, view, start, end);
+		//dto.toString();
 		System.out.println("page : " + page);
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
 		int cnt = searchDAO.totalCnt(dto);
-		//String pageSt = pageModule.makePage("searchHall", cnt, 5, view, page);
-		String json = "{\"cnt\":\"" + cnt + "\",\"companylist\":[";
+		String paging = pageModule.makePage("searchHall", cnt, view, 5, page);
+		//System.out.println(paging);
+		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
 		for(int i = 0; i < arr.size(); i++) {
 			json += "{";
 			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
@@ -103,7 +106,7 @@ public class SearchController {
 			}
 		}
 		json += "]}";
-		System.out.println(json);
+		//System.out.println(json);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("json", json);
 		mav.setViewName("search/result");

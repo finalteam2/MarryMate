@@ -10,6 +10,7 @@ public class SearchDTO {
 	private int guestMax;
 	private String name;
 	private String sort;
+	private String kind;
 	private int view;
 	private int start;
 	private int end;
@@ -25,6 +26,7 @@ public class SearchDTO {
 		System.out.println("guestMax : " + guestMax);
 		System.out.println("name : " + name);
 		System.out.println("sort : " + sort);
+		System.out.println("kind : " + kind);
 		System.out.println("view : " + view);
 		System.out.println("start : " + start);
 		System.out.println("end : " + end);
@@ -37,7 +39,7 @@ public class SearchDTO {
 	}
 
 	public SearchDTO(String sido, String sigungu, int payMin, int payMax, int guestMin, int guestMax, String name,
-			String sort, int view, int start, int end) {
+			String sort, String kind, int view, int start, int end) {
 		super();
 		this.sido = sido;
 		this.sigungu = sigungu;
@@ -47,6 +49,7 @@ public class SearchDTO {
 		this.guestMax = guestMax;
 		this.name = name;
 		this.sort = sort;
+		this.kind = kind;
 		this.view = view;
 		this.start = start;
 		this.end = end;
@@ -116,6 +119,14 @@ public class SearchDTO {
 		this.sort = sort;
 	}
 
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
 	public int getView() {
 		return view;
 	}
@@ -139,5 +150,5 @@ public class SearchDTO {
 	public void setEnd(int end) {
 		this.end = end;
 	}
-	
+
 }

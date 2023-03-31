@@ -80,6 +80,8 @@ function searchHall(page){
 	param += '&guestMin=' + guestMin;
 	var guestMax = document.getElementById('guestMax').value;
 	param += '&guestMax=' + guestMax;
+	var kind = document.getElementById('kind').value;
+	param += '&kind=' + kind;
 	var sorts = document.getElementsByName('sort');
 	param += '&sort=';
 	for(var i = 0; i < sorts.length; i++){
@@ -99,9 +101,16 @@ function searchResult(){
 			var companylist = data.companylist;
 			//window.alert(data);
 			
+			//검색된 수
 			var cnt = data.cnt;
 			var totalCntNode = document.getElementById('totalCnt');
-			totalCntNode.innerHTML='검색 결과 : 총' + cnt + ' 건';
+			totalCntNode.innerHTML='<span>검색 결과 : 총' + cnt + ' 건</span>';
+			
+			
+			var paging = data.paging;
+			var pagingNode = document.getElementById('paging');
+			pagingNode.innerHTML=paging;
+			
 			//컨테이너 비우기
 			var containerNode = document.getElementById('container');
 			var childNodes = containerNode.childNodes;
@@ -112,13 +121,6 @@ function searchResult(){
 			
 			for(var i = 0; i < companylist.length; i++){
 				var company = companylist[i];
-				/**
-				테스트 메시지 출력용
-				msg += '이름 : ' + company.cname + ' ';
-				msg += '가격 : ' + company.pay + ' ';
-				msg += '조회수 : ' + company.watch + ' ';
-				msg += '사번 : ' + company.cidx + '\n';
-				*/
 				//아이템 만들기
 				var newItemNode = document.createElement('div');
 				newItemNode.setAttribute('class','item');
@@ -131,7 +133,6 @@ function searchResult(){
 					
 					var newInfoNode = document.createElement('div');
 					newInfoNode.setAttribute('class','info');
-
 						
 						var newNameNode = document.createElement('span');
 						newNameNode.setAttribute('class','name');
@@ -180,7 +181,7 @@ function searchResult(){
 <body onload="searchHall('1')">
 <%@include file="../header.jsp" %>
 <h1>웨딩홀 검색</h1>
-
+<input type="hidden" name="kind" id="kind" value="${kind }">
 <div class="searchbox">
 <table>
 <tr>
@@ -220,10 +221,6 @@ function searchResult(){
 <tr>
 	<td colspan="2">
 		<input type="button" value="검색" onclick="searchHall('1')">
-		<input type="button" value="검색2" onclick="searchHall('2')">
-		<input type="button" value="검색3" onclick="searchHall('3')">
-		<input type="button" value="검색4" onclick="searchHall('4')">
-		<input type="button" value="검색5" onclick="searchHall('5')">
 		<input type="reset" value="다시입력">
 	</td>
 </tr>
@@ -242,9 +239,9 @@ function searchResult(){
 </tr>
 </table>
 </div>
-<span id="totalCnt"></span>
-<div class="container" id="container">
-</div>
+<div id="totalCnt"></div>
+<div class="container" id="container"></div>
+<div id="paging"></div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>
