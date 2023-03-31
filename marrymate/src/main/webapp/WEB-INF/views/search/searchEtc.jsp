@@ -6,90 +6,71 @@
 <head>
 <meta charset="UTF-8">
 <title>MarryMate</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <link href="/marrymate/css/searchStyle.css" rel="stylesheet">
 <script src="/marrymate/js/httpRequest.js"></script>
-<script src="/marrymate/js/searchEtc.js"></script>
+<script src="js/searchEtc.js"></script>
 </head>
 <body onload="searchEtc('1')">
 <%@include file="../header.jsp" %>
 <h1>웨딩컬렉션</h1>
+<form>
 <div class="searchbox">
-<table>
-<tr>
-	<th>분류</th>
-	<td>
-		<select name="kind" id="kind">
-			<option>스튜디오</option>
-			<option>헤어메이크업</option>
-			<option>드레스</option>
-			<option>스냅DVD</option>
-			<option>주례</option>
-			<option>사회</option>
-			<option>축가</option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<th>지역</th>
-	<td>
-		<select name="sido" id="sido">
-			<option>전국</option>
-			<option>서울</option>
-			<option>인천</option>
-			<option>대전</option>
-			<option>광주</option>
-			<option>울산</option>
-			<option>부산</option>
-			<option>경기</option>
-			<option>강원</option>
-			<option>충북</option>
-			<option>충남</option>
-			<option>전북</option>
-			<option>전남</option>
-			<option>경북</option>
-			<option>경남</option>
-			<option>제주</option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<th>비용</th>
-	<td>
-		<input type="text" name="payMin" id="payMin">
-		<input type="text" name="payMax" id="payMax">
-	</td>
-</tr>
-<tr>
-	<th>업체명</th>
-	<td>
-		<input type="text" name="name" id="name">
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<input type="button" value="검색" onclick="searchEtc('1')">
-		<input type="reset" value="다시입력">
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<input type="radio" name="sort" value="1" checked="checked">이름순
-		<input type="radio" name="sort" value="2">조회수순
-		<input type="radio" name="sort" value="3">낮은가격순
-		<input type="radio" name="sort" value="4">높은가격순
-		<select name="view" id="view">
-			<option value="4" selected="selected">4개씩 보기</option>
-			<option value="8">8개씩 보기</option>
-			<option value="12">12개씩 보기</option>
-		</select>
-	</td>
-</tr>
-</table>
+	<div class="input-group mb-3" >
+	  <label class="input-group-text" for="inputGroupSelect01">분류</label>
+	  <select class="form-select" name="kind" id="kind">
+		<option selected>스튜디오</option>
+		<option>헤어메이크업</option>
+		<option>드레스</option>
+		<option>스냅DVD</option>
+		<option>주례</option>
+		<option>사회</option>
+		<option>축가</option>
+	  </select>
+	</div>
+	<div class="input-group mb-3" >
+	  <label class="input-group-text" for="inputGroupSelect01">지역</label>
+	  <select class="form-select" name="sido" id="sido">
+	    <option selected>시도</option>
+	    <option>서울</option>
+	  </select>
+	</div>
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="basic-addon1">비용</span>
+	  <input type="text" class="form-control" placeholder="최소금액" name="payMin" id="payMin">
+	  <input type="text" class="form-control" placeholder="최대금액" name="payMax" id="payMax">
+	</div>
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="basic-addon1">업체명</span>
+	  <input type="text" class="form-control" placeholder="업체명" name="name" id="name">
+	</div>
+	<div>
+		<button type="button" class="btn btn-primary" onclick="searchEtc('1')">검색</button>
+		<button type="reset" class="btn btn-secondary">다시입력</button>
+	</div>
 </div>
+<ul class="nav nav-tabs">
+	<li class="nav-item"><a class="nav-link active" aria-current="page" id="sort1" onclick="goSort('1')">이름순</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort2" onclick="goSort('2')">조회수순</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort3" onclick="goSort('3')">낮은가격순</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort4" onclick="goSort('4')">높은가격순</a></li>
+	<li class="nav-item">
+	<select class="form-select" aria-label="Default select example" name="view" id="view" onchange="searchEtc(1)">
+		<option value="8" selected="selected">8개씩 보기</option>
+		<option value="12">12개씩 보기</option>
+		<option value="16">16개씩 보기</option>
+		<option value="20">20개씩 보기</option>
+	</select>
+	</li>
+</ul>
+</form>
 <div id="totalCnt"></div>
-<div class="container" id="container"></div>
-<div id="paging"></div>
+<div class="container1" id="container1"></div>
+<nav class="pagebox" aria-label="Page navigation example">
+  <ul class="pagination" id="paging"></ul>
+</nav>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>
