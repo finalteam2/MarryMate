@@ -76,6 +76,7 @@ public class SearchController {
 		for(int i = 0; i < arr.size(); i++) {
 			json += "{";
 			//json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
+			//json += "\"joindate\":\"" + arr.get(i).getJoindate() + "\",";
 			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
 			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
 			//json += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
@@ -96,7 +97,8 @@ public class SearchController {
 			//json += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
 			//json += "\"watch\":\"" + arr.get(i).getWatch() + "\",";
 			//json += "\"joindate\":\"" + arr.get(i).getJoindate() + "\",";
-			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
+			//json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\",";
+			json += "\"img\":\"" + arr.get(i).getImg() + "\"";
 			json += "}";
 			if(i+1 != arr.size()) {
 				json += ",";

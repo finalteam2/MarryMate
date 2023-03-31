@@ -58,7 +58,7 @@ function searchResult(){
 					var newImgNode = document.createElement('img');
 					newImgNode.setAttribute('class','img');
 					newImgNode.setAttribute('alt','default_img');
-					newImgNode.setAttribute('src','/marrymate/img/noimg.jpg');
+					newImgNode.setAttribute('src','/marrymate/img/company/' + company.img);
 					newItemNode.appendChild(newImgNode);
 					
 					var newInfoNode = document.createElement('div');
