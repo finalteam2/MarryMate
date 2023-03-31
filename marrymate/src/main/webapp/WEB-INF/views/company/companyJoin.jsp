@@ -217,7 +217,7 @@
 	<section>
 		<article>
 			<h2>회원가입</h2>
-			<form name="join_cp" action="join_cp.do" method="post" enctype="multipart/form-data">
+			<form name="companyJoin" action="companyJoin.do" method="post" enctype="multipart/form-data">
 			<div class="box">
 				<div id="iBox">
 					<div class="hTagBox">아이디</div>

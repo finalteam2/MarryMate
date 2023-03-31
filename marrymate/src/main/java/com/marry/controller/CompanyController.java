@@ -49,6 +49,12 @@ public class CompanyController {
 		
 	}
 	
+	@RequestMapping("/hallInfo.do")
+	public String hallInfo() {
+		return "company/hallInfo";
+	}
+	
+	//업로드 메서드
 	public void copyFile(MultipartFile upload) {
 		
 		try {

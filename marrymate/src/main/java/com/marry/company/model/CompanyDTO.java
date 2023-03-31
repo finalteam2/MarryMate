@@ -1,8 +1,11 @@
 package com.marry.company.model;
 
+import java.sql.Date;
+
 public class CompanyDTO {
 	
 	private int cidx;
+	private Date joindate;
 	private String kind;
 	private String cname;
 	private String intro;
@@ -28,11 +31,12 @@ public class CompanyDTO {
 		super();
 	}
 
-	public CompanyDTO(int cidx, String kind, String cname, String intro, String id, String pwd, String tel,
-			String email, String juso, String sjuso, String curl, String sido, String sigungu, int pay, int guest_num,
-			String cnum, String cfile, int clevel, int blind, int watch, int topfix) {
+	public CompanyDTO(int cidx, Date joindate, String kind, String cname, String intro, String id, String pwd,
+			String tel, String email, String juso, String sjuso, String curl, String sido, String sigungu, int pay,
+			int guest_num, String cnum, String cfile, int clevel, int blind, int watch, int topfix) {
 		super();
 		this.cidx = cidx;
+		this.joindate = joindate;
 		this.kind = kind;
 		this.cname = cname;
 		this.intro = intro;
@@ -61,6 +65,14 @@ public class CompanyDTO {
 
 	public void setCidx(int cidx) {
 		this.cidx = cidx;
+	}
+
+	public Date getJoindate() {
+		return joindate;
+	}
+
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
 	}
 
 	public String getKind() {
@@ -222,5 +234,4 @@ public class CompanyDTO {
 	public void setTopfix(int topfix) {
 		this.topfix = topfix;
 	}
-	
 }
