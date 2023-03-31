@@ -5,87 +5,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-table {
-	border:1px solid;
-	border-radius:20px;
-	padding:20px;
-	text-align: center;
-}
-table thead td {
-	text-align: left;
-}
-</style>
+<title>MarryMate</title>
+<link href="/marrymate/css/style.css" rel="stylesheet">
+<link href="/marrymate/css/searchStyle.css" rel="stylesheet">
 <script src="/marrymate/js/httpRequest.js"></script>
-<script>
-function show(){
-	var param = '';
-	var name = document.getElementById('name').value;
-	param += 'name=' + name;
-	var sido = document.getElementById('sido').value;
-	param += '&sido=' + sido;
-	var sigungu = document.getElementById('sigungu').value;
-	param += '&sigungu=' + sigungu;
-	var view = document.getElementById('view').value;
-	param += '&view=' + view;
-	var payMin = document.getElementById('payMin').value;
-	param += '&payMin=' + payMin;
-	var payMax = document.getElementById('payMax').value;
-	param += '&payMax=' + payMax;
-	var sorts = document.getElementsByName('sort');
-	param += '&sort=';
-	for(var i = 0; i < sorts.length; i++){
-		if (sorts[i].checked){
-			param += sorts[i].value;
-		}
-	}
-	sendRequest('searchEtc.do',param,'POST',showResult);
-}
-function showResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data = XHR.responseText;
-			//window.alert(data);
-			data = JSON.parse(data);
-			//window.alert(data);
-			
-			var companylist = data.companylist;
-			var msg = '검색 결과 : ' + companylist.length + '개\n';
-			for(var i = 0; i < companylist.length; i++){
-				var company = companylist[i];
-				msg += '이름 : ' + company.cname + ' ';
-				msg += '가격 : ' + company.pay + ' ';
-				msg += '조회수 : ' + company.watch + ' ';
-				msg += '사번 : ' + company.cidx + '\n';
-			}
-			window.alert(msg);
-			
-			//var resultNode = document.document.getElementById();
-		}
-	}
-}
-
-</script>
+<script src="/marrymate/js/searchEtc.js"></script>
 </head>
-<body>
-<h1>업체 검색</h1>
-<form name="search" action="">
+<body onload="searchEtc('1')">
+<%@include file="../header.jsp" %>
+<h1>웨딩컬렉션</h1>
+<div class="searchbox">
 <table>
-<thead>
+<tr>
+	<th>분류</th>
+	<td>
+		<select name="kind" id="kind">
+			<option>스튜디오</option>
+			<option>헤어메이크업</option>
+			<option>드레스</option>
+			<option>사진영상</option>
+			<option>주례</option>
+			<option>사회</option>
+			<option>축가</option>
+		</select>
+	</td>
+</tr>
 <tr>
 	<th>지역</th>
 	<td>
 		<select name="sido" id="sido">
 			<option>전국</option>
 			<option>서울</option>
-		</select>
-		<select name="sigungu" id="sigungu">
-			<option>시군구</option>
-			<option>몰라용</option>
+			<option>인천</option>
+			<option>대전</option>
+			<option>광주</option>
+			<option>울산</option>
+			<option>부산</option>
+			<option>경기</option>
+			<option>강원</option>
+			<option>충북</option>
+			<option>충남</option>
+			<option>전북</option>
+			<option>전남</option>
+			<option>경북</option>
+			<option>경남</option>
+			<option>제주</option>
 		</select>
 	</td>
-		<th>비용</th>
+</tr>
+<tr>
+	<th>비용</th>
 	<td>
 		<input type="text" name="payMin" id="payMin">
 		<input type="text" name="payMax" id="payMax">
@@ -99,7 +68,7 @@ function showResult(){
 </tr>
 <tr>
 	<td colspan="2">
-		<input type="button" value="검색" onclick="show()">
+		<input type="button" value="검색" onclick="searchEtc('1')">
 		<input type="reset" value="다시입력">
 	</td>
 </tr>
@@ -110,29 +79,18 @@ function showResult(){
 		<input type="radio" name="sort" value="3">낮은가격순
 		<input type="radio" name="sort" value="4">높은가격순
 		<select name="view" id="view">
-			<option value="5" selected="selected">5개씩 보기</option>
-			<option value="10">10개씩 보기</option>
-			<option value="15">15개씩 보기</option>
+			<option value="4" selected="selected">4개씩 보기</option>
+			<option value="8">8개씩 보기</option>
+			<option value="12">12개씩 보기</option>
 		</select>
 	</td>
 </tr>
-</thead>
-<tbody>
-	<tr>
-		<td colspan="2" id="result">
-		
-		</td>
-	</tr>
-</tbody>
-<tfoot>
-	<tr>
-		<td colspan="2">
-		1 2 3 4 5
-		</td>
-	</tr>
-</tfoot>
 </table>
-</form>
-
+</div>
+<div id="totalCnt"></div>
+<div class="container" id="container"></div>
+<div id="paging"></div>
+<%@include file="../chatbot.jsp" %>
+<%@include file="../footer.jsp" %>
 </body>
 </html>

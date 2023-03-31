@@ -79,6 +79,9 @@
  		<if test="sigungu != null and sigungu != '시군구'">
  			and sigungu = #{sigungu}
  		</if>
+ 		<if test="kind != null and kind != ''">
+ 			and kind = #{kind}
+ 		</if>
  		<if test="payMin != null and payMin != 0">
  			and pay <![CDATA[>=]]> #{payMin}
  		</if>

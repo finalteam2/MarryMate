@@ -27,7 +27,7 @@ public class SearchController {
 	public ModelAndView searchHall() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("search/searchHall");
-		mav.addObject("kind", "웨딩홀");
+		mav.addObject("kind", "예식장");
 		return mav;
 	}
 
@@ -43,11 +43,6 @@ public class SearchController {
 			}
 		}
 	}
-	
-	public int getTotalCnt() {
-		return 0;
-	}
-	
 	
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.POST)
 	public ModelAndView searchHall(
@@ -76,29 +71,31 @@ public class SearchController {
 		int cnt = searchDAO.totalCnt(dto);
 		String paging = pageModule.makePage("searchHall", cnt, view, 5, page);
 		//System.out.println(paging);
+		
 		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
 		for(int i = 0; i < arr.size(); i++) {
 			json += "{";
-			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
+			//json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
 			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
 			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
-			json += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
-			json += "\"id\":\"" + arr.get(i).getId() + "\",";
-			json += "\"pwd\":\"" + arr.get(i).getPwd() + "\",";
-			json += "\"tel\":\"" + arr.get(i).getTel() + "\",";
-			json += "\"email\":\"" + arr.get(i).getEmail() + "\",";
-			json += "\"juso\":\"" + arr.get(i).getJuso() + "\",";
-			json += "\"sjuso\":\"" + arr.get(i).getSjuso() + "\",";
-			json += "\"curl\":\"" + arr.get(i).getCurl() + "\",";
+			//json += "\"intro\":\"" + arr.get(i).getIntro() + "\",";
+			//json += "\"id\":\"" + arr.get(i).getId() + "\",";
+			//json += "\"pwd\":\"" + arr.get(i).getPwd() + "\",";
+			//json += "\"tel\":\"" + arr.get(i).getTel() + "\",";
+			//json += "\"email\":\"" + arr.get(i).getEmail() + "\",";
+			//json += "\"juso\":\"" + arr.get(i).getJuso() + "\",";
+			//json += "\"sjuso\":\"" + arr.get(i).getSjuso() + "\",";
+			//json += "\"curl\":\"" + arr.get(i).getCurl() + "\",";
 			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";
 			json += "\"sigungu\":\"" + arr.get(i).getSigungu() + "\",";
 			json += "\"pay\":\"" + arr.get(i).getPay() + "\",";
 			json += "\"guest_num\":\"" + arr.get(i).getGuest_num() + "\",";
-			json += "\"cnum\":\"" + arr.get(i).getCnum() + "\",";
-			json += "\"cfile\":\"" + arr.get(i).getCfile() + "\",";
-			json += "\"clevel\":\"" + arr.get(i).getClevel() + "\",";
-			json += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
-			json += "\"watch\":\"" + arr.get(i).getWatch() + "\",";
+			//json += "\"cnum\":\"" + arr.get(i).getCnum() + "\",";
+			//json += "\"cfile\":\"" + arr.get(i).getCfile() + "\",";
+			//json += "\"clevel\":\"" + arr.get(i).getClevel() + "\",";
+			//json += "\"blind\":\"" + arr.get(i).getBlind() + "\",";
+			//json += "\"watch\":\"" + arr.get(i).getWatch() + "\",";
+			//json += "\"joindate\":\"" + arr.get(i).getJoindate() + "\",";
 			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
 			json += "}";
 			if(i+1 != arr.size()) {
@@ -123,9 +120,49 @@ public class SearchController {
 	
 	@RequestMapping(value = "/searchEtc.do", method = RequestMethod.POST)
 	public ModelAndView searchEtc(
-			@RequestParam(name = "sido",defaultValue = "전국")String sido
+			@RequestParam(name = "sido",defaultValue = "전국")String sido,
+			@RequestParam(name = "payMin",defaultValue = "0")String pMin,
+			@RequestParam(name = "payMax",defaultValue = "0")String pMax,
+			@RequestParam(name = "name",defaultValue = "")String name,
+			@RequestParam(name = "sort",defaultValue = "")String sort,
+			@RequestParam(name = "kind",defaultValue = "")String kind,
+			@RequestParam(name = "view",defaultValue = "4")int view,
+			@RequestParam(name = "page",defaultValue = "1")int page
 			) {
+		int payMin = stToInt(pMin);
+		int payMax = stToInt(pMax);
+		int start = (page - 1) * view + 1;
+		int end = (page * view);
+		SearchDTO dto = new SearchDTO(sido, "시군구", payMin, payMax, 0, 0, name, sort, kind, view, start, end);
+
+//		dto.toString();
+//		System.out.println("page : " + page);
+		
+		List<CompanyDTO> arr = searchDAO.searchAll(dto);
+		int cnt = searchDAO.totalCnt(dto);
+		String paging = pageModule.makePage("searchEtc", cnt, view, 5, page);
 		ModelAndView mav = new ModelAndView();
+		
+//		System.out.println(paging);
+		
+		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
+		for(int i = 0; i < arr.size(); i++) {
+			json += "{";
+			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
+			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
+			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";
+			json += "\"pay\":\"" + arr.get(i).getPay() + "\",";
+			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
+			json += "}";
+			if(i+1 != arr.size()) {
+				json += ",";
+			}
+		}
+		json += "]}";
+		
+//		System.out.println(json);
+		
+		mav.addObject("json", json);
 		mav.setViewName("search/result");
 		return mav;
 	}
