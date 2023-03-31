@@ -27,12 +27,16 @@ article table thead th{
 	font-family: 'SUIT-Regular';
 	font-size: 20px;
 	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 article table tbody td{
 	font-family: 'SUIT-Regular';
 	font-size: 20px;
 	font-weight: bold;
+	padding-top: 16px;
 	padding-bottom: 10px;
+	border-bottom: 1px solid black; 
 }
 h2{
 	font-family: 'SUIT-Regular';
@@ -57,11 +61,18 @@ h2{
 			</thead>
 			<tbody>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>2023-03-31</td>
+					<td>이젠스튜디오</td>
+					<td style="color:red;">10000</td>
+					<td>차감</td>
+					<td>예약금</td>
+				</tr>
+				<tr>
+					<td>2023-03-19</td>
+					<td>메리메이트</td>
+					<td style="color:blue;">3000</td>
+					<td>적립</td>
+					<td>이벤트</td>
 				</tr>
 			</tbody>
 		</table>

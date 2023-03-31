@@ -30,4 +30,9 @@ public class MypageController {
 	public String point() {
 		return "/mypage/myPoint";
 	}
+	
+	@RequestMapping("/community.do")
+	public String community() {
+		return "/mypage/community";
+	}
 }

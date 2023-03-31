@@ -20,6 +20,7 @@
 						<a href="reserve.do">예약내역</a>
 						<a href="qna.do">문의내역</a>
 						<a href="point.do">My 포인트</a>
+						<a href="community.do">My 커뮤니티</a>
 					</div>
 					<div class="clearboth"></div>
 			</nav>
