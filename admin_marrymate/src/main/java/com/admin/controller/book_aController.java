@@ -18,7 +18,7 @@ public class book_aController {
 	@RequestMapping("/book_a.do")
 	public ModelAndView book_a() {
 		
-		List<BookDTO> dtos=bookDao.bookList("예식장");
+		List<BookListDTO> dtos=bookDao.bookList();
 		
 		ModelAndView mav=new ModelAndView();
 		
@@ -29,9 +29,9 @@ public class book_aController {
 	}
 	
 	@RequestMapping("/bookList.do")
-	public ModelAndView collectionList(String kind) {
+	public ModelAndView bookList() {
 		
-		List<BookDTO> dtos=bookDao.bookList(kind);
+		List<BookListDTO> dtos=bookDao.bookList();
 		
 		ModelAndView mav=new ModelAndView();
 		

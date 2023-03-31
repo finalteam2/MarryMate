@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,9 +109,42 @@
 	</tr>
 </table>
 <hr width="850" class="tb">
-<br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
+<form name="bookList">
+<table cellspacing="0" border="1" width="600" id="tb2">
+	<thead>
+		<tr>
+			<th>예약번호</th>
+			<th>회원번호</th>
+			<th>회원명</th>
+			<th>업체명</th>
+			<th>예약날짜/시간</th>
+			<th>이용날짜/시간</th>
+			<th>금액</th>
+			<th>상태</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="8" align="center">예약된 정보가 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
+		<tr>
+			<td>${dto.bk_idx}</td>
+			<td>${dto.midx}</td>
+			<td>${dto.name}</td>
+			<td>${dto.cname}</td>
+			<td>${dto.bookdate}</td>
+			<td>${dto.bk_date_time}</td>
+			<td>${dto.total_money}</td>
+			<td>${dto.bk_state}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
 <hr width="1200">
 </body>
 </html>

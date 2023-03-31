@@ -8,4 +8,8 @@
   		select * from member order by midx
   </select>
   
+  <select id="memberInfo" parameterType="Integer" resultType="com.admin.member.model.MemberDTO">
+  		select * from member where midx=#{midx}
+  </select>
+  
   </mapper>

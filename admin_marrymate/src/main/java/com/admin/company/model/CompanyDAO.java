@@ -8,6 +8,6 @@ public interface CompanyDAO {
 	
 	public List<CompanyDTO> collectionList(String kind);
 	
-	public String findKind(int cidx);
+	public CompanyDTO companyInfo(int cidx);
 
 }

@@ -12,4 +12,8 @@
   		select * from company where kind=#{kind} and clevel=1 order by cname
   </select>
   
+  <select id="companyInfo" parameterType="Integer" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where cidx=#{cidx}
+  </select>
+  
   </mapper>

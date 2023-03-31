@@ -7,5 +7,8 @@
   		<mapper resource="sqlMap/adminSQL.xml"/>
   		<mapper resource="sqlMap/companySQL.xml"/>
   		<mapper resource="sqlMap/memberSQL.xml"/>
+  		<mapper resource="sqlMap/bookSQL.xml"/>
+  		<mapper resource="sqlMap/hallSQL.xml"/>
+  		<mapper resource="sqlMap/paymentSQL.xml"/>
   	</mappers>
   </configuration>

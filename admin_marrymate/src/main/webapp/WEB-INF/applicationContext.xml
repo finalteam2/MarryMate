@@ -36,4 +36,8 @@
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="bookDao" class="com.admin.book.model.BookDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>
