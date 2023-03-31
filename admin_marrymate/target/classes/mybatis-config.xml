@@ -10,5 +10,6 @@
   		<mapper resource="sqlMap/bookSQL.xml"/>
   		<mapper resource="sqlMap/hallSQL.xml"/>
   		<mapper resource="sqlMap/paymentSQL.xml"/>
+  		<mapper resource="sqlMap/pointSQL.xml"/>
   	</mappers>
   </configuration>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +45,10 @@
 }
 #hr{
 	margin-left: 450px;
+}
+#tb2 {
+	text-align: center;
+	margin-left: 570px;
 }
 </style>
 </head>
@@ -105,7 +110,39 @@
 	</tr>
 </table>
 <hr width="950" id="hr">
-<br><br><br><br><br><br>
+<br><br>
+<form name="collectionList">
+<table cellspacing="0" border="1" width="700" id="tb2">
+	<thead>
+		<tr>
+			<th>회원번호</th>
+			<th>회원명</th>
+			<th>업체명</th>
+			<th>차감날짜/시간</th>
+			<th>차감포인트</th>
+			<th>구분</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="6" align="center">포인트 차감 내역이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+		<tr>
+			<td>${dto.midx}</td>
+			<td>${dto.midx}</td>
+			<td>${dto.pay_idx}</td>
+			<td>${dto.p_date}</td>
+			<td>${dto.p_cal}</td>
+			<td>${dto.p_type}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+<br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

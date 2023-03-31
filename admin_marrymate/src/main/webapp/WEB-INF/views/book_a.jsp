@@ -43,6 +43,10 @@
 .tb {
 	margin-left: 500px;
 }
+#tb2 {
+	text-align: center;
+	margin-left: 525px;
+}
 </style>
 </head>
 <body width="1200">
@@ -109,8 +113,9 @@
 	</tr>
 </table>
 <hr width="850" class="tb">
+<br><br>
 <form name="bookList">
-<table cellspacing="0" border="1" width="600" id="tb2">
+<table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
 			<th>예약번호</th>
@@ -145,6 +150,9 @@
 	</tbody>
 </table>
 </form>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">
 </body>
 </html>

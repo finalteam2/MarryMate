@@ -40,4 +40,8 @@
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="pointDao" class="com.admin.point.model.PointDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>

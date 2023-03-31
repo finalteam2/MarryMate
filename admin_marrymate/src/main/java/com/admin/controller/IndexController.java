@@ -68,11 +68,6 @@ public class IndexController {
 		return "community_a";
 	}
 	
-	@RequestMapping("/point_a.do")
-	public String point_a() {
-		return "point_a";
-	}
-	
 	@RequestMapping("/cs_a.do")
 	public String cs_a() {
 		return "cs_a";

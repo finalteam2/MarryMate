@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.admin.book.model.*;
 
 @Controller
-public class book_aController {
+public class Book_aController {
 	
 	@Autowired
 	private BookDAO bookDao;
