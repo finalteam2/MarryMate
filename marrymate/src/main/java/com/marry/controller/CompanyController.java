@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -92,6 +94,32 @@ public class CompanyController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)
+	public ModelAndView companyContent(
+			@RequestParam(value = "cidx", defaultValue = "0")int cidx
+			) {
+		ModelAndView mav = new ModelAndView();
+		CompanyDTO dto = null;
+		if(cidx != 0) {
+			dto = companyDao.companySelectOne(cidx);
+		}
+		if(cidx == 0 || dto.equals(null)) {
+			String msg = "잘못된 접근입니다";
+			mav.addObject("msg", msg);
+			mav.addObject("url", "index.do");
+		}else {
+			mav.addObject("dto", dto);
+			List harr = companyDao.selectHall(cidx);
+			List farr = companyDao.selectFood(cidx);
+			List iarr = companyDao.selectCom_Img(cidx);
+			mav.addObject("harr", harr);
+			mav.addObject("farr", farr);
+			mav.addObject("iarr", iarr);
+			mav.setViewName("company/companyContent");
+		}
+		return mav;
 	}
 	
 }

@@ -32,4 +32,43 @@
 	    #{img}
 	)
 	</insert>
+	<select id="companySelectOne" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
+	select
+		*
+	from
+		company
+	where
+		cidx = #{cidx}
+		clevel = 1
+	</select>
+	<select id="selectHall" parameterType="Integer" resultType="com.marry.company.model.HallDTO">
+	select
+		*
+	from
+		hall
+	where
+		cidx = #{cidx}
+	order by
+		hidx asc
+	</select>
+	<select id="selectFood" parameterType="Integer" resultType="com.marry.company.model.FoodDTO">
+	select
+		*
+	from
+		food
+	where
+		cidx = #{cidx}
+	order by
+		fidx asc
+	</select>
+	<select id="selectImg" parameterType="Integer" resultType="com.marry.company.model.Com_ImgDTO">
+	select
+		*
+	from
+		com_img
+	where
+		cidx = #{cidx}
+	order by
+		fidx asc
+	</select>
 </mapper>
