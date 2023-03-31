@@ -5,10 +5,9 @@ import java.sql.*;
 public class PaymentDTO {
 
 	private int pay_idx;
-	private int hallbk_idx;
-	private int combk_idx;
+	private int bk_idx;
 	private int midx;
-	private String pay_kind;
+	private String pay_how;
 	private Date pay_date;
 	private String pay_type;
 	private int pay_point;
@@ -18,14 +17,13 @@ public class PaymentDTO {
 		super();
 	}
 
-	public PaymentDTO(int pay_idx, int hallbk_idx, int combk_idx, int midx, String pay_kind, Date pay_date,
-			String pay_type, int pay_point, int pay_money) {
+	public PaymentDTO(int pay_idx, int bk_idx, int midx, String pay_how, Date pay_date, String pay_type, int pay_point,
+			int pay_money) {
 		super();
 		this.pay_idx = pay_idx;
-		this.hallbk_idx = hallbk_idx;
-		this.combk_idx = combk_idx;
+		this.bk_idx = bk_idx;
 		this.midx = midx;
-		this.pay_kind = pay_kind;
+		this.pay_how = pay_how;
 		this.pay_date = pay_date;
 		this.pay_type = pay_type;
 		this.pay_point = pay_point;
@@ -40,20 +38,12 @@ public class PaymentDTO {
 		this.pay_idx = pay_idx;
 	}
 
-	public int getHallbk_idx() {
-		return hallbk_idx;
+	public int getBk_idx() {
+		return bk_idx;
 	}
 
-	public void setHallbk_idx(int hallbk_idx) {
-		this.hallbk_idx = hallbk_idx;
-	}
-
-	public int getCombk_idx() {
-		return combk_idx;
-	}
-
-	public void setCombk_idx(int combk_idx) {
-		this.combk_idx = combk_idx;
+	public void setBk_idx(int bk_idx) {
+		this.bk_idx = bk_idx;
 	}
 
 	public int getMidx() {
@@ -64,12 +54,12 @@ public class PaymentDTO {
 		this.midx = midx;
 	}
 
-	public String getPay_kind() {
-		return pay_kind;
+	public String getPay_how() {
+		return pay_how;
 	}
 
-	public void setPay_kind(String pay_kind) {
-		this.pay_kind = pay_kind;
+	public void setPay_how(String pay_how) {
+		this.pay_how = pay_how;
 	}
 
 	public Date getPay_date() {
