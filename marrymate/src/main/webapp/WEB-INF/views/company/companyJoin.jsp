@@ -182,7 +182,7 @@
 	}
 	#aBox {
 		width: 600px;
-		height: 600px;
+		height: 650px;
 		margin-top: -30px;
 		margin-left: auto;
 		margin-right: auto;
@@ -267,7 +267,9 @@
 					<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
 					<div class="hTagBox">기업 웹사이트</div>
 					<input type="text" name="curl"><br>
-					<div class="hClear">상품 가격</div>
+					<div class="hClear">대표 이미지</div>
+					<input type="file" name="aimg"><br>
+					<div class="hTagBox">상품 가격</div>
 					<input type="text" name="pay"><br>
 				</div>
 				<div id="jBox">

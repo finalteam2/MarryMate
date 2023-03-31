@@ -26,6 +26,7 @@ public class CompanyDTO {
 	private int blind;
 	private int watch;
 	private int topfix;
+	private String img;
 	
 	public CompanyDTO() {
 		super();
@@ -33,7 +34,7 @@ public class CompanyDTO {
 
 	public CompanyDTO(int cidx, Date joindate, String kind, String cname, String intro, String id, String pwd,
 			String tel, String email, String juso, String sjuso, String curl, String sido, String sigungu, int pay,
-			int guest_num, String cnum, String cfile, int clevel, int blind, int watch, int topfix) {
+			int guest_num, String cnum, String cfile, int clevel, int blind, int watch, int topfix, String img) {
 		super();
 		this.cidx = cidx;
 		this.joindate = joindate;
@@ -57,6 +58,7 @@ public class CompanyDTO {
 		this.blind = blind;
 		this.watch = watch;
 		this.topfix = topfix;
+		this.img = img;
 	}
 
 	public int getCidx() {
@@ -233,5 +235,13 @@ public class CompanyDTO {
 
 	public void setTopfix(int topfix) {
 		this.topfix = topfix;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

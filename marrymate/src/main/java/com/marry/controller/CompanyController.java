@@ -34,9 +34,14 @@ public class CompanyController {
 		MultipartFile afile=req.getFile("afile");
 		copyFile(afile);
 		
+		MultipartFile aimg=req.getFile("aimg");
+		copyFile2(aimg);
+		
 		String cfile=afile.getOriginalFilename();
+		String img=aimg.getOriginalFilename();
 		
 		dto.setCfile(cfile);
+		dto.setImg(img);
 		
 		int result=companyDao.coJoin(dto);
 		String msg=result>0?"가입 완료":"가입 실패";
@@ -61,6 +66,23 @@ public class CompanyController {
 			byte bytes[]=upload.getBytes();
 			//용지
 			File outfile=new File("C:/student_java/cfileUpload/"+upload.getOriginalFilename());
+			
+			FileOutputStream fos=new FileOutputStream(outfile);
+			fos.write(bytes);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void copyFile2(MultipartFile upload) {
+		
+		try {
+			byte bytes[]=upload.getBytes();
+			//용지
+			File outfile=new File("C:/student_java/imgUpload/"+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
