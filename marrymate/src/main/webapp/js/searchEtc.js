@@ -1,3 +1,27 @@
+var sort = 1;
+
+function goSort(num){
+	sort = num;
+	var sort1Node = document.getElementById('sort1');
+	var sort2Node = document.getElementById('sort2');
+	var sort3Node = document.getElementById('sort3');
+	var sort4Node = document.getElementById('sort4');
+	sort1Node.setAttribute('class','nav-link');
+	sort2Node.setAttribute('class','nav-link');
+	sort3Node.setAttribute('class','nav-link');
+	sort4Node.setAttribute('class','nav-link');
+	if(sort == 1){
+		sort1Node.setAttribute('class','nav-link active');
+	}else if(sort == 2){
+		sort2Node.setAttribute('class','nav-link active');
+	}else if(sort == 3){
+		sort3Node.setAttribute('class','nav-link active');
+	}else if(sort == 4){
+		sort4Node.setAttribute('class','nav-link active');
+	}
+	searchEtc('1');
+}
+
 function searchEtc(page){
 	var param = '';
 	var name = document.getElementById('name').value;
@@ -12,13 +36,7 @@ function searchEtc(page){
 	param += '&payMax=' + payMax;
 	var kind = document.getElementById('kind').value;
 	param += '&kind=' + kind;
-	var sorts = document.getElementsByName('sort');
-	param += '&sort=';
-	for(var i = 0; i < sorts.length; i++){
-		if (sorts[i].checked){
-			param += sorts[i].value;
-		}
-	}
+	param += '&sort=' + sort;
 	param += '&page=' + page;
 	sendRequest('searchEtc.do',param,'POST',searchResult);
 }
@@ -42,7 +60,7 @@ function searchResult(){
 			pagingNode.innerHTML=paging;
 			
 			//컨테이너 비우기
-			var containerNode = document.getElementById('container');
+			var containerNode = document.getElementById('container1');
 			var childNodes = containerNode.childNodes;
 			for (let i = childNodes.length - 1; i >= 0; i--) {
 			  var childNode = childNodes[i];
@@ -53,10 +71,10 @@ function searchResult(){
 				var company = companylist[i];
 				//아이템 만들기
 				var newItemNode = document.createElement('div');
-				newItemNode.setAttribute('class','item');
+				newItemNode.setAttribute('class','card');
 				
 					var newImgNode = document.createElement('img');
-					newImgNode.setAttribute('class','img');
+					newImgNode.setAttribute('class','card-img-top');
 					newImgNode.setAttribute('alt','default_img');
 					newImgNode.setAttribute('src','/marrymate/img/company/' + company.img);
 					newItemNode.appendChild(newImgNode);
@@ -65,22 +83,22 @@ function searchResult(){
 					newInfoNode.setAttribute('class','info');
 						
 						var newNameNode = document.createElement('span');
-						newNameNode.setAttribute('class','name');
+						newNameNode.setAttribute('class','card-text');
 						var newNameTextNode = document.createTextNode(company.cname);
 						newNameNode.appendChild(newNameTextNode);
 						
 						var newSidoNode = document.createElement('span');
-						newSidoNode.setAttribute('class','sido');
+						newSidoNode.setAttribute('class','card-text');
 						var newSidoTextNode = document.createTextNode(company.sido + ' / ');
 						newSidoNode.appendChild(newSidoTextNode);
 						
 						var newKindNode = document.createElement('span');
-						newKindNode.setAttribute('class','kind');
+						newKindNode.setAttribute('class','card-text');
 						var newKindTextNode = document.createTextNode(company.kind);
 						newKindNode.appendChild(newKindTextNode);
 						
 						var newPayNode = document.createElement('span');
-						newPayNode.setAttribute('class','pay');
+						newPayNode.setAttribute('class','card-text');
 						var newPayTextNode = document.createTextNode('비용 : ' + company.pay);
 						newPayNode.appendChild(newPayTextNode);
 						

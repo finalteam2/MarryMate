@@ -69,7 +69,12 @@ public class SearchController {
 		//System.out.println("page : " + page);
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
 		int cnt = searchDAO.totalCnt(dto);
-		String paging = pageModule.makePage("searchHall", cnt, view, 5, page);
+		String paging = "";
+		if (cnt > 0) {
+			paging = pageModule.makePage("searchHall", cnt, view, 5, page);
+		}else {
+			paging = "검색결과가 없습니다.";
+		}
 		//System.out.println(paging);
 		
 		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
@@ -142,7 +147,12 @@ public class SearchController {
 		
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
 		int cnt = searchDAO.totalCnt(dto);
-		String paging = pageModule.makePage("searchEtc", cnt, view, 5, page);
+		String paging = "";
+		if (cnt > 0) {
+			paging = pageModule.makePage("searchEtc", cnt, view, 5, page);
+		}else {
+			paging = "검색결과가 없습니다.";
+		}
 		ModelAndView mav = new ModelAndView();
 		
 //		System.out.println(paging);
