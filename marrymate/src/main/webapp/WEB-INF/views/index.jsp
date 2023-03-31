@@ -6,10 +6,17 @@
 <meta charset="UTF-8">
 <title>MarryMate</title>
 <link href="/marrymate/css/style.css" rel="stylesheet">
-
+<link rel="stylesheet" href="/marrymate/css/sakura.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/sakura.js"></script>
 </head>
 
 <body>
+<script>
+$(window).load(function () {
+    $('body').sakura();
+});
+</script>
 <h3>메인 효과 영역, 첫 방문 시 노출 후 사라짐 예정</h3>
   <div class="video">
     <iframe width="700" height="400" src="/marrymate/video/main.mp4" title="video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
