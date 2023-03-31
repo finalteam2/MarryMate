@@ -16,7 +16,7 @@
 		}
 	article div input[type=password] {
 		width: 230px;
-		height: 25px;
+		height: 30px;
 		font-size: 15px;
 		border: 1px solid black;
 		border-radius: 12px;
@@ -238,16 +238,18 @@
 				</div>
 				<div id="aBox">
 					<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;기업 정보</h3>
-					<div class="buBox">업종 카테고리 선택</div>
-					<div class="buBox"><input type="radio" name="kind" value="예식장">예식장</div>
-					<div class="buBox"><input type="radio" name="kind" value="스튜디오">스튜디오</div>
-					<div class="buBox"><input type="radio" name="kind" value="드레스">드레스</div>
-					<div class="buBox"><input type="radio" name="kind" value="헤어/메이크업">헤어/메이크업</div>
-					<div class="buBox"><input type="radio" name="kind" value="사진">사진</div>
-					<div class="buBox"><input type="radio" name="kind" value="DVD">DVD</div>
-					<div class="buBox"><input type="radio" name="kind" value="주례">주례</div>
-					<div class="buBox"><input type="radio" name="kind" value="사회">사회</div>
-					<div class="buBox"><input type="radio" name="kind" value="축가">축가</div>
+					<div id="tagBox">
+						<div class="buBox">업종 카테고리 선택</div>
+						<div class="buBox"><input type="radio" name="kind" value="예식장">예식장</div>
+						<div class="buBox"><input type="radio" name="kind" value="스튜디오">스튜디오</div>
+						<div class="buBox"><input type="radio" name="kind" value="드레스">드레스</div>
+						<div class="buBox"><input type="radio" name="kind" value="헤어/메이크업">헤어/메이크업</div>
+						<div class="buBox"><input type="radio" name="kind" value="사진">사진</div>
+						<div class="buBox"><input type="radio" name="kind" value="DVD">DVD</div>
+						<div class="buBox"><input type="radio" name="kind" value="주례">주례</div>
+						<div class="buBox"><input type="radio" name="kind" value="사회">사회</div>
+						<div class="buBox"><input type="radio" name="kind" value="축가">축가</div>
+					</div>
 					<div id="head">
 					<div class="hTagBox">사업자등록번호</div>
 					<input type="text" name="cnum">&nbsp;<input type="file" name="afile"><br>

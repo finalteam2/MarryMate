@@ -23,12 +23,12 @@ public class CompanyController {
 	@Autowired
 	private CompanyDAO companyDao;
 	
-	@RequestMapping(value = "/join_cp.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/companyJoin.do", method = RequestMethod.GET)
 	public String joinForm_cp() {
-		return "member/memberJoin_cp";
+		return "company/companyJoin";
 	}
 	
-	@RequestMapping(value = "/join_cp.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/companyJoin.do", method = RequestMethod.POST)
 	public ModelAndView join_cp(CompanyDTO dto, MultipartHttpServletRequest req) {
 		
 		MultipartFile afile=req.getFile("afile");
@@ -44,7 +44,7 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.addObject("url", "index.do");
-		mav.setViewName("member/memberMsg");
+		mav.setViewName("company/companyMsg");
 		return mav;
 		
 	}

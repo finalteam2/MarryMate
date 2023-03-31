@@ -15,12 +15,12 @@ public class MemberController {
 	@Autowired
 	private MemberDAO memberDao;
 
-	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/memberJoin.do", method = RequestMethod.GET)
 	public String joinForm() {
 		return "member/memberJoin";
 	}
 
-	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberJoin.do", method = RequestMethod.POST)
 	public ModelAndView memberJoin(MemberDTO dto) {
 
 		int result=memberDao.memberJoin(dto);
