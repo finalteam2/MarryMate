@@ -154,7 +154,7 @@ public class SearchController {
 			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
 			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";
 			json += "\"pay\":\"" + arr.get(i).getPay() + "\",";
-			json += "\"topfix\":\"" + arr.get(i).getTopfix() + "\"";
+			json += "\"img\":\"" + arr.get(i).getImg() + "\"";
 			json += "}";
 			if(i+1 != arr.size()) {
 				json += ",";
