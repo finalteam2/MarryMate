@@ -2,26 +2,27 @@ package com.marry.book.model;
 
 import java.sql.*;
 
-public class Hall_bookDTO {
-	
-	private int hallbk_idx;
+public class BookDTO {
+
+	private int bk_idx;
 	private int midx;
 	private int hidx;
 	private int cidx;
 	private int fidx;
 	private Date bk_date;
 	private String bk_time;
-	private String bk_state;
+	private int bk_state;
 	private Date bookdate;
+	private int hall_nothall;
 	
-	public Hall_bookDTO() {
+	public BookDTO() {
 		super();
 	}
 
-	public Hall_bookDTO(int hallbk_idx, int midx, int hidx, int cidx, int fidx, Date bk_date, String bk_time,
-			String bk_state, Date bookdate) {
+	public BookDTO(int bk_idx, int midx, int hidx, int cidx, int fidx, Date bk_date, String bk_time, int bk_state,
+			Date bookdate, int hall_nothall) {
 		super();
-		this.hallbk_idx = hallbk_idx;
+		this.bk_idx = bk_idx;
 		this.midx = midx;
 		this.hidx = hidx;
 		this.cidx = cidx;
@@ -30,14 +31,15 @@ public class Hall_bookDTO {
 		this.bk_time = bk_time;
 		this.bk_state = bk_state;
 		this.bookdate = bookdate;
+		this.hall_nothall = hall_nothall;
 	}
 
-	public int getHallbk_idx() {
-		return hallbk_idx;
+	public int getBk_idx() {
+		return bk_idx;
 	}
 
-	public void setHallbk_idx(int hallbk_idx) {
-		this.hallbk_idx = hallbk_idx;
+	public void setBk_idx(int bk_idx) {
+		this.bk_idx = bk_idx;
 	}
 
 	public int getMidx() {
@@ -88,11 +90,11 @@ public class Hall_bookDTO {
 		this.bk_time = bk_time;
 	}
 
-	public String getBk_state() {
+	public int getBk_state() {
 		return bk_state;
 	}
 
-	public void setBk_state(String bk_state) {
+	public void setBk_state(int bk_state) {
 		this.bk_state = bk_state;
 	}
 
@@ -102,6 +104,14 @@ public class Hall_bookDTO {
 
 	public void setBookdate(Date bookdate) {
 		this.bookdate = bookdate;
+	}
+
+	public int getHall_nothall() {
+		return hall_nothall;
+	}
+
+	public void setHall_nothall(int hall_nothall) {
+		this.hall_nothall = hall_nothall;
 	}
 	
 	
