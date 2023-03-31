@@ -20,5 +20,11 @@ public class CompanyDAOImple implements CompanyDAO {
 		List<CompanyDTO> dtos=sqlMap.selectList("companyList",kind);
 		return dtos;
 	}
+	
+	@Override
+	public List<CompanyDTO> collectionList(String kind) {
+		List<CompanyDTO> dtos=sqlMap.selectList("collectionList",kind);
+		return dtos;
+	}
 
 }

@@ -41,11 +41,11 @@
 	margin: 0px auto;
 }
 .tb {
-	margin-left: 450px;
+	margin-left: 500px;
 }
 #tb2 {
 	text-align: center;
-	margin-left: 560px;
+	margin-left: 610px;
 }
 </style>
 </head>
@@ -88,7 +88,7 @@
 		<th><a href="cs_a.do">문의관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="mem_com_a.do">회원관리</a></th>
+		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="analytics.do">Analytics</a></th>
@@ -106,44 +106,35 @@
 		<th width="100">스튜디오</th>
 		<th width="100">드레스</th>
 		<th width="120">헤어/메이크업</th>
-		<th width="100">사진</th>
-		<th width="100">DVD</th>
+		<th width="100">스냅DVD</th>
 		<th width="100">주례</th>
 		<th width="100">사회</th>
 		<th width="100">축가</th>
 	</tr>
 </table>
-<hr width="950" class="tb">
+<hr width="850" class="tb">
 <br><br>
-<form name="companyList" action="companyDetails.do">
-<table cellspacing="0" border="1" width="700" id="tb2">
+<form name="collectionList">
+<table cellspacing="0" border="1" width="600" id="tb2">
 	<thead>
 		<tr>
+			<th></th>
 			<th>업체번호</th>
 			<th>업체명</th>
-			<th>가입날짜/시간</th>
-			<th>구분</th>
-			<th>업체정보</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
+			<td colspan="3" align="center">등록된 기업이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="cidx" value="${dto.cidx}">
 		<tr>
+			<td><input type="radio" name="remote_con"></td>
 			<td>${dto.cidx}</td>
 			<td>${dto.cname}</td>
-			<td>${dto.joindate}</td>
-			<td>
-				<c:if test="${dto.clevel==0}">승인대기</c:if>
-				<c:if test="${dto.clevel==-1}">승인거부</c:if>
-				<c:if test="${dto.clevel==1}">기업회원</c:if>
-			</td>
-			<td><input type="submit" value="정보보기"></td>
 		</tr>
 	</c:forEach>
 	</tbody>

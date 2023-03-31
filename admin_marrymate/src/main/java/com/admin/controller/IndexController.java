@@ -63,11 +63,6 @@ public class IndexController {
 		return mav;
 	}
 	
-	@RequestMapping("/book_a.do")
-	public String book_a() {
-		return "book_a";
-	}
-	
 	@RequestMapping("/community_a.do")
 	public String community_a() {
 		return "community_a";
@@ -81,11 +76,6 @@ public class IndexController {
 	@RequestMapping("/cs_a.do")
 	public String cs_a() {
 		return "cs_a";
-	}
-	
-	@RequestMapping("/mem_com_a.do")
-	public String mem_com_a() {
-		return "mem_com_a";
 	}
 	
 	@RequestMapping("/analytics.do")

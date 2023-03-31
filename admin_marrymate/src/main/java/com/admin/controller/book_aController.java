@@ -2,45 +2,41 @@ package com.admin.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.admin.admin.model.AdminDAO;
-import com.admin.company.model.*;
+import com.admin.book.model.*;
 
 @Controller
-public class Collection_aController {
+public class book_aController {
 	
 	@Autowired
-	private CompanyDAO companyDao;
+	private BookDAO bookDao;
 	
-	@RequestMapping("/collection_a.do")
-	public ModelAndView collection_a() {
+	@RequestMapping("/book_a.do")
+	public ModelAndView book_a() {
 		
-		List<CompanyDTO> dtos=companyDao.collectionList("예식장");
+		List<BookDTO> dtos=bookDao.bookList("예식장");
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
-		mav.setViewName("collection_a");
+		mav.setViewName("book_a");
 		
 		return mav;
 	}
 	
-	@RequestMapping("/collectionList.do")
+	@RequestMapping("/bookList.do")
 	public ModelAndView collectionList(String kind) {
 		
-		List<CompanyDTO> dtos=companyDao.collectionList(kind);
+		List<BookDTO> dtos=bookDao.bookList(kind);
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
-		mav.setViewName("collection_a");
+		mav.setViewName("book_a");
 		
 		return mav;
 	}

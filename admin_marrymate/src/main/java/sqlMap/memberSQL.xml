@@ -5,7 +5,7 @@
   <mapper namespace="com.admin.member">
   
   <select id="memberList" resultType="com.admin.member.model.MemberDTO">
-  		select * from member where
+  		select * from member order by midx
   </select>
   
   </mapper>

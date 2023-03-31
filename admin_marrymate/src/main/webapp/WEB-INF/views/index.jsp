@@ -80,7 +80,7 @@
 		<th><a href="cs_a.do">문의관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="mem_com_a.do">회원관리</a></th>
+		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="analytics.do">Analytics</a></th>

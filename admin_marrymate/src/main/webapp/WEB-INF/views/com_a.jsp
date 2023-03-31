@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +41,21 @@
 	margin: 0px auto;
 }
 #tb {
-	margin-left: 610px;
+	margin-left: 760px;
 }
 #hr{
 	margin-left: 450px;
+}
+.tb2 {
+	text-align: center;
+	margin-left: 520px;
+}
+#hr2 {
+	margin-left: 515px;
+}
+#tb3 {
+	text-align: center;
+	margin-left: 560px;
 }
 </style>
 </head>
@@ -100,14 +112,61 @@
 <br><br>
 <table height="50" id="tb">
 	<tr>
-		<th width="150">공지사항</th>
-		<th width="150">웨딩후기</th>
-		<th width="150">웨딩톡톡</th>
-		<th width="150">불량글관리</th>
+		<th width="150"><a href="memberList.do">일반회원</a></th>
+		<th width="150"><a href="companyList.do">기업회원</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
-<br><br><br><br><br><br>
+<br><br>
+<table height="50" class="tb2" align="center">
+	<tr>
+		<th width="95">예식장</th>
+		<th width="95">스튜디오</th>
+		<th width="95">드레스</th>
+		<th width="120">헤어/메이크업</th>
+		<th width="95">스냅DVD</th>
+		<th width="95">주례</th>
+		<th width="95">사회</th>
+		<th width="95">축가</th>
+	</tr>
+</table>
+<hr width="820" id="hr2">
+<br><br>
+<form name="companyList" action="companyDetails.do">
+<table cellspacing="0" border="1" width="700" id="tb3">
+	<thead>
+		<tr>
+			<th>업체번호</th>
+			<th>업체명</th>
+			<th>가입날짜/시간</th>
+			<th>구분</th>
+			<th>업체정보</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+	<input type="hidden" name="cidx" value="${dto.cidx}">
+		<tr>
+			<td>${dto.cidx}</td>
+			<td>${dto.cname}</td>
+			<td>${dto.joindate}</td>
+			<td>
+				<c:if test="${dto.clevel==0}">승인대기</c:if>
+				<c:if test="${dto.clevel==-1}">승인거부</c:if>
+				<c:if test="${dto.clevel==1}">기업회원</c:if>
+			</td>
+			<td><input type="submit" value="정보보기"></td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+<br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

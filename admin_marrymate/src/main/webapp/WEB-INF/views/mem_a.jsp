@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +91,7 @@
 		<th><a href="cs_a.do">문의관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="mem_com_a.do">회원관리</a></th>
+		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="analytics.do">Analytics</a></th>
@@ -104,41 +105,39 @@
 <br><br>
 <table height="50" id="tb">
 	<tr>
-		<th width="150">일반회원</th>
-		<th width="150">기업회원</th>
+		<th width="150"><a href="memberList.do">일반회원</a></th>
+		<th width="150"><a href="companyList.do">기업회원</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
 <br><br>
-<form name="companyList" action="companyDetails.do">
+<form name="memberList" action="memberNotification.do">
 <table cellspacing="0" border="1" width="700" id="tb2">
 	<thead>
 		<tr>
-			<th>업체번호</th>
-			<th>업체명</th>
+			<th>회원번호</th>
+			<th>회원명</th>
+			<th>닉네임</th>
 			<th>가입날짜/시간</th>
-			<th>구분</th>
-			<th>업체정보</th>
+			<th>보유포인트</th>
+			<th>알림</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
+			<td colspan="6" align="center">등록된 회원이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-	<input type="hidden" name="cidx" value="${dto.cidx}">
+	<input type="hidden" name="midx" value="${dto.midx}">
 		<tr>
-			<td>${dto.cidx}</td>
-			<td>${dto.cname}</td>
+			<td>${dto.midx}</td>
+			<td>${dto.name}</td>
+			<td>${dto.nick}</td>
 			<td>${dto.joindate}</td>
-			<td>
-				<c:if test="${dto.clevel==0}">승인대기</c:if>
-				<c:if test="${dto.clevel==-1}">승인거부</c:if>
-				<c:if test="${dto.clevel==1}">기업회원</c:if>
-			</td>
-			<td><input type="submit" value="정보보기"></td>
+			<td>${dto.point}</td>
+			<td><input type="submit" value="알림보내기"></td>
 		</tr>
 	</c:forEach>
 	</tbody>

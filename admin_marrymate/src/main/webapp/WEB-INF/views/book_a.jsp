@@ -40,7 +40,7 @@
 	margin: 0px auto;
 }
 .tb {
-	margin-left: 450px;
+	margin-left: 500px;
 }
 </style>
 </head>
@@ -83,7 +83,7 @@
 		<th><a href="cs_a.do">문의관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="mem_com_a.do">회원관리</a></th>
+		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="analytics.do">Analytics</a></th>
@@ -101,14 +101,13 @@
 		<th width="100">스튜디오</th>
 		<th width="100">드레스</th>
 		<th width="120">헤어/메이크업</th>
-		<th width="100">사진</th>
-		<th width="100">DVD</th>
+		<th width="100">스냅DVD</th>
 		<th width="100">주례</th>
 		<th width="100">사회</th>
 		<th width="100">축가</th>
 	</tr>
 </table>
-<hr width="950" class="tb">
+<hr width="850" class="tb">
 <br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>

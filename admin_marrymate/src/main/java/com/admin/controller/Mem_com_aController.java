@@ -19,19 +19,6 @@ public class Mem_com_aController {
 	@Autowired
 	private CompanyDAO companyDao;
 	
-	@RequestMapping("/mem_com_a.do")
-	public ModelAndView mem_com_a() {
-		
-		List<MemberDTO> dtos=memberDao.memberList();
-		
-		ModelAndView mav=new ModelAndView();
-		
-		mav.addObject("dtos",dtos);
-		mav.setViewName("mem_com_a");
-		
-		return mav;
-	}
-	
 	@RequestMapping("/memberList.do")
 	public ModelAndView memberList() {
 		
@@ -40,20 +27,20 @@ public class Mem_com_aController {
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
-		mav.setViewName("mem_com_a");
+		mav.setViewName("mem_a");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/companyList.do")
-	public ModelAndView companyList(String kind) {
+	public ModelAndView companyList() {
 		
-		List<CompanyDTO> dtos=companyDao.companyList(kind);
+		List<CompanyDTO> dtos=companyDao.companyList("예식장");
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
-		mav.setViewName("mem_com_a");
+		mav.setViewName("com_a");
 		
 		return mav;
 	}

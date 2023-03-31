@@ -6,8 +6,8 @@
 	<!-- mybatis -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@Localhost:1521:xe"></property>
-		<property name="username" value="scott"></property>
+		<property name="url" value="jdbc:oracle:thin:@java-yong.tplinkdns.com:9000:orcl"></property>
+		<property name="username" value="PROJECT02"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 	
@@ -29,6 +29,10 @@
 	</bean>
 	
 	<bean id="companyDao" class="com.admin.company.model.CompanyDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
+	<bean id="memberDao" class="com.admin.member.model.MemberDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	

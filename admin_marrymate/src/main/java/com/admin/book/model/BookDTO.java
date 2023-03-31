@@ -2,38 +2,44 @@ package com.admin.book.model;
 
 import java.sql.*;
 
-public class Com_bookDTO {
-	
-	private int combk_idx;
+public class BookDTO {
+
+	private int bk_idx;
 	private int midx;
+	private int hidx;
 	private int cidx;
+	private int fidx;
 	private Date bk_date;
 	private String bk_time;
-	private String bk_state;
+	private int bk_state;
 	private Date bookdate;
+	private int hall_nothall;
 	
-	public Com_bookDTO() {
+	public BookDTO() {
 		super();
 	}
 
-	public Com_bookDTO(int combk_idx, int midx, int cidx, Date bk_date, String bk_time, String bk_state,
-			Date bookdate) {
+	public BookDTO(int bk_idx, int midx, int hidx, int cidx, int fidx, Date bk_date, String bk_time, int bk_state,
+			Date bookdate, int hall_nothall) {
 		super();
-		this.combk_idx = combk_idx;
+		this.bk_idx = bk_idx;
 		this.midx = midx;
+		this.hidx = hidx;
 		this.cidx = cidx;
+		this.fidx = fidx;
 		this.bk_date = bk_date;
 		this.bk_time = bk_time;
 		this.bk_state = bk_state;
 		this.bookdate = bookdate;
+		this.hall_nothall = hall_nothall;
 	}
 
-	public int getCombk_idx() {
-		return combk_idx;
+	public int getBk_idx() {
+		return bk_idx;
 	}
 
-	public void setCombk_idx(int combk_idx) {
-		this.combk_idx = combk_idx;
+	public void setBk_idx(int bk_idx) {
+		this.bk_idx = bk_idx;
 	}
 
 	public int getMidx() {
@@ -44,12 +50,28 @@ public class Com_bookDTO {
 		this.midx = midx;
 	}
 
+	public int getHidx() {
+		return hidx;
+	}
+
+	public void setHidx(int hidx) {
+		this.hidx = hidx;
+	}
+
 	public int getCidx() {
 		return cidx;
 	}
 
 	public void setCidx(int cidx) {
 		this.cidx = cidx;
+	}
+
+	public int getFidx() {
+		return fidx;
+	}
+
+	public void setFidx(int fidx) {
+		this.fidx = fidx;
 	}
 
 	public Date getBk_date() {
@@ -68,11 +90,11 @@ public class Com_bookDTO {
 		this.bk_time = bk_time;
 	}
 
-	public String getBk_state() {
+	public int getBk_state() {
 		return bk_state;
 	}
 
-	public void setBk_state(String bk_state) {
+	public void setBk_state(int bk_state) {
 		this.bk_state = bk_state;
 	}
 
@@ -82,6 +104,14 @@ public class Com_bookDTO {
 
 	public void setBookdate(Date bookdate) {
 		this.bookdate = bookdate;
+	}
+
+	public int getHall_nothall() {
+		return hall_nothall;
+	}
+
+	public void setHall_nothall(int hall_nothall) {
+		this.hall_nothall = hall_nothall;
 	}
 	
 	
