@@ -63,14 +63,34 @@ public class IndexController {
 		return mav;
 	}
 	
-	@RequestMapping("/collection_a.do")
-	public String collection_a() {
-		return "collection_a";
+	@RequestMapping("/book_a.do")
+	public String book_a() {
+		return "book_a";
 	}
 	
-	@RequestMapping("/book_a.do")
-	public String bookn_a() {
-		return "book_a";
+	@RequestMapping("/community_a.do")
+	public String community_a() {
+		return "community_a";
+	}
+	
+	@RequestMapping("/point_a.do")
+	public String point_a() {
+		return "point_a";
+	}
+	
+	@RequestMapping("/cs_a.do")
+	public String cs_a() {
+		return "cs_a";
+	}
+	
+	@RequestMapping("/mem_com_a.do")
+	public String mem_com_a() {
+		return "mem_com_a";
+	}
+	
+	@RequestMapping("/analytics.do")
+	public String analytics() {
+		return "analytics";
 	}
 
 }

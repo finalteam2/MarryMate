@@ -5,5 +5,7 @@
   <configuration>
   	<mappers>
   		<mapper resource="sqlMap/adminSQL.xml"/>
+  		<mapper resource="sqlMap/companySQL.xml"/>
+  		<mapper resource="sqlMap/memberSQL.xml"/>
   	</mappers>
   </configuration>

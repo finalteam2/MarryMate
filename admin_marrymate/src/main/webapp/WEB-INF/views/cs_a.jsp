@@ -39,6 +39,9 @@
 	left: 250px;
 	margin: 0px auto;
 }
+.tb {
+	margin-left: 450px;
+}
 </style>
 </head>
 <body width="1200">

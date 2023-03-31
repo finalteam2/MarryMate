@@ -39,6 +39,16 @@
 	left: 250px;
 	margin: 0px auto;
 }
+#tb {
+	margin-left: 760px;
+}
+#hr{
+	margin-left: 450px;
+}
+#tb2 {
+	text-align: center;
+	margin-left: 560px;
+}
 </style>
 </head>
 <body width="1200">
@@ -91,7 +101,50 @@
 		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
 	</tr>
 </table>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+<table height="50" id="tb">
+	<tr>
+		<th width="150">일반회원</th>
+		<th width="150">기업회원</th>
+	</tr>
+</table>
+<hr width="950" id="hr">
+<br><br>
+<form name="companyList" action="companyDetails.do">
+<table cellspacing="0" border="1" width="700" id="tb2">
+	<thead>
+		<tr>
+			<th>업체번호</th>
+			<th>업체명</th>
+			<th>가입날짜/시간</th>
+			<th>구분</th>
+			<th>업체정보</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+	<input type="hidden" name="cidx" value="${dto.cidx}">
+		<tr>
+			<td>${dto.cidx}</td>
+			<td>${dto.cname}</td>
+			<td>${dto.joindate}</td>
+			<td>
+				<c:if test="${dto.clevel==0}">승인대기</c:if>
+				<c:if test="${dto.clevel==-1}">승인거부</c:if>
+				<c:if test="${dto.clevel==1}">기업회원</c:if>
+			</td>
+			<td><input type="submit" value="정보보기"></td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+<br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

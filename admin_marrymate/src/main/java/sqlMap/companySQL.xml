@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.admin.company">
+  
+  <select id="companyList" parameterType="String" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where kind=#{kind}
+  </select>
+  
+  </mapper>

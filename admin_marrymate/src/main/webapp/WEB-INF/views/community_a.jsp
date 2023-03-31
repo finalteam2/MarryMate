@@ -39,6 +39,12 @@
 	left: 250px;
 	margin: 0px auto;
 }
+#tb {
+	margin-left: 610px;
+}
+#hr{
+	margin-left: 450px;
+}
 </style>
 </head>
 <body width="1200">
@@ -91,7 +97,17 @@
 		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
 	</tr>
 </table>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+<table height="50" id="tb">
+	<tr>
+		<th width="150">공지사항</th>
+		<th width="150">웨딩후기</th>
+		<th width="150">웨딩톡톡</th>
+		<th width="150">불량글관리</th>
+	</tr>
+</table>
+<hr width="950" id="hr">
+<br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

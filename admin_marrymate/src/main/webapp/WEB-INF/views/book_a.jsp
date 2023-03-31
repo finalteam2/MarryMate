@@ -74,19 +74,19 @@
 		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
-		<th>커뮤니티 관리</th>
+		<th><a href="community_a.do">커뮤니티 관리</a></th>
 	</tr>
 	<tr>
-		<th>포인트관리</th>
+		<th><a href="point_a.do">포인트관리</a></th>
 	</tr>
 	<tr>
-		<th>문의관리</th>
+		<th><a href="cs_a.do">문의관리</a></th>
 	</tr>
 	<tr>
-		<th>회원관리</th>
+		<th><a href="mem_com_a.do">회원관리</a></th>
 	</tr>
 	<tr>
-		<th>Analytics</th>
+		<th><a href="analytics.do">Analytics</a></th>
 	</tr>
 </table>
 <table width="1100" align="center">
