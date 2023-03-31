@@ -23,7 +23,7 @@
 			<option>스튜디오</option>
 			<option>헤어메이크업</option>
 			<option>드레스</option>
-			<option>사진영상</option>
+			<option>스냅DVD</option>
 			<option>주례</option>
 			<option>사회</option>
 			<option>축가</option>
