@@ -101,22 +101,20 @@ public class CompanyController {
 			@RequestParam(value = "cidx", defaultValue = "0")int cidx
 			) {
 		ModelAndView mav = new ModelAndView();
-		CompanyDTO dto = null;
-		if(cidx != 0) {
-			dto = companyDao.companySelectOne(cidx);
-		}
-		if(cidx == 0 || dto.equals(null)) {
+		CompanyDTO dto = companyDao.companySelectOne(cidx);
+		if(cidx == 0 || dto == null) {
 			String msg = "잘못된 접근입니다";
 			mav.addObject("msg", msg);
 			mav.addObject("url", "index.do");
+			mav.setViewName("company/companyMsg");
 		}else {
 			mav.addObject("dto", dto);
-			List harr = companyDao.selectHall(cidx);
-			List farr = companyDao.selectFood(cidx);
-			List iarr = companyDao.selectCom_Img(cidx);
-			mav.addObject("harr", harr);
-			mav.addObject("farr", farr);
-			mav.addObject("iarr", iarr);
+//			List harr = companyDao.selectHall(cidx);
+//			List farr = companyDao.selectFood(cidx);
+//			List iarr = companyDao.selectCom_Img(cidx);
+//			mav.addObject("harr", harr);
+//			mav.addObject("farr", farr);
+//			mav.addObject("iarr", iarr);
 			mav.setViewName("company/companyContent");
 		}
 		return mav;

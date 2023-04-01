@@ -72,6 +72,8 @@ function searchResult(){
 				//아이템 만들기
 				var newItemNode = document.createElement('div');
 				newItemNode.setAttribute('class','card');
+				newItemNode.setAttribute('onclick','location.href=\'/marrymate/companyContent.do?cidx=' + company.cidx + '\'');
+				
 				
 					var newImgNode = document.createElement('img');
 					newImgNode.setAttribute('class','card-img-top');
@@ -80,7 +82,7 @@ function searchResult(){
 					newItemNode.appendChild(newImgNode);
 					
 					var newInfoNode = document.createElement('div');
-					newInfoNode.setAttribute('class','info');
+					newInfoNode.setAttribute('class','card-body');
 						
 						var newNameNode = document.createElement('span');
 						newNameNode.setAttribute('class','card-text');

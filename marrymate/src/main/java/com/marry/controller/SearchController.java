@@ -80,7 +80,7 @@ public class SearchController {
 		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
 		for(int i = 0; i < arr.size(); i++) {
 			json += "{";
-			//json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
+			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
 			//json += "\"joindate\":\"" + arr.get(i).getJoindate() + "\",";
 			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
 			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
@@ -160,6 +160,7 @@ public class SearchController {
 		String json = "{\"cnt\":\"" + cnt + "\",\"paging\":\"" + paging + "\",\"companylist\":[";
 		for(int i = 0; i < arr.size(); i++) {
 			json += "{";
+			json += "\"cidx\":\"" + arr.get(i).getCidx() + "\",";
 			json += "\"kind\":\"" + arr.get(i).getKind() + "\",";
 			json += "\"cname\":\"" + arr.get(i).getCname() + "\",";
 			json += "\"sido\":\"" + arr.get(i).getSido() + "\",";

@@ -78,6 +78,7 @@ function searchResult(){
 				//아이템 만들기
 				var newItemNode = document.createElement('div');
 				newItemNode.setAttribute('class','card');
+				newItemNode.setAttribute('onclick','location.href=\'/marrymate/companyContent.do?cidx=' + company.cidx + '\'');
 				
 					var newImgNode = document.createElement('img');
 					newImgNode.setAttribute('class','card-img-top');

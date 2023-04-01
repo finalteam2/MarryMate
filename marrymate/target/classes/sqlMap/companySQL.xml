@@ -39,7 +39,7 @@
 		company
 	where
 		cidx = #{cidx}
-		clevel = 1
+		and clevel = 1
 	</select>
 	<select id="selectHall" parameterType="Integer" resultType="com.marry.company.model.HallDTO">
 	select
@@ -69,6 +69,6 @@
 	where
 		cidx = #{cidx}
 	order by
-		fidx asc
+		iidx asc
 	</select>
 </mapper>
