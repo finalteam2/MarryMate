@@ -40,6 +40,19 @@
 	h3 {
 		font-size: 20px;
 	}
+	select {
+		width: 150px; 
+		padding: .8em .5em; 
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border: 1px solid #999;
+		font-family: inherit;  
+		background: no-repeat 95% 50%; 
+		border-radius: 0px; 
+		-webkit-appearance: none; 
+		-moz-appearance: none;
+		appearance: none;
+	}
 	.box {
 		width: 850px;
 		height: 1200px;
@@ -213,6 +226,7 @@
 	}
 </style>
 </head>
+<script type="text/javascript" src="js/jusoSelector.js"></script>
 <body>
 	<section>
 		<article>
@@ -243,9 +257,8 @@
 						<div class="buBox"><input type="radio" name="kind" value="예식장">예식장</div>
 						<div class="buBox"><input type="radio" name="kind" value="스튜디오">스튜디오</div>
 						<div class="buBox"><input type="radio" name="kind" value="드레스">드레스</div>
-						<div class="buBox"><input type="radio" name="kind" value="헤어/메이크업">헤어/메이크업</div>
-						<div class="buBox"><input type="radio" name="kind" value="사진">사진</div>
-						<div class="buBox"><input type="radio" name="kind" value="DVD">DVD</div>
+						<div class="buBox"><input type="radio" name="kind" value="헤어메이크업">헤어메이크업</div>
+						<div class="buBox"><input type="radio" name="kind" value="스냅DVD">스냅DVD</div>
 						<div class="buBox"><input type="radio" name="kind" value="주례">주례</div>
 						<div class="buBox"><input type="radio" name="kind" value="사회">사회</div>
 						<div class="buBox"><input type="radio" name="kind" value="축가">축가</div>
@@ -257,11 +270,28 @@
 					<div class="hClear">기업명</div>
 					<input type="text" name="cname"><br>
 					<div class="hTagBox">지역</div>
-					<select name="sido">
+					<select id="jusoKindH" name="sido" onchange="jusoKindChange(this)">
+						<option>도/특별시/광역시</option>
 						<option value="서울">서울</option>
+						<option value="부산">부산</option>
+						<option value="대구">대구</option>
+						<option value="인천">인천</option>
+						<option value="광주">광주</option>
+						<option value="대전">대전</option>
+						<option value="울산">울산</option>
+						<option value="세종">세종</option>
+						<option value="경기">경기</option>
+						<option value="강원">강원</option>
+						<option value="충북">충북</option>
+						<option value="충남">충남</option>
+						<option value="전북">전북</option>
+						<option value="전남">전남</option>
+						<option value="경북">경북</option>
+						<option value="경남">경남</option>
+						<option value="제주">제주</option>
 					</select>
-					<select name="sigungu">
-						<option value="서초구">서초구</option>
+					<select id="jusoKindS" name="sigungu">
+						<option>시/군/구</option>
 					</select>
 					<div class="hClear">기업소개</div>
 					<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
