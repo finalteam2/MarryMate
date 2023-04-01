@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.price_box .ui-slider {
+	position: relative;
+	text-align: left;
+}
+.price_box .ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 1.2em;
+	height: 1.2em;
+	cursor: pointer;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.price_box .ui-slider .ui-slider-range {
+	position: absolute;
+	z-index: 1;
+	font-size: .7em;
+	display: block;
+	border: 0;
+	background-position: 0 0;
+}
+
+.price_box .ui-slider.ui-state-disabled .ui-slider-handle,
+.price_box .ui-slider.ui-state-disabled .ui-slider-range {
+	filter: inherit;
+}
+
+.price_box .ui-slider-horizontal {
+	height: .8em;
+}
+.price_box .ui-slider-horizontal .ui-slider-handle {
+	top: -.3em;
+	margin-left: -.6em;
+}
+.price_box .ui-slider-horizontal .ui-slider-range {
+	top: 0;
+	height: 100%;
+}
+.price_box .ui-slider-horizontal .ui-slider-range-min {
+	left: 0;
+}
+.price_box .ui-slider-horizontal .ui-slider-range-max {
+	right: 0;
+}
+
+.price_box .ui-slider-vertical {
+	width: .8em;
+	height: 100px;
+}
+.price_box .ui-slider-vertical .ui-slider-handle {
+	left: -.3em;
+	margin-left: 0;
+	margin-bottom: -.6em;
+}
+.price_box .ui-slider-vertical .ui-slider-range {
+	left: 0;
+	width: 100%;
+}
+.price_box .ui-slider-vertical .ui-slider-range-min {
+	bottom: 0;
+}
+.price_box .ui-slider-vertical .ui-slider-range-max {
+	top: 0;
+}
+.price_box .ui-corner-all {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+.price_box .ui-state-default{
+	border: 1px solid #c5c5c5;
+	background: #f6f6f6;
+}
+.price_box .ui-widget.ui-widget-content {
+	border:1px solid #feb6cf;
+	border-radius:30px;
+}
+.price_box .ui-widget-content {
+	border: 1px solid #dddddd;
+	background: #ffffff;
+}
+.price_box .ui-widget-header {
+	border: 1px solid #dddddd;
+	background: #fed1e1;
+}
+.price_box .ui-widget-content .ui-state-default,
+.price_box .ui-widget-header .ui-state-default{
+	border:2px solid #f24f7b;
+	border-radius:100%;
+	background: #fff;
+}
+.price_box .ui-widget-content .ui-state-default:focus{
+	border:2px solid #ee114es;
+	border-radius:100%;
+	background: #fff;
+	outline:none;
+}

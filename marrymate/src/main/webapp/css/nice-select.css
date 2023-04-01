@@ -12,7 +12,7 @@
 	font-size: 18px;
 	font-weight: normal;
 	height: 100%;
-	line-height:57px;
+	line-height:65px;
 	outline: none;
 	padding-left: 27px;
 	position: relative;
@@ -27,12 +27,12 @@
 	width: 100%;
 }
   .nice-select:hover {
-    border-color: #ecaaff; }
+    border-color: #cf30fe; }
   .nice-select:active, .nice-select.open, .nice-select:focus {
-    border-color: #ecaaff; }
+    border-color: #cf30fe; }
   .nice-select:after {
-    border-bottom: 2px solid #c121fe;
-    border-right: 2px solid #c121fe;
+    border-bottom: 2px solid #cf30fe;
+    border-right: 2px solid #cf30fe;
     content: '';
     display: block;
     height: 5px;

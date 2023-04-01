@@ -5,12 +5,12 @@
 	padding: 10px 0;
 	margin-bottom:10px;
 }
-.ui-state-default,
-.ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default,
-.ui-button,
-html .ui-button.ui-state-disabled:hover,
-html .ui-button.ui-state-disabled:active {
+.ui-datepicker .ui-state-default,
+.ui-datepicker .ui-widget-content .ui-state-default,
+.ui-datepicker .ui-widget-header .ui-state-default,
+.ui-datepicker .ui-button,
+.ui-datepicker .ui-button.ui-state-disabled:hover,
+.ui-datepicker .ui-button.ui-state-disabled:active {
 	background-color: transparent;
 	font-weight: normal;
 	color: #454545;
@@ -38,49 +38,50 @@ html .ui-button.ui-state-disabled:active {
 	width: 26.75%;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 } 
-.ui-widget.ui-widget-content {
+.ui-datepicker .ui-widget.ui-widget-content {
 	border: 1px solid #eee;
 }
 #datepicker:focus>.ui-datepicker {
 	display: block;
 } 
-.ui-datepicker-prev, .ui-datepicker-next {
+.ui-datepicker .ui-datepicker-prev, 
+.ui-datepicker .ui-datepicker-next {
 	cursor: pointer;
 }
-.ui-datepicker-prev {
+.ui-datepicker .ui-datepicker-prev {
 	margin-left:5%;
 }
-.ui-datepicker-next {
+.ui-datepicker .ui-datepicker-next {
 	float: right;
 	margin-right:5%;
 } 
-.ui-state-disabled {
+.ui-datepicker .ui-state-disabled {
 	cursor: default;
 	color: hsla(0, 0%, 80%, 1);
 }
-.ui-datepicker-calendar {
+.ui-datepicker .ui-datepicker-calendar {
 	width: 100%;
 } 
-.ui-datepicker-calendar>thead>tr>th {
+.ui-datepicker .ui-datepicker-calendar>thead>tr>th {
 	padding: 3px;
 	font-size: 15px !important;
 	font-weight: 400;
 } 
-.ui-datepicker-calendar>tbody>tr>td>a {
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>td>a {
 	color: #000;
 	font-size: 13px !important;
 	font-weight: bold !important;
 	text-decoration: none;
 }
-.ui-datepicker-calendar>tbody>tr>.ui-state-disabled{
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>.ui-state-disabled{
 	opacity:0.4;
 }
-.ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
 	cursor: default;
 	background-color: #fff;
 	opacity: 0.4;
 } 
-.ui-datepicker-calendar>tbody>tr>td {
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>td {
 	border-radius: 100%;
 	width: 100px;
 	height: 30px;
@@ -90,36 +91,36 @@ html .ui-button.ui-state-disabled:active {
 	text-align: center;
 	font-size: 12px;
 } 
-.ui-datepicker-calendar>tbody>tr>td:hover {
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>td:hover {
 	background-color: transparent;
 	opacity: 0.6;
 } 
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus,
-.ui-button:hover,
-.ui-button:focus {
+.ui-datepicker .ui-state-hover,
+.ui-datepicker .ui-widget-content .ui-state-hover,
+.ui-datepicker .ui-widget-header .ui-state-hover,
+.ui-datepicker .ui-state-focus,
+.ui-datepicker .ui-widget-content .ui-state-focus,
+.ui-datepicker .ui-widget-header .ui-state-focus,
+.ui-datepicker .ui-button:hover,
+.ui-datepicker .ui-button:focus {
 	background-color: transparent;
 	font-weight: normal;
 }
-.ui-datepicker-calendar>tbody>tr>td:first-child a {
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>td:first-child a {
 	color: red !important;
 } 
-.ui-datepicker-calendar>tbody>tr>td:last-child a { 
+.ui-datepicker .ui-datepicker-calendar>tbody>tr>td:last-child a { 
 	color: #0099ff !important; 
 } 
-.ui-datepicker-calendar>thead>tr>th:first-child { 
+.ui-datepicker .ui-datepicker-calendar>thead>tr>th:first-child { 
 	color: red !important;
 } 
-.ui-datepicker-calendar>thead>tr>th:last-child {
+.ui-datepicker .ui-datepicker-calendar>thead>tr>th:last-child {
  	color: #0099ff !important;
 } 
-.ui-state-highlight,
-.ui-widget-content .ui-state-highlight,
-.ui-widget-header .ui-state-highlight {
+.ui-datepicker .ui-state-highlight,
+.ui-datepicker .ui-widget-content .ui-state-highlight,
+.ui-datepicker .ui-widget-header .ui-state-highlight {
 	border:1px solid black;
 	padding:5px;
 	border-radius:4px;
@@ -143,8 +144,8 @@ html .ui-button.ui-state-disabled:active {
 	cursor:pointer;
 }
 #datepicker:hover, #datepicker:active, #datepicker:focus{
-	border-color: #ecaaff;
-	transition: all 0.3s;
+	border-color: #cf30fe;
+	transition: all 0.4s;
 }
 #datepicker::placeholder{
 	color:black;

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>통 합 예 약</title>
 <link rel="stylesheet" href="/marrymate/css/all-book.css">
+<link rel="stylesheet" href="/marrymate/css/price-range.css">
 <link rel="stylesheet" href="/marrymate/css/date-picker.css">
 <link rel="stylesheet" href="/marrymate/css/nice-select.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -25,6 +26,19 @@ $( function() {
 		nextText: ">",
 		prevText: "<"
 	});
+} );
+$( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 1,
+      max: 295,
+      values: [ 1, 295 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val(ui.values[ 0 ]+"만원 ~ "+ui.values[ 1 ]+"만원");
+      }
+    });
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+      "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
 } );
 </script>
 </head>
@@ -76,10 +90,20 @@ $( function() {
 				</script>
 			</div>
 			<div class="price_box">
-				가격범위
+				<div class="price_box2">
+					<div class="price_textbox">
+						<label class="price_text">가격범위</label>
+					</div>
+					<div class="price_barbox">
+						<div id="slider-range"></div>
+					</div>
+					<div class="price_rangebox">
+						<input type="text" id="amount" readonly>
+					</div>
+				</div>
 			</div>
 			<div class="button_box">
-				버튼
+				<input class="search_button" type="button" value="검색하기">
 			</div>
 		</div>
 	</article>
