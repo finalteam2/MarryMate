@@ -4,16 +4,16 @@ public class Com_ImgDTO {
 	private int iidx;
 	private int cidx;
 	private int type;
-	private String name;
+	private String img;
 	public Com_ImgDTO() {
 		super();
 	}
-	public Com_ImgDTO(int iidx, int cidx, int type, String name) {
+	public Com_ImgDTO(int iidx, int cidx, int type, String img) {
 		super();
 		this.iidx = iidx;
 		this.cidx = cidx;
 		this.type = type;
-		this.name = name;
+		this.img = img;
 	}
 	public int getIidx() {
 		return iidx;
@@ -33,11 +33,11 @@ public class Com_ImgDTO {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getName() {
-		return name;
+	public String getImg() {
+		return img;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	
