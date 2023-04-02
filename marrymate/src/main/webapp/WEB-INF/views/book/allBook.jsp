@@ -65,7 +65,7 @@ $( function() {
 			</div>
 			<div class="local_box">
 				<select name="local_select">
-					<option data-display="지역을 선택해주세요." value="">시/도</option>
+					<option data-display="지역을 선택해주세요." value="" disabled selected>시/도</option>
 					<option value="1">서울</option>
 					<option value="2">경기</option>
 					<option value="3">인천</option>
@@ -109,49 +109,19 @@ $( function() {
 	</article>
 	<article>
 		<div class="order_box">
-			<input class="order_button" type="button" value="이름순">
-			<input class="order_button" type="button" value="조회수순">
-			<input class="order_button" type="button" value="낮은가격순">
-			<input class="order_button" type="button" value="높은가격순">
+			<input class="order_radio" name="order_name" id="order_one" type="radio" value="1" checked>
+			<label class="order_tab" for="order_one">이름순</label>
+			<input class="order_radio" name="order_name" id="order_two" type="radio" value="2">
+			<label class="order_tab" for="order_two">조회순</label>
+			<input class="order_radio" name="order_name" id="order_three" type="radio" value="3">
+			<label class="order_tab" for="order_three">낮은가격순</label>
+			<input class="order_radio" name="order_name" id="order_four" type="radio" value="4">
+			<label class="order_tab" for="order_four">높은가격순</label>
 		</div>
 		<div class="left_box">
 			<div>
-				<h2 class="cate_title">스튜디오</h2>
+				<h2 class="cate_title">카테고리명</h2>
 				<hr style="width:93%;border:1px solid #6c6c6c;">
-				<table class="list_table">
-					<tr>
-						<td rowspan="3" width="28%" align="center">
-						이미지
-						</td>
-						<td width="36%">이름</td>
-						<td width="36%" align="right">날짜선택</td>
-					</tr>
-					<tr>
-						<td>지역<br><br><br></td>
-						<td align="right">시간선택<br><br><br></td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td align="right">버튼</td>
-					</tr>
-				</table>
-				<table class="list_table">
-					<tr>
-						<td rowspan="3" width="28%" align="center">
-						이미지
-						</td>
-						<td width="36%">이름</td>
-						<td width="36%" align="right">날짜선택</td>
-					</tr>
-					<tr>
-						<td>지역<br><br><br></td>
-						<td align="right">시간선택<br><br><br></td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td align="right">버튼</td>
-					</tr>
-				</table>
 				<table class="list_table">
 					<tr>
 						<td rowspan="3" width="28%" align="center">
@@ -212,27 +182,22 @@ $( function() {
 			<div>
 				<h2 class="category">카 테 고 리</h2>
 			</div>
-			<h3 class="cate_menu">
-			<label>스튜디오</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>드레스</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>헤어메이크업</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>스냅DVD</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>주례</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>사회</label>
-			</h3>
-			<h3 class="cate_menu">
-			<label>축가</label>
-			</h3>
+			<div class="cate_menubox">
+				<input class="cate_radio" name="cate_name" id="cate_one" type="radio" value="1" checked>
+				<label class="cate_menu" for="cate_one">스튜디오</label>
+				<input class="cate_radio" name="cate_name" id="cate_two" type="radio" value="2">
+				<label class="cate_menu" for="cate_two">드레스</label>
+				<input class="cate_radio" name="cate_name" id="cate_three" type="radio" value="3">
+				<label class="cate_menu" for="cate_three">헤어메이크업</label>
+				<input class="cate_radio" name="cate_name" id="cate_four" type="radio" value="4">
+				<label class="cate_menu" for="cate_four">스냅DVD</label>
+				<input class="cate_radio" name="cate_name" id="cate_five" type="radio" value="5">
+				<label class="cate_menu" for="cate_five">주례</label>
+				<input class="cate_radio" name="cate_name" id="cate_six" type="radio" value="6">
+				<label class="cate_menu" for="cate_six">사회</label>
+				<input class="cate_radio" name="cate_name" id="cate_seven" type="radio" value="7">
+				<label class="cate_menu" for="cate_seven">축가</label>
+			</div>
 			<div class="allClear_box">
 				<input class="allClear_button" type="button" value="전체삭제">
 			</div>
@@ -244,5 +209,6 @@ $( function() {
 		</div>
 	</article>
 </section>
+<%@include file="../chatbot.jsp" %>
 </body>
 </html>

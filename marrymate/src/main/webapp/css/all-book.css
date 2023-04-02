@@ -183,9 +183,9 @@ video{
 	top:82%;
 	left:17.45%;
 	width:42.8%;
+	padding-bottom:20px;
 	background:#fff;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-	z-index:-1;
 }
 .right_box{
 	border:1px solid #e1e1e1;
@@ -196,26 +196,32 @@ video{
 	width:20.65%;
 	background:#fff;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-	z-index:-1;
 }
 .order_box{
 	position:absolute;
-	top:77.2%;
+	top:78.65%;
 	left:17.45%;
-	width:23%;
+	width:42.8%;
 	height:5.2%;
-	z-index:-1;
-	
 }
-.order_button{
-	border:2px solid #e1e1e1;
+.order_radio{
+	display:none;
+}
+.order_tab{
+	border:1px solid #e1e1e1;
 	border-radius:5px;
 	background:#fff;
 	cursor:pointer;
-	width:24.2%;
-	height:100%;
-	font-size:14px;
-	font-family: 'SUIT-Regular';
+	padding-top:12px;
+	padding-bottom:16px;
+	padding-left:16px;
+	padding-right:16px;
+	font-size:15px;
+}
+.order_radio:checked + .order_tab{
+	background:#e4e4e4;
+	transition:all 0.15s;
+	border:1px solid #cccccc;
 }
 .cate_title{
 	color:#4e4e4e;
@@ -235,16 +241,28 @@ video{
 	border-spacing:0px;
 	padding:8px;
 }
+.cate_menubox{
+	width:94%;
+	margin:0px auto;
+}
 .cate_menu{
-	border:1px solid #e8e6e6;
-	background:#f0eeee;
-	width:90%;
-	font-weight:normal;
-	font-size:18px;
-	margin:6px auto;
-	padding:8px;
-	border-radius:2px;
-	color:#4e4e4e;
+	border:1px solid #f7e3ff;
+	border-radius:4px;
+	background:#f7e3ff;
+	font-size:19px;
+	padding:10px;
+	display:block;
+	margin-top:5px;
+	cursor:pointer;
+}
+.cate_radio{
+	display:none;
+}
+.cate_radio:checked + .cate_menu{
+	font-weight:bold;
+	background:#a23dfc;
+	color:#fff;
+	transition:all 0.3s;
 }
 .allClear_box{
 	width:93%;
@@ -260,6 +278,10 @@ video{
 	border:none;
 	font-size:14px;
 	font-family: 'SUIT-Regular';
+}
+.allClear_button:hover{
+	background:#8a8198;
+	transition: all 0.2s;
 }
 .sumPay_text1{
 	text-align:right;
