@@ -109,12 +109,14 @@ public class CompanyController {
 			mav.setViewName("company/companyMsg");
 		}else {
 			mav.addObject("dto", dto);
-//			List harr = companyDao.selectHall(cidx);
-//			List farr = companyDao.selectFood(cidx);
-//			List iarr = companyDao.selectCom_Img(cidx);
-//			mav.addObject("harr", harr);
-//			mav.addObject("farr", farr);
-//			mav.addObject("iarr", iarr);
+			List iarr = companyDao.selectCom_Img(cidx);
+			mav.addObject("iarr", iarr);
+			if(dto.getKind().equals("예식장")) {
+				List harr = companyDao.selectHall(cidx);
+				List farr = companyDao.selectFood(cidx);
+				mav.addObject("harr", harr);
+				mav.addObject("farr", farr);
+			}
 			mav.setViewName("company/companyContent");
 		}
 		return mav;

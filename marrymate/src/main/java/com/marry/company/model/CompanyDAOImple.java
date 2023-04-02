@@ -34,13 +34,13 @@ public class CompanyDAOImple implements CompanyDAO {
 	
 	@Override
 	public List<FoodDTO> selectFood(int cidx) {
-		List<FoodDTO> arr = sqlMap.selectList("selectHall", cidx);
+		List<FoodDTO> arr = sqlMap.selectList("selectFood", cidx);
 		return arr;
 	}
 	
 	@Override
 	public List<Com_ImgDTO> selectCom_Img(int cidx) {
-		List<Com_ImgDTO> arr = sqlMap.selectList("selectCom_Img", cidx);
+		List<Com_ImgDTO> arr = sqlMap.selectList("selectImg", cidx);
 		return arr;
 	}
 	
