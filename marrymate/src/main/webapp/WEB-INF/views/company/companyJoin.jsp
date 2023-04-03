@@ -227,6 +227,17 @@
 </style>
 </head>
 <script type="text/javascript" src="js/jusoSelector.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	function openAddressSearch() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				document.getElementById('juso').value = data.address;
+				document.getElementById('sjuso').focus();
+			}
+		}).open();
+	}
+</script>
 <body>
 	<section>
 		<article>
@@ -235,20 +246,21 @@
 			<div class="box">
 				<div id="iBox">
 					<div class="hTagBox">아이디</div>
-					<input type="text" name="id">
-					<input type="button" value="중복확인"><br>
+						<input type="text" name="id">
+						<input type="button" value="중복확인"><br>
 					<div class="hClear">비밀번호</div>
-					<input type="password" name="pwd"><br>
+						<input type="password" name="pwd"><br>
 					<div class="hTagBox">비밀번호 확인</div>
-					<input type="password" name="pwd"><br>
+						<input type="password" name="pwd"><br>
 					<div class="hClear">전화번호</div>
-					<input type="text" name="tel"><br>
+						<input type="text" name="tel"><br>
 					<div class="hTagBox">이메일</div>
-					<input type="text" name="email"><br>
+						<input type="text" name="email"><br>
 					<div class="hClear">주소</div>
-					<input type="text" name="juso"><br>
+						<input type="text" id="juso" name="juso" placeholder="주소검색을 통해 입력해주세요" readonly>&nbsp;&nbsp;
+						<input type="button" value="주소 검색" class="cc" onclick="openAddressSearch()"><br>
 					<div class="hTagBox">상세주소</div>
-					<input type="text" name="sjuso">
+						<input type="text" id="sjuso" name="sjuso" placeholder="상세주소 입력">
 				</div>
 				<div id="aBox">
 					<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;기업 정보</h3>
@@ -294,13 +306,13 @@
 						<option>시/군/구</option>
 					</select>
 					<div class="hClear">기업소개</div>
-					<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
+						<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
 					<div class="hTagBox">기업 웹사이트</div>
-					<input type="text" name="curl"><br>
+						<input type="text" name="curl"><br>
 					<div class="hClear">대표 이미지</div>
-					<input type="file" name="aimg"><br>
+						<input type="file" name="aimg"><br>
 					<div class="hTagBox">상품 가격</div>
-					<input type="text" name="pay"><br>
+						<input type="text" name="pay"><br>
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="정보입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

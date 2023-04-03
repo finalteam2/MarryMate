@@ -3,9 +3,10 @@ package com.marry.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marry.company.model.Book_TimeDTO;
 import com.marry.company.model.CompanyDAO;
 import com.marry.company.model.CompanyDTO;
 
@@ -45,28 +47,33 @@ public class CompanyController {
 		dto.setCfile(cfile);
 		dto.setImg(img);
 		
+		String hallInfo=req.getParameter("kind");
+		
 		int result=companyDao.coJoin(dto);
-		String msg=result>0?"가입 완료":"가입 실패";
+		String msg=result>0?"정보를 입력해주세요":"가입 실패";
+		
+		String id=req.getParameter("id");
+		int cidx=companyDao.selectCidx(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
-		mav.setViewName("company/companyMsg");
+		if(hallInfo.equals("예식장")) {
+			mav.addObject("url", "hallInfo.do");
+			mav.addObject("cidx", cidx);
+			mav.setViewName("company/hallInfo");
+		}else {
+			mav.addObject("url", "index.do");
+			mav.setViewName("company/companyMsg");
+		}
 		return mav;
 		
 	}
 	
-	@RequestMapping("/hallInfo.do")
-	public String hallInfo() {
-		return "company/hallInfo";
-	}
-	
-	//업로드 메서드
+	//사업자 파일 업로드 메서드
 	public void copyFile(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			//용지
 			File outfile=new File("C:/student_java/cfileUpload/"+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
@@ -79,11 +86,12 @@ public class CompanyController {
 		
 	}
 	
+	
+	//기업 이미지 업로드 메서드
 	public void copyFile2(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			//용지
 			File outfile=new File("C:/student_java/imgUpload/"+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
@@ -94,6 +102,89 @@ public class CompanyController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping(value = "/hallInfo.do", method = RequestMethod.GET)
+	public String hallInfoForm() {
+		return "company/hallInfo";
+	}
+	
+	@RequestMapping(value = "/hallInfo.do", method = RequestMethod.POST)
+	public ModelAndView hallInfoInsert(Book_TimeDTO dto, HttpServletRequest req) {
+		
+		int result = 0;
+		
+		String yoil1=req.getParameter("yoil1");
+		if(yoil1==null || yoil1.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil1);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		
+		String yoil2=req.getParameter("yoil2");
+		if(yoil2==null || yoil2.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil2);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String yoil3=req.getParameter("yoil3");
+		if(yoil3==null || yoil3.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil3);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String yoil4=req.getParameter("yoil4");
+		if(yoil4==null || yoil4.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil4);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String yoil5=req.getParameter("yoil5");
+		if(yoil5==null || yoil5.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil5);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String yoil6=req.getParameter("yoil6");
+		if(yoil6==null || yoil6.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil6);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String yoil7=req.getParameter("yoil7");
+		if(yoil7==null || yoil4.equals("")) {
+			
+		}else {
+			dto.setYoil(yoil7);
+			companyDao.timeInsert(dto);
+			result+=1;
+		}
+		
+		String msg=result>0?"작성 완료":"작성 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "index.do");
+		mav.setViewName("company/companyMsg");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)

@@ -14,10 +14,20 @@ public class CompanyDAOImple implements CompanyDAO {
 	
 	@Override
 	public int coJoin(CompanyDTO dto) {
-		
 		int count=sqlMap.insert("companyJoin", dto);
 		return count;
-		
+	}
+	
+	@Override
+	public int selectCidx(String id) {
+		int count=sqlMap.selectOne("selectCidx", id);
+		return count;
+	}
+	
+	@Override
+	public int timeInsert(Book_TimeDTO dto) {
+		int count=sqlMap.insert("timeInsert", dto);
+		return count;
 	}
 
 	@Override
