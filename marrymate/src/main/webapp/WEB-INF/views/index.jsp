@@ -7,6 +7,7 @@
 <title>MarryMate</title>
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="/marrymate/css/sakura.css">
+<link rel="stylesheet" href="/marrymate/css/calendar.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/sakura.js"></script>
 </head>
@@ -16,11 +17,31 @@
 $(window).load(function () {
     $('body').sakura();
 });
+
+
+function handleVideoEnd() {
+    var video = document.getElementById('video');
+    var header = document.getElementById('header');
+    var opacity = 1;
+    
+    var fadeOut = setInterval(function() {
+        if (opacity > 0) {
+            opacity -= 0.1;
+            video.style.opacity = opacity;
+        } else {
+            clearInterval(fadeOut);
+            video.style.display = "none";
+            header.style.display = "block";
+        }
+    }, 40);
+}
 </script>
-<h3>메인 효과 영역, 첫 방문 시 노출 후 사라짐 예정</h3>
-  <div class="video">
-    <iframe width="700" height="400" src="/marrymate/video/main.mp4" title="video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-  </div>
+    <br><br><br>
+    <video id="video" muted autoplay onended="handleVideoEnd()">
+		<source src="/marrymate/video/mainv.mp4" type="video/mp4">
+	</video>
+
+
 
 <%@include file="header.jsp" %>
 
