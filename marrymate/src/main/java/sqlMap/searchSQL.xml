@@ -22,10 +22,10 @@
 	 		<if test="name != null and name != ''">
 	 			and cname like '%' || #{name} || '%'
 	 		</if>
-	 		<if test="sido != null and sido != '시도'">
+	 		<if test="sido != null and sido != ''">
 	 			and sido = #{sido}
 	 		</if>
-	 		<if test="sigungu != null and sigungu != '시군구'">
+	 		<if test="sigungu != null and sigungu != ''">
 	 			and sigungu = #{sigungu}
 	 		</if>
 	 		<if test="kind != null and kind != ''">
@@ -77,10 +77,10 @@
  		<if test="name != null and name != ''">
  			and cname like '%' || #{name} || '%'
  		</if>
- 		<if test="sido != null and sido != '시도'">
+ 		<if test="sido != null and sido != ''">
  			and sido = #{sido}
  		</if>
- 		<if test="sigungu != null and sigungu != '시군구'">
+ 		<if test="sigungu != null and sigungu != ''">
  			and sigungu = #{sigungu}
  		</if>
  		<if test="kind != null and kind != ''">

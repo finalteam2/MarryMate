@@ -46,8 +46,8 @@ public class SearchController {
 	
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.POST)
 	public ModelAndView searchHall(
-			@RequestParam(name = "sido",defaultValue = "전국")String sido,
-			@RequestParam(name = "sigungu",defaultValue = "시군구")String sigungu,
+			@RequestParam(name = "sido",defaultValue = "")String sido,
+			@RequestParam(name = "sigungu",defaultValue = "")String sigungu,
 			@RequestParam(name = "payMin",defaultValue = "0")String pMin,
 			@RequestParam(name = "payMax",defaultValue = "0")String pMax,
 			@RequestParam(name = "guestMin",defaultValue = "0")String gMin,
@@ -91,7 +91,7 @@ public class SearchController {
 	
 	@RequestMapping(value = "/searchEtc.do", method = RequestMethod.POST)
 	public ModelAndView searchEtc(
-			@RequestParam(name = "sido",defaultValue = "전국")String sido,
+			@RequestParam(name = "sido",defaultValue = "")String sido,
 			@RequestParam(name = "payMin",defaultValue = "0")String pMin,
 			@RequestParam(name = "payMax",defaultValue = "0")String pMax,
 			@RequestParam(name = "name",defaultValue = "")String name,
@@ -104,7 +104,7 @@ public class SearchController {
 		int payMax = stToInt(pMax);
 		int start = (page - 1) * view + 1;
 		int end = (page * view);
-		SearchDTO dto = new SearchDTO(sido, "시군구", payMin, payMax, 0, 0, name, sort, kind, view, start, end);
+		SearchDTO dto = new SearchDTO(sido, "", payMin, payMax, 0, 0, name, sort, kind, view, start, end);
 		List<CompanyDTO> arr = searchDAO.searchAll(dto);
 		int cnt = searchDAO.totalCnt(dto);
 		String paging = "";

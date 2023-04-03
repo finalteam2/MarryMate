@@ -26,9 +26,9 @@ function searchHall(page){
 	var param = '';
 	var name = document.getElementById('name').value;
 	param += 'name=' + name;
-	var sido = document.getElementById('sido').value;
+	var sido = document.getElementById('jusoKindH').value;
 	param += '&sido=' + sido;
-	var sigungu = document.getElementById('sigungu').value;
+	var sigungu = document.getElementById('jusoKindS').value;
 	param += '&sigungu=' + sigungu;
 	var view = document.getElementById('view').value;
 	param += '&view=' + view;
