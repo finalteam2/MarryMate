@@ -26,11 +26,26 @@ body{
 }
 
 .carousel-item, .carousel-fade{
-	width: 800px;
-	height: 400px;
+	width: 600px;
+	height: 350px;
 	object-fit:cover;
 	margin:0 auto;
 }
+.info_map {
+	width: 800px;
+	margin:0 auto;
+}
+
+.info_area {
+	width: 300px;
+	display: inline-block;
+}
+
+ .map_area{
+	width: 400px; 
+	display: inline-block;
+}
+
 </style>
 
 </head>
@@ -40,7 +55,6 @@ body{
 <p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
 
 <hr>
-<span>이미지 슬라이드 영역</span>
 <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -67,50 +81,31 @@ body{
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 <hr>
 
-<div class="info_map">
+<div class="container-lg info_map">
 	<div class="info_area">
-		<dl>							
-			<dt style="width:0;"></dt>
-			<dd style="margin-bottom:7px;"><strong class="place_title_name">아펠가모공덕</strong></dd>
-			<dt><span class="info_Name">주소</span><!--<img src="../images/hall_info_txt02.png" alt="주소" />--></dt>
-			<dd style="font-size:13px;">서울특별시 마포구 도화동 25-13</dd>
-			<dt><span class="info_Name">도로명주소</span><!--<img src="../images/hall_info_txt03.png" alt="도로명주소" />--></dt>
-			<dd style="font-size:13px;">서울 마포구 마포대로 92 효성래링턴스퀘어 B동 6~7층</dd>
-			<dt><span class="info_Name">식사비용</span><!--<img src="../images/hall_info_txt04.png" alt="식사비용" />--></dt>
-			<dd style="font-size:13px;"><strong>59,400</strong></dd>
-			<dt><span class="info_Name">메뉴종류</span><!--<img src="../images/hall_info_txt05.png" alt="메뉴종류" />--></dt>
-			<dd style="font-size:13px;">뷔페</dd>
-			<dt><span class="info_Name">예식형태</span><!--<img src="../images/hall_info_txt06.png" alt="예식형태" />--></dt>
-			<dd style="font-size:13px;">분리예식</dd>
-			<dt><span class="info_Name">예식유형</span><!--<img src="../images/hall_info_txt07.png" alt="홀사용료" />--></dt>
-			<dd style="font-size:13px;">일반웨딩홀</dd>
-			<dt><span class="info_Name">보증인원</span><!--<img src="../images/hall_info_txt08.png" alt="보증인원" />--></dt>
-			<dd style="font-size:13px;">300 ~ 500</dd>
-			<dt><span class="info_Name">홈페이지</span><!--<img src="../images/hall_info_txt09.png" alt="홈페이지" />--></dt>
-			<dd><a href="http://apelgamo.com/apelgamo/wedding/gongdeok/" target="_blank" style="font-size:13px;">apelgamo.com/apelgamo/wedding/gongdeok/</a></dd>
-		</dl> 
+		<h4>${dto.cname }</h4>
+		<span>
+		지역 : ${dto.sido } ${dto.sigungu }
+		</span><br><span>
+		주소 : ${dto.juso } ${dto.sjuso }
+		</span><br><span>
+		홈페이지 : ${dto.curl }
+		</span><br><span>
+		문의전화 : ${dto.tel }
+		</span><br><span>
+		이메일 : ${dto.email }
+		</span>
 	</div>
-	<div class="map_area">
-		<div class="map_img">							
-			<div class="contain_map" id="map" style="width: 395px; height: 265px; position: relative; overflow: hidden;">
-				<div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none;">
-				</div>
-			</div>
-		</div>
+	<div class="map_area" id="map">
+		<div class="contain_map" id="map" style="width: 395px; height: 265px; overflow: hidden;"></div>
+		<input type="hidden" id="cname" value="${dto.cname }">
 	</div>
-	<!--map-->
 </div>
 
-
-
-
-
-지역 : ${dto.sido } ${dto.sigungu }<br>
-주소 : ${dto.juso } ${dto.sjuso }<br>
-홈페이지 : ${dto.curl }<br>
-<input type="hidden" id="cname" value="${dto.cname }">
+<hr>
 
 <ul class="nav nav-tabs" id="scrollspyHeading1">
   <li class="nav-item">
@@ -127,8 +122,6 @@ body{
 <h3>상세정보</h3>
 
 소개 : ${dto.intro }<br>
-문의전화 : ${dto.tel }<br>
-이메일 : ${dto.email }<br>
 
 
 HallDTO<br>
