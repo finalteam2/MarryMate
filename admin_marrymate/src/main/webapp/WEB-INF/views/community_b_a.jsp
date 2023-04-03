@@ -40,8 +40,11 @@
 	left: 250px;
 	margin: 0px auto;
 }
-.tb {
-	margin-left: 500px;
+#tb {
+	margin-left: 610px;
+}
+#hr{
+	margin-left: 450px;
 }
 #tb2 {
 	text-align: center;
@@ -100,51 +103,41 @@
 	</tr>
 </table>
 <br><br>
-<table height="50" class="tb">
+<table height="50" id="tb">
 	<tr>
-		<th width="100">예식장</th>
-		<th width="100">스튜디오</th>
-		<th width="100">드레스</th>
-		<th width="120">헤어/메이크업</th>
-		<th width="100">스냅DVD</th>
-		<th width="100">주례</th>
-		<th width="100">사회</th>
-		<th width="100">축가</th>
+		<th width="150"><a href="bbsList.do?kind=공지사항">공지사항</a></th>
+		<th width="150"><a href="bbsList.do?kind=웨딩후기">웨딩후기</a></th>
+		<th width="150"><a href="bbsList.do?kind=웨딩톡톡">웨딩톡톡</a></th>
+		<th width="150"><a href="bbsList_b.do">불량글관리</a></th>
 	</tr>
 </table>
-<hr width="850" class="tb">
+<hr width="950" id="hr">
 <br><br>
-<form name="bookList">
+<form name="bbsList_b">
 <table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
-			<th>예약번호</th>
-			<th>회원번호</th>
-			<th>회원명</th>
-			<th>업체명</th>
-			<th>예약날짜/시간</th>
-			<th>이용날짜/시간</th>
-			<th>금액</th>
-			<th>상태</th>
+			<th>구분</th>
+			<th>게시글번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="8" align="center">예약된 정보가 없습니다.</td>
+			<td colspan="5" align="center">불량글 내역이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
+	<input type="hidden" name="bidx" value="${dto.bidx}">
 		<tr>
-			<td>${dto.bk_idx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.name}</td>
-			<td>${dto.cname}</td>
-			<td>${dto.bookdate}</td>
-			<td>${dto.bk_date_time}</td>
-			<td>${dto.total_money}</td>
-			<td>${dto.bk_state}</td>
+			<td>${dto.kind}</td>
+			<td>${dto.bidx}</td>
+			<td>${dto.subject}</td>
+			<td>${dto.nick}</td>
+			<td>${dto.writedate}</td>
 		</tr>
 	</c:forEach>
 	</tbody>

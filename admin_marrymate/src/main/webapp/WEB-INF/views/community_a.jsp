@@ -50,6 +50,20 @@
 	text-align: center;
 	margin-left: 525px;
 }
+#bbsWrite{
+	width:150px;
+	height:45px;
+	font-size:18px;
+	font-weight:bold;
+	color:white;
+	background-color:#28A4F6;
+	border:0px;
+	border-radius:5px;
+	position: fixed;
+	bottom: 210px;
+	right: 280px;
+	margin: 0px auto;
+}
 </style>
 </head>
 <body width="1200">
@@ -82,10 +96,7 @@
 		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
-		<c:url var="community_a" value="bbsList.do">
-     		<c:param name="kind" value="공지사항" />
-		</c:url> 
-		<th><a href="${community_a}">커뮤니티 관리</a></th>
+		<th><a href="bbsList.do?kind=공지사항">커뮤니티 관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="pointMinusList.do">포인트관리</a></th>
@@ -101,6 +112,11 @@
 	</tr>
 </table>
 <table width="1100" align="center">
+	<c:if test="${param.kind=='공지사항'}">
+	<tr>
+		<td align="right"><a href="bbsWrite.do"><input type="button" value="글 작성" id="bbsWrite"></a></td>
+	</tr>
+	</c:if>
 	<tr>
 		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
 	</tr>
@@ -111,7 +127,7 @@
 		<th width="150"><a href="bbsList.do?kind=공지사항">공지사항</a></th>
 		<th width="150"><a href="bbsList.do?kind=웨딩후기">웨딩후기</a></th>
 		<th width="150"><a href="bbsList.do?kind=웨딩톡톡">웨딩톡톡</a></th>
-		<th width="150">불량글관리</th>
+		<th width="150"><a href="bbsList_b.do">불량글관리</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
@@ -121,6 +137,7 @@
 <table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
+			<th></th>
 			<th>게시글번호</th>
 			<th>제목</th>
 			<th>작성자</th>
@@ -136,6 +153,7 @@
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="bidx" value="${dto.bidx}">
 		<tr>
+			<td><input type="radio" name="remote_con"></td>
 			<td>${dto.bidx}</td>
 			<td>${dto.subject}</td>
 			<td>관리자</td>
@@ -151,6 +169,7 @@
 <table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
+			<th></th>
 			<th>게시글번호</th>
 			<th>제목</th>
 			<th>작성자</th>
@@ -160,12 +179,13 @@
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="4" align="center">게시글 내역이 없습니다.</td>
+			<td colspan="5" align="center">게시글 내역이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="bidx" value="${dto.bidx}">
 		<tr>
+			<td><input type="radio" name="remote_con"></td>
 			<td>${dto.bidx}</td>
 			<td>${dto.subject}</td>
 			<td>${dto.nick}</td>

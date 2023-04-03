@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BbsListDTO {
 	
+	private String kind;
 	private int bidx;
 	private String subject;
 	private String nick;
@@ -14,12 +15,20 @@ public class BbsListDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BbsListDTO(int bidx, String subject, String nick, Date writedate) {
+	public BbsListDTO(String kind, int bidx, String subject, String nick, Date writedate) {
 		super();
+		this.kind = kind;
 		this.bidx = bidx;
 		this.subject = subject;
 		this.nick = nick;
 		this.writedate = writedate;
+	}
+	
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public int getBidx() {

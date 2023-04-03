@@ -79,10 +79,7 @@
 		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
-		<c:url var="community_a" value="bbsList.do">
-     		<c:param name="kind" value="공지사항" />
-		</c:url> 
-		<th><a href="${community_a}">커뮤니티 관리</a></th>
+		<th><a href="bbsList.do?kind=공지사항">커뮤니티 관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="pointMinusList.do">포인트관리</a></th>

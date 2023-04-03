@@ -28,5 +28,11 @@ public class BbsDAOImple implements BbsDAO {
 			
 		
 	}
+	
+	@Override
+	public List<BbsListDTO> bbsList_b() {
+		List<BbsListDTO> dtos=sqlMap.selectList("bbsList_b");
+		return dtos;
+	}
 
 }

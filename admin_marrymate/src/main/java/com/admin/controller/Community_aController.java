@@ -31,5 +31,18 @@ public class Community_aController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/bbsList_b.do")
+	public ModelAndView bbsList_b() {
+		
+		List<BbsListDTO> dtos=bbsDao.bbsList_b();
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("dtos",dtos);
+		mav.setViewName("community_b_a");
+		
+		return mav;
+	}
 
 }
