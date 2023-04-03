@@ -38,7 +38,7 @@ function handleVideoEnd() {
 </script>
     <br><br><br>
     <video id="video" muted autoplay onended="handleVideoEnd()">
-		<source src="/marrymate/video/mainv.mp4" type="video/mp4">
+		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
 
 
