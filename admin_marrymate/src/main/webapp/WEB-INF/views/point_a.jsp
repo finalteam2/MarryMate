@@ -82,10 +82,13 @@
 		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="community_a.do">커뮤니티 관리</a></th>
+		<c:url var="community_a" value="bbsList.do">
+     		<c:param name="kind" value="공지사항" />
+		</c:url> 
+		<th><a href="${community_a}">커뮤니티 관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="point_a.do">포인트관리</a></th>
+		<th><a href="pointMinusList.do">포인트관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="cs_a.do">문의관리</a></th>
@@ -105,16 +108,18 @@
 <br><br>
 <table height="50" id="tb">
 	<tr>
-		<th width="150">차감</th>
-		<th width="150">적립</th>
+		<th width="150"><a href="pointMinusList.do">차감</a></th>
+		<th width="150"><a href="pointPlusList.do">적립</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
 <br><br>
-<form name="collectionList">
+<c:if test="${mp=='m'}">
+<form name="pointMinusList">
 <table cellspacing="0" border="1" width="700" id="tb2">
 	<thead>
 		<tr>
+			<th>포인트번호</th>
 			<th>회원번호</th>
 			<th>회원명</th>
 			<th>업체명</th>
@@ -126,14 +131,15 @@
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="6" align="center">포인트 차감 내역이 없습니다.</td>
+			<td colspan="7" align="center">포인트 차감 내역이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
 		<tr>
+			<td>${dto.p_idx}</td>
 			<td>${dto.midx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.pay_idx}</td>
+			<td>${dto.name}</td>
+			<td>${dto.cname}</td>
 			<td>${dto.p_date}</td>
 			<td>${dto.p_cal}</td>
 			<td>${dto.p_type}</td>
@@ -142,6 +148,40 @@
 	</tbody>
 </table>
 </form>
+</c:if>
+<c:if test="${mp=='p'}">
+<form name="pointPlusList">
+<table cellspacing="0" border="1" width="700" id="tb2">
+	<thead>
+		<tr>
+			<th>포인트번호</th>
+			<th>회원번호</th>
+			<th>회원명</th>
+			<th>적립날짜/시간</th>
+			<th>적립포인트</th>
+			<th>구분</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="6" align="center">포인트 적립 내역이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+		<tr>
+			<td>${dto.p_idx}</td>
+			<td>${dto.midx}</td>
+			<td>${dto.name}</td>
+			<td>${dto.p_date}</td>
+			<td>${dto.p_cal}</td>
+			<td>${dto.p_type}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+</c:if>
 <br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>

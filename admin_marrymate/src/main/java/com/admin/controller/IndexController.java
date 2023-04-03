@@ -63,11 +63,6 @@ public class IndexController {
 		return mav;
 	}
 	
-	@RequestMapping("/community_a.do")
-	public String community_a() {
-		return "community_a";
-	}
-	
 	@RequestMapping("/cs_a.do")
 	public String cs_a() {
 		return "cs_a";

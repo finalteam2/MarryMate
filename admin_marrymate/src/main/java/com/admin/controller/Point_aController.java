@@ -15,14 +15,30 @@ public class Point_aController {
 	@Autowired
 	private PointDAO pointDao;
 	
-	@RequestMapping("/point_a.do")
-	public ModelAndView point_a() {
+	@RequestMapping("/pointMinusList.do")
+	public ModelAndView pointMinusList() {
 		
-		List<PointDTO> dtos=pointDao.pointList();
+		List<PointListDTO> dtos=pointDao.pointMinusList();
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
+		mav.addObject("mp","m");
+		mav.setViewName("point_a");
+		
+		return mav;
+	}
+	
+
+	@RequestMapping("/pointPlusList.do")
+	public ModelAndView pointPlusList() {
+		
+		List<PointListDTO> dtos=pointDao.pointPlusList();
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("dtos",dtos);
+		mav.addObject("mp","p");
 		mav.setViewName("point_a");
 		
 		return mav;

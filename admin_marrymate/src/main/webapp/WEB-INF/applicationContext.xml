@@ -44,4 +44,8 @@
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="bbsDao" class="com.admin.bbs.model.BbsDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>

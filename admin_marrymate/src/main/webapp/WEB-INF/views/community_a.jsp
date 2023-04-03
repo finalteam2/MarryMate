@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +46,10 @@
 #hr{
 	margin-left: 450px;
 }
+#tb2 {
+	text-align: center;
+	margin-left: 525px;
+}
 </style>
 </head>
 <body width="1200">
@@ -77,10 +82,13 @@
 		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="community_a.do">커뮤니티 관리</a></th>
+		<c:url var="community_a" value="bbsList.do">
+     		<c:param name="kind" value="공지사항" />
+		</c:url> 
+		<th><a href="${community_a}">커뮤니티 관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="point_a.do">포인트관리</a></th>
+		<th><a href="pointMinusList.do">포인트관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="cs_a.do">문의관리</a></th>
@@ -100,14 +108,75 @@
 <br><br>
 <table height="50" id="tb">
 	<tr>
-		<th width="150">공지사항</th>
-		<th width="150">웨딩후기</th>
-		<th width="150">웨딩톡톡</th>
+		<th width="150"><a href="bbsList.do?kind=공지사항">공지사항</a></th>
+		<th width="150"><a href="bbsList.do?kind=웨딩후기">웨딩후기</a></th>
+		<th width="150"><a href="bbsList.do?kind=웨딩톡톡">웨딩톡톡</a></th>
 		<th width="150">불량글관리</th>
 	</tr>
 </table>
 <hr width="950" id="hr">
-<br><br><br><br><br><br>
+<br><br>
+<c:if test="${param.kind=='공지사항'}">
+<form name="bbsList_g">
+<table cellspacing="0" border="1" width="800" id="tb2">
+	<thead>
+		<tr>
+			<th>게시글번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="4" align="center">게시글 내역이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+	<input type="hidden" name="bidx" value="${dto.bidx}">
+		<tr>
+			<td>${dto.bidx}</td>
+			<td>${dto.subject}</td>
+			<td>관리자</td>
+			<td>${dto.writedate}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+</c:if>
+<c:if test="${param.kind=='웨딩후기' || param.kind=='웨딩톡톡'}">
+<form name="bbsList_w">
+<table cellspacing="0" border="1" width="800" id="tb2">
+	<thead>
+		<tr>
+			<th>게시글번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:if test="${empty dtos}">
+		<tr>
+			<td colspan="4" align="center">게시글 내역이 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:forEach var="dto" items="${dtos}">
+	<input type="hidden" name="bidx" value="${dto.bidx}">
+		<tr>
+			<td>${dto.bidx}</td>
+			<td>${dto.subject}</td>
+			<td>${dto.nick}</td>
+			<td>${dto.writedate}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+</c:if>
+<br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

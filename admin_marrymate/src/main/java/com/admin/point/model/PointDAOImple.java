@@ -14,10 +14,15 @@ public class PointDAOImple implements PointDAO {
 	public void setSqlMap(SqlSessionTemplate sqlMap) {
 		this.sqlMap = sqlMap;
 	}
-
+	
 	@Override
-	public List<PointDTO> pointList() {
-		List<PointDTO> dtos=sqlMap.selectList("pointList");
+	public List<PointListDTO> pointMinusList() {
+		List<PointListDTO> dtos=sqlMap.selectList("pointMinusList");
+		return dtos;
+	}
+	@Override
+	public List<PointListDTO> pointPlusList() {
+		List<PointListDTO> dtos=sqlMap.selectList("pointPlusList");
 		return dtos;
 	}
 

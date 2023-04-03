@@ -11,5 +11,6 @@
   		<mapper resource="sqlMap/hallSQL.xml"/>
   		<mapper resource="sqlMap/paymentSQL.xml"/>
   		<mapper resource="sqlMap/pointSQL.xml"/>
+  		<mapper resource="sqlMap/bbsSQL.xml"/>
   	</mappers>
   </configuration>

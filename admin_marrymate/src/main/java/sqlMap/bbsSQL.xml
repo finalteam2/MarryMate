@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.admin.bbs">
+  
+  <select id="bbsList_g" parameterType="String" resultType="com.admin.bbs.model.BbsListDTO">
+  		select bbs.bidx bidx,bbs.subject subject,bbs.writedate writedate from bbs where kind=#{kind} order by bidx
+  </select>
+  
+  <select id="bbsList_w" parameterType="String" resultType="com.admin.bbs.model.BbsListDTO">
+  		select bbs.bidx bidx,bbs.subject subject,member.nick nick,bbs.writedate writedate from bbs,member where bbs.midx=member.midx and kind=#{kind} order by bidx
+  </select>
+  
+  </mapper>
