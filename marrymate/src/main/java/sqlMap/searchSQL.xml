@@ -18,6 +18,7 @@
 		 		company
 	 		where 1=1
 	 			and clevel = 1
+	 			and blind = 0
 	 		<if test="name != null and name != ''">
 	 			and cname like '%' || #{name} || '%'
 	 		</if>
@@ -72,6 +73,7 @@
 	 		company
  		where 1=1
  			and clevel = 1
+ 			and blind = 0
  		<if test="name != null and name != ''">
  			and cname like '%' || #{name} || '%'
  		</if>
