@@ -14,7 +14,7 @@
 <meta property="og:image" content="/marrymate/img/logo1.png">
 <meta property="og:description"
 	content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
-	<link rel="stylesheet" href="/marrymate/css/calendar.css">
+<link rel="stylesheet" href="/marrymate/css/calendar.css">
 
 
 
@@ -85,9 +85,6 @@
 					</div>
 				</div>
 
-
-
-
 				<!--mainMyweddingAnimation : s-->
 				<div class="mainMyweddingAnimationScroll">
 					<div class="infoArea">
@@ -96,11 +93,6 @@
 								data-target="chkst" data-chkst="01"> <span class="tit">
 										PAST<br class="onlyM">
 								</span> <span class="number"> <strong id="checkListChkCnt">
-
-
-
-
-
 
 											2 </strong> <span class="txt">건</span>
 								</span>
@@ -128,6 +120,9 @@
 			</div>
 		</div>
 
+		<div class="imgFrame">
+			<img class="frame" src="/marrymate/img/imgframe.png" style="width: 100%">
+		</div>
 
 		<div class="contestList">
 			<div class="checkListArea">
