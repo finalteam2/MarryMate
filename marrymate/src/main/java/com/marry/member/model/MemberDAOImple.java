@@ -17,5 +17,12 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 		
 	}
+	
+	@Override
+	public int checkId(String id) {
 
+		return sqlMap.selectOne("com.marry.member.model.MemberDTO.checkId", id);
+		
+	}
+	
 }

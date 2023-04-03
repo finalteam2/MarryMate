@@ -152,14 +152,6 @@
 		background: black;
 		color: white;
 	}
-	.id_ok{
-	color:#008000;
-	display: none;
-	}
-	.id_already{
-	color:#6A82FB; 
-	display: none;
-	}
 	#iBox {
 		width: 600px;
 		height: 625px;
@@ -176,7 +168,39 @@
 		text-align: center;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	function openAddressSearch() {
+	  new daum.Postcode({
+	    oncomplete: function(data) {
+	      document.getElementById('juso').value = data.address;
+	      document.getElementById('sjuso').focus();
+	    }
+	  }).open();
+	}
+	
+	 $(document).ready(function() {
+         $('#checkBtn').click(function() {
+             $.ajax({
+                 type : 'POST',
+                 url : 'checkId.do',
+                 data : {
+                     id : $('#id').val()
+                 },
+                 success : function(result) {
+                     if(result == 0) {
+                         $('#result').html('사용 가능한 아이디입니다.');
+                     } else {
+                         $('#result').html('이미 사용 중인 아이디입니다.');
+                     }
+                 },
+                 error : function() {
+                     alert('오류가 발생했습니다.');
+                 }
+             });
+         });
+     });
 </script>
 </head>
 <body>
@@ -186,37 +210,37 @@
 			<form name="memberJoin" action="memberJoin.do" method="post">
 			<div class="box">
 				<div id="iBox">
-					<input type="hidden" name="point" value="0">
-					<input type="hidden" name="img" value="imgfile">
 					<div class="hClear">이름</div>
-					<input type="text" name="name"><br>
+						<input type="text" name="name" placeholder="실명 입력"><br>
 					<div class="hTagBox">생년월일</div>
-					<input type="date" name="birthday" placeholder="xxxx-xx-xx ('-'없이 입력)"><br>
+						<input type="date" name="birthday" placeholder="xxxx-xx-xx ('-'없이 입력)"><br>
 					<div class="hClear">성별</div>
-					<input type="radio" name="gender" value="남">남
-					<input type="radio" name="gender" value="여">여<br>
+						<input type="radio" name="gender" value="남">남
+						<input type="radio" name="gender" value="여">여<br>
 					<div class="hTagBox">닉네임</div>
-					<input type="text" name="nick" placeholder="중복확인을 진행해주세요">&nbsp;&nbsp;
-					<input type="button" value="중복확인" class="cc" onblur="checkNick()"><br>
-					<div class="hClear">아이디</div>
-					<input type="text" id="id" name="id" oninput = "checkId()" placeholder="중복확인을 진행해주세요">&nbsp;&nbsp;
-					<input type="button" value="중복확인" class="cc">
-					<span class="id_ok">사용 가능한 아이디입니다.</span>
-					<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span><br>
+						<input type="text" name="nick" placeholder="중복확인 진행">&nbsp;&nbsp;
+						<input type="button" value="중복확인" class="cc"><br>
+					<div class="hClear">아이디</div> 
+						<input type="text" id="id" name="id" oninput = "checkId()" placeholder="중복확인 진행">&nbsp;&nbsp;
+						<input type="button" value="중복확인" id="checkBtn" class="cc" onclick="checkId()"><br>
+						<div id="result"></div>
 					<div class="hTagBox">비밀번호</div>
-					<input type="password" id="pwd" name="pwd" onchange="check_pwd()" placeholder="6자 이상 16자 이하(!,@,#,$,% 포함)"><br>
-					<div class="hTagBox">전화번호</div>
-					<input type="text" name="tel" placeholder="010-xxxx-xxxx"><br>
-					<div class="hClear">주소</div>
-					<input type="text" name="juso"><br>
-					<div class="hTagBox">상세주소</div>
-					<input type="text" name="sjuso"><br>
-					<div class="hClear">추천인</div>
-					<input type="text" name="gname"><br>
-					<div class="hTagBox">예식날짜</div>
-					<input type="date" name="marrydate" placeholder="xxxx-xx-xx ('-'없이 입력)">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="marrydate">미정<br>
-					<div class="hClear">배우자</div>
-					<input type="text" name="pname"><br>
+						<input type="password" id="pwd" name="pwd" onchange="check_pwd()" placeholder="6자 이상 16자 이하(!,@,#,$,% 포함)"><br>
+					<div class="hTagBox">비밀번호 확인</div>
+						<input type="password" id="pwdCheck" name="Check" onchange="check_pwd()"><br>
+					<div class="hClear">전화번호</div>
+						<input type="text" name="tel" placeholder="010-xxxx-xxxx('-'없이 입력)"><br>
+					<div class="hTagBox">주소</div>
+						<input type="text" id="juso" name="juso" placeholder="주소검색을 통해 입력해주세요" readonly>&nbsp;&nbsp;
+						<input type="button" value="주소 검색" class="cc" onclick="openAddressSearch()"><br>
+					<div class="hClear">상세주소</div>
+						<input type="text" id="sjuso" name="sjuso" placeholder="상세주소 입력"><br>
+					<div class="hTagBox">추천인</div>
+						<input type="text" name="gname" placeholder="추천인 아이디 입력(선택)"><br>
+					<div class="hClear">예식날짜</div>
+						<input type="date" name="marrydate" placeholder="xxxx-xx-xx ('-'없이 입력)">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="marrydate">미정<br>
+					<div class="hTagBox">배우자</div>
+						<input type="text" name="pname" placeholder="배우자 이름(선택)"><br>
 				</div>
 				<div class="tBox">
 					<h3>이용약관</h3>

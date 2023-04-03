@@ -40,4 +40,7 @@
 		    #{pname}
 		)
 	</insert>
+	<select id="checkId" parameterType="String" resultType="int">
+        select count(*) from member where id=#{id}
+    </select>
 </mapper>
