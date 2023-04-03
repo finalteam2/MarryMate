@@ -101,39 +101,43 @@
 		 </div>
 		</div>
 		<div id="mBox">
-			<form name="memberInfo" action="">
 				<div class="hTagBox">이름</div>
-				<input type="text" name="name" readonly required><br>
+				<input type="text" name="name" value="" readonly required><br>
 				<div class="hTagBox">아이디</div>
-				<input type="text" name="id" readonly required><br>
+				<input type="text" name="id" value="" readonly required><br>
 				<div class="hTagBox">생년월일</div>
-				<input type="date" name="birthday" readonly required><br>
+				<input type="date" name="birthday" value="" readonly required><br>
 				<div class="hTagBox">성별</div>
 				<span><input type="radio" name="gender" value="male" checked>남
 				<input type="radio" name="gender" value="female">여</span><br>
 				<div class="hTagBox">닉네임</div>
-				<input type="text" name="nick" required><br>
+				<input type="text" name="nick" value="" required><br>
 				<div class="hTagBox">비밀번호</div>
-				<input type="password" name="pwd" required><br>
+				<input type="password" name="pwd" value="" required><br>
 				<div class="hTagBox">전화번호</div>
-				<input type="text" name="tel" required><br>
+				<input type="text" name="tel" value="" required><br>
 				<div class="hTagBox">주소</div>
-				<input type="text" name="juso" required><br>			
+				<input type="text" name="juso" value="" required><br>			
 				<div class="hTagBox">상세주소</div>
-				<input type="text" name="sjuso" required><br>
+				<input type="text" name="sjuso" value="" required><br>
 				<div class="hTagBox">예식날짜</div>
-				<input type="date" name="marrydate" required><br>
+				<input type="date" name="marrydate" value="" required><br>
 				<div class="hTagBox">배우자</div>
-				<input type="text" name="pname" required><br><br>
-				<div class="bBox"><input type="submit" class="btn" value="수정">
+				<input type="text" name="pname" value="" required><br><br>
+				<div class="bBox"><input type="button" class="btn" value="수정" onclick="memberUpdate()">
 				<input type="reset" class="btn" value="취소"></div>
-			</form>
 		</div>
 	</article>
 </section>
 </body>
 <script>
 function changeImg(){
+	
+}
+function memberDel(){
+	
+}
+function memberUpdate(){
 	
 }
 </script>
