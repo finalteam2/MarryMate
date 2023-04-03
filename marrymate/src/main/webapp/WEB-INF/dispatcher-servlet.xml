@@ -13,12 +13,17 @@
 	<context:component-scan base-package="com.marry"></context:component-scan>
 	
 	<!-- viewResolver & view -->
+	<!-- finalJson 사용하려면 우선순위 부여해서 먼저 읽을 수 있도록해야함 -->
 	<bean id="finalJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="1"></property>
 	</bean>
-	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- finalJson 사용하기 위해 우선순위 설정 -->
+		<property name="order" value="0"></property>
+	</bean>
 	
 </beans>
