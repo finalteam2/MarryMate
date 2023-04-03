@@ -35,4 +35,9 @@ public class MypageController {
 	public String community() {
 		return "/mypage/community";
 	}
+	
+	@RequestMapping("/favorite.do")
+	public String favorite() {
+		return "/mypage/favorite";
+	}
 }

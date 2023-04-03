@@ -2,6 +2,13 @@
 
 
 /*header 영역*/
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 header img{
 	padding-top: 35px;
 	width:250px;
@@ -11,7 +18,7 @@ header{
 	text-align: center;
 }
 
-header .menu{
+header #menu{
 	margin:0px auto;
 	width:1580px;
 }
@@ -23,6 +30,13 @@ header nav{
 	font-size:23px;
 	color:#a4a4a4;
 }
+.menu a{cursor: pointer;}
+.menu a img{width: 40px}
+.menu .hide{
+	display: none;
+	font-family: 'SUIT-Regular';
+}
+.menu .hide li{list-style: none;}
 
 /*body 영역*/
 body section{

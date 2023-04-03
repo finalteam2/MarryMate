@@ -5,6 +5,43 @@
 <head>
 <meta charset="UTF-8">
 <title>My 커뮤니티</title>
+<style>
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+article table{
+	width: 60%;
+	margin: auto;
+	border-collapse: collapse;
+	text-align: center;	
+}
+article table thead{
+	border-bottom: 20px solid white;
+	background-color: #c797eb;
+}
+article table thead th{
+	color: white;
+	font-family: 'SUIT-Regular';
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+article table tbody td{
+	font-family: 'SUIT-Regular';
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid black; 
+}
+h2{
+	font-family: 'SUIT-Regular';
+}
+</style>
 </head>
 <body>
 <section>
