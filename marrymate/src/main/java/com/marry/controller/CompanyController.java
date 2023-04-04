@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.StringJoiner;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +20,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.Book_TimeDTO;
+import com.marry.company.model.Com_ImgDTO;
 import com.marry.company.model.CompanyDAO;
 import com.marry.company.model.CompanyDTO;
+import com.marry.company.model.FoodDTO;
+import com.marry.company.model.HallDTO;
 
 @Controller
 public class CompanyController {
@@ -54,6 +59,9 @@ public class CompanyController {
 		
 		String id=req.getParameter("id");
 		int cidx=companyDao.selectCidx(id);
+		
+		HttpSession session=req.getSession();
+		session.setAttribute("cidx", cidx);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
@@ -123,7 +131,6 @@ public class CompanyController {
 			result+=1;
 		}
 		
-		
 		String yoil2=req.getParameter("yoil2");
 		if(yoil2==null || yoil2.equals("")) {
 			
@@ -178,6 +185,9 @@ public class CompanyController {
 			result+=1;
 		}
 		
+		HttpSession session=req.getSession();
+		session.removeAttribute("cidx");
+		
 		String msg=result>0?"작성 완료":"작성 실패";
 		
 		ModelAndView mav=new ModelAndView();
@@ -187,30 +197,108 @@ public class CompanyController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)
-	public ModelAndView companyContent(
-			@RequestParam(value = "cidx", defaultValue = "0")int cidx
-			) {
-		ModelAndView mav = new ModelAndView();
-		CompanyDTO dto = companyDao.companySelectOne(cidx);
-		if(cidx == 0 || dto == null) {
-			String msg = "잘못된 접근입니다";
-			mav.addObject("msg", msg);
-			mav.addObject("url", "index.do");
-			mav.setViewName("company/companyMsg");
-		}else {
-			mav.addObject("dto", dto);
-			List iarr = companyDao.selectCom_Img(cidx);
-			mav.addObject("iarr", iarr);
-			if(dto.getKind().equals("예식장")) {
-				List harr = companyDao.selectHall(cidx);
-				List farr = companyDao.selectFood(cidx);
-				mav.addObject("harr", harr);
-				mav.addObject("farr", farr);
-			}
-			mav.setViewName("company/companyContent");
-		}
+	@RequestMapping(value = "/food.do", method = RequestMethod.POST)
+	public ModelAndView food(FoodDTO dto) {
+		
+		int result=companyDao.foodInsert(dto);
+		String msg=result>0?"작성 완료":"작성 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "index.do");
+		mav.setViewName("company/companyMsg");
 		return mav;
+		
+	}
+	
+	@RequestMapping(value = "/hall.do", method = RequestMethod.POST)
+	public ModelAndView hall(HallDTO dto) {
+		
+		int result=companyDao.hallInsert(dto);
+		String msg=result>0?"작성 완료":"작성 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "index.do");
+		mav.setViewName("company/companyMsg");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value = "/img.do", method = RequestMethod.POST)
+	public ModelAndView img(
+			MultipartHttpServletRequest req) {
+		
+		int result=0;
+		
+		MultipartFile Inimg1=req.getFile("img1");
+		if(Inimg1 == null) {
+		    
+		}else {
+			copyFile(Inimg1);
+			String cidx=req.getParameter("cidx");
+			String img=Inimg1.getOriginalFilename();
+			result+=companyDao.imgInsert(cidx, img);
+		}
+
+		MultipartFile Inimg2=req.getFile("img2");
+		if (Inimg2 == null) {
+
+		} else {
+			copyFile(Inimg2);
+			String cidx = req.getParameter("cidx");
+			String img = Inimg2.getOriginalFilename();
+			result += companyDao.imgInsert(cidx, img);
+		}
+		
+		MultipartFile Inimg3=req.getFile("img3");
+		MultipartFile Inimg4=req.getFile("img4");
+		MultipartFile Inimg5=req.getFile("img5");
+		
+		
+		
+		
+		if (Inimg3 == null) {
+		    
+		}else {
+			copyFile(Inimg3);
+			
+			String cidx=req.getParameter("cidx");
+			String img=Inimg3.getOriginalFilename();
+			
+			result+=companyDao.imgInsert(cidx, img);
+		}
+
+		if (Inimg4 == null) {
+		    
+		}else {
+			copyFile(Inimg4);
+			
+			String cidx=req.getParameter("cidx");
+			String img=Inimg4.getOriginalFilename();
+			
+			result+=companyDao.imgInsert(cidx, img);
+		}
+		
+		if (Inimg5 == null) {
+		    
+		}else {
+			copyFile(Inimg5);
+			
+			String cidx=req.getParameter("cidx");
+			String img=Inimg5.getOriginalFilename();
+			
+			result+=companyDao.imgInsert(cidx, img);
+		}
+		
+	    String msg=result>0?"파일 등록 완료":"파일 등록 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "index.do");
+		mav.setViewName("company/companyMsg");
+		return mav;
+		
 	}
 	
 }
