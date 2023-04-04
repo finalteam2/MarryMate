@@ -3,6 +3,14 @@ var map;
 var infowindow;
 var ps;
 
+//모달팝업
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+
 function mapLoad(){
 	mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
@@ -56,3 +64,4 @@ function displayMarker(place) {
         infowindow.open(map, marker);
     });
 }
+

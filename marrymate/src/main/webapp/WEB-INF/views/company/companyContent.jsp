@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b6b897e9b2101fc41066a267ee940a5&libraries=services,clusterer,drawing"></script>
@@ -45,13 +45,42 @@ body{
 	width: 400px; 
 	display: inline-block;
 }
+.star-rating {
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content:space-around;
+  text-align:center;
+  width: 150px;
+  font-size:24px;
+}
 
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
+
+textarea {
+	 resize:none;
+}
 </style>
 
+<title>Insert title here</title>
 </head>
 <body onload="mapLoad()">
 <%@include file="../header.jsp" %>
-
 <p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
 
 <hr>
@@ -124,18 +153,15 @@ body{
 소개 : ${dto.intro }<br>
 
 
-HallDTO<br>
-harr<br>
 <c:forEach var="hdto" items="${harr }">
-${hdto.hidx } : hidx<br>
-${hdto.cidx } : cidx<br>
 ${hdto.name } : name<br>
-${hdto.worktime } : worktime<br>
+${hdto.pay } : pay<br>
+${hdto.time } : time<br>
+${hdto.guest_num } : guest_num<br>
+${hdto.seat_num } : seat_num<br>
 </c:forEach>
 <hr>
 
-FoodDTO<br>
-farr<br>
 <c:forEach var="fdto" items="${farr }">
 ${fdto.fidx } : fidx<br>
 ${fdto.cidx } : cidx<br>
@@ -156,22 +182,29 @@ ${fdto.pay } : pay<br>
 	<a class="nav-link" href="#scrollspyHeading3">문의</a>
   </li>
 </ul>
+<hr>
 <h3>리뷰</h3>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
+
+<form name="fm" action="review.do" method="post">
+	<span class="star-rating">
+	<input type="radio" id="5-stars" name="star" value="5" required="required" />
+		<label for="5-stars" class="star">&#9733;</label>
+	<input type="radio" id="4-stars" name="star" value="4" required="required" />
+		<label for="4-stars" class="star">&#9733;</label>
+	<input type="radio" id="3-stars" name="star" value="3" required="required" />
+		<label for="3-stars" class="star">&#9733;</label>
+	<input type="radio" id="2-stars" name="star" value="2" required="required" />
+		<label for="2-stars" class="star">&#9733;</label>
+	<input type="radio" id="1-star" name="star" value="1" required="required" />
+		<label for="1-star" class="star">&#9733;</label>
+	</span>
+
+	<div class="input-group mb-3">
+	  <textarea class="form-control" placeholder="리뷰 내용을 작성하세요." name="content" aria-label="With textarea" rows="4" required="required"></textarea>
+	  <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="리뷰 작성"/>
+	</div>
+
+</form>
 
 <ul class="nav nav-tabs" id="scrollspyHeading3">
   <li class="nav-item">
@@ -184,22 +217,45 @@ ${fdto.pay } : pay<br>
 	<a class="nav-link active" aria-current="page" href="#scrollspyHeading3">문의</a>
   </li>
 </ul>
+<hr>
 <h3>문의</h3>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
-소개 : ${dto.intro }<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+문의하기
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+	<form name="com_cs" action="com_cs.do" method="post">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">문의하기</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">문의업체</label>
+            <input type="text" class="form-control" id="recipient-name" value="${dto.cname }" readonly="readonly">
+            <input type="hidden" name="cidx" value="${dto.cidx }">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">제목</label>
+            <input type="text" class="form-control" id="message-text1" name="subject" placeholder="제목을 작성하세요." required="required">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">문의 내용</label>
+            <textarea class="form-control" id="message-text2" name="content" placeholder="문의 내용을 작성하세요." required="required" rows="5"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="submit" class="btn btn-primary">문의하기</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>
