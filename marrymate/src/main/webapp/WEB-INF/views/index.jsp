@@ -36,7 +36,6 @@ function handleVideoEnd() {
     }, 40);
 }
 </script>
-    <br><br><br>
     <video id="video" muted autoplay onended="handleVideoEnd()">
 		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
