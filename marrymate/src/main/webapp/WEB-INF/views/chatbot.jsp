@@ -26,7 +26,7 @@
 	opacity: 0;
 }
 
-.show {
+.chatshow {
 	opacity: 1;
 	z-index: 1000;
 	
@@ -55,7 +55,7 @@
 </head>
 <body>
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
-<div id="show" class="show"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70"></div>
+<div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70"></div>
 <div class="background">
 	<div class="window">
     	<div class="popup">
@@ -85,15 +85,15 @@
 </div>
 
 <script>
-	function show() {
-        document.querySelector(".background").className = "background show";
+	function chatshow() {
+        document.querySelector(".background").className = "background chatshow";
 	}
 
 	function close() {
 		document.querySelector(".background").className = "background";
 	}
 
-	document.querySelector("#show").addEventListener("click", show);
+	document.querySelector("#chatshow").addEventListener("click", chatshow);
 	document.querySelector("#close").addEventListener("click", close);
 </script>
 </body>
