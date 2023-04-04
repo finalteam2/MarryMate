@@ -43,6 +43,8 @@ public class ContentController {
 				mav.addObject("harr", harr);
 				mav.addObject("farr", farr);
 			}
+			List rarr = contentDao.selectReview(cidx);
+			mav.addObject("rarr", rarr);
 			mav.setViewName("company/companyContent");
 		}
 		return mav;

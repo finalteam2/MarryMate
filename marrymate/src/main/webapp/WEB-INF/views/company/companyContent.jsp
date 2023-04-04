@@ -137,15 +137,9 @@ textarea {
 <hr>
 
 <ul class="nav nav-tabs" id="scrollspyHeading1">
-  <li class="nav-item">
-	<a class="nav-link active" aria-current="page" href="#scrollspyHeading1">상세정보</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading3">문의</a>
-  </li>
+  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading1">상세정보</a>  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading3">문의</a>  </li>
 </ul>
 <hr>
 <h3>상세정보</h3>
@@ -172,19 +166,23 @@ ${fdto.pay } : pay<br>
 <hr>
 
 <ul class="nav nav-tabs" id="scrollspyHeading2">
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link active" aria-current="page" href="#scrollspyHeading2">리뷰</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading3">문의</a>
-  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>  </li>
+  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading2">리뷰</a>  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading3">문의</a>  </li>
 </ul>
 <hr>
+
 <h3>리뷰</h3>
 
+<c:forEach var="rdto" items="${rarr }">
+인덱스 : ${rdto.ridx } <br>
+회사번호 : ${rdto.cidx } <br>
+회원번호 : ${rdto.midx } <br>
+컨텐츠 : ${rdto.content } <br>
+별점 : ${rdto.star } <br>
+작성일 : ${rdto.redate } <br>
+<hr>
+</c:forEach>
 <form name="fm" action="review.do" method="post">
 	<input type="hidden" name="cidx" value="${dto.cidx }">
 	<span class="star-rating">
@@ -208,15 +206,9 @@ ${fdto.pay } : pay<br>
 </form>
 
 <ul class="nav nav-tabs" id="scrollspyHeading3">
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>
-  </li>
-  <li class="nav-item">
-	<a class="nav-link active" aria-current="page" href="#scrollspyHeading3">문의</a>
-  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>  </li>
+  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>  </li>
+  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading3">문의</a>  </li>
 </ul>
 <hr>
 <h3>문의</h3>

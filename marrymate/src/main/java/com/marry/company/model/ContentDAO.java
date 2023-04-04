@@ -9,5 +9,6 @@ public interface ContentDAO {
 	public List<FoodDTO> selectFood(int cidx); 
 	public List<Com_ImgDTO> selectCom_Img(int cidx);
 	public int insertReview(ReviewDTO dto);
+	public List<ReviewDTO> selectReview(int cidx);
 	
 }

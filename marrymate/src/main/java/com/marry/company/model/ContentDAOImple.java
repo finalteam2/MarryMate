@@ -41,4 +41,10 @@ public class ContentDAOImple implements ContentDAO {
 		int result = sqlMap.insert("insertReview", dto);
 		return result;
 	}
+	
+	@Override
+	public List<ReviewDTO> selectReview(int cidx) {
+		List<ReviewDTO> arr = sqlMap.selectList("selectReview", cidx);
+		return arr;
+	}
 }

@@ -55,4 +55,14 @@
 		sysdate
 		)
 	</insert>
+	<select id="selectReview" parameterType="Integer" resultType="com.marry.company.model.ReviewDTO">
+	select
+		*
+	from
+		review
+	where
+		cidx = #{cidx}
+	order by
+		ridx asc
+	</select>
 </mapper>
