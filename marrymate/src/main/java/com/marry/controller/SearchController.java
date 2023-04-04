@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.CompanyDTO;
@@ -20,7 +18,7 @@ import com.marry.search.model.SearchDTO;
 public class SearchController {
 	
 	@Autowired
-	SearchDAOImple searchDAO;
+	private SearchDAOImple searchDAO;
 	
 	/**웨딩홀 검색 페이지*/
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.GET)

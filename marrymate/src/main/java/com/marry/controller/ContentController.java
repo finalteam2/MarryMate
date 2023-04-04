@@ -16,7 +16,7 @@ import com.marry.company.model.ContentDAOImple;
 public class ContentController {
 	
 	@Autowired
-	ContentDAOImple contentDao;
+	private ContentDAOImple contentDao;
 	
 	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)
 	public ModelAndView companyContent(
@@ -44,6 +44,12 @@ public class ContentController {
 		return mav;
 	}
 	
+	
+	@RequestMapping(value = "/test.do",method = RequestMethod.POST)
+	public ModelAndView insertReview() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
 	
 	
 	

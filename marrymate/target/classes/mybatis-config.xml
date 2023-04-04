@@ -8,5 +8,6 @@
 		<mapper resource="sqlMap/companySQL.xml"/>
 		<mapper resource="sqlMap/searchSQL.xml"/>
 		<mapper resource="sqlMap/bookSQL.xml"/>
+		<mapper resource="sqlMap/contentSQL.xml"/>
 	</mappers>
 </configuration>

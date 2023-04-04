@@ -11,11 +11,12 @@
 	where
 		cidx = #{cidx}
 		and clevel = 1
+		and blind = 0
 	</select>
 	<select id="selectHall" parameterType="Integer" resultType="com.marry.company.model.HallDTO">
 	select
 		*
-	from
+	from	
 		hall
 	where
 		cidx = #{cidx}
@@ -42,17 +43,4 @@
 	order by
 		iidx asc
 	</select>
-	<select id="selectCidx" parameterType="String" resultType="int">
-		select cidx from company where id=#{id}
-	</select>
-	<insert id="timeInsert" parameterType="com.marry.company.model.Book_TimeDTO">
-		insert into
-			book_time
-		values(
-			book_time_bktime_idx.nextval,
-			#{cidx},
-			#{yoil},
-			#{worktime}
-		)
-	</insert>
 </mapper>
