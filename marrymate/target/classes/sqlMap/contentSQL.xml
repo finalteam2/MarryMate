@@ -43,4 +43,16 @@
 	order by
 		iidx asc
 	</select>
+	<insert id="insertReview" parameterType="com.marry.company.model.ReviewDTO">
+	insert into 
+		review
+	values (
+		review_ridx.nextval,
+		#{cidx},
+		#{midx},
+		#{content},
+		#{star},
+		sysdate
+		)
+	</insert>
 </mapper>

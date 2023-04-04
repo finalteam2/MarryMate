@@ -1,13 +1,13 @@
-package com.marry.like.model;
+package com.marry.company.model;
 
-public class LikeDTO {
+public class Com_LikeDTO {
 	private int lidx;
 	private int midx;
 	private int cidx;
-	public LikeDTO() {
+	public Com_LikeDTO() {
 		super();
 	}
-	public LikeDTO(int lidx, int midx, int cidx) {
+	public Com_LikeDTO(int lidx, int midx, int cidx) {
 		super();
 		this.lidx = lidx;
 		this.midx = midx;
