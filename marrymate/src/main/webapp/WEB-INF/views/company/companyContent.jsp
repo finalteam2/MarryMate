@@ -198,10 +198,18 @@ ${fdto.pay } : pay<br>
 		<label for="1-star" class="star">&#9733;</label>
 	</span>
 
+<c:if test="${empty sessionScope.loginMidx }">
+	<div class="input-group mb-3">
+	  <textarea class="form-control" placeholder="리뷰 작성은 로그인 후 이용 가능합니다" name="content" aria-label="With textarea" rows="4" readonly="readonly"></textarea>
+	  <input class="btn btn-outline-secondary" type="button" id="button-addon2" value="리뷰 작성"/>
+	</div>
+</c:if>
+<c:if test="${not empty sessionScope.loginMidx }">
 	<div class="input-group mb-3">
 	  <textarea class="form-control" placeholder="리뷰 내용을 작성하세요." name="content" aria-label="With textarea" rows="4" required="required"></textarea>
 	  <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="리뷰 작성"/>
 	</div>
+</c:if>
 
 </form>
 
@@ -249,7 +257,44 @@ ${fdto.pay } : pay<br>
     </div>
   </div>
 </div>
+
+
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
+<script>
+</script>
+<div class="fixed-bottom">
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        메뉴 바
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <c:if test="${empty sessionScope.loginMidx }">
+      로그인 후 이용 가능합니다
+      </c:if>
+      <c:if test="${not empty sessionScope.loginMidx }">
+      <form action="com_like.do" method="post">
+      	 <input type="hidden" name="midx" value="${sessionScope.loginMidx }">
+      	 <input type="hidden" name="cidx" value="${dto.cidx }">
+      	 <button id="likebutton" type="submit" class="btn btn-outline-primary">
+      	 <c:if test="${empty ldto }">
+      	 지금즐겨찾기안햇는뎨요
+      	 </c:if>
+      	 <c:if test="${not empty ldto}">
+      	 <input type="hidden" name="lidx" value="${ldto.lidx }">
+      	 ☆즐겨찾기했음☆
+      	 </c:if>
+      	 </button>
+      </form>
+      </c:if>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </body>
 </html>

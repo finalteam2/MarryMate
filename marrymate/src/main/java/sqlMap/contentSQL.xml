@@ -65,4 +65,28 @@
 	order by
 		ridx asc
 	</select>
+	<select id="selectLike" parameterType="com.marry.company.model.Com_LikeDTO" resultType="com.marry.company.model.Com_LikeDTO">
+	select
+		*
+	from
+		com_like
+	where
+		cidx = #{cidx}
+		and midx = #{midx}
+	</select>
+	<insert id="insertLike" parameterType="com.marry.company.model.Com_LikeDTO">
+	insert into 
+		com_like
+	values (
+		com_like_lidx.nextval,
+		#{midx},
+		#{cidx}
+		)
+	</insert>
+	<delete id="deleteLike" parameterType="com.marry.company.model.Com_LikeDTO">
+	delete from
+		com_like
+	where
+		lidx = #{lidx}
+	</delete>
 </mapper>

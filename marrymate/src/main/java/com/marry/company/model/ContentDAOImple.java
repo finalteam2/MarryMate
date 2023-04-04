@@ -47,4 +47,24 @@ public class ContentDAOImple implements ContentDAO {
 		List<ReviewDTO> arr = sqlMap.selectList("selectReview", cidx);
 		return arr;
 	}
+	
+	@Override
+	public Com_LikeDTO selectCom_Like(Com_LikeDTO dto) {
+		Com_LikeDTO result = sqlMap.selectOne("selectLike", dto);
+		return result;
+	}
+
+	@Override
+	public int insertCom_Like(Com_LikeDTO dto) {
+		int result = sqlMap.insert("insertLike", dto);
+		return result;
+	}
+	
+	@Override
+	public int deleteCom_Like(Com_LikeDTO dto) {
+		int result = sqlMap.delete("deleteLike", dto);
+		return result;
+	}
+	
+	
 }
