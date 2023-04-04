@@ -5,6 +5,10 @@
 <head>
 <meta name="charset" content="UTF-8">
 <title>웨딩캘린더</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +19,8 @@
 <meta property="og:description"
 	content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
 <link rel="stylesheet" href="/marrymate/css/calendar.css">
+<link rel="stylesheet" href="/marrymate/css/style.css">
+<script src="/marrymate/js/CommonUI.js"></script>
 <script>
 	(function(config, $, undefined) {
 
@@ -26,6 +32,7 @@
 </script>
 </head>
 <body background="/marrymate/img/background.png">
+<%@include file="../header.jsp" %>
 
 	<div class="contentsArea full" id="goContent">
 
@@ -111,7 +118,7 @@
 		</div>
 
 		<div class="imgFrame">
-			<img class="frame" src="/marrymate/img/imgframe.png" style="width: 100%">
+			<img class="frame" src="/marrymate/img/frame.png" style="width: 100%">
 		</div>
 
 		<div class="contestList">
@@ -664,6 +671,6 @@
 			</ul>
 		</div>
 	</section>
-
+<%@include file="../footer.jsp" %>
 </body>
 </html>
