@@ -68,7 +68,7 @@
 	}
 	.iBox {
 		width: 600px;
-		height: 625px;
+		height: 300px;
 		margin: 50px auto;
 		padding-left: 100px;
 		line-height: 45px;
@@ -169,37 +169,113 @@
 		text-align: center;
 	}
 </style>
-<script type="text/javascript" src="js/jusoSelector.js"></script>
+<script>
+function addFileInput() {
+	  var fileInputs = document.getElementById("file-inputs");
+	  if (fileInputs.children.length < 5) {
+	    var newInput = document.createElement("input");
+	    newInput.setAttribute("type", "file");
+	    newInput.setAttribute("name", "img" + (fileInputs.children.length + 1));
+
+	    var deleteButton = document.createElement("button");
+	    deleteButton.setAttribute("type", "button");
+	    deleteButton.setAttribute("onclick", "deleteFileInput(this.parentNode)");
+	    deleteButton.textContent = "삭제";
+
+	    var wrapper = document.createElement("div");
+	    wrapper.appendChild(newInput);
+	    wrapper.appendChild(deleteButton);
+
+	    fileInputs.appendChild(wrapper);
+	  }
+	}
+
+	function deleteFileInput(inputWrapper) {
+	  inputWrapper.remove();
+	}
+</script>
+
 </head>
 <body>
 	<section>
 		<article>
 			<h2>회원가입</h2>
-			<form name="hallInfo" action="hallInfo.do" method="post">
 			<div class="box">
-				<div class="iBox">
-					<h3>이용시간</h3>
-					<div>
-						<input type="checkbox" name="yoil1" value="월">월
-						<input type="checkbox" name="yoil2" value="화">화
-						<input type="checkbox" name="yoil3" value="수">수
-						<input type="checkbox" name="yoil4" value="목">목
-						<input type="checkbox" name="yoil5" value="금">금
-						<input type="checkbox" name="yoil6" value="토">토
-						<input type="checkbox" name="yoil7" value="일">일
+				<form name="hallInfo" action="hallInfo.do" method="post">
+					<div class="iBox">
+						<h3>이용시간</h3>
+						<div>
+							<input type="checkbox" name="yoil1" value="월">월
+							<input type="checkbox" name="yoil2" value="화">화
+							<input type="checkbox" name="yoil3" value="수">수
+							<input type="checkbox" name="yoil4" value="목">목
+							<input type="checkbox" name="yoil5" value="금">금
+							<input type="checkbox" name="yoil6" value="토">토
+							<input type="checkbox" name="yoil7" value="일">일
+						</div>
+						<div>
+							<input type="hidden" name="cidx" value="${sessionScope.cidx}">
+							<input type="time" name="worktime" placeholder="오전/오후 00:00(24시간 형식으로 입력)">
+							<input type="submit" value="추가하기">
+						</div>
 					</div>
+					<div id="jBox">
+						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
+					</div>
+				</form>
+				<form name="food" action="food.do" method="post">
+				<div class="iBox">
+					<h2>식사 추가</h2>
 					<div>
-						<input type="text" name="cidx" value="${cidx}">
-						<input type="text" name="worktime" placeholder="오전/오후 00:00(24시간 형식으로 입력)">
-						<input type="submit" value="추가하기">
+						<input type="hidden" name="cidx" value="${sessionScope.cidx}">
+						<input type="hidden" name="type" value="0">
+						<div class="hClear">메뉴</div>
+							<input type="text" name="name"><br>
+						<div class="hTagBox">가격</div>
+							<input type="text" name="pay"><br>
 					</div>
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
 				</div>
+				</form>
+				<form name="hall" action="hall.do" method="post">
+					<div class="iBox">
+						<h2>홀 등록</h2>
+						<input type="hidden" name="cidx" value="69">
+						<div class="hClear">홀명칭</div>
+							<input type="text" name="name"><br>
+						<div class="hTagBox">예식시간</div>
+							<input type="text" name="time"><br>
+						<div class="hClear">홀사용료</div>
+							<input type="text" name="pay"><br>
+						<div class="hTagBox">보증인원</div>
+							<input type="text" name="guest_num"><br>
+						<div class="hClear">좌석수</div>
+							<input type="text" name="seat_num">
+					</div>	
+					<div id="jBox">
+						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
+					</div>
+				</form>
+				<form name="img" action="img.do" method="post" enctype="multipart/form-data">
+					<div class="iBox">
+						<h2>이미지 등록</h2>
+						<input type="hidden" name="cidx" value="69">
+						<div id="file-inputs">
+							<input type="file" name="img1">
+						</div>
+						<button type="button" onclick="addFileInput()">파일 추가</button>
+					</div>	
+					<div id="jBox">
+						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
+					</div>
+				</form>
 			</div>
-			</form>
 		</article>
 	</section>
 </body>

@@ -34,4 +34,19 @@ public class MemberDAOImple implements MemberDAO {
 		return sqlMap.selectOne("getNick", id);
 	}
 	
+	@Override
+	public String getName(String id) {
+		return sqlMap.selectOne("getName", id);
+	}
+	
+	@Override
+	public String getMarryDate(String id) {
+		return sqlMap.selectOne("getMarryDate", id);
+	}
+	
+	@Override
+	public String getPname(String id) {
+		return sqlMap.selectOne("getPname", id);
+	}
+	
 }

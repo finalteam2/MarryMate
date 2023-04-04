@@ -35,7 +35,7 @@
 		    		0,
 		    	</otherwise>
 		    </choose>
-		    #{img, jdbcType=VARCHAR},
+		    '/marrymate/img/logo.png',
 		    TO_DATE(#{marrydate},'YYYY-MM-DD'),
 		    #{pname}
 		)
@@ -51,6 +51,30 @@
 	<select id="getNick" parameterType="String" resultType="String">
 		select
 			nick
+		from
+			member
+		where
+			id=#{id}
+	</select>
+	<select id="getName" parameterType="String" resultType="String">
+		select
+			name
+		from
+			member
+		where
+			id=#{id}
+	</select>
+	<select id="getMarryDate" parameterType="String" resultType="String">
+		select
+			marrydate
+		from
+			member
+		where
+			id=#{id}
+	</select>
+	<select id="getPname" parameterType="String" resultType="String">
+		select
+			pname
 		from
 			member
 		where

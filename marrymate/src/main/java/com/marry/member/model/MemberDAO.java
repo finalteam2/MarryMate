@@ -8,4 +8,10 @@ public interface MemberDAO {
 	
 	public String getNick(String id);
 	
+	public String getName(String id);
+	
+	public String getMarryDate(String id);
+	
+	public String getPname(String id);
+	
 }

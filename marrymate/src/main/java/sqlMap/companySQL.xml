@@ -32,45 +32,6 @@
 	    #{img}
 	)
 	</insert>
-	<select id="companySelectOne" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
-	select
-		*
-	from
-		company
-	where
-		cidx = #{cidx}
-		and clevel = 1
-	</select>
-	<select id="selectHall" parameterType="Integer" resultType="com.marry.company.model.HallDTO">
-	select
-		*
-	from
-		hall
-	where
-		cidx = #{cidx}
-	order by
-		hidx asc
-	</select>
-	<select id="selectFood" parameterType="Integer" resultType="com.marry.company.model.FoodDTO">
-	select
-		*
-	from
-		food
-	where
-		cidx = #{cidx}
-	order by
-		fidx asc
-	</select>
-	<select id="selectImg" parameterType="Integer" resultType="com.marry.company.model.Com_ImgDTO">
-	select
-		*
-	from
-		com_img
-	where
-		cidx = #{cidx}
-	order by
-		iidx asc
-	</select>
 	<select id="selectCidx" parameterType="String" resultType="int">
 		select cidx from company where id=#{id}
 	</select>
@@ -82,6 +43,40 @@
 			#{cidx},
 			#{yoil},
 			#{worktime}
+		)
+	</insert>
+	<insert id="foodInsert" parameterType="com.marry.company.model.FoodDTO">
+		insert into
+			food
+		values(
+			food_fidx.nextval,
+			#{cidx},
+			#{type},
+			#{name},
+			#{pay}
+		)
+	</insert>
+	<insert id="hallInsert" parameterType="com.marry.company.model.HallDTO">
+		insert into
+			hall
+		values(
+			hall_hidx.nextval,
+			#{cidx},
+			#{name},
+			#{time},
+			#{pay},
+			#{guest_num},
+			#{seat_num}
+		)
+	</insert>
+	<insert id="imgInsert" parameterType="Map">
+		insert into
+			com_img
+		values(
+			com_img_iidx.nextval,
+			#{cidx},
+			0,
+			#{img}
 		)
 	</insert>
 </mapper>

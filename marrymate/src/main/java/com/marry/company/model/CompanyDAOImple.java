@@ -1,6 +1,8 @@
 package com.marry.company.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -29,29 +31,24 @@ public class CompanyDAOImple implements CompanyDAO {
 		int count=sqlMap.insert("timeInsert", dto);
 		return count;
 	}
-
+	
 	@Override
-	public CompanyDTO companySelectOne(int cidx) {
-		CompanyDTO dto = sqlMap.selectOne("companySelectOne", cidx);
-		return dto;
+	public int foodInsert(FoodDTO dto) {
+		int count=sqlMap.insert("foodInsert", dto);
+		return count;
 	}
 	
 	@Override
-	public List<HallDTO> selectHall(int cidx) {
-		List<HallDTO> arr = sqlMap.selectList("selectHall", cidx);
-		return arr;
+	public int hallInsert(HallDTO dto) {
+		return sqlMap.insert("hallInsert", dto);
 	}
 	
 	@Override
-	public List<FoodDTO> selectFood(int cidx) {
-		List<FoodDTO> arr = sqlMap.selectList("selectFood", cidx);
-		return arr;
-	}
-	
-	@Override
-	public List<Com_ImgDTO> selectCom_Img(int cidx) {
-		List<Com_ImgDTO> arr = sqlMap.selectList("selectImg", cidx);
-		return arr;
+	public int imgInsert(String cidx, String img) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("cidx", cidx);
+		map.put("img", img);
+		return sqlMap.insert("imgInsert", map);
 	}
 	
 }

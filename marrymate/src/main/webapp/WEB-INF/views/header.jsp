@@ -79,7 +79,7 @@
 				<div><a href="login.do">로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
 			</c:if>
 			<c:if test="${!empty sessionScope.loginId}">
-				<div>${sessionScope.loginName} 접속중 | <a href="logout.do">로그아웃</a></div>
+				<div>${sessionScope.loginNick} 접속중 | <a href="logout.do">로그아웃</a></div>
 			</c:if>
 			<a href="memberJoin.do">회원가입</a>
 			<a href="companyJoin.do">기업 회원가입</a>

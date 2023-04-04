@@ -56,9 +56,16 @@ public class MemberController {
 			return mav;
 		} else {
 			String nick=memberDao.getNick(id);
+			String name=memberDao.getName(id);
+			String marrydate=memberDao.getMarryDate(id);
+			String pname=memberDao.getPname(id);
+			
 			
 			session.setAttribute("loginId", id);
-			session.setAttribute("loginName", nick);
+			session.setAttribute("loginNick", nick);
+			session.setAttribute("loginName", name);
+			session.setAttribute("loginMD", marrydate);
+			session.setAttribute("loginPname", pname);
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("msg", dto.getName()+"님 즐거운 하루 되세요~!");
