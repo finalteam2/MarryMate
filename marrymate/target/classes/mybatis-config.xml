@@ -7,5 +7,6 @@
 		<mapper resource="sqlMap/memberSQL.xml"/>
 		<mapper resource="sqlMap/companySQL.xml"/>
 		<mapper resource="sqlMap/searchSQL.xml"/>
+		<mapper resource="sqlMap/bookSQL.xml"/>
 	</mappers>
 </configuration>

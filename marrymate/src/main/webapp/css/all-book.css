@@ -227,7 +227,10 @@ video{
 	color:#4e4e4e;
 	width:50%;
 	margin-left:30px;
-	font-size:27px;
+	font-size:29px;
+}
+.alt_text{
+	border:1px solid red;
 }
 .category{
 	color:#4e4e4e;
@@ -235,11 +238,54 @@ video{
 	margin:24px auto;
 }
 .list_table{
-	width:86%;
-	margin:20px auto;
-	border:1px solid black;
-	border-spacing:0px;
-	padding:8px;
+	width:93.5%;
+	margin:11px auto;
+	border-radius:5px;
+	border:1px solid rgba(0, 0, 0, 0.175);
+	padding:8px 20px;
+	background-color:#f8f7f9;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+}
+.list_table .company_img{
+	width:79%;
+	height:130px;
+	border-radius:6px;
+	border:1px solid rgba(0, 0, 0, 0.175);
+	object-fit: cover;
+}
+.list_table .bk_cname{
+	font-size:19px;
+	font-weight:bold;
+	color:#3a3a3a;
+}
+.list_table .bk_sido{
+	font-size:16px;
+}
+.list_table .bk_pay{
+	font-size:17px;
+	font-weight:bold;
+	color:#494949;
+}
+.list_table .add_button{
+	background-color:#de2e5f;
+	border:1px solid #de2e5f;
+	border-radius:0.4rem;
+	color:#fff;
+	width: 4rem;
+    height: 2rem;
+    font-size: 1rem;
+	cursor:pointer;
+	font-family: 'SUIT-Regular';
+	background-image:url(/marrymate/img/right-arrow.png);
+	background-repeat:no-repeat;
+	background-position:93% center;
+	text-align:left;
+	padding-left:8px;
+}
+.list_table .add_button:hover{
+	background:#e24b75;
+	transition: all 0.32s;
+	padding-left:17px;
 }
 .cate_menubox{
 	width:94%;

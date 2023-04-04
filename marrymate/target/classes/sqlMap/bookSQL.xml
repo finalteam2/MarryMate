@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marry.book">
+	<select id="firstList" resultType="com.marry.company.model.CompanyDTO">
+		select
+			*
+		from
+			company
+		where
+			kind='스튜디오'
+		order by
+			cname asc
+	</select>
+	<select id="cateList" parameterType="String" resultType="com.marry.company.model.CompanyDTO">
+		select
+			*
+		from
+			company
+		where
+			kind=#{filterCate}
+		order by
+			cname asc
+	</select>
+	<select id="orderList" parameterType="com.marry.book.model.FilterDTO" resultType="com.marry.company.model.CompanyDTO">
+		select
+			*
+		from
+			company
+		where
+			kind=#{filterCate}
+		order by
+			<if test="filterOrder=='이름순'">
+	 			cname asc, cidx desc
+	 		</if>
+	 		<if test="filterOrder=='조회순'">
+	 			watch desc, cidx desc
+	 		</if>
+	 		<if test="filterOrder=='낮은가격순'">
+	 			pay asc, cidx desc
+	 		</if>
+	 		<if test="filterOrder=='높은가격순'">
+	 			pay desc, cidx desc
+	 		</if>
+	</select>
+</mapper>

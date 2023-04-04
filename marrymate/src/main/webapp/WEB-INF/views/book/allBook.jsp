@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="js/jquery.nice-select.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script type="text/javascript" src="js/all-book.js"></script>
 <script>
 $( function() {
 	$( "#datepicker" ).datepicker({
@@ -53,35 +56,35 @@ $( function() {
 				<p class="title">통 합 예 약</p>
 				<p class="sub_title">홀을 제외한 모든 예약을 한번에 하세요!</p>
 			</div>
-		</div>
+		</div>                  
 	</article>
 	<article>
 		<div class="top_box">
 			<div class="search_box">
-				<input class="search_input" type="text" name="search_text" placeholder="지역, 업체명을 입력해주세요.">
+				<input class="search_input" type="text" name="filterText" placeholder="지역, 업체명을 입력해주세요.">
 			</div>
 			<div class="calendar_box">
-				<input type="text" id="datepicker" placeholder="이용날짜를 선택해주세요." readonly>
+				<input type="text" id="datepicker" name="filterDate" placeholder="이용날짜를 선택해주세요." readonly>
 			</div>
 			<div class="local_box">
-				<select name="local_select">
+				<select name="filterSido">
 					<option data-display="지역을 선택해주세요." value="" disabled selected>시/도</option>
-					<option value="1">서울</option>
-					<option value="2">경기</option>
-					<option value="3">인천</option>
-					<option value="4">부산</option>
-					<option value="5">대전</option>
-					<option value="6">대구</option>
-					<option value="7">광주</option>
-					<option value="8">울산</option>
-					<option value="9">제주</option>
-					<option value="10">강원</option>
-					<option value="11">경북</option>
-					<option value="12">경남</option>
-					<option value="13">전북</option>
-					<option value="14">전남</option>
-					<option value="15">충북</option>
-					<option value="16">충남</option>
+					<option value="서울">서울</option>
+					<option value="경기">경기</option>
+					<option value="인천">인천</option>
+					<option value="부산">부산</option>
+					<option value="대전">대전</option>
+					<option value="대구">대구</option>
+					<option value="광주">광주</option>
+					<option value="울산">울산</option>
+					<option value="제주">제주</option>
+					<option value="강원">강원</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="전북">전북</option>
+					<option value="전남">전남</option>
+					<option value="충북">충북</option>
+					<option value="충남">충남</option>
 				</select>
 				<script>
 					$(document).ready(function(){
@@ -98,7 +101,7 @@ $( function() {
 						<div id="slider-range"></div>
 					</div>
 					<div class="price_rangebox">
-						<input type="text" id="amount" readonly>
+						<input type="text" name="flterPrice" id="amount" readonly>
 					</div>
 				</div>
 			</div>
@@ -109,71 +112,51 @@ $( function() {
 	</article>
 	<article>
 		<div class="order_box">
-			<input class="order_radio" name="order_name" id="order_one" type="radio" value="1" checked>
-			<label class="order_tab" for="order_one">이름순</label>
-			<input class="order_radio" name="order_name" id="order_two" type="radio" value="2">
-			<label class="order_tab" for="order_two">조회순</label>
-			<input class="order_radio" name="order_name" id="order_three" type="radio" value="3">
-			<label class="order_tab" for="order_three">낮은가격순</label>
-			<input class="order_radio" name="order_name" id="order_four" type="radio" value="4">
-			<label class="order_tab" for="order_four">높은가격순</label>
+			<input class="order_radio" name="filterOrder" id="order_one" type="radio" value="이름순" checked>
+			<label class="order_tab" for="order_one" onclick="orderList(1)">이름순</label>
+			<input class="order_radio" name="filterOrder" id="order_two" type="radio" value="조회순">
+			<label class="order_tab" for="order_two" onclick="orderList(2)">조회순</label>
+			<input class="order_radio" name="filterOrder" id="order_three" type="radio" value="낮은가격순">
+			<label class="order_tab" for="order_three" onclick="orderList(3)">낮은가격순</label>
+			<input class="order_radio" name="filterOrder" id="order_four" type="radio" value="높은가격순">
+			<label class="order_tab" for="order_four" onclick="orderList(4)">높은가격순</label>
 		</div>
 		<div class="left_box">
 			<div>
-				<h2 class="cate_title">카테고리명</h2>
-				<hr style="width:93%;border:1px solid #6c6c6c;">
-				<table class="list_table">
-					<tr>
-						<td rowspan="3" width="28%" align="center">
-						이미지
-						</td>
-						<td width="36%">이름</td>
-						<td width="36%" align="right">날짜선택</td>
-					</tr>
-					<tr>
-						<td>지역<br><br><br></td>
-						<td align="right">시간선택<br><br><br></td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td align="right">버튼</td>
-					</tr>
-				</table>
-				<table class="list_table">
-					<tr>
-						<td rowspan="3" width="28%" align="center">
-						이미지
-						</td>
-						<td width="36%">이름</td>
-						<td width="36%" align="right">날짜선택</td>
-					</tr>
-					<tr>
-						<td>지역<br><br><br></td>
-						<td align="right">시간선택<br><br><br></td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td align="right">버튼</td>
-					</tr>
-				</table>
-				<table class="list_table">
-					<tr>
-						<td rowspan="3" width="28%" align="center">
-						이미지
-						</td>
-						<td width="36%">이름</td>
-						<td width="36%" align="right">날짜선택</td>
-					</tr>
-					<tr>
-						<td>지역<br><br><br></td>
-						<td align="right">시간선택<br><br><br></td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td align="right">버튼</td>
-					</tr>
-				</table>
-				<hr style="width:93%;border:1px solid #6c6c6c;">
+			<h2 class="cate_title">
+			선택한 카테고리명
+			</h2>
+			<hr style="width:93%;border:1px solid #6c6c6c;">	
+			<c:if test="${empty arr }">
+				<h3 class="alt_text">예약가능한 업체가 없습니다.</h3>
+			</c:if>
+			
+			<div id="list_container">
+				<c:forEach var="dto" items="${arr }">
+					<table class="list_table">
+						<tr>
+							<td rowspan="3" width="28%" align="center">
+							<img class="company_img" src="/marrymate/img/company/${dto.img }" alt="업체사진">
+							</td>
+							<td class="bk_cname" width="52%">${dto.cname }</td>
+							<td width="20%" align="right">날짜선택</td>
+						</tr>
+						<tr>
+							<td class="bk_sido">
+							${dto.sido } - ${dto.sigungu }
+							<br><br><br>
+							</td>
+							<td align="right">시간선택<br><br><br></td>
+						</tr>
+						<tr>
+							<td class="bk_pay">가격 : ${dto.pay } 원</td>
+							<td align="right"><input class="add_button" type="button" value="담기"></td>
+						</tr>
+					</table>
+				</c:forEach>
+			</div>
+			
+			<hr style="width:93%;border:1px solid #6c6c6c;">
 			</div>
 		</div>
 	</article>
@@ -183,20 +166,22 @@ $( function() {
 				<h2 class="category">카 테 고 리</h2>
 			</div>
 			<div class="cate_menubox">
-				<input class="cate_radio" name="cate_name" id="cate_one" type="radio" value="1" checked>
-				<label class="cate_menu" for="cate_one">스튜디오</label>
-				<input class="cate_radio" name="cate_name" id="cate_two" type="radio" value="2">
-				<label class="cate_menu" for="cate_two">드레스</label>
-				<input class="cate_radio" name="cate_name" id="cate_three" type="radio" value="3">
-				<label class="cate_menu" for="cate_three">헤어메이크업</label>
-				<input class="cate_radio" name="cate_name" id="cate_four" type="radio" value="4">
-				<label class="cate_menu" for="cate_four">스냅DVD</label>
-				<input class="cate_radio" name="cate_name" id="cate_five" type="radio" value="5">
-				<label class="cate_menu" for="cate_five">주례</label>
-				<input class="cate_radio" name="cate_name" id="cate_six" type="radio" value="6">
-				<label class="cate_menu" for="cate_six">사회</label>
-				<input class="cate_radio" name="cate_name" id="cate_seven" type="radio" value="7">
-				<label class="cate_menu" for="cate_seven">축가</label>
+				<form name="cateFm">
+					<input class="cate_radio" name="filterCate" id="cate_one" type="radio" value="스튜디오" checked>
+					<label class="cate_menu" for="cate_one" onclick="cateList(1)">스튜디오</label>
+					<input class="cate_radio" name="filterCate" id="cate_two" type="radio" value="드레스">
+					<label class="cate_menu" for="cate_two" onclick="cateList(2)">드레스</label>
+					<input class="cate_radio" name="filterCate" id="cate_three" type="radio" value="헤어메이크업">
+					<label class="cate_menu" for="cate_three" onclick="cateList(3)">헤어메이크업</label>
+					<input class="cate_radio" name="filterCate" id="cate_four" type="radio" value="스냅DVD">
+					<label class="cate_menu" for="cate_four" onclick="cateList(4)">스냅DVD</label>
+					<input class="cate_radio" name="filterCate" id="cate_five" type="radio" value="주례">
+					<label class="cate_menu" for="cate_five" onclick="cateList(5)">주례</label>
+					<input class="cate_radio" name="filterCate" id="cate_six" type="radio" value="사회">
+					<label class="cate_menu" for="cate_six" onclick="cateList(6)">사회</label>
+					<input class="cate_radio" name="filterCate" id="cate_seven" type="radio" value="축가">
+					<label class="cate_menu" for="cate_seven" onclick="cateList(7)">축가</label>
+				</form>
 			</div>
 			<div class="allClear_box">
 				<input class="allClear_button" type="button" value="전체삭제">
