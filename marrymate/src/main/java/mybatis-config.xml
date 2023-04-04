@@ -10,5 +10,6 @@
 		<mapper resource="sqlMap/bookSQL.xml"/>
 		<mapper resource="sqlMap/contentSQL.xml"/>
 		<mapper resource="sqlMap/mypageSQL.xml"/>
+		<mapper resource="sqlMap/calendarSQL.xml"/>
 	</mappers>
 </configuration>

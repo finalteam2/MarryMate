@@ -42,5 +42,7 @@
 	<bean id="mypageDao" class="com.marry.mypage.model.MypageDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
-	
+	<bean id="calendarDao" class="com.marry.calender.model.CalendarDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
 </beans>
