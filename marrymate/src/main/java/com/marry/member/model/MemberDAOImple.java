@@ -30,6 +30,11 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	@Override
+	public int getMidx(String id) {
+		return sqlMap.selectOne("getMidx", id);
+	}
+	
+	@Override
 	public String getNick(String id) {
 		return sqlMap.selectOne("getNick", id);
 	}

@@ -55,12 +55,13 @@ public class MemberController {
 			mav.setViewName("member/memberMsg");
 			return mav;
 		} else {
+			int midx=memberDao.getMidx(id);
 			String nick=memberDao.getNick(id);
 			String name=memberDao.getName(id);
 			String marrydate=memberDao.getMarryDate(id);
 			String pname=memberDao.getPname(id);
 			
-			
+			session.setAttribute("loginMidx", midx);
 			session.setAttribute("loginId", id);
 			session.setAttribute("loginNick", nick);
 			session.setAttribute("loginName", name);
