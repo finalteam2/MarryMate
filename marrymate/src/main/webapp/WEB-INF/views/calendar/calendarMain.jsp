@@ -80,11 +80,12 @@
 									</c:if>
 									<span>이름 (닉네임)</span>님 결혼예정일
 								</div>
-								<div class="weddingDay">
-									<span class="date"><c:if test="${!empty sessionScope.loginId}">
-	<div>${sessionScope.loginMD} </div></c:if> </span> 
-									<span class="d-day" id="dDay"> D-000 </span><br>
-	
+									
+									<div class="weddingDay">
+									    <span class="date"><c:if test="${!empty sessionScope.loginId}">
+									        <div>${sessionScope.loginMD} </div></c:if> </span> 
+									     <span class="d-day" id="dDay">D-</span><br></div>
+									
 									<span class="date">2023년 10월 14일</span> <span class="d-day" id="dDay">
 										D-205 </span>
 

@@ -10,6 +10,7 @@ public interface CalendarDAO {
 	public int coupleInfo(int cal_idx);
 	public int englishName(int cal_idx);
 	public int calendarShow(int cidx);
+	public int date();
 	public Date dateInfo();
 	public List<BookDTO> bookInfo(int cidx);
 	public List<BookDTO> moneyBook(int cidx);
