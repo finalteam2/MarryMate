@@ -12,7 +12,6 @@
 <link href="/marrymate/css/searchStyle.css" rel="stylesheet">
 <script src="/marrymate/js/httpRequest.js"></script>
 <script src="js/searchHall.js"></script>
-<script type="text/javascript" src="js/jusoSelector.js"></script>
 </head>
 <body onload="searchHall('1')">
 <%@include file="../header.jsp" %>
