@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,45 +101,46 @@
 		 <input type="button" class="btn" value="회원탈퇴" onclick="memberDel()">
 		 </div>
 		</div>
+		<form name="infoUpdate" action="update.do">
 		<div id="mBox">
 				<div class="hTagBox">이름</div>
-				<input type="text" name="name" value="" readonly required><br>
+				<input type="text" name="name" value="${userInfo.name }" readonly required><br>
 				<div class="hTagBox">아이디</div>
-				<input type="text" name="id" value="" readonly required><br>
+				<input type="text" name="id" value="${userInfo.id }" readonly required><br>
 				<div class="hTagBox">생년월일</div>
-				<input type="date" name="birthday" value="" readonly required><br>
+				<input type="date" name="birthday" value="${userInfo.birthday }" readonly required><br>
 				<div class="hTagBox">성별</div>
-				<span><input type="radio" name="gender" value="male" checked>남
-				<input type="radio" name="gender" value="female">여</span><br>
+				<span>
+				<c:choose>
+				<c:when test="${userInfo.gender eq '남' }">
+				<input type="radio" name="gender" value="male" checked>남
+				<input type="radio" name="gender" value="female">여
+				</c:when>
+				<c:otherwise>
+				<input type="radio" name="gender" value="male">남
+				<input type="radio" name="gender" value="female" checked>여
+				</c:otherwise>
+				</c:choose>
+				 	</span><br>
 				<div class="hTagBox">닉네임</div>
-				<input type="text" name="nick" value="" required><br>
+				<input type="text" name="nick" value="${userInfo.nick }" required><br>
 				<div class="hTagBox">비밀번호</div>
-				<input type="password" name="pwd" value="" required><br>
+				<input type="password" name="pwd" value="${userInfo.pwd }" required><br>
 				<div class="hTagBox">전화번호</div>
-				<input type="text" name="tel" value="" required><br>
+				<input type="text" name="tel" value="${userInfo.tel }" required><br>
 				<div class="hTagBox">주소</div>
-				<input type="text" name="juso" value="" required><br>			
+				<input type="text" name="juso" value="${userInfo.juso }" required><br>			
 				<div class="hTagBox">상세주소</div>
-				<input type="text" name="sjuso" value="" required><br>
+				<input type="text" name="sjuso" value="${userInfo.sjuso }" required><br>
 				<div class="hTagBox">예식날짜</div>
-				<input type="date" name="marrydate" value="" required><br>
+				<input type="date" name="marrydate" value="${userInfo.marrydate }"><br>
 				<div class="hTagBox">배우자</div>
-				<input type="text" name="pname" value="" required><br><br>
-				<div class="bBox"><input type="button" class="btn" value="수정" onclick="memberUpdate()">
+				<input type="text" name="pname" value="${userInfo.pname }"><br><br>
+				<div class="bBox"><input type="submit" class="btn" value="수정">
 				<input type="reset" class="btn" value="취소"></div>
 		</div>
+		</form>
 	</article>
 </section>
 </body>
-<script>
-function changeImg(){
-	
-}
-function memberDel(){
-	
-}
-function memberUpdate(){
-	
-}
-</script>
 </html>
