@@ -1,19 +1,44 @@
 package com.marry.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.marry.company.model.*;
+import com.marry.member.model.*;
+import com.marry.mypage.model.MypageDAO;
 
 @Controller
 public class MypageController {
 
+	@Autowired
+	private MypageDAO mypageDao;
+	
 	@RequestMapping("/myInfo_m.do")
-	public String myInfo_m() {
-		return "/mypage/myInfo_m";
+	public ModelAndView myInfo_m() {
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = new MemberDTO();
+		dto.setId("asd");
+		mav.addObject("userInfo", mypageDao.myInfoSelect(dto));
+		mav.setViewName("/mypage/myInfo_m");
+		return mav;
 	}
 	
 	@RequestMapping("/myInfo_c.do")
-	public String myInfo_c() {
-		return "/mypage/myInfo_c";
+	public ModelAndView myInfo_c() {
+		ModelAndView mav=new ModelAndView();
+		CompanyDTO dto_c= new CompanyDTO();
+		HallDTO dto_h=new HallDTO();
+		FoodDTO dto_f=new FoodDTO();
+		dto_c.setId("hall1");
+		dto_h.setCidx(1);
+		dto_f.setCidx(1);
+		mav.addObject("comInfo", mypageDao.comInfoSelect(dto_c));
+		mav.addObject("hallInfo", mypageDao.hallInfoSelect(dto_h));
+		mav.addObject("foodInfo", mypageDao.foodInfoSelect(dto_f));
+		mav.setViewName("/mypage/myInfo_c");
+		return mav;
 	}
 	
 	@RequestMapping("/reserve.do")

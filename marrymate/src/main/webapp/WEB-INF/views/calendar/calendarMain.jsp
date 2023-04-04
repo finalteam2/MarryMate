@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="charset" content="UTF-8">
 <title>웨딩캘린더</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -18,7 +26,9 @@
 <meta property="og:image" content="/marrymate/img/logo1.png">
 <meta property="og:description"
 	content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
+<script src="/marrymate/js/CalendarJS.js"></script>
 <link rel="stylesheet" href="/marrymate/css/calendar.css">
+<link rel="stylesheet" href="/marrymate/css/style.css">
 <script>
 	(function(config, $, undefined) {
 
@@ -27,55 +37,61 @@
 		config.login = "/member/login";
 
 	})(window.config = window.config || {}, jQuery);
+	
+	  // Get the loginMD date from the JSP variable
+	  const loginMD = "${loginMD}";
+
+	  // Convert the loginMD date to YYYY년 MM월 DD일 format
+	  const loginDate = new Date(loginMD);
+	  const loginDateFormatted = loginDate.getFullYear() + "년 " + (loginDate.getMonth() + 1) + "월 " + loginDate.getDate() + "일";
+
+	  // Set the loginMD text in the HTML elements
+	  const loginMDElements = document.querySelectorAll('.weddingDay > div');
+	  loginMDElements.forEach(element => {
+	    element.innerText = loginDateFormatted;
+	  });
 </script>
+
 </head>
 <body background="/marrymate/img/background.png">
-
+	<%@include file="../header.jsp"%>
 	<div class="contentsArea full" id="goContent">
 
 		<div class="contentsTop">
 
-		<img id="Caltopmem" src="/marrymate/img/caltopmem.png" style="width: 100%">
+			<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
+				style="width: 100%">
 			<!--checkListTopWrap : s-->
 			<div class="checkListTopWrap">
 				<div class="inner">
-					
+
+
 					<div class="profileWrap">
 						<!--profileArea : s-->
 						<div class="profileBox">
-							<div class="imgArea"></div>
+							<div class="imgArea">
+								<c:if test="${!empty sessionScope.loginId}">
+	<div>${sessionScope.img} </div></c:if>
+							</div>
 							<div class="txtArea">
 								<div class="nameArea">
-									<span>신은지 (는징는징)</span>님 결혼예정일
+									<c:if test="${!empty sessionScope.loginId}">
+	<div><strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick}) 님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일</div>
+									</c:if>
+									<span>이름 (닉네임)</span>님 결혼예정일
 								</div>
 								<div class="weddingDay">
-
-									<span class="date">2023년 10월 14일</span> <span class="d-day">
+									<span class="date"><c:if test="${!empty sessionScope.loginId}">
+	<div>${sessionScope.loginMD} </div></c:if> </span> 
+									<span class="d-day" id="dDay"> D-000 </span><br>
+	
+									<span class="date">2023년 10월 14일</span> <span class="d-day" id="dDay">
 										D-205 </span>
 
 								</div>
 							</div>
 						</div>
 						<!--profileArea : e-->
-						<!--tagBox : s-->
-						<div class="tagConBox">
-							<div class="tagListWrap">
-								<div class="tagList">
-									<div class="inner">
-
-
-										<a href="javascript:void(0);" class="tagBox moveScroll"
-											data-target="chkid" data-chkid="4">#스/드/메</a>
-
-									</div>
-								</div>
-								<a href="javascript:void(0);" class="btnOpenClose"><span>태그열기</span></a>
-							</div>
-							<div class="txt">준비는 되셨나요?</div>
-							<div class="bottomTxt">
-								※ 체크리스트 사용 선택은 <br class="onlyM"> 최소 5개를 유지해주셔야 합니다.
-							</div>
-						</div>
 					</div>
 				</div>
 
@@ -115,7 +131,8 @@
 		</div>
 
 		<div class="imgFrame">
-			<img class="frame" src="/marrymate/img/imgframe.png" style="width: 100%">
+			<img class="frame" src="/marrymate/img/imgframe.png"
+				style="width: 100%">
 		</div>
 
 		<div class="contestList">
@@ -139,13 +156,6 @@
 									class="txt">사용</span></a>
 								<div class="bottom" data-chkst="02">
 
-
-
-
-
-
-
-
 									<div class="stat quickly">급해요</div>
 									<div class="checkBox">
 										<input type="checkbox" id="checklist0"> <label
@@ -154,8 +164,6 @@
 								</div>
 							</div>
 						</li>
-
-
 
 						<li>
 							<div class="item on" data-seqno="1">
@@ -167,12 +175,6 @@
 								<div class="bottom" data-chkst="02">
 
 
-
-
-
-
-
-
 									<div class="stat quickly">급해요</div>
 									<div class="checkBox">
 										<input type="checkbox" id="checklist1"> <label
@@ -181,8 +183,6 @@
 								</div>
 							</div>
 						</li>
-
-
 
 						<li>
 							<div class="item " data-seqno="1">
@@ -510,7 +510,7 @@
 													"",
 													function(result) {
 														if (result.status == 0) {
-												
+
 															MP05.redrawScreen();
 
 														} else {
@@ -552,7 +552,7 @@
 															"",
 															function(result) {
 																if (result.status == 0) {
-													
+
 																	MP05
 																			.redrawScreen();
 
@@ -592,7 +592,7 @@
 														"",
 														function(result) {
 															if (result.status == 0) {
-								
+
 																MP05
 																		.redrawScreen();
 
@@ -621,7 +621,7 @@
 														"",
 														function(result) {
 															if (result.status == 0) {
-																
+
 																MP05
 																		.redrawScreen();
 
@@ -668,6 +668,6 @@
 			</ul>
 		</div>
 	</section>
-
+	<%@include file="../footer.jsp"%>
 </body>
 </html>
