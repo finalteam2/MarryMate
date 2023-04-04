@@ -91,7 +91,7 @@
 		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="analytics.do">Analytics</a></th>
+		<th><a href="traffic.do">Analytics</a></th>
 	</tr>
 </table>
 <table width="1100" align="center">
@@ -144,7 +144,13 @@
 			<td>${dto.bookdate}</td>
 			<td>${dto.bk_date_time}</td>
 			<td>${dto.total_money}</td>
-			<td>${dto.bk_state}</td>
+			<td>
+			<c:if test="${dto.bk_state==0}">결제전</c:if>
+			<c:if test="${dto.bk_state==1}">예약대기</c:if>
+			<c:if test="${dto.bk_state==2}">예약확정</c:if>
+			<c:if test="${dto.bk_state==3}">잔금 결제완료</c:if>
+			<c:if test="${dto.bk_state==4}">예약취소</c:if>
+			</td>
 		</tr>
 	</c:forEach>
 	</tbody>

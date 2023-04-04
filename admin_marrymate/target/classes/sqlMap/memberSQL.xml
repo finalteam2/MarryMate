@@ -12,4 +12,24 @@
   		select * from member where midx=#{midx}
   </select>
   
+  <select id="traffic5_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(sysdate,'yy/mm')
+  </select>
+  
+  <select id="traffic4_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm')
+  </select>
+  
+  <select id="traffic3_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm')
+  </select>
+  
+  <select id="traffic2_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm')
+  </select>
+  
+  <select id="traffic1_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
+  </select>
+  
   </mapper>

@@ -48,4 +48,8 @@
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="paymentDao" class="com.admin.book.model.PaymentDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>

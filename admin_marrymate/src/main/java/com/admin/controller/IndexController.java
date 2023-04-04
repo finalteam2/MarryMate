@@ -68,9 +68,4 @@ public class IndexController {
 		return "cs_a";
 	}
 	
-	@RequestMapping("/analytics.do")
-	public String analytics() {
-		return "analytics";
-	}
-
 }
