@@ -15,9 +15,6 @@
 <meta property="og:description"
 	content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
 <link rel="stylesheet" href="/marrymate/css/calendar.css">
-
-
-
 <script>
 	(function(config, $, undefined) {
 
@@ -28,24 +25,17 @@
 	})(window.config = window.config || {}, jQuery);
 </script>
 </head>
-
-
-<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0"
-	class="mainTopBannerType myWeddingType mobile titleType"
-	data-new-gr-c-s-check-loaded="14.1101.0" data-gr-ext-installed="">
-
-
+<body background="/marrymate/img/background.png">
 
 	<div class="contentsArea full" id="goContent">
 
 		<div class="contentsTop">
 
-
-
+		<img id="Caltopmem" src="/marrymate/img/caltopmem.png" style="width: 100%">
 			<!--checkListTopWrap : s-->
 			<div class="checkListTopWrap">
 				<div class="inner">
-					<h2 class="sTit01 onlyPc">체크 리스트</h2>
+					
 					<div class="profileWrap">
 						<!--profileArea : s-->
 						<div class="profileBox">
