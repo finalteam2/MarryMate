@@ -1,5 +1,6 @@
 package com.admin.member.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,6 +20,18 @@ public class MemberDAOImple implements MemberDAO {
 	public List<MemberDTO> memberList() {
 		List<MemberDTO> dtos=sqlMap.selectList("memberList");
 		return dtos;
+	}
+	
+	@Override
+	public List<Integer> traffic() {
+		List<Integer> traffic=new ArrayList<Integer>();
+		
+		traffic.add(sqlMap.selectOne("traffic1_m"));
+		traffic.add(sqlMap.selectOne("traffic2_m"));
+		traffic.add(sqlMap.selectOne("traffic3_m"));
+		traffic.add(sqlMap.selectOne("traffic4_m"));
+		traffic.add(sqlMap.selectOne("traffic5_m"));
+		return traffic;
 	}
 
 }

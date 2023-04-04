@@ -1,5 +1,6 @@
 package com.admin.point.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,6 +21,7 @@ public class PointDAOImple implements PointDAO {
 		List<PointListDTO> dtos=sqlMap.selectList("pointMinusList");
 		return dtos;
 	}
+	
 	@Override
 	public List<PointListDTO> pointPlusList() {
 		List<PointListDTO> dtos=sqlMap.selectList("pointPlusList");

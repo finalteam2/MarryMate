@@ -16,4 +16,24 @@
   		select * from company where cidx=#{cidx}
   </select>
   
+  <select id="traffic5_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(sysdate,'yy/mm')
+  </select>
+  
+  <select id="traffic4_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm')
+  </select>
+  
+  <select id="traffic3_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm')
+  </select>
+  
+  <select id="traffic2_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm')
+  </select>
+  
+  <select id="traffic1_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
+  </select>
+  
   </mapper>

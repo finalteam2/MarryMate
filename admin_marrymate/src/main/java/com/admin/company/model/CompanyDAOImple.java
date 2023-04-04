@@ -1,5 +1,6 @@
 package com.admin.company.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,6 +32,18 @@ public class CompanyDAOImple implements CompanyDAO {
 	public CompanyDTO companyInfo(int cidx) {
 		CompanyDTO dto=sqlMap.selectOne("companyInfo",cidx);
 		return dto;
+	}
+	
+	@Override
+	public List<Integer> traffic() {
+		List<Integer> traffic=new ArrayList<Integer>();
+		
+		traffic.add(sqlMap.selectOne("traffic1_c"));
+		traffic.add(sqlMap.selectOne("traffic2_c"));
+		traffic.add(sqlMap.selectOne("traffic3_c"));
+		traffic.add(sqlMap.selectOne("traffic4_c"));
+		traffic.add(sqlMap.selectOne("traffic5_c"));
+		return traffic;
 	}
 
 }

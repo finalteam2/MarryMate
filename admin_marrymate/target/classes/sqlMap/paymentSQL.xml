@@ -8,4 +8,44 @@
   		select * from payment where pay_idx=#{pay_idx}
   </select>
   
+  <select id="amount5_s" resultType="Integer">
+  		select sum(pay_point)+sum(pay_money) from payment where to_char(pay_date,'yy/mm')=to_char(sysdate,'yy/mm')
+  </select>
+  
+  <select id="amount4_s" resultType="Integer">
+  		select sum(pay_point)+sum(pay_money) from payment where to_char(pay_date,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm')
+  </select>
+  
+  <select id="amount3_s" resultType="Integer">
+  		select sum(pay_point)+sum(pay_money) from payment where to_char(pay_date,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm')
+  </select>
+  
+  <select id="amount2_s" resultType="Integer">
+  		select sum(pay_point)+sum(pay_money) from payment where to_char(pay_date,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm')
+  </select>
+  
+  <select id="amount1_s" resultType="Integer">
+  		select sum(pay_point)+sum(pay_money) from payment where to_char(pay_date,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
+  </select>
+  
+  <select id="amount5_b" resultType="Integer">
+  		select nvl((sum(payment.pay_point)+sum(payment.pay_money))*0.9+sum(payment.pay_point)-(sum(refund.rf_money)+sum(refund.rf_point)),0) from payment,refund where to_char(payment.pay_date,'yy/mm')=to_char(sysdate,'yy/mm') and to_char(refund.rf_date,'yy/mm')=to_char(sysdate,'yy/mm')
+  </select>
+  
+  <select id="amount4_b" resultType="Integer">
+  		select nvl((sum(payment.pay_point)+sum(payment.pay_money))*0.9+sum(payment.pay_point)-(sum(refund.rf_money)+sum(refund.rf_point)),0) from payment,refund where to_char(payment.pay_date,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm') and to_char(refund.rf_date,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm')
+  </select>
+  
+  <select id="amount3_b" resultType="Integer">
+  		select nvl((sum(payment.pay_point)+sum(payment.pay_money))*0.9+sum(payment.pay_point)-(sum(refund.rf_money)+sum(refund.rf_point)),0) from payment,refund where to_char(payment.pay_date,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm') and to_char(refund.rf_date,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm')
+  </select>
+  
+  <select id="amount2_b" resultType="Integer">
+  		select nvl((sum(payment.pay_point)+sum(payment.pay_money))*0.9+sum(payment.pay_point)-(sum(refund.rf_money)+sum(refund.rf_point)),0) from payment,refund where to_char(payment.pay_date,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm') and to_char(refund.rf_date,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm')
+  </select>
+  
+  <select id="amount1_b" resultType="Integer">
+  		select nvl((sum(payment.pay_point)+sum(payment.pay_money))*0.9+sum(payment.pay_point)-(sum(refund.rf_money)+sum(refund.rf_point)),0) from payment,refund where to_char(payment.pay_date,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm') and to_char(refund.rf_date,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
+  </select>
+  
   </mapper>
