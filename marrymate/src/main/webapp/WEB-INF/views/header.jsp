@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- NAVIGATION -->
 <a name="header"><header id="header"></a>
@@ -13,6 +14,12 @@
 						<div><a href="community.do">커뮤니티</a></div>
 					</div>
 					<div>
+						<c:if test="${empty sessionScope.loginId}">
+							<div><a href="login.do">로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
+						</c:if>
+						<c:if test="${!empty sessionScope.loginId}">
+							<div>${sessionScope.loginName} 접속중 | <a href="logout.do">로그아웃</a></div>
+						</c:if>
 						<a href="memberJoin.do">회원가입</a>
 						<a href="companyJoin.do">기업 회원가입</a>
 					</div>

@@ -1,5 +1,8 @@
 package com.marry.member.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberDAOImple implements MemberDAO {
@@ -19,10 +22,16 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	@Override
-	public int checkId(String id) {
-
-		return sqlMap.selectOne("com.marry.member.model.MemberDTO.checkId", id);
-		
+	public MemberDTO memberLogin(String id, String pwd) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pwd", pwd);
+		return sqlMap.selectOne("memberLogin", map);
+	}
+	
+	@Override
+	public String getNick(String id) {
+		return sqlMap.selectOne("getNick", id);
 	}
 	
 }

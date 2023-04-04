@@ -40,7 +40,20 @@
 		    #{pname}
 		)
 	</insert>
-	<select id="checkId" parameterType="String" resultType="int">
-        select count(*) from member where id=#{id}
-    </select>
+	<select id="memberLogin" parameterType="Map" resultType="com.marry.member.model.MemberDTO">
+		select
+			*
+		from
+			member
+		where
+			id=#{id} and pwd=#{pwd}
+	</select>
+	<select id="getNick" parameterType="String" resultType="String">
+		select
+			nick
+		from
+			member
+		where
+			id=#{id}
+	</select>
 </mapper>

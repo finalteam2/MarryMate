@@ -1,12 +1,12 @@
 package com.marry.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.member.model.MemberDAO;
@@ -37,10 +37,42 @@ public class MemberController {
 
 	}
 	
-	@PostMapping("/checkId.do")
-    @ResponseBody
-    public int checkId(@RequestBody String id) {
-		return memberDao.checkId(id);
-    }
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String loginForm() {
+		return "member/login";
+	}
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest req, HttpSession session) {
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("pwd");
+		MemberDTO dto = memberDao.memberLogin(id, pwd);
+		
+		if (dto == null) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("msg", "로그인 정보가 올바르지 않습니다.");
+			mav.addObject("url", "login.do");
+			mav.setViewName("member/memberMsg");
+			return mav;
+		} else {
+			String nick=memberDao.getNick(id);
+			
+			session.setAttribute("loginId", id);
+			session.setAttribute("loginName", nick);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("msg", dto.getName()+"님 즐거운 하루 되세요~!");
+			mav.addObject("url", "index.do");
+			mav.setViewName("member/memberMsg");
+			return mav;
+		}
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		session.invalidate();
+		return "redirect:/index.do";
+	}
 	  
 }
