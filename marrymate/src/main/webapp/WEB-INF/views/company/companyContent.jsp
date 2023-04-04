@@ -128,7 +128,7 @@ textarea {
 		이메일 : ${dto.email }
 		</span>
 	</div>
-	<div class="map_area" id="map">
+	<div class="map_area" id="map_area">
 		<div class="contain_map" id="map" style="width: 395px; height: 265px; overflow: hidden;"></div>
 		<input type="hidden" id="cname" value="${dto.cname }">
 	</div>

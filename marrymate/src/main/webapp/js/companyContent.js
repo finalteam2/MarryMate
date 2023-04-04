@@ -1,7 +1,4 @@
-var mapContainer;
-var map;
-var infowindow;
-var ps;
+
 
 //모달팝업
 const myModal = document.getElementById('myModal')
@@ -10,6 +7,13 @@ const myInput = document.getElementById('myInput')
 myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus()
 })
+
+
+//지도정보
+var mapContainer;
+var map;
+var infowindow;
+var ps;
 
 function mapLoad(){
 	mapContainer = document.getElementById('map'), // 지도를 표시할 div 
