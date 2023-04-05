@@ -112,27 +112,27 @@ setInterval(function() {
 					<!--profileArea : e-->
 				</div>
 			</div>
-			<br><br>
+
 			<!--mainMyweddingAnimation : s-->
 			<div class="mainMyweddingAnimationScroll">
 				<div class="infoArea">
 					<ul>
 						<li><a href="javascript:void(0);" class="moveScroll"
 							data-target="chkst" data-chkst="01"> <span class="tit">
-									PAST<br class="onlyM">
+									-PAST-<br class="onlyM">
 							</span> <span class="number"> <strong id="checkListChkCnt">
 
-										2 </strong> <span class="txt">건</span>
+										12 </strong> <span class="txt">건</span>
 							</span>
 						</a></li>
 						<li><a href="javascript:void(0);" class="moveScroll"
-							data-target="chkst" data-chkst="04"> <span class="tit">PRESENT<br
+							data-target="chkst" data-chkst="04"> <span class="tit">-PRESENT-<br
 									class="onlyM"></span> <span class="number"> <strong
 									id="checkListDoingCnt"> 1 </strong> <span class="txt">건</span>
 							</span>
 						</a></li>
 						<li><a href="javascript:void(0);" class="moveScroll"
-							data-target="chkst" data-chkst="03"> <span class="tit">FUTURE<br
+							data-target="chkst" data-chkst="03"> <span class="tit">-FUTURE-<br
 									class="onlyM"></span> <span class="number"> <strong
 									id="checkListReservCnt"> 12 </strong> <span class="txt">건</span>
 							</span>

@@ -36,7 +36,7 @@ video {
 	height: 650px;
 	position: relative;
 	overflow: hidden;
-
+	text-align: center;
 }
 
 .mainMyweddingAnimationScroll .infoArea {
@@ -44,35 +44,37 @@ video {
 	left: 0;
 	right: 0;
 	width: 1000px;
-	margin: 0 auto;
+	margin: 8% auto;
 	top: 0;
-	z-index: 1
+	z-index: 1;
+	list-style-type: none;
 }
 
 .mainMyweddingAnimationScroll .infoArea li {
 	float: left;
 	width: 33.3333%;
 	text-align: center;
+	list-style-type: none;
 }
 
 .mainMyweddingAnimationScroll .infoArea li a {
 	display: inline-block;
-	text-align: left;
-	color: #6b5d55;
+	text-align: center;
+	color: #400080;
 }
 
 .mainMyweddingAnimationScroll .infoArea li a .tit {
-	font-size: 18px;
-	color: #6b5d55;
+	font-size: 42px;
+	color: #400080;
 	display: block;
 }
 
 .mainMyweddingAnimationScroll .infoArea li a .number {
 	display: inline-block;
-	margin-top: 18px;
+	margin-top: 29px;
 	overflow: hidden;
-
-	padding-right: 42px;
+	color: #8f4dff;
+	text-align: center;
 }
 
 .mainMyweddingAnimationScroll .infoArea li a .number strong {
@@ -81,13 +83,15 @@ video {
 	float: left;
 	font-weight: normal;
 	font-family: 'SUIT-Regular';
+	margin: 14px 0 0 5px;
 }
 
 .mainMyweddingAnimationScroll .infoArea li a .number .txt {
 	float: left;
-	font-size: 18px;
-	color: #6b5d55;
+	font-size: 30px;
+	color: #400080;
 	margin: 29px 0 0 5px;
+	float: left;
 }
 
 .mainMyweddingAnimationScroll .goal {
@@ -99,8 +103,8 @@ video {
 	bottom: 47px;
 	z-index: 1;
 	text-align: center;
-	font-size: 18px;
-	color: #665956;
+	font-size: 25px;
+	color: #ef3aa7;
 }
 
 .mainMyweddingAnimationScroll .goal span {
@@ -219,7 +223,7 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .nameArea {
-	font-size: 44px;
+	font-size: 45px;
 	color: #5706b0;
 	border-bottom: 1px solid #e4d9cf;
 	padding-bottom: 13px;
