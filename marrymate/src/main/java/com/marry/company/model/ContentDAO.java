@@ -13,4 +13,5 @@ public interface ContentDAO {
 	public Com_LikeDTO selectCom_Like(Com_LikeDTO dto);
 	public int insertCom_Like(Com_LikeDTO dto);
 	public int deleteCom_Like(Com_LikeDTO dto);
+	public int insertCom_cs(Com_CsDTO dto);
 }

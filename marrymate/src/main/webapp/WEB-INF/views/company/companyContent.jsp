@@ -200,8 +200,8 @@ ${fdto.pay } : pay<br>
 
 <c:if test="${empty sessionScope.loginMidx }">
 	<div class="input-group mb-3">
-	  <textarea class="form-control" placeholder="리뷰 작성은 로그인 후 이용 가능합니다" name="content" aria-label="With textarea" rows="4" readonly="readonly"></textarea>
-	  <input class="btn btn-outline-secondary" type="button" id="button-addon2" value="리뷰 작성"/>
+	  <textarea class="form-control" placeholder="로그인 후 이용 가능합니다" name="content" aria-label="With textarea" rows="4" disabled></textarea>
+	  <input class="btn btn-outline-secondary" type="button" id="button-addon2" value="리뷰 작성" disabled/>
 	</div>
 </c:if>
 <c:if test="${not empty sessionScope.loginMidx }">
@@ -221,9 +221,13 @@ ${fdto.pay } : pay<br>
 <hr>
 <h3>문의</h3>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-문의하기
-</button>
+<c:if test="${not empty sessionScope.loginMidx }">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">문의하기</button>
+</c:if>
+<c:if test="${empty sessionScope.loginMidx }">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled>문의하기</button>
+로그인 후 이용 가능합니다
+</c:if>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -239,9 +243,12 @@ ${fdto.pay } : pay<br>
             <label for="recipient-name" class="col-form-label">문의업체</label>
             <input type="text" class="form-control" id="recipient-name" value="${dto.cname }" readonly="readonly">
             <input type="hidden" name="cidx" value="${dto.cidx }">
+            <input type="hidden" name="midx" value="${sessionScope.loginMidx }">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">제목</label>
+		    <input class="form-check-input" name="is_private" type="checkbox" id="inlineCheckbox1" value="1">
+		    <label class="form-check-label" for="inlineCheckbox1">숨김</label>
             <input type="text" class="form-control" id="message-text1" name="subject" placeholder="제목을 작성하세요." required="required">
           </div>
           <div class="mb-3">
@@ -250,8 +257,8 @@ ${fdto.pay } : pay<br>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
         <button type="submit" class="btn btn-primary">문의하기</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
       </form>
     </div>
@@ -280,15 +287,17 @@ ${fdto.pay } : pay<br>
       <form action="com_like.do" method="post">
       	 <input type="hidden" name="midx" value="${sessionScope.loginMidx }">
       	 <input type="hidden" name="cidx" value="${dto.cidx }">
-      	 <button id="likebutton" type="submit" class="btn btn-outline-primary">
       	 <c:if test="${empty ldto }">
+      	 <button type="submit" class="btn btn-outline-primary">
       	 지금즐겨찾기안햇는뎨요
+      	 </button>
       	 </c:if>
       	 <c:if test="${not empty ldto}">
       	 <input type="hidden" name="lidx" value="${ldto.lidx }">
+      	 <button type="submit" class="btn btn-outline-primary">
       	 ☆즐겨찾기했음☆
-      	 </c:if>
       	 </button>
+      	 </c:if>
       </form>
       </c:if>
       </div>

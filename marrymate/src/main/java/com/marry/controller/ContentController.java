@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marry.company.model.Com_CsDTO;
 import com.marry.company.model.Com_LikeDTO;
 import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.ContentDAOImple;
@@ -101,7 +102,7 @@ public class ContentController {
 		return mav;
 	}
 	
-	@RequestMapping("com_like.do")
+	@RequestMapping("/com_like.do")
 	public ModelAndView com_like(
 			Com_LikeDTO dto
 			) {
@@ -130,5 +131,27 @@ public class ContentController {
 		mav.setViewName("company/companyMsg");
 		return mav;
 	}
+	
+	@RequestMapping("/com_cs.do")
+	public ModelAndView comcs(Com_CsDTO dto,
+			@RequestParam(value="is_private", defaultValue = "0")int is_private
+			) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("is_paivate : "+is_private);
+		dto.setIs_private(is_private);
+		int cnt = contentDao.insertCom_cs(dto);
+		String msg = "";
+		if (cnt > 0) {
+			msg = "문의 등록 성공";
+		}else {
+			msg = "문의 등록 실패";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("url", "/marrymate/companyContent.do?cidx="+dto.getCidx());
+		mav.setViewName("company/companyMsg");
+		return mav;
+	}
+	
+	
 	
 }

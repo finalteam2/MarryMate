@@ -66,5 +66,11 @@ public class ContentDAOImple implements ContentDAO {
 		return result;
 	}
 	
+	@Override
+	public int insertCom_cs(Com_CsDTO dto) {
+		int result = sqlMap.insert("insertcomcs", dto);
+		return result;
+	}
+
 	
 }

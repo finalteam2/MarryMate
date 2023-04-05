@@ -89,4 +89,19 @@
 	where
 		lidx = #{lidx}
 	</delete>
+	<insert id="insertcomcs" parameterType="com.marry.company.model.Com_CsDTO">
+	insert into
+		com_cs
+	values (
+		com_cs_ccsidx.nextval,
+		#{cidx},
+		#{midx},
+		#{subject},
+		#{content},
+		sysdate,
+		null,
+		null,
+		#{is_private}
+		)
+	</insert>
 </mapper>
