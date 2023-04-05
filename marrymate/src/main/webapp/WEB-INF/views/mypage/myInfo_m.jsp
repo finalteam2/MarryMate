@@ -94,7 +94,7 @@
 		<hr>
 		<div id="fBox">
 		 <div class="iBox">
-		 <img src="/marrymate/img/user.png" class="profile">
+		 <img src="/marrymate/img/member/user.png" class="profile">
 		 </div><br>
 		 <div>
 		 <input type="button" class="btn" value="사진변경" onclick="changeImg()"><br><br>

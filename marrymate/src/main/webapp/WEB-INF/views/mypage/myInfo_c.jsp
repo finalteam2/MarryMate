@@ -33,20 +33,29 @@
 		font-size: 10px;
 	}
 	#ht{
-	width: 90%;
-	margin: auto;
-	border-collapse: collapse;
-	text-align: center;	
+		width: 90%;
+		margin: auto;
+		border-collapse: collapse;
+		text-align: center;	
 	}
 	#ht thead{
-	border-bottom: 20px solid white;
-	background-color: #c797eb;
+		border-bottom: 20px solid white;
+		background-color: #c797eb;
 	}
 	#ht thead th{
-	color: white;
-	font-family: 'SUIT-Regular';
-	font-size: 14px;
-	font-weight: bold;
+		color: white;
+		font-family: 'SUIT-Regular';
+		font-size: 14px;
+		font-weight: bold;
+	}
+	#ht tbody input[type=text] {
+		width: 80px;
+		height: 30px;
+		font-size: 17px;
+		font-family: 'GmarketSansMedium';
+		border: 1px solid black;
+		border-radius: 12px;
+		text-align: center;
 	}
 	.hTagBox {
 		width: 120px;
@@ -123,7 +132,7 @@
 				<input type="file" name="aimg" accept="image/*"><br>
 				<hr>
 				<br>
-				<c:if test="${comInfo.kind eq '예식장' }">
+				<c:if test="${comInfo.kind == '예식장' }">
 				<div class="hTagBox">홀</div><br>
 				<table id="ht">
 					<thead>
@@ -137,10 +146,10 @@
 					<tbody>
 					<c:forEach var="hall" items="${hallInfo }">
 						<tr>
-							<td><input type="text" value="${hall.name }"></td>
-							<td><input type="text" value="${hall.time }"></td>
-							<td><input type="text" value="${hall.pay }"></td>
-							<td><input type="text" value="${hall.guest_num }"></td>
+							<td><input type="text" value="${hall.name }" required> 홀</td>
+							<td><input type="text" value="${hall.time }" required> 시간</td>
+							<td><input type="text" value="${hall.pay }" required> 원</td>
+							<td><input type="text" value="${hall.guest_num }" required> 명</td>
 						</tr>
 					</c:forEach>	
 					</tbody>
@@ -152,27 +161,25 @@
 					<thead>
 						<tr>
 							<th>식사종류</th>
-							<th>식사메뉴</th>
 							<th>식사가격</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><input type="text" value="${foodInfo.get(0).name }" required></td>
-							<td><input type="text" value="${foodInfo.get(0).type }"></td>
-							<td><input type="text" value="${foodInfo.get(0).pay }" required></td>
+							<td><input type="text" value="${foodInfo.get(0).pay }" required>원</td>
 						</tr>
 					</tbody>
 				</table>
 				</c:if>
-				<c:if test="${comInfo.kind ne '예식장' }">
+				<c:if test="${comInfo.kind != '예식장' }">
 				<div class="hTagBox">요금</div><br>
 				<table id="ht">
 					<thead>
 						<tr>
 							<th>금액</th>
 						</tr>
-						<td><input type="text" value="${comInfo.pay }"></td>
+						<td><input type="text" value="${comInfo.pay }" required>원</td>
 					</thead>
 				</table>	
 				</c:if>

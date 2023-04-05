@@ -37,6 +37,7 @@
     			,curl
     			,intro
     			,img
+    			,kind
     	from company
     	where id=#{id}		 		
     </select>
