@@ -46,7 +46,32 @@ function searchHall(page){
 	param += '&page=' + page;
 	sendRequest('searchHall.do',param,'POST',searchResult);
 }
+
+
 function searchResult(){
+	if(XHR.readyState==2){
+		if(XHR.status==200){
+			//컨테이너 비우기
+			var containerNode = document.getElementById('container1');
+			var childNodes = containerNode.childNodes;
+			for (let i = childNodes.length - 1; i >= 0; i--) {
+			  var childNode = childNodes[i];
+			  containerNode.removeChild(childNode);
+			}
+			//아이템 만들기
+			var newItemNode = document.createElement('div');
+				newItemNode.setAttribute('class','spinner-border m-5');
+				newItemNode.setAttribute('role','status');
+			
+				var newSpanNode = document.createElement('span');
+				newSpanNode.setAttribute('class','visually-hidden');
+				var newSpanTextNode = document.createTextNode('Loading...');
+				newSpanNode.appendChild(newSpanTextNode);
+			
+			newItemNode.appendChild(newSpanNode);
+			containerNode.appendChild(newItemNode);
+		}
+	}
 	if(XHR.readyState==4){
 		if(XHR.status==200){
 			var data = XHR.responseText;

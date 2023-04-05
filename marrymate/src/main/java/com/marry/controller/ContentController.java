@@ -138,7 +138,7 @@ public class ContentController {
 			) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("is_paivate : "+is_private);
-		dto.setIs_private(is_private);
+		//dto.setIs_private(is_private);
 		int cnt = contentDao.insertCom_cs(dto);
 		String msg = "";
 		if (cnt > 0) {

@@ -248,7 +248,7 @@ ${fdto.pay } : pay<br>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">제목</label>
 		    <input class="form-check-input" name="is_private" type="checkbox" id="inlineCheckbox1" value="1">
-		    <label class="form-check-label" for="inlineCheckbox1">숨김</label>
+		    <label class="form-check-label" for="inlineCheckbox1">비밀글</label>
             <input type="text" class="form-control" id="message-text1" name="subject" placeholder="제목을 작성하세요." required="required">
           </div>
           <div class="mb-3">
@@ -279,28 +279,43 @@ ${fdto.pay } : pay<br>
       </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-      <c:if test="${empty sessionScope.loginMidx }">
-      로그인 후 이용 가능합니다
-      </c:if>
-      <c:if test="${not empty sessionScope.loginMidx }">
-      <form action="com_like.do" method="post">
-      	 <input type="hidden" name="midx" value="${sessionScope.loginMidx }">
-      	 <input type="hidden" name="cidx" value="${dto.cidx }">
-      	 <c:if test="${empty ldto }">
-      	 <button type="submit" class="btn btn-outline-primary">
-      	 지금즐겨찾기안햇는뎨요
-      	 </button>
-      	 </c:if>
-      	 <c:if test="${not empty ldto}">
-      	 <input type="hidden" name="lidx" value="${ldto.lidx }">
-      	 <button type="submit" class="btn btn-outline-primary">
-      	 ☆즐겨찾기했음☆
-      	 </button>
-      	 </c:if>
-      </form>
-      </c:if>
-      </div>
+	<div class="accordion-body">
+	<c:if test="${empty sessionScope.loginMidx }">
+		로그인 후 이용 가능합니다
+	</c:if>
+	<c:if test="${not empty sessionScope.loginMidx }">
+	<form action="com_like.do" method="post">
+		<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
+		<input type="hidden" name="cidx" value="${dto.cidx }">
+	<c:if test="${empty ldto }">
+		<button type="submit" class="btn btn-outline-primary">
+		☆즐겨찾기☆
+		</button>
+	</c:if>
+	<c:if test="${not empty ldto}">
+		<input type="hidden" name="lidx" value="${ldto.lidx }">
+		<button type="submit" class="btn btn-primary">
+		☆즐겨찾기☆
+		</button>
+	</c:if>
+	</form>
+	<form action="" method="get">
+		<input type="button" name="midx" value="${sessionScope.loginMidx }">
+		<input type="button" name="cidx" value="${dto.cidx }">
+		<select name="hidx">
+			<c:forEach var="hdto" items="${harr }">
+			<option value="${hdto.hidx }">${hdto.name }(대관료 : ${hdto.pay } 최소보증인원 : ${hdto.guest_num })</option>
+			</c:forEach>
+		</select>
+		<select name="fidx">
+			<c:forEach var="fdto" items="${farr }">
+			<option value="${fdto.fidx }">${fdto.name }(식대 : ${fdto.pay })</option>
+			</c:forEach>
+		</select>
+		cidx, hidx, booktime, book을 조회해서 선택 String bk_time;
+	</form>
+	</c:if>
+	</div>
     </div>
   </div>
 </div>
