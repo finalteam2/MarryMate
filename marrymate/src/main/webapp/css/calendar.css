@@ -186,7 +186,7 @@ video {
 }
 
 .checkListTopWrap>.inner {
-	padding: 600px 0 40px 750px;
+	padding: 30% 0 0% 40%;
 	margin: 0 auto;
 	width: 100%;
 }
@@ -219,7 +219,7 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .nameArea {
-	font-size: 40px;
+	font-size: 44px;
 	color: #5706b0;
 	border-bottom: 1px solid #e4d9cf;
 	padding-bottom: 13px;
@@ -232,7 +232,7 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .weddingDay {
-	font-size: 38px;
+	font-size: 40px;
 	font-family: 'SUIT-Regular';
 
 }
@@ -244,10 +244,11 @@ video {
 	line-height: 50px;
 	display: inline-block;
 	vertical-align: top;
+	margin-top: 12px;
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .d-day {
-	font-size: 36px;
+	font-size: 42px;
 	font-family: 'SUIT-Regular';
 	color: #ef3aa7;
 	letter-spacing: -0.05em;
@@ -255,7 +256,7 @@ video {
 	display: inline-block;
 	vertical-align: top;
 	margin-left: 15px;
-	margin-top: -2px;
+	margin-top: 12px;
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea #count {
