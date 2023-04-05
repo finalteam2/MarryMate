@@ -3,24 +3,19 @@ package com.marry.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.StringJoiner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.Book_TimeDTO;
-import com.marry.company.model.Com_ImgDTO;
 import com.marry.company.model.CompanyDAO;
 import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.FoodDTO;
@@ -41,10 +36,10 @@ public class CompanyController {
 	public ModelAndView join_cp(CompanyDTO dto, MultipartHttpServletRequest req) {
 		
 		MultipartFile afile=req.getFile("afile");
-		copyFile(afile);
+		copyFile_cnum(afile);
 		
 		MultipartFile aimg=req.getFile("aimg");
-		copyFile2(aimg);
+		copyFile_best(aimg);
 		
 		String cfile=afile.getOriginalFilename();
 		String img=aimg.getOriginalFilename();
@@ -58,7 +53,7 @@ public class CompanyController {
 		String msg=result>0?"정보를 입력해주세요":"가입 실패";
 		
 		String id=req.getParameter("id");
-		int cidx=companyDao.selectCidx(id);
+		int cidx=companyDao.getCidx(id);
 		
 		HttpSession session=req.getSession();
 		session.setAttribute("cidx", cidx);
@@ -70,19 +65,18 @@ public class CompanyController {
 			mav.addObject("cidx", cidx);
 			mav.setViewName("company/hallInfo");
 		}else {
-			mav.addObject("url", "index.do");
+			mav.addObject("url", "companyInfo.do");
 			mav.setViewName("company/companyMsg");
 		}
 		return mav;
 		
 	}
 	
-	//사업자 파일 업로드 메서드
-	public void copyFile(MultipartFile upload) {
+	public void copyFile_images(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File("C:/student_java/cfileUpload/"+upload.getOriginalFilename());
+			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/com_img/"+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -94,13 +88,27 @@ public class CompanyController {
 		
 	}
 	
+	public void copyFile_best(MultipartFile upload) {
+			
+		try {
+			byte bytes[]=upload.getBytes();
+			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/com_best/"+upload.getOriginalFilename());
+				
+			FileOutputStream fos=new FileOutputStream(outfile);
+			fos.write(bytes);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
 	
-	//기업 이미지 업로드 메서드
-	public void copyFile2(MultipartFile upload) {
+	public void copyFile_cnum(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File("C:/student_java/imgUpload/"+upload.getOriginalFilename());
+			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/cnumFile/"+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -115,6 +123,11 @@ public class CompanyController {
 	@RequestMapping(value = "/hallInfo.do", method = RequestMethod.GET)
 	public String hallInfoForm() {
 		return "company/hallInfo";
+	}
+	
+	@RequestMapping(value = "/companyInfo.do", method = RequestMethod.GET)
+	public String companyInfoForm() {
+		return "company/companyInfo";
 	}
 	
 	@RequestMapping(value = "/hallInfo.do", method = RequestMethod.POST)
@@ -185,9 +198,6 @@ public class CompanyController {
 			result+=1;
 		}
 		
-		HttpSession session=req.getSession();
-		session.removeAttribute("cidx");
-		
 		String msg=result>0?"작성 완료":"작성 실패";
 		
 		ModelAndView mav=new ModelAndView();
@@ -229,15 +239,21 @@ public class CompanyController {
 	public ModelAndView img(
 			MultipartHttpServletRequest req) {
 		
+		ModelAndView mav=new ModelAndView();
+		
 		int result=0;
+		String fileLoad="C:/student_java/finalproject/marrymate/src/main/webapp/img/com_img/";
 		
 		MultipartFile Inimg1=req.getFile("img1");
 		if(Inimg1 == null) {
 		    
 		}else {
-			copyFile(Inimg1);
+			copyFile_images(Inimg1);
 			String cidx=req.getParameter("cidx");
-			String img=Inimg1.getOriginalFilename();
+			String img=fileLoad+Inimg1.getOriginalFilename();
+			
+			mav.addObject("imgSrc", img);
+			
 			result+=companyDao.imgInsert(cidx, img);
 		}
 
@@ -245,55 +261,50 @@ public class CompanyController {
 		if (Inimg2 == null) {
 
 		} else {
-			copyFile(Inimg2);
+			copyFile_images(Inimg2);
 			String cidx = req.getParameter("cidx");
-			String img = Inimg2.getOriginalFilename();
+			String img = fileLoad+Inimg2.getOriginalFilename();
 			result += companyDao.imgInsert(cidx, img);
 		}
 		
 		MultipartFile Inimg3=req.getFile("img3");
-		MultipartFile Inimg4=req.getFile("img4");
-		MultipartFile Inimg5=req.getFile("img5");
-		
-		
-		
-		
 		if (Inimg3 == null) {
 		    
 		}else {
-			copyFile(Inimg3);
+			copyFile_images(Inimg3);
 			
 			String cidx=req.getParameter("cidx");
-			String img=Inimg3.getOriginalFilename();
-			
-			result+=companyDao.imgInsert(cidx, img);
-		}
-
-		if (Inimg4 == null) {
-		    
-		}else {
-			copyFile(Inimg4);
-			
-			String cidx=req.getParameter("cidx");
-			String img=Inimg4.getOriginalFilename();
+			String img=fileLoad+Inimg3.getOriginalFilename();
 			
 			result+=companyDao.imgInsert(cidx, img);
 		}
 		
+		MultipartFile Inimg4=req.getFile("img4");
+		if (Inimg4 == null) {
+		    
+		}else {
+			copyFile_images(Inimg4);
+			
+			String cidx=req.getParameter("cidx");
+			String img=fileLoad+Inimg4.getOriginalFilename();
+			
+			result+=companyDao.imgInsert(cidx, img);
+		}
+		
+		MultipartFile Inimg5=req.getFile("img5");
 		if (Inimg5 == null) {
 		    
 		}else {
-			copyFile(Inimg5);
+			copyFile_images(Inimg5);
 			
 			String cidx=req.getParameter("cidx");
-			String img=Inimg5.getOriginalFilename();
+			String img=fileLoad+Inimg5.getOriginalFilename();
 			
 			result+=companyDao.imgInsert(cidx, img);
 		}
 		
 	    String msg=result>0?"파일 등록 완료":"파일 등록 실패";
 		
-		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.addObject("url", "index.do");
 		mav.setViewName("company/companyMsg");

@@ -226,8 +226,6 @@
 						<div id="result"></div>
 					<div class="hTagBox">비밀번호</div>
 						<input type="password" id="pwd" name="pwd" onchange="check_pwd()" placeholder="6자 이상 16자 이하(!,@,#,$,% 포함)"><br>
-					<div class="hTagBox">비밀번호 확인</div>
-						<input type="password" id="pwdCheck" name="Check" onchange="check_pwd()"><br>
 					<div class="hClear">전화번호</div>
 						<input type="text" name="tel" placeholder="010-xxxx-xxxx('-'없이 입력)"><br>
 					<div class="hTagBox">주소</div>

@@ -1,12 +1,10 @@
 package com.marry.company.model;
 
-import java.util.List;
-
 public interface CompanyDAO {
 
 	public int coJoin(CompanyDTO dto);
 	
-	public int selectCidx(String id);
+	public CompanyDTO companyLogin(String id, String pwd);
 	
 	public int timeInsert(Book_TimeDTO dto);
 	
@@ -15,5 +13,7 @@ public interface CompanyDAO {
 	public int hallInsert(HallDTO dto);
 	
 	public int imgInsert(String cidx, String img);
+	
+	public int getCidx(String id);
 
 }

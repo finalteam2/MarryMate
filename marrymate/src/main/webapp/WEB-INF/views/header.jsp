@@ -75,11 +75,14 @@
      <div class="container-fluid">
       <ul class="navbar-nav">
       	<li class="nav-item">
-			<c:if test="${empty sessionScope.loginId}">
-				<div><a href="login.do">로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
+			<c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
+				<div><a href="login.do">로그인</a>&nbsp;or&nbsp;<div><a href="login_com.do">기업 로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
 			</c:if>
 			<c:if test="${!empty sessionScope.loginId}">
 				<div>${sessionScope.loginNick} 접속중 | <a href="logout.do">로그아웃</a></div>
+			</c:if>
+			<c:if test="${!empty sessionScope.com_id}">
+				<div>${sessionScope.com_cname} 접속중 | <a href="logout.do">로그아웃</a></div>
 			</c:if>
 			<a href="memberJoin.do">회원가입</a>
 			<a href="companyJoin.do">기업 회원가입</a>

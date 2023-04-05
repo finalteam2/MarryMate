@@ -32,9 +32,6 @@
 	    #{img}
 	)
 	</insert>
-	<select id="selectCidx" parameterType="String" resultType="int">
-		select cidx from company where id=#{id}
-	</select>
 	<insert id="timeInsert" parameterType="com.marry.company.model.Book_TimeDTO">
 		insert into
 			book_time
@@ -79,4 +76,10 @@
 			#{img}
 		)
 	</insert>
+	<select id="companyLogin" parameterType="Map" resultType="com.marry.company.model.CompanyDTO">
+		select * from company where id=#{id} and pwd=#{pwd}
+	</select>
+	<select id="getCidx" parameterType="String" resultType="int">
+		select cidx from company where id=#{id}
+	</select>
 </mapper>

@@ -48,44 +48,4 @@
 		where
 			id=#{id} and pwd=#{pwd}
 	</select>
-	<select id="getMidx" parameterType="String" resultType="int">
-		select
-			midx
-		from
-			member
-		where
-			id=#{id}
-	</select>
-	<select id="getNick" parameterType="String" resultType="String">
-		select
-			nick
-		from
-			member
-		where
-			id=#{id}
-	</select>
-	<select id="getName" parameterType="String" resultType="String">
-		select
-			name
-		from
-			member
-		where
-			id=#{id}
-	</select>
-	<select id="getMarryDate" parameterType="String" resultType="String">
-		select
-			marrydate
-		from
-			member
-		where
-			id=#{id}
-	</select>
-	<select id="getPname" parameterType="String" resultType="String">
-		select
-			pname
-		from
-			member
-		where
-			id=#{id}
-	</select>
 </mapper>

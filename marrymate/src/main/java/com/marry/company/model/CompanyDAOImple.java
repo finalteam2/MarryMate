@@ -1,7 +1,6 @@
 package com.marry.company.model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,9 +20,15 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
-	public int selectCidx(String id) {
-		int count=sqlMap.selectOne("selectCidx", id);
-		return count;
+	public CompanyDTO companyLogin(String id, String pwd) {
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println(id);
+		System.out.println(pwd);
+		map.put("id", id);
+		map.put("pwd", pwd);
+		CompanyDTO dto= sqlMap.selectOne("companyLogin", map);
+		System.out.println(dto);
+		return dto;
 	}
 	
 	@Override
@@ -49,6 +54,12 @@ public class CompanyDAOImple implements CompanyDAO {
 		map.put("cidx", cidx);
 		map.put("img", img);
 		return sqlMap.insert("imgInsert", map);
+	}
+	
+	@Override
+	public int getCidx(String id) {
+		int count=sqlMap.selectOne("getCidx", id);
+		return count;
 	}
 	
 }
