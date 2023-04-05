@@ -12,5 +12,6 @@
 		<mapper resource="sqlMap/contentSQL.xml"/>
 		<mapper resource="sqlMap/mypageSQL.xml"/>
 		<mapper resource="sqlMap/calendarSQL.xml"/>
+		<mapper resource="sqlMap/admin_csSQL.xml"/>
 	</mappers>
 </configuration>

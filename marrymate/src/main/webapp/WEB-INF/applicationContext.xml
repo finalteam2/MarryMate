@@ -48,4 +48,7 @@
 	<bean id="calendarDao" class="com.marry.calender.model.CalendarDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="admin_csDao" class="com.marry.admin_cs.model.Admin_csDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
 </beans>
