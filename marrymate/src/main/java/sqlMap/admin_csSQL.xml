@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.marry.admin_cs">
+  
+  <select id="admin_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.Admin_csDTO">
+  		select answer from admin_cs where acsidx=#{acsidx}
+  </select>
+  
+  <select id="m_a_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.M_a_csDTO">
+  		select * from m_a_cs where midx=#{midx}
+  </select>
+  
+  <select id="c_a_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.C_a_csDTO">
+  		select * from c_a_cs where cidx=#{cidx}
+  </select>
+  
+  </mapper>
