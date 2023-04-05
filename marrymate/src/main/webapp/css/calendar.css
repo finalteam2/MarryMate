@@ -173,7 +173,8 @@ video {
 	max-width: 1920px;
 	height: 1050px;
 	overflow: hidden;
-	background-size: 1920px 100%;
+	background: url("/marrymate/img/imgframe.png");
+	background-size: cover;
 }
 
 .mainMyweddingAnimation {
@@ -185,49 +186,30 @@ video {
 }
 
 .checkListTopWrap>.inner {
-	padding: 80px 0 40px 0;
+	padding: 600px 0 40px 750px;
 	margin: 0 auto;
-	width: 1400px;
+	width: 100%;
 }
 
 .checkListTopWrap .profileWrap {
-	height: 500px;
-	width: 1400px;
+	height: 100%;
+	width: 100%;
 }
 
 .checkListTopWrap .profileWrap .profileBox {
-	height: 400px;
-	width: 1400px;
-	box-shadow: 0 10px 15px 5px rgba(147, 135, 119, 0.15);
-	float: left;
-	background: #dcdced;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 50px 0 0 70px;
 	overflow: hidden;
-	border-radius: 0 0 0 15px;
+
 }
 
 .checkListTopWrap .profileWrap .profileBox .imgArea {
 	overflow: hidden;
-	border-radius: 135px;
-	border: 3px solid #6666b0;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 300px;
-	height: 300px;
 	position: relative;
-	box-shadow: 0 7px 20px 5px rgba(51, 51, 51, 0.19);
 	float: left;
 }
 
 .checkListTopWrap .profileWrap .profileBox .imgArea img {
 	height: 100%;
 	position: absolute;
-	left: 50%;
-	top: 0;
 	transform: translate(-50%, 0)
 }
 
@@ -237,7 +219,7 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .nameArea {
-	font-size: 35px;
+	font-size: 40px;
 	color: #5706b0;
 	border-bottom: 1px solid #e4d9cf;
 	padding-bottom: 13px;
@@ -252,12 +234,12 @@ video {
 .checkListTopWrap .profileWrap .profileBox .txtArea .weddingDay {
 	font-size: 38px;
 	font-family: 'SUIT-Regular';
-	
+
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .date {
 	color: #7a32f3;
-	font-size: 36px;
+	font-size: 38px;
 	font-family: 'SUIT-Regular';
 	line-height: 50px;
 	display: inline-block;
@@ -265,9 +247,9 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .d-day {
-	font-size: 34px;
+	font-size: 36px;
 	font-family: 'SUIT-Regular';
-	color: #e4458d;
+	color: #ef3aa7;
 	letter-spacing: -0.05em;
 	line-height: 50px;
 	display: inline-block;
@@ -277,9 +259,9 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea #count {
-	font-size: 20px;
+	font-size: 25px;
 	font-family: 'SUIT-Regular';
-	color: #e4458d;
+	color: #b993f9;
 }
 
 .checkListTopWrap .profileWrap .tagConBox {
@@ -310,7 +292,7 @@ video {
 
 .checkListArea {
 	margin: 0 auto;
-	width: 1400px;
+	width: 100%;
 	padding: 53px 0 0 0
 }
 

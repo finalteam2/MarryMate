@@ -40,7 +40,7 @@ setInterval(function() {
   var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
   var sec = Math.ceil((gap % (1000 * 60)) / 1000);
 
-  document.getElementById("count").innerHTML = "D-DAY까지 " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초 남았습니다.";
+  document.getElementById("count").innerHTML = "예식 D-DAY까지 " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초 남았습니다.";
 }, 1000);
  
  
@@ -112,7 +112,7 @@ setInterval(function() {
 					<!--profileArea : e-->
 				</div>
 			</div>
-
+			<br><br>
 			<!--mainMyweddingAnimation : s-->
 			<div class="mainMyweddingAnimationScroll">
 				<div class="infoArea">
@@ -148,10 +148,6 @@ setInterval(function() {
 		</div>
 	</div>
 
-	<div class="imgFrame">
-		<img class="frame" src="/marrymate/img/imgframe.png"
-			style="width: 100%">
-	</div>
 
 	<div class="contestList">
 		<div class="checkListArea">
