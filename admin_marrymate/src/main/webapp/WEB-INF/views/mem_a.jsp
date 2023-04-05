@@ -94,7 +94,7 @@
 		<th><a href="memberList.do">회원관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="analytics.do">Analytics</a></th>
+		<th><a href="traffic.do">Analytics</a></th>
 	</tr>
 </table>
 <table width="1100" align="center">

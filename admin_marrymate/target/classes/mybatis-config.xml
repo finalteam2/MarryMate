@@ -12,5 +12,6 @@
   		<mapper resource="sqlMap/paymentSQL.xml"/>
   		<mapper resource="sqlMap/pointSQL.xml"/>
   		<mapper resource="sqlMap/bbsSQL.xml"/>
+  		<mapper resource="sqlMap/refundSQL.xml"/>
   	</mappers>
   </configuration>

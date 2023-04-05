@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.admin.refund">
+
+  <select id="amount5_b2" resultType="Integer">
+  		select -(nvl(sum(rf_point),0)+nvl(sum(rf_money),0))*0.9-nvl(sum(rf_point),0)+nvl(sum(rf_money),0) from refund where to_char(rf_date,'yy/mm')=to_char(sysdate,'yy/mm')
+  </select>
+  
+  <select id="amount4_b2" resultType="Integer">
+  		select -(nvl(sum(rf_point),0)+nvl(sum(rf_money),0))*0.9-nvl(sum(rf_point),0)+nvl(sum(rf_money),0) from refund where to_char(rf_date,'yy/mm')=to_char(add_months(sysdate,-1),'yy/mm')
+  </select>
+  
+  <select id="amount3_b2" resultType="Integer">
+  		select -(nvl(sum(rf_point),0)+nvl(sum(rf_money),0))*0.9-nvl(sum(rf_point),0)+nvl(sum(rf_money),0) from refund where to_char(rf_date,'yy/mm')=to_char(add_months(sysdate,-2),'yy/mm')
+  </select>
+  
+  <select id="amount2_b2" resultType="Integer">
+  		select -(nvl(sum(rf_point),0)+nvl(sum(rf_money),0))*0.9-nvl(sum(rf_point),0)+nvl(sum(rf_money),0) from refund where to_char(rf_date,'yy/mm')=to_char(add_months(sysdate,-3),'yy/mm')
+  </select>
+  
+  <select id="amount1_b2" resultType="Integer">
+  		select -(nvl(sum(rf_point),0)+nvl(sum(rf_money),0))*0.9-nvl(sum(rf_point),0)+nvl(sum(rf_money),0) from refund where to_char(rf_date,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
+  </select>
+
+  </mapper>

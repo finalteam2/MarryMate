@@ -33,7 +33,6 @@ public class AnalyticsController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("ta","t");
 		mav.addObject("traffic_m",traffic_m);
 		mav.addObject("traffic_c",traffic_c);
 		mav.setViewName("analytics");
@@ -49,10 +48,9 @@ public class AnalyticsController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("ta","a");
 		mav.addObject("amount_s",amount_s);
 		mav.addObject("amount_b",amount_b);
-		mav.setViewName("analytics");
+		mav.setViewName("analytics_g");
 		
 		return mav;
 	}

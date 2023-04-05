@@ -79,7 +79,7 @@
 let xAxisData = ['22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
 
 function drawChart () { 
-	let seriesData = [${traffic_m.get(0)},${traffic_m.get(1)},${traffic_m.get(2)},${traffic_m.get(3)},${traffic_m.get(4)}]; // 값 데이터 배열 생성
+	let seriesData = [${amount_s.get(0)},${amount_s.get(1)},${amount_s.get(2)},${amount_s.get(3)},${amount_s.get(4)}]; // 값 데이터 배열 생성
 	
 	var myChart = echarts.init(document.getElementById('chart'));
 	
@@ -102,7 +102,7 @@ function drawChart () {
 }
 
 function drawChart2 () { 
-	let seriesData2 = [${traffic_c.get(0)},${traffic_c.get(1)},${traffic_c.get(2)},${traffic_c.get(3)},${traffic_c.get(4)}]; // 값 데이터 배열 생성
+	let seriesData2 = [${amount_b.get(0)},${amount_b.get(1)},${amount_b.get(2)},${amount_b.get(3)},${amount_b.get(4)}]; // 값 데이터 배열 생성
 	
 	var myChart = echarts.init(document.getElementById('chart2'));
 	
@@ -184,23 +184,23 @@ function drawChart2 () {
 </table>
 <hr width="950" id="hr">
 <br>
-<form name="traffic">
 <table width="950" class="tb_to">
 	<tr>
-		<th>[일반회원] 회원가입 수</th>
-		<th>[기업회원] 회원가입 수</th>
+		<th>수익</th>
+		<th>비용</th>
 	</tr>
 	<tr id="dan">
-		<td align="right">(단위: 명)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td align="right">(단위: 명)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
+<form name="amount">
 <div id="chart"></div>
 <div id="chart2"></div>
 <table width="950" class="tb_to">
 	<tr>
-		<th><input type="button" value="일별보기" class="bu_to"></th>
-		<th><input type="button" value="일별보기" class="bu_to"></th>
+		<th><input type="button" value="내역보기" class="bu_to"></th>
+		<th><input type="button" value="내역보기" class="bu_to"></th>
 	</tr>
 </table>
 </form>
