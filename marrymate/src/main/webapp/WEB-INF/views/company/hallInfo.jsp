@@ -214,8 +214,8 @@ function addFileInput() {
 							<input type="checkbox" name="yoil7" value="일">일
 						</div>
 						<div>
-							<input type="hidden" name="cidx" value="${sessionScope.cidx}">
-							<input type="time" name="worktime" placeholder="오전/오후 00:00(24시간 형식으로 입력)">
+							<input type="hidden" name="cidx" value="${cidx}">
+							<input type="time" name="worktime">
 							<input type="submit" value="추가하기">
 						</div>
 					</div>
@@ -228,7 +228,7 @@ function addFileInput() {
 				<div class="iBox">
 					<h2>식사 추가</h2>
 					<div>
-						<input type="hidden" name="cidx" value="${sessionScope.cidx}">
+						<input type="hidden" name="cidx" value="${cidx}">
 						<input type="hidden" name="type" value="0">
 						<div class="hClear">메뉴</div>
 							<input type="text" name="name"><br>
@@ -244,7 +244,7 @@ function addFileInput() {
 				<form name="hall" action="hall.do" method="post">
 					<div class="iBox">
 						<h2>홀 등록</h2>
-						<input type="hidden" name="cidx" value="69">
+						<input type="hidden" name="cidx" value="${cidx}">
 						<div class="hClear">홀명칭</div>
 							<input type="text" name="name"><br>
 						<div class="hTagBox">예식시간</div>
@@ -264,7 +264,7 @@ function addFileInput() {
 				<form name="img" action="img.do" method="post" enctype="multipart/form-data">
 					<div class="iBox">
 						<h2>이미지 등록</h2>
-						<input type="hidden" name="cidx" value="69">
+						<input type="hidden" name="cidx" value="${cidx}">
 						<div id="file-inputs">
 							<input type="file" name="img1">
 						</div>

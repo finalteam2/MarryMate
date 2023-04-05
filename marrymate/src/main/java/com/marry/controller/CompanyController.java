@@ -35,14 +35,14 @@ public class CompanyController {
 	@RequestMapping(value = "/companyJoin.do", method = RequestMethod.POST)
 	public ModelAndView join_cp(CompanyDTO dto, MultipartHttpServletRequest req) {
 		
-		MultipartFile afile=req.getFile("afile");
-		copyFile_cnum(afile);
+		MultipartFile cnumfile=req.getFile("cnumfile");
+		copyFile_cnum(cnumfile);
 		
-		MultipartFile aimg=req.getFile("aimg");
-		copyFile_best(aimg);
+		MultipartFile bestimg=req.getFile("bestimg");
+		copyFile_best(bestimg);
 		
-		String cfile=afile.getOriginalFilename();
-		String img=aimg.getOriginalFilename();
+		String cfile=cnumfile.getOriginalFilename();
+		String img=bestimg.getOriginalFilename();
 		
 		dto.setCfile(cfile);
 		dto.setImg(img);
@@ -59,12 +59,14 @@ public class CompanyController {
 		session.setAttribute("cidx", cidx);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", msg);
+		
 		if(hallInfo.equals("예식장")) {
+			mav.addObject("msg", msg);
 			mav.addObject("url", "hallInfo.do");
 			mav.addObject("cidx", cidx);
-			mav.setViewName("company/hallInfo");
+			mav.setViewName("company/companyMsg");
 		}else {
+			mav.addObject("msg", msg);
 			mav.addObject("url", "companyInfo.do");
 			mav.setViewName("company/companyMsg");
 		}
@@ -72,11 +74,12 @@ public class CompanyController {
 		
 	}
 	
+	//파일 경로 지정 필요
 	public void copyFile_images(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/com_img/"+upload.getOriginalFilename());
+			File outfile=new File(upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -88,11 +91,12 @@ public class CompanyController {
 		
 	}
 	
+	//파일 경로 지정 필요
 	public void copyFile_best(MultipartFile upload) {
 			
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/com_best/"+upload.getOriginalFilename());
+			File outfile=new File(upload.getOriginalFilename());
 				
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -104,11 +108,12 @@ public class CompanyController {
 			
 	}
 	
+	//파일 경로 지정 필요
 	public void copyFile_cnum(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File("C:/student_java/finalproject/marrymate/src/main/webapp/img/cnumFile/"+upload.getOriginalFilename());
+			File outfile=new File(upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -202,7 +207,7 @@ public class CompanyController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
+		mav.addObject("url", "hallInfo.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 	}
@@ -215,7 +220,7 @@ public class CompanyController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
+		mav.addObject("url", "hallInfo.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		
@@ -229,7 +234,7 @@ public class CompanyController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
+		mav.addObject("url", "hallInfo.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		
@@ -242,7 +247,7 @@ public class CompanyController {
 		ModelAndView mav=new ModelAndView();
 		
 		int result=0;
-		String fileLoad="C:/student_java/finalproject/marrymate/src/main/webapp/img/com_img/";
+		String fileLoad="";
 		
 		MultipartFile Inimg1=req.getFile("img1");
 		if(Inimg1 == null) {
@@ -306,7 +311,7 @@ public class CompanyController {
 	    String msg=result>0?"파일 등록 완료":"파일 등록 실패";
 		
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
+		mav.addObject("url", "hallInfo.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		

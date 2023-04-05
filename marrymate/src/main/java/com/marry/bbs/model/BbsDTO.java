@@ -1,7 +1,5 @@
 package com.marry.bbs.model;
 
-import java.sql.Date;
-
 public class BbsDTO {
 
 	private int bidx;
@@ -10,7 +8,7 @@ public class BbsDTO {
 	private String horse;
 	private String subject;
 	private String content;
-	private Date writedate;
+	private String writedate;
 	private String img;
 	private int ref;
 	private int stair;
@@ -24,7 +22,7 @@ public class BbsDTO {
 		super();
 	}
 
-	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, Date writedate,
+	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, String writedate,
 			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin) {
 		super();
 		this.bidx = bidx;
@@ -92,11 +90,11 @@ public class BbsDTO {
 		this.content = content;
 	}
 
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
 
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 

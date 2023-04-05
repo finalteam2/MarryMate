@@ -22,8 +22,6 @@ public class CompanyDAOImple implements CompanyDAO {
 	@Override
 	public CompanyDTO companyLogin(String id, String pwd) {
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(id);
-		System.out.println(pwd);
 		map.put("id", id);
 		map.put("pwd", pwd);
 		CompanyDTO dto= sqlMap.selectOne("companyLogin", map);

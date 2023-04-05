@@ -24,4 +24,28 @@
 			0
 		)
 	</insert>
+	<select id="bbsNotiList" resultType="com.marry.bbs.model.BbsDTO">
+		select
+			*
+		from
+			bbs
+		where
+			kind='공지사항'
+	</select>
+	<select id="bbsAfterList" resultType="com.marry.bbs.model.BbsDTO">
+		select
+			*
+		from
+			bbs
+		where
+			kind='웨딩후기'
+	</select>
+	<select id="bbsTalkList" resultType="com.marry.bbs.model.BbsDTO">
+		select
+			*
+		from
+			bbs
+		where
+			kind='웨딩톡톡'
+	</select>
 </mapper>
