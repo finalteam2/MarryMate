@@ -1,13 +1,17 @@
 package com.marry.calender.model;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marry.book.model.BookDTO;
+import com.marry.member.model.MemberDTO;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -72,15 +76,21 @@ public class CalendarDAOImple implements CalendarDAO {
 		return 0;
 	}
 
+
 	@Override
-	public int date() {
-		return (int) calendarDTO.getCdate().getTime();
+	public int date(String loginMD) {
+		LocalDate loginDate = LocalDate.parse(loginMD, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate today = LocalDate.now();
+		long diffInDays = ChronoUnit.DAYS.between(today, loginDate);
+		int dDay = (int) diffInDays;
+		return dDay;
 	}
-	
+
 	@Override
-	public Date dateInfo() {
-		return calendarDTO.getCdate();
+	public Date dateInfo(String loginMD) {
+		return null;
 	}
+
 	
 	private final CalendarDAO calendarDAO;
 

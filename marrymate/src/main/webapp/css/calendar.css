@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
 	background: url("/marrymate/img/background.png")
 }
@@ -16,10 +23,9 @@ video {
 
 .main h2.sTit {
 	color: #333333;
-	font-family: "lotteMartMedium";
+	font-family: 'SUIT-Regular';
 	font-size: 28px;
 	margin-bottom: 18px;
-	background: url("/img/site/main/main_title_icon.png") no-repeat;
 	-webkit-background-size: 34px auto;
 	background-size: 34px auto;
 	padding-left: 48px;
@@ -30,8 +36,7 @@ video {
 	height: 650px;
 	position: relative;
 	overflow: hidden;
-	background: url("/img/site/main/2019_main_info_bg_02_pc.png") no-repeat
-		center top;
+
 }
 
 .mainMyweddingAnimationScroll .infoArea {
@@ -66,8 +71,7 @@ video {
 	display: inline-block;
 	margin-top: 18px;
 	overflow: hidden;
-	background: url("/img/site/main/btn_more_chk.png") no-repeat right
-		bottom;
+
 	padding-right: 42px;
 }
 
@@ -76,7 +80,7 @@ video {
 	display: block;
 	float: left;
 	font-weight: normal;
-	font-family: "SpoqaHanSansBold";
+	font-family: 'SUIT-Regular';
 }
 
 .mainMyweddingAnimationScroll .infoArea li a .number .txt {
@@ -103,13 +107,13 @@ video {
 	display: inline-block;
 	vertical-align: top;
 	margin: 12px 5px 0 0;
-	font-family: "SpoqaHanSansBold";
+	font-family: 'SUIT-Regular';
 }
 
 .mainMyweddingAnimationScroll .goal strong {
 	font-size: 32px;
 	font-weight: normal;
-	font-family: "SpoqaHanSansBold";
+	font-family: 'SUIT-Regular';
 	display: inline-block;
 	vertical-align: top;
 }
@@ -117,7 +121,7 @@ video {
 .mainMyweddingAnimationScroll .goal span.info {
 	margin-top: 15px;
 	font-size: 13px;
-	font-family: "SpoqaHanSansRegular";
+	font-family: 'SUIT-Regular';
 	padding-left: 3px;
 }
 
@@ -145,13 +149,13 @@ video {
 	display: inline-block;
 	vertical-align: top;
 	margin: 12px 5px 0 0;
-	font-family: "SpoqaHanSansBold";
+	font-family: 'SUIT-Regular';
 }
 
 .mainMyweddingAnimationScroll .goal strong {
 	font-size: 40px;
 	font-weight: normal;
-	font-family: "SpoqaHanSansBold";
+	font-family: 'SUIT-Regular';
 	display: inline-block;
 	vertical-align: top;
 }
@@ -159,7 +163,7 @@ video {
 .mainMyweddingAnimationScroll .goal span.info {
 	margin-top: 15px;
 	font-size: 13px;
-	font-family: "SpoqaHanSansRegular";
+	font-family: 'SUIT-Regular';
 	padding-left: 3px;
 }
 
@@ -172,6 +176,14 @@ video {
 	background-size: 1920px 100%;
 }
 
+.mainMyweddingAnimation {
+	
+}
+
+.pc.myWeddingType .mainMyweddingAnimationScroll {
+	background: none !important;
+}
+
 .checkListTopWrap>.inner {
 	padding: 80px 0 40px 0;
 	margin: 0 auto;
@@ -179,17 +191,20 @@ video {
 }
 
 .checkListTopWrap .profileWrap {
-	height: 235px;
+	height: 500px;
+	width: 1400px;
 }
 
 .checkListTopWrap .profileWrap .profileBox {
-	height: 235px;
-	width: 1200px;
+	height: 400px;
+	width: 1400px;
 	box-shadow: 0 10px 15px 5px rgba(147, 135, 119, 0.15);
 	float: left;
-
-	overflow: hidden;
-	border-radius: 0 0 0 15px;
+	background: #dcdced;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 50px 0 0 70px;
 	overflow: hidden;
 	border-radius: 0 0 0 15px;
 }
@@ -197,12 +212,12 @@ video {
 .checkListTopWrap .profileWrap .profileBox .imgArea {
 	overflow: hidden;
 	border-radius: 135px;
-	border: 3px solid #d4bea5;
+	border: 3px solid #6666b0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	width: 135px;
-	height: 135px;
+	width: 300px;
+	height: 300px;
 	position: relative;
 	box-shadow: 0 7px 20px 5px rgba(51, 51, 51, 0.19);
 	float: left;
@@ -222,8 +237,8 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .nameArea {
-	font-size: 22px;
-	color: #957963;
+	font-size: 35px;
+	color: #5706b0;
 	border-bottom: 1px solid #e4d9cf;
 	padding-bottom: 13px;
 	margin-bottom: 10px;
@@ -231,16 +246,19 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .nameArea span {
-	color: #5a4e47;
+	color: #6c00d9;
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .weddingDay {
+	font-size: 38px;
+	font-family: 'SUIT-Regular';
 	
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .date {
-	color: #5a4e47;
-	font-size: 22px;
+	color: #7a32f3;
+	font-size: 36px;
+	font-family: 'SUIT-Regular';
 	line-height: 50px;
 	display: inline-block;
 	vertical-align: top;
@@ -248,14 +266,20 @@ video {
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .d-day {
 	font-size: 34px;
-	font-family: "SpoqaHanSansBold";
-	color: #a63030;
+	font-family: 'SUIT-Regular';
+	color: #e4458d;
 	letter-spacing: -0.05em;
 	line-height: 50px;
 	display: inline-block;
 	vertical-align: top;
 	margin-left: 15px;
 	margin-top: -2px;
+}
+
+.checkListTopWrap .profileWrap .profileBox .txtArea #count {
+	font-size: 20px;
+	font-family: 'SUIT-Regular';
+	color: #e4458d;
 }
 
 .checkListTopWrap .profileWrap .tagConBox {
@@ -325,7 +349,7 @@ video {
 	font-size: 34px;
 	margin-top: 8px;
 	display: block;
-	font-family: "SpoqaHanSansLight";
+	font-family: 'SUIT-Regular';
 }
 
 .checkListArea .listRow .itemArea {
@@ -364,432 +388,7 @@ video {
 }
 
 .checkListArea .listRow .itemArea li .item .tit.memo {
-	background-size: 20px auto;
-	padding-right: 29px;
-	padding-right: 29px;
-}
 
-.checkListArea .listRow .itemArea li .item .checkToggle {
-	position: absolute;
-	right: 30px;
-	top: 30px;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom {
-	position: absolute;
-	bottom: 30px;
-	left: 30px;
-	right: 30px;
-	margin: 0 auto;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom .stat {
-	float: left;
-	line-height: 25px;
-	display: none;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom .stat.quickly {
-	color: #a63030;
-	background-size: 14px auto;
-	padding-left: 19px;
-	padding-left: 19px;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom .stat.now {
-	color: #e29090;
-	padding-left: 19px;
-	 .profileWrap  .tagConBox .txt { font-size : 18px; margin-top : 14px; }
-	.checkListTopWrap .profileWrap .tagConBox .bottomTxt { font-size : 15px;
-	color : #999999; margin-top : 60px; } .checkListArea { margin : 0 auto;
-	width : 1400px; padding : 53px 0 0 0 } .checkListArea .listRow {
-	position : relative; margin-right : -10px; } .checkListArea .listRow
-	:after { content : ''; display : block; clear : both; } .checkListArea
-	 .listRow .d-day_tit { background : #f4f4f4; display : flex;
-	align-items : center; justify-content : center; color : #999999; width
-	: 160px; float : left; overflow : hidden; border-radius : 0 0 0 15px;
-	height : 165px; text-align : center; margin : 10px 10px 0 0; }
-	.checkListArea .listRow .d-day_tit span { display : block; }
-	.checkListArea .listRow .d-day_tit strong { font-weight : normal;
-	font-size : 34px; margin-top : 8px; display : block; font-family :
-	"SpoqaHanSansLight"; } .checkListArea .listRow .itemArea { overflow :
-	hidden; } .checkListArea .listRow .itemArea li { margin : 10px; float :
-	left; } .checkListArea .listRow .itemArea li .item { background :
-	#f4f4f4; border-radius : 0 0 0 15px; overflow : hidden; padding : 20px
-	30px; width : 290px; height : 165px; -webkit-box-sizing : border-box;
-	-moz-box-sizing : border-box; box-sizing : border-box; position :
-	relative; transition : all 0.5s } .checkListArea .listRow .itemArea li
-	 .item .d-day { color : #aaaaaa; font-size : 18px; } .checkListArea 
-	.listRow .itemArea li .item .tit { display : inline-block; color :
-	#aaaaaa; font-size : 22px; margin-top : 12px; } .checkListArea 
-	.listRow .itemArea li .item .tit .memo { background-size : 20px auto;
-	padding-right : 29px; } .checkListArea .listRow .itemArea li .item 
-	.checkToggle { position : absolute; right : 30px; top : 30px; }
-	.checkListArea .listRow .itemArea li .item .bottom { position :
-	absolute; bottom : 30px; left : 30px; right : 30px; margin : 0 auto; }
-	.checkListArea .listRow .itemArea li .item .bottom .stat { float : left;
-	line-height : 25px; display : none; } .checkListArea .listRow 
-	.itemArea li .item .bottom .stat .quickly { color : #a63030;
-	background-size : 14px auto; padding-left : 19px; } .checkListArea 
-	.listRow .itemArea li .item .bottom .stat .now { color : #e29090;
-	padding-left: 19px;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom .stat {
-	float: left;
-	line-height: 25px;
-}
-
-.checkListArea .listRow .itemArea li .item .bottom .checkBox {
-	float: right;
-}
-
-.checkListArea .listRow .d-day_tit.on {
-	background: #665956;
-	color: #FFFFFF;
-}
-
-.checkListArea .listRow .itemArea li .item.on {
-	background: #f4efeb;
-}
-
-.checkListArea .listRow .itemArea li .item.on .d-day {
-	color: #957963;
-}
-
-.checkListArea .listRow .itemArea li .item.on .tit {
-	color: #957963;
-}
-
-.checkListArea .listRow .itemArea li .item.on .tit.memo {
-	background: url("/marrymate/img/background.png") no-repeat right center;
-	-webkit-background-size: 20px auto;
-	background-size: 20px auto;
-}
-
-.checkListArea .listRow .itemArea li .item.on .bottom .stat {
-	display: block;
-}
-
-.checkListArea .listRow .itemArea li .item.on .check {
-	background: #957963;
-}
-
-.checkListArea .listRow .itemArea li .item.on .check .txt {
-	color: #ffffff;
-	position: absolute;
-	left: 17px;
-}
-
-.checkListArea .listRow .itemArea li .item.on .check:after {
-	left: 68px;
-	background: #ffffff;
-}
-
-
-.checkBox{display:inline-block;vertical-align:middle;}
-	.checkBox input[type="checkbox"]{display:block;width:25px;height:25px;opacity:0;filter:alpha(opacity=0);position:absolute;z-index:1;cursor:pointer;margin:0}
-	.checkBox input[type="checkbox"] + label{display:inline-block;padding-left:40px;vertical-align:top;cursor:pointer;position:relative;line-height:25px;font-size:16px;color:#666}
-	.checkBox input[type="checkbox"] + label:before{display:inline-block;content:"";width:25px;height:25px;cursor:pointer;position:absolute;left:0;top:0px;background:url('/img/site/common/check_off.png') no-repeat 0 0;background-size:auto 100%;}
-	.checkBox input[type="checkbox"]:checked + label:before{background:url('/img/site/common/check_on.png') no-repeat 0 0;background-size:auto 100%;width:31px;}
-	.checkBox input[type="checkbox"]:focus + label:before{outline:1px dotted;outline:auto 5px -webkit-focus-ring-color }
-	.checkBox input[type="checkbox"]:disabled + label{color:#aaa;}
-	.checkBox input[type="checkbox"]:disabled + label:before{background:url('/img/site/common/check_disabled.png') no-repeat 0 0;background-size:auto 100%;width:31px;}
-	.checkBox.active input[type="checkbox"]:checked + label{color:#a63030}
-
-
-@media only screen and (min-width: 1025px) and (max-width: 30000px)
-	.checkToggle {
-	display
-	:
-	 
-	block
-	;
-	
-    
-	width
-	:
-	 
-	75px
-	;
-	
-    
-	height
-	:
-	 
-	32px
-	;
-	
-    
-	background
-	:
-	 
-	#FFFFFF
-	;
-	
-    
-	border-radius
-	:
-	 
-	32px
-	;
-	
-    
-	line-height
-	:
-	 
-	30px
-	;
-	
-    
-	overflow
-	:
-	 
-	hidden
-	;
-	
-    
-	transition
-	:
-	 
-	all
-	 
-	0
-	.5s
-	;
-	
-    
-	position
-	:
-	 
-	relative
-	;
-	
-    
-	border
-	:
-	 
-	1px
-	 
-	solid
-	 
-	#e2e2e2
-	;
-	
-    
-	-webkit-box-sizing
-	:
-	 
-	border-box
-	;
-	
-    
-	-moz-box-sizing
-	:
-	 
-	border-box
-	;
-	
-    
-	box-sizing
-	:
-	 
-	border-box
-	;
-	
-
-}
-
-.checkToggle .txt {
-	color: #aaaaaa;
-	position: absolute;
-	left: 39px;
-	top: 0;
-	display: block;
-	font-size: 15px;
-	display: none;
-}
-
-.checkToggle:after {
-	content: '';
-	display: block;
-	width: 22px;
-	height: 22px;
-	position: absolute;
-	left: 4px;
-	top: 4px;
-	background: #aaaaaa;
-	box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-	border-radius: 22px;
-	overflow: hidden;
-	transition: all 0.5s
-}
-
-.checkToggle.on {
-	background: #957963;
-	border: 1px solid #957963
-}
-
-.checkToggle.on .txt {
-	color: #ffffff;
-	position: absolute;
-	left: 17px;
-}
-
-.checkToggle.on:after {
-	left: 47px;
-	background: #ffffff;
-}
-
-/* checkBox */
-.checkBox {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.checkBox input[type="checkbox"] {
-	display: block;
-	width: 25px;
-	height: 25px;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-	position: absolute;
-	z-index: 1;
-	cursor: pointer;
-	margin: 0
-}
-
-.checkBox input[type="checkbox"]+label {
-	display: inline-block;
-	padding-left: 40px;
-	vertical-align: top;
-	cursor: pointer;
-	position: relative;
-	line-height: 25px;
-	font-size: 16px;
-	color: #666
-}
-
-.checkBox input[type="checkbox"]+label:before {
-	display: inline-block;
-	content: "";
-	width: 25px;
-	height: 25px;
-	cursor: pointer;
-	position: absolute;
-	left: 0;
-	top: 0px;
-	background: url('/img/site/common/check_off.png') no-repeat 0 0;
-	background-size: auto 100%;
-}
-
-.checkBox input[type="checkbox"]:checked+label:before {
-	background: url('/img/site/common/check_on.png') no-repeat 0 0;
-	background-size: auto 100%;
-	width: 31px;
-}
-
-.checkBox input[type="checkbox"]:focus+label:before {
-	outline: 1px dotted;
-	outline: auto 5px -webkit-focus-ring-color
-}
-
-.checkBox input[type="checkbox"]:disabled+label {
-	color: #aaa;
-}
-
-.checkBox input[type="checkbox"]:disabled+label:before {
-	background: url('/img/site/common/check_disabled.png') no-repeat 0 0;
-	background-size: auto 100%;
-	width: 31px;
-}
-
-.checkBox.active input[type="checkbox"]:checked+label {
-	color: #a63030
-}
-
-.checkListArea {
-	margin: 0 auto;
-	width: 1400px;
-	padding: 53px 0 0 0
-}
-
-.checkListArea .listRow {
-	position: relative;
-	margin-right: -10px;
-}
-
-.checkListArea .listRow:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-.checkListArea .listRow .d-day_tit {
-	background: #f4f4f4;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #999999;
-	width: 160px;
-	float: left;
-	overflow: hidden;
-	border-radius: 0 0 0 15px;
-	height: 165px;
-	text-align: center;
-	margin: 10px 10px 0 0;
-}
-
-.checkListArea .listRow .d-day_tit span {
-	display: block;
-}
-
-.checkListArea .listRow .d-day_tit strong {
-	font-weight: normal;
-	font-size: 34px;
-	margin-top: 8px;
-	display: block;
-	font-family: "SpoqaHanSansLight";
-}
-
-.checkListArea .listRow .itemArea {
-	overflow: hidden;
-}
-
-.checkListArea .listRow .itemArea li {
-	margin: 10px;
-	float: left;
-}
-
-.checkListArea .listRow .itemArea li .item {
-	background: #f4f4f4;
-	border-radius: 0 0 0 15px;
-	overflow: hidden;
-	padding: 20px 30px;
-	width: 290px;
-	height: 165px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	position: relative;
-	transition: all 0.5s
-}
-
-.checkListArea .listRow .itemArea li .item .d-day {
-	color: #aaaaaa;
-	font-size: 18px;
-}
-
-.checkListArea .listRow .itemArea li .item .tit {
-	display: inline-block;
-	color: #aaaaaa;
-	font-size: 22px;
-	margin-top: 12px;
-}
-
-.checkListArea .listRow .itemArea li .item .tit.memo {
-	background: url("/img/site/mywedding/icon_memo_off.png") no-repeat right
-		center;
 	-webkit-background-size: 20px auto;
 	background-size: 20px auto;
 	padding-right: 29px;
@@ -817,8 +416,7 @@ video {
 
 .checkListArea .listRow .itemArea li .item .bottom .stat.quickly {
 	color: #a63030;
-	background: url("/img/site/mywedding/icon_quickly.png") no-repeat left
-		center;
+
 	-webkit-background-size: 14px auto;
 	background-size: 14px auto;
 	padding-left: 19px;
@@ -826,8 +424,7 @@ video {
 
 .checkListArea .listRow .itemArea li .item .bottom .stat.now {
 	color: #e29090;
-	background: url("/img/site/mywedding/icon_now.png") no-repeat left
-		center;
+
 	-webkit-background-size: 14px auto;
 	background-size: 14px auto;
 	padding-left: 19px;
@@ -860,8 +457,7 @@ video {
 }
 
 .checkListArea .listRow .itemArea li .item.on .tit.memo {
-	background: url("/img/site/mywedding/icon_memo_on.png") no-repeat right
-		center;
+
 	-webkit-background-size: 20px auto;
 	background-size: 20px auto;
 }
@@ -885,3 +481,5 @@ video {
 	background: #ffffff;
 }
 
+
+/*캘린더 제이쿼리*/
