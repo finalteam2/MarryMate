@@ -37,4 +37,11 @@ public class BookDAOImple implements BookDAO {
 		List<CompanyDTO> list=sqlMap.selectList("orderList",dto);
 		return list;
 	}
+	
+	/**상품 카트에 추가*/
+	@Override
+	public CompanyDTO addBookCart(int cidx) {
+		CompanyDTO dto=sqlMap.selectOne("addCart", cidx);
+		return dto;
+	}
 }

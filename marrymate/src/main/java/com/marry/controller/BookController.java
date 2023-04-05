@@ -54,4 +54,16 @@ public class BookController {
 		mav.setViewName("finalJson");
 		return mav;
 	}
+	
+	/**통합예약내 담기 클릭시*/
+	@RequestMapping("/addCart.do")
+	public ModelAndView addCart(
+			@RequestParam(name = "cidx",defaultValue = "0")int cidx) {
+		CompanyDTO dto=bookDao.addBookCart(cidx);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("dto",dto);
+		mav.setViewName("finalJson");
+		return mav;
+	}
 }

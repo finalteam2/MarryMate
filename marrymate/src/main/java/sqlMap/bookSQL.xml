@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			company
 		where
-			kind='스튜디오'
+			kind='스튜디오' and clevel=1 and blind=0
 		order by
 			cname asc
 	</select>
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			company
 		where
-			kind=#{filterCate}
+			kind=#{filterCate} and clevel=1 and blind=0
 		order by
 			cname asc
 	</select>
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			company
 		where
-			kind=#{filterCate}
+			kind=#{filterCate} and clevel=1 and blind=0
 		order by
 			<if test="filterOrder=='이름순'">
 	 			cname asc, cidx desc
@@ -43,5 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		<if test="filterOrder=='높은가격순'">
 	 			pay desc, cidx desc
 	 		</if>
+	</select>
+	<select id="addCart" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
+		select
+			*
+		from
+			company
+		where
+			cidx=#{cidx}
 	</select>
 </mapper>

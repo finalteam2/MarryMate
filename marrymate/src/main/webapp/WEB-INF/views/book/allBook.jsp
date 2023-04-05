@@ -123,8 +123,8 @@ $( function() {
 		</div>
 		<div class="left_box">
 			<div>
-			<h2 class="cate_title">
-			선택한 카테고리명
+			<h2 id="cate_title" class="cate_title">
+			스튜디오
 			</h2>
 			<hr style="width:93%;border:1px solid #6c6c6c;">	
 			<c:if test="${empty arr }">
@@ -150,7 +150,7 @@ $( function() {
 						</tr>
 						<tr>
 							<td class="bk_pay">가격 : ${dto.pay } 원</td>
-							<td align="right"><input class="add_button" type="button" value="담기"></td>
+							<td align="right"><input class="add_button" type="button" value="담기" onclick="addCart(${dto.cidx})"></td>
 						</tr>
 					</table>
 				</c:forEach>
@@ -169,25 +169,32 @@ $( function() {
 				<form name="cateFm">
 					<input class="cate_radio" name="filterCate" id="cate_one" type="radio" value="스튜디오" checked>
 					<label class="cate_menu" for="cate_one" onclick="cateList(1)">스튜디오</label>
+					<div id="cate_menu1"></div>
 					<input class="cate_radio" name="filterCate" id="cate_two" type="radio" value="드레스">
 					<label class="cate_menu" for="cate_two" onclick="cateList(2)">드레스</label>
+					<div id="cate_menu2"></div>
 					<input class="cate_radio" name="filterCate" id="cate_three" type="radio" value="헤어메이크업">
 					<label class="cate_menu" for="cate_three" onclick="cateList(3)">헤어메이크업</label>
+					<div id="cate_menu3"></div>
 					<input class="cate_radio" name="filterCate" id="cate_four" type="radio" value="스냅DVD">
 					<label class="cate_menu" for="cate_four" onclick="cateList(4)">스냅DVD</label>
+					<div id="cate_menu4"></div>
 					<input class="cate_radio" name="filterCate" id="cate_five" type="radio" value="주례">
 					<label class="cate_menu" for="cate_five" onclick="cateList(5)">주례</label>
+					<div id="cate_menu5"></div>
 					<input class="cate_radio" name="filterCate" id="cate_six" type="radio" value="사회">
 					<label class="cate_menu" for="cate_six" onclick="cateList(6)">사회</label>
+					<div id="cate_menu6"></div>
 					<input class="cate_radio" name="filterCate" id="cate_seven" type="radio" value="축가">
 					<label class="cate_menu" for="cate_seven" onclick="cateList(7)">축가</label>
+					<div id="cate_menu7"></div>
 				</form>
 			</div>
 			<div class="allClear_box">
-				<input class="allClear_button" type="button" value="전체삭제">
+				<input class="allClear_button" type="button" value="전체삭제" onclick="allDelCart()">
 			</div>
 			<h3 class="sumPay_text1">총 금액</h3>
-			<h3 class="sumPay_text2">150,000 원</h3>
+			<h3 id="sumPay_text2" class="sumPay_text2">0 원</h3>
 			<div class="book_box">
 				<input class="book_button" type="submit" value="예 약 하 기">
 			</div>
