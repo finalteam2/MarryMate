@@ -17,6 +17,7 @@ public class BbsDTO {
 	private int step;
 	private int watch;
 	private int blind;
+	private int topfix;
 	private int admin;
 	
 	public BbsDTO() {
@@ -24,7 +25,7 @@ public class BbsDTO {
 	}
 
 	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, Date writedate,
-			String img, int ref, int stair, int step, int watch, int blind, int admin) {
+			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin) {
 		super();
 		this.bidx = bidx;
 		this.midx = midx;
@@ -39,6 +40,7 @@ public class BbsDTO {
 		this.step = step;
 		this.watch = watch;
 		this.blind = blind;
+		this.topfix = topfix;
 		this.admin = admin;
 	}
 
@@ -145,7 +147,15 @@ public class BbsDTO {
 	public void setBlind(int blind) {
 		this.blind = blind;
 	}
-	
+
+	public int getTopfix() {
+		return topfix;
+	}
+
+	public void setTopfix(int topfix) {
+		this.topfix = topfix;
+	}
+
 	public int getAdmin() {
 		return admin;
 	}

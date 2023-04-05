@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marry.bbs">
+	<insert id="bbsWrite" parameterType="com.marry.bbs.model.BbsDTO">
+		insert into
+			bbs
+		values(
+			bbs_bidx.nextval,
+			#{midx},
+			#{kind},
+			#{horse},
+			#{subject},
+			#{content},
+			sysdate,
+			#{img},
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
+		)
+	</insert>
+</mapper>
