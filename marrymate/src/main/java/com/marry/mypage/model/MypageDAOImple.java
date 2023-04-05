@@ -1,5 +1,6 @@
 package com.marry.mypage.model;
 
+import java.util.*;
 import java.sql.*;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -45,16 +46,16 @@ public class MypageDAOImple implements MypageDAO {
 	}
 	
 	
-	public HallDTO hallInfoSelect(HallDTO dto) {
+	public List<HallDTO> hallInfoSelect(int cidx) {
 		
-		HallDTO dto4=sqlMap.selectOne("hallInfoSelect",dto);
+		List<HallDTO> dto4=sqlMap.selectList("hallInfoSelect",1);
 		return dto4;
 	}
 	
 	
-	public FoodDTO foodInfoSelect(FoodDTO dto) {
+	public List<FoodDTO> foodInfoSelect(int cidx) {
 		
-		FoodDTO dto5=sqlMap.selectOne("foodInfoSelect", dto);
+		List<FoodDTO> dto5=sqlMap.selectList("foodInfoSelect",1);
 		return dto5;
 	}
 

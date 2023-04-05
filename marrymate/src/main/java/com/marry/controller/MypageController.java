@@ -1,5 +1,6 @@
 package com.marry.controller;
 
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +30,10 @@ public class MypageController {
 	public ModelAndView myInfo_c() {
 		ModelAndView mav=new ModelAndView();
 		CompanyDTO dto_c= new CompanyDTO();
-		HallDTO dto_h=new HallDTO();
-		FoodDTO dto_f=new FoodDTO();
 		dto_c.setId("hall1");
-		dto_h.setCidx(1);
-		dto_f.setCidx(1);
 		mav.addObject("comInfo", mypageDao.comInfoSelect(dto_c));
-		mav.addObject("hallInfo", mypageDao.hallInfoSelect(dto_h));
-		mav.addObject("foodInfo", mypageDao.foodInfoSelect(dto_f));
+		mav.addObject("hallInfo", mypageDao.hallInfoSelect(1));
+		mav.addObject("foodInfo", mypageDao.foodInfoSelect(1));
 		mav.setViewName("/mypage/myInfo_c");
 		return mav;
 	}

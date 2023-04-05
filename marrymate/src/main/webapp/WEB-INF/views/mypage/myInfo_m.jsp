@@ -101,7 +101,7 @@
 		 <input type="button" class="btn" value="회원탈퇴" onclick="memberDel()">
 		 </div>
 		</div>
-		<form name="infoUpdate" action="update.do">
+		<form name="myInfoUpdate" action="update.do">
 		<div id="mBox">
 				<div class="hTagBox">이름</div>
 				<input type="text" name="name" value="${userInfo.name }" readonly required><br>

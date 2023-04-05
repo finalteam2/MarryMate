@@ -123,6 +123,7 @@
 				<input type="file" name="aimg" accept="image/*"><br>
 				<hr>
 				<br>
+				<c:if test="${comInfo.kind eq '예식장' }">
 				<div class="hTagBox">홀</div><br>
 				<table id="ht">
 					<thead>
@@ -134,9 +135,14 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="hall" items="${hallInfo }">
 						<tr>
-							
+							<td><input type="text" value="${hall.name }"></td>
+							<td><input type="text" value="${hall.time }"></td>
+							<td><input type="text" value="${hall.pay }"></td>
+							<td><input type="text" value="${hall.guest_num }"></td>
 						</tr>
+					</c:forEach>	
 					</tbody>
 				</table>
 				<hr>
@@ -152,12 +158,24 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" value="${foodInfo.type }"></td>
-							<td><input type="text" value="${foodInfo.name }"></td>
-							<td><input type="text" value="${foodInfo.pay }"></td>
+							<td><input type="text" value="${foodInfo.get(0).name }" required></td>
+							<td><input type="text" value="${foodInfo.get(0).type }"></td>
+							<td><input type="text" value="${foodInfo.get(0).pay }" required></td>
 						</tr>
 					</tbody>
 				</table>
+				</c:if>
+				<c:if test="${comInfo.kind ne '예식장' }">
+				<div class="hTagBox">요금</div><br>
+				<table id="ht">
+					<thead>
+						<tr>
+							<th>금액</th>
+						</tr>
+						<td><input type="text" value="${comInfo.pay }"></td>
+					</thead>
+				</table>	
+				</c:if>
 				<br>
 				<div class="bBox">
 				<input type="submit" class="btn" value="수정">
