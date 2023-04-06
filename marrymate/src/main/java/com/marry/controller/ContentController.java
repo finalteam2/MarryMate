@@ -152,6 +152,48 @@ public class ContentController {
 		return mav;
 	}
 	
+	@RequestMapping("/qna.do")
+	public ModelAndView qna(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		int midx = 0;
+		int cidx = 0;
+		try {
+			midx = (int) session.getAttribute("loginMidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			cidx = (int) session.getAttribute("com_cidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if (midx > 0) {
+			List<Com_CsDTO> marr = contentDao.selectMemCs(midx);
+			mav.addObject("marr",marr);
+		}else if(cidx > 0) {
+			List<Com_CsDTO> carr = contentDao.selectComCs(cidx);
+			mav.addObject("carr",carr);
+		}
+		mav.setViewName("/mypage/qna");
+		return mav;
+	}
 	
-	
+	@RequestMapping("/qnaUpadate.do")
+	public ModelAndView qnaUpadte(Com_CsDTO dto) {
+		ModelAndView mav = new ModelAndView();
+		int result = contentDao.updateComCs(dto);
+		String msg = "";
+		if (result > 0) {
+			msg = "업데이트성공";
+		}else {
+			msg = "업데이트실패";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "qna.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
 }

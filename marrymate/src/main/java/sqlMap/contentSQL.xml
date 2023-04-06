@@ -101,7 +101,42 @@
 		sysdate,
 		null,
 		null,
-		#{is_private}
+		#{is_private},
+		0
 		)
 	</insert>
+	<select id="selectcomcs" resultType="com.marry.company.model.Com_CsDTO">
+	select
+	    com_cs.*, member.name as mname, company.cname as cname
+	from	
+	    com_cs, member, company
+	where
+	    com_cs.cidx = #{cidx}
+	    and member.midx = com_cs.midx
+	    and company.cidx = #{cidx}
+	order by
+	    ccsidx desc	
+	</select>
+	<select id="selectmemcs" resultType="com.marry.company.model.Com_CsDTO">
+	select
+	    com_cs.*, member.name as mname, company.cname as cname
+	from	
+	    com_cs, member, company
+	where
+	    com_cs.midx = #{midx}
+	    and member.midx = #{midx}
+	    and company.cidx = com_cs.cidx
+	order by
+	    ccsidx desc	
+	</select>
+	<update id="updatecomcs" parameterType="com.marry.company.model.Com_CsDTO">
+	update 
+		com_cs
+	set
+		answer = #{answer},
+		ansdate = sysdate,
+		is_answered = 1
+	where 
+		ccsidx = #{ccsidx}
+	</update>
 </mapper>

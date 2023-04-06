@@ -304,7 +304,6 @@ textarea {
   </div>
 </div>
 
-
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 <script>

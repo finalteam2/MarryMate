@@ -72,5 +72,21 @@ public class ContentDAOImple implements ContentDAO {
 		return result;
 	}
 
+	@Override
+	public List<Com_CsDTO> selectComCs(int cidx) {
+		List<Com_CsDTO> arr = sqlMap.selectList("selectcomcs", cidx);
+		return arr;
+	}
 	
+	@Override
+	public List<Com_CsDTO> selectMemCs(int midx) {
+		List<Com_CsDTO> arr = sqlMap.selectList("selectmemcs", midx);
+		return arr;
+	}
+	
+	@Override
+	public int updateComCs(Com_CsDTO dto) {
+		int result = sqlMap.update("updatecomcs", dto);
+		return result;
+	}
 }

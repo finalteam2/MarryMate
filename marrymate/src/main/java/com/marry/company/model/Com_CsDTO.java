@@ -12,15 +12,20 @@ public class Com_CsDTO {
 	private String answer;
 	private Date ansdate;
 	private int is_private;
+	private int is_answered;
+	
+	private String mname;
+	private String cname;
 	
 	
 	public Com_CsDTO() {
 		super();
 	}
 
+	
 
 	public Com_CsDTO(int ccsidx, int cidx, int midx, String subject, String content, Date csdate, String answer,
-			Date ansdate, int is_private) {
+			Date ansdate, int is_private, int is_answered, String mname, String cname) {
 		super();
 		this.ccsidx = ccsidx;
 		this.cidx = cidx;
@@ -31,8 +36,44 @@ public class Com_CsDTO {
 		this.answer = answer;
 		this.ansdate = ansdate;
 		this.is_private = is_private;
+		this.is_answered = is_answered;
+		this.mname = mname;
+		this.cname = cname;
 	}
 
+	
+
+	public String getMname() {
+		return mname;
+	}
+
+
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+
+
+	public String getCname() {
+		return cname;
+	}
+
+
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+
+
+	public int getIs_answered() {
+		return is_answered;
+	}
+
+	public void setIs_answered(int is_answered) {
+		this.is_answered = is_answered;
+	}
 
 	public int getCcsidx() {
 		return ccsidx;

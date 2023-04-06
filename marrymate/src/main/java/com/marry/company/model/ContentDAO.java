@@ -14,4 +14,7 @@ public interface ContentDAO {
 	public int insertCom_Like(Com_LikeDTO dto);
 	public int deleteCom_Like(Com_LikeDTO dto);
 	public int insertCom_cs(Com_CsDTO dto);
+	public List<Com_CsDTO> selectComCs(int cidx);
+	public List<Com_CsDTO> selectMemCs(int midx);
+	public int updateComCs(Com_CsDTO dto);
 }
