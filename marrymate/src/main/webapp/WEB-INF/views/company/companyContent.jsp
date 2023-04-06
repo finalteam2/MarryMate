@@ -25,11 +25,16 @@ body{
 	margin:0 auto;
 }
 
-.carousel-item, .carousel-fade{
+#carouselExampleIndicators{
 	width: 600px;
-	height: 350px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+.carousel-item{
+	width: 600px;
+	height: 300px;
 	object-fit:cover;
-	margin:0 auto;
 }
 .info_map {
 	width: 800px;
@@ -82,9 +87,8 @@ textarea {
 <body onload="mapLoad()">
 <%@include file="../header.jsp" %>
 <p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
-
 <hr>
-<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 	<c:forEach  var="idto" items="${iarr }" varStatus="loop">
@@ -93,11 +97,11 @@ textarea {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-	    <img src="/marrymate/img/company/${dto.img }" class="d-block w-100" alt="img">
+	    <img src="/marrymate/img/company/com_best/${dto.img }" class="d-block w-100" alt="img">
     </div>
 	<c:forEach  var="idto" items="${iarr }" varStatus="loop">
 	    <div class="carousel-item">
-	      <img src="${idto.img }" class="d-block w-100" alt="img">
+	      <img src="/marrymate/img/company/com_img/${idto.img }" class="d-block w-100" alt="img">
 	    </div>
 	</c:forEach>
   </div>
@@ -146,23 +150,56 @@ textarea {
 
 소개 : ${dto.intro }<br>
 
-
-<c:forEach var="hdto" items="${harr }">
-${hdto.name } : name<br>
-${hdto.pay } : pay<br>
-${hdto.time } : time<br>
-${hdto.guest_num } : guest_num<br>
-${hdto.seat_num } : seat_num<br>
-</c:forEach>
 <hr>
 
-<c:forEach var="fdto" items="${farr }">
-${fdto.fidx } : fidx<br>
-${fdto.cidx } : cidx<br>
-${fdto.type } : type<br>
-${fdto.name } : name<br>
-${fdto.pay } : pay<br>
+<span>홀 정보</span>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">홀명칭</th>
+      <th scope="col">대관료</th>
+      <th scope="col">예식시간</th>
+      <th scope="col">최소보증인원</th>
+      <th scope="col">최대수용인원</th>
+    </tr>
+  </thead>
+  <tbody>
+<c:forEach varStatus="status" var="hdto" items="${harr }">
+    <tr>
+      <th scope="row">${status.count }</th>
+      <td>${hdto.name }</td>
+      <td>${hdto.pay }</td>
+      <td>${hdto.time }</td>
+      <td>${hdto.guest_num }</td>
+      <td>${hdto.seat_num }</td>
+    </tr>
 </c:forEach>
+  </tbody>
+</table>
+
+<hr>
+
+<span>메뉴 종류 & 가격</span>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">식사</th>
+      <th scope="col">식대</th>
+    </tr>
+  </thead>
+  <tbody>
+<c:forEach varStatus="status" var="fdto" items="${farr }">
+    <tr>
+      <th scope="row">${status.count }</th>
+      <td>${fdto.name }</td>
+      <td>${fdto.pay }</td>
+    </tr>
+</c:forEach>
+  </tbody>
+</table>
+
 <hr>
 
 <ul class="nav nav-tabs" id="scrollspyHeading2">
@@ -181,6 +218,8 @@ ${fdto.pay } : pay<br>
 컨텐츠 : ${rdto.content } <br>
 별점 : ${rdto.star } <br>
 작성일 : ${rdto.redate } <br>
+
+
 <hr>
 </c:forEach>
 <form name="fm" action="review.do" method="post">
@@ -312,7 +351,18 @@ ${fdto.pay } : pay<br>
 			<option value="${fdto.fidx }">${fdto.name }(식대 : ${fdto.pay })</option>
 			</c:forEach>
 		</select>
+		<input type="date" name="bk_date">
+		
 		cidx, hidx, booktime, book을 조회해서 선택 String bk_time;
+		
+		
+		midx
+		cidx
+		hidx
+		fidx
+		bk_date (예약하는 날짜)
+		bk_time (예약하는 시간)
+		
 	</form>
 	</c:if>
 	</div>

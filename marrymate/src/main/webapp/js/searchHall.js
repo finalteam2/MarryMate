@@ -108,7 +108,7 @@ function searchResult(){
 					var newImgNode = document.createElement('img');
 					newImgNode.setAttribute('class','card-img-top');
 					newImgNode.setAttribute('alt','default_img');
-					newImgNode.setAttribute('src','/marrymate/img/company/' + company.img);
+					newImgNode.setAttribute('src','/marrymate/img/company/com_best' + company.img);
 					newItemNode.appendChild(newImgNode);
 					
 					var newInfoNode = document.createElement('div');
