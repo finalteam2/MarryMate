@@ -37,8 +37,8 @@ public class MypageController {
 		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("com_id");
 		int cidx = (Integer) session.getAttribute("com_cidx");
-		ModelAndView mav=new ModelAndView();
-		CompanyDTO dto_c= new CompanyDTO();
+		ModelAndView mav = new ModelAndView();
+		CompanyDTO dto_c = new CompanyDTO();
 		dto_c.setId(id);
 		mav.addObject("comInfo", mypageDao.comInfoSelect(dto_c));
 		mav.addObject("hallInfo", mypageDao.hallInfoSelect(cidx));
