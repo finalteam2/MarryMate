@@ -3,4 +3,62 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marry.notification">
+	<insert id="insertNoti" parameterType="com.marry.notification.model.NotificationDTO">
+	insert into
+		notification
+	values (
+		NOTIFICATION_NIDX.nextval,
+		#{cidx},
+		#{midx},
+		#{recv},
+		#{page},
+		#{title},
+		#{content},
+		#{nkind},
+		sysdate,
+		0
+	)
+	</insert>
+	<select id="selectComNoti" resultType="com.marry.notification.model.NotificationDTO">
+	select
+		*
+	from
+		notification
+	where
+		cidx = #{cidx}
+	</select>
+	<select id="cntComNoti" resultType="Integer">
+	select
+		count(*)
+	from
+		notification
+	where
+		cidx = #{cidx}
+		and checked = 0
+	</select>
+	<select id="selectMemNoti" resultType="com.marry.notification.model.NotificationDTO">
+	select
+		*
+	from
+		notification
+	where
+		midx = #{midx}
+	</select>
+	<select id="cntMemNoti" resultType="Integer">
+	select
+		count(*)
+	from
+		notification
+	where
+		midx = #{midx}
+		and checked = 0
+	</select>
+	<update id="checkNoti" parameterType="Integer">
+	update
+		notification
+	set
+		checked = 1
+	where 
+		nidx = #{nidx}
+	</update>
 </mapper>

@@ -8,7 +8,7 @@ public class NotificationDTO {
 	private int cidx;
 	private int midx;
 	private String recv;
-	private String id;
+	private String page;
 	private String title;
 	private String content;
 	private String nkind;
@@ -21,14 +21,14 @@ public class NotificationDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NotificationDTO(int nidx, int cidx, int midx, String recv, String id, String title, String content,
+	public NotificationDTO(int nidx, int cidx, int midx, String recv, String page, String title, String content,
 			String nkind, Date sentdate, int status, int checked) {
 		super();
 		this.nidx = nidx;
 		this.cidx = cidx;
 		this.midx = midx;
 		this.recv = recv;
-		this.id = id;
+		this.page = page;
 		this.title = title;
 		this.content = content;
 		this.nkind = nkind;
@@ -69,12 +69,12 @@ public class NotificationDTO {
 		this.recv = recv;
 	}
 
-	public String getId() {
-		return id;
+	public String getPage() {
+		return page;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setPage(String page) {
+		this.page = page;
 	}
 
 	public String getTitle() {
@@ -124,5 +124,5 @@ public class NotificationDTO {
 	public void setChecked(int checked) {
 		this.checked = checked;
 	}
-
+	
 }
