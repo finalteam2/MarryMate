@@ -16,6 +16,7 @@
 		,pname=#{pname}
 		where midx=#{midx} 	
 	</update>
+	
 	<update id="companyInfoUpdate" parameterType="com.marry.company.model.CompanyDTO">
 		update company
 		set
@@ -26,8 +27,27 @@
 		,sjuso=#{sjuso}
 		,curl=#{curl}
 		,intro=#{intro}
-		where id=#{id}
+		where cidx=#{cidx}
 	</update>
+	
+	<update id="hallInfoUpdate" parameterType="com.marry.company.model.HallDTO">
+		update hall
+		set
+		name=#{name}
+		,time=#{time}
+		,pay=#{pay}
+		,guest_num=#{guest_num}
+		where hidx=#{hidx}
+	</update>
+	
+	<update id="foodInfoUpdate" parameterType="com.marry.company.model.FoodDTO">
+		update food
+		set
+		name=#{name}
+		,pay=#{pay}
+		where fidx=#{fidx}
+	</update>
+	
 	<select id="myInfoSelect" parameterType="com.marry.member.model.MemberDTO" resultType="com.marry.member.model.MemberDTO">
         select 
         	  name
@@ -42,8 +62,8 @@
         	, pname 
          from member 
          where id=#{id}
-         
     </select>
+    
     <select id="comInfoSelect" parameterType="com.marry.company.model.CompanyDTO" resultType="com.marry.company.model.CompanyDTO">
     	select
     			id
@@ -63,6 +83,7 @@
     	from company
     	where id=#{id}		 		
     </select>
+    
     <select id="hallInfoSelect" parameterType="integer" resultType="com.marry.company.model.HallDTO">
     	select
     			hidx
@@ -75,6 +96,7 @@
     	from hall
     	where cidx=#{cidx}		
     </select>
+    
     <select id="foodInfoSelect" parameterType="integer" resultType="com.marry.company.model.FoodDTO">
     	select
     			fidx
@@ -85,4 +107,5 @@
     	from food
     	where cidx=#{cidx}		
     </select>
+    
 </mapper>

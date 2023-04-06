@@ -96,6 +96,17 @@
 	    font-weight: 600;
 	    text-align: center;
 	}
+	.btn2 {
+		width: 150px;
+		height: 40px;
+	    border: none;
+	    display: inline-block;
+	    border-radius: 15px;
+	    font-family: 'SUIT-Regular';
+	    font-size: 14px;
+	    font-weight: 600;
+	    text-align: center;
+	}
 	.t{
 	background-color: white;
 	}
@@ -128,24 +139,22 @@
 				<div class="hTagBox">웹사이트</div>
 				<input type="text" name="curl" value="${comInfo.curl }" required><br>
 				<div class="hTagBox">기업소개</div>
-				<textarea style="resize: none" name="intro" rows="11" cols="50" value="${comInfo.intro }"></textarea><br><br>
-				<hr>
+				<textarea style="resize: none" name="intro" rows="11" cols="50" value="${comInfo.intro }"></textarea><br>
 				<br>
 				<div class="hTagBox">대표이미지</div>
 				<c:if test="${!empty comInfo.img}">
-				<img src="/marrymate/img/company/${comInfo.img }">
+				<img src="/marrymate/img/com_best/${comInfo.img }">
 				</c:if>
 				<c:if test="${empty comInfo.img}">
 				<img src="/marrymate/img/nomal.png">
 				</c:if>
 				<input type="file" name="aimg" accept="image/*"><br>
-				<hr>
+				<br>
 				<div class="bBox">
 				<input type="submit" class="btn" value="수정">
-				<input type="reset" class="btn" value="취소"></div>
+				<input type="reset" class="btn" value="다시작성"></div>
 			</form>
 				<hr>
-			<form name="hallInfoUpdate" action="hallUpdate.do">	
 				<c:if test="${comInfo.kind == '예식장' }">
 				<div class="hTagBox">홀</div><br>
 				<table id="ht">
@@ -160,6 +169,7 @@
 					</thead>
 					<tbody>
 					<c:forEach var="hall" items="${hallInfo }">
+					<form name="hallInfoUpdate" action="hallUpdate.do">	
 						<tr>
 							<td><input type="text" name="name" value="${hall.name }" required> 홀</td>
 							<td><input type="text" value="${hall.time }" required> 시간</td>
@@ -167,10 +177,10 @@
 							<td><input type="text" value="${hall.guest_num }" required> 명</td>
 							<td><input type="submit" value="수정"></td>
 						</tr>
+					</form>	
 					</c:forEach>
 					</tbody>
-				</table>
-			</form>	
+				</table>	
 				<hr>
 				<br>
 				<div class="hTagBox">식대</div><br>
@@ -184,11 +194,13 @@
 					</thead>
 					<tbody>
 					<c:forEach var="food" items="${foodInfo }">
+					<form name="foodInfoUpdate" action="foodUpdate.do">
 						<tr>
 							<td><input type="text" value="${food.name }" required></td>
 							<td><input type="text" value="${food.pay }" required>원</td>
 							<td><input type="submit" value="수정"></td>
 						</tr>
+					</form>	
 					</c:forEach>
 					</tbody>
 				</table>
@@ -205,6 +217,8 @@
 				</table>	
 				</c:if>
 				<br>
+				<div class="bBox">
+				<input type="button" class="btn2" value="수정완료" onclick="location.href='index.do'"></div>
 		</div>
 	</article>
 </section>

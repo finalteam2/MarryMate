@@ -39,6 +39,20 @@ public class MypageDAOImple implements MypageDAO {
 	}
 	
 	@Override
+	public int hallInfoUpdate(HallDTO dto) {
+		
+		int count=sqlMap.update("hallInfoUpdate", dto);
+		return count;
+	}
+	
+	@Override
+	public int foodInfoUpdate(FoodDTO dto) {
+		
+		int count=sqlMap.update("foodInfoUpdate", dto);
+		return count;
+	}
+	
+	@Override
 	public MemberDTO myInfoSelect(MemberDTO dto) {
 	
 		MemberDTO dto2=sqlMap.selectOne("myInfoSelect",dto);

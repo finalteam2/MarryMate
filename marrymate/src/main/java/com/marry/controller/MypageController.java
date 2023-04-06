@@ -53,6 +53,24 @@ public class MypageController {
 		return mav;
 	}
 	
+	@RequestMapping("/comUpdate.do")
+	public ModelAndView comUpdate(CompanyDTO dto) {
+		ModelAndView mav=new ModelAndView();
+		return mav;
+	}
+	
+	@RequestMapping("/hallUpdate.do")
+	public ModelAndView hallUpdate(HallDTO dto) {
+		ModelAndView mav=new ModelAndView();
+		return mav;
+	}
+	
+	@RequestMapping("/foodUpdate.do")
+	public ModelAndView foodUpdate(FoodDTO dto) {
+		ModelAndView mav=new ModelAndView();
+		return mav;
+	}
+	
 	@RequestMapping("/reserve.do")
 	public String reserve() {
 		return "/mypage/reserve";
@@ -68,9 +86,9 @@ public class MypageController {
 		return "/mypage/myPoint";
 	}
 	
-	@RequestMapping("/community.do")
+	@RequestMapping("/myCommunity.do")
 	public String community() {
-		return "/mypage/community";
+		return "/mypage/myCommunity";
 	}
 	
 	@RequestMapping("/favorite.do")
