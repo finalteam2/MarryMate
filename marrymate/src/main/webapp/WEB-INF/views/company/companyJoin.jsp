@@ -55,7 +55,6 @@
 	}
 	.box {
 		width: 850px;
-		height: 1200px;
 		border: 1px solid black;
 		border-radius: 30px;
 		margin: 0px auto;
@@ -250,8 +249,6 @@
 						<input type="button" value="중복확인"><br>
 					<div class="hClear">비밀번호</div>
 						<input type="password" name="pwd"><br>
-					<div class="hTagBox">비밀번호 확인</div>
-						<input type="password" name="pwd"><br>
 					<div class="hClear">전화번호</div>
 						<input type="text" name="tel"><br>
 					<div class="hTagBox">이메일</div>
@@ -277,12 +274,12 @@
 					</div>
 					<div id="head">
 					<div class="hTagBox">사업자등록번호</div>
-					<input type="text" name="cnum">&nbsp;<input type="file" name="afile"><br>
+					<input type="text" name="cnum">&nbsp;<input type="file" name="cnumfile"><br>
 					</div>
 					<div class="hClear">기업명</div>
 					<input type="text" name="cname"><br>
 					<div class="hTagBox">지역</div>
-					<select id="jusoKindH" name="sido" onchange="jusoKindChange(this)">
+					<select name="sido" onchange="jusoKindChange(this)">
 						<option>도/특별시/광역시</option>
 						<option value="서울">서울</option>
 						<option value="부산">부산</option>
@@ -310,7 +307,7 @@
 					<div class="hTagBox">기업 웹사이트</div>
 						<input type="text" name="curl"><br>
 					<div class="hClear">대표 이미지</div>
-						<input type="file" name="aimg"><br>
+						<input type="file" name="bestimg"><br>
 					<div class="hTagBox">상품 가격</div>
 						<input type="text" name="pay"><br>
 				</div>

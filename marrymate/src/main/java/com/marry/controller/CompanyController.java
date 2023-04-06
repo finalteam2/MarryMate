@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,9 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyDAO companyDao;
+	
+	@Autowired
+	ServletContext context;
 	
 	@RequestMapping(value = "/companyJoin.do", method = RequestMethod.GET)
 	public String joinForm_cp() {
@@ -79,7 +83,8 @@ public class CompanyController {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File(upload.getOriginalFilename());
+			String imagepath = context.getRealPath("/img/com_img/");
+			File outfile=new File(imagepath+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -91,12 +96,12 @@ public class CompanyController {
 		
 	}
 	
-	//파일 경로 지정 필요
 	public void copyFile_best(MultipartFile upload) {
 			
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File(upload.getOriginalFilename());
+			String imagepath = context.getRealPath("/img/com_best/");
+			File outfile=new File(imagepath+upload.getOriginalFilename());
 				
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
@@ -108,12 +113,12 @@ public class CompanyController {
 			
 	}
 	
-	//파일 경로 지정 필요
 	public void copyFile_cnum(MultipartFile upload) {
 		
 		try {
 			byte bytes[]=upload.getBytes();
-			File outfile=new File(upload.getOriginalFilename());
+			String imagepath = context.getRealPath("/img/cnumFile/");
+			File outfile=new File(imagepath+upload.getOriginalFilename());
 			
 			FileOutputStream fos=new FileOutputStream(outfile);
 			fos.write(bytes);
