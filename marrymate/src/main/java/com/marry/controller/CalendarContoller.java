@@ -30,9 +30,14 @@ public class CalendarContoller {
 		return "calendar/calendarInfo";
 	}
 	
+	@RequestMapping("/plan/planList.do")
+	public String planList() {
+		return "calendar/plan/planList";
+	}
+	
 	@Autowired
 	private CalendarDAO calendarDAO;
 	
-
+	
 
 }

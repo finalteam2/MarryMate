@@ -1,12 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.Calendar" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="charset" content="UTF-8">
 <title>웨딩캘린더</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
+<meta
+  name="viewport"
+  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+/>
+
+<link rel="stylesheet" href="/marrymate/css/calendar.css">
+<link rel="stylesheet" href="/marrymate/css/style.css">
+<link rel="stylesheet" href="/marrymate/css/date-picker.css">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="/marrymate/js/jquery-1.12.4.js"></script>
+<script src="/marrymate/js/jquery-ui.js"></script>
+<script src="/marrymate/js/CalendarJS.js"></script>
+<script src="/marrymate/js/swiper.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,18 +36,6 @@
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
 
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="description" content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
-<meta property="og:title" content="메리메이트">
-<meta property="og:url" content="https://localhost:9090/marrymate/">
-<meta property="og:image" content="/marrymate/img/logo1.png">
-<meta property="og:description"
-	content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
-<script src="/marrymate/js/CalendarJS.js"></script>
-<link rel="stylesheet" href="/marrymate/css/calendar.css">
-<link rel="stylesheet" href="/marrymate/css/style.css">
 <script>
 var dday = new Date("${sessionScope.loginMD}").getTime();
 
@@ -54,6 +61,15 @@ setInterval(function() {
 document.getElementById("dDay").innerHTML = "D-" + day + "일 ♥";
 }, 1000);
 
+var dateonly = new Date("${sessionScope.loginMD}").getTime();
+
+setInterval(function() {
+  var today = new Date().getTime();
+  var gap = dateonly - today;
+  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
+
+document.getElementById("dDayOnly").innerHTML = "D-" + day;
+}, 1000);
 
 var dayinfo = new Date("${sessionScope.loginMD}");
 
@@ -65,88 +81,152 @@ setInterval(function() {
     document.getElementById("day").innerHTML = dayName;
 });
 
+
 </script>
+
 
 </head>
 <body background="/marrymate/img/background.png">
 	<%@include file="../header.jsp"%>
 	<div class="contentsArea full" id="goContent">
 
-		<div class="contentsTop">
+		<div class="contentsTop"></div>
 
-			<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
-				style="width: 100%">
-			<!--checkListTopWrap : s-->
-			<div class="checkListTopWrap">
-				<div class="inner">
-					<div class="profileWrap">
-						<!--profileArea : s-->
-						<div class="profileBox">
-							<div class="imgArea">
+		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
+			style="width: 100%">
+		<!--checkListTopWrap : s-->
+		<div class="checkListTopWrap">
+			<div class="inner">
+				<div class="profileWrap">
+					<!--profileArea : s-->
+					<div class="profileBox">
+						<div class="imgArea">
+							<c:if test="${!empty sessionScope.loginId}">
+								<div>${sessionScope.img}</div>
+							</c:if>
+						</div>
+						<div class="txtArea">
+							<div class="nameArea">
 								<c:if test="${!empty sessionScope.loginId}">
-									<div>${sessionScope.img}</div>
+									<div>
+										<strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick})
+										님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일
+									</div>
 								</c:if>
 							</div>
-							<div class="txtArea">
-								<div class="nameArea">
-									<c:if test="${!empty sessionScope.loginId}">
-										<div>
-											<strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick})
-											님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일
+
+							<div class="weddingDay">
+								<span class="date"> <c:if
+										test="${!empty sessionScope.loginId}">
+										<div>${sessionScope.loginMD.substring(0, 10)}
+											&nbsp;<span id="day"></span>
 										</div>
 									</c:if>
-								</div>
-
-								<div class="weddingDay">
-									<span class="date"> 
-										<c:if test="${!empty sessionScope.loginId}">
-											<div >${sessionScope.loginMD.substring(0, 10)} &nbsp;<span id="day"></span></div>
-										</c:if>
-									</span> 
-									<span class="d-day" id="dDay"></span><br>
-								</div>
-								<div id="count"></div>
+								</span> <span class="d-day" id="dDay"></span><br>
 							</div>
+							<div id="count"></div>
 						</div>
 					</div>
-					<!--profileArea : e-->
 				</div>
-			</div>
-
-			<!--mainMyweddingAnimation : s-->
-			<div class="mainMyweddingAnimationScroll">
-				<div class="infoArea">
-					<ul>
-						<li><a href="javascript:void(0);" class="moveScroll"
-							data-target="chkst" data-chkst="01"> <span class="tit">
-									-PAST-<br class="onlyM">
-							</span> <span class="number"> <strong id="checkListChkCnt">
-
-										12 </strong> <span class="txt">건</span>
-							</span>
-						</a></li>
-						<li><a href="javascript:void(0);" class="moveScroll"
-							data-target="chkst" data-chkst="04"> <span class="tit">-PRESENT-<br
-									class="onlyM"></span> <span class="number"> <strong
-									id="checkListDoingCnt"> 1 </strong> <span class="txt">건</span>
-							</span>
-						</a></li>
-						<li><a href="javascript:void(0);" class="moveScroll"
-							data-target="chkst" data-chkst="03"> <span class="tit">-FUTURE-<br
-									class="onlyM"></span> <span class="number"> <strong
-									id="checkListReservCnt"> 12 </strong> <span class="txt">건</span>
-							</span>
-						</a></li>
-					</ul>
-				</div>
-				<div class="goal">
-
-					<strong> D-205 </strong>
-
-				</div>
+				<!--profileArea : e-->
 			</div>
 		</div>
-	</div>
+		</div>
+<%
+String yy=request.getParameter("year");
+String mm=request.getParameter("month");
+
+Calendar cal=Calendar.getInstance();
+
+int y=cal.get(Calendar.YEAR);
+int m=cal.get(Calendar.MONTH);
+
+if(yy != null && mm != null && !yy.equals("") && !mm.equals("")){
+	y=Integer.parseInt(yy);
+	m=Integer.parseInt(mm)-1;
+}
+cal.set(y,m,1);
+int dayOfweek=cal.get(Calendar.DAY_OF_WEEK);
+int lastday=cal.getActualMaximum(Calendar.DATE);
+%>
+		<br><br>
+		<!--calendarShow-->
+		<div class="calendarshow" align="center">
+				<div class="todaydate" align="center"><%=y %>년 &nbsp;&nbsp; <%=m+1 %>월</div>
+					<table class="caldate">
+						<tr class="trth">
+							<th>일</th>
+							<th>월</th>
+							<th>화</th>
+							<th>수</th>
+							<th>목</th>
+							<th>금</th>
+							<th>토</th>
+						</tr>
+						<tr>
+						<%
+						int count=0;
+						for(int s=1;s<dayOfweek;s++){
+							out.print("<td></td>");
+							count++;
+						}
+						for(int d=1;d<lastday;d++){
+							count++;
+							String color="#555555";
+							if(count==7){
+								color="blue";
+							}else if(count==1){
+								color="red";
+							}
+						%>
+							<td style="color: <%=color%>"><%=d %></td>
+						<%
+							if(count==7){
+								out.print("</tr><tr>");
+								count=0;
+							}	
+						}
+						while(count<7){
+							out.print("<td></td>");
+							count++;
+						}
+						 %>
+						</tr>
+				</table>
+		</div>
+
+		<!--mainMyweddingAnimation : s-->
+		<div class="mainMyweddingAnimationScroll">
+			<div class="infoArea">
+				<ul>
+					<li><a href="javascript:void(0);" class="moveScroll"
+						data-target="chkst" data-chkst="01"> <span class="tit">
+								-PAST-<br class="onlyM">
+						</span> <span class="number"> <strong id="checkListChkCnt">
+								</strong> <span class="txt">건</span>
+						</span>
+					</a></li>
+					<li><a href="javascript:void(0);" class="moveScroll"
+						data-target="chkst" data-chkst="04"> <span class="tit">-PRESENT-<br
+								class="onlyM"></span> <span class="number"> <strong
+								id="checkListDoingCnt"> </strong> <span class="txt">건</span>
+						</span>
+					</a></li>
+					<li><a href="javascript:void(0);" class="moveScroll"
+						data-target="chkst" data-chkst="03"> <span class="tit">-FUTURE-<br
+								class="onlyM"></span> <span class="number"> <strong
+								id="checkListReservCnt"> </strong> <span class="txt">건</span>
+						</span>
+					</a></li>
+				</ul>
+			</div>
+			<div class="goal">
+
+				<strong><span class="d-day" id="dDayOnly"></span></strong>
+
+			</div>
+		</div>
+
 
 
 	<div class="contestList">
@@ -661,7 +741,6 @@ setInterval(function() {
 
 	</div>
 
-	</div>
 
 
 	<section>
