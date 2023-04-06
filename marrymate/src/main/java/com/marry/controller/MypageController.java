@@ -76,7 +76,7 @@ public class MypageController {
 		return "/mypage/reserve";
 	}
 	
-	@RequestMapping("/qna.do")
+	
 	public String qna() {
 		return "/mypage/qna";
 	}
