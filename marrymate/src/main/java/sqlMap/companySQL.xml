@@ -7,7 +7,12 @@
 	insert into
   	  company
 	values(
+		<if test="kind.equals('예식장')">
 	    company_cidx.nextval,
+	    </if>
+	    <if test="!kind.equals('예식장')">
+	    company_cidx2.nextval,
+	    </if>
 	    sysdate,
 	    #{kind},
 	    #{cname},
