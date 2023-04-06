@@ -2,7 +2,7 @@ package com.marry.admin_cs.model;
 
 public class Admin_csDTO {
 	
-	private int ascidx;
+	private int acsidx;
 	private String question;
 	private String answer;
 	
@@ -11,18 +11,18 @@ public class Admin_csDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin_csDTO(int ascidx, String question, String answer) {
+	public Admin_csDTO(int acsidx, String question, String answer) {
 		super();
-		this.ascidx = ascidx;
+		this.acsidx = acsidx;
 		this.question = question;
 		this.answer = answer;
 	}
 
-	public int getAscidx() {
-		return ascidx;
+	public int getAcsidx() {
+		return acsidx;
 	}
-	public void setAscidx(int ascidx) {
-		this.ascidx = ascidx;
+	public void setAcsidx(int acsidx) {
+		this.acsidx = acsidx;
 	}
 
 	public String getQuestion() {

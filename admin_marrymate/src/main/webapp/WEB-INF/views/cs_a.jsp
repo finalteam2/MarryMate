@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +40,15 @@
 	left: 250px;
 	margin: 0px auto;
 }
-.tb {
+#tb {
+	margin-left: 760px;
+}
+#hr{
 	margin-left: 450px;
+}
+#tb2 {
+	text-align: center;
+	margin-left: 520px;
 }
 </style>
 </head>
@@ -80,7 +88,7 @@
 		<th><a href="pointMinusList.do">포인트관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="cs_a.do">문의관리</a></th>
+		<th><a href="cs_a_m.do">문의관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="memberList.do">회원관리</a></th>
@@ -94,7 +102,50 @@
 		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
 	</tr>
 </table>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+<table height="50" id="tb">
+	<tr>
+		<th width="150"><a href="cs_a_m.do">일반회원</a></th>
+		<th width="150"><a href="cs_a_c.do">기업회원</a></th>
+	</tr>
+</table>
+<hr width="950" id="hr">
+<br><br>
+<c:if test="${mc=='m'}">
+<form name="m_a_cs_List">
+<table cellspacing="0" border="1" width="800" id="tb2">
+	<tbody>
+	<c:forEach var="dto" items="${m_a_cs_List}">
+	<input type="hidden" name="midx" value="${dto.midx}">
+		<tr>
+			<td>${dto.img}</td>
+			<td>${dto.name}</td>
+			<td>${dto.content}</td>
+			<td>${dto.time}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+</c:if>
+<c:if test="${mc=='c'}">
+<form name="c_a_cs_List">
+<table cellspacing="0" border="1" width="800" id="tb2">
+	<tbody>
+	<c:forEach var="dto" items="${c_a_cs_List}">
+	<input type="hidden" name="cidx" value="${dto.cidx}">
+		<tr>
+			<td>${dto.img}</td>
+			<td>${dto.cname}</td>
+			<td>${dto.content}</td>
+			<td>${dto.time}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</form>
+</c:if>
+<br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">

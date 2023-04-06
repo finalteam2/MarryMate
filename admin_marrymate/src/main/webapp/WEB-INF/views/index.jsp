@@ -77,7 +77,7 @@
 		<th><a href="pointMinusList.do">포인트관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="cs_a.do">문의관리</a></th>
+		<th><a href="cs_a_m.do">문의관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="memberList.do">회원관리</a></th>

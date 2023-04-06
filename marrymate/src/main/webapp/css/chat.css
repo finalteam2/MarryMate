@@ -1,11 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'SUIT-Regular';
+}
+
+input{
+	font-family: 'SUIT-Regular';
+}
+
 .wrap .chat {
     display: flex;
     padding: 5px;
@@ -47,13 +56,13 @@
 
 .wrap .ch1 .textbox {
     margin-left: 10px;
-    background-color: #ddd;
+    background-color: white;
 }
 
 .wrap .ch1 .textbox::before {
     left: -15px;
     content: "◀";
-    color: #ddd;
+    color: white;
 }
 
 .wrap .ch2 {
@@ -84,11 +93,12 @@
 	vertical-align : bottom;
 	height: 30px;
 }
-.bt {
+.chatbt {
 	font-size: 14px;
 	background-color:#DFE6F7;
 	border:solid 1px;
-	border-radius:10px;
+	border-radius:20px;
+	height:25px;
 }
 #bt2 {
 	width:220px;
@@ -100,40 +110,27 @@
 	border:0px;
 	border-radius:10px;
 }
-</style>
-</head>
-<body>
-<form name="chat" action="goChatting.do">
-    <div class="wrap">
-    	<table width="320" height="540" align="center" id="tb">
-    		<tr id="tr">
-    			<td>
-			        <div class="chat ch1" id="st">
-			            <div class="icon"><img src="/marrymate/img/chatbot_profile.png" alt="chatbot" width="40" height="40"></div>
-			            <div class="textbox">무엇을 도와드릴까요?</div>
-			        </div>
-			     </td>
-			</tr>
-			<tr id="tr2">
-				<td>
-					<table cellpadding="5" width="320">
-						<tr>
-							<td align="right"><input type="button" value="질문1" class="bt"></td>
-						</tr>
-						<tr>
-							<td align="right"><input type="button" value="질문2" class="bt"></td>
-						</tr>
-						<tr>
-							<td align="right"><input type="button" value="질문3" class="bt"></td>
-						</tr>
-						<tr>
-							<td align="center"><input type="submit" value="1:1 채팅하기" id="bt2"></td>
-						</tr>
-					</table>
-        		</td>
-        	</tr>
-        </table>
-    </div>
-</form>
-</body>
-</html>
+
+#tr3 {
+	width:320px;
+	height:38px;
+	background-color:white;
+	text-align:center;
+}
+#tx {
+	width:300px;
+	height:35px;
+	font-size:16px;
+	border:0px;
+}
+#tx:focus {
+	outline: none;
+}
+
+#chat_p::-webkit-scrollbar {
+  display: none;
+}
+#chat_p {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

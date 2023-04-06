@@ -4,16 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.marry.admin_cs">
   
-  <select id="admin_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.Admin_csDTO">
-  		select answer from admin_cs where acsidx=#{acsidx}
+  <select id="questions" resultType="com.marry.admin_cs.model.Admin_csDTO">
+  		select * from admin_cs
   </select>
   
-  <select id="m_a_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.M_a_csDTO">
-  		select * from m_a_cs where midx=#{midx}
+  <select id="answer" parameterType="Integer" resultType="com.marry.admin_cs.model.Admin_csDTO">
+  		select * from admin_cs where acsidx=#{acsidx}
   </select>
   
-  <select id="c_a_cs" parameterType="Integer" resultType="com.marry.admin_cs.model.C_a_csDTO">
-  		select * from c_a_cs where cidx=#{cidx}
+  <insert id="sendContent_m" parameterType="com.marry.admin_cs.model.M_a_csDTO">
+  		insert into m_a_cs values(m_a_cs_maidx.nextval,#{midx},1,1,#{content},sysdate)
+  </insert>
+  
+  <select id="loadContent_m" parameterType="Integer" resultType="com.marry.admin_cs.model.M_a_csDTO">
+  		select * from m_a_cs where midx=#{midx} order by time
+  </select>
+  
+  <insert id="sendContent_c" parameterType="com.marry.admin_cs.model.C_a_csDTO">
+  		insert into c_a_cs values(c_a_cs_caidx.nextval,#{cidx},1,1,#{content},sysdate)
+  </insert>
+  
+  <select id="loadContent_c" parameterType="Integer" resultType="com.marry.admin_cs.model.C_a_csDTO">
+  		select * from c_a_cs where cidx=#{cidx} order by time
   </select>
   
   </mapper>

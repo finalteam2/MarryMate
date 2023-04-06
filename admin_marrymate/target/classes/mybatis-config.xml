@@ -13,5 +13,6 @@
   		<mapper resource="sqlMap/pointSQL.xml"/>
   		<mapper resource="sqlMap/bbsSQL.xml"/>
   		<mapper resource="sqlMap/refundSQL.xml"/>
+  		<mapper resource="sqlMap/admin_csSQL.xml"/>
   	</mappers>
   </configuration>
