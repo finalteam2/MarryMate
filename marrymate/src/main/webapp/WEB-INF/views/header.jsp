@@ -67,7 +67,7 @@
           <a class="nav-link" href="calendarMain.do">웨딩캘린더</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="community.do">커뮤니티</a>
+          <a class="nav-link" href="allCommunity.do">커뮤니티</a>
         </li>  
       </ul>
       </div>
