@@ -13,5 +13,6 @@
 		<mapper resource="sqlMap/mypageSQL.xml"/>
 		<mapper resource="sqlMap/calendarSQL.xml"/>
 		<mapper resource="sqlMap/admin_csSQL.xml"/>
+		<mapper resource="sqlMap/notificationSQL.xml"/>
 	</mappers>
 </configuration>
