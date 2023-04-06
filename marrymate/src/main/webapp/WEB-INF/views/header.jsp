@@ -100,7 +100,7 @@
 		            <li><a class="dropdown-item" href="qna.do">문의내역</a></li>
 		            <li><a class="dropdown-item" href="favorite.do">즐겨찾기</a></li>
 		            <li><a class="dropdown-item" href="point.do">My포인트</a></li>
-		            <li><a class="dropdown-item" href="community.do">My커뮤니티</a></li>
+		            <li><a class="dropdown-item" href="MyCommunity.do">My커뮤니티</a></li>
 		          </ul>
      		   </li>
 			</ul>
