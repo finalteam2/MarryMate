@@ -249,8 +249,8 @@ textarea {
 	  <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="리뷰 작성"/>
 	</div>
 </c:if>
-
 </form>
+
 
 <ul class="nav nav-tabs" id="scrollspyHeading3">
   <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>  </li>
@@ -259,6 +259,44 @@ textarea {
 </ul>
 <hr>
 <h3>문의</h3>
+
+<div class="accordion" id="accordionExample">
+<c:forEach varStatus="status" var="dto" items="${csarr }">
+<input type="hidden" name="ccsidx" value="${dto.ccsidx }">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading${status.count }">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
+        ${dto.subject } ${dto.csdate } ${dto.mname }
+        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+      </button>
+    </h2>
+    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        ${dto.content } 
+        <br>
+        ${dto.cname }
+        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+        <br>
+        ${dto.answer }
+      	답변일 : ${dto.ansdate }
+        <c:if test="${dto.is_answered == 0 }">
+      	<div class="mb-3">
+            <label for="message-text" class="col-form-label">답변</label>
+            <textarea class="form-control" id="message-text2" name="answer" placeholder="답변 내용을 작성하세요." required="required" rows="5"></textarea>
+        </div>
+        <div class="mb-3">
+        <button type="submit" class="btn btn-primary">답변하기</button>
+        </div>
+        </c:if>
+      </div>
+    </div>
+  </div>
+</c:forEach>
+</div>
+
+<hr>
 <!-- Button trigger modal -->
 <c:if test="${not empty sessionScope.loginMidx }">
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">문의하기</button>

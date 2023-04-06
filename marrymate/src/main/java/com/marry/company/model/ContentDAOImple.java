@@ -89,4 +89,10 @@ public class ContentDAOImple implements ContentDAO {
 		int result = sqlMap.update("updatecomcs", dto);
 		return result;
 	}
+	
+	@Override
+	public List<Com_CsDTO> answeredCs(int cidx) {
+		List<Com_CsDTO> arr = sqlMap.selectList("answeredcs", cidx);
+		return arr;
+	}
 }

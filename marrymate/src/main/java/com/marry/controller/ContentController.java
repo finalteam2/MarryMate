@@ -42,6 +42,8 @@ public class ContentController {
 			mav.addObject("dto", dto);
 			List iarr = contentDao.selectCom_Img(cidx);
 			mav.addObject("iarr", iarr);
+			List csarr = contentDao.answeredCs(cidx);
+			mav.addObject("csarr", csarr);
 			//예식장 확인, 예식장일 때만 홀과 식사 조회
 			if(dto.getKind().equals("예식장")) {
 				List harr = contentDao.selectHall(cidx);

@@ -129,6 +129,19 @@
 	order by
 	    ccsidx desc	
 	</select>
+	<select id="answeredcs" resultType="com.marry.company.model.Com_CsDTO">
+	select
+	    com_cs.*, member.name as mname, company.cname as cname
+	from	
+	    com_cs, member, company
+	where
+	    com_cs.cidx = #{cidx}
+	    and member.midx = com_cs.midx
+	    and company.cidx = #{cidx}
+	    and is_answered = 1
+	order by
+	    ccsidx desc	
+	</select>
 	<update id="updatecomcs" parameterType="com.marry.company.model.Com_CsDTO">
 	update 
 		com_cs
