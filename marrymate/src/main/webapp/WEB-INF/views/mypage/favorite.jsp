@@ -9,7 +9,15 @@
 <body>
 <section>
 	<article>
-	
+		<h2>즐 겨 찾 기</h2>
+		<hr>
+		<br>
+		<div>예식장</div>
+		<hr>
+		<div>스/드/메</div>
+		<hr>
+		<div>기타</div>
+		<hr>
 	</article>
 </section>
 </body>

@@ -32,6 +32,13 @@ public class MypageDAOImple implements MypageDAO {
 	}
 	
 	@Override
+	public int companyInfoUpdate(CompanyDTO dto) {
+		
+		int count=sqlMap.update("companyInfoUpdate", dto);
+		return count;
+	}
+	
+	@Override
 	public MemberDTO myInfoSelect(MemberDTO dto) {
 	
 		MemberDTO dto2=sqlMap.selectOne("myInfoSelect",dto);
@@ -48,14 +55,14 @@ public class MypageDAOImple implements MypageDAO {
 	
 	public List<HallDTO> hallInfoSelect(int cidx) {
 		
-		List<HallDTO> dto4=sqlMap.selectList("hallInfoSelect",1);
+		List<HallDTO> dto4=sqlMap.selectList("hallInfoSelect",cidx);
 		return dto4;
 	}
 	
 	
 	public List<FoodDTO> foodInfoSelect(int cidx) {
 		
-		List<FoodDTO> dto5=sqlMap.selectList("foodInfoSelect",1);
+		List<FoodDTO> dto5=sqlMap.selectList("foodInfoSelect",cidx);
 		return dto5;
 	}
 

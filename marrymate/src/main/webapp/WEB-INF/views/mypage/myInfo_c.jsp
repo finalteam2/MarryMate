@@ -7,11 +7,17 @@
 <meta charset="UTF-8">
 <title>My 정보수정</title>
 <style type="text/css">
+	@font-face {
+    	font-family: 'SUIT-Regular';
+    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    	font-weight: normal;
+    	font-style: normal;
+	}
 	article div input[type=text] {
 		width: 230px;
 		height: 30px;
 		font-size: 17px;
-		font-family: 'GmarketSansMedium';
+		font-family: 'SUIT-Regular';
 		border: 1px solid black;
 		border-radius: 12px;
 		text-align: center;
@@ -33,7 +39,7 @@
 		font-size: 10px;
 	}
 	#ht{
-		width: 90%;
+		width: 100%;
 		margin: auto;
 		border-collapse: collapse;
 		text-align: center;	
@@ -52,7 +58,7 @@
 		width: 80px;
 		height: 30px;
 		font-size: 17px;
-		font-family: 'GmarketSansMedium';
+		font-family: 'SUIT-Regular';
 		border: 1px solid black;
 		border-radius: 12px;
 		text-align: center;
@@ -85,10 +91,13 @@
 	    border: none;
 	    display: inline-block;
 	    border-radius: 15px;
-	    font-family: 'GmarketSansMedium';
+	    font-family: 'SUIT-Regular';
 	    font-size: 14px;
 	    font-weight: 600;
 	    text-align: center;
+	}
+	.t{
+	background-color: white;
 	}
 </style>
 </head>
@@ -99,7 +108,7 @@
 		<hr>
 		<br>
 		<div id="cBox">
-			<form name="companyInfo" action="comUpdate.do">
+			<form name="companyInfoUpdate" action="comUpdate.do">
 				<div class="hTagBox">아이디</div>
 				<input type="text" name="id" value="${comInfo.id }" readonly required><br>
 				<div class="hTagBox">비밀번호</div>
@@ -131,7 +140,12 @@
 				</c:if>
 				<input type="file" name="aimg" accept="image/*"><br>
 				<hr>
-				<br>
+				<div class="bBox">
+				<input type="submit" class="btn" value="수정">
+				<input type="reset" class="btn" value="취소"></div>
+			</form>
+				<hr>
+			<form name="hallInfoUpdate" action="hallUpdate.do">	
 				<c:if test="${comInfo.kind == '예식장' }">
 				<div class="hTagBox">홀</div><br>
 				<table id="ht">
@@ -141,19 +155,22 @@
 							<th>예식시간</th>
 							<th>홀 대여료</th>
 							<th>보증인원</th>
+							<th class="t">취소버튼</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach var="hall" items="${hallInfo }">
 						<tr>
-							<td><input type="text" value="${hall.name }" required> 홀</td>
+							<td><input type="text" name="name" value="${hall.name }" required> 홀</td>
 							<td><input type="text" value="${hall.time }" required> 시간</td>
 							<td><input type="text" value="${hall.pay }" required> 원</td>
 							<td><input type="text" value="${hall.guest_num }" required> 명</td>
+							<td><input type="submit" value="수정"></td>
 						</tr>
-					</c:forEach>	
+					</c:forEach>
 					</tbody>
 				</table>
+			</form>	
 				<hr>
 				<br>
 				<div class="hTagBox">식대</div><br>
@@ -162,13 +179,17 @@
 						<tr>
 							<th>식사종류</th>
 							<th>식사가격</th>
+							<th class="t">취소버튼</th>
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="food" items="${foodInfo }">
 						<tr>
-							<td><input type="text" value="${foodInfo.get(0).name }" required></td>
-							<td><input type="text" value="${foodInfo.get(0).pay }" required>원</td>
+							<td><input type="text" value="${food.name }" required></td>
+							<td><input type="text" value="${food.pay }" required>원</td>
+							<td><input type="submit" value="수정"></td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 				</c:if>
@@ -184,10 +205,6 @@
 				</table>	
 				</c:if>
 				<br>
-				<div class="bBox">
-				<input type="submit" class="btn" value="수정">
-				<input type="reset" class="btn" value="취소"></div>
-			</form>
 		</div>
 	</article>
 </section>

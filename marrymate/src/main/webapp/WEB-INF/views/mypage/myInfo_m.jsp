@@ -103,6 +103,7 @@
 		</div>
 		<form name="myInfoUpdate" action="update.do">
 		<div id="mBox">
+				<input type="hidden" name="midx" value=${sessionScope.midx }>
 				<div class="hTagBox">이름</div>
 				<input type="text" name="name" value="${userInfo.name }" readonly required><br>
 				<div class="hTagBox">아이디</div>
