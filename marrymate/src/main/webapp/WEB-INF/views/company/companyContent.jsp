@@ -267,7 +267,6 @@ textarea {
     <h2 class="accordion-header" id="heading${status.count }">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
         ${dto.subject } ${dto.csdate } ${dto.mname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
         <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
       </button>
     </h2>
@@ -276,7 +275,6 @@ textarea {
         ${dto.content } 
         <br>
         ${dto.cname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
         <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
         <br>
         ${dto.answer }
