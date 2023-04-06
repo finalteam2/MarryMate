@@ -90,8 +90,12 @@
 			  <li class="nav-item dropdown">
 			 	  <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown"><img src="/marrymate/img/user2.png" style="width:30px"></a>
 		          <ul class="dropdown-menu">
-		            <li><a class="dropdown-item" href="myInfo_m.do">마이페이지(일반)</a></li>
-		            <li><a class="dropdown-item" href="myInfo_c.do">마이페이지(기업)</a></li>
+					<c:if test="${!empty sessionScope.loginId}">
+		            <li><a class="dropdown-item" href="myInfo_m.do">마이페이지</a></li>
+					</c:if>
+					<c:if test="${!empty sessionScope.com_id}">
+		            <li><a class="dropdown-item" href="myInfo_c.do">마이페이지</a></li>
+					</c:if>
 		            <li><a class="dropdown-item" href="reserve.do">예약내역</a></li>
 		            <li><a class="dropdown-item" href="qna.do">문의내역</a></li>
 		            <li><a class="dropdown-item" href="favorite.do">즐겨찾기</a></li>
