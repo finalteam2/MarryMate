@@ -115,7 +115,48 @@
 			pay desc, cidx desc
 		</if>
 	</select>
-
+	<select id="likehall" resultType="com.marry.company.model.CompanyDTO">
+	select 
+	    *
+	from 
+	    company, com_like
+	where
+	    com_like.midx = #{midx}
+	    and company.cidx = com_like.cidx
+	    and kind = '예식장'
+		and clevel = 1
+		and blind = 0
+	order by
+		lidx asc
+	</select>
+	<select id="likesdm" resultType="com.marry.company.model.CompanyDTO">
+	select 
+	    * 
+	from 
+	    company, com_like
+	where
+	    com_like.midx = #{midx}
+	    and company.cidx = com_like.cidx
+	    and (kind = '스튜디오' or kind = '드레스' or kind = '헤어메이크업')
+		and clevel = 1
+		and blind = 0
+	order by
+		lidx asc
+	</select>
+	<select id="likeetc" resultType="com.marry.company.model.CompanyDTO">
+	select 
+	    * 
+	from 
+	    company, com_like
+	where
+	    com_like.midx = #{midx}
+	    and company.cidx = com_like.cidx
+	    and (kind = '스냅DVD' or kind = '주례' or kind = '사회' or kind = '축가')
+		and clevel = 1
+		and blind = 0
+	order by
+		lidx asc
+	</select>
 	
 	
 	

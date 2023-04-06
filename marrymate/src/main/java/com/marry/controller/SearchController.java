@@ -18,7 +18,7 @@ import com.marry.search.model.SearchDTO;
 public class SearchController {
 	
 	@Autowired
-	private SearchDAOImple searchDAO;
+	private SearchDAOImple searchDao;
 	
 	/**웨딩홀 검색 페이지*/
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.GET)
@@ -63,8 +63,8 @@ public class SearchController {
 		int start = (page - 1) * view + 1;
 		int end = (page * view);
 		SearchDTO dto = new SearchDTO(sido, sigungu, payMin, payMax, guestMin, guestMax, name, sort, kind, view, start, end);
-		List<CompanyDTO> arr = searchDAO.searchAll(dto);
-		int cnt = searchDAO.totalCnt(dto);
+		List<CompanyDTO> arr = searchDao.searchAll(dto);
+		int cnt = searchDao.totalCnt(dto);
 		String paging = "";
 		if (cnt > 0) {
 			paging = pageModule.makePage("searchHall", cnt, view, 5, page);
@@ -103,8 +103,8 @@ public class SearchController {
 		int start = (page - 1) * view + 1;
 		int end = (page * view);
 		SearchDTO dto = new SearchDTO(sido, "", payMin, payMax, 0, 0, name, sort, kind, view, start, end);
-		List<CompanyDTO> arr = searchDAO.searchAll(dto);
-		int cnt = searchDAO.totalCnt(dto);
+		List<CompanyDTO> arr = searchDao.searchAll(dto);
+		int cnt = searchDao.totalCnt(dto);
 		String paging = "";
 		if (cnt > 0) {
 			paging = pageModule.makePage("searchEtc", cnt, view, 5, page);
@@ -115,6 +115,21 @@ public class SearchController {
 		mav.addObject("companylist", arr);
 		mav.addObject("paging",paging);
 		mav.addObject("cnt", cnt);
+		mav.setViewName("finalJson");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/searchLike.do", method = RequestMethod.POST)
+	public ModelAndView likeList(
+			@RequestParam(value="midx")int mdix
+			) {
+		ModelAndView mav = new ModelAndView();
+		List<CompanyDTO> harr = searchDao.likeHall(mdix);
+		List<CompanyDTO> sarr = searchDao.likeSdm(mdix);
+		List<CompanyDTO> earr = searchDao.likeEtc(mdix);
+		mav.addObject("harr", harr);
+		mav.addObject("sarr", sarr);
+		mav.addObject("earr", earr);
 		mav.setViewName("finalJson");
 		return mav;
 	}

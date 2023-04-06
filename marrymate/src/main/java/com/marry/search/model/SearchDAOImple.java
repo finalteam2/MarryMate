@@ -35,4 +35,21 @@ public class SearchDAOImple implements SearchDAO {
 		return cnt;
 	}
 	
+	@Override
+	public List<CompanyDTO> likeHall(int midx) {
+		List<CompanyDTO> arr = sqlMap.selectList("likehall",midx); 
+		return arr;
+	}
+	@Override
+	public List<CompanyDTO> likeSdm(int midx) {
+		List<CompanyDTO> arr = sqlMap.selectList("likesdm",midx); 
+		return arr;
+	}
+	@Override
+	public List<CompanyDTO> likeEtc(int midx) {
+		List<CompanyDTO> arr = sqlMap.selectList("likeetc",midx); 
+		return arr;
+	}
+	
+	
 }

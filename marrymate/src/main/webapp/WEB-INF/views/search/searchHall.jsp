@@ -80,7 +80,7 @@
 </ul>
 </form>
 <div id="totalCnt"></div>
-<div class="container1" id="container1"></div>
+<div  class="condiv"id="container1"></div>
 <nav class="pagebox" aria-label="Page navigation example">
   <ul class="pagination" id="paging"></ul>
 </nav>
