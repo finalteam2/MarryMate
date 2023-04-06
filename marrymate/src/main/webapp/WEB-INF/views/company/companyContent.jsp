@@ -97,11 +97,11 @@ textarea {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-	    <img src="/marrymate/img/company/com_best/${dto.img }" class="d-block w-100" alt="img">
+	    <img src="/marrymate/img/com_best/${dto.img }" class="d-block w-100" alt="img">
     </div>
 	<c:forEach  var="idto" items="${iarr }" varStatus="loop">
 	    <div class="carousel-item">
-	      <img src="/marrymate/img/company/com_img/${idto.img }" class="d-block w-100" alt="img">
+	      <img src="/marrymate/img/com_img/${idto.img }" class="d-block w-100" alt="img">
 	    </div>
 	</c:forEach>
   </div>
