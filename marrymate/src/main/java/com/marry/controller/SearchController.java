@@ -20,7 +20,7 @@ public class SearchController {
 	@Autowired
 	private SearchDAOImple searchDao;
 	
-	/**웨딩홀 검색 페이지*/
+	/**예식장 검색 페이지*/
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.GET)
 	public ModelAndView searchHall() {
 		ModelAndView mav = new ModelAndView();
@@ -42,6 +42,7 @@ public class SearchController {
 		}
 	}
 	
+	//예식장 내역 검색 json 반환
 	@RequestMapping(value = "/searchHall.do", method = RequestMethod.POST)
 	public ModelAndView searchHall(
 			@RequestParam(name = "sido",defaultValue = "")String sido,
@@ -87,6 +88,7 @@ public class SearchController {
 		return mav;
 	}
 	
+	//기타 검색 내용 json 반환
 	@RequestMapping(value = "/searchEtc.do", method = RequestMethod.POST)
 	public ModelAndView searchEtc(
 			@RequestParam(name = "sido",defaultValue = "")String sido,
@@ -119,6 +121,7 @@ public class SearchController {
 		return mav;
 	}
 	
+	//즐겨찾기 한 항목 조회 json 반환
 	@RequestMapping(value = "/searchLike.do", method = RequestMethod.POST)
 	public ModelAndView likeList(
 			@RequestParam(value="midx")int mdix

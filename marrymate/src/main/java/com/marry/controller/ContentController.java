@@ -24,7 +24,7 @@ public class ContentController {
 	@Autowired
 	private ContentDAOImple contentDao;
 	
-	//업체 상세 페이지 접속 메서드
+	//업체 상세 페이지 접속
 	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)
 	public ModelAndView companyContent(
 			@RequestParam(value = "cidx", defaultValue = "0")int cidx,
@@ -68,7 +68,7 @@ public class ContentController {
 		return mav;
 	}
 	
-	
+	//리뷰 작성
 	@RequestMapping(value = "/review.do",method = RequestMethod.POST)
 	public ModelAndView insertReview(ReviewDTO dto,
 			HttpServletRequest req
@@ -104,6 +104,7 @@ public class ContentController {
 		return mav;
 	}
 	
+	//즐겨찾기 등록, 취소
 	@RequestMapping("/com_like.do")
 	public ModelAndView com_like(
 			Com_LikeDTO dto
@@ -134,12 +135,13 @@ public class ContentController {
 		return mav;
 	}
 	
+	//문의 등록
 	@RequestMapping("/com_cs.do")
 	public ModelAndView comcs(Com_CsDTO dto,
 			@RequestParam(value="is_private", defaultValue = "0")int is_private
 			) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("is_paivate : "+is_private);
+		//System.out.println("is_paivate : "+is_private);
 		//dto.setIs_private(is_private);
 		int cnt = contentDao.insertCom_cs(dto);
 		String msg = "";
@@ -154,6 +156,7 @@ public class ContentController {
 		return mav;
 	}
 	
+	//내 문의 조회 페이지 진입
 	@RequestMapping("/qna.do")
 	public ModelAndView qna(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -172,6 +175,8 @@ public class ContentController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		//로그인 유저에 따라 다른 방식으로 조회
 		if (midx > 0) {
 			List<Com_CsDTO> marr = contentDao.selectMemCs(midx);
 			mav.addObject("marr",marr);
@@ -183,6 +188,7 @@ public class ContentController {
 		return mav;
 	}
 	
+	//문의 답변하기
 	@RequestMapping("/qnaUpadate.do")
 	public ModelAndView qnaUpadte(Com_CsDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -199,15 +205,20 @@ public class ContentController {
 		return mav;
 	}
 	
+	
+	//내 예약 목록 조회 및 페이지 진입
 	@RequestMapping("/myBook.do")
-	public String reserve() {
-		return "/mypage/myBook";
+	public ModelAndView myBook() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
 	}
 	
 	
+	//내 포인트 내역 조회 및 페이지 진입
 	@RequestMapping("/myPoint.do")
-	public String point() {
-		return "/mypage/myPoint";
+	public ModelAndView myPoint() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
 	}
 	
 	

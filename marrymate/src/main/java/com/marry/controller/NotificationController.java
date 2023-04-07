@@ -21,6 +21,7 @@ public class NotificationController {
 	@Autowired
 	NotificationDAOImple notificationDao;
 	
+	//기능 구현 테스트 진입
 	@RequestMapping("/test.do")
 	public ModelAndView test() {
 		ModelAndView mav = new ModelAndView();
@@ -28,6 +29,7 @@ public class NotificationController {
 		return mav;
 	}
 
+	//노티 추가 메서드
 	@RequestMapping(value = "/addNoti.do", method = RequestMethod.POST)
 	public ModelAndView addNoti(NotificationDTO dto) {
 		ModelAndView mav = new ModelAndView();
@@ -74,6 +76,7 @@ public class NotificationController {
 		return mav;
 	}
 	
+	//노티 읽음 처리 및 페이지 이동
 	@RequestMapping("/goNoti.do")
 	public ModelAndView goNoti(
 			@RequestParam(value="page", defaultValue = "index.do")String page, 
