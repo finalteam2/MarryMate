@@ -15,7 +15,7 @@
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/all-book.js"></script>
 </head>
-<body onload="cateList(1)">
+<body onload="cateList(1);rn();">
 <section>
 	<article>
 		<div class="bg_box">
@@ -141,7 +141,7 @@
 			</div>
 			<h3 class="sumPay_text1">총 금액</h3>
 			<h3 id="sumPay_text2" class="sumPay_text2">0 원</h3>
-			<form name="bookFm" action="bookSubmit.do">
+			<form id="bookFm" name="bookFm" action="bookSubmit.do">
 			
 				<input type="hidden" name="test" value="예약시 넘길 데이터입니다">
 				
