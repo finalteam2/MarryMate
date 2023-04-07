@@ -17,7 +17,7 @@ article table{
 	width: 60%;
 	margin: auto;
 	border-collapse: collapse;
-	text-align: center;	
+	text-align: center;
 }
 article table thead{
 	border-bottom: 20px solid white;
