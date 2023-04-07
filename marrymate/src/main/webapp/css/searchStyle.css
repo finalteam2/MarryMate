@@ -6,8 +6,11 @@
     font-weight: normal;
     font-style: normal;
 }
-
 body{
+	background:#fbf4ff;
+}
+
+.allpage{
     font-family: 'SUIT-Regular';
 	width: 1280px;
 	margin:0 auto;

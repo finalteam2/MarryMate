@@ -208,6 +208,7 @@ function searchResult(){
 </head>
 <body onload="searchLike();">
 <%@include file="../header.jsp" %>
+<div class="allpage">
 <section>
 	<h2 align="left">즐 겨 찾 기</h2>
 	<article>
@@ -229,6 +230,7 @@ function searchResult(){
 	<hr>
 	</article>
 </section>
+</div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>

@@ -15,78 +15,80 @@
 </head>
 <body onload="searchEtc('1')">
 <%@include file="../header.jsp" %>
-<h1>웨딩컬렉션</h1>
-<form>
-<div class="searchbox">
-	<div class="input-group mb-3" >
-	  <label class="input-group-text" for="inputGroupSelect01">분류</label>
-	  <select class="form-select" name="kind" id="kind">
-		<option selected>스튜디오</option>
-		<option>헤어메이크업</option>
-		<option>드레스</option>
-		<option>스냅DVD</option>
-		<option>주례</option>
-		<option>사회</option>
-		<option>축가</option>
-	  </select>
+<div class="allpage">
+	<h1>웨딩컬렉션</h1>
+	<form>
+	<div class="searchbox">
+		<div class="input-group mb-3" >
+		  <label class="input-group-text" for="inputGroupSelect01">분류</label>
+		  <select class="form-select" name="kind" id="kind">
+			<option selected>스튜디오</option>
+			<option>헤어메이크업</option>
+			<option>드레스</option>
+			<option>스냅DVD</option>
+			<option>주례</option>
+			<option>사회</option>
+			<option>축가</option>
+		  </select>
+		</div>
+		<div class="input-group mb-3" >
+		  <label class="input-group-text" for="inputGroupSelect01">지역</label>
+		  <select class="form-select" name="sido" id="sido">
+			<option value="">도/특별시/광역시</option>
+			<option value="서울">서울</option>
+			<option value="부산">부산</option>
+			<option value="대구">대구</option>
+			<option value="인천">인천</option>
+			<option value="광주">광주</option>
+			<option value="대전">대전</option>
+			<option value="울산">울산</option>
+			<option value="세종">세종</option>
+			<option value="경기">경기</option>
+			<option value="강원">강원</option>
+			<option value="충북">충북</option>
+			<option value="충남">충남</option>
+			<option value="전북">전북</option>
+			<option value="전남">전남</option>
+			<option value="경북">경북</option>
+			<option value="경남">경남</option>
+			<option value="제주">제주</option>
+		  </select>
+		</div>
+		<div class="input-group mb-3">
+		  <span class="input-group-text" id="basic-addon1">비용</span>
+		  <input type="text" class="form-control" placeholder="최소금액" name="payMin" id="payMin">
+		  <input type="text" class="form-control" placeholder="최대금액" name="payMax" id="payMax">
+		</div>
+		<div class="input-group mb-3">
+		  <span class="input-group-text" id="basic-addon1">업체명</span>
+		  <input type="text" class="form-control" placeholder="업체명" name="name" id="name">
+		</div>
+		<div>
+			<button type="button" class="btn btn-primary" onclick="searchEtc('1')">검색</button>
+			<button type="reset" class="btn btn-secondary">다시입력</button>
+		</div>
 	</div>
-	<div class="input-group mb-3" >
-	  <label class="input-group-text" for="inputGroupSelect01">지역</label>
-	  <select class="form-select" name="sido" id="sido">
-		<option value="">도/특별시/광역시</option>
-		<option value="서울">서울</option>
-		<option value="부산">부산</option>
-		<option value="대구">대구</option>
-		<option value="인천">인천</option>
-		<option value="광주">광주</option>
-		<option value="대전">대전</option>
-		<option value="울산">울산</option>
-		<option value="세종">세종</option>
-		<option value="경기">경기</option>
-		<option value="강원">강원</option>
-		<option value="충북">충북</option>
-		<option value="충남">충남</option>
-		<option value="전북">전북</option>
-		<option value="전남">전남</option>
-		<option value="경북">경북</option>
-		<option value="경남">경남</option>
-		<option value="제주">제주</option>
-	  </select>
-	</div>
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="basic-addon1">비용</span>
-	  <input type="text" class="form-control" placeholder="최소금액" name="payMin" id="payMin">
-	  <input type="text" class="form-control" placeholder="최대금액" name="payMax" id="payMax">
-	</div>
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="basic-addon1">업체명</span>
-	  <input type="text" class="form-control" placeholder="업체명" name="name" id="name">
-	</div>
-	<div>
-		<button type="button" class="btn btn-primary" onclick="searchEtc('1')">검색</button>
-		<button type="reset" class="btn btn-secondary">다시입력</button>
-	</div>
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link active" aria-current="page" id="sort1" onclick="goSort('1')">이름순</a></li>
+		<li class="nav-item"><a class="nav-link" aria-current="page" id="sort2" onclick="goSort('2')">조회수순</a></li>
+		<li class="nav-item"><a class="nav-link" aria-current="page" id="sort3" onclick="goSort('3')">낮은가격순</a></li>
+		<li class="nav-item"><a class="nav-link" aria-current="page" id="sort4" onclick="goSort('4')">높은가격순</a></li>
+		<li class="nav-item">
+		<select class="form-select" aria-label="Default select example" name="view" id="view" onchange="searchEtc(1)">
+			<option value="8" selected="selected">8개씩 보기</option>
+			<option value="12">12개씩 보기</option>
+			<option value="16">16개씩 보기</option>
+			<option value="20">20개씩 보기</option>
+		</select>
+		</li>
+	</ul>
+	</form>
+	<div id="totalCnt"></div>
+	<div class="condiv" id="container1"></div>
+	<nav class="pagebox" aria-label="Page navigation example">
+	  <ul class="pagination" id="paging"></ul>
+	</nav>
 </div>
-<ul class="nav nav-tabs">
-	<li class="nav-item"><a class="nav-link active" aria-current="page" id="sort1" onclick="goSort('1')">이름순</a></li>
-	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort2" onclick="goSort('2')">조회수순</a></li>
-	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort3" onclick="goSort('3')">낮은가격순</a></li>
-	<li class="nav-item"><a class="nav-link" aria-current="page" id="sort4" onclick="goSort('4')">높은가격순</a></li>
-	<li class="nav-item">
-	<select class="form-select" aria-label="Default select example" name="view" id="view" onchange="searchEtc(1)">
-		<option value="8" selected="selected">8개씩 보기</option>
-		<option value="12">12개씩 보기</option>
-		<option value="16">16개씩 보기</option>
-		<option value="20">20개씩 보기</option>
-	</select>
-	</li>
-</ul>
-</form>
-<div id="totalCnt"></div>
-<div class="condiv" id="container1"></div>
-<nav class="pagebox" aria-label="Page navigation example">
-  <ul class="pagination" id="paging"></ul>
-</nav>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>
