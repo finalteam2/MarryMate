@@ -80,7 +80,7 @@
 				<a href="login.do">회원로그인</a>&nbsp;&nbsp;
 				<a href="login_com.do">기업로그인</a>&nbsp;&nbsp;
 	            <a href="memberJoin.do">회원가입</a> &nbsp;&nbsp;
-	            <a href="companyJoin.do">기업가입</a>
+	            <a href="allCompanyJoin.do">기업가입</a>
 				</div>
 			</c:if>
            	<c:if test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
