@@ -10,4 +10,5 @@ public interface BookDAO {
 	public List<CompanyDTO> cateBookList(String filterCate);
 	public List<CompanyDTO> orderBookList(FilterDTO dto);
 	public CompanyDTO addBookCart(int cidx);
+	public List<CompanyDTO> searchBookList(FilterDTO dto);
 }

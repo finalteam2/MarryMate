@@ -15,35 +15,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/all-book.js"></script>
-<script>
-$( function() {
-	$( "#datepicker" ).datepicker({
-		showMonthAfterYear: true,
-		yearSuffix: ",",
-		monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
-		dateFormat: "yy-mm-dd",
-		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
-		dayNames: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ],
-		minDate: "+1",
-		maxDate: "+365",
-		nextText: ">",
-		prevText: "<"
-	});
-} );
-$( function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 1,
-      max: 295,
-      values: [ 1, 295 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val(ui.values[ 0 ]+"만원 ~ "+ui.values[ 1 ]+"만원");
-      }
-    });
-    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
-      "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
-} );
-</script>
 </head>
 <body>
 <section>
@@ -59,6 +30,7 @@ $( function() {
 		</div>                  
 	</article>
 	<article>
+		<form name="searchFm">
 		<div class="top_box">
 			<div class="search_box">
 				<input class="search_input" type="text" name="filterText" placeholder="지역, 업체명을 입력해주세요.">
@@ -67,7 +39,7 @@ $( function() {
 				<input type="text" id="datepicker" name="filterDate" placeholder="이용날짜를 선택해주세요." readonly>
 			</div>
 			<div class="local_box">
-				<select name="filterSido">
+				<select id="filterSido" name="filterSido">
 					<option data-display="지역을 선택해주세요." value="" disabled selected>시/도</option>
 					<option value="서울">서울</option>
 					<option value="경기">경기</option>
@@ -88,7 +60,7 @@ $( function() {
 				</select>
 				<script>
 					$(document).ready(function(){
-						$('select').niceSelect();
+						$('#filterSido').niceSelect();
 					});
 				</script>
 			</div>
@@ -106,9 +78,10 @@ $( function() {
 				</div>
 			</div>
 			<div class="button_box">
-				<input class="search_button" type="button" value="검색하기">
+				<input class="search_button" type="button" value="검색하기" onclick="searchList()">
 			</div>
 		</div>
+		</form>
 	</article>
 	<article>
 		<div class="order_box">
@@ -126,27 +99,29 @@ $( function() {
 			<h2 id="cate_title" class="cate_title">
 			스튜디오
 			</h2>
-			<hr style="width:93%;border:1px solid #6c6c6c;">	
-			<c:if test="${empty arr }">
-				<h3 class="alt_text">예약가능한 업체가 없습니다.</h3>
-			</c:if>
-			
+			<hr style="width:93%;border:1px solid #6c6c6c;">
 			<div id="list_container">
 				<c:forEach var="dto" items="${arr }">
 					<table class="list_table">
 						<tr>
 							<td rowspan="3" width="28%" align="center">
-							<img class="company_img" src="/marrymate/img/company/${dto.img }" alt="업체사진">
+							<img class="company_img" src="/marrymate/img/com_best/${dto.img }" alt="업체사진">
 							</td>
 							<td class="bk_cname" width="52%">${dto.cname }</td>
-							<td width="20%" align="right">날짜선택</td>
+							<td width="20%" align="right"><input id="bk_date${dto.cidx }" type="date" name="bk_date"></td>
 						</tr>
 						<tr>
 							<td class="bk_sido">
 							${dto.sido } - ${dto.sigungu }
 							<br><br><br>
 							</td>
-							<td align="right">시간선택<br><br><br></td>
+							<td align="right">
+							<select id="bk_time${dto.cidx }" name="bk_time">
+								<option value="12:00">12:00</option>
+								<option value="14:00">14:00</option>
+							</select>
+							<br><br><br>
+							</td>
 						</tr>
 						<tr>
 							<td class="bk_pay">가격 : ${dto.pay } 원</td>
@@ -195,9 +170,12 @@ $( function() {
 			</div>
 			<h3 class="sumPay_text1">총 금액</h3>
 			<h3 id="sumPay_text2" class="sumPay_text2">0 원</h3>
-			<div class="book_box">
-				<input class="book_button" type="submit" value="예 약 하 기">
-			</div>
+			<form name="bookFm" action="bookSubmit.do">
+				<input type="hidden" name="test" value="테스트용입니다.">
+				<div class="book_box">
+					<input class="book_button" type="submit" value="예 약 하 기">
+				</div>
+			</form>
 		</div>
 	</article>
 </section>

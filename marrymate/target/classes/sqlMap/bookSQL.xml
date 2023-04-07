@@ -52,4 +52,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 			cidx=#{cidx}
 	</select>
+	<select id="searchList" parameterType="com.marry.book.model.FilterDTO" resultType="com.marry.company.model.CompanyDTO">
+		select
+			company.cidx, kind, cname, sido, sigungu, pay, clevel, watch, blind, img
+		from
+			company, book_time
+		where
+			company.cidx=book_time.cidx
+		and
+			clevel=1 and blind=0
+		and
+			(cname like #{filterText} or sido like #{filterText} or sigungu like #{filterText})
+		and
+			yoil like #{filterDate}
+		and
+			sido like #{filterSido}
+		and
+			pay <![CDATA[>=]]> #{filterPriceMin} and pay <![CDATA[<=]]> #{filterPriceMax}
+		and
+			kind=#{filterCate}
+		group by
+			company.cidx, kind, cname, sido, sigungu, pay, clevel, watch, blind, img
+		order by
+			cname asc, company.cidx desc
+	</select>
 </mapper>
