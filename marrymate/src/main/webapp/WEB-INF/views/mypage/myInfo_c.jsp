@@ -6,9 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>My 정보수정</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <style type="text/css">
 	@font-face {
@@ -143,9 +140,9 @@
 				<div class="hTagBox">상세주소</div>
 				<input type="text" name="sjuso" value="${comInfo.sjuso }" required><br> 
 				<div class="hTagBox">웹사이트</div>
-				<input type="text" name="curl" value="${comInfo.curl }" required><br>
+				<input type="text" name="curl" value="${comInfo.curl }"><br>
 				<div class="hTagBox">기업소개</div>
-				<textarea style="resize: none" name="intro" rows="11" cols="50" value="${comInfo.intro }"></textarea><br>
+				<textarea style="resize: none" name="intro" rows="11" cols="50">${comInfo.intro }</textarea><br>
 				<br>
 				<div class="hTagBox">대표이미지</div>
 				<c:if test="${!empty comInfo.img}">

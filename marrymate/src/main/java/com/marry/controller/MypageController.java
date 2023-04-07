@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.*;
@@ -50,41 +51,44 @@ public class MypageController {
 	@RequestMapping("/update.do")
 	public ModelAndView update(MemberDTO dto) {
 		ModelAndView mav=new ModelAndView();
+		mypageDao.myInfoUpdate(dto);
+		mav.addObject("msg", "정보수정 성공!");
+		mav.addObject("goUrl", "/marrymate/myInfo_m.do");
+		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
 	
 	@RequestMapping("/comUpdate.do")
 	public ModelAndView comUpdate(CompanyDTO dto) {
 		ModelAndView mav=new ModelAndView();
+		mypageDao.companyInfoUpdate(dto);
+		mav.addObject("msg", "정보수정 성공!");
+		mav.addObject("goUrl", "/marrymate/myInfo_c.do");
+		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
 	
 	@RequestMapping("/hallUpdate.do")
 	public ModelAndView hallUpdate(HallDTO dto) {
 		ModelAndView mav=new ModelAndView();
+		mypageDao.hallInfoUpdate(dto);
+		mav.addObject("msg", "정보수정 성공!");
+		mav.addObject("goUrl", "/marrymate/myInfo_c.do");
+		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
 	
 	@RequestMapping("/foodUpdate.do")
 	public ModelAndView foodUpdate(FoodDTO dto) {
 		ModelAndView mav=new ModelAndView();
+		mypageDao.foodInfoUpdate(dto);
+		mav.addObject("msg", "정보수정 성공!");
+		mav.addObject("goUrl", "/marrymate/myInfo_c.do");
+		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
 	
-	@RequestMapping("/reserve.do")
-	public String reserve() {
-		return "/mypage/reserve";
-	}
 	
-	
-	public String qna() {
-		return "/mypage/qna";
-	}
-	
-	@RequestMapping("/point.do")
-	public String point() {
-		return "/mypage/myPoint";
-	}
 	
 	@RequestMapping("/myCommunity.do")
 	public String community() {

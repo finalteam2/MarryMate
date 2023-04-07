@@ -17,7 +17,7 @@
     font-style: normal;
 }
 article table{
-	width: 60%;
+	width: 70%;
 	margin: auto;
 	border-collapse: collapse;
 	text-align: center;	
@@ -29,17 +29,8 @@ article table thead{
 article table thead th{
 	color: white;
 	font-family: 'SUIT-Regular';
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
-}
-.t{
-	background-color: white;
-}
-article table tbody td{
-	font-family: 'SUIT-Regular';
-	font-size: 20px;
-	font-weight: bold;
-	padding-bottom: 10px;
 }
 h2{
 	font-family: 'SUIT-Regular';
@@ -53,8 +44,9 @@ h2{
 		<h2>문 의 내 역</h2>
 		<hr>
 		<br>
+		<div>
 		<table>
-			<thead height="60">
+			<thead>
 				<tr>
 					<th>제 목</th>
 					<th>작성자</th>
@@ -62,25 +54,8 @@ h2{
 					<th>답변여부</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>문의 드려요.</td>
-					<td>임토토</td>
-					<td>2023-03-30</td>
-					<td style="color: red;">답변대기</td>
-				</tr>
-				<tr>
-					<td>문의!</td>
-					<td>우성진</td>
-					<td>2023-03-28</td>
-					<td style="color: blue;">답변완료</td>
-				</tr>
-			</tbody>
 		</table>
-		<hr>
-	</article>
-</section>
-
+		</div>
 <div class="accordion" id="accordionExample">
 <c:forEach varStatus="status" var="dto" items="${marr }">
   <div class="accordion-item">
@@ -141,6 +116,9 @@ h2{
 </form>
 </c:forEach>
 </div>
+	<hr>
+	</article>
+</section>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>

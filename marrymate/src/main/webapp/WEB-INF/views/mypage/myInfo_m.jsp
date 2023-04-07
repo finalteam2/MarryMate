@@ -6,16 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>My 정보수정</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <style type="text/css">
 	article div input[type=text] {
 		width: 230px;
 		height: 30px;
 		font-size: 17px;
-		font-family: 'GmarketSansMedium';
+		font-family: 'SUIT-Regular';
 		border: 1px solid black;
 		border-radius: 12px;
 		text-align: center;
@@ -84,7 +81,7 @@
 	    border: none;
 	    display: inline-block;
 	    border-radius: 15px;
-	    font-family: 'GmarketSansMedium';
+	    font-family: 'SUIT-Regular';
 	    font-size: 14px;
 	    font-weight: 600;
 	    text-align: center;
@@ -92,7 +89,6 @@
 </style>
 </head>
 <body>
-<%@include file="../header.jsp" %>
 <section>
 	<article>
 		<h2>My 정보수정</h2><br>
@@ -108,7 +104,7 @@
 		</div>
 		<form name="myInfoUpdate" action="update.do">
 		<div id="mBox">
-				<input type="hidden" name="midx" value=${sessionScope.midx }>
+				<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
 				<div class="hTagBox">이름</div>
 				<input type="text" name="name" value="${userInfo.name }" readonly required><br>
 				<div class="hTagBox">아이디</div>
@@ -131,7 +127,7 @@
 				<div class="hTagBox">닉네임</div>
 				<input type="text" name="nick" value="${userInfo.nick }" required><br>
 				<div class="hTagBox">비밀번호</div>
-				<input type="password" name="pwd" value="${userInfo.pwd }" required><br>
+				<input type="password" name="pwd" value="${userInfo.pwd }"><br>
 				<div class="hTagBox">전화번호</div>
 				<input type="text" name="tel" value="${userInfo.tel }" required><br>
 				<div class="hTagBox">주소</div>

@@ -49,38 +49,12 @@
 	</update>
 	
 	<select id="myInfoSelect" parameterType="com.marry.member.model.MemberDTO" resultType="com.marry.member.model.MemberDTO">
-        select 
-        	  name
-        	, id
-        	, birthday
-        	, gender
-        	, nick
-        	, tel
-        	, juso
-        	, sjuso
-        	, marrydate
-        	, pname 
-         from member 
+        select * from member 
          where id=#{id}
     </select>
     
     <select id="comInfoSelect" parameterType="com.marry.company.model.CompanyDTO" resultType="com.marry.company.model.CompanyDTO">
-    	select
-    			id
-    			,pwd
-    			,cnum
-    			,cname
-    			,tel
-    			,email
-    			,juso
-    			,sjuso
-    			,sido
-    			,sigungu
-    			,curl
-    			,intro
-    			,img
-    			,kind
-    	from company
+    	select * from company
     	where id=#{id}		 		
     </select>
     
