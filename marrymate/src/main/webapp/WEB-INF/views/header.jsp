@@ -57,7 +57,9 @@
             <div style="display: flex; margin-right: 10px;">
             	<a href="allBook.do">통합예약</a></div>
             <div style="display: flex; margin-right: 10px;">
-            	<a href="searchHall.do">웨딩</a><a href="searchEtc.do">컬렉션</a></div>
+            	<a href="searchHall.do">예식장검색</a></div>
+            <div style="display: flex; margin-right: 10px;">
+            	<a href="searchEtc.do">웨딩컬렉션</a></div>
             <div style="display: flex; margin-right: 10px;">
             	<c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
 		            <li style="list-style: none;"><a href="calendarInfo.do">웨딩캘린더</a></li>
@@ -74,32 +76,41 @@
 	        	</div>
         <div style="display: flex; align-items: center; margin-right: 40px;">
             <c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
-				<div><a href="login.do">로그인</a>&nbsp;or&nbsp;<a href="login_com.do">기업 로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
+				<div>
+				<a href="login.do">회원로그인</a>&nbsp;&nbsp;
+				<a href="login_com.do">기업로그인</a>&nbsp;&nbsp;
+	            <a href="memberJoin.do">회원가입</a> &nbsp;&nbsp;
+	            <a href="companyJoin.do">기업가입</a>
+				</div>
 			</c:if>
-            <c:if test="${!empty sessionScope.loginId}">
-                <div style="display: flex; margin-right: 10px;">${sessionScope.loginName} 접속중 | &nbsp;<a href="logout.do">로그아웃</a></div>
+           	<c:if test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
+                <div style="display: flex; margin-right: 10px;">${sessionScope.com_cname}${sessionScope.loginName} 접속중 | &nbsp;<a href="logout.do">로그아웃</a></div>
             </c:if>
-            <a href="memberJoin.do">회원가입</a> &nbsp;&nbsp;
-            <a href="companyJoin.do">기업 회원가입</a>
+           	<c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
+            </c:if>
+           	<c:if test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
             <div class="menu">
                 <a><img src="/marrymate/img/user2.png" style="width:40px;"></a>
                 <ul class="mbar">
-					<c:if test="${!empty sessionScope.loginId}">
+					<c:if test="${not empty sessionScope.loginId}">
 		            <li><a href="myInfo_m.do">마이페이지</a></li>
 					</c:if>
-					<c:if test="${!empty sessionScope.com_id}">
+					<c:if test="${not empty sessionScope.com_id}">
 		            <li><a href="myInfo_c.do">마이페이지</a></li>
 					</c:if>
                     <li><a href="reserve.do">예약내역</a></li>
                     <li><a href="qna.do">문의내역</a></li>
+					<c:if test="${not empty sessionScope.loginId}">
                     <li><a href="favorite.do">즐겨찾기</a></li>
                     <li><a href="point.do">My 포인트</a></li>
                     <li><a href="community.do">My 커뮤니티</a></li>
+					</c:if>
                 </ul>
             </div>
             <div class="noti" style="margin-left: 10px;">
                 <a href=""><img src="/marrymate/img/notification.png" style="width:40px;"></a>
             </div>
+            </c:if>
         </div>
     </nav>
 </header>
