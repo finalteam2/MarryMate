@@ -43,7 +43,8 @@ td{
 	font-family: 'SUIT-Regular';
 	font-size: 50px;
 	font-weight: bold;
-	color: #6800d0;
+	color: #8448ff;
+	padding-top: 20px;
 	padding-bottom: 40px;
 }
 .calendarshow .caldate{
@@ -144,7 +145,7 @@ video {
 	z-index: 1;
 	text-align: center;
 	font-size: 32px;
-	color: #6800d0;
+	color: #8448ff;
 }
 
 .mainMyweddingAnimationScroll .goal span {
@@ -202,7 +203,7 @@ video {
 	font-family: 'SUIT-Regular';
 	display: inline-block;
 	vertical-align: top;
-	color: #6800d0;
+	color: #8448ff;
 }
 
 .mainMyweddingAnimationScroll .goal span.info {
@@ -268,7 +269,7 @@ video {
 	color: #5706b0;
 	border-bottom: 1px solid #e4d9cf;
 	padding-bottom: 13px;
-	margin-bottom: 10px;
+	margin-bottom: 25px;
 	letter-spacing: -0.05em;
 }
 
@@ -284,7 +285,7 @@ video {
 }
 
 .checkListTopWrap .profileWrap .profileBox .txtArea .date {
-	color: #7a32f3;
+	color: #6b1bf1;
 	font-size: 38px;
 	font-family: 'SUIT-Regular';
 	line-height: 50px;
@@ -308,7 +309,7 @@ video {
 .checkListTopWrap .profileWrap .profileBox .txtArea #count {
 	font-size: 25px;
 	font-family: 'SUIT-Regular';
-	padding-top: 20px;
+	padding-top: 15px;
 	color: #b993f9;
 }
 
@@ -497,7 +498,7 @@ video {
 }
 
 .checkListArea .listRow .itemArea li .item.on .check {
-	background: #957963;
+	background: #bfb3f0;
 }
 
 .checkListArea .listRow .itemArea li .item.on .check .txt {
@@ -523,7 +524,7 @@ video {
 	.tagListWrap .tagList .tagBox{display:inline-block;line-height:30px;border:1px solid #999999;padding:0 20px;color:#777777;font-size:16px;border-radius:32px;margin:5px;background:#fff;}
 	.tagListWrap .tagList .tagBox:hover,
 	.tagListWrap .tagList .tagBox:focus{border:1px solid #777777;background:#f4f4f4;color:#333333;}
-	.tagListWrap .tagList .tagBox.on{border:1px solid #957963;background:#f4efeb;color:#957963;}
+	.tagListWrap .tagList .tagBox.on{border:1px solid #bfb3f0;background:#f4efeb;color:#bfb3f0;}
 	.tagListWrap .btnOpenClose{display:none;}
 
 	.tagListWrap.toggle{padding:0 0 36px 0;position:relative;z-index:1}
@@ -537,7 +538,7 @@ video {
 
 	.tagListWrap .tagAdd{margin-top:30px;}
 	.tagListWrap .tagAdd input{width:433px;}
-	.tagListWrap .tagAdd .btnAdd{float:right;display:inline-block;background:#957963;width:97px;height:46px;line-height:46px;color:#fff;letter-spacing:-0.05em;vertical-align:middle;text-align:center}
+	.tagListWrap .tagAdd .btnAdd{float:right;display:inline-block;background:#bfb3f0;width:97px;height:46px;line-height:46px;color:#fff;letter-spacing:-0.05em;vertical-align:middle;text-align:center}
 
 	.layerPop .tagListWrap{padding-top:37px;margin-top:37px;border-top:1px solid #bbb}
 	
@@ -559,7 +560,7 @@ video {
 	.checkToggle .txt{color:#aaaaaa;position:absolute;left:39px;top:0;display:block;font-size:16px;display:none;}
 	.checkToggle:after{content:'';display:block;width:22px;height:22px;position:absolute;left:4px;top:4px;background:#aaaaaa;box-shadow:1px 1px 5px 1px rgba(0,0,0,0.2);border-radius:22px;overflow:hidden;transition:all 0.5s}
 
-	.checkToggle.on{background:#957963;border:1px solid #957963}
+	.checkToggle.on{background:#bfb3f0;border:1px solid #bfb3f0}
 	.checkToggle.on .txt{color:#ffffff;position:absolute;left:17px;}
 	.checkToggle.on:after{left:47px;background:#ffffff;}
 		/* checkBox */
@@ -600,7 +601,7 @@ video {
 	.formList > li .tagAdd .inputSet{float:left}
 	.formList > li .tagAdd .btnAdd{float:right}
 	.formList > li.btnAdd .inputSet{width:calc(100% - 88px);display:inline-block}
-	.formList > li .btnCheck{display:inline-block;width:79px;height:36px;line-height:36px;font-size:15px;color:#fff;background:#957963;text-align:center;vertical-align:middle}
+	.formList > li .btnCheck{display:inline-block;width:79px;height:36px;line-height:36px;font-size:15px;color:#fff;background:#bfb3f0;text-align:center;vertical-align:middle}
 
 	.formList > li .inputSetWrap,
 	.formList > li .selectSetWrap,
@@ -626,17 +627,17 @@ video {
 	.bdrGray span{color:#777}
 	.bdrBlue{border:1px solid #389cfd;color:#389cfd}
 	.bdrBlue span{color:#389cfd}
-	.bdrBrown{border:1px solid #957963;color:#957963}
-	.bdrBrown span{color:#957963}
-	.btnBdr.bgBrown{background:#957963;border:1px solid #675956;}
+	.bdrBrown{border:1px solid #bfb3f0;color:#bfb3f0}
+	.bdrBrown span{color:#bfb3f0}
+	.btnBdr.bgBrown{background:#bfb3f0;border:1px solid #400080;}
 	.btnBdr.bgBrown span{color:#fff;}
 
-	.btnBrown{background:#957963;}
+	.btnBrown{background:#bfb3f0;}
 	.btnRed{background:#a63030;}
 	.btnDkBrown{background:#665956;}
 	.btnGray{background:#999;}
 	.btnWhite{background:#ffffff;}
-	.btnWhite span{color:#957963;}
+	.btnWhite span{color:#bfb3f0;}
 	.btnPink{background:#e29090;}
 	.btnPink.shadow{box-shadow:0 5px 20px 15px rgba(154,115,143,0.1)}
 
@@ -689,7 +690,7 @@ video {
 	.tabWrap.item2 ul{display:block;margin:0 -1px;}
 	.tabWrap.item2 ul li{float:left;width:50%;margin-bottom:-1px;text-align:center;}
 	.tabWrap.item2 ul li a{display:block;height:40px;padding:12px 20px 10px;border-top:1px solid #e2e2e2;border-bottom:1px solid #e2e2e2;font-weight:400;font-size:16px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-	.tabWrap.item2 ul li.on a{border-top:1px solid #957963;border-bottom:1px solid #957963;background:#957963;color:#fff;}
+	.tabWrap.item2 ul li.on a{border-top:1px solid #bfb3f0;border-bottom:1px solid #bfb3f0;background:#bfb3f0;color:#fff;}
 
 	.tabWrap.item4 ul li{width:25%;}
 	.tabWrap.item3 ul li{width:33%;}
