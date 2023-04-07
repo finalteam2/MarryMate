@@ -43,36 +43,36 @@ function tagListToggle() {
 
 
 
-$(function(){
-	//스크롤이동
-	$(".moveScroll").click(function(e) {
-		var scrollY = 0;
-		if($(this).data('target') == 'chkid') {
-			var chkid = $(this).data('chkid')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
+
+	$(function(){
+		//스크롤이동
+		$(".moveScroll").click(function(e) {
+			var scrollY = 0;
+			if($(this).data('target') == 'chkid') {
+				var chkid = $(this).data('chkid')+'';
+				var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
+				if(findEl.length > 0) {
+					scrollY = $(findEl[0]).closest(".item").offset().top;
+				} else {
+					scrollY = $(".checkListArea").offset().top;
+				}
+			} else if($(this).data('target') == 'chkst') {
+				var chkst = $(this).data('chkst')+'';
+				var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
+				if(findEl.length > 0) {
+					scrollY = $(findEl[0]).closest(".item").offset().top;
+				} else {
+					scrollY = $(".checkListArea").offset().top;
+				}
 			} else {
 				scrollY = $(".checkListArea").offset().top;
 			}
-		} else if($(this).data('target') == 'chkst') {
-			var chkst = $(this).data('chkst')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else {
-			scrollY = $(".checkListArea").offset().top;
-		}
+			//
+			$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
+		});
 		//
-		$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
+		
 	});
-	
-});
-
-
 
 
 	function viewCheckList(){

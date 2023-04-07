@@ -21,6 +21,17 @@ public class FilterDTO {
 	}
 
 	public FilterDTO(String filterText, String filterDate, String filterSido, int filterPriceMin, int filterPriceMax,
+			String filterCate) {
+		super();
+		this.filterText = filterText;
+		this.filterDate = filterDate;
+		this.filterSido = filterSido;
+		this.filterPriceMin = filterPriceMin;
+		this.filterPriceMax = filterPriceMax;
+		this.filterCate = filterCate;
+	}
+
+	public FilterDTO(String filterText, String filterDate, String filterSido, int filterPriceMin, int filterPriceMax,
 			String filterOrder, String filterCate) {
 		super();
 		this.filterText = filterText;

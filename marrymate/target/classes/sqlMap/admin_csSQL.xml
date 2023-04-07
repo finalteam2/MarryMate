@@ -36,4 +36,12 @@
   		select * from c_a_cs where cidx=#{cidx} order by time
   </select>
   
+  <select id="readNum_c" parameterType="Integer" resultType="Integer">
+  		select count(*) from c_a_cs where cidx=#{cidx} and type=2 and read=0 
+  </select>
+  
+  <update id="read_c" parameterType="Integer">
+  		update c_a_cs set read=1 where cidx=#{cidx} and type=2 and time&lt;sysdate
+  </update>
+  
   </mapper>

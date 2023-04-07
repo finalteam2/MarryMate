@@ -230,7 +230,10 @@ video{
 	font-size:34px;
 }
 .alt_text{
-	border:1px solid red;
+	width:70%;
+	margin:50px auto;
+	font-size:35px;
+	text-align:center;
 }
 .category{
 	color:#4e4e4e;
