@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.marry.calender.model.CalendarDAO;
 
@@ -35,9 +36,14 @@ public class CalendarContoller {
 		return "calendar/calendarInfo";
 	}
 	
-	@RequestMapping("/plan/planList.do")
+	@RequestMapping("/planList.do")
 	public String planList() {
 		return "calendar/plan/planList";
+	}
+	
+	@RequestMapping("/planWrite.do")
+	public String planWrite() {
+		return "calendar/plan/planWrite";
 	}
 	
 	@Autowired

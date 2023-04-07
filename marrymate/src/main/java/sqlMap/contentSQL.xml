@@ -152,4 +152,24 @@
 	where 
 		ccsidx = #{ccsidx}
 	</update>
+	<select id="selectmembook" resultType="com.marry.book.model.BookDTO">
+	select
+	    * 
+	from 
+	    book
+	where
+	    midx = #{midx}
+	order by
+	    bk_idx desc
+	</select>
+	<select id="selectcombook" resultType="com.marry.book.model.BookDTO">
+	select
+	    * 
+	from 
+	    book
+	where
+	    cidx = #{cidx}
+	order by
+	    bk_idx desc
+	</select>
 </mapper>

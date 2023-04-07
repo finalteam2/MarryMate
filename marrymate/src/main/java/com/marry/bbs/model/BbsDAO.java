@@ -23,5 +23,7 @@ public interface BbsDAO {
 	public int bestCount(int bidx, int midx);
 	
 	public int worstCount(int bidx, int midx);
+	
+	public int contentDelete(int bidx);
 
 }

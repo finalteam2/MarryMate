@@ -93,17 +93,17 @@
                 <a><img src="/marrymate/img/user2.png" style="width:40px;"></a>
                 <ul class="mbar">
 					<c:if test="${not empty sessionScope.loginId}">
-		            <li><a href="myInfo_m.do">마이페이지</a></li>
+		          	  <li><a href="myInfo_m.do">마이페이지</a></li>
 					</c:if>
 					<c:if test="${not empty sessionScope.com_id}">
-		            <li><a href="myInfo_c.do">마이페이지</a></li>
+		            	<li><a href="myInfo_c.do">마이페이지</a></li>
 					</c:if>
-                    <li><a href="reserve.do">예약내역</a></li>
+                    <li><a href="myBook.do">예약내역</a></li>
                     <li><a href="qna.do">문의내역</a></li>
 					<c:if test="${not empty sessionScope.loginId}">
-                    <li><a href="favorite.do">즐겨찾기</a></li>
-                    <li><a href="point.do">My 포인트</a></li>
-                    <li><a href="community.do">My 커뮤니티</a></li>
+	                    <li><a href="favorite.do">즐겨찾기</a></li>
+	                    <li><a href="myPoint.do">My 포인트</a></li>
+	                    <li><a href="community.do">My 커뮤니티</a></li>
 					</c:if>
                 </ul>
             </div>

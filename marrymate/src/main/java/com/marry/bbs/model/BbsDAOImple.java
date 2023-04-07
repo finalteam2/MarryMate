@@ -69,5 +69,10 @@ public class BbsDAOImple implements BbsDAO {
 		map.put("midx", midx);
 		return sqlMap.insert("worstCount", map);
 	}
+	
+	@Override
+	public int contentDelete(int bidx) {
+		return sqlMap.delete("contentDelete", bidx);
+	}
 
 }

@@ -93,4 +93,7 @@
 			-1
 		)
 	</insert>
+	<delete id="contentDelete" parameterType="int">
+		delete from bbs where bidx=#{bidx}
+	</delete>
 </mapper>
