@@ -32,7 +32,6 @@ $( function() {
       "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
 } );
 
-
 function searchList(){
 	document.getElementById('order_one').checked=true;
 	var filterText=document.searchFm.filterText.value;

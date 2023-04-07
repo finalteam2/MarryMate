@@ -3,16 +3,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.marry.book">
-	<select id="firstList" resultType="com.marry.company.model.CompanyDTO">
-		select
-			*
-		from
-			company
-		where
-			kind='스튜디오' and clevel=1 and blind=0
-		order by
-			cname asc
-	</select>
 	<select id="cateList" parameterType="String" resultType="com.marry.company.model.CompanyDTO">
 		select
 			*

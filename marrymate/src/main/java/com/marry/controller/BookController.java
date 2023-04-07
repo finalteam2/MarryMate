@@ -23,13 +23,8 @@ public class BookController {
 	
 	/**통합예약 페이지이동*/
 	@RequestMapping("/allBook.do")
-	public ModelAndView allBook() {
-		List<CompanyDTO> arr=bookDao.firstBookList();
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("arr", arr);
-		mav.setViewName("book/allBook");
-		return mav;
+	public String allBook() {
+		return "book/allBook";
 	}
 
 	/**통합예약내 카테고리선택시*/

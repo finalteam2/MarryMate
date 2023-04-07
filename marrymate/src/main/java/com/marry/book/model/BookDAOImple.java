@@ -17,13 +17,6 @@ public class BookDAOImple implements BookDAO {
 		this.sqlMap = sqlMap;
 	}
 
-	/**통합예약내 업체리스트 출력(첫화면)*/
-	@Override
-	public List<CompanyDTO> firstBookList() {
-		List<CompanyDTO> list=sqlMap.selectList("firstList");
-		return list;
-	}
-	
 	/**통합예약내 업체리스트 출력(카테고리별)*/
 	@Override
 	public List<CompanyDTO> cateBookList(String filterCate) {
