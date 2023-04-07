@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookDTO;
+import com.marry.book.model.BookListDTO;
 import com.marry.company.model.Com_CsDTO;
 import com.marry.company.model.Com_LikeDTO;
 import com.marry.company.model.CompanyDTO;
@@ -216,26 +217,56 @@ public class ContentController {
 		int cidx = 0;
 		try {
 			midx = (int) session.getAttribute("loginMidx");
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		try {
 			cidx = (int) session.getAttribute("com_cidx");
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
-		//로그인 유저에 따라 다른 방식으로 조회
+		//로그인 유저에 따라 페이지 나뉨
+//		추가 정보 제공 가능하나 리스트에 널값이 생겨서 제외
+//		hidx - hname이름 / hpay가격 / hnum최소보증인원
+//		fidx - fname이름 / fpay가격
+//
+//		추가 결제 테이블 조회
+//		결제 방식
+//		포인트 사용량
+//		총 금액(포인트 사용 후)
 		if (midx > 0) {
-			List<BookDTO> marr = contentDao.selectMemBook(midx);
-			mav.addObject("marr", marr);
+			List<BookListDTO> arr = contentDao.selectMemBook(midx);
+			for(int i = 0; i < arr.size(); i++) {
+				BookListDTO dto = arr.get(i);
+				if(dto.getCkind().equals("예식장")) {
+					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
+					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
+				}else {
+					dto.setAllpay(dto.getCpay());
+				}
+			}
+			String mname = (String) session.getAttribute("loginName");
+			mav.addObject("mname", mname);
+			mav.addObject("arr", arr);
+			mav.setViewName("mypage/myBook_m");
 		}else if(cidx > 0) {
-			List<BookDTO> carr = contentDao.selectComBook(cidx);
-			mav.addObject("carr", carr);
+			List<BookListDTO> arr = contentDao.selectComBook(cidx);
+			for(int i = 0; i < arr.size(); i++) {
+				BookListDTO dto = arr.get(i);
+				if(dto.getCkind().equals("예식장")) {
+					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
+					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
+					mav.addObject("hall", "hall");
+				}else {
+					dto.setAllpay(dto.getCpay());
+				}
+			}
+			String cname = (String) session.getAttribute("com_cname");
+			mav.addObject("cname", cname);
+			mav.addObject("arr", arr);
+			mav.setViewName("mypage/myBook_c");
 		}
-		mav.setViewName("mypage/myBook");
 		return mav;
 	}
 	

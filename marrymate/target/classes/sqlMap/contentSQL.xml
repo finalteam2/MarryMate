@@ -152,24 +152,57 @@
 	where 
 		ccsidx = #{ccsidx}
 	</update>
-	<select id="selectmembook" resultType="com.marry.book.model.BookDTO">
+	<select id="selectmembook" resultType="com.marry.book.model.BookListDTO">
 	select
-	    * 
-	from 
+	   book.*, company.cname, company.kind as ckind, company.pay as cpay, hall.pay as hpay, 
+	   food.pay as fpay, hall.guest_num as hnum
+    from
 	    book
+	left join
+	    member
+	on 
+	    book.midx = member.midx
+	left join 
+	    company
+	on
+	    book.cidx = company.cidx
+	left join
+	    hall
+	on
+	    book.hidx = hall.hidx
+	left join
+	    food
+	on
+	    book.fidx = food.fidx
 	where
-	    midx = #{midx}
-	order by
-	    bk_idx desc
+	    book.midx = #{midx}
 	</select>
-	<select id="selectcombook" resultType="com.marry.book.model.BookDTO">
+	<select id="selectcombook" resultType="com.marry.book.model.BookListDTO">
 	select
-	    * 
-	from 
+	   book.*, member.name as mname, 
+       hall.name as hname, hall.pay as hpay, 
+       hall.guest_num as hnum, food.name as fname, 
+       food.pay as fpay, company.pay as cpay,
+       company.kind as ckind
+    from
 	    book
-	where
-	    cidx = #{cidx}
-	order by
-	    bk_idx desc
+	left join
+	    member
+	on 
+	    book.midx = member.midx
+	left join 
+	    company
+	on
+	    book.cidx = company.cidx
+	left join
+	    hall
+	on
+	    book.hidx = hall.hidx
+	left join
+	    food
+	on
+	    book.fidx = food.fidx
+   	where
+   		book.cidx = #{cidx}
 	</select>
 </mapper>

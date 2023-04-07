@@ -13,45 +13,36 @@
 <body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
+      <h1>이름 : ${mname }</h1>
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">bk_idx</th>
-      <th scope="col">midx</th>
-      <th scope="col">hidx</th>- 이름 / 가격 / 최소보증인원
-      <th scope="col">cidx</th>
-      <th scope="col">fidx</th> - 이름 / 가격
-      <th scope="col">bk_date</th>
-      <th scope="col">bk_time</th>
-      <th scope="col">bk_state</th>
-      <th scope="col">bookdate</th>
-      <th scope="col">hall_nothall</th>
-      <th scope="col"> 총 금액(포인트 사용 전) </th>
-      <th scope="col"> 결제 방식 </th>
-      <th scope="col"> 포인트 사용량 </th>
-      <th scope="col"> 총 금액(포인트 사용 후) </th>
+      <th scope="col">예약 번호 bk_idx</th>
+      <th scope="col">업체명 cname </th>
+      <th scope="col">업체종류 ckind</th>
+      <th scope="col">예약일/시간 bk_date bk_time</th>
+      <th scope="col">all pay 총 금액</th>
+      <th scope="col">예약 상태 bk_state</th>
     </tr>
   </thead>
   <tbody>
+    <c:forEach varStatus="status" var="dto" items="${arr }">
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">${status.count }</th>
+      <td>${dto.bk_idx }</td>
+      <td>${dto.cname }</td>
+      <td>${dto.ckind }</td>
+      <td>${dto.bk_date } ${dto.bk_time }</td>
+      <td>${dto.allpay }</td>
+	  <c:if test="${dto.bk_state eq 0}"><td>결제전</td></c:if>
+	  <c:if test="${dto.bk_state eq 1}"><td>예약대기</td></c:if>
+	  <c:if test="${dto.bk_state eq 2}"><td>예약확정</td></c:if>
+	  <c:if test="${dto.bk_state eq 3}"><td>잔금 결제완료</td></c:if>
+	  <c:if test="${dto.bk_state eq 4}"><td>예약취소</td></c:if>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    </c:forEach>
   </tbody>
 </table>
 
