@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -166,6 +167,20 @@ public class BbsController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("community/allCommunity");
+		return mav;
+		
+	}
+	
+	@RequestMapping("/delete.do")
+	public ModelAndView delete(@RequestParam("bidx")int bidx) {
+		
+		int result=bbsDao.contentDelete(bidx);
+		String msg=result>0?"게시물 삭제 완료":"게시물 삭제 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("url", "allCommunity.do");
+		mav.addObject("msg", msg);
+		mav.setViewName("community/communityMsg");
 		return mav;
 		
 	}

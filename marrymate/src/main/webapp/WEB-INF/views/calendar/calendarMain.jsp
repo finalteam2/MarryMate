@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.Calendar" %>
 <!DOCTYPE html>
@@ -82,6 +80,10 @@ setInterval(function() {
 });
 
 
+function addplan(){
+	window.open('planWrite.do','width=700, height=500');
+}
+
 </script>
 
 
@@ -153,6 +155,8 @@ int lastday=cal.getActualMaximum(Calendar.DATE);
 		<!--calendarShow-->
 		<div class="calendarshow" align="center">
 				<div class="todaydate" align="center"><%=y %>년 &nbsp;&nbsp; <%=m+1 %>월</div>
+				<input type="button" value="일정등록" onclick="addplan();">
+				
 					<table class="caldate">
 						<tr class="trth">
 							<th>일</th>
@@ -577,174 +581,12 @@ int lastday=cal.getActualMaximum(Calendar.DATE);
 			</div>
 		</div>
 
-		<script>
-		$(function() {
-			//사용/미사용
-			$(".checkListArea .item .checkToggle")
-					.click(
-							function(e) {
-								e.preventDefault();
-								var $this = $(this);
-								var $target = $this.closest(".item");
-								if (!$target.hasClass("on")) {
-									ajaxCall(
-											'/mywedding/checklist/edit',
-											encodeURIComponent(JSON
-													.stringify({
-														seq_no : $target
-																.data('seqno'),
-														chk_id : $target
-																.find(
-																		'.jsSWO01Ev')
-																.data(
-																		'chkid'),
-														use_yn : 'Y'
-													})),
-											"",
-											"",
-											function(result) {
-												if (result.status == 0) {
-
-													MP05.redrawScreen();
-
-												} else {
-													_alert({
-														message : '체크리스트 사용 설정에 실패했습니다.',
-														btnTxt : '닫기'
-													});
-												}
-											});
-								} else {
-									if ($target.find(".checkBox input")
-											.is(":checked")) {
-										_alert({
-											message : '완료된 항목은 미사용을 할 수 없습니다.',
-											btnTxt : '닫기'
-										});
-									} else {
-										//최소 5개는 사용으로 유지
-										if ($(".checkListArea .item .on").length <= 5) {
-											_alert({
-												message : '체크리스트 사용 선택은 최소 5개를 유지해주셔야 합니다.',
-												btnTxt : '닫기'
-											});
-										} else {
-											ajaxCall(
-													'/marrymate/calendar/checklist',
-													encodeURIComponent(JSON
-															.stringify({
-																seq_no : $target
-																		.data('seqno'),
-																chk_id : $target
-																		.find(
-																				'.jsSWO01Ev')
-																		.data(
-																				'chkid'),
-																use_yn : 'N'
-															})),
-													"",
-													"",
-													function(result) {
-														if (result.status == 0) {
-
-															MP05
-																	.redrawScreen();
-
-														} else {
-															_alert({
-																message : '체크리스트 사용 설정에 실패했습니다.',
-																btnTxt : '닫기'
-															});
-														}
-													});
-										}
-									}
-								}
-							});
-			$(
-					".checkListArea .item .bottom .checkBox input[type=checkbox]")
-					.click(
-							function(e) {
-								var $this = $(this);
-								var $target = $this.closest(".item");
-								if ($target.hasClass('on')) {
-									if ($this.is(":checked")) {
-										ajaxCall(
-												'/marrymate/calendar/checklist',
-												encodeURIComponent(JSON
-														.stringify({
-															seq_no : $target
-																	.data('seqno'),
-															chk_id : $target
-																	.find(
-																			'.jsSWO01Ev')
-																	.data(
-																			'chkid'),
-															done_yn : 'Y'
-														})),
-												"",
-												"",
-												function(result) {
-													if (result.status == 0) {
-
-														MP05
-																.redrawScreen();
-
-													} else {
-														_alert({
-															message : '체크리스트 완료 설정에 실패했습니다.',
-															btnTxt : '닫기'
-														});
-													}
-												});
-									} else {
-										ajaxCall(
-												'/marrymate/calendar/checklist',
-												encodeURIComponent(JSON
-														.stringify({
-															seq_no : $target
-																	.data('seqno'),
-															chk_id : $target
-																	.find(
-																			'.jsSWO01Ev')
-																	.data(
-																			'chkid'),
-															done_yn : 'N'
-														})),
-												"",
-												"",
-												function(result) {
-													if (result.status == 0) {
-
-														MP05
-																.redrawScreen();
-
-													} else {
-														_alert({
-															message : '체크리스트 완료 설정에 실패했습니다.',
-															btnTxt : '닫기'
-														});
-													}
-												});
-									}
-								} else {
-									_alert({
-										message : '미사용 항목은 완료 할 수 없습니다.',
-										btnTxt : '닫기'
-									});
-								}
-							});
-
-		});
-			</script>
-
-
 	</div>
 
 
 
+	<!--
 	<section>
-
 
 		<div class="mwBtmMenu">
 			<ul>
@@ -761,6 +603,217 @@ int lastday=cal.getActualMaximum(Calendar.DATE);
 			</ul>
 		</div>
 	</section>
+	  -->
+			<script>
+			$(function(){
+				//스크롤이동
+				$(".moveScroll").click(function(e) {
+					var scrollY = 0;
+					if($(this).data('target') == 'chkid') {
+						var chkid = $(this).data('chkid')+'';
+						var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
+						if(findEl.length > 0) {
+							scrollY = $(findEl[0]).closest(".item").offset().top;
+						} else {
+							scrollY = $(".checkListArea").offset().top;
+						}
+					} else if($(this).data('target') == 'chkst') {
+						var chkst = $(this).data('chkst')+'';
+						var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
+						if(findEl.length > 0) {
+							scrollY = $(findEl[0]).closest(".item").offset().top;
+						} else {
+							scrollY = $(".checkListArea").offset().top;
+						}
+					} else {
+						scrollY = $(".checkListArea").offset().top;
+					}
+					//
+					$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
+				});
+				//
+				
+			});
+
+			$(function(){
+				//사용/미사용
+				$(".checkListArea .item .checkToggle").click(function(e){
+					e.preventDefault();
+					var $this = $(this);
+					var $target = $this.closest(".item");
+					if(!$target.hasClass("on")){
+						ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+							seq_no: $target.data('seqno'),
+							chk_id: $target.find('.jsSWO01Ev').data('chkid'),
+							use_yn: 'Y'
+						})), "", "", function(result){
+							if(result.status == 0) {
+								//refresh
+								//location.reload();
+								
+								if(result.item) {
+									MP05.redrawCount(result.item);
+								}
+								//
+								$target.addClass("on");
+								$target.find(".checkToggle").addClass("on");
+								$target.find(".checkToggle .txt").text("사용");
+								$target.find(".checkBox input").prop("disabled",false);
+								//
+								var secdt = "150";
+								var daydt = $target.find('.d-day').data('daydt');
+								if(secdt == daydt) {
+									$target.find('.stat').addClass('now');
+									$target.find('.stat').removeClass('quickly');
+									$target.find('.stat').text('지금해야해요');
+								} else if(secdt < daydt) {
+									$target.find('.stat').removeClass('now');
+									$target.find('.stat').addClass('quickly');
+									$target.find('.stat').text('급해요');
+								} else {
+									$target.find('.stat').removeClass('now');
+									$target.find('.stat').removeClass('quickly');
+									$target.find('.stat').text('');
+								}
+								
+								MP05.redrawScreen();
+								
+							} else {
+								_alert({
+									message:'체크리스트 사용 설정에 실패했습니다.',
+									btnTxt : '닫기'
+								});
+							}
+						});
+					}else{
+						if($target.find(".checkBox input").is(":checked")){
+							_alert({
+								message:'완료된 항목은 미사용을 할 수 없습니다.',
+								btnTxt : '닫기'
+							});
+						}else{
+							//최소 5개는 사용으로 유지
+							if($(".checkListArea .item .on").length <= 5) {
+								_alert({
+									message:'체크리스트 사용 선택은 최소 5개를 유지해주셔야 합니다.',
+									btnTxt : '닫기'
+								});
+							} else {
+								ajaxCall('/mywedding/checklist/edit', encodeURIComponent(JSON.stringify({
+									seq_no: $target.data('seqno'),
+									chk_id: $target.find('.jsSWO01Ev').data('chkid'),
+									use_yn: 'N'
+								})), "", "", function(result){
+									if(result.status == 0) {
+										//refresh
+										//location.reload();
+										
+										if(result.item) {
+											MP05.redrawCount(result.item);
+										}
+										//
+										$target.removeClass("on");
+										$target.find(".checkToggle").removeClass("on");
+										$target.find(".checkToggle .txt").text("미사용");
+										$target.find(".checkBox input").prop("disabled",true);
+										
+										MP05.redrawScreen();
+										
+									} else {
+										_alert({
+											message:'체크리스트 사용 설정에 실패했습니다.',
+											btnTxt : '닫기'
+										});
+									}
+								});
+							}
+						}
+					}
+				});
+				//완료
+				$(".checkListArea .item .bottom .checkBox input[type=checkbox]").click(function(e) {
+					var $this = $(this);
+					var $target = $this.closest(".item");
+					if($target.hasClass('on')) {
+						if($this.is(":checked")) {
+							ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+								seq_no: $target.data('seqno'),
+								chk_id: $target.find('.jsSWO01Ev').data('chkid'),
+								done_yn: 'Y'
+							})), "", "", function(result){
+								if(result.status == 0) {
+									//refresh
+									//location.reload();
+									
+									if(result.item) {
+										MP05.redrawCount(result.item);
+									}
+									//완료일자 표시
+									if(result.done_dt && result.done_dt.length > 0) {
+										$target.find('.stat').removeClass('now');
+										$target.find('.stat').removeClass('quickly');
+										$target.find('.stat').text(result.done_dt);
+									}
+									
+									MP05.redrawScreen();
+									
+								} else {
+									_alert({
+										message:'체크리스트 완료 설정에 실패했습니다.',
+										btnTxt : '닫기'
+									});
+								}
+							});
+						} else {
+							ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+								seq_no: $target.data('seqno'),
+								chk_id: $target.find('.jsSWO01Ev').data('chkid'),
+								done_yn: 'N'
+							})), "", "", function(result){
+								if(result.status == 0) {
+									//refresh
+									//location.reload();
+									
+									if(result.item) {
+										MP05.redrawCount(result.item);
+									}
+									//
+									var secdt = "150";
+									var daydt = $target.find('.d-day').data('daydt');
+									if(secdt == daydt) {
+										$target.find('.stat').addClass('now');
+										$target.find('.stat').removeClass('quickly');
+										$target.find('.stat').text('지금해야해요');
+									} else if(secdt < daydt) {
+										$target.find('.stat').removeClass('now');
+										$target.find('.stat').addClass('quickly');
+										$target.find('.stat').text('급해요');
+									} else {
+										$target.find('.stat').removeClass('now');
+										$target.find('.stat').removeClass('quickly');
+										$target.find('.stat').text('');
+									}
+									
+									MP05.redrawScreen();
+									
+								} else {
+									_alert({
+										message:'체크리스트 완료 설정에 실패했습니다.',
+										btnTxt : '닫기'
+									});
+								}
+							});
+						}
+					} else {
+						_alert({
+							message:'미사용 항목은 완료 할 수 없습니다.',
+							btnTxt : '닫기'
+						});
+					}
+				});
+			
+			});
+			</script>
 	<%@include file="../footer.jsp"%>
 </body>
 </html>

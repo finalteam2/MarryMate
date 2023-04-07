@@ -81,7 +81,7 @@ function tagListToggle() {
 			var $this = $(this);
 			var $target = $this.closest(".item");
 			if(!$target.hasClass("on")){
-				ajaxCall('/mywedding/checklist/edit', encodeURIComponent(JSON.stringify({
+				ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
 					seq_no: $target.data('seqno'),
 					chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 					use_yn: 'Y'
@@ -138,7 +138,7 @@ function tagListToggle() {
 							btnTxt : '닫기'
 						});
 					} else {
-						ajaxCall('/mywedding/checklist/edit', encodeURIComponent(JSON.stringify({
+						ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
 							seq_no: $target.data('seqno'),
 							chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 							use_yn: 'N'
@@ -175,7 +175,7 @@ function tagListToggle() {
 			var $target = $this.closest(".item");
 			if($target.hasClass('on')) {
 				if($this.is(":checked")) {
-					ajaxCall('/mywedding/checklist/edit', encodeURIComponent(JSON.stringify({
+					ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
 						seq_no: $target.data('seqno'),
 						chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 						done_yn: 'Y'
@@ -204,7 +204,7 @@ function tagListToggle() {
 						}
 					});
 				} else {
-					ajaxCall('/mywedding/checklist/edit', encodeURIComponent(JSON.stringify({
+					ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
 						seq_no: $target.data('seqno'),
 						chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 						done_yn: 'N'
@@ -1528,20 +1528,7 @@ function gnb(dep1, dep2, type, myWedding) {
             }
         }
     }, 100)
-    //마이웨딩 메뉴 이벤트
-    $(document).on("click", ".myWeddingType .moreMenuBtn", function(e) {
-        e.preventDefault();
-        var scrollTop = $(window).scrollTop();
-        if (!$("body").hasClass("myWeddingMenuOpen")) {
-            $(".myWedding_dim_bg").fadeIn();
-            $(".myWeddingMenuWrap").show();
-            setTimeout(function() {
-                $("body").addClass("myWeddingMenuOpen").css("top", -scrollTop);
-            }, 100);
-        } else {
-            $(".myWeddingMenuWrap .btnMobileClose").click();
-        }
-    })
+    
     $(document).on("click", ".myWeddingType .btnMobileClose, .myWedding_dim_bg", function(e) {
         e.preventDefault();
         var scrollTop = Number($("body").css("top").split("px")[0]) * -1;
