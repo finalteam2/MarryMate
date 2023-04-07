@@ -14,8 +14,14 @@ public interface Admin_csDAO {
 	
 	public int readNum_m(int midx);
 	
+	public void read_m(int midx);
+	
 	public void sendContent_c(int cidx,String content);
 	
 	public List<C_a_csDTO> loadContent_c(int cidx);
+	
+	public int readNum_c(int cidx);
+	
+	public void read_c(int cidx);
 
 }

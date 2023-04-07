@@ -61,8 +61,14 @@
 </div>
 <script>
 function rn(){
-	var param='midx='+${sessionScope.loginMidx};
-	sendRequest('readNum_m.do',param,'GET',rnResult);
+	if(${sessionScope.loginMidx!=0}){
+		var param='midx='+${sessionScope.loginMidx};
+		sendRequest('readNum_m.do',param,'GET',rnResult);
+	}else if(${sessionScope.com_cidx!=0}){
+		var param='cidx='+${sessionScope.com_cidx};
+		sendRequest('readNum_c.do',param,'GET',rnResult);
+	}
+	
 }
 function rnResult(){
 	if(XHR.readyState==4){
@@ -363,11 +369,33 @@ function close() {
 
 function rs(){
 	
+	if(${sessionScope.loginMidx!=0}){
+		var param='midx='+${sessionScope.loginMidx};
+		sendRequest('readNum_m.do',param,'GET',rsResult);
+	}else if(${sessionScope.com_cidx!=0}){
+		var param='cidx='+${sessionScope.com_cidx};
+		sendRequest('readNum_c.do',param,'GET',rsResult);
+	}
+	
 	var DivNode=document.getElementById('questions');
 	var DivChildNodes=DivNode.childNodes;
 	for(var i=DivChildNodes.length-1;i>=0;i--) {
 		var DivChildNode=DivChildNodes[i];
 		DivNode.removeChild(DivChildNode);
+	}
+}
+function rsResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data=XHR.responseText;
+			data=JSON.parse(data);
+			
+			var read=data.read;
+			
+			if(read==0){
+				document.getElementById('alr').remove();
+			}
+		}
 	}
 }
 

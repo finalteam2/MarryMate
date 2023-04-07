@@ -58,6 +58,7 @@ public class Admin_csController {
 	@RequestMapping("/load_m.do")
 	public ModelAndView loadContent_m(int midx) {
 		
+		admin_csDao.read_m(midx);
 		List<M_a_csDTO> dtos=admin_csDao.loadContent_m(midx);
 		
 		ModelAndView mav=new ModelAndView();
@@ -98,11 +99,25 @@ public class Admin_csController {
 	@RequestMapping("/load_c.do")
 	public ModelAndView loadContent_c(int cidx) {
 		
+		admin_csDao.read_c(cidx);
 		List<C_a_csDTO> dtos=admin_csDao.loadContent_c(cidx);
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("dtos",dtos);
+		mav.setViewName("finalJson");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/readNum_c.do")
+	public ModelAndView readNum_c(int cidx) {
+		
+		int read=admin_csDao.readNum_c(cidx);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("read",read);
 		mav.setViewName("finalJson");
 		
 		return mav;

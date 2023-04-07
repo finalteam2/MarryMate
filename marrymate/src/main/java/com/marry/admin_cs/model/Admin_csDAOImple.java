@@ -1,3 +1,4 @@
+
 package com.marry.admin_cs.model;
 
 import java.util.*;
@@ -50,6 +51,12 @@ public class Admin_csDAOImple implements Admin_csDAO {
 	}
 	
 	@Override
+	public void read_m(int midx) {
+		sqlMap.update("read_m",midx);
+		
+	}
+	
+	@Override
 	public void sendContent_c(int cidx, String content) {
 		
 		C_a_csDTO dto=new C_a_csDTO();
@@ -63,6 +70,17 @@ public class Admin_csDAOImple implements Admin_csDAO {
 	public List<C_a_csDTO> loadContent_c(int cidx) {
 		List<C_a_csDTO> dtos=sqlMap.selectList("loadContent_c",cidx);
 		return dtos;
+	}
+	
+	@Override
+	public int readNum_c(int cidx) {
+		int read=sqlMap.selectOne("readNum_c",cidx);
+		return read;
+	}
+	
+	@Override
+	public void read_c(int cidx) {
+		sqlMap.update("read_c",cidx);
 	}
 
 }
