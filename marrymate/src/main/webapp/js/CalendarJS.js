@@ -72,30 +72,7 @@ function tagListToggle() {
 		});
 		//
 		
-		
-		//mainTopBanner 
- 		if($(".mainTopBanner").length > 0){
-			$(".mainTopBanner").slideDown(500);
-			$(".mainTopBanner .btnClose").click(function(e){
-				e.preventDefault();
-				$(".mainTopBanner").slideUp(500,function(){
-					// $(".rouletteFixed").css("top",55);
-				});
-
-			})
-		}
-		
-		cookiedata = document.cookie;
-    	if(cookiedata.indexOf("close=Y") < 0){
-			startFloatingBanner();
-    	} else {
-    		var divObj = document.getElementById("roul");
-    		divObj.style.visibility = "hidden";
-    	}
 	});
-
-
-
 
 
 	function viewCheckList(){

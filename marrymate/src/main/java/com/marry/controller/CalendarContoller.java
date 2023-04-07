@@ -25,6 +25,11 @@ public class CalendarContoller {
 		return "calendar/calendarMain";
 	}
 	
+	@RequestMapping("/calendarMainCom.do")
+	public String CalendarMainCom() {
+		return "calendar/calendarMainCom";
+	}
+	
 	@RequestMapping("/calendarInfo.do")
 	public String CalendarInfo() {
 		return "calendar/calendarInfo";

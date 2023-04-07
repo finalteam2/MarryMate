@@ -59,10 +59,19 @@
             <div style="display: flex; margin-right: 10px;">
             	<a href="searchHall.do">웨딩</a><a href="searchEtc.do">컬렉션</a></div>
             <div style="display: flex; margin-right: 10px;">
-            	<a href="calendarMain.do">웨딩캘린더</a></div>
-            <div style="display: flex; margin-right: 10px;">
-            	<a href="community.do">커뮤니티</a></div>
-        </div>
+            	<c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
+		            <li style="list-style: none;"><a href="calendarInfo.do">웨딩캘린더</a></li>
+				</c:if>
+            	<c:if test="${!empty sessionScope.loginId}">
+		            <li style="list-style: none;"><a href="calendarMain.do">웨딩캘린더</a></li>
+				</c:if>
+				<c:if test="${!empty sessionScope.com_id}">
+		            <li style="list-style: none;"><a href="calendarMainCom.do">웨딩캘린더</a></li>
+				</c:if>
+			</div>
+	            <div style="display: flex; margin-right: 10px;">
+	            	<a href="community.do">커뮤니티</a></div>
+	        	</div>
         <div style="display: flex; align-items: center; margin-right: 40px;">
             <c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
 				<div><a href="login.do">로그인</a>&nbsp;or&nbsp;<a href="login_com.do">기업 로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>

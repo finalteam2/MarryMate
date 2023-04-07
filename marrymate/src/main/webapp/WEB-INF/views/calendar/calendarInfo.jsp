@@ -9,6 +9,6 @@
 <title>웨딩캘린더</title>
   </head>
   <body>
-    
+    <h1>calendar info page</h1>
   </body>
 </html>
