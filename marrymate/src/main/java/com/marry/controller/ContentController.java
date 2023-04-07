@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marry.book.model.BookDTO;
 import com.marry.company.model.Com_CsDTO;
 import com.marry.company.model.Com_LikeDTO;
 import com.marry.company.model.CompanyDTO;
@@ -208,16 +209,64 @@ public class ContentController {
 	
 	//내 예약 목록 조회 및 페이지 진입
 	@RequestMapping("/myBook.do")
-	public ModelAndView myBook() {
+	public ModelAndView myBook(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		int midx = 0;
+		int cidx = 0;
+		try {
+			midx = (int) session.getAttribute("loginMidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			cidx = (int) session.getAttribute("com_cidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//로그인 유저에 따라 다른 방식으로 조회
+		if (midx > 0) {
+			List<BookDTO> marr = contentDao.selectMemBook(midx);
+			mav.addObject("marr", marr);
+		}else if(cidx > 0) {
+			List<BookDTO> carr = contentDao.selectComBook(cidx);
+			mav.addObject("carr", carr);
+		}
+		mav.setViewName("mypage/myBook");
 		return mav;
 	}
 	
 	
 	//내 포인트 내역 조회 및 페이지 진입
 	@RequestMapping("/myPoint.do")
-	public ModelAndView myPoint() {
+	public ModelAndView myPoint(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		int midx = 0;
+		int cidx = 0;
+		try {
+			midx = (int) session.getAttribute("loginMidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			cidx = (int) session.getAttribute("com_cidx");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//로그인 유저에 따라 다른 방식으로 조회
+		if (midx > 0) {
+			
+		}else if(cidx > 0) {
+		
+		}
+		mav.setViewName("mypage/myPoint");
 		return mav;
 	}
 	

@@ -2,6 +2,8 @@ package com.marry.company.model;
 
 import java.util.List;
 
+import com.marry.book.model.BookDTO;
+
 public interface ContentDAO {
 	
 	public CompanyDTO companySelectOne(int cidx);
@@ -18,4 +20,6 @@ public interface ContentDAO {
 	public List<Com_CsDTO> selectMemCs(int midx);
 	public List<Com_CsDTO> answeredCs(int cidx);
 	public int updateComCs(Com_CsDTO dto);
+	public List<BookDTO> selectComBook(int cidx);
+	public List<BookDTO> selectMemBook(int midx);
 }
