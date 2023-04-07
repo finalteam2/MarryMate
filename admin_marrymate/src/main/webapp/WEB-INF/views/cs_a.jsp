@@ -7,6 +7,161 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+
+	/* 숨기기 */
+	z-index: -1;
+	opacity: 0;
+}
+
+.chatshow {
+	opacity: 1;
+	z-index: 1000;
+}
+
+.window {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+.popup {
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	background-color: #f2f2f2;
+	box-shadow: 0px 0px 30px lightgray;
+	width: 360px;
+	height: 660px;
+	border-radius:20px;
+}
+
+.wrap .chat {
+    display: flex;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.wrap .chat .icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.wrap .chat .icon i {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    font-size: 2.5rem;
+    color: #aaa;
+    transform: translateX(-50%);
+}
+
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+.wrap .ch1 .textbox {
+    margin-left: 10px;
+    background-color: white;
+}
+
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: white;
+}
+
+.wrap .ch2 {
+    flex-direction: row-reverse;
+}
+
+.wrap .ch2 .textbox {
+    margin-right: 5px;
+    background-color: #F9EB54;
+}
+
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #F9EB54;
+}
+
+#st {
+	padding-top: 20px;
+}
+#tb {
+	background-color: #DFE6F7;
+}
+#tr {
+	vertical-align : top;
+}
+#tr2 {
+	vertical-align : bottom;
+	height: 30px;
+}
+.chatbt {
+	font-size: 14px;
+	background-color:#DFE6F7;
+	border:solid 1px;
+	border-radius:20px;
+	height:25px;
+}
+#bt2 {
+	width:220px;
+	height:45px;
+	font-size:18px;
+	font-weight:bold;
+	color:white;
+	background-color:#2F92FE;
+	border:0px;
+	border-radius:10px;
+}
+
+#tr3 {
+	width:320px;
+	height:38px;
+	background-color:white;
+	text-align:center;
+}
+#tx {
+	width:300px;
+	height:35px;
+	font-size:16px;
+	border:0px;
+}
+#tx:focus {
+	outline: none;
+}
+
+#chat_p::-webkit-scrollbar {
+  display: none;
+}
+#chat_p {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .label{
 	font-size:18px;
 }
@@ -40,7 +195,7 @@
 	left: 250px;
 	margin: 0px auto;
 }
-#tb {
+#tab {
 	margin-left: 760px;
 }
 #hr{
@@ -49,6 +204,12 @@
 #tb2 {
 	text-align: center;
 	margin-left: 520px;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+.td{
+	border-bottom: 1px solid #444444;
+	padding: 10px;
 }
 </style>
 </head>
@@ -103,7 +264,7 @@
 	</tr>
 </table>
 <br><br>
-<table height="50" id="tb">
+<table height="50" id="tab">
 	<tr>
 		<th width="150"><a href="cs_a_m.do">일반회원</a></th>
 		<th width="150"><a href="cs_a_c.do">기업회원</a></th>
@@ -113,15 +274,15 @@
 <br><br>
 <c:if test="${mc=='m'}">
 <form name="m_a_cs_List">
-<table cellspacing="0" border="1" width="800" id="tb2">
+<table width="800" id="tb2">
 	<tbody>
 	<c:forEach var="dto" items="${m_a_cs_List}">
 	<input type="hidden" name="midx" value="${dto.midx}">
 		<tr>
-			<td>${dto.img}</td>
-			<td>${dto.name}</td>
-			<td>${dto.content}</td>
-			<td>${dto.time}</td>
+			<td width="60" class="td"><div id="chatshow" class="chatshow"><img src="/marrymate/img/member/${dto.img}" width="50" height="50"></div></td>
+			<td width="150" class="td">${dto.name}</td>
+			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
+			<td width="150" class="td">${dto.time}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -130,15 +291,15 @@
 </c:if>
 <c:if test="${mc=='c'}">
 <form name="c_a_cs_List">
-<table cellspacing="0" border="1" width="800" id="tb2">
+<table width="800" id="tb2">
 	<tbody>
 	<c:forEach var="dto" items="${c_a_cs_List}">
 	<input type="hidden" name="cidx" value="${dto.cidx}">
 		<tr>
-			<td>${dto.img}</td>
-			<td>${dto.cname}</td>
-			<td>${dto.content}</td>
-			<td>${dto.time}</td>
+			<td width="60" class="td"><img src="/marrymate/img/com_best/${dto.img}" width="50" height="50"></td>
+			<td width="150" class="td">${dto.cname}</td>
+			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
+			<td width="150" class="td">${dto.time}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -148,6 +309,53 @@
 <br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="background">
+	<div class="window">
+    	<div class="popup">
+			<div id="close">
+				<table align="right">
+					<tr height="65">
+						<th width="260" align="left">상담챗</th>
+						<td width="50">
+							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="wrap">
+			    <table width="300" height="540" align="center" id="tb">
+			    	<tr id="tr">
+			    		<td>
+			    		<div id="chat_p" style="width:320px;height:360px;overflow:auto;">
+							<div class="chat ch1" id="st">
+						    	<div class="icon"><img src="/marrymate/img/chatbot_profile.png" alt="chatbot" width="40" height="40"></div>
+						    	<div class="textbox">무엇을 도와드릴까요?</div>
+							</div>
+							<div id="user_chat"></div>
+						</div>
+						</td>
+					</tr>
+					<tr id="tr3">
+						<td><input type="text" id="tx" name="chatWindow" placeholder="메세지 보내기" onkeypress="press(this.form);"></td>
+					</tr>
+			    </table>
+			</div>
+        </div>
+	</div>
+</div>
+
+<script>
+function chatshow() {
+    document.querySelector(".background").className = "background chatshow";
+}
+function close() {
+	document.querySelector(".background").className = "background";
+}
+
+document.querySelector("#chatshow").addEventListener("click", chatshow);
+document.querySelector("#close").addEventListener("click", close);
+</script>
 <hr width="1200">
 </body>
 </html>

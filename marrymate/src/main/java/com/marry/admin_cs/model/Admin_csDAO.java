@@ -12,6 +12,8 @@ public interface Admin_csDAO {
 	
 	public List<M_a_csDTO> loadContent_m(int midx);
 	
+	public int readNum_m(int midx);
+	
 	public void sendContent_c(int cidx,String content);
 	
 	public List<C_a_csDTO> loadContent_c(int cidx);

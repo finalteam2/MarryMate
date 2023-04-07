@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:if test="${empty sessionScope.loginMidx}">
+<%session.setAttribute("loginMidx",0); %>
+</c:if>
+<c:if test="${empty sessionScope.com_cidx}">
+<%session.setAttribute("com_cidx",0); %>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +18,9 @@
 <link rel="stylesheet" href="/marrymate/css/chat.css">
 <script type="text/javascript" src="js/httpRequest.js"></script>
 </head>
-<body>
+<body onload="rn();">
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
 <div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
-
-<c:if test="${empty sessionScope.loginMidx}">
-<%session.setAttribute("loginMidx",0); %>
-</c:if>
-<c:if test="${empty sessionScope.com_cidx}">
-<%session.setAttribute("com_cidx",0); %>
-</c:if>
 
 <div class="background">
 	<div class="window">
@@ -59,6 +60,36 @@
 	</div>
 </div>
 <script>
+function rn(){
+	var param='midx='+${sessionScope.loginMidx};
+	sendRequest('readNum_m.do',param,'GET',rnResult);
+}
+function rnResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data=XHR.responseText;
+			data=JSON.parse(data);
+			
+			var read=data.read;
+			
+			if(read!=0){
+				
+				var newDivNode=document.createElement('div');
+				newDivNode.setAttribute('id','alr');
+				var newLabelNode=document.createElement('label');
+				newLabelNode.setAttribute('id','al');
+				var newLabelTextNode=document.createTextNode(read);
+				
+				newLabelNode.appendChild(newLabelTextNode);
+				newDivNode.appendChild(newLabelNode);
+				
+				var DivNode=document.getElementById('chatshow');
+				DivNode.appendChild(newDivNode);
+			}
+		}
+	}
+}
+
 function chatshow() {
     document.querySelector(".background").className = "background chatshow";
 }

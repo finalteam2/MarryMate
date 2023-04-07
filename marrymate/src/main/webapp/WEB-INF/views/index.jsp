@@ -10,7 +10,6 @@
 
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="/marrymate/css/sakura.css">
-<link rel="stylesheet" href="/marrymate/css/calendar.css">
 <link rel="stylesheet" href="/marrymate/css/chatbot.css">
 <link rel="stylesheet" href="/marrymate/css/chat.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

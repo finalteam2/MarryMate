@@ -44,6 +44,12 @@ public class Admin_csDAOImple implements Admin_csDAO {
 	}
 	
 	@Override
+	public int readNum_m(int midx) {
+		int read=sqlMap.selectOne("readNum_m",midx);
+		return read;
+	}
+	
+	@Override
 	public void sendContent_c(int cidx, String content) {
 		
 		C_a_csDTO dto=new C_a_csDTO();

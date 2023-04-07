@@ -68,6 +68,19 @@ public class Admin_csController {
 		return mav;
 	}
 	
+	@RequestMapping("/readNum_m.do")
+	public ModelAndView readNum_m(int midx) {
+		
+		int read=admin_csDao.readNum_m(midx);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("read",read);
+		mav.setViewName("finalJson");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/content_c.do")
 	public ModelAndView sendContent_c(int cidx,String content) {
 		

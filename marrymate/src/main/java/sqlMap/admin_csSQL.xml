@@ -13,15 +13,23 @@
   </select>
   
   <insert id="sendContent_m" parameterType="com.marry.admin_cs.model.M_a_csDTO">
-  		insert into m_a_cs values(m_a_cs_maidx.nextval,#{midx},1,1,#{content},sysdate)
+  		insert into m_a_cs values(m_a_cs_maidx.nextval,#{midx},1,1,#{content},sysdate,0)
   </insert>
   
   <select id="loadContent_m" parameterType="Integer" resultType="com.marry.admin_cs.model.M_a_csDTO">
   		select * from m_a_cs where midx=#{midx} order by time
   </select>
   
+  <select id="readNum_m" parameterType="Integer" resultType="Integer">
+  		select count(*) from m_a_cs where midx=#{midx} and type=2 and read=0 
+  </select>
+  
+  <update id="read_m" parameterType="Integer">
+  		update m_a_cs set read=1 where midx=#{midx} and type=2 and time&lt;sysdate
+  </update>
+  
   <insert id="sendContent_c" parameterType="com.marry.admin_cs.model.C_a_csDTO">
-  		insert into c_a_cs values(c_a_cs_caidx.nextval,#{cidx},1,1,#{content},sysdate)
+  		insert into c_a_cs values(c_a_cs_caidx.nextval,#{cidx},1,1,#{content},sysdate,0)
   </insert>
   
   <select id="loadContent_c" parameterType="Integer" resultType="com.marry.admin_cs.model.C_a_csDTO">
