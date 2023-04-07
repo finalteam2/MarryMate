@@ -12,6 +12,10 @@
 	작성자 : ${dto.nick}<br>
 	작성일 : ${dto.writedate}<br>
 	내용 : ${dto.content}<br>
+	<form name="delete" action="delete.do">
+		<input type="hidden" name="bidx" value="${dto.bidx}">
+		<input type="submit" value="삭제">
+	</form>
 	<form name="best" action="best.do">
 		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 		<input type="hidden" name="bidx" value="${dto.bidx}">
@@ -23,7 +27,7 @@
 		<input type="submit" value="비추천">
 	</form>
 	<h3>댓글</h3>
-	<form name="reply" action="reply.do">
+	<form name="reply" action="reply.do" method="post">
 		<input type="hidden" name="bidx" value="${param.bidx}">
 		<input type="hidden" name="nick" value="${sessionScope.loginNick}">
 		<input type="hidden" name="id" value="${sessionScope.loginId}">
