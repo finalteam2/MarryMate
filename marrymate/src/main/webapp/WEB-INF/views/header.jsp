@@ -72,7 +72,7 @@
 				</c:if>
 			</div>
 	            <div style="display: flex; margin-right: 10px;">
-	            	<a href="community.do">커뮤니티</a></div>
+	            	<a href="allCommunity.do">커뮤니티</a></div>
 	        	</div>
         <div style="display: flex; align-items: center; margin-right: 40px;">
             <c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
@@ -80,7 +80,7 @@
 				<a href="login.do">회원로그인</a>&nbsp;&nbsp;
 				<a href="login_com.do">기업로그인</a>&nbsp;&nbsp;
 	            <a href="memberJoin.do">회원가입</a> &nbsp;&nbsp;
-	            <a href="allCompanyJoin.do">기업가입</a>
+	            <a href="companyJoin.do">기업가입</a>
 				</div>
 			</c:if>
            	<c:if test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
