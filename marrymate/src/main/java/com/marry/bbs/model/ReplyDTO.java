@@ -9,13 +9,13 @@ public class ReplyDTO {
 	private String nick;
 	private String id;
 	private String content;
-	private Date writedate;
+	private String writedate;
 	
 	public ReplyDTO() {
 		super();
 	}
 
-	public ReplyDTO(int ridx, int bidx, String nick, String id, String content, Date writedate) {
+	public ReplyDTO(int ridx, int bidx, String nick, String id, String content, String writedate) {
 		super();
 		this.ridx = ridx;
 		this.bidx = bidx;
@@ -65,11 +65,11 @@ public class ReplyDTO {
 		this.content = content;
 	}
 
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
 
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 	

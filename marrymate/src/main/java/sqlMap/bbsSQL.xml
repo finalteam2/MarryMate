@@ -24,4 +24,73 @@
 			0
 		)
 	</insert>
+	<select id="bbsNotiList" resultType="com.marry.bbs.model.BbsDTO">
+		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='공지사항' order by bidx desc
+	</select>
+	<select id="bbsAfterList" resultType="com.marry.bbs.model.BbsDTO">
+		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩후기' order by bidx desc
+	</select>
+	<select id="bbsTalkList" resultType="com.marry.bbs.model.BbsDTO">
+		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩톡톡' order by bidx desc
+	</select>
+	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsDTO">
+		select
+			bbs.*, member.nick
+		from
+			bbs
+		join
+			member
+		on
+			bbs.midx=member.midx
+		where
+			bidx=#{bidx}
+	</select>
+	<insert id="replyWrite" parameterType="com.marry.bbs.model.ReplyDTO">
+		insert into
+			reply
+		values(
+			reply_ridx.nextval,
+			#{bidx},
+			#{nick},
+			#{id},
+			#{content},
+			sysdate
+		)
+	</insert>
+	<select id="replyList" parameterType="int" resultType="com.marry.bbs.model.ReplyDTO">
+		select
+			*
+		from
+			reply
+		where
+			bidx=#{bidx}
+	</select>
+	<update id="watchUp" parameterType="int">
+		update
+			bbs
+		set
+			watch=watch+1
+		where
+			bidx=#{bidx}
+	</update>
+	<insert id="bestCount" parameterType="Map">
+		insert into
+			recommand
+		values(
+			recommand_re_idx.nextval,
+			#{bidx},
+			#{midx},
+			1
+		)
+	</insert>
+	<insert id="worstCount" parameterType="Map">
+		insert into
+			recommand
+		values(
+			recommand_re_idx.nextval,
+			#{bidx},
+			#{midx},
+			-1
+		)
+	</insert>
 </mapper>

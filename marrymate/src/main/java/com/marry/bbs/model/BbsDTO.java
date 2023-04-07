@@ -17,13 +17,14 @@ public class BbsDTO {
 	private int blind;
 	private int topfix;
 	private int admin;
+	private String nick;
 	
 	public BbsDTO() {
 		super();
 	}
 
 	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, String writedate,
-			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin) {
+			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin, String nick) {
 		super();
 		this.bidx = bidx;
 		this.midx = midx;
@@ -40,6 +41,7 @@ public class BbsDTO {
 		this.blind = blind;
 		this.topfix = topfix;
 		this.admin = admin;
+		this.nick = nick;
 	}
 
 	public int getBidx() {
@@ -160,6 +162,14 @@ public class BbsDTO {
 
 	public void setAdmin(int admin) {
 		this.admin = admin;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	
 }

@@ -25,7 +25,6 @@ public class CompanyDAOImple implements CompanyDAO {
 		map.put("id", id);
 		map.put("pwd", pwd);
 		CompanyDTO dto= sqlMap.selectOne("companyLogin", map);
-		System.out.println(dto);
 		return dto;
 	}
 	

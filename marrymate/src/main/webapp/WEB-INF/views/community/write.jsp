@@ -166,6 +166,28 @@
 		text-align: center;
 	}
 </style>
+<script>
+	function horseSelector(e) {
+		var review = [ "없음" ];
+		var talk = [ "가전", "신혼혼수", "프로포즈", "상견례", "신혼집", "인테리어", "다이어트" ];
+		
+		var target = document.getElementById("horseList");
+
+		if (e.value == "웨딩후기")
+			var d = review;
+		else if (e.value == "웨딩톡톡")
+			var d = talk;
+
+		target.options.length = 0;
+
+		for (x in d) {
+			var opt = document.createElement("option");
+			opt.value = d[x];
+			opt.innerHTML = d[x];
+			target.appendChild(opt);
+		}
+	}
+</script>
 </head>
 <body>
 	<section>
@@ -176,32 +198,27 @@
 				<div id="iBox">
 					<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 					<div class="hTagBox">카테고리</div>
-						<select name="kind">
+						<select name="kind" onchange="horseSelector(this)">
+							<option>선택</option>
 							<option value="웨딩후기">웨딩후기</option>
 							<option value="웨딩톡톡">웨딩톡톡</option>
 						</select><br>
 					<div class="hClear">말머리</div>
-						<select name="horse">
-							<option value="가전">가전</option>
-							<option value="신혼집">신혼집</option>
-							<option value="신혼혼수">신혼혼수</option>
-							<option value="상견례">상견례</option>
-							<option value="프로포즈">프로포즈</option>
-							<option value="인테리어">인테리어</option>
-							<option value="다이어트">다이어트</option>
+						<select id="horseList" name="horse">
+							<option>선택</option>
 						</select><br>
 					<div class="hClear">제목</div>
 						<input type="text" name="subject"><br>
 					<div class="hTagBox">내용</div>
-						<textarea name="content" rows="20" cols="80" class=ta></textarea><br>
+						<textarea name="content" rows="20" cols="80" class="ta"></textarea><br>
 					<div class="hClear">이미지 첨부</div>	
-						<input type="file" name="img">
+						<input type="file" name="bbsimg">
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="작성완료">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시쓰기">
 				</div>
-			</div>
+				</div>
 			</form>
 		</article>
 	</section>
