@@ -26,7 +26,10 @@ body{
 .allpage{
     font-family: 'SUIT-Regular';
 	width: 1280px;
-	margin:0 auto;
+	margin:30px auto;
+	background: #ffffff;
+	padding: 20px 20px 20px 20px;
+	border-radius: 25px 25px 25px 25px;
 }
 
 #carouselExampleIndicators{
@@ -345,7 +348,7 @@ textarea {
 	  </div>
 	</div>
 	
-	</div>
+
 
 	<script>
 	</script>
@@ -409,6 +412,8 @@ textarea {
 	    </div>
 	  </div>
 	</div>
+</div>
+
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>

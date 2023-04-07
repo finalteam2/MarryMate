@@ -34,6 +34,8 @@ public class CalendarDAOImple implements CalendarDAO {
 	}
 	
 	private final CalendarDTO calendarDTO;
+	
+	private final CalendarDAO calendarDAO;
 
     public CalendarDAOImple(CalendarDTO calendarDTO) {
         this.calendarDTO = calendarDTO;
@@ -91,23 +93,21 @@ public class CalendarDAOImple implements CalendarDAO {
 		return null;
 	}
 
-	
-	private final CalendarDAO calendarDAO;
 
 	@Override
-	public List<BookDTO> bookInfo(int cidx) {
+	public List<BookDTO> bookInfo(int midx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<BookDTO> moneyBook(int cidx) {
+	public List<BookDTO> moneyBook(int midx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<BookDTO> moneyLeft(int cidx) {
+	public List<BookDTO> moneyLeft(int midx) {
 		// TODO Auto-generated method stub
 		return null;
 	}

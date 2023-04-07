@@ -14,8 +14,8 @@ public interface CalendarDAO {
 	public int calendarShow(int cidx);
 	public int date(String loginMD);
 	public Date dateInfo(String loginMD);
-	public List<BookDTO> bookInfo(int cidx);
-	public List<BookDTO> moneyBook(int cidx);
-	public List<BookDTO> moneyLeft(int cidx);
+	public List<BookDTO> bookInfo(int midx);
+	public List<BookDTO> moneyBook(int midx);
+	public List<BookDTO> moneyLeft(int midx);
 	
 }
