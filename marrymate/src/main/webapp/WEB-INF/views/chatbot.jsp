@@ -68,7 +68,6 @@ function rn(){
 		var param='cidx='+${sessionScope.com_cidx};
 		sendRequest('readNum_c.do',param,'GET',rnResult);
 	}
-	
 }
 function rnResult(){
 	if(XHR.readyState==4){

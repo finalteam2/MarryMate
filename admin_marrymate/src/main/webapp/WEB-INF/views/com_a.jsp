@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body{
+    background: #fbf4ff;
+}
+
 .label{
 	font-size:18px;
 }
@@ -60,6 +64,13 @@
 </style>
 </head>
 <body width="1200">
+<c:if test="${empty sessionScope.name}">
+<script>
+	window.alert('로그인 후 이용가능합니다.');
+	location.href='login.do';
+</script>
+</c:if>
+<c:if test="${!empty sessionScope.name}">
 <table width="1100" align="center">
 	<tr>
 		<td align="left">
@@ -170,5 +181,6 @@
 <br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br>
 <hr width="1200">
+</c:if>
 </body>
 </html>

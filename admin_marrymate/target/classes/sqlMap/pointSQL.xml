@@ -5,7 +5,7 @@
   <mapper namespace="com.admin.point">
   
   <select id="pointMinusList" resultType="com.admin.point.model.PointListDTO">
-  		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type from point,member,payment,book,company where point.midx=member.midx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and p_cal&lt;0 order by point.p_idx
+  		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type from point,member,payment,book,company where point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and p_cal&lt;0 order by point.p_idx
   </select>
   
   <select id="pointPlusList" resultType="com.admin.point.model.PointListDTO">

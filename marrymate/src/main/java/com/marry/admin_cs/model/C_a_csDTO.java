@@ -10,13 +10,14 @@ public class C_a_csDTO {
 	private int type;
 	private String content;
 	private Date time;
+	private int read;
 	
 	public C_a_csDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public C_a_csDTO(int caidx, int cidx, int admin, int type, String content, Date time) {
+	public C_a_csDTO(int caidx, int cidx, int admin, int type, String content, Date time, int read) {
 		super();
 		this.caidx = caidx;
 		this.cidx = cidx;
@@ -24,6 +25,7 @@ public class C_a_csDTO {
 		this.type = type;
 		this.content = content;
 		this.time = time;
+		this.read = read;
 	}
 
 	public int getCaidx() {
@@ -66,6 +68,13 @@ public class C_a_csDTO {
 	}
 	public void setTime(Date time) {
 		this.time = time;
+	}
+	
+	public int getRead() {
+		return read;
+	}
+	public void setRead(int read) {
+		this.read = read;
 	}
 
 }

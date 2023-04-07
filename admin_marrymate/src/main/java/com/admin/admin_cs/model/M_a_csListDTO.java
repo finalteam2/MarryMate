@@ -7,6 +7,7 @@ public class M_a_csListDTO {
 	private int midx;
 	private String img;
 	private String name;
+	private int rnum;
 	private String content;
 	private Date time;
 	
@@ -15,11 +16,12 @@ public class M_a_csListDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public M_a_csListDTO(int midx, String img, String name, String content, Date time) {
+	public M_a_csListDTO(int midx, String img, String name, int rnum, String content, Date time) {
 		super();
 		this.midx = midx;
 		this.img = img;
 		this.name = name;
+		this.rnum = rnum;
 		this.content = content;
 		this.time = time;
 	}
@@ -46,6 +48,14 @@ public class M_a_csListDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getContent() {

@@ -85,6 +85,7 @@ input{
 }
 #tb {
 	background-color: #DFE6F7;
+	border-collapse: collapse;
 }
 #tr {
 	vertical-align : top;

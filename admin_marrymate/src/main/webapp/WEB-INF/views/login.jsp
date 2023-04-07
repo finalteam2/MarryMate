@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body{
+    background: #fbf4ff;
+}
+
 .label{
 	font-size:20px;
 }
@@ -58,7 +62,7 @@
 			</td>
 			<td>
 				<br><br>
-				<table bgcolor="lightgray" >
+				<table bgcolor="#e3e3e3" >
 					<tr height="30"><td colspan="3"> </td></tr>
 					<tr height="50">
 						<th width="130"><label class="label">아이디</label></th>
