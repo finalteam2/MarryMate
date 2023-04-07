@@ -814,6 +814,7 @@ int lastday=cal.getActualMaximum(Calendar.DATE);
 			
 			});
 			</script>
+	<%@include file="../chatbot.jsp"%>
 	<%@include file="../footer.jsp"%>
 </body>
 </html>

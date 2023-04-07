@@ -49,7 +49,7 @@
 </style>
 
 <!-- header 영역 혹시 깨질까봐 우선 in-line으로 css적용해두었어요! -->
-<header style="display: flex; justify-content: space-between; align-items: center;">
+<header style="display: flex; justify-content: space-between; align-items: center;" id="header">
     <nav style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
         <div style="display: flex; align-items: center; margin-left: 40px;">
             <div style="display: flex; margin-right: 10px;">

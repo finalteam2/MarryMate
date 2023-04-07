@@ -8354,3 +8354,6 @@ function setFloatingBanner() {
     }
 
 }
+
+
+
