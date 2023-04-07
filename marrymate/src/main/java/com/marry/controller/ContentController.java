@@ -198,4 +198,17 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
+	
+	@RequestMapping("/myBook.do")
+	public String reserve() {
+		return "/mypage/myBook";
+	}
+	
+	
+	@RequestMapping("/myPoint.do")
+	public String point() {
+		return "/mypage/myPoint";
+	}
+	
+	
 }
