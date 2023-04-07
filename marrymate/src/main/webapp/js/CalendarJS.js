@@ -43,34 +43,57 @@ function tagListToggle() {
 
 
 
-$(function(){
-	//스크롤이동
-	$(".moveScroll").click(function(e) {
-		var scrollY = 0;
-		if($(this).data('target') == 'chkid') {
-			var chkid = $(this).data('chkid')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
+
+	$(function(){
+		//스크롤이동
+		$(".moveScroll").click(function(e) {
+			var scrollY = 0;
+			if($(this).data('target') == 'chkid') {
+				var chkid = $(this).data('chkid')+'';
+				var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
+				if(findEl.length > 0) {
+					scrollY = $(findEl[0]).closest(".item").offset().top;
+				} else {
+					scrollY = $(".checkListArea").offset().top;
+				}
+			} else if($(this).data('target') == 'chkst') {
+				var chkst = $(this).data('chkst')+'';
+				var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
+				if(findEl.length > 0) {
+					scrollY = $(findEl[0]).closest(".item").offset().top;
+				} else {
+					scrollY = $(".checkListArea").offset().top;
+				}
 			} else {
 				scrollY = $(".checkListArea").offset().top;
 			}
-		} else if($(this).data('target') == 'chkst') {
-			var chkst = $(this).data('chkst')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else {
-			scrollY = $(".checkListArea").offset().top;
-		}
+			//
+			$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
+		});
 		//
-		$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
+		
+		
+		//mainTopBanner 
+ 		if($(".mainTopBanner").length > 0){
+			$(".mainTopBanner").slideDown(500);
+			$(".mainTopBanner .btnClose").click(function(e){
+				e.preventDefault();
+				$(".mainTopBanner").slideUp(500,function(){
+					// $(".rouletteFixed").css("top",55);
+				});
+
+			})
+		}
+		
+		cookiedata = document.cookie;
+    	if(cookiedata.indexOf("close=Y") < 0){
+			startFloatingBanner();
+    	} else {
+    		var divObj = document.getElementById("roul");
+    		divObj.style.visibility = "hidden";
+    	}
 	});
-	
-});
+
 
 
 

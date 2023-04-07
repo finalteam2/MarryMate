@@ -1,7 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+.menu {
+  position: relative;
+  margin-left: 10px;
+}
 
+.menu ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  min-width: 160px;
+}
+
+.menu li {
+  display: block;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu li:last-child {
+  border-bottom: none;
+}
+
+.menu a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu a:hover {
+  background-color: #f1f1f1;
+}
+
+.menu:hover ul {
+  display: block;
+}
+
+</style>
 
 <!-- header 영역 혹시 깨질까봐 우선 in-line으로 css적용해두었어요! -->
 <header style="display: flex; justify-content: space-between; align-items: center;">
@@ -19,22 +64,22 @@
             	<a href="community.do">커뮤니티</a></div>
         </div>
         <div style="display: flex; align-items: center; margin-right: 40px;">
-            <c:if test="${empty sessionScope.loginId}">
-                <div style="display: flex; margin-right: 10px;"><a href="login.do">로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
-            </c:if>
+            <c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
+				<div><a href="login.do">로그인</a>&nbsp;or&nbsp;<a href="login_com.do">기업 로그인</a>&nbsp;|&nbsp;<a href="memberJoin.do">회원가입</a></div>
+			</c:if>
             <c:if test="${!empty sessionScope.loginId}">
                 <div style="display: flex; margin-right: 10px;">${sessionScope.loginName} 접속중 | &nbsp;<a href="logout.do">로그아웃</a></div>
             </c:if>
             <a href="memberJoin.do">회원가입</a> &nbsp;&nbsp;
             <a href="companyJoin.do">기업 회원가입</a>
-            <div class="menu" style="position: relative; margin-left: 10px;">
-                <a style="display: block;"><img src="/marrymate/img/user2.png" style="width:40px;"></a>
-                <ul class="hide" style="position: absolute; top: 100%; left: 0; z-index: 1; display: none;">
+            <div class="menu">
+                <a><img src="/marrymate/img/user2.png" style="width:40px;"></a>
+                <ul class="mbar">
 					<c:if test="${!empty sessionScope.loginId}">
-		            <li><a class="dropdown-item" href="myInfo_m.do">마이페이지</a></li>
+		            <li><a href="myInfo_m.do">마이페이지</a></li>
 					</c:if>
 					<c:if test="${!empty sessionScope.com_id}">
-		            <li><a class="dropdown-item" href="myInfo_c.do">마이페이지</a></li>
+		            <li><a href="myInfo_c.do">마이페이지</a></li>
 					</c:if>
                     <li><a href="reserve.do">예약내역</a></li>
                     <li><a href="qna.do">문의내역</a></li>

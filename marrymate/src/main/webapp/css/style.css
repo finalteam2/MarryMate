@@ -9,40 +9,6 @@
     font-style: normal;
 }
 
-header img{
-	padding-top: 25px;
-	width:20px;
-}
-
-header{
-	text-align: center;
-}
-
-header #menu{
-	margin:0px auto;
-	width:1580px;
-}
-header .nav-bar{
-	list-style-type:none;
-	display:inline;
-	margin-left:3px;
-	font-family: 'GmarketSansMedium';
-	font-size:23px;
-	color:#a4a4a4;
-}
-
-.menu a{cursor: pointer;}
-.menu a img{width: 40px}
-.menu .hide{
-	display: none;
-	font-family: 'SUIT-Regular';
-}
-
-.menu .hide li{list-style: none;}
-
-header .loginArea{
-	text-align: right;
-}
 
 /*body 영역
 body section{
