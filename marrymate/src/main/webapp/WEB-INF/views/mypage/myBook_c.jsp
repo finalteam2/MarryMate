@@ -32,6 +32,7 @@
       
       <th scope="col">총 금액 allpay</th>
       <th scope="col">예약 상태 bk_state</th>
+      <th scope="col">승인 / 취소</th>
     </tr>
   </thead>
   <tbody>
@@ -49,11 +50,26 @@
       <td>${dto.fpay }</td>
 	</c:if>
       <td>${dto.allpay }</td>
-	  <c:if test="${dto.bk_state eq 0}"><td>결제전</td></c:if>
-	  <c:if test="${dto.bk_state eq 1}"><td>예약대기</td></c:if>
-	  <c:if test="${dto.bk_state eq 2}"><td>예약확정</td></c:if>
-	  <c:if test="${dto.bk_state eq 3}"><td>잔금 결제완료</td></c:if>
-	  <c:if test="${dto.bk_state eq 4}"><td>예약취소</td></c:if>
+	  <td>
+		  <c:if test="${dto.bk_state eq 0}">결제전</c:if>
+		  <c:if test="${dto.bk_state eq 1}">예약대기</c:if>
+		  <c:if test="${dto.bk_state eq 2}">예약확정</c:if>
+		  <c:if test="${dto.bk_state eq 3}">결제완료</c:if>
+		  <c:if test="${dto.bk_state eq 4}">예약취소</c:if>
+		  <c:if test="${dto.bk_state eq 5}">이용완료</c:if>
+	  </td>
+	  <td>
+	  <div class="btn-group" role="group" aria-label="Basic example">
+	  	<form action="" method="post">
+	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+		  <button type="submit" class="btn btn-outline-primary" <c:if test="${not (dto.bk_state eq 1)}">disabled</c:if>>승인</button>
+	  	</form>
+	  	<form action="" method="post">
+	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+		  <button type="button" class="btn btn-outline-danger" <c:if test="${dto.bk_state eq 5 || dto.bk_state eq 4}">disabled</c:if>>취소</button>
+	  	</form>
+	  </div>
+	  </td>
     </tr>
     </c:forEach>
   </tbody>

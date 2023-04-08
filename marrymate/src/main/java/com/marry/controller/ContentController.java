@@ -1,5 +1,6 @@
 package com.marry.controller;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -236,9 +237,13 @@ public class ContentController {
 //		포인트 사용량
 //		총 금액(포인트 사용 후)
 		if (midx > 0) {
+			//회원 페이지
 			List<BookListDTO> arr = contentDao.selectMemBook(midx);
 			for(int i = 0; i < arr.size(); i++) {
 				BookListDTO dto = arr.get(i);
+				if(dto.getIs_after() == 1 && dto.getBk_state() != 4) {
+					dto.setBk_state(5);
+				}
 				if(dto.getCkind().equals("예식장")) {
 					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
 					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
@@ -251,11 +256,15 @@ public class ContentController {
 			mav.addObject("arr", arr);
 			mav.setViewName("mypage/myBook_m");
 		}else if(cidx > 0) {
+			//업체 페이지
 			List<BookListDTO> arr = contentDao.selectComBook(cidx);
 			for(int i = 0; i < arr.size(); i++) {
 				BookListDTO dto = arr.get(i);
+//				System.out.println("is_after : "+dto.getIs_after());
+				if(dto.getIs_after() == 1 && dto.getBk_state() != 4) {
+					dto.setBk_state(5);
+				}
 				if(dto.getCkind().equals("예식장")) {
-					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
 					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
 					mav.addObject("hall", "hall");
 				}else {

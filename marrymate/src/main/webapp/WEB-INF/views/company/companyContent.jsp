@@ -175,7 +175,7 @@ textarea {
 	  <tbody>
 	<c:forEach varStatus="status" var="hdto" items="${harr }">
 	    <tr>
-	      <th scope="row">${status.count }</th>
+	      <th scope="row">${status.count } / ${hdto.hidx }</th>
 	      <td>${hdto.name }</td>
 	      <td>${hdto.pay }</td>
 	      <td>${hdto.time }</td>
@@ -200,7 +200,7 @@ textarea {
 	  <tbody>
 	<c:forEach varStatus="status" var="fdto" items="${farr }">
 	    <tr>
-	      <th scope="row">${status.count }</th>
+	      <th scope="row">${status.count } / ${fdto.fidx }</th>
 	      <td>${fdto.name }</td>
 	      <td>${fdto.pay }</td>
 	    </tr>

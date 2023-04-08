@@ -12,20 +12,27 @@ public class BookListDTO {
 	private String ckind;
 	private Date bk_date;
 	private String bk_time;
+	private Date booktime;
 	private int cpay;
 	private int hpay;
 	private int fpay;
 	private int hnum;
 	private int allpay;
 	private int bk_state;
+	private int is_after;
 	
 	public BookListDTO() {
 		super();
 	}
 	
 
+
+
+
+
 	public BookListDTO(int bk_idx, String cname, String mname, String hname, String fname, String ckind, Date bk_date,
-			String bk_time, int cpay, int hpay, int fpay, int hnum, int allpay, int bk_state) {
+			String bk_time, Date booktime, int cpay, int hpay, int fpay, int hnum, int allpay, int bk_state,
+			int is_after) {
 		super();
 		this.bk_idx = bk_idx;
 		this.cname = cname;
@@ -35,14 +42,50 @@ public class BookListDTO {
 		this.ckind = ckind;
 		this.bk_date = bk_date;
 		this.bk_time = bk_time;
+		this.booktime = booktime;
 		this.cpay = cpay;
 		this.hpay = hpay;
 		this.fpay = fpay;
 		this.hnum = hnum;
 		this.allpay = allpay;
 		this.bk_state = bk_state;
+		this.is_after = is_after;
 	}
-	
+
+
+
+
+
+
+	public int getIs_after() {
+		return is_after;
+	}
+
+
+
+
+
+
+	public void setIs_after(int is_after) {
+		this.is_after = is_after;
+	}
+
+
+
+
+
+
+	public Date getBooktime() {
+		return booktime;
+	}
+
+
+
+	public void setBooktime(Date booktime) {
+		this.booktime = booktime;
+	}
+
+
 
 	public String getMname() {
 		return mname;
