@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.marry.book.model.BookDTO;
 import com.marry.book.model.BookListDTO;
+import com.marry.point.model.PointDTO;
 
 public class ContentDAOImple implements ContentDAO {
 
@@ -107,6 +108,12 @@ public class ContentDAOImple implements ContentDAO {
 	@Override
 	public List<BookListDTO> selectMemBook(int midx) {
 		List<BookListDTO> arr = sqlMap.selectList("selectmembook", midx);
+		return arr;
+	}
+	
+	@Override
+	public List<PointDTO> selectpoint(int midx) {
+		List<PointDTO> arr = sqlMap.selectList("selectpoint", midx);
 		return arr;
 	}
 }

@@ -12,6 +12,22 @@
 </head>
 <body>
 <%@include file="../header.jsp" %>
+<c:if test="${empty arr }">
+<h1>포인트 내역이 없습니다.</h1>
+</c:if>
+<c:forEach var="dto" items="${arr }">
+P_IDX : ${dto.p_idx }<br>
+MIDX : ${dto.midx }<br>
+PAY_IDX : ${dto.pay_idx }<br>
+REFUND_IDX : ${dto.refund_idx }<br>
+BIDX : ${dto.bidx }<br>
+P_CAL : ${dto.p_cal }<br>
+P_DATE : ${dto.p_date }<br>
+P_TOTAL : ${dto.p_total }<br>
+P_TYPE : ${dto.p_type }<br>
+<hr>
+</c:forEach>
+
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>

@@ -213,4 +213,14 @@
    	where
    		book.cidx = #{cidx}
 	</select>
+	<select id="selectpoint" resultType="com.marry.point.model.PointDTO">
+	select
+		*
+	from
+		point
+	where
+		midx = #{midx}
+	order by
+		p_idx desc
+	</select>
 </mapper>

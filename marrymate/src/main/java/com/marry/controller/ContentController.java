@@ -1,6 +1,6 @@
 package com.marry.controller;
 
-import java.time.LocalTime;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.marry.book.model.BookDTO;
 import com.marry.book.model.BookListDTO;
 import com.marry.company.model.Com_CsDTO;
 import com.marry.company.model.Com_LikeDTO;
 import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.ContentDAOImple;
 import com.marry.company.model.ReviewDTO;
+import com.marry.point.model.PointDTO;
 
 @Controller
 public class ContentController {
@@ -228,14 +228,6 @@ public class ContentController {
 		}
 		
 		//로그인 유저에 따라 페이지 나뉨
-//		추가 정보 제공 가능하나 리스트에 널값이 생겨서 제외
-//		hidx - hname이름 / hpay가격 / hnum최소보증인원
-//		fidx - fname이름 / fpay가격
-//
-//		추가 결제 테이블 조회
-//		결제 방식
-//		포인트 사용량
-//		총 금액(포인트 사용 후)
 		if (midx > 0) {
 			//회원 페이지
 			List<BookListDTO> arr = contentDao.selectMemBook(midx);
@@ -285,27 +277,9 @@ public class ContentController {
 	public ModelAndView myPoint(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
-		int midx = 0;
-		int cidx = 0;
-		try {
-			midx = (int) session.getAttribute("loginMidx");
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		try {
-			cidx = (int) session.getAttribute("com_cidx");
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		//로그인 유저에 따라 다른 방식으로 조회
-		if (midx > 0) {
-			
-		}else if(cidx > 0) {
-		
-		}
+		int midx = (int) session.getAttribute("loginMidx");
+		List<PointDTO> arr = contentDao.selectpoint(midx);
+		mav.addObject("arr", arr);
 		mav.setViewName("mypage/myPoint");
 		return mav;
 	}

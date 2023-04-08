@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.marry.book.model.BookDTO;
 import com.marry.book.model.BookListDTO;
+import com.marry.point.model.PointDTO;
 
 public interface ContentDAO {
 	
@@ -23,4 +24,5 @@ public interface ContentDAO {
 	public int updateComCs(Com_CsDTO dto);
 	public List<BookListDTO> selectComBook(int cidx);
 	public List<BookListDTO> selectMemBook(int midx);
+	public List<PointDTO> selectpoint(int midx);
 }
