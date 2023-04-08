@@ -48,6 +48,8 @@ public class LoginController {
 			session.setAttribute("loginName", dto.getName());
 			session.setAttribute("loginMD", dto.getMarrydate());
 			session.setAttribute("loginPname", dto.getPname());
+			session.setAttribute("loginPoint", dto.getPoint());
+			session.setAttribute("loginTel", dto.getTel());
 			
 			mav.addObject("msg", dto.getName()+"님 즐거운 하루 되세요~!");
 			mav.addObject("url", "index.do");
