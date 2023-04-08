@@ -10,5 +10,7 @@
   </head>
   <body>
     <h1>calendar info page</h1>
+    <img id="calinfo1" src="/marrymate/img/caltopmem.png"
+			style="width: 100%">
   </body>
 </html>

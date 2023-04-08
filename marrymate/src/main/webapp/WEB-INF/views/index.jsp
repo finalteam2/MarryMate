@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>MarryMate</title>
 
-<link href="/marrymate/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="/marrymate/css/sakura.css">
 <link rel="stylesheet" href="/marrymate/css/chatbot.css">
 <link rel="stylesheet" href="/marrymate/css/chat.css">

@@ -23,7 +23,7 @@ body section img{
 */
 
 
-/*footer 영역*/
+/*footer 영역
 footer #foot1{
 	background-color:#fff;
 	color:#9e9e9e;
@@ -35,6 +35,15 @@ footer #foot2{
 	width:1510px;
 	line-height: 25px;
 }
+
+footer #foottop {
+    border: 5px solid #ECCC83;
+    padding: 5px;
+    display: inline-block;
+  }
+footer #foottop a {
+    margin-right: 5px;
+  }
 footer img{
 	padding-top: 35px;
 	width:160px;
@@ -43,3 +52,4 @@ footer label{
 	font-size:18px;
 	margin-left:740px;
 }
+*/
