@@ -25,7 +25,14 @@
 		    		#{gname},
 		    	</otherwise>
 		    </choose>
-		    0,
+		    <choose>
+		    	<when test="gname!=null">
+		    		5000,
+		    	</when>
+		    	<otherwise>
+		    		0,
+		    	</otherwise>
+		    </choose>
 		    sysdate,
 		    <choose>
 		    	<when test="e_check=='1'">
@@ -40,6 +47,39 @@
 		    #{pname}
 		)
 	</insert>
+	<insert id="gnameInsertPoint" parameterType="int">
+		insert into
+			point
+		values(
+			point_p_idx.nextval,
+			#{midx},
+			0,
+			0,
+			0,
+			5000,
+			sysdate,
+			5000,
+			'친구소개'
+		)
+	</insert>
+	<insert id="memberInsertPoint" parameterType="Map">
+		insert into
+				point
+			values(
+				point_p_idx.nextval,
+				#{midx},
+				0,
+				0,
+				0,
+				5000,
+				sysdate,
+				#{point},
+				'친구소개'
+			)
+	</insert>
+	<update id="updatePoint" parameterType="String">
+		update member set point=point+5000 where id=#{gname}
+	</update>
 	<select id="memberLogin" parameterType="Map" resultType="com.marry.member.model.MemberDTO">
 		select
 			*
@@ -47,5 +87,20 @@
 			member
 		where
 			id=#{id} and pwd=#{pwd}
+	</select>
+	<select id="nickCheck" parameterType="String" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
+	<select id="gnameCheck" parameterType="String" resultType="int">
+		select count(*) from member where id=#{gname}
+	</select>
+	<select id="getMidx" parameterType="String" resultType="int">
+		select midx from member where id=#{id}
+	</select>
+	<select id="getPoint" parameterType="String" resultType="int">
+		select point from member where id=#{id}
 	</select>
 </mapper>
