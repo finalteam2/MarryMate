@@ -1,12 +1,15 @@
 package com.marry.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.CompanyDAO;
@@ -28,7 +31,11 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest req, HttpSession session) {
+	public ModelAndView login(
+			@RequestParam(value = "saveid", required = false)String saveid,
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			HttpSession session) {
 		String id=req.getParameter("id");
 		String pwd=req.getParameter("pwd");
 		MemberDTO dto=memberDao.memberLogin(id, pwd);
@@ -40,7 +47,17 @@ public class LoginController {
 			mav.addObject("url", "login.do");
 			mav.setViewName("login/loginMsg");
 			return mav;
-		}else {
+		}else {			
+			
+			if(saveid==null) {
+				Cookie ck=new Cookie("saveid", dto.getId());
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
+			}else {
+				Cookie ck=new Cookie("saveid", dto.getId());
+				ck.setMaxAge(60*60*24*30);
+				resp.addCookie(ck);
+			}
 			
 			session.setAttribute("loginMidx", dto.getMidx());
 			session.setAttribute("loginId", dto.getId());
@@ -61,11 +78,15 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login_com.do", method = RequestMethod.GET)
 	public String companyLoginForm() {
-		return "login/login_com";
+		return "login/login";
 	}
 	
 	@RequestMapping(value = "/login_com.do", method = RequestMethod.POST)
-	public ModelAndView companyLoginSubmit(HttpServletRequest req, HttpSession session) {
+	public ModelAndView companyLoginSubmit(
+			@RequestParam(value = "comSaveid", required = false)String comSaveid,
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			HttpSession session) {
 		String id=req.getParameter("id");
 		String pwd=req.getParameter("pwd");
 		CompanyDTO dto=companyDao.companyLogin(id, pwd);
@@ -74,10 +95,20 @@ public class LoginController {
 		
 		if(dto==null) {
 			mav.addObject("msg", "로그인 정보가 올바르지 않습니다.");
-			mav.addObject("url", "login_com.do");
+			mav.addObject("url", "login.do");
 			mav.setViewName("login/loginMsg");
 			return mav;
 		}else {
+			
+			if(comSaveid==null) {
+				Cookie ck=new Cookie("comSaveid", dto.getId());
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
+			}else {
+				Cookie ck=new Cookie("comSaveid", dto.getId());
+				ck.setMaxAge(60*60*24*30);
+				resp.addCookie(ck);
+			}
 			
 			session.setAttribute("com_cidx", dto.getCidx());
 			session.setAttribute("com_id", dto.getId());
