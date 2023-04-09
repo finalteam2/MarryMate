@@ -54,6 +54,11 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public int comIdCheck(String id) {
+		return sqlMap.selectOne("comIdCheck", id);
+	}
+	
+	@Override
 	public int getCidx(String id) {
 		int count=sqlMap.selectOne("getCidx", id);
 		return count;

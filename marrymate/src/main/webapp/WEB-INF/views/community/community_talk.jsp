@@ -4,63 +4,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>marrymate</title>
-<style>
-	table {
-		width: 1000px;
-		margin: auto;
-		text-align: center;
-	}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+  <title>MarryMate</title>
+  <style>
+    .d-flex.flex-column > a {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-	<div>
-		<table>
+  <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+  <div class="container">
+    <h1 class="text-center my-3">커뮤니티</h1>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="d-flex flex-column" style="padding-top: 100px; padding-bottom: 100px;">
+          <a href="notiList.do" class="btn btn-primary">공지사항</a>
+	      <a href="afterList.do" class="btn btn-primary">웨딩후기</a>
+	      <a href="talkList.do" class="btn btn-primary">웨딩톡톡</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <table class="table">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성날짜</th>
-					<th>조회수</th>
+					<th class="text-center">번호</th>
+					<th class="text-center">제목</th>
+					<th class="text-center">작성자</th>
+					<th class="text-center">작성날짜</th>
+					<th class="text-center">조회수</th>
 				</tr>
 			</thead>
-			<tfoot>
-				<tr>
-					<td colspan="4" align="center">
-					${pageStr}
-					</td>
-					<td><a href="write.do">글쓰기</a></td>
-				</tr>
-			</tfoot>
 			<tbody>
 				<c:if test="${empty listTalk}">
 					<tr>
-						<td colspan="5" align="center">
-						등록된 게시글이 없습니다.
-						</td>
+						<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${listTalk}">
 					<tr>
-						<td>${dto.bidx}</td>
+						<td class="text-center">${dto.bidx}</td>
 						<c:url var="contentUrl" value="content.do">
 							<c:param name="bidx">${dto.bidx}</c:param>
 						</c:url>
 						<td>
-							<c:if test="${!empty dto.horse ||'없음' eq dto.horse}">
-							[${dto.horse}]
-							</c:if>
-							<a href="${contentUrl}">${dto.subject}</a>
+							<a href="${contentUrl}" class="text-center">
+							<c:if test="${!empty dto.horse && '없음' ne dto.horse}">
+								[${dto.horse}]
+							</c:if> 
+							${dto.subject}
+							</a>
 						</td>
-						<td>${dto.nick}</td>
-						<td>${dto.writedate}</td>
-						<td>${dto.watch}</td>
+						<td class="text-center">${dto.nick}</td>
+						<td class="text-center">${dto.writedate}</td>
+						<td class="text-center">${dto.watch}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+	  <a href="write.do" class="btn btn-primary" style="margin-bottom: 20px; margin-right: 110px;">글쓰기</a>
 	</div>
+  </div>
+  <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
+

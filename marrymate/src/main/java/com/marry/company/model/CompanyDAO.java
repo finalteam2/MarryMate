@@ -14,6 +14,8 @@ public interface CompanyDAO {
 	
 	public int imgInsert(String cidx, String img);
 	
+	public int comIdCheck(String id);
+	
 	public int getCidx(String id);
 
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>marrymate</title>
+<title>MarryMate</title>
 <style>
 	article div input[type=text] {
 		width: 230px;
@@ -108,6 +108,10 @@
 	.tc {
 		text-align: center;
 	}
+	.sc {
+		padding-right: 115px;
+		text-align: center;
+	}
 	.w-btn-red {
 	    background-color: #ff5f2e;
 	    color: #e1eef6;
@@ -183,12 +187,12 @@
 	}
 	#iBox {
 		width: 600px;
-		height: 350px;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 50px;
 		margin-top: 20px;
 		padding-left: 100px;
+		padding-bottom: 30px;
 		line-height: 45px;
 		border-bottom: 2px dashed black;
 	}
@@ -205,8 +209,10 @@
 	#jBox {
 		width: 350px;
 		height: 60px;
-		margin: auto;
+		margin-left: auto;
+		margin-right: auto;
 		padding-top: 30px;
+		padding-bottom: 30px;
 		text-align: center;
 	}
 	#headTagBox {
@@ -225,8 +231,10 @@
 	}
 </style>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="js/jusoSelector.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="js/comJoinCheck.js"></script>
 <script>
 	function openAddressSearch() {
 		new daum.Postcode({
@@ -238,26 +246,39 @@
 	}
 </script>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<section>
 		<article>
-			<h2>회원가입</h2>
+			<h2>기업 회원가입</h2>
 			<form name="companyJoin" action="companyJoin.do" method="post" enctype="multipart/form-data">
 			<div class="box">
 				<div id="iBox">
-					<div class="hTagBox">아이디</div>
-						<input type="text" name="id">
-						<input type="button" value="중복확인"><br>
-					<div class="hClear">비밀번호</div>
-						<input type="password" name="pwd"><br>
-					<div class="hClear">전화번호</div>
-						<input type="text" name="tel"><br>
-					<div class="hTagBox">이메일</div>
-						<input type="text" name="email"><br>
-					<div class="hClear">주소</div>
-						<input type="text" id="juso" name="juso" placeholder="주소검색을 통해 입력해주세요" readonly>&nbsp;&nbsp;
+				
+					<div class="hClear">아이디</div> 
+						<input type="text" id="id" name="id" placeholder="중복확인 진행">&nbsp;&nbsp;
+						<input type="button" value="중복확인" id="idcb" class="cc"><br>
+						<div id="idCheck" class="sc"></div>
+						
+						
+					<div class="hTagBox">비밀번호</div>
+						<input type="password" id="pwd" name="pwd" placeholder="8자 이상(대소문자 및 특수문자 포함)" onchange="checkPwd()"><br>
+						<div id="pwdMsg" class="sc"></div>
+					<div class="hClear">비밀번호 확인</div>
+						<input type="password" id="reCheckPwd" placeholder="설정한 비밀번호 재입력" onchange="checkPwd()">
+						<div id="rePwdMsg" class="sc"></div>
+						
+						
+					<div class="hTagBox">전화번호</div>
+						<input type="text" name="tel" placeholder="('-'없이 입력)"><br>
+					<div class="hClear">이메일</div>
+						<input type="text" name="email" placeholder="아이디@주소.com 형식으로 작성"><br>
+					<div class="hTagBox">주소</div>
+						<input type="text" id="juso" name="juso" placeholder="주소검색을 통해 입력" readonly>&nbsp;&nbsp;
 						<input type="button" value="주소 검색" class="cc" onclick="openAddressSearch()"><br>
-					<div class="hTagBox">상세주소</div>
+					<div class="hClear">상세주소</div>
 						<input type="text" id="sjuso" name="sjuso" placeholder="상세주소 입력">
+						
+						
 				</div>
 				<div id="aBox">
 					<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;기업 정보</h3>
@@ -274,10 +295,10 @@
 					</div>
 					<div id="head">
 					<div class="hTagBox">사업자등록번호</div>
-					<input type="text" name="cnum">&nbsp;<input type="file" name="cnumfile"><br>
+					<input type="text" name="cnum" placeholder="xxx-xx-xxxxx('-'없이 입력)">&nbsp;<input type="file" name="cnumfile"><br>
 					</div>
 					<div class="hClear">기업명</div>
-					<input type="text" name="cname"><br>
+					<input type="text" name="cname" placeholder="기업명 입력"><br>
 					<div class="hTagBox">지역</div>
 					<select name="sido" onchange="jusoKindChange(this)">
 						<option>도/특별시/광역시</option>
@@ -303,13 +324,13 @@
 						<option>시/군/구</option>
 					</select>
 					<div class="hClear">기업소개</div>
-						<textarea name="intro" class="ta" rows="11" cols="50"></textarea>
+						<textarea name="intro" class="ta" rows="11" cols="50" placeholder="기업 소개 입력"></textarea>
 					<div class="hTagBox">기업 웹사이트</div>
-						<input type="text" name="curl"><br>
+						<input type="text" name="curl" placeholder="기업 웹사이트 입력(선택)"><br>
 					<div class="hClear">대표 이미지</div>
 						<input type="file" name="bestimg"><br>
 					<div class="hTagBox">상품 가격</div>
-						<input type="text" name="pay"><br>
+						<input type="text" name="pay" placeholder="상품 가격 입력(','없이 입력)"><br>
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="정보입력">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -319,5 +340,6 @@
 			</form>
 		</article>
 	</section>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

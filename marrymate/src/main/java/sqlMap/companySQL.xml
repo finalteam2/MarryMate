@@ -84,6 +84,9 @@
 	<select id="companyLogin" parameterType="Map" resultType="com.marry.company.model.CompanyDTO">
 		select * from company where id=#{id} and pwd=#{pwd}
 	</select>
+	<select id="comIdCheck" parameterType="String" resultType="int">
+		select count(*) from company where id=#{id}
+	</select>
 	<select id="getCidx" parameterType="String" resultType="int">
 		select cidx from company where id=#{id}
 	</select>

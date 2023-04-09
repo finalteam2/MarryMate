@@ -1,26 +1,4 @@
 $(document).ready(function() {
-  $('#nickcb').click(function() {
-    var nick = $('#nick').val();
-    if (nick == '') {
-      alert('닉네임을 입력해주세요.');
-      return;
-    }
-    $.ajax({
-      url: 'checkNick.do',
-      type: 'POST',
-      data: {nick: nick},
-      success: function(result) {
-        if (result == 'true') {
-          $('#nickCheck').css('color', 'blue').text('사용 가능한 닉네임입니다.');
-        } else {
-          $('#nickCheck').css('color', 'red').text('이미 사용 중인 닉네임입니다.');
-        }
-      }
-    });
-  });
-});
-
-$(document).ready(function() {
   $('#idcb').click(function() {
     var id = $('#id').val();
     if (id == '') {
@@ -28,7 +6,7 @@ $(document).ready(function() {
       return;
     }
     $.ajax({
-      url: 'checkId.do',
+      url: 'comIdCheck.do',
       type: 'POST',
       data: {id: id},
       success: function(result) {

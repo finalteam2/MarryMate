@@ -39,26 +39,25 @@
 	}
 	.box {
 		width: 850px;
-		height: 1800px;
 		border: 1px solid black;
 		border-radius: 30px;
 		margin: 0px auto;
 		margin-bottom: 50px;
 	}
 	.hTagBox {
-		width: 120px;
+		width: 100px;
 		height: 45px;
 		text-align: center;
-		font-size: 13px;
 		float: left;
+		font-size: 15px;
 	}
 	.hClear {
-		width: 120px;
+		width: 100px;
 		height: 45px;
 		clear: both;
 		float: left;
 		text-align: center;
-		font-size: 13px;
+		font-size: 15px;
 	}
 	.tBox {
 		width: 700px;
@@ -67,13 +66,14 @@
 		text-align: center;
 	}
 	.iBox {
-		width: 600px;
-		height: 300px;
-		margin: 50px auto;
-		padding-left: 100px;
+		width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 30px;
+		padding-bottom: 30px;
 		line-height: 45px;
 		border-bottom: 2px dashed black;
-		text-align: ceter;
+		text-align: center;
 	}
 	.jcBox {
 		width: 620px;
@@ -168,7 +168,16 @@
 		padding-top: 30px;
 		text-align: center;
 	}
+	#pBox {
+		width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 30px;
+		line-height: 45px;
+		text-align: center;
+	}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function addFileInput() {
 	  var fileInputs = document.getElementById("file-inputs");
@@ -194,12 +203,12 @@ function addFileInput() {
 	  inputWrapper.remove();
 	}
 </script>
-
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<section>
 		<article>
-			<h2>회원가입</h2>
+			<h2>추가 정보 입력</h2>
 			<div class="box">
 				<form name="hallInfo" action="hallInfo.do" method="post">
 					<div class="iBox">
@@ -219,64 +228,53 @@ function addFileInput() {
 							<input type="submit" value="추가하기">
 						</div>
 					</div>
-					<div id="jBox">
-						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
-					</div>
 				</form>
+				<div id="updateArea"></div>
 				<form name="food" action="food.do" method="post">
-				<div class="iBox">
-					<h2>식사 추가</h2>
-					<div>
-						<input type="hidden" name="cidx" value="${cidx}">
-						<input type="hidden" name="type" value="0">
-						<div class="hClear">메뉴</div>
-							<input type="text" name="name"><br>
-						<div class="hTagBox">가격</div>
-							<input type="text" name="pay"><br>
+					<div class="iBox">
+						<h3>식사 추가</h3>
+						<div>
+							<input type="hidden" name="cidx" value="${cidx}">
+							<input type="hidden" name="type" value="0">
+							<div class="hTagBox">메뉴</div><input type="text" name="name"><br>
+							<div class="hClear">가격</div><input type="text" name="pay"><br>
+							<div id="jBox">
+								<input type="submit" class="w-btn-outline w-btn-red-outline" value="추가하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+						</div>
 					</div>
-				</div>
-				<div id="jBox">
-					<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
-				</div>
 				</form>
 				<form name="hall" action="hall.do" method="post">
 					<div class="iBox">
-						<h2>홀 등록</h2>
+						<h3>홀 등록</h3>
 						<input type="hidden" name="cidx" value="${cidx}">
-						<div class="hClear">홀명칭</div>
-							<input type="text" name="name"><br>
-						<div class="hTagBox">예식시간</div>
-							<input type="text" name="time"><br>
-						<div class="hClear">홀사용료</div>
-							<input type="text" name="pay"><br>
-						<div class="hTagBox">보증인원</div>
-							<input type="text" name="guest_num"><br>
-						<div class="hClear">좌석수</div>
-							<input type="text" name="seat_num">
-					</div>	
-					<div id="jBox">
-						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
+						
+						<div class="hTagBox">홀명칭</div><input type="text" name="name"><br>
+						<div class="hClear">예식시간</div><input type="text" name="time"><br>
+						<div class="hTagBox">홀사용료</div><input type="text" name="pay"><br>
+						<div class="hClear">보증인원</div><input type="text" name="guest_num"><br>
+						<div class="hTagBox">좌석수</div><input type="text" name="seat_num">
+						<div id="jBox">
+							<input type="submit" class="w-btn-outline w-btn-red-outline" value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
 					</div>
 				</form>
 				<form name="img" action="img.do" method="post" enctype="multipart/form-data">
-					<div class="iBox">
-						<h2>이미지 등록</h2>
+					<div id="pBox">
+						<h3>이미지 등록</h3>
 						<input type="hidden" name="cidx" value="${cidx}">
 						<div id="file-inputs">
 							<input type="file" name="img1">
 						</div>
 						<button type="button" onclick="addFileInput()">파일 추가</button>
-					</div>	
-					<div id="jBox">
-						<input type="submit" class="w-btn-outline w-btn-red-outline" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시입력">
+						<div id="jBox">
+							<input type="submit" class="w-btn-outline w-btn-red-outline" value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
 					</div>
 				</form>
 			</div>
 		</article>
 	</section>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,20 +38,46 @@ public class CompanyController {
 		return "company/companyJoin";
 	}
 	
+	@RequestMapping("/comIdCheck.do")
+    @ResponseBody
+    public String idCheck(@RequestParam("id") String id) {
+        
+        int result=companyDao.comIdCheck(id);
+		
+        if(result==0) {
+        	return "true";
+        }else {
+        	return "false";
+        }
+        
+    }
+	
 	@RequestMapping(value = "/companyJoin.do", method = RequestMethod.POST)
 	public ModelAndView join_cp(CompanyDTO dto, MultipartHttpServletRequest req) {
 		
+		String cfile="";
+		String img="";
+		
 		MultipartFile cnumfile=req.getFile("cnumfile");
-		copyFile_cnum(cnumfile);
+		if (cnumfile.isEmpty()) {
+			cfile="없음";
+			dto.setCfile(cfile);
+		}else {
+			copyFile_cnum(cnumfile);
+			cfile=cnumfile.getOriginalFilename();
+			dto.setCfile(cfile);
+		}
+		
 		
 		MultipartFile bestimg=req.getFile("bestimg");
-		copyFile_best(bestimg);
-		
-		String cfile=cnumfile.getOriginalFilename();
-		String img=bestimg.getOriginalFilename();
-		
-		dto.setCfile(cfile);
-		dto.setImg(img);
+		if (bestimg.isEmpty()) {
+			img="없음";
+			dto.setImg(img);
+		}else {
+			copyFile_best(bestimg);
+			img=bestimg.getOriginalFilename();
+			dto.setImg(img);
+		}
 		
 		String hallInfo=req.getParameter("kind");
 		
@@ -78,7 +106,6 @@ public class CompanyController {
 		
 	}
 	
-	//파일 경로 지정 필요
 	public void copyFile_images(MultipartFile upload) {
 		
 		try {
@@ -255,7 +282,7 @@ public class CompanyController {
 		String fileLoad="";
 		
 		MultipartFile Inimg1=req.getFile("img1");
-		if(Inimg1 == null) {
+		if(Inimg1.isEmpty()) {
 		    
 		}else {
 			copyFile_images(Inimg1);
@@ -268,7 +295,7 @@ public class CompanyController {
 		}
 
 		MultipartFile Inimg2=req.getFile("img2");
-		if (Inimg2 == null) {
+		if (Inimg2.isEmpty()) {
 
 		} else {
 			copyFile_images(Inimg2);
@@ -278,7 +305,7 @@ public class CompanyController {
 		}
 		
 		MultipartFile Inimg3=req.getFile("img3");
-		if (Inimg3 == null) {
+		if (Inimg3.isEmpty()) {
 		    
 		}else {
 			copyFile_images(Inimg3);
@@ -290,7 +317,7 @@ public class CompanyController {
 		}
 		
 		MultipartFile Inimg4=req.getFile("img4");
-		if (Inimg4 == null) {
+		if (Inimg4.isEmpty()) {
 		    
 		}else {
 			copyFile_images(Inimg4);
@@ -302,7 +329,7 @@ public class CompanyController {
 		}
 		
 		MultipartFile Inimg5=req.getFile("img5");
-		if (Inimg5 == null) {
+		if (Inimg5.isEmpty()) {
 		    
 		}else {
 			copyFile_images(Inimg5);

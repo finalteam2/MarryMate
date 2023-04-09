@@ -24,7 +24,7 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<section>
 		<article>
-			<h2>회원가입</h2>
+			<h2>일반 회원가입</h2>
 			<form name="memberJoin" action="memberJoin.do" method="post" onsubmit="return allCheckForm()">
 			<div class="box">
 				<div id="iBox">
@@ -50,7 +50,7 @@
 									<input type="password" id="reCheckPwd" placeholder="설정한 비밀번호 재입력" onchange="checkPwd()">
 										<div id="rePwdMsg" class="sc"></div>
 					<div class="hTagBox">전화번호</div>
-						<input type="text" name="tel" placeholder="010-xxxx-xxxx('-'없이 입력)"><br>
+						<input type="text" name="tel" placeholder="xxx-xxxx-xxxx('-'없이 입력)"><br>
 					<div class="hClear">주소</div>
 						<input type="text" id="juso" name="juso" placeholder="주소검색을 통해 입력" readonly>&nbsp;&nbsp;
 						<input type="button" value="주소 검색" class="cc" onclick="openAddressSearch()"><br>
