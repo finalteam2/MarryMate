@@ -14,5 +14,7 @@
 		<mapper resource="sqlMap/calendarSQL.xml"/>
 		<mapper resource="sqlMap/admin_csSQL.xml"/>
 		<mapper resource="sqlMap/notificationSQL.xml"/>
+		<mapper resource="sqlMap/checklistSQL.xml"/>
+		<mapper resource="sqlMap/planSQL.xml"/>
 	</mappers>
 </configuration>

@@ -35,6 +35,188 @@ function tagListToggle() {
     })
 }
 
+(function(MP05, $, undefined) {
+	
+	'use strict';
+	
+	var item = {};
+
+	function clear() {
+	}
+
+	function reset() {
+		clear();
+	}
+	
+	function open(options) {
+		ajaxCall('/marrymate/calendar/calendarMain', encodeURIComponent(JSON.stringify({
+			seq_no: options.seq_no,
+			chk_id: options.chk_id
+		})), "", "", function(result){
+			if(result.status == 0) {
+				item = result.item;
+				//
+				layerPop({type : "open", target : 'myPop181' ,close : function(){
+				}});
+				//
+				redraw(result.item);
+				//
+			} else {
+				_alert({
+					message:'체크리스트 항목 상세 조회에 실패했습니다.',
+					btnTxt : '닫기'
+				});
+			}
+		});
+	}
+	
+	function close() {
+		layerPop({type : "close", target : "myPop181" ,close : function(){
+		}});
+	}
+	
+	function confirm(){
+		//update
+		ajaxCall('/marrymate/calendar/calendarMain', encodeURIComponent(JSON.stringify({
+			seq_no: item.seq_no,
+			chk_id: item.chk_id,
+			use_yn: $("#myPop181UseToggle").hasClass('on') ? 'Y' : 'N',
+			day_dt: $("#myPop181Dday").val(),
+			done_yn: $("#myPop181Doneyn").is(":checked") ? 'Y' : 'N',
+			etc_tx: $("#myPop181Etctx").val()
+		})), "", "", function(result){
+			if(result.status == 0) {
+				close();
+				//refresh
+				//location.reload();
+				/*
+				if(result.item) {
+					redrawCount(result.item);
+				}
+				ajaxHtml(
+					'/Marrymate/calendar/calendarMain'
+					, JSON.stringify({})
+					, ""
+					, ""
+					, function(result){
+						$('div.contentsArea > .contestList').html(result);
+					}
+					, function(){
+						_alert({title:"알림", message: "시스템 에러 입니다. 동일한 증상이 계속 발생시 담당자에게 문의 부탁드립니다.", close:function(){}});
+					}
+				);
+				*/
+				//
+				redrawScreen();
+				//
+			} else {
+				_alert({
+					message:'체크리스트 항목 수정에 실패했습니다.',
+					btnTxt : '닫기'
+				})
+			}
+		});
+	}
+	
+	function redraw(item) {
+		//항목명
+		$("#myPop181Chknm").text("#" + item.chk_nm);
+		//사용여부
+		if(item.use_yn == 'Y') {
+			$("#myPop181Useyn").text('사용');
+			$("#myPop181Useyn").parent().addClass('on');
+			//
+			$("#myPop181Doneyn").prop("disabled", false);
+		} else {
+			$("#myPop181Useyn").text('미사용');
+			$("#myPop181Useyn").parent().removeClass('on');
+			//
+			$("#myPop181Doneyn").prop("disabled", true);
+		}
+		//D-day
+		$("#myPop181Dday").val(item.day_dt);
+		//완료일자/완료여부
+		if(item.done_yn == 'Y') {
+			$("#myPop181Donedt").text(item.done_dt || '');
+			$("#myPop181Doneyn").prop("checked", true);
+		} else {
+			$("#myPop181Donedt").text('');
+			$("#myPop181Doneyn").prop("checked", false);
+		}
+		//메모
+		$("#myPop181Etctx").val(item.etc_tx || '');
+	}
+	
+	function redrawCount(item) {
+		//한번더 체크
+		$("#checkListChkCnt").text(item.chk_cnt + '' || '0');
+		//지금해야해요
+		$("#checkListDoingCnt").text(item.doing_cnt + '' || '0');
+		//앞으로할것
+		$("#checkListReservCnt").text(item.reserv_cnt + '' || '17');
+	}
+	
+	function redrawScreen() {
+		//top
+		redrawTop(function() {
+			//list
+			redrawList();
+		});
+	}
+	
+	function redrawTop(callback) {
+		ajaxHtml(
+			'/marrymate/calendar/calendarMain'
+			, JSON.stringify({
+				type: 'top'
+			})
+			, ""
+			, ""
+			, function(result){
+				$('div.contentsArea > .contentsTop').html(result);
+				//
+				callback && callback();
+			}
+			, function(){
+				_alert({title:"알림", message: "시스템 에러 입니다. 동일한 증상이 계속 발생시 담당자에게 문의 부탁드립니다.", close:function(){}});
+			}
+		);
+	}
+	
+	function redrawList(callback) {
+		//list
+		ajaxHtml(
+			'/marrymate/calendar/calendarMain'
+			, JSON.stringify({
+				type: 'list'
+			})
+			, ""
+			, ""
+			, function(result){
+				$('div.contentsArea > .contestList').html(result);
+				//
+				callback && callback();
+			}
+			, function(){
+				_alert({title:"알림", message: "시스템 에러 입니다. 동일한 증상이 계속 발생시 담당자에게 문의 부탁드립니다.", close:function(){}});
+			}
+		);
+	}
+	
+	// 익스포트
+	MP05.open = open;
+	MP05.close = close;
+	MP05.clear = clear;
+	MP05.reset = reset;
+	MP05.confirm = confirm;
+	MP05.redraw = redraw;
+	MP05.redrawCount = redrawCount;
+	MP05.redrawScreen = redrawScreen;
+	MP05.redrawTop = redrawTop;
+	MP05.redrawList = redrawList;
+	
+})(window.MP05 = window.MP05 || {}, jQuery);
+
 
 /**
  * 
@@ -81,7 +263,7 @@ function tagListToggle() {
 			var $this = $(this);
 			var $target = $this.closest(".item");
 			if(!$target.hasClass("on")){
-				ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+				ajaxCall('/marrymate/calendar/calendarMain', encodeURIComponent(JSON.stringify({
 					seq_no: $target.data('seqno'),
 					chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 					use_yn: 'Y'
@@ -138,7 +320,7 @@ function tagListToggle() {
 							btnTxt : '닫기'
 						});
 					} else {
-						ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+						ajaxCall('/marrymate/calendar/calendarMain', encodeURIComponent(JSON.stringify({
 							seq_no: $target.data('seqno'),
 							chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 							use_yn: 'N'
@@ -175,7 +357,7 @@ function tagListToggle() {
 			var $target = $this.closest(".item");
 			if($target.hasClass('on')) {
 				if($this.is(":checked")) {
-					ajaxCall('/marrymate/calendar/calendarMain.do', encodeURIComponent(JSON.stringify({
+					ajaxCall('/marrymate/calendar/calendarMain', encodeURIComponent(JSON.stringify({
 						seq_no: $target.data('seqno'),
 						chk_id: $target.find('.jsSWO01Ev').data('chkid'),
 						done_yn: 'Y'
@@ -8354,6 +8536,5 @@ function setFloatingBanner() {
     }
 
 }
-
 
 

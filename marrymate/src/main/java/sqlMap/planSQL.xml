@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marry.calendar">
+	<insert id="planWrite" parameterType="com.marry.calender.model.PlanDTO">
+	insert into 
+		myplan
+	values (
+		myp_idx.nextval,
+		#{midx},
+		TO_DATE(#{pdate},'MM/DD/YYYY'),
+		#{title},
+		#{content}
+		)
+	</insert>
+</mapper>

@@ -54,4 +54,7 @@
 	<bean id="NotificationDao" class="com.marry.notification.model.NotificationDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="PlanDao" class="com.marry.calender.model.PlanDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
 </beans>
