@@ -14,25 +14,24 @@
 <%@include file="../header.jsp" %>
 <div class="allpage">
       <h1>업체명 : ${cname }</h1>
-
 <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">예약 번호 bk_idx</th>
-      <th scope="col">회원이름 mname </th>
-      <th scope="col">예약일/시간 bk_date bk_time</th>
+      <th scope="col">예약 번호</th>
+      <th scope="col">회원이름 </th>
+      <th scope="col">예약일/시간</th>
 	<c:if test="${not empty hall}">
-      <th scope="col">홀 이름 hname</th>
-      <th scope="col">대관료 hpay</th>
-      <th scope="col">최소보증인원 hnum</th>
-      <th scope="col">식사 이름 fname</th>
-      <th scope="col">식대 fpay</th>
+      <th scope="col">홀 이름</th>
+      <th scope="col">대관료</th>
+      <th scope="col">보증인원</th>
+      <th scope="col">식사</th>
+      <th scope="col">식대</th>
 	</c:if>
       
-      <th scope="col">총 금액 allpay</th>
-      <th scope="col">예약 상태 bk_state</th>
-      <th scope="col">승인 / 취소</th>
+      <th scope="col">총 금액</th>
+      <th scope="col">예약 상태</th>
+      <th scope="col">승인/취소</th>
     </tr>
   </thead>
   <tbody>
@@ -60,13 +59,13 @@
 	  </td>
 	  <td>
 	  <div class="btn-group" role="group" aria-label="Basic example">
-	  	<form action="" method="post">
+	  	<form action="#" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
 		  <button type="submit" class="btn btn-outline-primary" <c:if test="${not (dto.bk_state eq 1)}">disabled</c:if>>승인</button>
 	  	</form>
-	  	<form action="" method="post">
+	  	<form action="#" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
-		  <button type="button" class="btn btn-outline-danger" <c:if test="${dto.bk_state eq 5 || dto.bk_state eq 4}">disabled</c:if>>취소</button>
+		  <button type="submit" class="btn btn-outline-danger" <c:if test="${dto.bk_state eq 5 || dto.bk_state eq 4}">disabled</c:if>>취소</button>
 	  	</form>
 	  </div>
 	  </td>
