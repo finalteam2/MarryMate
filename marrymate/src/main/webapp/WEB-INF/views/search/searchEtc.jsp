@@ -17,20 +17,17 @@
 <%@include file="../header.jsp" %>
 <div class="allpage">
 	<h1>웨딩컬렉션</h1>
-	<form>
+	<form id="searchfm">
+	<ul class="nav nav-tabs">
+	<li class="nav-item"><a class="nav-link active" aria-current="page" id="kind1" onclick="goKind('스튜디오')">스튜디오</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind2" onclick="goKind('헤어메이크업')">헤어메이크업</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind3" onclick="goKind('드레스')">드레스</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind4" onclick="goKind('스냅DVD')">스냅DVD</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind5" onclick="goKind('주례')">주례</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind6" onclick="goKind('사회')">사회</a></li>
+	<li class="nav-item"><a class="nav-link" aria-current="page" id="kind7" onclick="goKind('축가')">축가</a></li>
+	</ul>
 	<div class="searchbox">
-		<div class="input-group mb-3" >
-		  <label class="input-group-text" for="inputGroupSelect01">분류</label>
-		  <select class="form-select" name="kind" id="kind">
-			<option selected>스튜디오</option>
-			<option>헤어메이크업</option>
-			<option>드레스</option>
-			<option>스냅DVD</option>
-			<option>주례</option>
-			<option>사회</option>
-			<option>축가</option>
-		  </select>
-		</div>
 		<div class="input-group mb-3" >
 		  <label class="input-group-text" for="inputGroupSelect01">지역</label>
 		  <select class="form-select" name="sido" id="sido">
