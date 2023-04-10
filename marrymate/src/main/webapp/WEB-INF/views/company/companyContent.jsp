@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b6b897e9b2101fc41066a267ee940a5&libraries=services,clusterer,drawing"></script>
 <link href="/marrymate/css/style.css" rel="stylesheet">
+<link href="/marrymate/css/revboot.css" rel="stylesheet">
 <script src="js/companyContent.js"></script>
 <style>
 @font-face {
@@ -99,6 +100,8 @@ body{
 textarea {
 	 resize:none;
 }
+
+
 </style>
 
 <title>Insert title here</title>
@@ -358,7 +361,7 @@ textarea {
 	<div class="accordion" id="accordionExample">
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="headingOne">
-	      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 	        메뉴 바
 	      </button>
 	    </h2>

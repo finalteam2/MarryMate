@@ -108,7 +108,12 @@ function searchResult(){
 					var newImgNode = document.createElement('img');
 					newImgNode.setAttribute('class','card-img-top');
 					newImgNode.setAttribute('alt','default_img');
+					//널일때 노말 이미지로 교체
+					//if(company.img != null){
 					newImgNode.setAttribute('src','/marrymate/img/com_best/' + company.img);
+					//}else {	
+					//newImgNode.setAttribute('src','/marrymate/img/nomal.png');
+					//}
 					newItemNode.appendChild(newImgNode);
 					
 					var newInfoNode = document.createElement('div');

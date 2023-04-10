@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <link href="/marrymate/css/searchStyle.css" rel="stylesheet">
+<link href="/marrymate/css/revboot.css" rel="stylesheet">
 <script src="/marrymate/js/httpRequest.js"></script>
 <script src="js/searchEtc.js"></script>
 </head>
