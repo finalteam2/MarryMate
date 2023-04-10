@@ -83,36 +83,63 @@ public class BbsController {
 	}
 	
 	@RequestMapping("/notiList.do")
-	public ModelAndView bbsNotiList() {
+	public ModelAndView bbsNotiList(
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		List<BbsDTO> list=bbsDao.bbsNotiList();
+		int totalCnt=bbsDao.bbsTotalCount();
+		int listSize=5;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("notiList.do", totalCnt, listSize, pageSize, cp);
+		
+		List<BbsDTO> list=bbsDao.bbsNotiList(cp, listSize);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listNoti", list);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("community/community_after");
 		return mav;
 		
 	}
 	
 	@RequestMapping("/afterList.do")
-	public ModelAndView bbsAfterList() {
+	public ModelAndView bbsAfterList(
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		List<BbsDTO> list=bbsDao.bbsAfterList();
+		int totalCnt=bbsDao.bbsTotalCount();
+		int listSize=5;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("afterList.do", totalCnt, listSize, pageSize, cp);
+		
+		List<BbsDTO> list=bbsDao.bbsAfterList(cp, listSize);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listAfter", list);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("community/community_after");
 		return mav;
 		
 	}
 	
 	@RequestMapping("/talkList.do")
-	public ModelAndView bbsTalkList() {
+	public ModelAndView bbsTalkList(
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		List<BbsDTO> list=bbsDao.bbsTalkList();
+		int totalCnt=bbsDao.bbsTotalCount();
+		int listSize=5;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("talkList.do", totalCnt, listSize, pageSize, cp);
+		
+		List<BbsDTO> list=bbsDao.bbsTalkList(cp, listSize);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listTalk", list);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("community/community_talk");
 		return mav;
 		
@@ -121,9 +148,9 @@ public class BbsController {
 	@RequestMapping("/allCommunity.do")
 	public ModelAndView bbsAllList() {
 		
-		List<BbsDTO> listNoti=bbsDao.bbsNotiList();
-		List<BbsDTO> listAfter=bbsDao.bbsAfterList();
-		List<BbsDTO> listTalk=bbsDao.bbsTalkList();
+		List<BbsDTO> listNoti=bbsDao.bbsNotiMini();
+		List<BbsDTO> listAfter=bbsDao.bbsAfterMini();
+		List<BbsDTO> listTalk=bbsDao.bbsTalkMini();
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listNoti", listNoti);

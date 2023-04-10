@@ -24,13 +24,31 @@
 			0
 		)
 	</insert>
-	<select id="bbsNotiList" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsNotiList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='공지사항' order by bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="bbsAfterList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩후기' order by bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="bbsTalkList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩톡톡' order by bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="bbsNotiMini" resultType="com.marry.bbs.model.BbsDTO">
 		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='공지사항' order by bidx desc
 	</select>
-	<select id="bbsAfterList" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsAfterMini" resultType="com.marry.bbs.model.BbsDTO">
 		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩후기' order by bidx desc
 	</select>
-	<select id="bbsTalkList" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsTalkMini" resultType="com.marry.bbs.model.BbsDTO">
 		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩톡톡' order by bidx desc
 	</select>
 	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsDTO">
@@ -51,6 +69,7 @@
 		values(
 			reply_ridx.nextval,
 			#{bidx},
+			#{midx},
 			#{nick},
 			#{id},
 			#{content},
@@ -64,6 +83,9 @@
 			reply
 		where
 			bidx=#{bidx}
+	</select>
+	<select id="bbsTotalCount" resultType="int">
+		select count(*) from bbs
 	</select>
 	<update id="watchUp" parameterType="int">
 		update

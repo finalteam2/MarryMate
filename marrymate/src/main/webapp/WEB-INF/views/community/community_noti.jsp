@@ -4,41 +4,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-  <title>MarryMate</title>
-  <style>
-    .d-flex.flex-column > a {
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<title>MarryMate</title>
+	<style>
+		body {
+			background-color: #fbf4ff;
+		}
+		h1 {
+			color: #333333;
+			text-align: center;
+			margin-top: 50px;
+		}
+		table {
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 70px;
+			width: 80%;
+			min-width: 800px;
+			max-width: 1200px;
+			border-collapse: collapse;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+			background-color: #ffffff;
+		}
+		th, td {
+			padding: 10px;
+			font-size: 16px;
+			color: #333333;
+			border: 1px solid #d9d9d9;
+		}
+		th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+			text-align: center;
+		}
+		td {
+			text-align: center;
+		}
+		td a {
+			color: #333333;
+			text-decoration: none;
+		}
+		td a:hover {
+			color: #555555;
+			text-decoration: underline;
+		}
+		#left-box {
+		    position: absolute;
+		    left: 20px;
+		    top: 180px;
+		    width: 100px;
+		    background-color: #f2f2f2;
+		    border: 1px solid #d9d9d9;
+		    border-radius: 5px;
+		    padding-bottom: 15px;
+		    text-align: center;
+		}
+		#tableBox {
+			height: 500px;
+		}
+	</style>
 </head>
 <body>
-  <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-  <div class="container">
-    <h1 class="text-center my-3">커뮤니티</h1>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="d-flex flex-column" style="padding-top: 100px; padding-bottom: 100px;">
-          <a href="notiList.do" class="btn btn-primary">공지사항</a>
-	      <a href="afterList.do" class="btn btn-primary">웨딩후기</a>
-	      <a href="talkList.do" class="btn btn-primary">웨딩톡톡</a>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <table class="table">
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<div id="left-box">
+		<h4>게시판 이동</h4>
+		<a href="notiList.do">공지사항</a><br><br><br>
+		<a href="afterList.do">웨딩후기</a><br><br><br>
+		<a href="talkList.do">웨딩톡톡</a>
+	</div>
+	<div id="tableBox">
+	<h1>공지사항</h1>
+		<table>
 			<thead>
 				<tr>
-					<th class="text-center">번호</th>
-					<th class="text-center">제목</th>
-					<th class="text-center">작성자</th>
-					<th class="text-center">작성날짜</th>
-					<th class="text-center">조회수</th>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
+			<tfoot>
+				<tr>
+					<td colspan="5" align="center">${pageStr}</td>
+				</tr>
+			</tfoot>
 			<tbody>
 				<c:if test="${empty listNoti}">
 					<tr>
@@ -47,32 +98,25 @@
 				</c:if>
 				<c:forEach var="dto" items="${listNoti}">
 					<tr>
-						<td class="text-center">${dto.bidx}</td>
+						<td>${dto.bidx}</td>
 						<c:url var="contentUrl" value="content.do">
 							<c:param name="bidx">${dto.bidx}</c:param>
 						</c:url>
 						<td>
 							<a href="${contentUrl}" class="text-center">
-							<c:if test="${!empty dto.horse && '없음' ne dto.horse}">
-								[${dto.horse}]
-							</c:if> 
-							${dto.subject}
+								<c:if test="${!empty dto.horse && '없음' ne dto.horse}">
+									[${dto.horse}]
+								</c:if> ${dto.subject}
 							</a>
 						</td>
-						<td class="text-center">${dto.nick}</td>
-						<td class="text-center">${dto.writedate}</td>
-						<td class="text-center">${dto.watch}</td>
+						<td>${dto.nick}</td>
+						<td>${dto.writedate}</td>
+						<td>${dto.watch}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-      </div>
-    </div>
-    <div class="d-flex justify-content-end mt-3">
-	  <a href="write.do" class="btn btn-primary" style="margin-bottom: 20px; margin-right: 110px;">글쓰기</a>
 	</div>
-  </div>
-  <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
-

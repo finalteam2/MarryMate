@@ -8,15 +8,23 @@ public interface BbsDAO {
 	
 	public int replyWrite(ReplyDTO dto);
 	
-	public List<BbsDTO> bbsNotiList();
+	public List<BbsDTO> bbsNotiList(int cp, int ls);
 	
-	public List<BbsDTO> bbsAfterList();
+	public List<BbsDTO> bbsAfterList(int cp, int ls);
 	
-	public List<BbsDTO> bbsTalkList();
+	public List<BbsDTO> bbsTalkList(int cp, int ls);
+	
+	public List<BbsDTO> bbsNotiMini();
+	
+	public List<BbsDTO> bbsAfterMini();
+	
+	public List<BbsDTO> bbsTalkMini();
 	
 	public List<ReplyDTO> replyList(int bidx);
 	
 	public BbsDTO bbsContent(int bidx);
+	
+	public int bbsTotalCount();
 	
 	public int watchUp(int bidx);
 	

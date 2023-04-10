@@ -25,18 +25,54 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public List<BbsDTO> bbsNotiList() {
-		return sqlMap.selectList("bbsNotiList");
+	public List<BbsDTO> bbsNotiList(int cp, int ls) {
+		
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlMap.selectList("bbsNotiList", map);
 	}
 	
 	@Override
-	public List<BbsDTO> bbsAfterList() {
-		return sqlMap.selectList("bbsAfterList");
+	public List<BbsDTO> bbsAfterList(int cp, int ls) {
+		
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlMap.selectList("bbsAfterList", map);
 	}
 	
 	@Override
-	public List<BbsDTO> bbsTalkList() {
-		return sqlMap.selectList("bbsTalkList");
+	public List<BbsDTO> bbsTalkList(int cp, int ls) {
+		
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlMap.selectList("bbsTalkList", map);
+	}
+	
+	@Override
+	public List<BbsDTO> bbsNotiMini() {
+		return sqlMap.selectList("bbsNotiMini");
+	}
+	
+	@Override
+	public List<BbsDTO> bbsAfterMini() {
+		return sqlMap.selectList("bbsAfterMini");
+	}
+	
+	@Override
+	public List<BbsDTO> bbsTalkMini() {
+		return sqlMap.selectList("bbsTalkMini");
 	}
 	
 	@Override
@@ -47,6 +83,11 @@ public class BbsDAOImple implements BbsDAO {
 	@Override
 	public BbsDTO bbsContent(int bidx) {
 		return sqlMap.selectOne("bbsContent", bidx);
+	}
+	
+	@Override
+	public int bbsTotalCount() {
+		return sqlMap.selectOne("bbsTotalCount");
 	}
 	
 	@Override
