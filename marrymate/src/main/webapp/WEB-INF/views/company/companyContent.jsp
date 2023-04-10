@@ -147,7 +147,6 @@ textarea {
 	</div>
 	
 	<hr>
-	
 	<ul class="nav nav-tabs" id="scrollspyHeading1">
 	  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading1">상세정보</a>  </li>
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>  </li>
@@ -160,6 +159,7 @@ textarea {
 	
 	<hr>
 	
+<c:if test="${dto.kind eq '예식장' }">
 	<span>홀 정보</span>
 	<table class="table table-hover">
 	  <thead>
@@ -210,6 +210,8 @@ textarea {
 	
 	<hr>
 	
+</c:if>
+
 	<ul class="nav nav-tabs" id="scrollspyHeading2">
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading1">상세정보</a>  </li>
 	  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading2">리뷰</a>  </li>
