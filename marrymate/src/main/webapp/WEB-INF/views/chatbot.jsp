@@ -2,11 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${empty sessionScope.loginMidx}">
-<%session.setAttribute("loginMidx",0); %>
+<%
+int midx=0;
+int cidx=0;
+%>
+<c:if test="${!empty sessionScope.loginMidx}">
+<%midx=(int)session.getAttribute("loginMidx"); %>
 </c:if>
-<c:if test="${empty sessionScope.com_cidx}">
-<%session.setAttribute("com_cidx",0); %>
+<c:if test="${!empty sessionScope.com_cidx}">
+<%cidx=(int)session.getAttribute("com_cidx"); %>
 </c:if>
 
 <!DOCTYPE html>
@@ -61,11 +65,11 @@
 </div>
 <script>
 function rn(){
-	if(${sessionScope.loginMidx!=0}){
-		var param='midx='+${sessionScope.loginMidx};
+	if(${midx!=0}){
+		var param='midx='+${midx};
 		sendRequest('readNum_m.do',param,'GET',rnResult);
-	}else if(${sessionScope.com_cidx!=0}){
-		var param='cidx='+${sessionScope.com_cidx};
+	}else if(${cidx!=0}){
+		var param='cidx='+${cidx};
 		sendRequest('readNum_c.do',param,'GET',rnResult);
 	}
 }
@@ -198,12 +202,12 @@ function anResult(){
 }
 
 function chat_tx(){
-	if(${sessionScope.loginMidx==0 && sessionScope.com_cidx==0}){
+	if(${midx==0 && cidx==0}){
 		window.alert('로그인 후 이용가능합니다.');
 		location.href='index.do';
 	}else{
 		
-		if(${sessionScope.loginMidx!=0}){
+		if(${midx!=0}){
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
 			for(var i=DivChildNodes.length-1;i>=0;i--) {
@@ -237,7 +241,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='midx='+${sessionScope.loginMidx};
+			var param='midx='+${midx};
 			sendRequest('load_m.do',param,'GET',ctResult);
 		}else{
 			
@@ -274,7 +278,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='cidx='+${sessionScope.com_cidx};
+			var param='cidx='+${cidx};
 			sendRequest('load_c.do',param,'GET',ctResult);
 		}
 	}
@@ -283,9 +287,9 @@ function chat_tx(){
 function press(e){
     if(e.keyCode == 13){
     	
-    	if(${sessionScope.loginMidx!=0}){
+    	if(${midx!=0}){
 	    	var param='';
-	    	param+='midx='+${sessionScope.loginMidx};
+	    	param+='midx='+${midx};
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest('content_m.do',param,'GET',ctResult);
 	    	
@@ -293,7 +297,7 @@ function press(e){
     	}else{
     		
     		var param='';
-	    	param+='cidx='+${sessionScope.com_cidx};
+	    	param+='cidx='+${cidx};
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest('content_c.do',param,'GET',ctResult);
 	    	
@@ -368,11 +372,11 @@ function close() {
 
 function rs(){
 	
-	if(${sessionScope.loginMidx!=0}){
-		var param='midx='+${sessionScope.loginMidx};
+	if(${midx!=0}){
+		var param='midx='+${midx};
 		sendRequest('readNum_m.do',param,'GET',rsResult);
-	}else if(${sessionScope.com_cidx!=0}){
-		var param='cidx='+${sessionScope.com_cidx};
+	}else if(${cidx!=0}){
+		var param='cidx='+${cidx};
 		sendRequest('readNum_c.do',param,'GET',rsResult);
 	}
 	
