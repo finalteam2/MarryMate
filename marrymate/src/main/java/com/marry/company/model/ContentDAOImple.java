@@ -116,4 +116,11 @@ public class ContentDAOImple implements ContentDAO {
 		List<PointDTO> arr = sqlMap.selectList("selectpoint", midx);
 		return arr;
 	}
+	
+	@Override
+	public int updateWatch(int cidx) {
+		int result = sqlMap.update("updatewatch", cidx);
+		return result;
+	}
+
 }

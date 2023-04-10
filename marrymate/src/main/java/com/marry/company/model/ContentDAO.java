@@ -25,4 +25,5 @@ public interface ContentDAO {
 	public List<BookListDTO> selectComBook(int cidx);
 	public List<BookListDTO> selectMemBook(int midx);
 	public List<PointDTO> selectpoint(int midx);
+	public int updateWatch(int cidx);
 }

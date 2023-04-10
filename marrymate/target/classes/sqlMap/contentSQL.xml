@@ -224,4 +224,12 @@
 	order by
 		p_idx desc
 	</select>
+	<update id="updatewatch" parameterType="Integer">
+	update 
+		company
+	set
+		watch = watch+1
+	where 
+		cidx = #{cidx}
+	</update>
 </mapper>

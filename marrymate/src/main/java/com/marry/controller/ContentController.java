@@ -45,6 +45,7 @@ public class ContentController {
 			mav.addObject("url", "index.do");
 			mav.setViewName("company/companyMsg");
 		}else {
+			contentDao.updateWatch(cidx);
 			mav.addObject("dto", dto);
 			List<Com_ImgDTO> iarr = contentDao.selectCom_Img(cidx);
 			mav.addObject("iarr", iarr);
