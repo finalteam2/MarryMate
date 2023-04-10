@@ -26,13 +26,13 @@ h1 {
 	width:25%;
 }
 .searchbox {
-	border:1px solid gray;
-	border-radius:20px;
-	padding:20px;
-	text-align: center;
-	width: 70%;
-	margin:20px auto;
-	background-color: white;
+    border: 1px solid #e1e1e1;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    margin: 20px auto;
+    background-color: #f8f7f9;
 }
 .searchbox td {
 	text-align: left;
