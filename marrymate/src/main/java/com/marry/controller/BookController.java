@@ -3,7 +3,10 @@ package com.marry.controller;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookDAOImple;
+import com.marry.book.model.CartDTO;
 import com.marry.book.model.FilterDTO;
 import com.marry.company.model.CompanyDTO;
 
@@ -119,11 +123,25 @@ public class BookController {
 	
 	/**통합예약내 예약하기 클릭시*/
 	@RequestMapping("/bookSubmit.do")
-	public ModelAndView bookSubmit(
-			@RequestParam(name = "test",defaultValue = "")String test) {
+	public ModelAndView bookSubmit(HttpServletRequest req) {
 		
+		String[] cidxs=req.getParameterValues("cidx");
+		String[] bk_dates=req.getParameterValues("bk_date");
+		String[] bk_times=req.getParameterValues("bk_time");
+		String[] imgs=req.getParameterValues("img");
+		String[] pays=req.getParameterValues("pay");
+		String[] cnames=req.getParameterValues("cname");
+		String[] kinds=req.getParameterValues("kind");
+		
+		List<CartDTO> cartList=new ArrayList<CartDTO>();
+		
+		for(int i=0;i<cidxs.length;i++) {
+			CartDTO dto=new CartDTO(cidxs[i], bk_dates[i], bk_times[i], imgs[i], pays[i], cnames[i], kinds[i]);
+			cartList.add(dto);
+		}
+
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("test",test);
+		mav.addObject("cartList", cartList);
 		mav.setViewName("book/payment");
 		return mav;
 	}

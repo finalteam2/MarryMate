@@ -325,6 +325,11 @@ video{
 .cancel_img{
 	cursor:pointer;
 }
+.cancel_img:hover{
+	border-radius: 100%;
+	background-color:#dbdbdb;
+	transition: all 0.25s;
+}
 .cate_radio{
 	display:none;
 }

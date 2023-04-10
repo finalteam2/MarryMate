@@ -336,6 +336,60 @@ function showCartResult(){
 			case '축가':menu7Node.appendChild(tableNode);
 			}
 			
+			//카트 담을때 예약정보 hidden에 담아서 결제페이지로 넘기기
+			var formNode=document.getElementById('bookFm');
+			
+			var hidden1Node=document.createElement('input');
+			hidden1Node.setAttribute('type','hidden');
+			hidden1Node.setAttribute('name','cidx');
+			hidden1Node.setAttribute('value',addItem.cidx);
+			hidden1Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden2Node=document.createElement('input');
+			hidden2Node.setAttribute('type','hidden');
+			hidden2Node.setAttribute('name','bk_date');
+			hidden2Node.setAttribute('value',bk_date);
+			hidden2Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden3Node=document.createElement('input');
+			hidden3Node.setAttribute('type','hidden');
+			hidden3Node.setAttribute('name','bk_time');
+			hidden3Node.setAttribute('value',bk_time);
+			hidden3Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden4Node=document.createElement('input');
+			hidden4Node.setAttribute('type','hidden');
+			hidden4Node.setAttribute('name','img');
+			hidden4Node.setAttribute('value',addItem.img);
+			hidden4Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden5Node=document.createElement('input');
+			hidden5Node.setAttribute('type','hidden');
+			hidden5Node.setAttribute('name','pay');
+			hidden5Node.setAttribute('value',addItem.pay);
+			hidden5Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden6Node=document.createElement('input');
+			hidden6Node.setAttribute('type','hidden');
+			hidden6Node.setAttribute('name','cname');
+			hidden6Node.setAttribute('value',addItem.cname);
+			hidden6Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			var hidden7Node=document.createElement('input');
+			hidden7Node.setAttribute('type','hidden');
+			hidden7Node.setAttribute('name','kind');
+			hidden7Node.setAttribute('value',addItem.kind);
+			hidden7Node.setAttribute('class','hidden'+addItem.cidx);
+			
+			formNode.appendChild(hidden1Node);
+			formNode.appendChild(hidden2Node);
+			formNode.appendChild(hidden3Node);
+			formNode.appendChild(hidden4Node);
+			formNode.appendChild(hidden5Node);
+			formNode.appendChild(hidden6Node);
+			formNode.appendChild(hidden7Node);
+			
+			
 			//총금액 구하기
 			totalPrice+=addItem.pay;
 			
@@ -358,6 +412,12 @@ function delCart(cidx){
 	//카트에서 선택한 상품만 삭제
 	var delTableNode = document.getElementById('cart_table'+cidx);
 	delTableNode.remove();
+	
+	//삭제한 상품 히든값 지우기
+	var delHiddenNodes = document.querySelectorAll('.hidden'+cidx);
+	for(var i=0;i<delHiddenNodes.length;i++){
+		delHiddenNodes[i].remove();
+	}
 }
 
 
@@ -393,6 +453,11 @@ function allDelCart(){
 	while(menu7Node.firstChild){
 		menu7Node.firstChild.remove()
 	}
+	
+	//모든 히든값 지우기
+	document.querySelectorAll('input[type="hidden"]').forEach(function(node) {
+		node.remove();
+	});
 	
 	document.getElementById('sumPay_text2').innerHTML='0 원';
 }

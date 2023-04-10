@@ -14,8 +14,26 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="js/all-book.js"></script>
+<script>
+function cartCheck(){
+	var hiddens=document.querySelectorAll('#bookFm input[type="hidden"]');
+	var loginMidx='${sessionScope.loginMidx}';
+	
+	if(loginMidx=="0"){
+		window.alert('로그인한 회원만 예약이 가능합니다.');
+		return false;
+	}
+	
+	if(hiddens==null || hiddens.length==0){
+		window.alert('카트에 담긴 상품이 없습니다. 상품을 담아주세요.');
+		return false;
+	}else{
+		return true;
+	}
+}
+</script>
 </head>
-<body onload="cateList(1);rn();">
+<body onload="cateList(1);">
 <section>
 	<article>
 		<div class="bg_box">
@@ -141,10 +159,7 @@
 			</div>
 			<h3 class="sumPay_text1">총 금액</h3>
 			<h3 id="sumPay_text2" class="sumPay_text2">0 원</h3>
-			<form id="bookFm" name="bookFm" action="bookSubmit.do">
-			
-				<input type="hidden" name="test" value="예약시 넘길 데이터입니다">
-				
+			<form onsubmit="return cartCheck()" id="bookFm" name="bookFm" action="bookSubmit.do">
 				<div class="book_box">
 					<input class="book_button" type="submit" value="예 약 하 기">
 				</div>

@@ -1,6 +1,6 @@
 package com.marry.book.model;
 
-import java.sql.*;
+import java.sql.Date;
 
 public class BookDTO {
 
