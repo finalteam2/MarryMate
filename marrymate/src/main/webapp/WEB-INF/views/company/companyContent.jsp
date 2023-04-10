@@ -37,29 +37,30 @@ body{
 }
 
 #carouselExampleIndicators{
-	width: 600px;
-	height: 300px;
+	width: 800px;
+	height: 400px;
 	margin: 0 auto;
 }
 
-.carousel-item{
-	width: 600px;
-	height: 300px;
-	object-fit:cover;
-}
 .info_map {
-	width: 800px;
-	margin:0 auto;
+    width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
 }
 
 .info_area {
-	width: 300px;
-	display: inline-block;
+	border: 2px solid #e1e1e1;
+	width: 400px;
+	height: 250px;
+	padding-top: 10px;
+	padding-left: 10px;
 }
 
  .map_area{
-	width: 400px; 
-	display: inline-block;
+	width: 50%; 
 }
 
 .rev_star_active{
@@ -110,7 +111,6 @@ textarea {
 <%@include file="../header.jsp" %>
 <div class="allpage">
 	<p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
-	<hr>
 	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
 	  <div class="carousel-indicators">
 	    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -138,8 +138,6 @@ textarea {
 	  </button>
 	</div>
 	
-	<hr>
-	
 	<div class="container-lg info_map">
 		<div class="info_area">
 			<h4>${dto.cname }</h4>
@@ -156,23 +154,23 @@ textarea {
 			</span>
 		</div>
 		<div class="map_area" id="map_area">
-			<div class="contain_map" id="map" style="width: 395px; height: 265px; overflow: hidden;"></div>
+			<div class="contain_map" id="map" style="width: 400px; height: 250px; overflow: hidden;"></div>
 			<input type="hidden" id="cname" value="${dto.cname }">
 		</div>
 	</div>
 	
-	<hr>
 	<ul class="nav nav-tabs" id="scrollspyHeading1">
 	  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading1">상세정보</a>  </li>
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>  </li>
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading3">문의</a>  </li>
 	</ul>
-	<hr>
+	<br>
 	<h3>상세정보</h3>
 	
-	소개 : ${dto.intro }<br>
-	
-	<hr>
+	<br>
+	소개 : ${dto.intro }
+	<br>
+	<br>
 	
 <c:if test="${dto.kind eq '예식장' }">
 	<span>홀 정보</span>
@@ -201,8 +199,6 @@ textarea {
 	  </tbody>
 	</table>
 	
-	<hr>
-	
 	<span>메뉴 종류 & 가격</span>
 	<table class="table table-hover">
 	  <thead>
@@ -223,8 +219,6 @@ textarea {
 	  </tbody>
 	</table>
 	
-	<hr>
-	
 </c:if>
 
 	<ul class="nav nav-tabs" id="scrollspyHeading2">
@@ -232,10 +226,14 @@ textarea {
 	  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading2">리뷰</a>  </li>
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading3">문의</a>  </li>
 	</ul>
-	<hr>
+	<br>
 	
 	<h3>리뷰</h3>
-	
+	<c:if test="${empty rarr }">
+	<br>
+	작성된 리뷰가 없습니다.
+	<br><br>
+	</c:if>
 	<c:forEach var="rdto" items="${rarr }">
 	${rdto.mname } <small class="text-muted">${rdto.redate }</small><br>
 	<c:forEach begin="1" end="5" var="num">
@@ -247,7 +245,9 @@ textarea {
 		</c:if>
 	</c:forEach>
 	<pre>${rdto.content }</pre>
-	<hr>
+	
+	<br>
+	
 	</c:forEach>
 	<form name="fm" action="review.do" method="post">
 		<input type="hidden" name="cidx" value="${dto.cidx }">
@@ -283,9 +283,15 @@ textarea {
 	  <li class="nav-item">	<a class="nav-link" href="#scrollspyHeading2">리뷰</a>  </li>
 	  <li class="nav-item">	<a class="nav-link active" aria-current="page" href="#scrollspyHeading3">문의</a>  </li>
 	</ul>
-	<hr>
+	<br>
 	<h3>문의</h3>
 	
+	<c:if test="${empty rarr }">
+	<br>
+	답변된 문의가 없습니다.
+	<br><br>
+	</c:if>
+
 	<div class="accordion" id="accordionExample">
 	<c:forEach varStatus="status" var="dto" items="${csarr }">
 	<input type="hidden" name="ccsidx" value="${dto.ccsidx }">
@@ -309,7 +315,6 @@ textarea {
 	</c:forEach>
 	</div>
 	
-	<hr>
 	<!-- Button trigger modal -->
 	<c:if test="${not empty sessionScope.loginMidx }">
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">문의하기</button>
@@ -320,7 +325,7 @@ textarea {
 	</c:if>
 	
 	<!-- Modal -->
-	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 		<form name="com_cs" action="com_cs.do" method="post">
