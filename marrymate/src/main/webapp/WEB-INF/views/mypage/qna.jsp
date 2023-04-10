@@ -16,108 +16,96 @@
     font-weight: normal;
     font-style: normal;
 }
-article table{
-	width: 70%;
-	margin: auto;
-	border-collapse: collapse;
-	text-align: center;	
+
+body{
+	background:#fbf4ff;
 }
-article table thead{
-	border-bottom: 20px solid white;
-	background-color: #c797eb;
+
+pre {
+    font-family: 'SUIT-Regular';
 }
-article table thead th{
-	color: white;
-	font-family: 'SUIT-Regular';
-	font-size: 18px;
-	font-weight: bold;
+section.sizefix{
+	background: #ffffff;
+	padding: 20px 20px 20px 20px;
+	border-radius: 25px 25px 25px 25px;
+	width: 1280px;
+	margin: 50px auto;
 }
-h2{
-	font-family: 'SUIT-Regular';
+
+article.sizefix{
 }
 </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
-<section>
-	<article>
+<section class="sizefix">
 		<h2>문 의 내 역</h2>
-		<hr>
-		<br>
-		<div>
-		<table>
-			<thead>
-				<tr>
-					<th>제 목</th>
-					<th>작성자</th>
-					<th>작성날짜</th>
-					<th>답변여부</th>
-				</tr>
-			</thead>
-		</table>
-		</div>
-<div class="accordion" id="accordionExample">
-<c:forEach varStatus="status" var="dto" items="${marr }">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${status.count }">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
-        ${dto.cname } ${dto.subject } ${dto.csdate } ${dto.mname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
-        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
-      </button>
-    </h2>
-    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        ${dto.content } 
-        <br>
-        ${dto.cname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
-        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
-        <br>
-        ${dto.answer }
-      	답변일 : ${dto.ansdate } 
-      </div>
-    </div>
-  </div>
-</c:forEach>
-<c:forEach varStatus="status" var="dto" items="${carr }">
-<form action="qnaUpadate.do" method="post">
-<input type="hidden" name="ccsidx" value="${dto.ccsidx }">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${status.count }">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
-        ${dto.subject } ${dto.csdate } ${dto.mname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
-        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
-      </button>
-    </h2>
-    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        ${dto.content } 
-        <br>
-        ${dto.cname }
-        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
-        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
-        <br>
-        ${dto.answer }
-      	답변일 : ${dto.ansdate }
-        <c:if test="${dto.is_answered == 0 }">
-      	<div class="mb-3">
-            <label for="message-text" class="col-form-label">답변</label>
-            <textarea class="form-control" id="message-text2" name="answer" placeholder="답변 내용을 작성하세요." required="required" rows="5"></textarea>
-        </div>
-        <div class="mb-3">
-        <button type="submit" class="btn btn-primary">답변하기</button>
-        </div>
-        </c:if>
-      </div>
-    </div>
-  </div>
-</form>
-</c:forEach>
-</div>
-	<hr>
+	<div class="accordion" id="accordionExample">
+	<c:forEach varStatus="status" var="dto" items="${marr }">
+	<article class="sizefix">
+	  <div class="accordion-item">
+	    <h2 class="accordion-header" id="heading${status.count }">
+	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
+	        ${dto.subject }<br><small class="text-muted">${dto.csdate }</small>
+	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+	      </button>
+	    </h2>
+	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
+	      <div class="accordion-body">
+	        ${dto.subject }<br>
+	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <pre>${dto.content }</pre> 
+	        <br>
+	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small>
+	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+	        <br>
+	        <pre>${dto.answer }</pre>
+	      </div>
+	    </div>
+	  </div>
 	</article>
+	</c:forEach>
+	<c:forEach varStatus="status" var="dto" items="${carr }">
+	<article class="">
+	<form action="qnaUpadate.do" method="post">
+	<input type="hidden" name="ccsidx" value="${dto.ccsidx }">
+	  <div class="accordion-item">
+	    <h2 class="accordion-header" id="heading${status.count }">
+	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
+	        ${dto.subject }<br><small class="text-muted">${dto.csdate }</small>
+	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+	      </button>
+	    </h2>
+	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
+	      <div class="accordion-body">
+	        ${dto.subject }<br>
+	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <pre>${dto.content }</pre> 
+	        <br>
+	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small>
+	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
+	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+	        <br>
+	        <pre>${dto.answer }</pre>
+	        <c:if test="${dto.is_answered == 0 }">
+	      	<div class="mb-3">
+	            <label for="message-text" class="col-form-label">답변</label>
+	            <textarea class="form-control" id="message-text2" name="answer" placeholder="답변 내용을 작성하세요." required="required" rows="5"></textarea>
+	        </div>
+	        <div class="mb-3">
+	        <button type="submit" class="btn btn-primary">답변하기</button>
+	        </div>
+	        </c:if>
+	      </div>
+	    </div>
+	  </div>
+	</form>
+	</article>
+	</c:forEach>
+	</div>
 </section>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>

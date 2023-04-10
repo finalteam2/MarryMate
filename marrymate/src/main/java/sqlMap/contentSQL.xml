@@ -57,13 +57,14 @@
 	</insert>
 	<select id="selectReview" parameterType="Integer" resultType="com.marry.company.model.ReviewDTO">
 	select
-		*
+		review.*, member.name as mname
 	from
-		review
+		review, member
 	where
 		cidx = #{cidx}
+		and review.midx = member.midx
 	order by
-		ridx asc
+		ridx desc
 	</select>
 	<select id="selectLike" parameterType="com.marry.company.model.Com_LikeDTO" resultType="com.marry.company.model.Com_LikeDTO">
 	select

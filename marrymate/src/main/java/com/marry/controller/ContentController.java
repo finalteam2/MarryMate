@@ -15,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookListDTO;
 import com.marry.company.model.Com_CsDTO;
+import com.marry.company.model.Com_ImgDTO;
 import com.marry.company.model.Com_LikeDTO;
 import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.ContentDAOImple;
+import com.marry.company.model.FoodDTO;
+import com.marry.company.model.HallDTO;
 import com.marry.company.model.ReviewDTO;
 import com.marry.point.model.PointDTO;
 
@@ -43,14 +46,14 @@ public class ContentController {
 			mav.setViewName("company/companyMsg");
 		}else {
 			mav.addObject("dto", dto);
-			List iarr = contentDao.selectCom_Img(cidx);
+			List<Com_ImgDTO> iarr = contentDao.selectCom_Img(cidx);
 			mav.addObject("iarr", iarr);
-			List csarr = contentDao.answeredCs(cidx);
+			List<Com_CsDTO> csarr = contentDao.answeredCs(cidx);
 			mav.addObject("csarr", csarr);
 			//예식장 확인, 예식장일 때만 홀과 식사 조회
 			if(dto.getKind().equals("예식장")) {
-				List harr = contentDao.selectHall(cidx);
-				List farr = contentDao.selectFood(cidx);
+				List<HallDTO> harr = contentDao.selectHall(cidx);
+				List<FoodDTO> farr = contentDao.selectFood(cidx);
 				mav.addObject("harr", harr);
 				mav.addObject("farr", farr);
 			}
@@ -64,7 +67,7 @@ public class ContentController {
 				// TODO: handle exception
 			}
 			
-			List rarr = contentDao.selectReview(cidx);
+			List<ReviewDTO> rarr = contentDao.selectReview(cidx);
 			mav.addObject("rarr", rarr);
 			mav.setViewName("company/companyContent");
 		}

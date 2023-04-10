@@ -49,11 +49,23 @@
             });
         }
     </script>
+<style>
+body{
+	background:#fbf4ff;
+}
+div.allpage{
+	background: #ffffff;
+	padding: 20px 20px 20px 20px;
+	border-radius: 25px 25px 25px 25px;
+	width: 1280px;
+	margin: 50px auto;
+}
+</style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
-      <h1>이름 : ${mname }</h1>
+      <h1>${mname } 님의 예약 내역입니다.</h1>
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -68,6 +80,13 @@
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	<c:if test="${empty arr }">
+	  	<tr>
+	  		<td colspan="6">
+	  		에약 내역이 없습니다.
+	  		</td>
+	  	</tr>
+	  	</c:if>
 	    <c:forEach varStatus="status" var="dto" items="${arr }">
 	    <tr>
 	      <th scope="row">${status.count }</th>

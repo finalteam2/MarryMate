@@ -7,21 +7,41 @@ public class ReviewDTO {
 	private int ridx;
 	private int cidx;
 	private int midx;
+	private String mname;
 	private String content;
 	private int  star;
 	private Date redate;
 	public ReviewDTO() {
 		super();
 	}
-	public ReviewDTO(int ridx, int cidx, int midx, String content, int star, Date redate) {
+
+	
+
+	public ReviewDTO(int ridx, int cidx, int midx, String mname, String content, int star, Date redate) {
 		super();
 		this.ridx = ridx;
 		this.cidx = cidx;
 		this.midx = midx;
+		this.mname = mname;
 		this.content = content;
 		this.star = star;
 		this.redate = redate;
 	}
+
+
+
+	public String getMname() {
+		return mname;
+	}
+
+
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+
+
 	public int getRidx() {
 		return ridx;
 	}

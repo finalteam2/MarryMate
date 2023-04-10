@@ -18,6 +18,9 @@
     font-weight: normal;
     font-style: normal;
 }
+pre {
+    font-family: 'SUIT-Regular';
+}
 
 body{
 	background:#fbf4ff;
@@ -56,6 +59,15 @@ body{
  .map_area{
 	width: 400px; 
 	display: inline-block;
+}
+
+.rev_star_active{
+  font-size:20px;
+  color:#fc0;
+}
+.rev_star{
+  font-size:20px;
+  color:#ccc;
 }
 .star-rating {
   display:flex;
@@ -222,14 +234,16 @@ textarea {
 	<h3>리뷰</h3>
 	
 	<c:forEach var="rdto" items="${rarr }">
-	인덱스 : ${rdto.ridx } <br>
-	회사번호 : ${rdto.cidx } <br>
-	회원번호 : ${rdto.midx } <br>
-	컨텐츠 : ${rdto.content } <br>
-	별점 : ${rdto.star } <br>
-	작성일 : ${rdto.redate } <br>
-	
-	
+	${rdto.mname } <small class="text-muted">${rdto.redate }</small><br>
+	<c:forEach begin="1" end="5" var="num">
+		<c:if test="${num <= rdto.star}">
+		<label class="rev_star_active">&#9733;</label>
+		</c:if>
+		<c:if test="${num > rdto.star}">
+		<label class="rev_star">&#9733;</label>
+		</c:if>
+	</c:forEach>
+	<pre>${rdto.content }</pre>
 	<hr>
 	</c:forEach>
 	<form name="fm" action="review.do" method="post">
@@ -246,7 +260,6 @@ textarea {
 		<input type="radio" id="1-star" name="star" value="1" />
 			<label for="1-star" class="star">&#9733;</label>
 		</span>
-	
 	<c:if test="${empty sessionScope.loginMidx }">
 		<div class="input-group mb-3">
 		  <textarea class="form-control" placeholder="로그인 후 이용 가능합니다" name="content" aria-label="With textarea" rows="4" disabled></textarea>
@@ -276,28 +289,17 @@ textarea {
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="heading${status.count }">
 	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">
-	        ${dto.subject } ${dto.csdate } ${dto.mname }
-	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
+	        ${dto.subject }<br><small class="text-muted">${dto.csdate }</small>
 	      </button>
 	    </h2>
 	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
-	        ${dto.content } 
+	        ${dto.subject }<br>
+	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <pre>${dto.content }</pre> 
 	        <br>
-	        ${dto.cname }
-	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
-	        <br>
-	        ${dto.answer }
-	      	답변일 : ${dto.ansdate }
-	        <c:if test="${dto.is_answered == 0 }">
-	      	<div class="mb-3">
-	            <label for="message-text" class="col-form-label">답변</label>
-	            <textarea class="form-control" id="message-text2" name="answer" placeholder="답변 내용을 작성하세요." required="required" rows="5"></textarea>
-	        </div>
-	        <div class="mb-3">
-	        <button type="submit" class="btn btn-primary">답변하기</button>
-	        </div>
-	        </c:if>
+	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small><br>
+	        <pre>${dto.answer }</pre>
 	      </div>
 	    </div>
 	  </div>
@@ -332,8 +334,6 @@ textarea {
 	          </div>
 	          <div class="mb-3">
 	            <label for="message-text" class="col-form-label">제목</label>
-			    <input class="form-check-input" name="is_private" type="checkbox" id="inlineCheckbox1" value="1">
-			    <label class="form-check-label" for="inlineCheckbox1">비밀글</label>
 	            <input type="text" class="form-control" id="message-text1" name="subject" placeholder="제목을 작성하세요." required="required">
 	          </div>
 	          <div class="mb-3">
