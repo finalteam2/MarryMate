@@ -83,7 +83,7 @@ function searchResult(){
 			//검색된 수
 			var cnt = data.cnt;
 			var totalCntNode = document.getElementById('totalCnt');
-			totalCntNode.innerHTML='<span>검색 결과 : 총' + cnt + ' 건</span>';
+			totalCntNode.innerHTML='<span>[' + cnt + '개의 예식장이 검색되었습니다]</span>';
 			
 			
 			var paging = data.paging;

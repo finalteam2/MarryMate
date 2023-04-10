@@ -16,7 +16,7 @@
 <body onload="searchHall('1')">
 <%@include file="../header.jsp" %>
 <div class="allpage">
-	<h1>예식장 검색</h1>
+	<h1>예식장</h1>
 	<input type="hidden" name="kind" id="kind" value="${kind }">
 	<form>
 	<div class="searchbox">

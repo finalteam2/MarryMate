@@ -1,4 +1,5 @@
 var sort = 1;
+var kind = '스튜디오';
 
 function goSort(num){
 	sort = num;
@@ -22,6 +23,41 @@ function goSort(num){
 	searchEtc('1');
 }
 
+function goKind(st){
+	kind = st;
+	var kind1Node = document.getElementById('kind1');
+	var kind2Node = document.getElementById('kind2');
+	var kind3Node = document.getElementById('kind3');
+	var kind4Node = document.getElementById('kind4');
+	var kind5Node = document.getElementById('kind5');
+	var kind6Node = document.getElementById('kind6');
+	var kind7Node = document.getElementById('kind7');
+	kind1Node.setAttribute('class','nav-link');
+	kind2Node.setAttribute('class','nav-link');
+	kind3Node.setAttribute('class','nav-link');
+	kind4Node.setAttribute('class','nav-link');
+	kind5Node.setAttribute('class','nav-link');
+	kind6Node.setAttribute('class','nav-link');
+	kind7Node.setAttribute('class','nav-link');
+	if(kind == '스튜디오'){
+		kind1Node.setAttribute('class','nav-link active');
+	}else if(kind == '헤어메이크업'){
+		kind2Node.setAttribute('class','nav-link active');
+	}else if(kind == '드레스'){
+		kind3Node.setAttribute('class','nav-link active');
+	}else if(kind == '스냅DVD'){
+		kind4Node.setAttribute('class','nav-link active');
+	}else if(kind == '주례'){
+		kind5Node.setAttribute('class','nav-link active');
+	}else if(kind == '사회'){
+		kind6Node.setAttribute('class','nav-link active');
+	}else if(kind == '축가'){
+		kind7Node.setAttribute('class','nav-link active');
+	}
+	document.all.searchfm.reset();
+	goSort('1');
+}
+
 function searchEtc(page){
 	var param = '';
 	var name = document.getElementById('name').value;
@@ -34,7 +70,6 @@ function searchEtc(page){
 	param += '&payMin=' + payMin;
 	var payMax = document.getElementById('payMax').value;
 	param += '&payMax=' + payMax;
-	var kind = document.getElementById('kind').value;
 	param += '&kind=' + kind;
 	param += '&sort=' + sort;
 	param += '&page=' + page;
@@ -75,7 +110,11 @@ function searchResult(){
 			//검색된 수
 			var cnt = data.cnt;
 			var totalCntNode = document.getElementById('totalCnt');
-			totalCntNode.innerHTML='<span>검색 결과 : 총' + cnt + ' 건</span>';
+			if(kind =='헤어메이크업'){
+				totalCntNode.innerHTML='<span>[' + cnt + '개의 ' + kind + '이 검색되었습니다]</span>';
+			}else{
+				totalCntNode.innerHTML='<span>[' + cnt + '개의 ' + kind + '가 검색되었습니다]</span>';
+			}
 			
 			
 			var paging = data.paging;
