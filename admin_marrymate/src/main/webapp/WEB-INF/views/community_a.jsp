@@ -101,7 +101,7 @@ body{
 <hr width="1200">
 <table height="455" width="160" border="1" cellspacing="0" id="menu">
 	<tr>
-		<th><a href="collection_a.do">웨딩컬렉션 관리</a></th>
+		<th><a href="collectionList.do?kind=예식장">웨딩컬렉션 관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="book_a.do">예약관리</a></th>

@@ -8,8 +8,9 @@
   		select * from company where kind=#{kind} order by cidx
   </select>
   
-  <select id="collectionList" parameterType="String" resultType="com.admin.company.model.CompanyDTO">
-  		select * from company where kind=#{kind} and clevel=1 order by cname
+  <select id="collectionList" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} and clevel=1 order by blind, topfix desc, cname) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="companyInfo" parameterType="Integer" resultType="com.admin.company.model.CompanyDTO">
@@ -35,5 +36,38 @@
   <select id="traffic1_c" resultType="Integer">
   		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
   </select>
+  
+  <select id="listSelect_cidx" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where kind=#{kind} and clevel=1 and cidx=#{cidx}
+  </select>
+  
+  <select id="listSelect_cname" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%' order by blind, topfix desc, cname) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="getTotalCnt" parameterType="String" resultType="Integer">
+  		select count(*) from company where kind=#{kind} and clevel=1
+  </select>
+  
+  <select id="getTotalCnt_cn" parameterType="Map" resultType="Integer">
+  		select count(*) from company where kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%'
+  </select>
+  
+  <select id="bi" parameterType="int" resultType="int">
+  		select topfix from company where cidx=#{cidx}
+  </select>
+  
+  <update id="sd" parameterType="int">
+  		update company set topfix=1 where cidx=#{cidx}
+  </update>
+  
+  <update id="hj" parameterType="int">
+  		update company set topfix=0 where cidx=#{cidx}
+  </update>
+  
+  <update id="sg" parameterType="int">
+  		update company set blind=1, topfix=0 where cidx=#{cidx}
+  </update>
   
   </mapper>
