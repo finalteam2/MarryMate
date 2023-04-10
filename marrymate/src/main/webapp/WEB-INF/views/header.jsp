@@ -103,7 +103,7 @@
 					<c:if test="${not empty sessionScope.loginId}">
 	                    <li><a href="favorite.do">즐겨찾기</a></li>
 	                    <li><a href="myPoint.do">My 포인트</a></li>
-	                    <li><a href="community.do">My 커뮤니티</a></li>
+	                    <li><a href="myCommunity.do">My 커뮤니티</a></li>
 					</c:if>
                 </ul>
             </div>
