@@ -40,8 +40,10 @@
                 buyer_postcode : '123-456'
             }, function (rsp) { // callback
                 if (rsp.success) {
+                	alert('결제 성공');
                     console.log(rsp);
                 } else {
+                	alert('결제 실패');
                     console.log(rsp);
                 }
             });
