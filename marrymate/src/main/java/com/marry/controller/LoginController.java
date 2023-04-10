@@ -76,11 +76,6 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping(value = "/login_com.do", method = RequestMethod.GET)
-	public String companyLoginForm() {
-		return "login/login";
-	}
-	
 	@RequestMapping(value = "/login_com.do", method = RequestMethod.POST)
 	public ModelAndView companyLoginSubmit(
 			@RequestParam(value = "comSaveid", required = false)String comSaveid,
