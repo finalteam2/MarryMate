@@ -6,28 +6,23 @@ public class ChecklistDTO {
 	
 	private int ch_idx;
 	private int midx;
-	private int chtype;
-	private String cschedule;
-	private String chchedule;
-	private Date chdate;
-	private int dday;
-	private String onoff;
+	private String title;
+	private String dueday;
+	private String content;
+	private int onoff;
 	private int checked;
 	
 	public ChecklistDTO() {
 		super();
 	}
 
-	public ChecklistDTO(int ch_idx, int midx, int chtype, String cschedule, String chchedule, Date chdate, int dday,
-			String onoff, int checked) {
+	public ChecklistDTO(int ch_idx, int midx, String title, String dueday, String content, int onoff, int checked) {
 		super();
 		this.ch_idx = ch_idx;
 		this.midx = midx;
-		this.chtype = chtype;
-		this.cschedule = cschedule;
-		this.chchedule = chchedule;
-		this.chdate = chdate;
-		this.dday = dday;
+		this.title = title;
+		this.dueday = dueday;
+		this.content = content;
 		this.onoff = onoff;
 		this.checked = checked;
 	}
@@ -48,51 +43,35 @@ public class ChecklistDTO {
 		this.midx = midx;
 	}
 
-	public int getChtype() {
-		return chtype;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setChtype(int chtype) {
-		this.chtype = chtype;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getCschedule() {
-		return cschedule;
+	public String getDueday() {
+		return dueday;
 	}
 
-	public void setCschedule(String cschedule) {
-		this.cschedule = cschedule;
+	public void setDueday(String dueday) {
+		this.dueday = dueday;
 	}
 
-	public String getChchedule() {
-		return chchedule;
+	public String getContent() {
+		return content;
 	}
 
-	public void setChchedule(String chchedule) {
-		this.chchedule = chchedule;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public Date getChdate() {
-		return chdate;
-	}
-
-	public void setChdate(Date chdate) {
-		this.chdate = chdate;
-	}
-
-	public int getDday() {
-		return dday;
-	}
-
-	public void setDday(int dday) {
-		this.dday = dday;
-	}
-
-	public String getOnoff() {
+	public int getOnoff() {
 		return onoff;
 	}
 
-	public void setOnoff(String onoff) {
+	public void setOnoff(int onoff) {
 		this.onoff = onoff;
 	}
 
@@ -103,6 +82,7 @@ public class ChecklistDTO {
 	public void setChecked(int checked) {
 		this.checked = checked;
 	}
+	
 	
 	
 }

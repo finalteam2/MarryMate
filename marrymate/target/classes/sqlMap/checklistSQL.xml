@@ -2,6 +2,21 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.marry.calendar">
-
+<mapper namespace="com.marry.calender">
+	<insert id="checklistAdd" parameterType="com.marry.calender.model.ChecklistDTO">
+	insert into 
+		checklist
+	values (
+		myp_idx.nextval,
+		#{midx},
+		TO_DATE(#{dueday},'MM/DD/YYYY'),
+		#{title},
+		#{content},
+		1,
+		0
+		)
+	</insert>
+	<select id="checklistAll" resultType="com.marry.calender.model.ChecklistDTO">
+		select*from checklist where midx=#{midx}
+	</select>
 </mapper>

@@ -9,38 +9,28 @@ public class ChecklistDAOImple implements ChecklistDAO {
 	
 	private SqlSessionTemplate sqlMap;
 	
-	public SqlSessionTemplate getSqlMap() {
-		return sqlMap;
-	}
 	
 	public void setSqlMap(SqlSessionTemplate sqlMap) {
 		this.sqlMap = sqlMap;
 	}
 	
-	public ChecklistDAOImple() {
-		this.checklistDAO = null;
-		this.checklistDTO = new ChecklistDTO();
+
+	@Override
+	public int checklistAdd(ChecklistDTO dto) {
+		int count=sqlMap.insert("checklistAdd", dto);
+		return count;
 	}
-	private final ChecklistDAO checklistDAO;
-	
-	private final ChecklistDTO checklistDTO;
 	
 	@Override
-	public List<ChecklistDTO> checklist() {
-		// TODO Auto-generated method stub
-		return null;
+	public int checklistDel(String schedule) {
+		int count=sqlMap.delete("checklistDel", schedule);
+		return count;
 	}
 
 	@Override
-	public int checkdataInfo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int checkStatus() {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<ChecklistDTO> checklistAll() {
+		List<ChecklistDTO> list=sqlMap.selectList("checklistAll");
+		return list;
 	}
 
 }

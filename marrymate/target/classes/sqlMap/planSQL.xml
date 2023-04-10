@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.marry.calendar">
+<mapper namespace="com.marry.calender">
 	<insert id="planWrite" parameterType="com.marry.calender.model.PlanDTO">
 	insert into 
 		myplan

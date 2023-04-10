@@ -57,4 +57,7 @@
 	<bean id="PlanDao" class="com.marry.calender.model.PlanDAOImple">
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="ChecklistDao" class="com.marry.calender.model.ChecklistDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
 </beans>

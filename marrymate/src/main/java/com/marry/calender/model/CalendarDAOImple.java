@@ -27,6 +27,12 @@ import java.time.temporal.ChronoUnit;
 
 public class CalendarDAOImple implements CalendarDAO {
 	
+	private SqlSessionTemplate sqlMap;
+	
+	public void setSqlMap(SqlSessionTemplate sqlMap) {
+		this.sqlMap = sqlMap;
+	}
+	
 	public CalendarDAOImple() {
 		this.calendarDTO = new CalendarDTO();
 		this.calendarDAO = null;
@@ -48,16 +54,6 @@ public class CalendarDAOImple implements CalendarDAO {
 		this.calendarDTO = new CalendarDTO();
 		this.request = request;
 		this.calendarDAO = null;
-	}
-	
-	private SqlSessionTemplate sqlMap;
-	
-	public SqlSessionTemplate getSqlMap() {
-		return sqlMap;
-	}
-	
-	public void setSqlMap(SqlSessionTemplate sqlMap) {
-		this.sqlMap = sqlMap;
 	}
 
 	@Override

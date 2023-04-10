@@ -6,18 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인 일정 추가하기</title>
+<title>체크리스트 추가하기</title>
 <link rel="stylesheet" href="/marrymate/css/jquery-ui.css">
 <script src="/marrymate/js/jquery-1.12.4.js"></script>
 <script src="/marrymate/js/jquery-ui.js"></script>
 <script src="/marrymate/js/httpRequest.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#pdate").datepicker({
+	$("#dueday").datepicker({
 		changeMonth:true,
 		changeYear:true
 	});
 });
+
 
 </script>
 </head>
@@ -46,13 +47,13 @@ caption{
 }
 </style>
 <body>
-<form name="form" method="post" action="planWrite.do" enctype="multipart/form-data">
+<form name="form" method="post" action="checklistAdd.do" enctype="multipart/form-data">
 <input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 <table>
-<caption>일정등록</caption>
+<caption>체크리스트 추가</caption>
 	<tr>
 		<th width="20%">날짜</th>
-		<td width="80%"><input type="text" name="pdate" id="pdate" style="width: 98%"></td>
+		<td width="80%"><input type="text" name="dueday" id="dueday" style="width: 98%"></td>
 	</tr>
 	<tr>
 		<th width="20%">제목</th>
