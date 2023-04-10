@@ -54,7 +54,61 @@ body{
 	text-align: center;
 	margin-left: 570px;
 }
+
+#select {
+	margin-left: 700px;
+	width:100px;
+	height:30px;
+	font-size:15px;
+}
+
+#text{
+	width:220px;
+	height:25px;
+	font-size:16px;
+}
+
+#search {
+	width:60px;
+	height:30px;
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+	background-color:#0a95f1;
+	border:0px;
+	border-radius:5px;
+}
+
+#pg {
+	position: fixed;
+	bottom: 205px;
+	left:55%;
+	transform:translateX(-50%);
+}
+
+#hrf {
+	position: fixed;
+	bottom: 100px;
+	left:50%;
+	transform:translateX(-50%);
+}
+#pop {
+	width:100px;
+	height:35px;
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+	background-color:#078b18;
+	border:0px;
+	border-radius:5px;
+}
 </style>
+<script>
+function popup(){
+	window.open('popup.do','popup','width=600,height=290,top=250,left=550');
+}
+
+</script>
 </head>
 <body width="1200">
 <c:if test="${empty sessionScope.name}">
@@ -121,9 +175,19 @@ body{
 	</tr>
 </table>
 <hr width="950" id="hr">
-<br><br>
 <c:if test="${mp=='m'}">
-<form name="pointMinusList">
+<br><br>
+<form name="pointMinusList" action="listSelect_p.do">
+<input type="hidden" name="mp" value="${mp}">
+<select name="selectType" id="select">
+	<option>회원번호</option>
+	<option>회원명</option>
+	<option>업체명</option>
+</select>
+<input type="text" name="selectText" id="text" placeholder="검색">
+&nbsp;<input type="submit" value="검색" id="search">
+</form>
+<br><br>
 <table cellspacing="0" border="1" width="700" id="tb2">
 	<thead>
 		<tr>
@@ -155,10 +219,22 @@ body{
 	</c:forEach>
 	</tbody>
 </table>
+<div id="pg">${pageStr}</div>
 </form>
 </c:if>
 <c:if test="${mp=='p'}">
-<form name="pointPlusList">
+<br><br>
+<form name="pointPlusList" action="listSelect_p.do">
+<input type="hidden" name="mp" value="${mp}">
+<select name="selectType" id="select">
+	<option>회원번호</option>
+	<option>회원명</option>
+</select>
+<input type="text" name="selectText" id="text" placeholder="검색">
+&nbsp;<input type="submit" value="검색" id="search">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 적립" id="pop" onclick="popup();">
+</form>
+<br><br>
 <table cellspacing="0" border="1" width="700" id="tb2">
 	<thead>
 		<tr>
@@ -188,12 +264,10 @@ body{
 	</c:forEach>
 	</tbody>
 </table>
+<div id="pg">${pageStr}</div>
 </form>
 </c:if>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<hr width="1200">
+<hr width="1200" id="hrf">
 </c:if>
 </body>
 </html>
