@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.marry.company.model.*;
 import com.marry.member.model.*;
 import com.marry.mypage.model.MypageDAO;
+import com.marry.bbs.model.*;
 
 @Controller
 public class MypageController {
@@ -87,12 +88,16 @@ public class MypageController {
 		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
-	
-	
-	
+		
 	@RequestMapping("/myCommunity.do")
-	public String community() {
-		return "/mypage/myCommunity";
+	public ModelAndView comSelect(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		int midx = (Integer) session.getAttribute("loginMidx");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("subInfo", mypageDao.subjectSelect(midx));
+		mav.addObject("replyInfo", mypageDao.replySelect(midx));
+		mav.setViewName("mypage/myCommunity");
+		return mav;
 	}
 	
 	@RequestMapping("/favorite.do")

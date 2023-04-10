@@ -43,6 +43,17 @@ article table tbody td{
 h2{
 	font-family: 'SUIT-Regular';
 }
+
+.text{
+	font-family: 'SUIT-Regular';
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -54,7 +65,8 @@ h2{
 		<br>
 		<div class="p">
 		<div class="s">
-		<div>내가 쓴 글</div>
+		<br><br>
+		<div class="text">내가 쓴 게시글</div>
 		<br>
 		<table>
 			<thead>
@@ -63,59 +75,58 @@ h2{
 					<th>제목</th>
 					<th>작성날짜</th>
 					<th>조회수</th>
-					<th>추천수</th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:if test="${empty subInfo }">
+			<tr>
+				<td colspan="4">작성된 게시글이 없습니다.</td>		
+			</tr>
+			</c:if>
+			<c:forEach var="sub" items="${subInfo }">
+					<input type="hidden" name="midx" value=${sub.midx }>
 				<tr>
-					<td>2</td>
-					<td>안녕하세요~</td>
-					<td>2023-03-29</td>
-					<td>43</td>
-					<td>8</td>
+					<td>${sub.bidx }</td>
+					<td><a href="content.do?bidx=${sub.bidx }">${sub.subject }</a></td>
+					<td>${sub.writedate }</td>
+					<td>${sub.watch }</td>
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>회원가입 했어요!</td>
-					<td>2023-03-01</td>
-					<td>213</td>
-					<td>23</td>
-				</tr>
+			</c:forEach>	
 			</tbody>
 		</table>
 		</div>
-		<br><br><br><br>
+		<br><br>
 		<div class="s">
-		<div>내가 쓴 댓글</div>
+		<div class="text">내가 쓴 댓글</div>
 		<br>
 		<table>
 			<thead>
 				<tr>
 					<th>No.</th>
-					<th>제목</th>
+					<th>본문제목</th>
+					<th>댓글내용</th>
 					<th>작성날짜</th>
-					<th>조회수</th>
-					<th>추천수</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:if test="${empty replyInfo }">
+			<tr>
+				<td colspan="4">작성한 댓글이 없습니다.</td>		
+			</tr>
+			</c:if>
+			<c:forEach var="reply" items="${replyInfo }">
+					<input type="hidden" name="midx" value=${reply.midx }>
 				<tr>
-					<td>2</td>
-					<td>안녕하세요~</td>
-					<td>2023-03-29</td>
-					<td>43</td>
-					<td>8</td>
+					<td>${reply.ridx }</td>
+					<td><a href="content.do?bidx=${reply.bidx }">${reply.subject }</a></td>
+					<td>${reply.content }</td>
+					<td>${reply.writedate }</td>
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>회원가입 했어요!</td>
-					<td>2023-03-01</td>
-					<td>213</td>
-					<td>23</td>
-				</tr>
+			</c:forEach>
 			</tbody>	
 		</table>
 		</div>
+		<br><br>
 		</div>
 	</article>
 </section>

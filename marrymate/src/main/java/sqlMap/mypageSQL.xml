@@ -82,4 +82,21 @@
     	where cidx=#{cidx}		
     </select>
     
+    <select	id="subjectSelect" parameterType="integer" resultType="com.marry.bbs.model.BbsDTO">
+    	select * from bbs
+    	where midx=#{midx}
+    </select>
+    
+    <select id="replySelect" parameterType="integer" resultType="com.marry.bbs.model.ReplyDTO">
+   		select
+    		reply.*, bbs.subject as subject
+		from
+    		reply, bbs
+		where
+    		reply.bidx = bbs.bidx
+    	and reply.midx = #{midx}
+		order by
+			ridx
+    </select>
+    
 </mapper>

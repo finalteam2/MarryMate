@@ -11,12 +11,13 @@ public class ReplyDTO {
 	private String id;
 	private String content;
 	private String writedate;
+	private String subject;
 	
 	public ReplyDTO() {
 		super();
 	}
 
-	public ReplyDTO(int ridx, int bidx, int midx, String nick, String id, String content, String writedate) {
+	public ReplyDTO(int ridx, int bidx, int midx, String nick, String id, String content, String writedate, String subject) {
 		super();
 		this.ridx = ridx;
 		this.bidx = bidx;
@@ -25,6 +26,7 @@ public class ReplyDTO {
 		this.id = id;
 		this.content = content;
 		this.writedate = writedate;
+		this.subject = subject;
 	}
 
 	public int getRidx() {
@@ -81,6 +83,14 @@ public class ReplyDTO {
 
 	public void setWritedate(String writedate) {
 		this.writedate = writedate;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	
 }

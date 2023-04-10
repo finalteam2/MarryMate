@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.marry.member.model.MemberDTO;
 import com.marry.company.model.*;
+import com.marry.bbs.model.*;
 
 public class MypageDAOImple implements MypageDAO {
 
@@ -78,6 +79,18 @@ public class MypageDAOImple implements MypageDAO {
 		
 		List<FoodDTO> dto5=sqlMap.selectList("foodInfoSelect",cidx);
 		return dto5;
+	}
+	
+	public List<BbsDTO> subjectSelect(int midx) {
+	
+		List<BbsDTO> dto6=sqlMap.selectList("subjectSelect", midx);
+		return dto6;
+	}
+	
+	public List<ReplyDTO> replySelect(int midx) {
+	
+		List<ReplyDTO> dto7=sqlMap.selectList("replySelect", midx);
+		return dto7;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.marry.mypage.model;
 import java.util.*;
 import com.marry.member.model.MemberDTO;
 import com.marry.company.model.*;
+import com.marry.bbs.model.*;
 
 
 public interface MypageDAO {
@@ -16,4 +17,6 @@ public interface MypageDAO {
 	public CompanyDTO comInfoSelect(CompanyDTO dto);
 	public List<HallDTO> hallInfoSelect(int cidx);
 	public List<FoodDTO> foodInfoSelect(int cidx);
+	public List<BbsDTO> subjectSelect(int midx);
+	public List<ReplyDTO> replySelect(int midx);
 }
