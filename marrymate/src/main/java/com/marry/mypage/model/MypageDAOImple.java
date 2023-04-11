@@ -101,4 +101,15 @@ public class MypageDAOImple implements MypageDAO {
 		int count=sqlMap.update("imgChange", dto);
 		return count;
 	}
+	
+	@Override
+	public List<Book_TimeDTO> booktimeSelect(int cidx) {
+		List<Book_TimeDTO> arr = sqlMap.selectList("booktimeSelect", cidx);
+		return arr;
+	}
+	@Override
+	public List<Com_ImgDTO> comimgSelect(int cidx) {
+		List<Com_ImgDTO> arr = sqlMap.selectList("comimgSelect", cidx);
+		return arr;
+	}
 }

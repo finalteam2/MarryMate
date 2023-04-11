@@ -84,6 +84,8 @@ public class MypageController {
 		mav.addObject("comInfo", mypageDao.comInfoSelect(dto_c));
 		mav.addObject("hallInfo", mypageDao.hallInfoSelect(cidx));
 		mav.addObject("foodInfo", mypageDao.foodInfoSelect(cidx));
+		mav.addObject("barr", mypageDao.booktimeSelect(cidx));
+		mav.addObject("iarr", mypageDao.comimgSelect(cidx));
 		mav.setViewName("/mypage/myInfo_c");
 		return mav;
 	}

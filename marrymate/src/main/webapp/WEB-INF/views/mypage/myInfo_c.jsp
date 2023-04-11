@@ -7,111 +7,6 @@
 <meta charset="UTF-8">
 <title>My 정보수정</title>
 <link href="/marrymate/css/style.css" rel="stylesheet">
-<style type="text/css">
-	@font-face {
-    	font-family: 'SUIT-Regular';
-    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    	font-weight: normal;
-    	font-style: normal;
-	}
-	article div input[type=text] {
-		width: 230px;
-		height: 30px;
-		font-size: 17px;
-		font-family: 'SUIT-Regular';
-		border: 1px solid black;
-		border-radius: 12px;
-		text-align: center;
-	}
-	article div input[type=password] {
-		width: 230px;
-		height: 30px;
-		font-size: 15px;
-		border: 1px solid black;
-		border-radius: 12px;
-		text-align: center;
-	}	
-	article div input[type=text]::placeholder {
-		font-family: sans-serif; 
-		font-size: 10px;
-	}
-	article div input[type=password]::placeholder {
-		font-family: sans-serif; 
-		font-size: 10px;
-	}
-	#ht{
-		width: 100%;
-		margin: auto;
-		border-collapse: collapse;
-		text-align: center;	
-	}
-	#ht thead{
-		border-bottom: 20px solid white;
-		background-color: #c797eb;
-	}
-	#ht thead th{
-		color: white;
-		font-family: 'SUIT-Regular';
-		font-size: 14px;
-		font-weight: bold;
-	}
-	#ht tbody input[type=text] {
-		width: 80px;
-		height: 30px;
-		font-size: 17px;
-		font-family: 'SUIT-Regular';
-		border: 1px solid black;
-		border-radius: 12px;
-		text-align: center;
-	}
-	.hTagBox {
-		width: 120px;
-		height: 45px;
-		text-align: center;
-		float: left;
-	}
-	#cBox {
-		width: 560px;
-		height: 600px;
-		margin: 0px auto;
-		padding-left: 90px;
-		line-height: 45px;
-		position: absolute;
-		top: 20%;
-		left: 35%;
-	}
-	.bBox {
-		width: 350px;
-		height: 60px;
-		margin: auto;
-		text-align: center;
-	}
-	.btn {
-		width: 90px;
-		height: 40px;
-	    border: none;
-	    display: inline-block;
-	    border-radius: 15px;
-	    font-family: 'SUIT-Regular';
-	    font-size: 14px;
-	    font-weight: 600;
-	    text-align: center;
-	}
-	.btn2 {
-		width: 150px;
-		height: 40px;
-	    border: none;
-	    display: inline-block;
-	    border-radius: 15px;
-	    font-family: 'SUIT-Regular';
-	    font-size: 14px;
-	    font-weight: 600;
-	    text-align: center;
-	}
-	.t{
-	background-color: white;
-	}
-</style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
@@ -145,19 +40,38 @@
 				<textarea style="resize: none" name="intro" rows="11" cols="50">${comInfo.intro }</textarea><br>
 				<br>
 				<div class="hTagBox">대표이미지</div>
-				<c:if test="${!empty comInfo.img}">
 				<img src="/marrymate/img/com_best/${comInfo.img }">
-				</c:if>
-				<c:if test="${empty comInfo.img}">
-				<img src="/marrymate/img/nomal.png">
-				</c:if>
 				<input type="file" name="aimg" accept="image/*"><br>
 				<br>
 				<div class="bBox">
 				<input type="submit" class="btn" value="수정">
 				<input type="reset" class="btn" value="다시작성"></div>
 			</form>
+			
 				<hr>
+				<div>booktime</div>
+				<c:if test="${empty barr }">업서용</c:if>
+				<c:forEach var="dto" items="${barr }">
+				${dto.bktime_idx }
+				${dto.cidx }
+				${dto.yoil }
+				${dto.worktime }
+				<br>
+				</c:forEach>
+				<hr>
+				<hr>
+				<div>comimg</div>
+				<c:if test="${empty iarr }">업서용</c:if>
+				<c:forEach var="dto" items="${iarr }">
+				${dto.iidx }
+				${dto.cidx }
+				${dto.type }
+				${dto.img }
+				<br>
+				</c:forEach>
+				
+				<hr>
+			
 				<c:if test="${comInfo.kind == '예식장' }">
 				<div class="hTagBox">홀</div><br>
 				<table id="ht">
