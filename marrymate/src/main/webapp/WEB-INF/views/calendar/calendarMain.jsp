@@ -408,21 +408,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			</c:forEach>
 		</tbody>
 	</table>
-
-				<div>booktime</div>
-				<c:if test="${empty barr }">업서용</c:if>
-				<c:forEach var="dto" items="${barr }">
-					<form action="deleteBooktime.do" method="post">
-					<input type="hidden" name="bktime_idx" value="${dto.bktime_idx }">
-						${dto.bktime_idx }
-						${dto.cidx }
-						${dto.yoil }
-						${dto.worktime }
-						<input type="submit" value="삭제">
-					</form>
-				<br>
-				</c:forEach>
-				
 				
 	<script type="text/javascript">
 function setCheckboxChecked(checkboxId) {
