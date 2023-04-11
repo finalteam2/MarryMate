@@ -218,7 +218,7 @@ public class CalendarContoller {
 	}
 	
 	
-	@RequestMapping("/planlistDel.do")
+	@RequestMapping("/planlistDel.do" )
 	public ModelAndView planlistDel(PlanDTO pdto) {
 		
 		int result=planDao.planlistDel(pdto.getMyp_idx());

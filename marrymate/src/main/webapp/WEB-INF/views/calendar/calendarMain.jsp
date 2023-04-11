@@ -348,12 +348,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	<h3>
 		<a>모든 체크리스트</a>
 	</h3>
+	<form action="checklistDel.do" method="post">
 	<table border="1" width="900" cellspacing="0">
 		<thead>
 			<tr>
 				<th>제목</th>
 				<th>일자</th>
 				<th>내용</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -363,30 +365,31 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${checklistItems}">
+			<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 				<tr>
-
-					<td>${dto.title}<input type="hidden" name="ch_idx"
-						value="${dto.ch_idx}"></td>
+					<td>${dto.title}</td>
 					<td>${dto.dueday}</td>
 					<td>${dto.content}</td>
-					<td><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+					<td><input type="submit" value="삭제"><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
 
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	</form>
 
-
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 	<h3>
 		<a>테스트</a>
 	</h3>
+	<form action="planlistDel.do" method="post">
 	<table border="1" width="900" cellspacing="0">
 		<thead>
 			<tr>
 				<th>제목</th>
 				<th>일자</th>
 				<th>내용</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -396,19 +399,18 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 			</c:if>
 			<c:forEach var="pdto" items="${planlists}">
-			<form action="planlistDel.do" method="post">
+			<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 				<tr>
-					<td>${pdto.title}<input type="hidden" name="midx"
-						value="${dto.myp_idx}"></td>
+					<td>${pdto.title}</td>
 					<td>${pdto.pdate}</td>
 					<td>${pdto.content}</td>
 					<td><input type="submit" value="삭제"><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
 				</tr>
-			</form>
 			</c:forEach>
 		</tbody>
 	</table>
-				
+	</form>
+		
 	<script type="text/javascript">
 function setCheckboxChecked(checkboxId) {
 	  var checkbox = document.getElementById(checkboxId);
