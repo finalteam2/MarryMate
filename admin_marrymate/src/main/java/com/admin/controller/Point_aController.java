@@ -141,7 +141,7 @@ public class Point_aController {
 			
 			pointDao.pointPlus(midx_i,p_cal_i);
 			
-			mav.addObject("msg","회원번호:"+midx+"\n회원명:"+mdto.getName()+"님께 "+p_cal+"포인트를 지급하였습니다.");
+			mav.addObject("msg","회원번호: "+midx+" / 회원명: "+mdto.getName()+"님께 "+p_cal+"포인트를 지급하였습니다.");
 			mav.setViewName("adminClose");
 			
 		}catch(Exception e) {

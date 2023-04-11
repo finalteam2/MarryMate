@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <script>
 	window.alert('${msg}');
-	window.opener.reload();
+	opener.location.reload();
 	window.self.close();
 </script>
