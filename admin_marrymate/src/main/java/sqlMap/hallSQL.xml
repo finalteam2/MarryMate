@@ -5,7 +5,7 @@
   <mapper namespace="com.admin.hall">
   
   <select id="hallInfo" parameterType="Integer" resultType="com.admin.company.model.HallDTO">
-  		select * from hall where hidx=#{hidx}
+  		select * from hall where cidx=#{cidx}
   </select>
   
   </mapper>

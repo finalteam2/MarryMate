@@ -4,8 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.admin.company">
   
-  <select id="companyList" parameterType="String" resultType="com.admin.company.model.CompanyDTO">
-  		select * from company where kind=#{kind} order by cidx
+  <select id="companyList" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} order by cidx) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="collectionList" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
@@ -68,6 +69,31 @@
   
   <update id="sg" parameterType="int">
   		update company set blind=1, topfix=0 where cidx=#{cidx}
+  </update>
+  
+  <select id="getTotalCnt_com" parameterType="String" resultType="Integer">
+  		select count(*) from company where kind=#{kind}
+  </select>
+  
+  <select id="listSel_cidx" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where kind=#{kind} and cidx=#{cidx}
+  </select>
+  
+  <select id="listSel_cname" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} and cname like '%'||#{cname}||'%' order by cidx) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="getTotalCnt_cname" parameterType="Map" resultType="Integer">
+  		select count(*) from company where kind=#{kind} and cname like '%'||#{cname}||'%'
+  </select>
+  
+  <update id="companyOk" parameterType="int">
+  		update company set clevel=1 where cidx=#{cidx}
+  </update>
+  
+  <update id="companyNo" parameterType="int">
+  		update company set clevel=-1 where cidx=#{cidx}
   </update>
   
   </mapper>

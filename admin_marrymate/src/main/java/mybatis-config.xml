@@ -9,10 +9,12 @@
   		<mapper resource="sqlMap/memberSQL.xml"/>
   		<mapper resource="sqlMap/bookSQL.xml"/>
   		<mapper resource="sqlMap/hallSQL.xml"/>
+  		<mapper resource="sqlMap/foodSQL.xml"/>
   		<mapper resource="sqlMap/paymentSQL.xml"/>
   		<mapper resource="sqlMap/pointSQL.xml"/>
   		<mapper resource="sqlMap/bbsSQL.xml"/>
   		<mapper resource="sqlMap/refundSQL.xml"/>
   		<mapper resource="sqlMap/admin_csSQL.xml"/>
+  		<mapper resource="sqlMap/notificationSQL.xml"/>
   	</mappers>
   </configuration>

@@ -19,8 +19,15 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 
 	@Override
-	public List<CompanyDTO> companyList(String kind) {
-		List<CompanyDTO> dtos=sqlMap.selectList("companyList",kind);
+	public List<CompanyDTO> companyList(int cp, int listSize, String kind) {
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("kind", kind);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("companyList",map);
 		return dtos;
 	}
 	
@@ -119,6 +126,70 @@ public class CompanyDAOImple implements CompanyDAO {
 	@Override
 	public void sg(int cidx) {
 		sqlMap.update("sg",cidx);
+	}
+	
+	@Override
+	public int getTotalCnt_com(String kind) {
+		int count=sqlMap.selectOne("getTotalCnt_com",kind);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public List<CompanyDTO> listSel_cidx(String kind, int cidx) {
+		CompanyDTO comDto=new CompanyDTO();
+		comDto.setKind(kind);
+		comDto.setCidx(cidx);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSel_cidx",comDto);
+		return dtos;
+	}
+	@Override
+	public List<CompanyDTO> listSel_cname(int cp, int listSize, String kind, String selectText) {
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("kind", kind);
+		map.put("cname", selectText);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSel_cname",map);
+		return dtos;
+	}
+	@Override
+	public int getTotalCnt_cname(String kind, String selectText) {
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("cname", selectText);
+		
+		int count=sqlMap.selectOne("getTotalCnt_cname",map);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public List<HallDTO> hallInfo(int cidx) {
+		List<HallDTO> dtos=sqlMap.selectList("hallInfo",cidx);
+		return dtos;
+	}
+	
+	@Override
+	public List<FoodDTO> foodInfo(int cidx) {
+		List<FoodDTO> dtos=sqlMap.selectList("foodInfo",cidx);
+		return dtos;
+	}
+	
+	@Override
+	public void companyOk(int cidx) {
+		sqlMap.update("companyOk",cidx);
+		
+	}
+	
+	@Override
+	public void companyNo(int cidx) {
+		sqlMap.update("companyNo",cidx);
+		
 	}
 
 }

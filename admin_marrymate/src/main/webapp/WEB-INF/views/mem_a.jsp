@@ -54,7 +54,76 @@ body{
 	text-align: center;
 	margin-left: 560px;
 }
+
+#select {
+	margin-left: 700px;
+	width:100px;
+	height:30px;
+	font-size:15px;
+}
+
+#text{
+	width:220px;
+	height:25px;
+	font-size:16px;
+}
+
+#search {
+	width:60px;
+	height:30px;
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+	background-color:#0a95f1;
+	border:0px;
+	border-radius:5px;
+}
+
+#pg {
+	position: fixed;
+	bottom: 205px;
+	left:55%;
+	transform:translateX(-50%);
+}
+
+#hrf {
+	position: fixed;
+	bottom: 100px;
+	left:50%;
+	transform:translateX(-50%);
+}
+
+#butt {
+	width:75px;
+	height:25px;
+	font-size:13px;
+	font-weight:bold;
+	color:white;
+	background-color:#078b18;
+	border:0px;
+	border-radius:5px;
+}
+
+#pop {
+	width:120px;
+	height:35px;
+	font-size:14px;
+	font-weight:bold;
+	color:white;
+	background-color:#078b18;
+	border:0px;
+	border-radius:5px;
+}
 </style>
+<script>
+function pop(midx){
+	window.open('pop.do?midx='+midx,'pop','width=600,height=290,top=250,left=550');
+}
+
+function pop_all(){
+	window.open('pop_all.do','pop_all','width=600,height=290,top=250,left=550');
+}
+</script>
 </head>
 <body width="1200">
 <c:if test="${empty sessionScope.name}">
@@ -117,10 +186,20 @@ body{
 <table height="50" id="tb">
 	<tr>
 		<th width="150"><a href="memberList.do">일반회원</a></th>
-		<th width="150"><a href="companyList.do">기업회원</a></th>
+		<th width="150"><a href="companyList.do?kind=예식장">기업회원</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
+<br><br>
+<form name="memberSel" action="listSelect_mem.do">
+<select name="selectType" id="select">
+	<option>회원번호</option>
+	<option>회원명</option>
+</select>
+<input type="text" name="selectText" id="text" placeholder="검색">
+&nbsp;<input type="submit" value="검색" id="search">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="전체 알림보내기" id="pop" onclick="pop_all();">
+</form>
 <br><br>
 <form name="memberList" action="memberNotification.do">
 <table cellspacing="0" border="1" width="700" id="tb2">
@@ -148,16 +227,14 @@ body{
 			<td>${dto.nick}</td>
 			<td>${dto.joindate}</td>
 			<td>${dto.point}</td>
-			<td><input type="submit" value="알림보내기"></td>
+			<td><input type="button" value="알림보내기" onclick="pop(${dto.midx});" id="butt"></td>
 		</tr>
 	</c:forEach>
 	</tbody>
 </table>
 </form>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<hr width="1200">
+<div id="pg">${pageStr}</div>
+<hr width="1200" id="hrf">
 </c:if>
 </body>
 </html>

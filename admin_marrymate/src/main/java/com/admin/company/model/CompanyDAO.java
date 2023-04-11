@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CompanyDAO {
 	
-	public List<CompanyDTO> companyList(String kind);
+	public List<CompanyDTO> companyList(int cp, int listSize, String kind);
 	
 	public List<CompanyDTO> collectionList(int cp,int listSize,String kind);
 	
@@ -27,5 +27,21 @@ public interface CompanyDAO {
 	public void hj(int cidx);
 	
 	public void sg(int cidx);
+	
+	public int getTotalCnt_com(String kind);
+	
+	public List<CompanyDTO> listSel_cidx(String kind, int cidx);
+	
+	public List<CompanyDTO> listSel_cname(int cp, int listSize, String kind, String selectText);
+	
+	public int getTotalCnt_cname(String kind, String selectText);
+	
+	public List<HallDTO> hallInfo(int cidx);
+	
+	public List<FoodDTO> foodInfo(int cidx);
+	
+	public void companyOk(int cidx);
+	
+	public void companyNo(int cidx);
 
 }

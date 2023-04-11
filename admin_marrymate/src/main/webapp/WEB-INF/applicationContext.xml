@@ -56,4 +56,8 @@
 		<property name="sqlMap" ref="sqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="notificationDao" class="com.admin.notification.model.NotificationDAOImple">
+		<property name="sqlMap" ref="sqlSessionTemplate"></property>
+	</bean>
+	
 </beans>

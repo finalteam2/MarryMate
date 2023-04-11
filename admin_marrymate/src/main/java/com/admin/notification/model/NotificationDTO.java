@@ -8,12 +8,12 @@ public class NotificationDTO {
 	private int cidx;
 	private int midx;
 	private String recv;
-	private String id;
+	private String page;
 	private String title;
 	private String content;
 	private String nkind;
+	private int activedate;
 	private Date sentdate;
-	private int status;
 	private int checked;
 	
 	public NotificationDTO() {
@@ -21,19 +21,19 @@ public class NotificationDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NotificationDTO(int nidx, int cidx, int midx, String recv, String id, String title, String content,
-			String nkind, Date sentdate, int status, int checked) {
+	public NotificationDTO(int nidx, int cidx, int midx, String recv, String page, String title, String content,
+			String nkind, int activedate, Date sentdate, int checked) {
 		super();
 		this.nidx = nidx;
 		this.cidx = cidx;
 		this.midx = midx;
 		this.recv = recv;
-		this.id = id;
+		this.page = page;
 		this.title = title;
 		this.content = content;
 		this.nkind = nkind;
+		this.activedate = activedate;
 		this.sentdate = sentdate;
-		this.status = status;
 		this.checked = checked;
 	}
 
@@ -69,12 +69,12 @@ public class NotificationDTO {
 		this.recv = recv;
 	}
 
-	public String getId() {
-		return id;
+	public String getPage() {
+		return page;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setPage(String page) {
+		this.page = page;
 	}
 
 	public String getTitle() {
@@ -101,20 +101,20 @@ public class NotificationDTO {
 		this.nkind = nkind;
 	}
 
+	public int getActivedate() {
+		return activedate;
+	}
+
+	public void setActivedate(int activedate) {
+		this.activedate = activedate;
+	}
+
 	public Date getSentdate() {
 		return sentdate;
 	}
 
 	public void setSentdate(Date sentdate) {
 		this.sentdate = sentdate;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 	public int getChecked() {
@@ -125,4 +125,6 @@ public class NotificationDTO {
 		this.checked = checked;
 	}
 
+
+	
 }

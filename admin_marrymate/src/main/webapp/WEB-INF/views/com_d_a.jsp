@@ -57,8 +57,11 @@ body{
 #hr2 {
 	margin-left: 515px;
 }
-#tb3 {
+.tb3 {
 	text-align: center;
+	margin-left: 560px;
+}
+.tb3_h {
 	margin-left: 560px;
 }
 
@@ -93,13 +96,6 @@ body{
 	transform:translateX(-50%);
 }
 
-#hrf {
-	position: fixed;
-	bottom: 100px;
-	left:50%;
-	transform:translateX(-50%);
-}
-
 #butt {
 	width:65px;
 	height:25px;
@@ -107,6 +103,39 @@ body{
 	font-weight:bold;
 	color:white;
 	background-color:#078b18;
+	border:0px;
+	border-radius:5px;
+}
+
+#butt1 {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#28A4F6;
+	border:0px;
+	border-radius:5px;
+}
+
+#butt2 {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#D53834;
+	border:0px;
+	border-radius:5px;
+}
+
+#but {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#b8b8b8;
 	border:0px;
 	border-radius:5px;
 }
@@ -164,11 +193,6 @@ body{
 		<th><a href="traffic.do">Analytics</a></th>
 	</tr>
 </table>
-<table width="1100" align="center">
-	<tr>
-		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
-	</tr>
-</table>
 <br><br>
 <table height="50" id="tb">
 	<tr>
@@ -192,54 +216,106 @@ body{
 </table>
 <hr width="820" id="hr2">
 <br><br>
-<form name="companySel" action="listSelect_com.do">
-<input type="hidden" name="kind" value="${param.kind}">
-<select name="selectType" id="select">
-	<option>업체번호</option>
-	<option>업체명</option>
-</select>
-<input type="text" name="selectText" id="text" placeholder="검색">
-&nbsp;<input type="submit" value="검색" id="search">
-</form>
-<br><br>
-<table cellspacing="0" border="1" width="700" id="tb3">
-	<thead>
-		<tr>
-			<th width="80">업체번호</th>
-			<th>업체명</th>
-			<th width="110">가입날짜/시간</th>
-			<th width="80">구분</th>
-			<th width="80">업체정보</th>
-		</tr>
-	</thead>
-	<tbody>
-	<c:if test="${empty dtos}">
-		<tr>
-			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:forEach var="dto" items="${dtos}">
-	<form name="companyList" action="companyDetails.do">
-		<input type="hidden" name="kind" value="${param.kind}">
-		<input type="hidden" name="cidx" value="${dto.cidx}">
-		<input type="hidden" name="clevel" value="${dto.clevel}">
-			<tr>
-				<td>${dto.cidx}</td>
-				<td>${dto.cname}</td>
-				<td>${dto.joindate}</td>
-				<td>
-					<c:if test="${dto.clevel==0}"><label style="color:#feb916;">승인대기</label></c:if>
-					<c:if test="${dto.clevel==-1}"><label style="color:#e34331;">승인거부</label></c:if>
-					<c:if test="${dto.clevel==1}">기업회원</c:if>
-				</td>
-				<td><input type="submit" value="정보 보기" id="butt"></td>
-			</tr>
-	</form>
-	</c:forEach>
-	</tbody>
+<h2 class="tb3_h">업체정보</h2>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr>
+		<th>업체번호</th>
+		<td>${comDto.cidx}</td>
+		<th>업체명</th>
+		<td>${comDto.cname}</td>
+	</tr>
+	<tr>
+		<th>사업자등록번호</th>
+		<td>${comDto.cnum}</td>
+		<th>가입날짜/시간</th>
+		<td>${comDto.joindate}</td>
+	</tr>
 </table>
-<div id="pg">${pageStr}</div>
-<hr width="1200" id="hrf">
+<br>
+<h2 class="tb3_h">업체이미지</h2>
+<img src="/marrymate/img/com_best/${comDto.img}" width="300" class="tb3">
+
+<c:if test="${kind=='예식장'}">
+<br><br>
+<h2 class="tb3_h">홀</h2>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr>
+		<th>홀 명칭</th>
+		<th>죄석 수</th>
+		<th>홀 사용료</th>
+		<th>보증인원</th>
+	</tr>
+	<c:forEach var="hdto" items="${hallDtos}">
+	<tr>
+		<td>${hdto.name}</td>
+		<td>${hdto.seat_num}</td>
+		<td>${hdto.pay}</td>
+		<td>${hdto.guest_num}</td>
+	</tr>
+	</c:forEach>
+</table>
+<br>
+<h2 class="tb3_h">식대</h2>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr>
+		<th>메뉴명</th>
+		<th>가격</th>
+	</tr>
+	<c:forEach var="fdto" items="${foodDtos}">
+	<tr>
+		<td>${fdto.name}</td>
+		<td>${fdto.pay}</td>
+	</tr>
+	</c:forEach>
+</table>
+</c:if>
+<c:if test="${kind!='예식장'}">
+<br><br>
+<h2 class="tb3_h">금액</h2>
+<table cellspacing="0" border="1" width="400" class="tb3">
+	<tr>
+		<th>금액</th>
+		<td>${comDto.pay}</td>
+	</tr>
+</table>
+</c:if>
+<br>
+<h2 class="tb3_h">업체소개</h2>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr>
+		<td>${comDto.intro}</td>
+	</tr>
+</table>
+<br><br><br>
+<c:if test="${clevel==0}">
+<table cellspacing="0" width="700" class="tb3">
+	<tr>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="ok.do?cidx=${comDto.cidx}&kind=${kind}"><input type="button" value="가입승인" id="butt1"></a>
+			&nbsp;<a href="no.do?cidx=${comDto.cidx}&kind=${kind}"><input type="button" value="승인거절" id="butt2"></a>
+			
+		</td>
+		<td width="120">
+			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+		</td>
+	</tr>
+</table>
+</c:if>
+<c:if test="${clevel!=0}">
+<table cellspacing="0" width="700" class="tb3">
+	<tr>
+		<td>
+			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+		</td>
+	</tr>
+</table>
+</c:if>
+<br><br><br>
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>
