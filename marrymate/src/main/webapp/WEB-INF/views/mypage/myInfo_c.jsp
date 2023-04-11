@@ -39,15 +39,18 @@
 				<div class="hTagBox">기업소개</div>
 				<textarea style="resize: none" name="intro" rows="11" cols="50">${comInfo.intro }</textarea><br>
 				<br>
-				<div class="hTagBox">대표이미지</div>
-				<img style="width: 200px; height: 200px; object-fit:cover;" src="/marrymate/img/com_best/${comInfo.img }">
-				<input type="file" name="aimg" accept="image/*"><br>
-				<br>
 				<div class="bBox">
 				<input type="submit" class="btn" value="수정">
 				<input type="reset" class="btn" value="다시작성"></div>
+				<br>
 			</form>
-			
+			<form name="sImgChange" action="sImgChange.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
+				<div class="hTagBox">대표이미지</div>
+				<img style="width: 200px; height: 200px; object-fit:cover;" src="/marrymate/img/com_best/${comInfo.img }">
+				<input type="file" name="simg" accept="image/*"><br>
+				<input type="submit" class="btn" value="대표이미지 변경"><br>
+			</form>
 				<hr>
 				<div>booktime</div>
 				<c:if test="${empty barr }">업서용</c:if>

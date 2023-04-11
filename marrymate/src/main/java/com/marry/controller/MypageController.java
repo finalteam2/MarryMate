@@ -143,7 +143,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "/imgChange.do", method = RequestMethod.POST)
 	public ModelAndView imgChange(MultipartHttpServletRequest req, MemberDTO dto) {
-		ModelAndView mav= new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		int result=0;
 		String img;
 		MultipartFile updateMimg=req.getFile("mimg");
@@ -158,6 +158,25 @@ public class MypageController {
 		String msg=result>0?"프로필 등록 완료":"프로필 등록 실패";
 		mav.addObject("msg", msg);
 		mav.addObject("goUrl", "/marrymate/myInfo_m.do");
+		mav.setViewName("mypage/myPageMsg");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/sImgChange.do", method = RequestMethod.POST)
+	public ModelAndView sImgChange(MultipartHttpServletRequest req, CompanyDTO dto) {
+		ModelAndView mav = new ModelAndView();
+		int result=0;
+		String img;
+		MultipartFile updateSimg=req.getFile("simg");
+		if(updateSimg==null) {
+		}else {
+			img = copyFile(updateSimg, "/img/com_best/");
+			dto.setImg(img);
+			result += mypageDao.sImgChange(dto);
+		}
+		String msg=result>0?"대표이미지 변경 완료":"대표이미지 변경 실패";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "/marrymate/myInfo_c.do");
 		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}

@@ -20,6 +20,7 @@ public interface MypageDAO {
 	public List<BbsDTO> subjectSelect(int midx);
 	public List<ReplyDTO> replySelect(int midx);
 	public int imgChange(MemberDTO dto);
+	public int sImgChange(CompanyDTO dto);
 	public List<Com_ImgDTO> comimgSelect(int cidx);
 	public List<Book_TimeDTO> booktimeSelect(int cidx);
 	public int deleteImg(int iidx);
