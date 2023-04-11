@@ -90,7 +90,7 @@ public class Collection_aController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 상단고정하였습니다.");
+		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 [상단고정]하였습니다.");
 		mav.addObject("goUrl","collectionList.do?kind="+dto.getKind());
 		mav.setViewName("finalJson");
 		
@@ -105,7 +105,7 @@ public class Collection_aController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 고정해제하였습니다.");
+		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 [고정해제]하였습니다.");
 		mav.addObject("goUrl","collectionList.do?kind="+dto.getKind());
 		mav.setViewName("finalJson");
 		
@@ -120,7 +120,7 @@ public class Collection_aController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 숨김처리하였습니다.");
+		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 [숨김처리]하였습니다.");
 		mav.addObject("goUrl","collectionList.do?kind="+dto.getKind());
 		mav.setViewName("finalJson");
 		

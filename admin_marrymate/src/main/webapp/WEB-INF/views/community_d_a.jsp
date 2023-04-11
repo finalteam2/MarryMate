@@ -50,9 +50,19 @@ body{
 #hr{
 	margin-left: 450px;
 }
-#tb2 {
+.tb2 {
 	text-align: center;
-	margin-left: 525px;
+	margin-left: 520px;
+}
+#hr2 {
+	margin-left: 515px;
+}
+.tb3 {
+	text-align: center;
+	margin-left: 560px;
+}
+.tb3_h {
+	margin-left: 560px;
 }
 
 #select {
@@ -81,9 +91,53 @@ body{
 
 #pg {
 	position: fixed;
-	bottom: 205px;
+	bottom: 240px;
 	left:55%;
 	transform:translateX(-50%);
+}
+
+#butt {
+	width:65px;
+	height:25px;
+	font-size:13px;
+	font-weight:bold;
+	color:white;
+	background-color:#078b18;
+	border:0px;
+	border-radius:5px;
+}
+
+#butt1 {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#28A4F6;
+	border:0px;
+	border-radius:5px;
+}
+
+#butt2 {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#D53834;
+	border:0px;
+	border-radius:5px;
+}
+
+#but {
+	width:110px;
+	height:40px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#b8b8b8;
+	border:0px;
+	border-radius:5px;
 }
 
 #hrf {
@@ -146,11 +200,6 @@ body{
 		<th><a href="traffic.do">Analytics</a></th>
 	</tr>
 </table>
-<table width="1100" align="center">
-	<tr>
-		<td align="right"><a href="/marrymate/index.do"><input type="button" value="홈페이지" id="homepage"></a></td>
-	</tr>
-</table>
 <br><br>
 <table height="50" id="tb">
 	<tr>
@@ -162,46 +211,63 @@ body{
 </table>
 <hr width="950" id="hr">
 <br><br>
-<form name="bbsList" action="listSel_bbs_b.do">
-<input type="hidden" name="kind" value="${param.kind}">
-<select name="selectType" id="select">
-	<option>게시글번호</option>
-	<option>제목</option>
-</select>
-<input type="text" name="selectText" id="text" placeholder="검색">
-&nbsp;<input type="submit" value="검색" id="search">
-</form>
-<br><br>
-<form name="bbsList_b">
-<table cellspacing="0" border="1" width="800" id="tb2">
-	<thead>
-		<tr>
-			<th>구분</th>
-			<th>게시글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-		</tr>
-	</thead>
-	<tbody>
-	<c:if test="${empty dtos}">
-		<tr>
-			<td colspan="5" align="center">불량글 내역이 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:forEach var="dto" items="${dtos}">
-		<tr style="height: 30px;">
-			<td width="100">${dto.kind}</td>
-			<td width="100">${dto.bidx}</td>
-			<td><a href="bbsContent.do?bidx=${dto.bidx}&nick=${dto.nick}">${dto.subject}</a></td>
-			<td width="130">${dto.nick}</td>
-			<td width="100">${dto.writedate}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr style="height: 30px;">
+		<th width="150">작성자</th>
+		<td width="200">${nick}</td>
+		<th width="150">작성일</th>
+		<td>${dto.writedate}</td>
+	</tr>
+	<tr style="height: 30px;">
+		<th width="150">제목</th>
+		<td colspan="3">${dto.subject}</td>
+	</tr>
+	<tr style="height: 200px;">
+		<td colspan="4">${dto.content}</td>
+	</tr>
 </table>
-</form>
-<div id="pg">${pageStr}</div>
+
+<br><br><br>
+<c:if test="${dto.kind=='공지사항'}">
+<table cellspacing="0" width="700" class="tb3">
+	<tr>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:if test="${dto.blind==1}">
+			<a href="heajae.do?bidx=${dto.bidx}&kind=${dto.kind}"><input type="button" value="숨김해제" id="butt1"></a>
+			</c:if>
+			<c:if test="${dto.blind==0}">
+			<a href="ceolee.do?bidx=${dto.bidx}&kind=${dto.kind}"><input type="button" value="숨김처리" id="butt2"></a>
+			</c:if>
+		</td>
+		<td width="120">
+			<a href="bbsList.do?kind=${dto.kind}"><input type="button" value="돌아가기" id="but"></a>
+		</td>
+	</tr>
+</table>
+</c:if>
+<c:if test="${dto.kind!='공지사항'}">
+<table cellspacing="0" width="700" class="tb3">
+	<tr>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:if test="${dto.blind==1}">
+			<a href="chehoi.do?bidx=${dto.bidx}&midx=${dto.midx}"><input type="button" value="불량글 철회" id="butt1"></a>
+			</c:if>
+			<c:if test="${dto.blind==0}">
+			<a href="deuloc.do?bidx=${dto.bidx}&midx=${dto.midx}&kind=${dto.kind}"><input type="button" value="불량글 등록" id="butt2"></a>
+			</c:if>
+		</td>
+		<td width="120">
+			<a href="bbsList.do?kind=${dto.kind}"><input type="button" value="돌아가기" id="but"></a>
+		</td>
+	</tr>
+</table>
+</c:if>
 <hr width="1200" id="hrf">
 </c:if>
 </body>

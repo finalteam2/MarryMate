@@ -1,7 +1,5 @@
 package com.admin.bbs.model;
 
-import java.sql.Date;
-
 public class BbsDTO {
 
 	private int bidx;
@@ -10,21 +8,23 @@ public class BbsDTO {
 	private String horse;
 	private String subject;
 	private String content;
-	private Date writedate;
+	private String writedate;
 	private String img;
 	private int ref;
 	private int stair;
 	private int step;
 	private int watch;
 	private int blind;
+	private int topfix;
 	private int admin;
+	private String nick;
 	
 	public BbsDTO() {
 		super();
 	}
 
-	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, Date writedate,
-			String img, int ref, int stair, int step, int watch, int blind, int admin) {
+	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, String writedate,
+			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin, String nick) {
 		super();
 		this.bidx = bidx;
 		this.midx = midx;
@@ -39,7 +39,9 @@ public class BbsDTO {
 		this.step = step;
 		this.watch = watch;
 		this.blind = blind;
+		this.topfix = topfix;
 		this.admin = admin;
+		this.nick = nick;
 	}
 
 	public int getBidx() {
@@ -90,11 +92,11 @@ public class BbsDTO {
 		this.content = content;
 	}
 
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
 
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 
@@ -145,13 +147,29 @@ public class BbsDTO {
 	public void setBlind(int blind) {
 		this.blind = blind;
 	}
-	
+
+	public int getTopfix() {
+		return topfix;
+	}
+
+	public void setTopfix(int topfix) {
+		this.topfix = topfix;
+	}
+
 	public int getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(int admin) {
 		this.admin = admin;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	
 }

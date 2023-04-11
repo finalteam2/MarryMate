@@ -79,9 +79,9 @@ body{
 	border-radius:5px;
 }
 
-#pg {
+.pg {
 	position: fixed;
-	bottom: 205px;
+	bottom: 240px;
 	left:55%;
 	transform:translateX(-50%);
 }
@@ -219,7 +219,7 @@ function popup(){
 	</c:forEach>
 	</tbody>
 </table>
-<div id="pg">${pageStr}</div>
+<div class="pg">${pageStr}</div>
 </form>
 </c:if>
 <c:if test="${mp=='p'}">
@@ -264,7 +264,7 @@ function popup(){
 	</c:forEach>
 	</tbody>
 </table>
-<div id="pg">${pageStr}</div>
+<div class="pg">${pageStr}</div>
 </form>
 </c:if>
 <hr width="1200" id="hrf">

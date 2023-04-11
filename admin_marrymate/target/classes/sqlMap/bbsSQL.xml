@@ -4,16 +4,85 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.admin.bbs">
   
-  <select id="bbsList_g" parameterType="String" resultType="com.admin.bbs.model.BbsListDTO">
-  		select bbs.bidx bidx,bbs.subject subject,bbs.writedate writedate from bbs where kind=#{kind} order by bidx
+  <select id="bbsList_g" parameterType="Map" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from (select rownum as rnum,a.* from (select bbs.bidx bidx,bbs.subject subject,bbs.writedate writedate,bbs.blind blind,bbs.topfix topfix from bbs where kind=#{kind} order by blind, topfix desc, bidx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
-  <select id="bbsList_w" parameterType="String" resultType="com.admin.bbs.model.BbsListDTO">
-  		select bbs.bidx bidx,bbs.subject subject,member.nick nick,bbs.writedate writedate from bbs,member where bbs.midx=member.midx and blind=0 and kind=#{kind} order by bidx
+  <select id="bbsList_w" parameterType="Map" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from (select rownum as rnum,a.* from (select bbs.bidx bidx,bbs.subject subject,member.nick nick,bbs.writedate writedate,bbs.blind blind,bbs.topfix topfix from bbs,member where bbs.midx=member.midx and blind=0 and kind=#{kind} order by topfix desc, bidx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="bbsList_b" resultType="com.admin.bbs.model.BbsListDTO">
-  		select bbs.kind kind,bbs.bidx bidx,bbs.subject subject,member.nick nick,bbs.writedate writedate from bbs,member where bbs.midx=member.midx and blind=1 order by bidx
+  		select * from (select rownum as rnum,a.* from (select bbs.kind kind,bbs.bidx bidx,bbs.subject subject,member.nick nick,bbs.writedate writedate from bbs,member where bbs.midx=member.midx and blind=1 order by bidx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
+  
+  <select id="getTotalCnt_bbs" parameterType="Map" resultType="Integer">
+  		select count(*) from bbs where kind=#{kind}
+  </select>
+  
+  <select id="getTotalCnt_bbs_b" resultType="Integer">
+  		select count(*) from bbs where blind=1
+  </select>
+  
+  <select id="bbsInfo" parameterType="Integer" resultType="com.admin.bbs.model.BbsDTO">
+  		select * from bbs where bidx=#{bidx}
+  </select>
+  
+  <select id="bi_bbs" parameterType="int" resultType="int">
+  		select topfix from bbs where bidx=#{bidx}
+  </select>
+  
+  <update id="sd_bbs" parameterType="int">
+  		update bbs set topfix=1 where bidx=#{bidx}
+  </update>
+  
+  <update id="hj_bbs" parameterType="int">
+  		update bbs set topfix=0 where bidx=#{bidx}
+  </update>
+  
+  <select id="listSel_bidx" parameterType="com.admin.bbs.model.BbsDTO" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from bbs where kind=#{kind} and bidx=#{bidx}
+  </select>
+  
+  <select id="listSel_subject" parameterType="Map" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from (select rownum as rnum,a.* from (select * from bbs where kind=#{kind} and subject like '%'||#{subject}||'%' order by blind, topfix desc, bidx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSel_bidx_b" parameterType="com.admin.bbs.model.BbsDTO" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from bbs where blind=1 and bidx=#{bidx}
+  </select>
+  
+  <select id="listSel_subject_b" parameterType="Map" resultType="com.admin.bbs.model.BbsListDTO">
+  		select * from (select rownum as rnum,a.* from (select * from bbs where blind=1 and subject like '%'||#{subject}||'%' order by blind, topfix desc, bidx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="getTotalCnt_subject" parameterType="Map" resultType="Integer">
+  		select count(*) from bbs where kind=#{kind} and subject like '%'||#{subject}||'%'
+  </select>
+  
+  <select id="getTotalCnt_subject_b" parameterType="Map" resultType="Integer">
+  		select count(*) from bbs where blind=1 and subject like '%'||#{subject}||'%'
+  </select>
+  
+  <insert id="bbs" parameterType="com.admin.bbs.model.BbsDTO">
+  		insert into bbs values(bbs_bidx.nextval,null,'공지사항',null,#{subject},#{content},sysdate,null,null,null,null,null,0,0,1)
+  </insert>
+  
+  <select id="bbsContent" parameterType="Integer" resultType="com.admin.bbs.model.BbsDTO">
+  		select * from bbs where bidx=#{bidx}
+  </select>
+  
+  <update id="heajae" parameterType="int">
+  		update bbs set blind=0 where bidx=#{bidx}
+  </update>
+  
+  <update id="ceolee" parameterType="int">
+  		update bbs set blind=1,topfix=0 where bidx=#{bidx}
+  </update>
   
   </mapper>
