@@ -89,6 +89,7 @@
 </style>
 </head>
 <body>
+<%@include file="../header.jsp" %>
 <section>
 	<article>
 		<h2>My 정보수정</h2><br>
@@ -100,7 +101,7 @@
 		 <div>
 		 <form name="imgChange" action="imgChange.do" method="post" enctype="multipart/form-data">
    		 <input type="hidden" name="midx" value=${sessionScope.loginMidx }>
-		 <input type="file" name="mimg" accept="image/*"><br><br>
+		 <input type="file" class="btn" name="mimg" accept="image/*"><br><br>
 		 <input type="submit" class="btn" value="사진변경">
 		 </form>
 		 </div>
@@ -142,7 +143,7 @@
 				<div class="hTagBox">배우자</div>
 				<input type="text" name="pname" value="${userInfo.pname }"><br><br>
 				<div class="bBox"><input type="submit" class="btn" value="수정">
-				<input type="reset" class="btn" value="취소"></div>
+				<input type="button" class="btn" value="메인으로" onclick="location.href='index.do'"></div>
 		</div>
 		</form>
 	</article>

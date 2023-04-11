@@ -83,7 +83,7 @@
 				</div>
 			</c:if>
            	<c:if test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
-                <div style="display: flex; margin-right: 10px;">${sessionScope.com_cname}${sessionScope.loginName} 접속중 | &nbsp;<a href="logout.do">로그아웃</a></div>
+                <div style="display: flex; margin-right: 10px;">${sessionScope.com_cname}${sessionScope.loginName} 님 접속중 | &nbsp;<a href="logout.do">로그아웃</a></div>
             </c:if>
            	<c:if test="${empty sessionScope.loginId && empty sessionScope.com_id}">
             </c:if>
