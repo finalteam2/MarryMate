@@ -15,14 +15,19 @@ public class NotificationDTO {
 	private Date sentdate;
 	private int status;
 	private int checked;
+	private int activedate;
 	
 	public NotificationDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public NotificationDTO() {
+		super();
+	}
+
 	public NotificationDTO(int nidx, int cidx, int midx, String recv, String page, String title, String content,
-			String nkind, Date sentdate, int status, int checked) {
+			String nkind, Date sentdate, int status, int checked, int activedate) {
 		super();
 		this.nidx = nidx;
 		this.cidx = cidx;
@@ -35,6 +40,7 @@ public class NotificationDTO {
 		this.sentdate = sentdate;
 		this.status = status;
 		this.checked = checked;
+		this.activedate = activedate;
 	}
 
 	public int getNidx() {
@@ -124,5 +130,14 @@ public class NotificationDTO {
 	public void setChecked(int checked) {
 		this.checked = checked;
 	}
+
+	public int getActivedate() {
+		return activedate;
+	}
+
+	public void setActivedate(int activedate) {
+		this.activedate = activedate;
+	}
+
 	
 }
