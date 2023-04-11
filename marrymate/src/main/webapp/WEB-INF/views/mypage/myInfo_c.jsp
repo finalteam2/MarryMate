@@ -170,8 +170,12 @@
 						<tr>
 							<th>금액</th>
 						</tr>
-						<td><input type="text" value="${comInfo.pay }" required>원</td>
 					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" value="${comInfo.pay }" required>원</td>
+						</tr>
+					</tbody>
 				</table>	
 				</c:if>
 				<br>
