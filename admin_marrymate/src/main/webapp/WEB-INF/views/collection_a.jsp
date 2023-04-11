@@ -317,7 +317,7 @@ function sgResult(){
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="3" align="center">등록된 기업이 없습니다.</td>
+			<td colspan="4" align="center">등록된 기업이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">

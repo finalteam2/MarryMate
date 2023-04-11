@@ -12,6 +12,10 @@
   		select * from member where midx=#{midx}
   </select>
   
+  <update id="memberUpd" parameterType="com.admin.member.model.MemberDTO">
+  		update member set point=#{point} where midx=#{midx}
+  </update>
+  
   <select id="traffic5_m" resultType="Integer">
   		select count(*) from member where to_char(joindate,'yy/mm')=to_char(sysdate,'yy/mm')
   </select>

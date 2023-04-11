@@ -33,5 +33,11 @@ public class MemberDAOImple implements MemberDAO {
 		traffic.add(sqlMap.selectOne("traffic5_m"));
 		return traffic;
 	}
+	
+	@Override
+	public MemberDTO memberInfo(int midx) {
+		MemberDTO dto=sqlMap.selectOne("memberInfo",midx);
+		return dto;
+	}
 
 }
