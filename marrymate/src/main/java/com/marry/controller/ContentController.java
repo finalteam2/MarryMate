@@ -288,14 +288,4 @@ public class ContentController {
 		return mav;
 	}
 	
-	@RequestMapping()
-	public ModelAndView myPoint() {
-		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		int midx = (int) session.getAttribute("loginMidx");
-		List<PointDTO> arr = contentDao.selectpoint(midx);
-		mav.addObject("arr", arr);
-		mav.setViewName("mypage/myPoint");
-		return mav;
-	}
 }
