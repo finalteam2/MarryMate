@@ -6,41 +6,55 @@
 <meta charset="UTF-8">
 <title>MarryMate</title>
 <style>
+	@font-face {
+	    font-family: 'SUIT-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 	#loBox {
 		width: 450px;
 		height: 360px;
 		margin: auto;
 		text-align: center;
+		font-family: 'SUIT-Regular';
 	}
 	#idBox {
 		width: 300px;
 		height: 200px;
 		margin: auto;
 		padding-top: 20px;
+		font-family: 'SUIT-Regular';
 	}
 	#goBox {
 		padding-top: 30px;
+		font-family: 'SUIT-Regular';
 	}
 	#reBox {
 		padding-top: 5px;
 		text-align: center;
+		font-family: 'SUIT-Regular';
 	}
 	#moBox {
 		padding-top: 30px;
 		text-align: center;
+		font-size: 17px;
+		font-family: 'SUIT-Regular';
 	}
 	#ct {
 		text-align: center;
+		font-family: 'SUIT-Regular';
 	}
 	#toBox {
 		width: 500px;
 		height: 400px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-bottom: 50px;
+		margin-bottom: 100px;
 		padding-top: 20px;
 		text-align: center;
 		border: 1px solid black;
+		font-family: 'SUIT-Regular';
 	}
 	.teBox {
 		width: 200px;
@@ -51,6 +65,7 @@
 		padding-bottom: 5px;
 		font-size: 20px;
 		font-weight: bold;
+		font-family: 'SUIT-Regular';
 	}
 	.cc {
 		width: 200px;
@@ -69,9 +84,13 @@
 		background: black;
 		color: white;
 	}
+	body {
+		background-color: #fbf4ff;
+	}
 	h2 {
 		font-size: 36px;
 		text-align: center;
+		font-family: 'SUIT-Regular';
 	}
 	form div input[type=text] {
 		width: 230px;
@@ -80,6 +99,7 @@
 		border: 1px solid black;
 		border-radius: 12px;
 		text-align: center;
+		font-family: 'SUIT-Regular';
 		}
 	form div input[type=password] {
 		width: 230px;
@@ -88,14 +108,17 @@
 		border: 1px solid black;
 		border-radius: 12px;
 		text-align: center;
+		font-family: 'SUIT-Regular';
 		}
 	form div [type=text]::placeholder {
 		font-family: sans-serif; 
 		font-size: 10px;
+		font-family: 'SUIT-Regular';
 	}
 	form div [type=password]::placeholder {
 		font-family: sans-serif; 
 		font-size: 10px;
+		font-family: 'SUIT-Regular';
 	}
 </style>
 </head>
@@ -113,9 +136,7 @@
 		            <div class="teBox">Password</div><input type="password" name="pwd" placeholder="비밀번호 입력">
 		            <div id="goBox"><input type="submit" value="로그인" class="cc"></div>
 		            <div id="moBox">
-		                <a href="memberJoin.do">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		                <a href="#">ID 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		                <a href="#">비밀번호 찾기</a>
+		                회원이 아니라면?&nbsp;&nbsp;<a href="memberJoin.do">회원가입</a>
 		            </div>
 		        </div>
 		    </div>
@@ -128,9 +149,7 @@
 		            <div class="teBox">Password</div><input type="password" name="pwd" placeholder="비밀번호 입력">
 		            <div id="goBox"><input type="submit" value="로그인" class="cc"></div>
 		            <div id="moBox">
-		                <a href="companyJoin.do">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		                <a href="#">ID 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		                <a href="#">비밀번호 찾기</a>
+		                회원이 아니라면?&nbsp;&nbsp;<a href="companyJoin.do">회원가입</a>
 		            </div>
 		        </div>
 		    </div>
