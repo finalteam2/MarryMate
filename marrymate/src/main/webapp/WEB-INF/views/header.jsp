@@ -96,6 +96,7 @@
 					</c:if>
 					<c:if test="${not empty sessionScope.com_id}">
 		            	<li><a href="myInfo_c.do">마이페이지</a></li>
+		            	<li><a href="companyContent.do?cidx=${sessionScope.com_cidx }">상세페이지</a></li>
 					</c:if>
                     <li><a href="myBook.do">예약내역</a></li>
                     <li><a href="qna.do">문의내역</a></li>

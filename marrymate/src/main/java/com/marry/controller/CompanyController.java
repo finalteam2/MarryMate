@@ -91,16 +91,9 @@ public class CompanyController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if(hallInfo.equals("예식장")) {
-			mav.addObject("msg", msg);
-			mav.addObject("url", "hallInfo.do");
-			mav.addObject("cidx", cidx);
-			mav.setViewName("company/companyMsg");
-		}else {
-			mav.addObject("msg", msg);
-			mav.addObject("url", "companyInfo.do");
-			mav.setViewName("company/companyMsg");
-		}
+		mav.addObject("msg", msg);
+		mav.addObject("url", "myInfo_c.do");
+		mav.setViewName("company/companyMsg");
 		return mav;
 		
 	}
