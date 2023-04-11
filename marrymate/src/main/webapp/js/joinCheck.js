@@ -94,12 +94,15 @@ function checkPwd() {
     if (reCheckPwd === "") {
       rePwdMsg.innerText = "비밀번호 확인을 입력해주세요.";
       rePwdMsg.style.color = "red";
+      return false;
     } else if (pwd === reCheckPwd) {
       rePwdMsg.style.color = "blue";
       rePwdMsg.innerText = "비밀번호가 일치합니다.";
+      return true;
     } else {
       rePwdMsg.style.color = "red";
       rePwdMsg.innerText = "비밀번호가 일치하지 않습니다.";
+      return false;
     }
   }
 }
@@ -139,21 +142,13 @@ function allCheckForm() {
     }
   }
   
-  if (!genderChecked) {
-    alert("성별을 체크해주셔야합니다.");
+  if (!checkPwd()) {
+    alert("비밀번호가 조건에 맞지 않습니다.");
     return false;
   }
   
-  var pwd = document.getElementById("pwd").value;
-  var reCheckPwd = document.getElementById("reCheckPwd").value;
-
-  if (pwd !== reCheckPwd) {
-    alert("비밀번호가 일치하지 않습니다.");
-    return false;
-  }
-
-  if (!checkPwd()) {
-    alert("비밀번호가 조건에 맞지 않습니다.");
+  if (!genderChecked) {
+    alert("성별을 체크해주셔야합니다.");
     return false;
   }
   
