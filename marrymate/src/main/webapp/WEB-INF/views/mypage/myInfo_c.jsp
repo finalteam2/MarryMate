@@ -176,9 +176,9 @@
 					<input type="hidden" name="hidx" value=${hall.hidx }>
 						<tr>
 							<td><input type="text" name="name" value="${hall.name }" required> 홀</td>
-							<td><input type="text" value="${hall.time }" required> 시간</td>
-							<td><input type="text" value="${hall.pay }" required> 원</td>
-							<td><input type="text" value="${hall.guest_num }" required> 명</td>
+							<td><input type="text" name="time" value="${hall.time }" required> 시간</td>
+							<td><input type="text" name="pay" value="${hall.pay }" required> 원</td>
+							<td><input type="text" name="guest_num" value="${hall.guest_num }" required> 명</td>
 							<td><input type="submit" value="수정"></td>
 						</tr>
 					</form>	
@@ -201,8 +201,8 @@
 					<form name="foodInfoUpdate" action="foodUpdate.do">
 					<input type="hidden" name="fidx" value=${food.fidx }>
 						<tr>
-							<td><input type="text" value="${food.name }" required></td>
-							<td><input type="text" value="${food.pay }" required>원</td>
+							<td><input type="text" name="name" value="${food.name }" required></td>
+							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
 							<td><input type="submit" value="수정"></td>
 						</tr>
 					</form>	
