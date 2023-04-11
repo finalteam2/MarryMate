@@ -51,6 +51,44 @@ body{
 	text-align: center;
 	margin-left: 525px;
 }
+
+#select {
+	margin-left: 700px;
+	width:100px;
+	height:30px;
+	font-size:15px;
+}
+
+#text{
+	width:220px;
+	height:25px;
+	font-size:16px;
+}
+
+#search {
+	width:60px;
+	height:30px;
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+	background-color:#0a95f1;
+	border:0px;
+	border-radius:5px;
+}
+
+#pg {
+	position: fixed;
+	bottom: 205px;
+	left:55%;
+	transform:translateX(-50%);
+}
+
+#hrf {
+	position: fixed;
+	bottom: 100px;
+	left:50%;
+	transform:translateX(-50%);
+}
 </style>
 </head>
 <body width="1200">
@@ -87,7 +125,7 @@ body{
 		<th><a href="collectionList.do?kind=예식장">웨딩컬렉션 관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="book_a.do">예약관리</a></th>
+		<th><a href="bookList.do?kind=예식장">예약관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="bbsList.do?kind=공지사항">커뮤니티 관리</a></th>
@@ -113,17 +151,29 @@ body{
 <br><br>
 <table height="50" class="tb">
 	<tr>
-		<th width="100">예식장</th>
-		<th width="100">스튜디오</th>
-		<th width="100">드레스</th>
-		<th width="120">헤어/메이크업</th>
-		<th width="100">스냅DVD</th>
-		<th width="100">주례</th>
-		<th width="100">사회</th>
-		<th width="100">축가</th>
+		<th width="100"><a href="bookList.do?kind=예식장">예식장</a></th>
+		<th width="100"><a href="bookList.do?kind=스튜디오">스튜디오</a></th>
+		<th width="100"><a href="bookList.do?kind=드레스">드레스</a></th>
+		<th width="120"><a href="bookList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="100"><a href="bookList.do?kind=스냅DVD">스냅DVD</a></th>
+		<th width="100"><a href="bookList.do?kind=주례">주례</a></th>
+		<th width="100"><a href="bookList.do?kind=사회">사회</a></th>
+		<th width="100"><a href="bookList.do?kind=축가">축가</a></th>
 	</tr>
 </table>
 <hr width="850" class="tb">
+<br><br>
+<form name="bookList" action="listSel_bk.do">
+<input type="hidden" name="kind" value="${param.kind}">
+<select name="selectType" id="select">
+	<option>예약번호</option>
+	<option>회원번호</option>
+	<option>회원명</option>
+	<option>업체명</option>
+</select>
+<input type="text" name="selectText" id="text" placeholder="검색">
+&nbsp;<input type="submit" value="검색" id="search">
+</form>
 <br><br>
 <form name="bookList">
 <table cellspacing="0" border="1" width="800" id="tb2">
@@ -147,8 +197,8 @@ body{
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
-		<tr>
-			<td>${dto.bk_idx}</td>
+		<tr style="height: 30px;">
+			<td><a href="bookDetails.do?bk_idx=${dto.bk_idx}&kind=${param.kind}">${dto.bk_idx}</a></td>
 			<td>${dto.midx}</td>
 			<td>${dto.name}</td>
 			<td>${dto.cname}</td>
@@ -157,20 +207,18 @@ body{
 			<td>${dto.total_money}</td>
 			<td>
 			<c:if test="${dto.bk_state==0}">결제전</c:if>
-			<c:if test="${dto.bk_state==1}">예약대기</c:if>
-			<c:if test="${dto.bk_state==2}">예약확정</c:if>
+			<c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>
+			<c:if test="${dto.bk_state==2}"><label style="color:#28A4F6;">예약확정</label></c:if>
 			<c:if test="${dto.bk_state==3}">잔금 결제완료</c:if>
-			<c:if test="${dto.bk_state==4}">예약취소</c:if>
+			<c:if test="${dto.bk_state==4}"><label style="color:#e34331;">예약취소</label></c:if>
 			</td>
 		</tr>
 	</c:forEach>
 	</tbody>
 </table>
 </form>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<hr width="1200">
+<div id="pg">${pageStr}</div>
+<hr width="1200" id="hrf">
 </c:if>
 </body>
 </html>

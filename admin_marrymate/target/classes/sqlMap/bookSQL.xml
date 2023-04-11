@@ -4,12 +4,94 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.admin.book">
   
-  <select id="bookList_h" parameterType="String" resultType="com.admin.book.model.BookListDTO">
-  		select book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx
+  <select id="bookList_h" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
-  <select id="bookList" parameterType="String" resultType="com.admin.book.model.BookListDTO">
-  		select book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx
+  <select id="bookList" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSel_bk_idx_h" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where book.bk_idx=#{bk_idx} and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx order by bk_idx desc
+  </select>
+  
+  <select id="listSel_bk_idx" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where book.bk_idx=#{bk_idx} and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc
+  </select>
+  
+  <select id="listSel_bk_midx_h" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where book.midx=#{midx} and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx order by bk_idx desc
+  </select>
+  
+  <select id="listSel_bk_midx" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where book.midx=#{midx} and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc
+  </select>
+  
+  <select id="listSel_bk_name_h" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where member.name like '%'||#{name}||'%' and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSel_bk_name" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where member.name like '%'||#{name}||'%' and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSel_bk_cname_h" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where company.cname like '%'||#{cname}||'%' and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSel_bk_cname" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
+  		select * from (select rownum as rnum,a.* from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where company.cname like '%'||#{cname}||'%' and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="getTotalCnt_bk_h" parameterType="String" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx) a
+  </select>
+  
+  <select id="getTotalCnt_bk" parameterType="String" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx) a
+  </select>
+  
+  <select id="getTotalCnt_bk_n_h" parameterType="Map" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where member.name like '%'||#{name}||'%' and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx) a
+  </select>
+  
+  <select id="getTotalCnt_bk_n" parameterType="Map" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where member.name like '%'||#{name}||'%' and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx) a
+  </select>
+  
+  <select id="getTotalCnt_bk_cn_h" parameterType="Map" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state from book,member,company,payment,hall where company.cname like '%'||#{cname}||'%' and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx) a
+  </select>
+  
+  <select id="getTotalCnt_bk_cn" parameterType="Map" resultType="Integer">
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,book.bk_state bk_state from book,member,company,payment where company.cname like '%'||#{cname}||'%' and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx) a
+  </select>
+  
+  <select id="bookDetails_h" parameterType="Map" resultType="com.admin.book.model.BookDetailsDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,book.cidx cidx,company.cname cname,book.bookdate bookdate,company.kind kind,hall.name hname,hall.pay pay,hall.guest_num guest_num,food.pay fpay,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,(company.pay*hall.guest_num+hall.pay)*0.2 money1,(company.pay*hall.guest_num+hall.pay)*0.8 money2,book.bk_state bk_state from book,member,company,payment,hall,food where book.bk_idx=#{bk_idx} and kind='예식장' and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx and book.hidx=hall.hidx and book.fidx=food.fidx order by bk_idx desc
+  </select>
+  
+  <select id="bookDetails" parameterType="Map" resultType="com.admin.book.model.BookDetailsDTO">
+  		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,book.cidx cidx,company.cname cname,book.bookdate bookdate,company.kind kind,(book.bk_date||' '||book.bk_time) bk_date_time,company.pay total_money,company.pay*0.2 money1,company.pay*0.8 money2,book.bk_state bk_state from book,member,company,payment where book.bk_idx=#{bk_idx} and kind=#{kind} and book.midx=member.midx and book.cidx=company.cidx and book.bk_idx=payment.bk_idx order by bk_idx desc
+  </select>
+  
+  <select id="pay_date_1" parameterType="Integer" resultType="String">
+  		select bk_date-7 from book where bk_idx=#{bk_idx}
+  </select>
+  
+  <select id="countBook" parameterType="Integer" resultType="Integer">
+  		select count(*) from payment where bk_idx=#{bk_idx}
+  </select>
+  
+  <select id="pay_date_2" parameterType="Integer" resultType="String">
+  		select pay_date from payment where bk_idx=#{bk_idx} and pay_type='잔금'
   </select>
   
   </mapper>

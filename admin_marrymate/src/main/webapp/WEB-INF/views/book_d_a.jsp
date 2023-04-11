@@ -44,8 +44,8 @@ body{
 	left: 250px;
 	margin: 0px auto;
 }
-#tb {
-	margin-left: 760px;
+.tb {
+	margin-left: 500px;
 }
 #hr{
 	margin-left: 450px;
@@ -59,9 +59,6 @@ body{
 }
 .tb3 {
 	text-align: center;
-	margin-left: 560px;
-}
-.tb3_h {
 	margin-left: 560px;
 }
 
@@ -194,125 +191,128 @@ body{
 	</tr>
 </table>
 <br><br>
-<table height="50" id="tb">
+<table height="50" class="tb">
 	<tr>
-		<th width="150"><a href="memberList.do">일반회원</a></th>
-		<th width="150"><a href="companyList.do?kind=예식장">기업회원</a></th>
+		<th width="100"><a href="bookList.do?kind=예식장">예식장</a></th>
+		<th width="100"><a href="bookList.do?kind=스튜디오">스튜디오</a></th>
+		<th width="100"><a href="bookList.do?kind=드레스">드레스</a></th>
+		<th width="120"><a href="bookList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="100"><a href="bookList.do?kind=스냅DVD">스냅DVD</a></th>
+		<th width="100"><a href="bookList.do?kind=주례">주례</a></th>
+		<th width="100"><a href="bookList.do?kind=사회">사회</a></th>
+		<th width="100"><a href="bookList.do?kind=축가">축가</a></th>
 	</tr>
 </table>
-<hr width="950" id="hr">
+<hr width="850" class="tb">
 <br><br>
-<table height="50" class="tb2" align="center">
-	<tr>
-		<th width="95"><a href="companyList.do?kind=예식장">예식장</a></th>
-		<th width="95"><a href="companyList.do?kind=스튜디오">스튜디오</a></th>
-		<th width="95"><a href="companyList.do?kind=드레스">드레스</a></th>
-		<th width="120"><a href="companyList.do?kind=헤어메이크업">헤어/메이크업</a></th>
-		<th width="95"><a href="companyList.do?kind=스냅DVD">스냅DVD</a></th>
-		<th width="95"><a href="companyList.do?kind=주례">주례</a></th>
-		<th width="95"><a href="companyList.do?kind=사회">사회</a></th>
-		<th width="95"><a href="companyList.do?kind=축가">축가</a></th>
-	</tr>
-</table>
-<hr width="820" id="hr2">
-<br><br>
-<h2 class="tb3_h">업체정보</h2>
 <table cellspacing="0" border="1" width="700" class="tb3">
 	<tr>
-		<th>업체번호</th>
-		<td>${comDto.cidx}</td>
-		<th>업체명</th>
-		<td>${comDto.cname}</td>
+		<th>예약번호</th>
+		<td>${dto.bk_idx}</td>
+		<th>[회원번호] 회원명</th>
+		<td>[${dto.midx}] ${dto.name}</td>
 	</tr>
 	<tr>
-		<th>사업자등록번호</th>
-		<td>${comDto.cnum}</td>
-		<th>가입날짜/시간</th>
-		<td>${comDto.joindate}</td>
+		<th>[업체번호] 업체명</th>
+		<td>[${dto.cidx}] ${dto.cname}</td>
+		<th>예약날짜/시간</th>
+		<td>${dto.bookdate}</td>
 	</tr>
 </table>
-<br>
-<h2 class="tb3_h">업체이미지</h2>
-<img src="/marrymate/img/com_best/${comDto.img}" width="300" class="tb3">
 
-<c:if test="${kind=='예식장'}">
+<c:if test="${dto.kind=='예식장'}">
 <br><br>
-<h2 class="tb3_h">홀</h2>
 <table cellspacing="0" border="1" width="700" class="tb3">
-	<tr>
-		<th>홀 명칭</th>
-		<th>죄석 수</th>
-		<th>홀 사용료</th>
-		<th>보증인원</th>
+	<tr style="height:30px;">
+		<th>홀이름 (홀 사용료)</th>
+		<td>${dto.hname} (${dto.pay})</td>
+		<th>인원수</th>
+		<td>${dto.guest_num}</td>
 	</tr>
-	<c:forEach var="hdto" items="${hallDtos}">
-	<tr>
-		<td>${hdto.name}</td>
-		<td>${hdto.seat_num}</td>
-		<td>${hdto.pay}</td>
-		<td>${hdto.guest_num}</td>
+	<tr style="height:30px;">
+		<th>식대</th>
+		<td>${dto.fpay}</td>
+		<th>총액</th>
+		<td>${dto.total_money}</td>
 	</tr>
-	</c:forEach>
-</table>
-<br>
-<h2 class="tb3_h">식대</h2>
-<table cellspacing="0" border="1" width="700" class="tb3">
-	<tr>
-		<th>메뉴명</th>
-		<th>가격</th>
-	</tr>
-	<c:forEach var="fdto" items="${foodDtos}">
-	<tr>
-		<td>${fdto.name}</td>
-		<td>${fdto.pay}</td>
-	</tr>
-	</c:forEach>
 </table>
 </c:if>
-<c:if test="${kind!='예식장'}">
 <br><br>
-<h2 class="tb3_h">금액</h2>
-<table cellspacing="0" border="1" width="400" class="tb3">
-	<tr>
+<table cellspacing="0" border="1" width="700" class="tb3">
+	<tr style="height:30px;">
 		<th>금액</th>
-		<td>${comDto.pay}</td>
+		<td>${dto.total_money}</td>
+		<th>상태</th>
+		<td>
+			<c:if test="${dto.bk_state==0}">결제전</c:if>
+			<c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>
+			<c:if test="${dto.bk_state==2}"><label style="color:#28A4F6;">예약확정</label></c:if>
+			<c:if test="${dto.bk_state==3}">잔금 결제완료</c:if>
+			<c:if test="${dto.bk_state==4}"><label style="color:#e34331;">예약취소</label></c:if>
+		</td>
 	</tr>
-</table>
-</c:if>
-<br>
-<h2 class="tb3_h">업체소개</h2>
-<table cellspacing="0" border="1" width="700" class="tb3">
-	<tr>
-		<td>${comDto.intro}</td>
+	<c:if test="${dto.bk_state==0}">
+	<tr style="height:30px;">
+		<td colspan="4" align="center">결제전입니다.</td>
 	</tr>
+	</c:if>
+	<c:if test="${dto.bk_state==1}">
+	<tr style="height:30px;">
+		<th>예약금 (포인트 사용금액)</th>
+		<td>${dto.money1}</td>
+		<th>결제날짜/시간</th>
+		<td>${dto.bk_date_time}</td>
+	</tr>
+	<tr style="height:30px;">
+		<th>잔금</th>
+		<td>${dto.money2}</td>
+		<th>결제예정일</th>
+		<td>${pay_date}</td>
+	</tr>
+	</c:if>
+	<c:if test="${dto.bk_state==2}">
+	<tr style="height:30px;">
+		<th>예약금 (포인트 사용금액)</th>
+		<td>${dto.money1}</td>
+		<th>결제날짜/시간</th>
+		<td>${dto.bk_date_time}</td>
+	</tr>
+	<tr style="height:30px;">
+		<th>잔금</th>
+		<td>${dto.money2}</td>
+		<th>결제예정일</th>
+		<td>${pay_date}</td>
+	</tr>
+	</c:if>
+	<c:if test="${dto.bk_state==3}">
+	<tr style="height:30px;">
+		<th>예약금 (포인트 사용금액)</th>
+		<td>${dto.money1}</td>
+		<th>결제날짜/시간</th>
+		<td>${dto.bk_date_time}</td>
+	</tr>
+	<tr style="height:30px;">
+		<th>잔금 (포인트 사용금액)</th>
+		<td>${dto.money2}</td>
+		<th>결제날짜/시간</th>
+		<td>${pay_date}</td>
+	</tr>
+	</c:if>
+	<c:if test="${dto.bk_state==4}">
+	<tr style="height:30px;">
+		<td colspan="4" align="center">취소된 예약입니다.</td>
+	</tr>
+	</c:if>
 </table>
+
 <br><br><br>
-<c:if test="${clevel==0}">
 <table cellspacing="0" width="700" class="tb3">
 	<tr>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="ok.do?cidx=${comDto.cidx}&kind=${kind}"><input type="button" value="가입승인" id="butt1"></a>
-			&nbsp;<a href="no.do?cidx=${comDto.cidx}&kind=${kind}"><input type="button" value="승인거절" id="butt2"></a>
-			
-		</td>
-		<td width="120">
-			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+			<a href="bookList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
 		</td>
 	</tr>
 </table>
-</c:if>
-<c:if test="${clevel!=0}">
-<table cellspacing="0" width="700" class="tb3">
-	<tr>
-		<td>
-			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
-		</td>
-	</tr>
-</table>
-</c:if>
 <br><br><br>
 <hr width="1200">
 <br><br>

@@ -243,7 +243,7 @@ function pop_bbs(){
 		<th><a href="collectionList.do?kind=예식장">웨딩컬렉션 관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="book_a.do">예약관리</a></th>
+		<th><a href="bookList.do?kind=예식장">예약관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="bbsList.do?kind=공지사항">커뮤니티 관리</a></th>
