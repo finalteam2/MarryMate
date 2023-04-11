@@ -1,14 +1,22 @@
 package com.marry.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.company.model.*;
@@ -21,6 +29,37 @@ public class MypageController {
 
 	@Autowired
 	private MypageDAO mypageDao;
+	
+	@Autowired
+	ServletContext context;
+	
+	public String copyFile(MultipartFile upload,String path) {
+		
+	    try {
+	        byte[] bytes = upload.getBytes();
+	        String originalFilename = upload.getOriginalFilename();
+	        String extension = FilenameUtils.getExtension(originalFilename); // 파일 확장자 추출
+	        String fileName = FilenameUtils.getBaseName(originalFilename); // 파일 이름 추출
+	        String imagepath = context.getRealPath(path);
+	        File outfile = new File(imagepath, fileName + "." + extension);
+
+	        int index = 1;
+	        while (outfile.exists()) { // 파일 이름 중복일 경우
+	            fileName = FilenameUtils.getBaseName(originalFilename) + "_" + index; // 넘버링 추가
+	            outfile = new File(imagepath, fileName + "." + extension);
+	            index++;
+	        }
+
+	        FileOutputStream fos = new FileOutputStream(outfile);
+	        fos.write(bytes);
+	        fos.close();
+	        return fileName + "." + extension;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return "";
+	    }
+		
+	}
 	
 	@RequestMapping("/myInfo_m.do")
 	public ModelAndView myInfo_m(HttpServletRequest req) {
@@ -100,8 +139,24 @@ public class MypageController {
 		return mav;
 	}
 	
-	@RequestMapping("/favorite.do")
-	public String favorite() {
-		return "/mypage/favorite";
+	@RequestMapping(value = "/imgChange.do", method = RequestMethod.POST)
+	public ModelAndView imgChange(MultipartHttpServletRequest req, MemberDTO dto) {
+		ModelAndView mav= new ModelAndView();
+		int result=0;
+		String img;
+		MultipartFile updateMimg=req.getFile("mimg");
+		if(updateMimg==null) {
+		}else {
+			img = copyFile(updateMimg, "/img/member/");
+			dto.setImg(img);
+			System.out.println("img: "+dto.getImg()+"/ midx: "+dto.getMidx());
+			result += mypageDao.imgChange(dto);
+			System.out.println(result);
+		}
+		String msg=result>0?"프로필 등록 완료":"프로필 등록 실패";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "/marrymate/myInfo_m.do");
+		mav.setViewName("mypage/myPageMsg");
+		return mav;
 	}
 }

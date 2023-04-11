@@ -19,4 +19,5 @@ public interface MypageDAO {
 	public List<FoodDTO> foodInfoSelect(int cidx);
 	public List<BbsDTO> subjectSelect(int midx);
 	public List<ReplyDTO> replySelect(int midx);
+	public int imgChange(MemberDTO dto);
 }

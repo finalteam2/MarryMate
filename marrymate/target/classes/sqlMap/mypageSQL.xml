@@ -48,6 +48,13 @@
 		where fidx=#{fidx}
 	</update>
 	
+	<update id="imgChange" parameterType="com.marry.member.model.MemberDTO">
+		update member
+		set
+		img= #{img}
+		where midx= #{midx}
+	</update>
+	
 	<select id="myInfoSelect" parameterType="com.marry.member.model.MemberDTO" resultType="com.marry.member.model.MemberDTO">
         select * from member 
          where id=#{id}

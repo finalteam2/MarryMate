@@ -167,7 +167,8 @@
 							<th>예식시간</th>
 							<th>홀 대여료</th>
 							<th>보증인원</th>
-							<th class="t">취소버튼</th>
+							<th class="t">수정</th>
+							<th class="t">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -180,9 +181,22 @@
 							<td><input type="text" name="pay" value="${hall.pay }" required> 원</td>
 							<td><input type="text" name="guest_num" value="${hall.guest_num }" required> 명</td>
 							<td><input type="submit" value="수정"></td>
+					</form>	
+					<form name="hallDelete" action="#">
+					<input type="hidden" name="hidx" value=${hall.hidx }>
+							<td><input type="submit" value="삭제"></td>
+					</form>	
+						</tr>
+					</c:forEach>
+					<form name="hallInsert" action="#">
+						<tr>
+							<td><input type="text" name="name" required> 홀</td>
+							<td><input type="text" name="time" required> 시간</td>
+							<td><input type="text" name="pay"  required> 원</td>
+							<td><input type="text" name="guest_num" required> 명</td>
+							<td colspan="2"><input type="submit" value="추가"></td>
 						</tr>
 					</form>	
-					</c:forEach>
 					</tbody>
 				</table>	
 				<hr>
@@ -193,20 +207,31 @@
 						<tr>
 							<th>식사종류</th>
 							<th>식사가격</th>
-							<th class="t">취소버튼</th>
+							<th class="t">수정</th>
+							<th class="t">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach var="food" items="${foodInfo }">
 					<form name="foodInfoUpdate" action="foodUpdate.do">
-					<input type="hidden" name="fidx" value=${food.fidx }>
 						<tr>
 							<td><input type="text" name="name" value="${food.name }" required></td>
 							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
 							<td><input type="submit" value="수정"></td>
-						</tr>
 					</form>	
+					<form name="foodDelete" action="#">
+							<input type="hidden" name="fidx" value=${food.fidx }>
+							<td><input type="submit" value="삭제"></td>
+					</form>	
+						</tr>
 					</c:forEach>
+						<tr>
+						<form name="foodinsert" action="#">
+								<td><input type="text" name="name" value="${food.name }" required></td>
+								<td><input type="text" name="pay" value="${food.pay }" required>원</td>
+								<td><input type="submit" value="추가"></td>
+						</form>	
+						</tr>
 					</tbody>
 				</table>
 				</c:if>

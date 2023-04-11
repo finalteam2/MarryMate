@@ -95,11 +95,14 @@
 		<hr>
 		<div id="fBox">
 		 <div class="iBox">
-		 <img src="/marrymate/img/member/user.png" class="profile">
+		 <img src="/marrymate/img/member/${userInfo.img }" class="profile">
 		 </div><br>
 		 <div>
-		 <input type="button" class="btn" value="사진변경" onclick="changeImg()"><br><br>
-		 <input type="button" class="btn" value="회원탈퇴" onclick="memberDel()">
+		 <form name="imgChange" action="imgChange.do" method="post" enctype="multipart/form-data">
+   		 <input type="hidden" name="midx" value=${sessionScope.loginMidx }>
+		 <input type="file" name="mimg" accept="image/*"><br><br>
+		 <input type="submit" class="btn" value="사진변경">
+		 </form>
 		 </div>
 		</div>
 		<form name="myInfoUpdate" action="update.do">
