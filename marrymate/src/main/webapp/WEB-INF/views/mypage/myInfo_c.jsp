@@ -40,7 +40,7 @@
 				<textarea style="resize: none" name="intro" rows="11" cols="50">${comInfo.intro }</textarea><br>
 				<br>
 				<div class="hTagBox">대표이미지</div>
-				<img src="/marrymate/img/com_best/${comInfo.img }">
+				<img style="width: 200px; height: 200px; object-fit:cover;" src="/marrymate/img/com_best/${comInfo.img }">
 				<input type="file" name="aimg" accept="image/*"><br>
 				<br>
 				<div class="bBox">
@@ -52,24 +52,54 @@
 				<div>booktime</div>
 				<c:if test="${empty barr }">업서용</c:if>
 				<c:forEach var="dto" items="${barr }">
-				${dto.bktime_idx }
-				${dto.cidx }
-				${dto.yoil }
-				${dto.worktime }
+					<form action="deleteBooktime.do" method="post">
+					<input type="hidden" name="bktime_idx" value="${dto.bktime_idx }">
+						${dto.bktime_idx }
+						${dto.cidx }
+						${dto.yoil }
+						${dto.worktime }
+						<input type="submit" value="삭제">
+					</form>
 				<br>
 				</c:forEach>
-				<hr>
+				<form name="hallInfo" action="hallInfo.do" method="post">
+					<h3>이용시간</h3>
+					<div>
+						<input type="checkbox" name="yoil1" value="월">월
+						<input type="checkbox" name="yoil2" value="화">화
+						<input type="checkbox" name="yoil3" value="수">수
+						<input type="checkbox" name="yoil4" value="목">목
+						<input type="checkbox" name="yoil5" value="금">금
+						<input type="checkbox" name="yoil6" value="토">토
+						<input type="checkbox" name="yoil7" value="일">일
+					</div>
+					<div>
+						<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
+						<input type="time" name="worktime">
+						<input type="submit" value="추가하기">
+					</div>
+				</form>
 				<hr>
 				<div>comimg</div>
 				<c:if test="${empty iarr }">업서용</c:if>
 				<c:forEach var="dto" items="${iarr }">
-				${dto.iidx }
-				${dto.cidx }
-				${dto.type }
-				${dto.img }
-				<br>
+					<form action="deleteComimg.do" method="post">
+						<input type="hidden" name="iidx" value="${dto.iidx }">
+						${dto.iidx }
+						${dto.cidx }
+						${dto.type }
+						${dto.img }
+						<img style="width: 200px; height: 200px; object-fit:cover;" src="/marrymate/img/com_img/${dto.img }">
+						<input type="submit" value="삭제">
+					</form>
+					<br>
 				</c:forEach>
-				
+				<form name="img" action="img.do" method="post" enctype="multipart/form-data">
+					이미지 등록
+					<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
+					<input type="file" name="img">
+					<input type="submit" class="w-btn-outline w-btn-red-outline" value="등록하기">
+				</form>
 				<hr>
 			
 				<c:if test="${comInfo.kind == '예식장' }">

@@ -114,5 +114,16 @@
 		order by
 			ridx
     </select>
-    
+    <delete id="deleteImg" parameterType="Integer">
+    delete 
+    	com_img
+	where
+    	iidx = #{iidx}
+    </delete>
+    <delete id="deleteBk" parameterType="Integer">
+    delete 
+    	book_time
+	where
+    	bktime_idx = #{bktime_idx}
+    </delete>
 </mapper>

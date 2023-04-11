@@ -216,7 +216,7 @@ public class CompanyController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("url", "hallInfo.do");
+		mav.addObject("url", "myInfo_c.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 	}
@@ -259,41 +259,16 @@ public class CompanyController {
 		String img;
 		String cidx=req.getParameter("cidx");
 		//mav.addObject("imgSrc", img);
-		MultipartFile Inimg1=req.getFile("img1");
-		if(Inimg1==null) {
+		MultipartFile upload=req.getFile("img");
+		if(upload==null) {
 		}else {
-			img = copyFile(Inimg1, "/img/com_img/");
-			result += companyDao.imgInsert(cidx, img);
-		}
-		MultipartFile Inimg2=req.getFile("img2");
-		if (Inimg2==null) {
-		} else {
-			img = copyFile(Inimg2, "/img/com_img/");
-			result += companyDao.imgInsert(cidx, img);
-		}
-		MultipartFile Inimg3=req.getFile("img3");
-		if (Inimg3==null) {
-		    
-		}else {
-			img = copyFile(Inimg3, "/img/com_img/");
-			result += companyDao.imgInsert(cidx, img);
-		}
-		MultipartFile Inimg4=req.getFile("img4");
-		if (Inimg4==null) {
-		}else {
-			img = copyFile(Inimg4, "/img/com_img/");
-			result += companyDao.imgInsert(cidx, img);
-		}
-		MultipartFile Inimg5=req.getFile("img5");
-		if (Inimg5==null) {
-		}else {
-			img = copyFile(Inimg4, "/img/com_img/");
+			img = copyFile(upload, "/img/com_img/");
 			result += companyDao.imgInsert(cidx, img);
 		}
 	    String msg=result>0?"파일 "+result+"개 등록 완료":"파일 등록 실패";
 		
 		mav.addObject("msg", msg);
-		mav.addObject("url", "hallInfo.do");
+		mav.addObject("url", "myInfo_c.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		

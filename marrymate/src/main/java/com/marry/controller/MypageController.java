@@ -161,4 +161,25 @@ public class MypageController {
 		mav.setViewName("mypage/myPageMsg");
 		return mav;
 	}
+	
+	@RequestMapping("deleteComimg.do")
+	public ModelAndView deleteImg(Com_ImgDTO dto) {
+		ModelAndView mav= new ModelAndView();
+		int result = mypageDao.deleteImg(dto.getIidx());
+		String msg=result>0?"이미지 삭제 완료":"이미지 삭제 실패";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("mypage/myPageMsg");
+		return mav;
+	}
+	@RequestMapping("deleteBooktime.do")
+	public ModelAndView deleteBooktime(Book_TimeDTO dto) {
+		ModelAndView mav= new ModelAndView();
+		int result = mypageDao.deleteBk(dto.getBktime_idx());
+		String msg=result>0?"예약시간 삭제 완료":"예약시간 삭제 실패";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("mypage/myPageMsg");
+		return mav;
+	}
 }

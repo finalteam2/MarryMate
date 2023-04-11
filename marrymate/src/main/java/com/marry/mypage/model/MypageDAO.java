@@ -22,4 +22,6 @@ public interface MypageDAO {
 	public int imgChange(MemberDTO dto);
 	public List<Com_ImgDTO> comimgSelect(int cidx);
 	public List<Book_TimeDTO> booktimeSelect(int cidx);
+	public int deleteImg(int iidx);
+	public int deleteBk(int bktime_idx);
 }

@@ -112,4 +112,14 @@ public class MypageDAOImple implements MypageDAO {
 		List<Com_ImgDTO> arr = sqlMap.selectList("comimgSelect", cidx);
 		return arr;
 	}
+	@Override
+	public int deleteImg(int iidx) {
+		int result = sqlMap.delete("deleteImg", iidx);
+		return result;
+	}
+	@Override
+	public int deleteBk(int bktime_idx) {
+		int result = sqlMap.delete("deleteBk", bktime_idx);
+		return result;
+	}
 }
