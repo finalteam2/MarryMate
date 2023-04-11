@@ -182,13 +182,13 @@
 							<td><input type="text" name="guest_num" value="${hall.guest_num }" required> 명</td>
 							<td><input type="submit" value="수정"></td>
 					</form>	
-					<form name="hallDelete" action="#">
+					<form name="hallDelete" action="deleteHall.do" method="POST">
 					<input type="hidden" name="hidx" value=${hall.hidx }>
 							<td><input type="submit" value="삭제"></td>
 					</form>	
 						</tr>
 					</c:forEach>
-					<form name="hallInsert" action="#">
+					<form name="hallInsert" action="insertHall.do" method="POST">
 						<tr>
 							<td><input type="text" name="name" required> 홀</td>
 							<td><input type="text" name="time" required> 시간</td>
@@ -219,14 +219,14 @@
 							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
 							<td><input type="submit" value="수정"></td>
 					</form>	
-					<form name="foodDelete" action="#">
+					<form name="foodDelete" action="deleteFood.do" method="POST">
 							<input type="hidden" name="fidx" value=${food.fidx }>
 							<td><input type="submit" value="삭제"></td>
 					</form>	
 						</tr>
 					</c:forEach>
 						<tr>
-						<form name="foodinsert" action="#">
+						<form name="foodinsert" action="insertFood.do" method="POST">
 								<td><input type="text" name="name" value="${food.name }" required></td>
 								<td><input type="text" name="pay" value="${food.pay }" required>원</td>
 								<td><input type="submit" value="추가"></td>
