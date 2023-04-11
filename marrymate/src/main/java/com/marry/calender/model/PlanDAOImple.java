@@ -25,9 +25,11 @@ public class PlanDAOImple implements PlanDAO {
 		return count;
 	}
 	
-	@Autowired
-	private SqlSession sqlSession;
-	
+	@Override
+	public int planlistDel(int myp_idx) {
+		int count=sqlMap.delete("planlistDel", myp_idx);
+		return count;
+	}
 
 	@Override
 	public List<PlanDTO> planlistAll(int midx) {

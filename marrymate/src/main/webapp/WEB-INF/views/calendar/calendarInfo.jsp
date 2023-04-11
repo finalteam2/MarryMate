@@ -109,23 +109,39 @@
 </style>
 </head>
 <body class="app">
-
-
 	<div class="app-wrapper">
 		<div class="app-content pt-3 p-md-3 p-lg-4">
 			<div class="container pt-5">
-				<h3 class="text-center mb-4">전체 일정 보기</h3>
+				<h3 class="text-center mb-4">전체 스케줄 보기</h3>
 
-
-
-
-				<!--카드 -->
 				<div class="row g-4 mb-4 d-flex justify-content-center">
 					<div class="col-6 col-lg-3">
 						<div class="app-card app-card-stat shadow-sm h-100">
 							<div class="app-card-body p-3 p-lg-4">
-								<h4 class="stats-type mb-1"> 일정 </h4>
+								<h4 class="stats-type mb-1">모든 일정</h4>
 								<div class="stats-figure">${svc_count }</div>
+								<div class="stats-meta text-success">
+									건
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">잔금 건</h4>
+								<div class="stats-figure">${svcing_count }</div>
+								<div class="stats-meta text-success">
+									건
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">예약 건</h4>
+								<div class="stats-figure">${svc_cancel }</div>
 								<div class="stats-meta text-success">
 									건
 								</div>
@@ -135,11 +151,12 @@
 				
 				</div>
 
+
 				<br> <br>
 				<!-- 캘린더 시작  -->
 				<div class="row">
 					<div class="tab-pane active row justify-content-center">
-						<div id='calendar'></div>
+						<div id='calendar'>	<input type="hidden" name="midx" value="${sessionScope.loginMidx}"></div>
 					</div>
 				</div>
 			</div>

@@ -17,9 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	<select id="checklistAll" parameterType="Integer" resultType="com.marry.calender.model.ChecklistDTO">
-		select*from checklist where midx=#{midx}
+		select ch_idx, midx, TO_CHAR(dueday, 'YYYY-MM-DD') as dueday, title, content, onoff, checked from checklist where midx=#{midx}
 	</select>
-	<delete id="checklistDel" parameterType="com.marry.calender.model.ChecklistDTO">
+	<delete id="checklistDel" parameterType="Integer">
 		delete from checklist where ch_idx=#{ch_idx}
 	</delete>
 </mapper>

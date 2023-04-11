@@ -14,11 +14,14 @@
 <meta name="description" content="예식장, 스드메, 사진DVD, 주례, 사회, 축가 결혼준비 정보">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-   <link href='/marrymate/css/fullcalendar.main.min.css' rel='stylesheet' />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<link href='/marrymate/css/fullcalendar.main.min.css' rel='stylesheet' />
 <script src='/marrymate/js/ko.js'></script>
-   <script src='/marrymate/js/fullcalendar.main.min.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
+<script src='/marrymate/js/fullcalendar.main.min.js'></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
 <link rel="stylesheet" href="/marrymate/css/calendar.css">
 <link rel="stylesheet" href="/marrymate/css/date-picker.css">
 <link rel="stylesheet" href="/marrymate/css/jquery-ui.css">
@@ -30,10 +33,11 @@
 <script src="/marrymate/js/aos.js"></script>
 <script src="/marrymate/js/kakao.min.js"></script>
 <script src="/marrymate/js/commonUI.js"></script>
-    <link href='fullcalendar.main.min.css' rel='stylesheet' />
-	<script src='ko.js'></script>
-    <script src='fullcalendar.main.min.js'></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
+<link href='fullcalendar.main.min.css' rel='stylesheet' />
+<script src='ko.js'></script>
+<script src='fullcalendar.main.min.js'></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -159,7 +163,7 @@ $(function(){
 </script>
 </head>
 <body background="/marrymate/img/background.png">
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div class="contentsArea full" id="goContent">
 
 		<div class="contentsTop"></div>
@@ -204,137 +208,102 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	
+
 
 
 
 	<br>
 	<br>
 	<!--calendarShow-->
-	
-	  <div id='calendar'></div>
-	<div id='popup' style="width:500px; height:600px; display:none; background-color:white; padding:20px; border-radius:14px; border:2px solid #eeeeee"></div>
+
+	<div id='calendar'></div>
+	<div id='popup'
+		style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">	<input type="hidden" name="midx" value="${sessionScope.loginMidx}"></div>
 
 
 	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-				
-					
+
+
 	<div style="padding-left: 65%">
 		<button type="button" id="planadd" onclick="addplan();">일정등록</button>
 	</div>
 
 
- <script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
-			var calendar = new FullCalendar.Calendar(calendarEl, {
-				  locale: "ko",
-				  initialView: 'dayGridMonth',
-				  headerToolbar: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-				  },
-				  googleCalendarApiKey: 'AIzaSyApQkLavc0ttR7NIRHvdf6ncX1DMc9OAhM',
-				  events: {
+	<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		  locale: "ko",
+		  initialView: 'dayGridMonth',
+		  headerToolbar: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+		  },
+		  googleCalendarApiKey: 'AIzaSyApQkLavc0ttR7NIRHvdf6ncX1DMc9OAhM',
+		  eventSources : [
+			  {
 				  googleCalendarId: '7bbd24c0dfa76e1a7c63eaaeb126d9bd0442f78cd7800e222947fccd06257cfc@group.calendar.google.com',
-				  className: 'gcal-event' // an option!
-				  },
-				  
-				  eventClick: function(info) {
-					  let start_year = info.event.start.getUTCFullYear();
-					  let start_month = info.event.start.getMonth() + 1;
-					  let start_date = info.event.start.getUTCDate();
-					  let start_hour = info.event.start.getHours();
-					  let start_minute = info.event.start.getMinutes();
-					  let start_second = info.event.start.getSeconds();
-					  let end_hour = info.event.end.getHours();
-
-					  let start = start_year + "-" + start_month + "-" + start_date + " " + start_hour + "시 ~ " + end_hour + "시";
-
-					  let attends = "";
-					  info.event.extendedProps.attachments.forEach(function(item) {
-						  attends += "<div><a href='"+item.fileUrl+"' target='_blank'>[첨부파일]</a></div>"
-					  });
-
-					  if(!info.event.extendedProps.description) {
-						  info.event.extendedProps.description = "";
-					  }
-					  let contents = `
-						<div style='font-weight:bold; font-size:20px; margin-bottom:30px; text-align:center'>
-							${start}
-						</div>
-						<div style='font-size:18px; margin-bottom:20px'>
-							제목: ${info.event.title}
-						</div>
-						<div style='width:500px'>
-							${info.event.extendedProps.description}
-							${attends}
-						</div>
-					  `;
-					  
-					  $("#popup").html(contents);
-					  $("#popup").bPopup({
-						speed: 650,
-						transition: 'slideIn',
-						transitionClose: 'slideBack',
-						position: [($(document).width()-500)/2, 30] //x, y
-					  });
-					  info.jsEvent.stopPropagation();
-					  info.jsEvent.preventDefault();
-					  
-					  events: [
-				    	    { 
-				    	      title: '${dto.title}', // 제목
-				    	      start: '${dto.dueday}', // 시작일자
-				    	      end: '${dto.dueday}' // 종료일자
-				    	    }
-				    	  ]
+				  backgroundColor : '#FF6D6D',
+	              textColor : '#FFFFFF'
+				  },{
+			  events: '/calendarMain.do/events',
 				  }
-			});
-			calendar.render();
-		});
+		  ],
+		  eventClick: function(info) {
+			  let start_year = info.event.start.getUTCFullYear();
+			  let start_month = info.event.start.getMonth() + 1;
+			  let start_date = info.event.start.getUTCDate();
+			  let start_hour = info.event.start.getHours();
+			  let start_minute = info.event.start.getMinutes();
+			  let start_second = info.event.start.getSeconds();
+			  let end_hour = info.event.end.getHours();
 
+			  let start = start_year + "-" + start_month + "-" + start_date + " " + start_hour + "시 ~ " + end_hour + "시";
 
-    $(function(){
-		
-		var request = $.ajax({
-		  url: "/marrymate/calendarMain",
-		  method: "GET",
-		  dataType: "json"
-		});
-		 
-		request.done(function( data ) {
-			console.log(data);
-				
-				var calendarEl = document.getElementById('calendar');
-				
-			    var calendar = new FullCalendar.Calendar(calendarEl, {
-			      initialView: 'dayGridMonth',
-			      headerToolbar: {
-			        left: 'prev,next today',
-			        center: 'title',
-			        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-			      },
-			      events: data
-			    });
-		
-			    calendar.render();								
-		});
-		 
-		request.fail(function( jqXHR, textStatus ) {
-		  alert( "Request failed: " + textStatus );
-		});
+			  let attends = "";
+			  info.event.extendedProps.attachments.forEach(function(item) {
+				  attends += "<div><a href='"+item.fileUrl+"' target='_blank'>[첨부파일]</a></div>"
+			  });
+
+			  if(!info.event.extendedProps.description) {
+				  info.event.extendedProps.description = "";
+			  }
+			  let contents = `
+				<div style='font-weight:bold; font-size:20px; margin-bottom:30px; text-align:center'>
+					${start}
+				</div>
+				<div style='font-size:18px; margin-bottom:20px'>
+					제목: ${info.event.title}
+				</div>
+				<div style='width:500px'>
+					${info.event.extendedProps.description}
+					${attends}
+				</div>
+			  `;
+			  
+			  $("#popup").html(contents);
+			  $("#popup").bPopup({
+				speed: 650,
+				transition: 'slideIn',
+				transitionClose: 'slideBack',
+				position: [($(document).width()-500)/2, 30] //x, y
+			  });
+			  info.jsEvent.stopPropagation();
+			  info.jsEvent.preventDefault();
+		  }
+	});
+	calendar.render();
 });
+</script>
 
-    </script>
-
+	<!--  -->
 
 
 
 	<!--mainMyweddingAnimation : s-->
 	<div class="mainMyweddingAnimationScroll">
-		
+
 		<!--  
 		<div class="infoArea">
 			<ul>
@@ -368,77 +337,94 @@ $(function(){
 		</div>
 	</div>
 
-<!-- checklist add/select -->
+	<!-- checklist add/select -->
 
 
 	<div style="padding-left: 65%">
-		<button type="button" id="checkadd" onclick="checkadd();">체크리스트 등록</button>
+		<button type="button" id="checkadd" onclick="checkadd();">체크리스트
+			등록</button>
 	</div>
-		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-			<h3>
-				<a>모든 체크리스트</a>
-			</h3>
-			<table border="1" width="900" cellspacing="0">
-    <thead>
-        <tr>
-            <th>제목</th>
-            <th>일자</th>
-            <th>내용</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:if test="${empty checklistItems}">
-            <tr>
-                <td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
-            </tr>
-        </c:if>
-       <c:forEach var="dto" items="${checklistItems}">
-		<tr>
-
-				<td>${dto.title}<input type="hidden" name="midx" value="${sessionScope.loginMidx}"></td>
-				<td>${dto.dueday}</td>
-				<td>${dto.content}</td>
-				<td><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-
+	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<h3>
+		<a>모든 체크리스트</a>
+	</h3>
+	<table border="1" width="900" cellspacing="0">
+		<thead>
+			<tr>
+				<th>제목</th>
+				<th>일자</th>
+				<th>내용</th>
 			</tr>
-</c:forEach>
-    </tbody>
-</table>
+		</thead>
+		<tbody>
+			<c:if test="${empty checklistItems}">
+				<tr>
+					<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach var="dto" items="${checklistItems}">
+				<tr>
+
+					<td>${dto.title}<input type="hidden" name="ch_idx"
+						value="${dto.ch_idx}"></td>
+					<td>${dto.dueday}</td>
+					<td>${dto.content}</td>
+					<td><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 
-		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-			<h3>
-				<a>테스트</a>
-			</h3>
-			<table border="1" width="900" cellspacing="0">
-    <thead>
-        <tr>
-            <th>제목</th>
-            <th>일자</th>
-            <th>내용</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:if test="${empty planlists}">
-            <tr>
-                <td colspan="4" align="center">등록된 일정이 없습니다.</td>
-            </tr>
-        </c:if>
-       <c:forEach var="pdto" items="${planlists}">
-		<tr>
-
-				<td>${pdto.title}<input type="hidden" name="midx" value="${sessionScope.loginMidx}"></td>
-				<td>${pdto.pdate}</td>
-				<td>${pdto.content}</td>
-				<td><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-
+	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<h3>
+		<a>테스트</a>
+	</h3>
+	<table border="1" width="900" cellspacing="0">
+		<thead>
+			<tr>
+				<th>제목</th>
+				<th>일자</th>
+				<th>내용</th>
 			</tr>
-		</c:forEach>
-    </tbody>
-</table>
+		</thead>
+		<tbody>
+			<c:if test="${empty planlists}">
+				<tr>
+					<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach var="pdto" items="${planlists}">
+			<form action="planlistDel.do" method="post">
+				<tr>
+					<td>${pdto.title}<input type="hidden" name="midx"
+						value="${dto.myp_idx}"></td>
+					<td>${pdto.pdate}</td>
+					<td>${pdto.content}</td>
+					<td><input type="submit" value="삭제"><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+				</tr>
+			</form>
+			</c:forEach>
+		</tbody>
+	</table>
 
-
-<script type="text/javascript">
+				<div>booktime</div>
+				<c:if test="${empty barr }">업서용</c:if>
+				<c:forEach var="dto" items="${barr }">
+					<form action="deleteBooktime.do" method="post">
+					<input type="hidden" name="bktime_idx" value="${dto.bktime_idx }">
+						${dto.bktime_idx }
+						${dto.cidx }
+						${dto.yoil }
+						${dto.worktime }
+						<input type="submit" value="삭제">
+					</form>
+				<br>
+				</c:forEach>
+				
+				
+	<script type="text/javascript">
 function setCheckboxChecked(checkboxId) {
 	  var checkbox = document.getElementById(checkboxId);
 	  if (checkbox) {
@@ -470,11 +456,11 @@ if (checkedStatus === 'checked') {
 
 
 	<hr>
-	
-		<div class="myWeddingMenuWrap">
+
+	<div class="myWeddingMenuWrap">
 		<h3>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h3>
-</div>
-	
+	</div>
+
 	<div class="contestList">
 		<div class="checkListArea">
 			<div class="listRow" id="checkList300">
@@ -508,7 +494,7 @@ if (checkedStatus === 'checked') {
 								data-chkid="2" class="jsSWO01Ev tit " id="checklistitems">#결혼예산작성</a>
 						</div>
 					</li>
-										<li>
+					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="230">D-230</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
@@ -526,21 +512,24 @@ if (checkedStatus === 'checked') {
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="210">D-210</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#스튜디오 예약</a>
+								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#스튜디오
+								예약</a>
 						</div>
 					</li>
 					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="210">D-210</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#드레스샵 예약</a>
+								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#드레스샵
+								예약</a>
 						</div>
 					</li>
 					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="210">D-210</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#메이크업샵 예약</a>
+								data-chkid="3" class="jsSWO01Ev tit " id="checklistitems">#메이크업샵
+								예약</a>
 						</div>
 					</li>
 				</ul>
@@ -557,17 +546,19 @@ if (checkedStatus === 'checked') {
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="200">D-200</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="4" class="jsSWO01Ev tit " id="checklistitems">#DVD 예약</a>
+								data-chkid="4" class="jsSWO01Ev tit " id="checklistitems">#DVD
+								예약</a>
 						</div>
 					</li>
 					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="200">D-200</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="4" class="jsSWO01Ev tit " id="checklistitems">스냅사진 예약</a>
+								data-chkid="4" class="jsSWO01Ev tit " id="checklistitems">스냅사진
+								예약</a>
 						</div>
 					</li>
-															<li>
+					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="180">D-180</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
@@ -588,14 +579,14 @@ if (checkedStatus === 'checked') {
 								data-chkid="7" class="jsSWO01Ev tit " id="checklistitems">#신혼집</a>
 						</div>
 					</li>
-										<li>
+					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="150">D-150</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
 								data-chkid="6" class="jsSWO01Ev tit " id="checklistitems">#청첩장모임</a>
 						</div>
 					</li>
-					
+
 					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="140">D-140</div>
@@ -622,11 +613,12 @@ if (checkedStatus === 'checked') {
 					</div>
 				</div>
 				<ul class="itemArea">
-									<li>
-					<div class="item on" data-seqno="1">
+					<li>
+						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="90">D-90</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="11" class="jsSWO01Ev tit " id="checklistitems">#본식가봉 예약</a>
+								data-chkid="11" class="jsSWO01Ev tit " id="checklistitems">#본식가봉
+								예약</a>
 						</div>
 					</li>
 
@@ -667,7 +659,7 @@ if (checkedStatus === 'checked') {
 								data-chkid="12" class="jsSWO01Ev tit " id="checklistitems">#폐백/이바지</a>
 						</div>
 					</li>
-<li>
+					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="50">D-50</div>
 							<a href="javascript:void(0);" data-id="viewCheckList"
@@ -722,10 +714,10 @@ if (checkedStatus === 'checked') {
 		</div>
 
 	</div>
-	
 
-<jsp:include page="/WEB-INF/views/chatbot.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
+	<jsp:include page="/WEB-INF/views/chatbot.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 </body>
 </html>

@@ -69,10 +69,45 @@ public class CalendarContoller {
 			HttpSession session) {
 		int midx= (int) session.getAttribute("loginMidx");
 		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
-		//List<PlanDTO> plist = planDao.planlistAll(midx);
-		
-		ModelAndView mav = new ModelAndView();
-		
+		List<PlanDTO> plist = planDao.planlistAll(midx);
+	    
+		Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
+	    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
+	    String thisMonth = sdf.format(cal.getTime());
+	    String month = sdf2.format(cal.getTime());
+			
+	    List<PlanDTO> svcing = planDao.planlistAll(0);
+			
+	    JSONArray jsonArray = new JSONArray();
+	    int svcing_count = 0;
+	    int svc_count = 0;
+	    for(PlanDTO dto: svcing) {
+				
+	        JSONObject jsonObject = new JSONObject();
+				
+	        jsonObject.put("start", dto.getPdate()+":00");
+	        jsonObject.put("backgroundColor", "red");
+	        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
+	        jsonObject.put("borderColor", "red");
+	        jsonObject.put("borderWidth", "1px");
+	        jsonObject.put("url", dto.getMidx());
+	        jsonObject.put("className", dto.getTitle());
+
+	        jsonArray.add(jsonObject);
+	    }
+	    String jsonStr = jsonArray.toString();
+			
+	    ModelAndView mav = new ModelAndView();
+	    
+	    mav.addObject("svcing_count",svcing_count);
+	    mav.addObject("svc_count",svc_count);
+	    mav.addObject("month",month);
+	    mav.addObject("planlists", plist);
+	    mav.addObject("svcDTO", svcing);
+	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
+	    mav.addObject("jsonArray", jsonArray);
+	 
 		mav.addObject("checklistItems", list);
 		//mav.addObject("planlists", plist);
 		mav.setViewName("calendar/calendarMain");
@@ -80,54 +115,50 @@ public class CalendarContoller {
 	}
 	
 	@RequestMapping("/calendarInfo.do")
-	public ModelAndView calendarInfo(
-			HttpSession session) {
-		int midx= (int) session.getAttribute("loginMidx");
-		
-		List<PlanDTO> plist = planDao.planlistAll(midx);
-		
-		
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
-		
-		
-		JSONArray jsonArray = new JSONArray();
-		int svcing_count = 0;
-		int svc_count = 0;
-		for(PlanDTO dto: plist) {
-			
-			JSONObject jsonObject = new JSONObject();
-			
-			dto.getPdate();
+	public ModelAndView planForm(HttpSession session) {
+			int midx= (int) session.getAttribute("loginMidx");
+			List<PlanDTO> plist = planDao.planlistAll(midx);
+		    
+			Calendar cal = Calendar.getInstance();
+		    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
+		    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
+		    String thisMonth = sdf.format(cal.getTime());
+		    String month = sdf2.format(cal.getTime());
+				
+		    List<PlanDTO> svcing = planDao.planlistAll(0);
+				
+		    JSONArray jsonArray = new JSONArray();
+		    int svcing_count = 0;
+		    int svc_count = 0;
+		    for(PlanDTO dto: svcing) {
+					
+		        JSONObject jsonObject = new JSONObject();
+					
+		        jsonObject.put("start", dto.getPdate()+":00");
+		        jsonObject.put("backgroundColor", "red");
+		        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
+		        jsonObject.put("borderColor", "red");
+		        jsonObject.put("borderWidth", "1px");
+		        jsonObject.put("url", dto.getMidx());
+		        jsonObject.put("className", dto.getTitle());
 
-
-			jsonObject.put("start", dto.getPdate()+":00");
-			jsonObject.put("backgroundColor", "red");
-			jsonObject.put("textColor","white" ); // 폰트 색상을 지정
-			jsonObject.put("borderColor", "red");
-			jsonObject.put("borderWidth", "1px");
-			jsonObject.put("url", dto.getMidx());
-			jsonObject.put("className", dto.getTitle());
-
-			
-			jsonArray.add(jsonObject);
-			
-			  
+		        jsonArray.add(jsonObject);
+		    }
+		    String jsonStr = jsonArray.toString();
+				
+		    ModelAndView mav = new ModelAndView();
+		    
+		    mav.addObject("svcing_count",svcing_count);
+		    mav.addObject("svc_count",svc_count);
+		    mav.addObject("month",month);
+		    mav.addObject("planlists", plist);
+		    mav.addObject("svcDTO", svcing);
+		    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
+		    mav.addObject("jsonArray", jsonArray);
+		 
+			mav.setViewName("calendar/calendarInfo");
+			return mav;
 		}
-		String jsonStr = jsonArray.toString();
-
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("svcing_count",svcing_count);
-		mav.addObject("svc_count",svc_count);
-		mav.addObject("planlists", plist);
-	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
-	    mav.setViewName("calendar/calendarInfo");
-		return mav;
-		
-	}
-	
 	
 	@RequestMapping("/calendarMainCom.do")
 	public String CalendarMainCom() {
@@ -174,11 +205,10 @@ public class CalendarContoller {
 	
 	
 	@RequestMapping("/checklistDel.do")
-	public ModelAndView checklistDel(HttpSession session) {
+	public ModelAndView checklistDel(ChecklistDTO cdto) {
 		
-		int ch_idx= (int) session.getAttribute("loginMidx");
-		int result=checklistDao.checklistDel(ch_idx);
-		String msg=result>=0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
+		int result=checklistDao.checklistDel(cdto.getCh_idx());
+		String msg=result>0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("url", "calendarMain.do");
@@ -188,6 +218,18 @@ public class CalendarContoller {
 	}
 	
 	
+	@RequestMapping("/planlistDel.do")
+	public ModelAndView planlistDel(PlanDTO pdto) {
+		
+		int result=planDao.planlistDel(pdto.getMyp_idx());
+		String msg=result>0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("url", "calendarMain.do");
+		mav.addObject("msg", msg);
+		mav.setViewName("calendar/checklistMsg");
+		return mav;
+	}
 	
 	
 

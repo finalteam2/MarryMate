@@ -5,7 +5,7 @@ import java.util.List;
 public interface ChecklistDAO {
 	public int checklistAdd(ChecklistDTO cdto);
 	
-	public int checklistDel(int midx);
+	public int checklistDel(int ch_idx);
 	
 	public List<ChecklistDTO> checklistAll(int midx);
 	

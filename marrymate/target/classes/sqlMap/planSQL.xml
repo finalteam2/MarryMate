@@ -14,10 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content}
 		)
 	</insert>
-		<delete id="planDel" parameterType="com.marry.calender.model.PlanDTO">
+	<delete id="planDel" parameterType="Integer">
 		delete from myplan where myp_idx=#{myp_idx}
 	</delete>
 	<select id="planlistAll" parameterType="Integer" resultType="com.marry.calender.model.PlanDTO">
-		select*from myplan where midx=#{midx}
+		select myp_idx, midx, TO_CHAR(pdate, 'YYYY-MM-DD') as pdate, title, content from myplan where midx=#{midx}
 	</select>
 </mapper>
