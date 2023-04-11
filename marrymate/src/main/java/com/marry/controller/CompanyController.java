@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,23 +60,21 @@ public class CompanyController {
 		String img="";
 		
 		MultipartFile cnumfile=req.getFile("cnumfile");
-		if (cnumfile.isEmpty()) {
-			cfile="없음";
+		if (cnumfile==null) {
+			cfile="nomal.png";
 			dto.setCfile(cfile);
 		}else {
-			copyFile_cnum(cnumfile);
-			cfile=cnumfile.getOriginalFilename();
+			cfile = copyFile(cnumfile, "/img/cnumFile/");
 			dto.setCfile(cfile);
 		}
 		
 		
 		MultipartFile bestimg=req.getFile("bestimg");
-		if (bestimg.isEmpty()) {
-			img="없음";
+		if (bestimg==null) {
+			img="nomal.png";
 			dto.setImg(img);
 		}else {
-			copyFile_best(bestimg);
-			img=bestimg.getOriginalFilename();
+			img = copyFile(bestimg, "/img/com_best/");
 			dto.setImg(img);
 		}
 		
@@ -106,56 +105,34 @@ public class CompanyController {
 		
 	}
 	
-	public void copyFile_images(MultipartFile upload) {
+	public String copyFile(MultipartFile upload,String path) {
 		
-		try {
-			byte bytes[]=upload.getBytes();
-			String imagepath = context.getRealPath("/img/com_img/");
-			File outfile=new File(imagepath+upload.getOriginalFilename());
-			
-			FileOutputStream fos=new FileOutputStream(outfile);
-			fos.write(bytes);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    try {
+	        byte[] bytes = upload.getBytes();
+	        String originalFilename = upload.getOriginalFilename();
+	        String extension = FilenameUtils.getExtension(originalFilename); // 파일 확장자 추출
+	        String fileName = FilenameUtils.getBaseName(originalFilename); // 파일 이름 추출
+	        String imagepath = context.getRealPath(path);
+	        File outfile = new File(imagepath, fileName + "." + extension);
+
+	        int index = 1;
+	        while (outfile.exists()) { // 파일 이름 중복일 경우
+	            fileName = FilenameUtils.getBaseName(originalFilename) + "_" + index; // 넘버링 추가
+	            outfile = new File(imagepath, fileName + "." + extension);
+	            index++;
+	        }
+
+	        FileOutputStream fos = new FileOutputStream(outfile);
+	        fos.write(bytes);
+	        fos.close();
+	        return fileName + "." + extension;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return "";
+	    }
 		
 	}
 	
-	public void copyFile_best(MultipartFile upload) {
-			
-		try {
-			byte bytes[]=upload.getBytes();
-			String imagepath = context.getRealPath("/img/com_best/");
-			File outfile=new File(imagepath+upload.getOriginalFilename());
-				
-			FileOutputStream fos=new FileOutputStream(outfile);
-			fos.write(bytes);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-	}
-	
-	public void copyFile_cnum(MultipartFile upload) {
-		
-		try {
-			byte bytes[]=upload.getBytes();
-			String imagepath = context.getRealPath("/img/cnumFile/");
-			File outfile=new File(imagepath+upload.getOriginalFilename());
-			
-			FileOutputStream fos=new FileOutputStream(outfile);
-			fos.write(bytes);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	
 	@RequestMapping(value = "/hallInfo.do", method = RequestMethod.GET)
 	public String hallInfoForm() {
@@ -279,68 +256,41 @@ public class CompanyController {
 		ModelAndView mav=new ModelAndView();
 		
 		int result=0;
-		String fileLoad="";
-		
+		String img;
+		String cidx=req.getParameter("cidx");
+		//mav.addObject("imgSrc", img);
 		MultipartFile Inimg1=req.getFile("img1");
-		if(Inimg1.isEmpty()) {
-		    
+		if(Inimg1==null) {
 		}else {
-			copyFile_images(Inimg1);
-			String cidx=req.getParameter("cidx");
-			String img=fileLoad+Inimg1.getOriginalFilename();
-			
-			mav.addObject("imgSrc", img);
-			
-			result+=companyDao.imgInsert(cidx, img);
-		}
-
-		MultipartFile Inimg2=req.getFile("img2");
-		if (Inimg2.isEmpty()) {
-
-		} else {
-			copyFile_images(Inimg2);
-			String cidx = req.getParameter("cidx");
-			String img = fileLoad+Inimg2.getOriginalFilename();
+			img = copyFile(Inimg1, "/img/com_img/");
 			result += companyDao.imgInsert(cidx, img);
 		}
-		
+		MultipartFile Inimg2=req.getFile("img2");
+		if (Inimg2==null) {
+		} else {
+			img = copyFile(Inimg2, "/img/com_img/");
+			result += companyDao.imgInsert(cidx, img);
+		}
 		MultipartFile Inimg3=req.getFile("img3");
-		if (Inimg3.isEmpty()) {
+		if (Inimg3==null) {
 		    
 		}else {
-			copyFile_images(Inimg3);
-			
-			String cidx=req.getParameter("cidx");
-			String img=fileLoad+Inimg3.getOriginalFilename();
-			
-			result+=companyDao.imgInsert(cidx, img);
+			img = copyFile(Inimg3, "/img/com_img/");
+			result += companyDao.imgInsert(cidx, img);
 		}
-		
 		MultipartFile Inimg4=req.getFile("img4");
-		if (Inimg4.isEmpty()) {
-		    
+		if (Inimg4==null) {
 		}else {
-			copyFile_images(Inimg4);
-			
-			String cidx=req.getParameter("cidx");
-			String img=fileLoad+Inimg4.getOriginalFilename();
-			
-			result+=companyDao.imgInsert(cidx, img);
+			img = copyFile(Inimg4, "/img/com_img/");
+			result += companyDao.imgInsert(cidx, img);
 		}
-		
 		MultipartFile Inimg5=req.getFile("img5");
-		if (Inimg5.isEmpty()) {
-		    
+		if (Inimg5==null) {
 		}else {
-			copyFile_images(Inimg5);
-			
-			String cidx=req.getParameter("cidx");
-			String img=fileLoad+Inimg5.getOriginalFilename();
-			
-			result+=companyDao.imgInsert(cidx, img);
+			img = copyFile(Inimg4, "/img/com_img/");
+			result += companyDao.imgInsert(cidx, img);
 		}
-		
-	    String msg=result>0?"파일 등록 완료":"파일 등록 실패";
+	    String msg=result>0?"파일 "+result+"개 등록 완료":"파일 등록 실패";
 		
 		mav.addObject("msg", msg);
 		mav.addObject("url", "hallInfo.do");
