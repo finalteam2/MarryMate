@@ -149,9 +149,9 @@ public class MypageController {
 		}else {
 			img = copyFile(updateMimg, "/img/member/");
 			dto.setImg(img);
-			System.out.println("img: "+dto.getImg()+"/ midx: "+dto.getMidx());
+//			System.out.println("img: "+dto.getImg()+"/ midx: "+dto.getMidx());
 			result += mypageDao.imgChange(dto);
-			System.out.println(result);
+//			System.out.println(result);
 		}
 		String msg=result>0?"프로필 등록 완료":"프로필 등록 실패";
 		mav.addObject("msg", msg);
