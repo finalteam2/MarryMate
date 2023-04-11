@@ -24,44 +24,100 @@
 			0
 		)
 	</insert>
-	<select id="bbsNotiList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsNotiList" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
 		select * from
 		(select rownum as rnum,a.* from
-		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='공지사항' order by bidx desc) a) b
+		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' order by bidx desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
-	<select id="bbsAfterList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsAfterList" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
 		select * from
 		(select rownum as rnum,a.* from
-		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩후기' order by bidx desc) a) b
+		(select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩후기' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
-	<select id="bbsTalkList" parameterType="Map" resultType="com.marry.bbs.model.BbsDTO">
+	<select id="bbsTalkList" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
 		select * from
 		(select rownum as rnum,a.* from
-		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩톡톡' order by bidx desc) a) b
+		(select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩톡톡' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
-	<select id="bbsNotiMini" resultType="com.marry.bbs.model.BbsDTO">
-		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='공지사항' order by bidx desc
+	<select id="bbsAfterBest" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩후기' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by best desc nulls last
 	</select>
-	<select id="bbsAfterMini" resultType="com.marry.bbs.model.BbsDTO">
-		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩후기' order by bidx desc
+	<select id="bbsTalkBest" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩톡톡' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by best desc nulls last
 	</select>
-	<select id="bbsTalkMini" resultType="com.marry.bbs.model.BbsDTO">
-		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx where kind='웨딩톡톡' order by bidx desc
+	<select id="bbsAfterFix" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩후기' and topfix=1
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by best desc nulls last
 	</select>
-	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsDTO">
-		select
-			bbs.*, member.nick
-		from
-			bbs
-		join
-			member
-		on
-			bbs.midx=member.midx
-		where
-			bidx=#{bidx}
+	<select id="bbsTalkFix" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩톡톡' and topfix=1
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by best desc nulls last
+	</select>
+	<select id="bbsNotiMini" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' order by bidx desc
+	</select>
+	<select id="bbsAfterMini" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩후기' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc
+	</select>
+	<select id="bbsTalkMini" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where kind='웨딩톡톡' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc
+	</select>
+	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best, sum(recommand.worst) as worst
+		from bbs
+		left join member on bbs.bidx=member.midx
+		left join recommand on bbs.bidx=recommand.bidx
+		where bbs.bidx=#{bidx}
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 	</select>
 	<insert id="replyWrite" parameterType="com.marry.bbs.model.ReplyDTO">
 		insert into
@@ -102,7 +158,8 @@
 			recommand_re_idx.nextval,
 			#{bidx},
 			#{midx},
-			1
+			1,
+			0
 		)
 	</insert>
 	<insert id="worstCount" parameterType="Map">
@@ -112,9 +169,13 @@
 			recommand_re_idx.nextval,
 			#{bidx},
 			#{midx},
-			-1
+			0,
+			1
 		)
 	</insert>
+	<select id="checkClick" parameterType="Map" resultType="int">
+		select count(*) from recommand where bidx=#{bidx} and midx=#{midx}
+	</select>
 	<delete id="contentDelete" parameterType="int">
 		delete from bbs where bidx=#{bidx}
 	</delete>

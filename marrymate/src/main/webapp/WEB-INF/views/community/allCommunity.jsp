@@ -53,6 +53,29 @@
 			color: #555555;
 			text-decoration: underline;
 		}
+		th:first-child, td:first-child {
+			width: 10%;
+		}
+		
+		th:nth-child(2), td:nth-child(2) {
+			width: 30%;
+		}
+		
+		th:nth-child(3), td:nth-child(3) {
+			width: 15%;
+		}
+		
+		th:nth-child(4), td:nth-child(4) {
+			width: 15%;
+		}
+		
+		th:nth-child(5), td:nth-child(5) {
+			width: 5%;
+		}
+		
+		th:last-child, td:last-child {
+			width: 5%;
+		}
 	</style>
 </head>
 <body>
@@ -104,12 +127,13 @@
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
+				<th>추천</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:if test="${empty listAfter}">
 				<tr>
-					<td colspan="4" align="center">등록된 게시글이 없습니다.</td>
+					<td colspan="6" align="center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${listAfter}" begin="0" end="1">
@@ -128,6 +152,7 @@
 					<td>${dto.nick}</td>
 					<td>${dto.writedate}</td>
 					<td>${dto.watch}</td>
+					<td>0</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -141,12 +166,13 @@
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
+				<th>추천</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:if test="${empty listTalk}">
 				<tr>
-					<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+					<td colspan="6" align="center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${listTalk}" begin="0" end="1">
@@ -165,6 +191,7 @@
 					<td>${dto.nick}</td>
 					<td>${dto.writedate}</td>
 					<td>${dto.watch}</td>
+					<td>0</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -8,21 +8,29 @@ public interface BbsDAO {
 	
 	public int replyWrite(ReplyDTO dto);
 	
-	public List<BbsDTO> bbsNotiList(int cp, int ls);
+	public List<BbsViewDTO> bbsNotiList(int cp, int ls);
 	
-	public List<BbsDTO> bbsAfterList(int cp, int ls);
+	public List<BbsViewDTO> bbsAfterList(int cp, int ls);
 	
-	public List<BbsDTO> bbsTalkList(int cp, int ls);
+	public List<BbsViewDTO> bbsTalkList(int cp, int ls);
 	
-	public List<BbsDTO> bbsNotiMini();
+	public List<BbsViewDTO> bbsNotiMini();
 	
-	public List<BbsDTO> bbsAfterMini();
+	public List<BbsViewDTO> bbsAfterMini();
 	
-	public List<BbsDTO> bbsTalkMini();
+	public List<BbsViewDTO> bbsTalkMini();
+	
+	public List<BbsViewDTO> bbsAfterBest();
+	
+	public List<BbsViewDTO> bbsTalkBest();
+	
+	public List<BbsViewDTO> bbsAfterFix();
+	
+	public List<BbsViewDTO> bbsTalkFix();
 	
 	public List<ReplyDTO> replyList(int bidx);
 	
-	public BbsDTO bbsContent(int bidx);
+	public BbsViewDTO bbsContent(int bidx);
 	
 	public int bbsTotalCount();
 	
@@ -31,6 +39,8 @@ public interface BbsDAO {
 	public int bestCount(int bidx, int midx);
 	
 	public int worstCount(int bidx, int midx);
+	
+	public int checkClick(int bidx, int midx);
 	
 	public int contentDelete(int bidx);
 

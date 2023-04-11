@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>MarryMate</title>
+    <title>게시판 본문</title>
     <style>
     	body {
 			background-color: #fbf4ff;
@@ -93,7 +93,7 @@
             cursor: pointer;
         }
         .button-container {
-        	padding-top: 30px;
+        	padding-top: 50px;
         	padding-bottom: 20px;
             text-align: center;
         }
@@ -118,142 +118,13 @@
             color: #fff;
             border: none;
         }
-        .button-container-a {
-		  display: flex;
-		  margin-top: 20px;
-		  margin-bottom: 10px;
-		  justify-content: center;
-		}
-		.button-container-a button {
-		  margin: 0 10px;
-		}
         #reply {
         	margin-left: auto;
         	margin-right: auto;
         	margin-top: 50px;
         	text-align: center;
         }
-        #likeBtn {
-		  border: 1px solid #ccc;
-		  background-color: transparent;
-		  cursor: pointer;
-		  display: inline-flex;
-		  align-items: center;
-		  font-size: 14px;
-		  color: #666;
-		  width: 100px;
- 		  height: 30px;
-		}
-		
-		#likeBtn:hover {
-		  color: #000;
-		}
-		
-		#likeBtn img {
-		  margin-right: 5px;
-		  height: 16px;
-		  width: 16px;
-		}
-		
-		#dislikeBtn {
-		  border: 1px solid #ccc;
-		  background-color: transparent;
-		  cursor: pointer;
-		  display: inline-flex;
-		  align-items: center;
-		  font-size: 14px;
-		  color: #666;
-		  width: 100px;
- 		  height: 30px;
-		}
-		
-		#dislikeBtn:hover {
-		  color: #000;
-		}
-		
-		#dislikeBtn img {
-		  margin-right: 5px;
-		  height: 16px;
-		  width: 16px;
-		}
-		#likeDis {
-			text-align: center;
-			margin-top: 30px;
-		}
     </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	function checkReply() {
-	    if(confirm('댓글을 작성하시겠습니까?')) {
-	        if ('${sessionScope.loginMidx}' === '') {
-	            alert('로그인 후 이용가능합니다.');
-	            return false;
-	        }
-	        return true;
-	    }
-	    else {
-	        return false;
-	    }
-	}
-    function checkReWrite() {
-        if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
-            alert('작성자만 수정이 가능합니다.');
-            return false;
-        }
-        return true;
-    }
-    function checkDelete() {
-        if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
-            alert('작성자만 삭제 가능합니다.');
-            return false;
-        }
-        confirm('게시글을 삭제하시겠습니까?');
-        return true;
-    }
-    $(function() {
-        $('#likeBtn').on('click', function() {
-          var bidx = ${dto.bidx};
-          var midx = ${sessionScope.loginMidx};
-          $.ajax({
-            url: 'best.do',
-            type: 'POST',
-            data: { midx: midx, bidx: bidx },
-            success: function(result) {
-              if (result == 'false') {
-                alert('이미 추천 혹은 비추천을 하였습니다.');
-              } else {
-                alert('추천하였습니다.');
-                location.reload();
-              }
-            },
-            error: function() {
-              alert('서버와의 통신에 실패하였습니다.');
-            }
-          });
-        });
-
-        $('#dislikeBtn').on('click', function() {
-          var bidx = ${dto.bidx};
-          var midx = ${sessionScope.loginMidx};
-          $.ajax({
-            url: 'worst.do',
-            type: 'POST',
-            data: { midx: midx, bidx: bidx },
-            success: function(result) {
-              if (result == 'false') {
-                alert('이미 추천 혹은 비추천을 하였습니다.');
-              } else {
-                alert('비추천하였습니다.');
-                location.reload();
-              }
-            },
-            error: function() {
-              alert('서버와의 통신에 실패하였습니다.');
-            }
-          });
-        });
-      });
-</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
@@ -265,24 +136,13 @@
             <div class="content">
                 ${dto.content}
             </div>
-            <div id="likeDis">
-			  <button id="likeBtn">
-			    <img src="/marrymate/img/thumb-up.png" alt="추천">추천 : ${dto.best}
-			  </button>
-		  	  <button id="dislikeBtn">
-		  	    <img src="/marrymate/img/thumb-down.png" alt="비추천">비추천 : ${dto.worst}
-			  </button>
-			</div>
             <div class="button-container">
 		        <a href="#" class="button" onclick="window.history.back()">목록</a>
-		        	<c:url var="reWriteUrl" value="reWrite.do">
+		        	<c:url var="reContentUrl" value="reContent.do">
 						<c:param name="bidx">${dto.bidx}</c:param>
 					</c:url>
-		        <a href="${reWriteUrl}" class="button button-edit" onclick="return checkReWrite()">수정</a>
-		        	<c:url var="deleteUrl" value="delete.do">
-						<c:param name="bidx">${dto.bidx}</c:param>
-					</c:url>
-     		    <a href="${deleteUrl}" class="button button-delete" onclick="return checkDelete()">삭제</a>
+		        <a href="${reContentUrl}" class="button button-edit">수정</a>
+     		    <a href="#" class="button button-delete">삭제</a>
 		    </div>
             <div class="comment-wrapper">
             	<c:forEach var="reply" items="${list}">
@@ -294,8 +154,9 @@
 			            </div>
 			        </div>
 		        </c:forEach>
+		        <!-- 댓글을 추가할 때마다 위와 같은 .comment 클래스를 가진 div 요소를 생성합니다. -->
 		        <div class="comment-form">
-		            <form name="reply" action="reply.do" method="post" onsubmit="replyCall();">
+		            <form name="reply" action="reply.do" method="post">
 		            	<input type="hidden" name="bidx" value="${param.bidx}">
 		            	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 					    <input type="hidden" name="id" value="${sessionScope.loginId}">
@@ -303,7 +164,7 @@
 		                <input type="text" id="author" name="nick" value="${sessionScope.loginNick}" readonly><br>
 		                <label for="comment">댓글 내용</label><br>
 		                <textarea id="comment" name="content"></textarea>
-		                <input type="submit" value="댓글 작성" onclick="return checkReply()">
+		                <input type="submit" value="댓글 작성">
 		            </form>
 		        </div>
 		    </div>

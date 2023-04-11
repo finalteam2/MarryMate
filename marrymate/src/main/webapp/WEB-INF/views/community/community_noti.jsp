@@ -49,6 +49,25 @@
 			color: #555555;
 			text-decoration: underline;
 		}
+		th:first-child, td:first-child {
+			width: 10%;
+		}
+		
+		th:nth-child(2), td:nth-child(2) {
+			width: 30%;
+		}
+		
+		th:nth-child(3), td:nth-child(3) {
+			width: 15%;
+		}
+		
+		th:nth-child(4), td:nth-child(4) {
+			width: 15%;
+		}
+		
+		th:last-child, td:last-child {
+			width: 10%;
+		}
 		#left-box {
 		    position: absolute;
 		    left: 20px;
@@ -59,6 +78,7 @@
 		    border-radius: 5px;
 		    padding-bottom: 15px;
 		    text-align: center;
+		    font-weight: bold;
 		}
 		#tableBox {
 			height: 500px;
@@ -98,7 +118,7 @@
 				</c:if>
 				<c:forEach var="dto" items="${listNoti}">
 					<tr>
-						<td>${dto.bidx}</td>
+						<td>공지</td>
 						<c:url var="contentUrl" value="content.do">
 							<c:param name="bidx">${dto.bidx}</c:param>
 						</c:url>

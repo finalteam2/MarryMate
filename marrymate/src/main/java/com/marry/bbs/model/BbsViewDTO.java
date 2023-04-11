@@ -1,6 +1,6 @@
 package com.marry.bbs.model;
 
-public class BbsDTO {
+public class BbsViewDTO {
 
 	private int bidx;
 	private int midx;
@@ -17,13 +17,17 @@ public class BbsDTO {
 	private int blind;
 	private int topfix;
 	private int admin;
+	private String nick;
+	private int best;
+	private int worst;
 	
-	public BbsDTO() {
+	public BbsViewDTO() {
 		super();
 	}
 
-	public BbsDTO(int bidx, int midx, String kind, String horse, String subject, String content, String writedate,
-			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin) {
+	public BbsViewDTO(int bidx, int midx, String kind, String horse, String subject, String content, String writedate,
+			String img, int ref, int stair, int step, int watch, int blind, int topfix, int admin, String nick,
+			int best, int worst) {
 		super();
 		this.bidx = bidx;
 		this.midx = midx;
@@ -40,6 +44,9 @@ public class BbsDTO {
 		this.blind = blind;
 		this.topfix = topfix;
 		this.admin = admin;
+		this.nick = nick;
+		this.best = best;
+		this.worst = worst;
 	}
 
 	public int getBidx() {
@@ -160,6 +167,30 @@ public class BbsDTO {
 
 	public void setAdmin(int admin) {
 		this.admin = admin;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public int getBest() {
+		return best;
+	}
+
+	public void setBest(int best) {
+		this.best = best;
+	}
+
+	public int getWorst() {
+		return worst;
+	}
+
+	public void setWorst(int worst) {
+		this.worst = worst;
 	}
 	
 }

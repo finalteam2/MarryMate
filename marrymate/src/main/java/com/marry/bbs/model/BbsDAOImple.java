@@ -25,7 +25,7 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public List<BbsDTO> bbsNotiList(int cp, int ls) {
+	public List<BbsViewDTO> bbsNotiList(int cp, int ls) {
 		
 		int start=(cp-1)*ls+1;
 		int end=cp*ls;
@@ -37,7 +37,7 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public List<BbsDTO> bbsAfterList(int cp, int ls) {
+	public List<BbsViewDTO> bbsAfterList(int cp, int ls) {
 		
 		int start=(cp-1)*ls+1;
 		int end=cp*ls;
@@ -49,7 +49,7 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public List<BbsDTO> bbsTalkList(int cp, int ls) {
+	public List<BbsViewDTO> bbsTalkList(int cp, int ls) {
 		
 		int start=(cp-1)*ls+1;
 		int end=cp*ls;
@@ -61,18 +61,38 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public List<BbsDTO> bbsNotiMini() {
+	public List<BbsViewDTO> bbsNotiMini() {
 		return sqlMap.selectList("bbsNotiMini");
 	}
 	
 	@Override
-	public List<BbsDTO> bbsAfterMini() {
+	public List<BbsViewDTO> bbsAfterMini() {
 		return sqlMap.selectList("bbsAfterMini");
 	}
 	
 	@Override
-	public List<BbsDTO> bbsTalkMini() {
+	public List<BbsViewDTO> bbsTalkMini() {
 		return sqlMap.selectList("bbsTalkMini");
+	}
+	
+	@Override
+	public List<BbsViewDTO> bbsAfterBest() {
+		return sqlMap.selectList("bbsAfterBest");
+	}
+	
+	@Override
+	public List<BbsViewDTO> bbsTalkBest() {
+		return sqlMap.selectList("bbsTalkBest");
+	}
+	
+	@Override
+	public List<BbsViewDTO> bbsAfterFix() {
+		return sqlMap.selectList("bbsAfterFix");
+	}
+	
+	@Override
+	public List<BbsViewDTO> bbsTalkFix() {
+		return sqlMap.selectList("bbsTalkFix");
 	}
 	
 	@Override
@@ -81,7 +101,7 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public BbsDTO bbsContent(int bidx) {
+	public BbsViewDTO bbsContent(int bidx) {
 		return sqlMap.selectOne("bbsContent", bidx);
 	}
 	
@@ -109,6 +129,14 @@ public class BbsDAOImple implements BbsDAO {
 		map.put("bidx", bidx);
 		map.put("midx", midx);
 		return sqlMap.insert("worstCount", map);
+	}
+	
+	@Override
+	public int checkClick(int bidx, int midx) {
+		Map map=new HashMap<String, Integer>();
+		map.put("bidx", bidx);
+		map.put("midx", midx);
+		return sqlMap.selectOne("checkClick", map);
 	}
 	
 	@Override
