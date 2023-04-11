@@ -174,7 +174,7 @@ textarea {
 	
 <c:if test="${dto.kind eq '예식장' }">
 	<span>홀 정보</span>
-	<table class="table table-hover">
+	<table class="table table-striped">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
@@ -188,7 +188,7 @@ textarea {
 	  <tbody>
 	<c:forEach varStatus="status" var="hdto" items="${harr }">
 	    <tr>
-	      <th scope="row">${status.count } / ${hdto.hidx }</th>
+	      <th scope="row">${status.count }</th>
 	      <td>${hdto.name }</td>
 	      <td>${hdto.pay }</td>
 	      <td>${hdto.time }</td>
@@ -200,7 +200,7 @@ textarea {
 	</table>
 	
 	<span>메뉴 종류 & 가격</span>
-	<table class="table table-hover">
+	<table class="table table-striped">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
@@ -211,7 +211,7 @@ textarea {
 	  <tbody>
 	<c:forEach varStatus="status" var="fdto" items="${farr }">
 	    <tr>
-	      <th scope="row">${status.count } / ${fdto.fidx }</th>
+	      <th scope="row">${status.count }</th>
 	      <td>${fdto.name }</td>
 	      <td>${fdto.pay }</td>
 	    </tr>

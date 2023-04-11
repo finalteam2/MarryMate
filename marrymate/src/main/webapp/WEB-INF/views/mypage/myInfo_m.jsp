@@ -6,145 +6,85 @@
 <head>
 <meta charset="UTF-8">
 <title>My 정보수정</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link href="/marrymate/css/style.css" rel="stylesheet">
-<style type="text/css">
-	article div input[type=text] {
-		width: 230px;
-		height: 30px;
-		font-size: 17px;
-		font-family: 'SUIT-Regular';
-		border: 1px solid black;
-		border-radius: 12px;
-		text-align: center;
-		}
-	article div input[type=password] {
-		width: 230px;
-		height: 30px;
-		font-size: 15px;
-		border: 1px solid black;
-		border-radius: 12px;
-		text-align: center;
-		}
-	article div input[type=text]::placeholder {
-		font-family: sans-serif; 
-		font-size: 10px;
-	}
-	article div input[type=password]::placeholder {
-		font-family: sans-serif; 
-		font-size: 10px;
-	}
-	.hTagBox {
-		width: 120px;
-		height: 45px;
-		text-align: center;
-		float: left;
-	}
-	#fBox{
-		width: 200px;
-		heigth: 600px;
-		position:absolute;
-		top:20%;
-		left:5%;
-		text-align: center;
-	}
-	#mBox {
-		width: 560px;
-		height: 600px;
-		margin: 50px auto;
-		padding-left: 90px;
-		line-height: 45px;
-		position: absolute;
-		top: 20%;
-		left: 35%;
-	}
-	.bBox {
-		width: 350px;
-		height: 60px;
-		margin: auto;
-		text-align: center;
-	}
-	.iBox {
-		width: 150px;
-    	height: 150px; 
-    	border-radius: 70%;
-    	overflow: hidden;
-    	margin:0px auto;
-	}
-	.profile {
-		width: 100%;
-    	height: 100%;
-    	object-fit: cover;  	
-	}
-	.btn {
-		width: 90px;
-		height: 40px;
-	    border: none;
-	    display: inline-block;
-	    border-radius: 15px;
-	    font-family: 'SUIT-Regular';
-	    font-size: 14px;
-	    font-weight: 600;
-	    text-align: center;
-	}
+<style>
+.sizefix{
+	width: 640px;
+	margin: 0 auto;
+}
 </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <section>
-	<article>
+	<article class="sizefix">
 		<h2>My 정보수정</h2><br>
-		<hr>
-		<div id="fBox">
-		 <div class="iBox">
-		 <img src="/marrymate/img/member/${userInfo.img }" class="profile">
-		 </div><br>
-		 <div>
+		<img src="/marrymate/img/member/${userInfo.img }" class=" rounded float-start" alt="profile_img">
 		 <form name="imgChange" action="imgChange.do" method="post" enctype="multipart/form-data">
    		 <input type="hidden" name="midx" value=${sessionScope.loginMidx }>
-		 <input type="file" class="btn" name="mimg" accept="image/*"><br><br>
-		 <input type="submit" class="btn" value="사진변경">
-		 </form>
+		 <div class="input-group">
+		  <input type="file" class="form-control" name="mimg" accept="image/*" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">프로필 이미지 변경</button>
 		 </div>
-		</div>
+		 </form>
+		 
+		 <hr>
+		 
 		<form name="myInfoUpdate" action="update.do">
-		<div id="mBox">
-				<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
-				<div class="hTagBox">이름</div>
-				<input type="text" name="name" value="${userInfo.name }" readonly required><br>
-				<div class="hTagBox">아이디</div>
-				<input type="text" name="id" value="${userInfo.id }" readonly required><br>
-				<div class="hTagBox">생년월일</div>
-				<input type="date" name="birthday" value="${userInfo.birthday }" readonly required><br>
-				<div class="hTagBox">성별</div>
-				<span>
-				<c:choose>
-				<c:when test="${userInfo.gender eq '남' }">
-				<input type="radio" name="gender" value="male" checked>남
-				<input type="radio" name="gender" value="female">여
-				</c:when>
-				<c:otherwise>
-				<input type="radio" name="gender" value="male">남
-				<input type="radio" name="gender" value="female" checked>여
-				</c:otherwise>
-				</c:choose>
-				 	</span><br>
-				<div class="hTagBox">닉네임</div>
-				<input type="text" name="nick" value="${userInfo.nick }" required><br>
-				<div class="hTagBox">비밀번호</div>
-				<input type="password" name="pwd" value="${userInfo.pwd }"><br>
-				<div class="hTagBox">전화번호</div>
-				<input type="text" name="tel" value="${userInfo.tel }" required><br>
-				<div class="hTagBox">주소</div>
-				<input type="text" name="juso" value="${userInfo.juso }" required><br>			
-				<div class="hTagBox">상세주소</div>
-				<input type="text" name="sjuso" value="${userInfo.sjuso }" required><br>
-				<div class="hTagBox">예식날짜</div>
-				<input type="date" name="marrydate" value="${userInfo.marrydate }"><br>
-				<div class="hTagBox">배우자</div>
-				<input type="text" name="pname" value="${userInfo.pname }"><br><br>
-				<div class="bBox"><input type="submit" class="btn" value="수정">
-				<input type="button" class="btn" value="메인으로" onclick="location.href='index.do'"></div>
-		</div>
+			<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">이름</span>
+			  <input type="text" name="name" value="${userInfo.name }" readonly required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">아이디</span>
+			  <input type="text" name="id" value="${userInfo.id }" readonly required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">생년월일</span>
+			  <input type="date" name="birthday" value="${userInfo.birthday }" readonly required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">성별</span>
+				<c:if test="${userInfo.gender eq '남' }">
+				  <button type="button" class="btn btn-primary">남자</button>
+				</c:if>
+				<c:if test="${userInfo.gender eq '여' }">
+				  <button type="button" class="btn btn-primary">여자</button>
+				</c:if>
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">닉네임</span>
+			  <input type="text" name="nick" value="${userInfo.nick }" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">비밀번호</span>
+			  <input type="password" name="pwd" value="${userInfo.pwd }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">전화번호</span>
+			  <input type="text" name="tel" value="${userInfo.tel }" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">주소</span>
+			  <input type="text" name="juso" value="${userInfo.juso }" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">상세주소</span>
+			  <input type="text" name="sjuso" value="${userInfo.sjuso }" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">예식날짜</span>
+			  <input type="date" name="marrydate" value="${userInfo.marrydate }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">배우자</span>
+			  <input type="text" name="pname" value="${userInfo.pname }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<button type="submit" class="btn btn-primary">정보수정</button>
+			<button type="button" class="btn btn-secondary" onclick="location.href='index.do'">메인으로</button>
 		</form>
 	</article>
 </section>

@@ -170,6 +170,7 @@
 						<tr>
 							<td>
 							<form name="foodInfoUpdate" action="foodUpdate.do">
+							<input type="hidden" name="fidx" value=${food.fidx }>
 							<input type="text" name="name" value="${food.name }" required></td>
 							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
 							<td><input type="submit" value="수정">

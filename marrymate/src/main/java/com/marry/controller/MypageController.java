@@ -68,7 +68,14 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		MemberDTO dto = new MemberDTO();
 		dto.setId(id);
-		mav.addObject("userInfo", mypageDao.myInfoSelect(dto));
+		MemberDTO userInfo = mypageDao.myInfoSelect(dto);
+		try {
+			userInfo.setBirthday(userInfo.getBirthday().split(" ")[0]);
+			userInfo.setMarrydate(userInfo.getMarrydate().split(" ")[0]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("userInfo", userInfo);
 		mav.setViewName("/mypage/myInfo_m");
 		return mav;
 	}
