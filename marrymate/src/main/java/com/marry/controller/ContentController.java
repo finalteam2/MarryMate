@@ -288,4 +288,56 @@ public class ContentController {
 		return mav;
 	}
 	
+	//홀 추가
+	@RequestMapping("/insertHall.do")
+	public ModelAndView insertHall(HallDTO dto) {
+		
+		int result = contentDao.insertHall(dto);
+		String msg=result>0?"홀 추가 성공":"홀 추가 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
+	
+	//식사 추가
+	@RequestMapping("/insertFood.do")
+	public ModelAndView insertFood(FoodDTO dto) {
+		
+		int result = contentDao.insertFood(dto);
+		String msg=result>0?"식사 추가 성공":"식사 추가 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/deleteHall.do")
+	public ModelAndView deleteHall(@RequestParam("hidx")int hidx) {
+		
+		int result = contentDao.deleteHall(hidx);
+		String msg=result>0?"홀 삭제 성공":"홀 삭제 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
+	@RequestMapping("/deleteFood.do")
+	public ModelAndView deleteFood(@RequestParam("fidx")int fidx) {
+		
+		int result = contentDao.deletefood(fidx);
+		String msg=result>0?"식사 삭제 성공":"식사 삭제 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myInfo_c.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
 }

@@ -122,5 +122,25 @@ public class ContentDAOImple implements ContentDAO {
 		int result = sqlMap.update("updatewatch", cidx);
 		return result;
 	}
-
+	@Override
+	public int insertHall(HallDTO dto) {
+		int result = sqlMap.insert("inserthall", dto);
+		return result;
+	}
+	@Override
+	public int insertFood(FoodDTO dto) {
+		int result = sqlMap.insert("insertfood", dto);
+		return result;
+	}
+	@Override
+	public int deleteHall(int hidx) {
+		int result = sqlMap.insert("deletehall", hidx);
+		return result;
+	}
+	@Override
+	public int deletefood(int fidx) {
+		int result = sqlMap.insert("deletefood", fidx);
+		return result;
+	}
+	
 }

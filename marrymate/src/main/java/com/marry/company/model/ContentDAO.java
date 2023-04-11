@@ -26,4 +26,8 @@ public interface ContentDAO {
 	public List<BookListDTO> selectMemBook(int midx);
 	public List<PointDTO> selectpoint(int midx);
 	public int updateWatch(int cidx);
+	public int insertHall(HallDTO dto);
+	public int insertFood(FoodDTO dto);
+	public int deleteHall(int hidx);
+	public int deletefood(int fidx);
 }

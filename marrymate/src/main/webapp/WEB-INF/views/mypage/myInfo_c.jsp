@@ -173,30 +173,37 @@
 					</thead>
 					<tbody>
 					<c:forEach var="hall" items="${hallInfo }">
-					<form name="hallInfoUpdate" action="hallUpdate.do">
-					<input type="hidden" name="hidx" value=${hall.hidx }>
 						<tr>
-							<td><input type="text" name="name" value="${hall.name }" required> 홀</td>
+							<td>
+							<form name="hallInfoUpdate" action="hallUpdate.do">
+							<input type="hidden" name="hidx" value=${hall.hidx }>
+							<input type="text" name="name" value="${hall.name }" required> 홀</td>
 							<td><input type="text" name="time" value="${hall.time }" required> 시간</td>
 							<td><input type="text" name="pay" value="${hall.pay }" required> 원</td>
 							<td><input type="text" name="guest_num" value="${hall.guest_num }" required> 명</td>
-							<td><input type="submit" value="수정"></td>
-					</form>	
-					<form name="hallDelete" action="deleteHall.do" method="POST">
-					<input type="hidden" name="hidx" value=${hall.hidx }>
-							<td><input type="submit" value="삭제"></td>
-					</form>	
+							<td><input type="submit" value="수정">
+							</form>	
+							</td>
+							<td>
+							<form name="hallDelete" action="deleteHall.do" method="POST">
+							<input type="hidden" name="hidx" value=${hall.hidx }>
+							<input type="submit" value="삭제">
+							</form>	
+							</td>
 						</tr>
 					</c:forEach>
-					<form name="hallInsert" action="insertHall.do" method="POST">
 						<tr>
-							<td><input type="text" name="name" required> 홀</td>
+							<td>
+							<form name="hallInsert" action="insertHall.do" method="POST">
+							<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
+							<input type="text" name="name" required> 홀</td>
 							<td><input type="text" name="time" required> 시간</td>
 							<td><input type="text" name="pay"  required> 원</td>
 							<td><input type="text" name="guest_num" required> 명</td>
-							<td colspan="2"><input type="submit" value="추가"></td>
+							<td colspan="2"><input type="submit" value="추가">
+							</form>	
+							</td>
 						</tr>
-					</form>	
 					</tbody>
 				</table>	
 				<hr>
@@ -213,24 +220,31 @@
 					</thead>
 					<tbody>
 					<c:forEach var="food" items="${foodInfo }">
-					<form name="foodInfoUpdate" action="foodUpdate.do">
 						<tr>
-							<td><input type="text" name="name" value="${food.name }" required></td>
+							<td>
+							<form name="foodInfoUpdate" action="foodUpdate.do">
+							<input type="text" name="name" value="${food.name }" required></td>
 							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
-							<td><input type="submit" value="수정"></td>
-					</form>	
-					<form name="foodDelete" action="deleteFood.do" method="POST">
+							<td><input type="submit" value="수정">
+							</form>	
+							</td>
+							<td>
+							<form name="foodDelete" action="deleteFood.do" method="POST">
 							<input type="hidden" name="fidx" value=${food.fidx }>
-							<td><input type="submit" value="삭제"></td>
-					</form>	
+							<input type="submit" value="삭제">
+							</form>	
+							</td>
 						</tr>
 					</c:forEach>
 						<tr>
-						<form name="foodinsert" action="insertFood.do" method="POST">
-								<td><input type="text" name="name" value="${food.name }" required></td>
-								<td><input type="text" name="pay" value="${food.pay }" required>원</td>
-								<td><input type="submit" value="추가"></td>
-						</form>	
+							<td>
+							<form name="foodinsert" action="insertFood.do" method="POST">
+							<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
+							<input type="text" name="name" value="${food.name }" required></td>
+							<td><input type="text" name="pay" value="${food.pay }" required>원</td>
+							<td><input type="submit" value="추가">
+							</form>	
+							</td>
 						</tr>
 					</tbody>
 				</table>

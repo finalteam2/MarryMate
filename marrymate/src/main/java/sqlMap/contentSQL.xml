@@ -232,4 +232,40 @@
 	where 
 		cidx = #{cidx}
 	</update>
+	<insert id="inserthall" parameterType="com.marry.company.model.HallDTO">
+		insert into
+			hall
+		values(
+			hall_hidx.nextval,
+			#{cidx},
+			#{name},
+			#{time},
+			#{pay},
+			#{guest_num},
+			#{seat_num}
+		)
+	</insert>
+	<insert id="insertfood" parameterType="com.marry.company.model.FoodDTO">
+		insert into
+			food
+		values(
+			food_fidx.nextval,
+			#{cidx},
+			#{type},
+			#{name},
+			#{pay}
+		)
+	</insert>
+	<delete id="deletehall" parameterType="Integer">
+	delete 
+    	hall
+	where
+    	hidx = #{hidx}
+	</delete>
+	<delete id="deletefood" parameterType="Integer">
+	delete 
+    	food
+	where
+    	fidx = #{fidx}
+	</delete>
 </mapper>
