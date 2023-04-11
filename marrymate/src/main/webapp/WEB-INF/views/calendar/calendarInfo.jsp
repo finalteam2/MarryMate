@@ -1,52 +1,196 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="charset" content="UTF-8">
-<title>웨딩캘린더</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
-  </head>
-  <body onload="checkList();">
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-    <h1>calendar info page</h1>
-    <input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-    	<c:if test="${empty checkList}">
-					<tr>
-						<td colspan="5" align="center">설정해둔 체크리스트가 없습니다.</td>
-					</tr>
-				</c:if>
-				<c:forEach var="dto" items="${checkList}">
-					<tr>
-						<td class="text-center">${dto.midx}</td>
-						<td class="text-center">${dto.dday}</td>
-						<td class="text-center">${dto.chschedule}</td>
-					</tr>
-				</c:forEach>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+	crossorigin="anonymous">
+
+
+<!--fullcalendar css  -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- fullcalendar 언어 설정관련 script -->
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+<style>
+
+/* 일요일 날짜 빨간색 */
+.fc-day-sun a {
+	color: red;
+	text-decoration: none;
+}
+
+.fc-day-sun {
+	background-color: #EFEFEF;
+}
+
+/* 토요일 날짜 파란색 */
+.fc-day-sat a {
+	color: blue;
+	text-decoration: none;
+}
+
+.fc-day-sat {
+	background-color: #EFEFEF;
+}
+
+.fc .fc-time-grid-event .fc-content {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+.serviceTitle {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	padding: 2px;
+	background-color: #F9E000;
+	border-radius: 3px;
+	color: black;
+}
+
+.time1 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	padding: 2px;
+	background-color: #00ECF4;
+	border-radius: 3px;
+	color: black;
+}
+
+.time2 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	padding: 2px;
+	background-color: #7DDB83;
+	border-radius: 3px;
+	color: black;
+}
+
+.time3 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	padding: 2px;
+	background-color: #B674BC;
+	border-radius: 3px;
+	color: black;
+}
+</style>
+</head>
+<body class="app">
+
+
+	<div class="app-wrapper">
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container pt-5">
+				<h3 class="text-center mb-4">전체 일정 보기</h3>
+
+
+
+
+				<!--카드 -->
+				<div class="row g-4 mb-4 d-flex justify-content-center">
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1"> 일정 </h4>
+								<div class="stats-figure">${svc_count }</div>
+								<div class="stats-meta text-success">
+									건
+								</div>
+							</div>
+						</div>
+					</div>
 				
-	<div class="checklistbox">
-		<ul>
-			<li><input type="checkbox" name="chitem1" value="Item 1"></li>
-			<li><input type="checkbox" name="chitem2" value="Item 2">Item 2</li>
-			<li><input type="checkbox" name="chitem3" value="Item 3">Item 3</li>
-			<li><input type="checkbox" name="chitem4" value="Item 4">Item 4</li>
-			<li><input type="checkbox" name="chitem5" value="Item 5">Item 5</li>
-			<li><input type="checkbox" name="chitem6" value="Item 6">Item 6</li>
-			<li><input type="checkbox" name="chitem7" value="Item 7">Item 7</li>
-			<li><input type="checkbox" name="chitem8" value="Item 8">Item 8</li>
-			<li><input type="checkbox" name="chitem9" value="Item 9">Item 9</li>
-			<li><input type="checkbox" name="chitem10" value="Item 10">Item 10</li>
-			<li><input type="checkbox" name="chitem11" value="Item 11">Item 11</li>
-			<li><input type="checkbox" name="chitem12" value="Item 12">Item 12</li>
-			<li><input type="checkbox" name="chitem13" value="Item 13">Item 13</li>
-			<li><input type="checkbox" name="chitem14" value="Item 14">Item 14</li>
-			<li><input type="checkbox" name="chitem15" value="Item 15">Item 15</li>
-			<li><input type="checkbox" name="chitem16" value="Item 16">Item 16</li>
-		</ul>
+				</div>
+
+				<br> <br>
+				<!-- 캘린더 시작  -->
+				<div class="row">
+					<div class="tab-pane active row justify-content-center">
+						<div id='calendar'></div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div>
 	</div>
-<jsp:include page="/WEB-INF/views/chatbot.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
-  </body>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+
+
+	<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            googleCalendarApiKey : "'AIzaSyApQkLavc0ttR7NIRHvdf6ncX1DMc9OAhM'",
+            eventSources : [
+                {
+                    googleCalendarId : '7bbd24c0dfa76e1a7c63eaaeb126d9bd0442f78cd7800e222947fccd06257cfc@group.calendar.google.com',
+                    backgroundColor : '#FF6D6D',
+                    textColor : '#FFFFFF'
+                },
+                {
+                    events: ${svcJson},
+    
+                }
+
+            ],
+            initialView : 'dayGridMonth',
+            headerToolbar : {
+                start : 'prev next today',
+                center : 'title',
+                end : 'dayGridMonth,dayGridWeek,dayGridDay'
+            },
+            titleFormat : function(date) {
+                return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+            },
+            selectable : true,
+            droppable : true,
+            editable : true,
+            nowIndicator : true,
+            locale : 'ko'
+            	
+        });
+
+        calendar.render();
+    });
+</script>
+</body>
 </html>

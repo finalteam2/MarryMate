@@ -22,15 +22,17 @@ public class ChecklistDAOImple implements ChecklistDAO {
 	}
 	
 	@Override
-	public int checklistDel(String schedule) {
-		int count=sqlMap.delete("checklistDel", schedule);
+	public int checklistDel(int ch_idx) {
+		int count=sqlMap.delete("checklistDel", ch_idx);
 		return count;
 	}
 
 	@Override
-	public List<ChecklistDTO> checklistAll() {
-		List<ChecklistDTO> list=sqlMap.selectList("checklistAll");
-		return list;
+	public List<ChecklistDTO> checklistAll(int midx) {
+		return sqlMap.selectList("checklistAll", midx);
+
 	}
 
+	
+	
 }

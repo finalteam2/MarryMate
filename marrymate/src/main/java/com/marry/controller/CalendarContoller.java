@@ -1,6 +1,7 @@
 package com.marry.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookListDTO;
@@ -47,12 +55,79 @@ public class CalendarContoller {
 	@Autowired
 	private CalendarDAO calendarDao;
 	
-
+	@Autowired
+	private MemberDAO memberDao;
 	
-	@RequestMapping(value="/calendarMain.do", method = RequestMethod.GET)
-	public String calendarMain() {
-		return "calendar/calendarMain";
+	@RequestMapping("/calendar.do")
+	public String calendar() {
+		return "calendar/calendar";
 	}
+	
+
+	@RequestMapping("/calendarMain.do")
+	public ModelAndView calendarMain(
+			HttpSession session) {
+		int midx= (int) session.getAttribute("loginMidx");
+		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
+		//List<PlanDTO> plist = planDao.planlistAll(midx);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("checklistItems", list);
+		//mav.addObject("planlists", plist);
+		mav.setViewName("calendar/calendarMain");
+		return mav;
+	}
+	
+	@RequestMapping("/calendarInfo.do")
+	public ModelAndView calendarInfo(
+			HttpSession session) {
+		int midx= (int) session.getAttribute("loginMidx");
+		
+		List<PlanDTO> plist = planDao.planlistAll(midx);
+		
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
+		
+		
+		JSONArray jsonArray = new JSONArray();
+		int svcing_count = 0;
+		int svc_count = 0;
+		for(PlanDTO dto: plist) {
+			
+			JSONObject jsonObject = new JSONObject();
+			
+			dto.getPdate();
+
+
+			jsonObject.put("start", dto.getPdate()+":00");
+			jsonObject.put("backgroundColor", "red");
+			jsonObject.put("textColor","white" ); // 폰트 색상을 지정
+			jsonObject.put("borderColor", "red");
+			jsonObject.put("borderWidth", "1px");
+			jsonObject.put("url", dto.getMidx());
+			jsonObject.put("className", dto.getTitle());
+
+			
+			jsonArray.add(jsonObject);
+			
+			  
+		}
+		String jsonStr = jsonArray.toString();
+
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("svcing_count",svcing_count);
+		mav.addObject("svc_count",svc_count);
+		mav.addObject("planlists", plist);
+	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
+	    mav.setViewName("calendar/calendarInfo");
+		return mav;
+		
+	}
+	
 	
 	@RequestMapping("/calendarMainCom.do")
 	public String CalendarMainCom() {
@@ -97,27 +172,23 @@ public class CalendarContoller {
 		return mav;
 	}
 	
+	
 	@RequestMapping("/checklistDel.do")
-	public ModelAndView checklistDel(String schedule) {
-		int result=checklistDao.checklistDel(schedule);
+	public ModelAndView checklistDel(HttpSession session) {
+		
+		int ch_idx= (int) session.getAttribute("loginMidx");
+		int result=checklistDao.checklistDel(ch_idx);
 		String msg=result>=0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
+		
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("url", "calendarMain.do");
 		mav.addObject("msg", msg);
 		mav.setViewName("calendar/checklistMsg");
 		return mav;
 	}
 	
-	@RequestMapping("/calendarMain.do")
-	public ModelAndView checklistAll() {
-		
-		List<ChecklistDTO> list = checklistDao.checklistAll();
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("checklistItems", list);
-		mav.setViewName("calendar/calendarMain");
-		return mav;
-		
-	}
 	
-		
 	
+	
+
 }

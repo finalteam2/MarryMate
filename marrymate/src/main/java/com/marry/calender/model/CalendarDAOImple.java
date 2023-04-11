@@ -33,28 +33,6 @@ public class CalendarDAOImple implements CalendarDAO {
 		this.sqlMap = sqlMap;
 	}
 	
-	public CalendarDAOImple() {
-		this.calendarDTO = new CalendarDTO();
-		this.calendarDAO = null;
-	
-	}
-	
-	private final CalendarDTO calendarDTO;
-	
-	private final CalendarDAO calendarDAO;
-
-    public CalendarDAOImple(CalendarDTO calendarDTO) {
-        this.calendarDTO = calendarDTO;
-		this.calendarDAO = null;
-    }
-	
-	private HttpServletRequest request;
-
-	public CalendarDAOImple(HttpServletRequest request) {
-		this.calendarDTO = new CalendarDTO();
-		this.request = request;
-		this.calendarDAO = null;
-	}
 
 	@Override
 	public int coupleInfo(int cal_idx) {
