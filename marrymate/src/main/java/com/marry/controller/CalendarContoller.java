@@ -77,12 +77,13 @@ public class CalendarContoller {
 	    String thisMonth = sdf.format(cal.getTime());
 	    String month = sdf2.format(cal.getTime());
 			
-	    List<PlanDTO> svcing = planDao.planlistAll(0);
+	    List<PlanDTO> pdto = planDao.planlistAll(0);
 			
 	    JSONArray jsonArray = new JSONArray();
-	    int svcing_count = 0;
-	    int svc_count = 0;
-	    for(PlanDTO dto: svcing) {
+	    int allnum = 0;
+	    int paynum = 0;
+	    int reservnum = 0;
+	    for(PlanDTO dto: pdto) {
 				
 	        JSONObject jsonObject = new JSONObject();
 				
@@ -100,16 +101,15 @@ public class CalendarContoller {
 			
 	    ModelAndView mav = new ModelAndView();
 	    
-	    mav.addObject("svcing_count",svcing_count);
-	    mav.addObject("svc_count",svc_count);
+	    mav.addObject("allnum",allnum);
+	    mav.addObject("paynum",paynum);
+	    mav.addObject("reservnum",reservnum);
 	    mav.addObject("month",month);
-	    mav.addObject("planlists", plist);
-	    mav.addObject("svcDTO", svcing);
+	    mav.addObject("svcDTO", pdto);
 	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
 	    mav.addObject("jsonArray", jsonArray);
-	 
+	    mav.addObject("planlists", plist);
 		mav.addObject("checklistItems", list);
-		//mav.addObject("planlists", plist);
 		mav.setViewName("calendar/calendarMain");
 		return mav;
 	}
@@ -211,8 +211,8 @@ public class CalendarContoller {
 		String msg=result>0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("url", "calendarMain.do");
 		mav.addObject("msg", msg);
+		mav.addObject("url", "calendarMain.do");
 		mav.setViewName("calendar/checklistMsg");
 		return mav;
 	}
@@ -222,15 +222,13 @@ public class CalendarContoller {
 	public ModelAndView planlistDel(PlanDTO pdto) {
 		
 		int result=planDao.planlistDel(pdto.getMyp_idx());
-		String msg=result>0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
+		String msg=result>0?"일정 삭제 완료!":"일정 삭제 실패!";
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("url", "calendarMain.do");
 		mav.addObject("msg", msg);
-		mav.setViewName("calendar/checklistMsg");
+		mav.addObject("url", "calendarMain.do");
+		mav.setViewName("calendar/planlistMsg");
 		return mav;
 	}
-	
-	
 
 }

@@ -112,6 +112,14 @@ function checkdel(){
 	window.open("checklistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
 }
 
+
+function plandel(){
+	var w = (window.screen.width/2)-200;
+	var h = (window.screen.height/2)-200;
+	window.open("planlistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+}
+
+
 function checkuse(){
 	window.open("checklistShow.do","checkuse");
 }
@@ -216,10 +224,49 @@ $(function(){
 	<br>
 	<!--calendarShow-->
 
-	<div id='calendar'></div>
-	<div id='popup'
-		style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">	<input type="hidden" name="midx" value="${sessionScope.loginMidx}"></div>
+	<div class="app-wrapper">
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container pt-5">
+				<h3 class="text-center mb-4">전체 스케줄 보기</h3>
 
+				<div class="row g-4 mb-4 d-flex justify-content-center">
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">모든 일정</h4>
+								<div class="stats-figure">${allnum }</div>
+								<div class="stats-meta text-success">건</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">잔금 건</h4>
+								<div class="stats-figure">${paynum }</div>
+								<div class="stats-meta text-success">건</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">예약 건</h4>
+								<div class="stats-figure">${reservnum }</div>
+								<div class="stats-meta text-success">건</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 캘린더 시작  -->
+			<div id='calendar'></div>
+			<div id='popup'
+				style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">
+				<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+			</div>
+		</div>
+	</div>
 
 	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 
@@ -302,9 +349,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	<!--mainMyweddingAnimation : s-->
-	<div class="mainMyweddingAnimationScroll">
 
-		<!--  
+	<div class="mainMyweddingAnimationScroll">
+		<!-- 
 		<div class="infoArea">
 			<ul>
 				<li><a href="javascript:void(0);" class="moveScroll"
@@ -328,15 +375,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				</a></li>
 			</ul>
 		</div>
-		
+	</div>
 		-->
+	<div class="ddaygoal">
 		<div class="goal">
-
 			<strong><span class="d-day" id="dDayOnly"></span></strong>
-
 		</div>
 	</div>
-
+</div>
 	<!-- checklist add/select -->
 
 
@@ -349,68 +395,69 @@ document.addEventListener('DOMContentLoaded', function() {
 		<a>모든 체크리스트</a>
 	</h3>
 	<form action="checklistDel.do" method="post">
-	<table border="1" width="900" cellspacing="0">
-		<thead>
-			<tr>
-				<th>제목</th>
-				<th>일자</th>
-				<th>내용</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${empty checklistItems}">
+		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
+		<table border="1" width="900" cellspacing="0">
+			<thead>
 				<tr>
-					<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+					<th>제목</th>
+					<th>일자</th>
+					<th>내용</th>
+					<th></th>
 				</tr>
-			</c:if>
-			<c:forEach var="dto" items="${checklistItems}">
-			<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
-				<tr>
-					<td>${dto.title}</td>
-					<td>${dto.dueday}</td>
-					<td>${dto.content}</td>
-					<td><input type="submit" value="삭제"><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+			</thead>
+			<tbody>
+				<c:if test="${empty checklistItems}">
+					<tr>
+						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="dto" items="${checklistItems}">
+					<tr>
+						<td>${dto.title}</td>
+						<td>${dto.dueday}</td>
+						<td>${dto.content}</td>
+						<td><input type="submit" value="삭제">
+						<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
 
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</form>
 
-	<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 	<h3>
-		<a>테스트</a>
+		<a>일정 출력 테스트</a>
 	</h3>
 	<form action="planlistDel.do" method="post">
-	<table border="1" width="900" cellspacing="0">
-		<thead>
-			<tr>
-				<th>제목</th>
-				<th>일자</th>
-				<th>내용</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${empty planlists}">
+	<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
+		<table border="1" width="900" cellspacing="0">
+			<thead>
 				<tr>
-					<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+					<th>제목</th>
+					<th>일자</th>
+					<th>내용</th>
+					<th></th>
 				</tr>
-			</c:if>
-			<c:forEach var="pdto" items="${planlists}">
-			<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
-				<tr>
-					<td>${pdto.title}</td>
-					<td>${pdto.pdate}</td>
-					<td>${pdto.content}</td>
-					<td><input type="submit" value="삭제"><button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:if test="${empty planlists}">
+					<tr>
+						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="pdto" items="${planlists}">
+					<tr>
+						<td>${pdto.title}</td>
+						<td>${pdto.pdate}</td>
+						<td>${pdto.content}</td>
+						<td><input type="submit" value="삭제">
+						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</form>
-		
+
 	<script type="text/javascript">
 function setCheckboxChecked(checkboxId) {
 	  var checkbox = document.getElementById(checkboxId);
@@ -445,7 +492,7 @@ if (checkedStatus === 'checked') {
 	<hr>
 
 	<div class="myWeddingMenuWrap">
-		<h3>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h3>
+		<h2>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h2>
 	</div>
 
 	<div class="contestList">
