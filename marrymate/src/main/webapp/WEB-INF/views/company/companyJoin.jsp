@@ -250,7 +250,7 @@
 	<section>
 		<article>
 			<h2>기업 회원가입</h2>
-			<form name="companyJoin" action="companyJoin.do" method="post" enctype="multipart/form-data">
+			<form name="companyJoin" action="companyJoin.do" method="post" enctype="multipart/form-data" onsubmit="return allCheckForm()">
 			<div class="box">
 				<div id="iBox">
 				

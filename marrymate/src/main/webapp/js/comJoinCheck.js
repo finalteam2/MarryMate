@@ -20,29 +20,6 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function() {
-  $('#gnamecb').click(function() {
-    var gname = $('#gname').val();
-    if (gname == '') {
-      alert('추천인 아이디를 입력해주세요.');
-      return;
-    }
-    $.ajax({
-      url: 'checkGname.do',
-      type: 'POST',
-      data: { gname: gname },
-      success: function(result) {
-        if (result == 'true') {
-          $('#gnameCheck').css('color', 'blue').text('존재하는 추천인입니다.');
-        } else {
-          $('#gname').val("");
-          $('#gnameCheck').css('color', 'red').text('추천인이 존재하지 않습니다.');
-        }
-      }
-    });
-  });
-});
-
 function checkPwd() {
   var pwd = document.getElementById("pwd").value;
   var reCheckPwd = document.getElementById("reCheckPwd").value;
@@ -72,79 +49,55 @@ function checkPwd() {
     if (reCheckPwd === "") {
       rePwdMsg.innerText = "비밀번호 확인을 입력해주세요.";
       rePwdMsg.style.color = "red";
+      return false;
     } else if (pwd === reCheckPwd) {
       rePwdMsg.style.color = "blue";
       rePwdMsg.innerText = "비밀번호가 일치합니다.";
+      return true;
     } else {
       rePwdMsg.style.color = "red";
       rePwdMsg.innerText = "비밀번호가 일치하지 않습니다.";
+      return false;
     }
   }
-}
-
-window.onload = function() {
-  var today = new Date().toISOString().split("T")[0];
-  document.getElementById("birthday").setAttribute("max", today);
-  document.getElementById("marrydate").setAttribute("min", today);
-
-  var toggleDate = document.getElementById("toggleDate");
-  toggleDate.addEventListener("click", togglePut);
-};
-
-function togglePut() {
-  var datePut = document.getElementById("datePut");
-  var marrydate = '<input type="date" name="marrydate" min="' + new Date().toISOString().split("T")[0] + '">';
-
-  if (toggleDate.checked) {
-    marrydate = '<input type="hidden" name="marrydate" value="1111-11-11">';
-  }
-
-  datePut.innerHTML = marrydate;
 }
 
 
 function allCheckForm() {
   var inputs = document.getElementsByTagName("input");
-  var rule_1 = document.getElementsByName("rule_1")[0];
-  var rule_2 = document.getElementsByName("rule_2")[0];
-  var gender = document.getElementsByName("gender");
-  var genderChecked = false;
-  
-  for (var i = 0; i < gender.length; i++) {
-    if (gender[i].checked) {
-      genderChecked = true;
+  var payInput = document.getElementsByName("pay")[0];
+  var selectedRadio = false; // 선택된 라디오 버튼이 있는지를 나타내는 변수
+
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].name === "kind" && inputs[i].checked) {
+      selectedRadio = true;
       break;
     }
-  }
-  
-  if (!genderChecked) {
-    alert("성별을 체크해주셔야합니다.");
-    return false;
-  }
-  
-  var pwd = document.getElementById("pwd").value;
-  var reCheckPwd = document.getElementById("reCheckPwd").value;
-
-  if (pwd !== reCheckPwd) {
-    alert("비밀번호가 일치하지 않습니다.");
-    return false;
-  }
-
-  if (!checkPwd()) {
-    alert("비밀번호가 조건에 맞지 않습니다.");
-    return false;
-  }
-  
-  if (!rule_1.checked || !rule_2.checked) {
-    alert("필수 약관에 동의해주셔야 서비스를 이용할 수 있습니다.");
-    return false;
-  }
-  
-  for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].name !== "gname" && inputs[i].name !== "pname" && inputs[i].value === "") {
+    if (inputs[i].name !== "curl" && inputs[i].type !== "file" && inputs[i].value === "") {
       alert("선택 정보를 제외한 필수적인 정보들을 기입해주세요.");
       return false;
     }
   }
+  
+  if (!selectedRadio) {
+    alert("업종을 선택해주세요.");
+    return false;
+  }
+  
+  if ($('#idCheck').text() !== '사용 가능한 아이디입니다.') {
+    alert("아이디 중복 확인을 해야합니다.");
+    return false;
+  }
+  
+  if (!checkPwd()) {
+  alert("비밀번호가 조건에 맞지 않습니다.");
+  return false;
+  }
+  
+  if (payInput && (payInput.value.trim() === "" || isNaN(payInput.value.trim()))) {
+    alert("상품 가격을 숫자로 입력해주세요.");
+    return false;
+  }
+  
   return true;
 }

@@ -135,11 +135,28 @@ function allCheckForm() {
   var gender = document.getElementsByName("gender");
   var genderChecked = false;
   
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].name !== "gname" && inputs[i].name !== "marrydate" && inputs[i].name !== "pname" && inputs[i].value === "") {
+      alert("선택 정보를 제외한 필수적인 정보들을 기입해주세요.");
+      return false;
+    }
+  }
+  
   for (var i = 0; i < gender.length; i++) {
     if (gender[i].checked) {
       genderChecked = true;
       break;
     }
+  }
+  
+  if ($('#nickCheck').text() !== '사용 가능한 닉네임입니다.') {
+    alert("닉네임 중복 확인을 해야합니다.");
+    return false;
+  }
+  
+  if ($('#idCheck').text() !== '사용 가능한 아이디입니다.') {
+    alert("아이디 중복 확인을 해야합니다.");
+    return false;
   }
   
   if (!checkPwd()) {
@@ -157,11 +174,5 @@ function allCheckForm() {
     return false;
   }
   
-  for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].name !== "gname" && inputs[i].name !== "marrydate" && inputs[i].name !== "pname" && inputs[i].value === "") {
-      alert("선택 정보를 제외한 필수적인 정보들을 기입해주세요.");
-      return false;
-    }
-  }
   return true;
 }

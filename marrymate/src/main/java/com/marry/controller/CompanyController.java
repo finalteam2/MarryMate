@@ -78,21 +78,17 @@ public class CompanyController {
 			dto.setImg(img);
 		}
 		
-		String hallInfo=req.getParameter("kind");
-		
 		int result=companyDao.coJoin(dto);
-		String msg=result>0?"정보를 입력해주세요":"가입 실패";
-		
-		String id=req.getParameter("id");
-		int cidx=companyDao.getCidx(id);
+		String msg=result>0?"회원 가입이 완료되었습니다. 추가적인 정보를 기입해주세요.":"회원 가입 실패";
 		
 		HttpSession session=req.getSession();
-		session.setAttribute("cidx", cidx);
+		session.setAttribute("com_cidx", dto.getCidx());
+		session.setAttribute("com_id", dto.getId());
+		session.setAttribute("com_cname", dto.getCname());
 		
 		ModelAndView mav = new ModelAndView();
-		
 		mav.addObject("msg", msg);
-		mav.addObject("url", "index.do");
+		mav.addObject("url", "myInfo_c.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		
