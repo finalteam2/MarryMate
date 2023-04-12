@@ -15,8 +15,6 @@ public class BookDTO {
 	private Date bookdate;
 	private int hall_nothall;
 	
-	
-	
 	public BookDTO() {
 		super();
 	}
