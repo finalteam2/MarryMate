@@ -6,28 +6,94 @@
 <head>
 <meta charset="UTF-8">
 <title>MyPoint</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link href="/marrymate/css/style.css" rel="stylesheet">
+<style>
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+article table{
+	width: 60%;
+	margin: auto;
+	border-collapse: collapse;
+	text-align: center;
+}
+article table thead{
+	border-bottom: 20px solid white;
+	background-color: #c797eb;
+}
+article table thead th{
+	color: white;
+	font-family: 'SUIT-Regular';
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+article table tbody td{
+	font-family: 'SUIT-Regular';
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid black; 
+}
+h2{
+	font-family: 'SUIT-Regular';
+}
+</style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
-<c:if test="${empty arr }">
-<h1>포인트 내역이 없습니다.</h1>
-</c:if>
-<c:forEach var="dto" items="${arr }">
-P_IDX : ${dto.p_idx }<br>
-MIDX : ${dto.midx }<br>
-PAY_IDX : ${dto.pay_idx }<br>
-REFUND_IDX : ${dto.refund_idx }<br>
-BIDX : ${dto.bidx }<br>
-P_CAL : ${dto.p_cal }<br>
-P_DATE : ${dto.p_date }<br>
-P_TOTAL : ${dto.p_total }<br>
-P_TYPE : ${dto.p_type }<br>
-<hr>
-</c:forEach>
-
+<section>
+	<article>
+		<h2>My 포인트</h2>
+		<hr>
+		<br>
+		<div>
+			<br><br>
+			<table>
+				<thead>
+					<tr>
+						<th>Date.</th>
+						<th>포인트</th>
+						<th>지급/사용처</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${empty arr}">
+						<tr>
+							<td colspan="3">포인트 내역이 없습니다.</td>
+						</tr>				
+					</c:if>
+					<c:forEach var="dto" items="${arr }">
+					<tr>
+						<c:if test="${dto.p_cal==0 }">
+							<tr>
+							<td colspan="3">포인트 내역이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${dto.p_cal!=0 }">
+						<td>${dto.p_date }</td>
+						<c:if test="${dto.p_cal>0 }">
+						<td style='color:blue;'> ${dto.p_cal }</td>
+						</c:if>
+						<c:if test="${dto.p_cal<0 }">
+						<td style='color:red;'>${dto.p_cal }</td>
+						</c:if>
+						<td>${dto.p_type }</td>
+						</c:if>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<br><br>
+			<hr>
+		</div>
+	</article>
+</section>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>
