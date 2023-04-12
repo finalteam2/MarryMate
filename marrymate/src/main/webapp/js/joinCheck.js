@@ -121,7 +121,7 @@ function togglePut() {
   var marrydate = '<input type="date" name="marrydate" min="' + new Date().toISOString().split("T")[0] + '">';
 
   if (toggleDate.checked) {
-    marrydate = '<input type="hidden" name="marrydate" value="1111-11-11">';
+    marrydate = '<input type="hidden" name="marrydate" value="">';
   }
 
   datePut.innerHTML = marrydate;
@@ -158,7 +158,7 @@ function allCheckForm() {
   }
   
   for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].name !== "gname" && inputs[i].name !== "pname" && inputs[i].value === "") {
+    if (inputs[i].name !== "gname" && inputs[i].name !== "marrydate" && inputs[i].name !== "pname" && inputs[i].value === "") {
       alert("선택 정보를 제외한 필수적인 정보들을 기입해주세요.");
       return false;
     }
