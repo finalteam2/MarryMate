@@ -106,9 +106,10 @@ textarea {
 	 resize:none;
 }
 
-.accordion-button {
+.acbtm {
 	padding: 20px 16px;
     font-size: 22px;
+    background-color: #f0ecfc;
 }
 </style>
 
@@ -221,7 +222,7 @@ textarea {
 	    <tr>
 	      <th scope="row">${status.count }</th>
 	      <td>${fdto.name }</td>
-	      <td>${fdto.pay }</td>
+	      <td>${fdto.pay } 원</td>
 	    </tr>
 	</c:forEach>
 	  </tbody>
@@ -311,11 +312,13 @@ textarea {
 	    </h2>
 	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
-	        ${dto.subject }<br>
 	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <br><b style="font-size: 20px">Q.</b>&nbsp;&nbsp;${dto.subject }
 	        <pre>${dto.content }</pre> 
 	        <br>
+	        
 	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small><br>
+	        <b style="font-size: 20px">A.</b>&nbsp;&nbsp;re : ${dto.subject }
 	        <pre>${dto.answer }</pre>
 	      </div>
 	    </div>
@@ -374,7 +377,7 @@ textarea {
 	<div class="accordion" id="accordionExample">
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="headingOne">
-	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	      <button class="accordion-button acbtm collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 	        메뉴 바
 	      </button>
 	    </h2>

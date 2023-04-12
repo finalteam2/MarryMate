@@ -49,11 +49,6 @@
 	color:#ae59f4;
 }
 
-.accordion-button {
-    color: black;
-    background-color: #f0ecfc;
-}
-
 .accordion-button:not(.collapsed) {
     color: black;
     background-color: #f0ecfc;

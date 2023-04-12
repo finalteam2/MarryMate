@@ -54,15 +54,19 @@ article.sizefix{
 	    </h2>
 	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
-	        ${dto.subject }<br>
 	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <br><b style="font-size: 20px">Q.</b>&nbsp;&nbsp;${dto.subject }
 	        <pre>${dto.content }</pre> 
 	        <br>
 	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small>
 	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
 	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
 	        <br>
+	        
+	        <c:if test="${dto.is_answered == 1 }">
+	        <b style="font-size: 20px">A.</b>&nbsp;&nbsp;re : ${dto.subject }
 	        <pre>${dto.answer }</pre>
+	        </c:if>
 	      </div>
 	    </div>
 	  </div>
@@ -82,14 +86,15 @@ article.sizefix{
 	    </h2>
 	    <div id="collapse${status.count }" class="accordion-collapse collapse" aria-labelledby="heading${status.count }" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
-	        ${dto.subject }<br>
 	        ${dto.mname } <small class="text-muted">${dto.csdate }</small>
+	        <br><b style="font-size: 20px">Q.</b>&nbsp;&nbsp;${dto.subject }
 	        <pre>${dto.content }</pre> 
 	        <br>
 	        ${dto.cname } <small class="text-muted">${dto.ansdate }</small>
 	        <c:if test="${dto.is_answered == 0 }"><span style="color: red;">답변대기</span></c:if>
 	        <c:if test="${dto.is_answered == 1 }"><span style="color: blue;">답변완료</span></c:if>
 	        <br>
+	        <b style="font-size: 20px">A.</b>&nbsp;&nbsp;re : ${dto.subject }
 	        <pre>${dto.answer }</pre>
 	        <c:if test="${dto.is_answered == 0 }">
 	      	<div class="mb-3">
