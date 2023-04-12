@@ -61,6 +61,11 @@ public class MypageController {
 		
 	}
 	
+    @RequestMapping("/favorite.do")
+    public String favorite() {
+        return "/mypage/favorite";
+    }
+	
 	@RequestMapping("/myInfo_m.do")
 	public ModelAndView myInfo_m(HttpServletRequest req) {
 		HttpSession session = req.getSession();
