@@ -12,6 +12,16 @@
 <link rel="stylesheet" href="/marrymate/css/chat.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/sakura.js"></script>
+<style>
+.carousel, .carousel-inner, .carousel-item, .d-block{
+	width: 1200px;
+	height: 600px;
+}
+
+.d-block {
+	object-fit: cover;
+}
+</style>
 </head>
 
 <body>
