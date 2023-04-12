@@ -66,4 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by
 			cname asc, company.cidx desc
 	</select>
+	<insert id="bookInfo" parameterType="com.marry.book.model.BookDTO">
+		
+	</insert>
 </mapper>

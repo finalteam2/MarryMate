@@ -18,7 +18,7 @@ function showLoad(){
 	//최종 예약금
 	document.getElementById('finalPrice').innerHTML=sum*0.2;
 	
-	document.getElementById('payButton').value=sum*0.2+' 원 결제하기';
+	document.getElementById('payButton').innerHTML=sum*0.2+' 원 결제하기';
 }
 function allUsePoint(){
 	var havePointNode=document.getElementById('havePoint');
@@ -36,7 +36,7 @@ function allUsePoint(){
 	var bookPrice=parseInt(document.getElementById('bookPrice').firstChild.nodeValue);
 	document.getElementById('finalPrice').innerHTML=bookPrice-havePoint;
 	
-	document.getElementById('payButton').value=bookPrice-havePoint+' 원 결제하기';
+	document.getElementById('payButton').innerHTML=bookPrice-havePoint+' 원 결제하기';
 }
 function usePoint(){
 	var havePointNode=document.getElementById('havePoint');
@@ -57,12 +57,12 @@ function usePoint(){
 		afterPointNode.innerHTML=havePoint-usePoint;
 		usePointNode.innerHTML=usePoint;
 		document.getElementById('finalPrice').innerHTML=bookPrice-usePoint;
-		document.getElementById('payButton').value=bookPrice-usePoint+' 원 결제하기';
+		document.getElementById('payButton').innerHTML=bookPrice-usePoint+' 원 결제하기';
 	}else{
 		document.getElementById('usePoint_input').value=havePoint;
 		afterPointNode.innerHTML=0;
 		usePointNode.innerHTML=havePoint;
 		document.getElementById('finalPrice').innerHTML=bookPrice-havePoint;
-		document.getElementById('payButton').value=bookPrice-havePoint+' 원 결제하기';
+		document.getElementById('payButton').innerHTML=bookPrice-havePoint+' 원 결제하기';
 	}
 }

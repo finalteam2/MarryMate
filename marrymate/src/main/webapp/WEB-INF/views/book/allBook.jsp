@@ -19,7 +19,7 @@ function cartCheck(){
 	var hiddens=document.querySelectorAll('#bookFm input[type="hidden"]');
 	var loginMidx='${sessionScope.loginMidx}';
 	
-	if(loginMidx=="0"){
+	if(loginMidx==""){
 		window.alert('로그인한 회원만 예약이 가능합니다.');
 		return false;
 	}
@@ -159,7 +159,7 @@ function cartCheck(){
 			</div>
 			<h3 class="sumPay_text1">총 금액</h3>
 			<h3 id="sumPay_text2" class="sumPay_text2">0 원</h3>
-			<form onsubmit="return cartCheck()" id="bookFm" name="bookFm" action="bookSubmit.do">
+			<form onsubmit="return cartCheck()" id="bookFm" name="bookFm" action="notHallSubmit.do" method="post">
 				<div class="book_box">
 					<input class="book_button" type="submit" value="예 약 하 기">
 				</div>

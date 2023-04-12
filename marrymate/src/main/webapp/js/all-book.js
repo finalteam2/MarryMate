@@ -216,6 +216,13 @@ function showListResult(){
 
 
 function addCart(cidx){
+	var check=document.getElementById('cart_table'+cidx);
+	
+	if(!(check==null)){
+		window.alert('이미 담겨있는 상품입니다.');
+		return false;
+	}
+	
 	var param='cidx='+cidx;
 	sendRequest('addCart.do',param,'GET',showCartResult);
 }

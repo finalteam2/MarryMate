@@ -10,13 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookDAOImple;
 import com.marry.book.model.CartDTO;
 import com.marry.book.model.FilterDTO;
+import com.marry.book.model.HallDTO;
 import com.marry.company.model.CompanyDTO;
 
 @Controller
@@ -113,6 +116,7 @@ public class BookController {
 		
 		FilterDTO dto=new FilterDTO(filterText, filterDate, filterSido, filterPriceMin, filterPriceMax, filterCate);
 		
+		
 		List<CompanyDTO> arr=bookDao.searchBookList(dto);
 		
 		ModelAndView mav=new ModelAndView();
@@ -121,9 +125,9 @@ public class BookController {
 		return mav;
 	}
 	
-	/**통합예약내 예약하기 클릭시*/
-	@RequestMapping("/bookSubmit.do")
-	public ModelAndView bookSubmit(HttpServletRequest req) {
+	/**홀제외 업체 정보 결제페이지로*/
+	@RequestMapping(value = "/notHallSubmit.do", method = RequestMethod.POST)
+	public ModelAndView notHallSubmit(HttpServletRequest req) {
 		
 		String[] cidxs=req.getParameterValues("cidx");
 		String[] bk_dates=req.getParameterValues("bk_date");
@@ -146,4 +150,66 @@ public class BookController {
 		return mav;
 	}
 	
+	/**홀 업체 정보 결제페이지로*/
+	@RequestMapping(value = "/hallSubmit.do", method = RequestMethod.POST)
+	public ModelAndView hallSubmit(@RequestBody HallDTO hallDto) {
+		
+		System.out.println("cidx:"+hallDto.getCidx());
+		System.out.println("hidx:"+hallDto.getHidx());
+		System.out.println("fidx:"+hallDto.getFidx());
+		System.out.println("h_name:"+hallDto.getH_name());
+		System.out.println("h_pay:"+hallDto.getH_pay());
+		System.out.println("guest_num:"+hallDto.getGuest_num());
+		System.out.println("f_name:"+hallDto.getF_name());
+		System.out.println("f_pay:"+hallDto.getF_pay());
+		System.out.println("bk_date:"+hallDto.getBk_date());
+		System.out.println("bk_time:"+hallDto.getBk_time());
+		System.out.println("kind:"+hallDto.getKind());
+		System.out.println("pay:"+hallDto.getPay());
+		System.out.println("img:"+hallDto.getImg());
+		System.out.println("name:"+hallDto.getName());
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("book/payment");
+		return mav;
+	}
+	
+	
+	/**결제시 결제정보받고 DB에 저장*/
+	@RequestMapping("/payment.do")
+	public ModelAndView payment(
+			@RequestParam(name = "midx",defaultValue = "")int midx,
+			@RequestParam(name = "cidx",defaultValue = "")int cidx,
+			@RequestParam(name = "bk_date",defaultValue = "")String bk_date,
+			@RequestParam(name = "bk_time",defaultValue = "")String bk_time,
+			@RequestParam(name = "hall_nothall",defaultValue = "")int hall_nothall,
+			@RequestParam(name = "pay_point",defaultValue = "")int pay_point,
+			@RequestParam(name = "pay_money",defaultValue = "")int pay_money) {
+		
+		
+		System.out.println(midx);
+		System.out.println(cidx);
+		System.out.println(bk_date);
+		System.out.println(bk_time);
+		System.out.println(hall_nothall);
+		System.out.println(pay_point);
+		System.out.println(pay_money);
+		
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("book/paymentResult");
+		return mav;
+	}
+	
+	
+	/**결제완료후 결제정보페이지로 이동*/
+	@RequestMapping("/payResult.do")
+	public ModelAndView payResult() {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("book/paymentResult");
+		return mav;
+	}
 }
