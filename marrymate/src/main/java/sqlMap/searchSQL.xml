@@ -45,18 +45,22 @@
 	 		</if>
 			<if test="sort == null or sort == 1">
 			order by
+				topfix desc,
 				cname asc, cidx desc
 			</if>
 			<if test="sort == 2">
 			order by
+				topfix desc,
 				watch desc, cidx desc
 			</if>
 			<if test="sort == 3">
 			order by
+				topfix desc,
 				pay asc, cidx desc
 			</if>
 			<if test="sort == 4">
 			order by
+				topfix desc,
 				pay desc, cidx desc
 			</if>
 		)a)b

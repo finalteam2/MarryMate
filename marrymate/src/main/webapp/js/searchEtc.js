@@ -148,9 +148,11 @@ function searchResult(){
 						
 						var newNameNode = document.createElement('span');
 						newNameNode.setAttribute('class','card-text');
-						var newNameTextNode = document.createTextNode(company.cname);
+						var newNameTextNode = document.createTextNode(company.cname + ' ');
 						newNameNode.appendChild(newNameTextNode);
-						
+						if(company.topfix == 1){
+						newNameNode.innerHTML += '<span class="badge rounded-pill text-bg-secondary">제휴</span>';
+						}		
 						var newSidoNode = document.createElement('span');
 						newSidoNode.setAttribute('class','card-text');
 						var newSidoTextNode = document.createTextNode(company.sido + ' / ');
