@@ -152,7 +152,35 @@ public class BookController {
 	
 	/**홀 업체 정보 결제페이지로*/
 	@RequestMapping(value = "/hallSubmit.do", method = RequestMethod.POST)
-	public ModelAndView hallSubmit(@RequestBody HallDTO hallDto) {
+	public ModelAndView hallSubmit(HallDTO hallDto, 
+			@RequestParam(value = "hstr", required = false)String hstr,
+			@RequestParam(value = "fstr", required = false)String fstr) {
+		//홀, 식당 정보 문자열로 받아서 재설정
+		try {
+			String hdata[] =  hstr.split(" ");
+			int hidx = Integer.parseInt(hdata[0]);
+			String h_name = hdata[1];
+			int h_pay = Integer.parseInt(hdata[2]);
+			int guest_num = Integer.parseInt(hdata[3]);
+			hallDto.setHidx(hidx);
+			hallDto.setH_name(h_name);
+			hallDto.setH_pay(h_pay);
+			hallDto.setGuest_num(guest_num);
+			
+			String fdata[] =  fstr.split(" ");
+			int fidx = Integer.parseInt(fdata[0]);
+			String f_name = fdata[1];
+			int f_pay = Integer.parseInt(fdata[2]);
+			hallDto.setFidx(fidx);
+			hallDto.setF_name(f_name);
+			hallDto.setF_pay(f_pay);
+			
+			//최종 금액 계산 및 설정
+			hallDto.setPay(h_pay + guest_num * f_pay);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println("cidx:"+hallDto.getCidx());
 		System.out.println("hidx:"+hallDto.getHidx());

@@ -94,8 +94,11 @@ div.allpage{
 	  	  <c:if test="${dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4}">
 		  	  <button type="button" onclick="" class="btn btn-outline-secondary" disabled>취소</button>
 	  	  </c:if>
-	  	  <c:if test="${not (dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4)}">
+	  	  <c:if test="${not (dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4 || dto.bk_state eq 1)}">
 			  <button type="button" onclick="" class="btn btn-outline-danger" >취소</button>
+	  	  </c:if>
+	  	  <c:if test="${dto.bk_state eq 1}">
+			  <button type="button" onclick="" class="btn btn-outline-danger" >거부</button>
 	  	  </c:if>
 	  	</form>	  	
 	  </div>

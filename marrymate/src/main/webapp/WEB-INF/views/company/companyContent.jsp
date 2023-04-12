@@ -387,47 +387,92 @@ textarea {
 			로그인 후 이용 가능합니다
 		</c:if>
 		<c:if test="${not empty sessionScope.loginMidx }">
-		<form action="com_like.do" method="post">
-			<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
-			<input type="hidden" name="cidx" value="${dto.cidx }">
-		<c:if test="${empty ldto }">
-			<button type="submit" class="btn btn-outline-primary">
-			☆즐겨찾기☆
-			</button>
-		</c:if>
-		<c:if test="${not empty ldto}">
-			<input type="hidden" name="lidx" value="${ldto.lidx }">
-			<button type="submit" class="btn btn-primary">
-			☆즐겨찾기☆
-			</button>
-		</c:if>
-		</form>
-		<form action="" method="get">
-			<input type="button" name="midx" value="${sessionScope.loginMidx }">
-			<input type="button" name="cidx" value="${dto.cidx }">
-			<select name="hidx">
-				<c:forEach var="hdto" items="${harr }">
-				<option value="${hdto.hidx }">${hdto.name }(대관료 : ${hdto.pay } 최소보증인원 : ${hdto.guest_num })</option>
-				</c:forEach>
-			</select>
-			<select name="fidx">
-				<c:forEach var="fdto" items="${farr }">
-				<option value="${fdto.fidx }">${fdto.name }(식대 : ${fdto.pay })</option>
-				</c:forEach>
-			</select>
-			<input type="date" name="bk_date">
-			
-			cidx, hidx, booktime, book을 조회해서 선택 String bk_time;
+
 			
 			
-			midx
-			cidx
-			hidx
-			fidx
-			bk_date (예약하는 날짜)
-			bk_time (예약하는 시간)
+			<c:if test="${dto.kind eq '예식장' }">
+			<form action="hallSubmit.do" method="post">
+				<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
+				<div class="input-group mb-3" style="width: 50%;">
+				  <label class="input-group-text" for="inputGroupSelect01">웨딩홀</label>
+				  <select name="hstr" class="form-select" id="inputGroupSelect01">
+				    <option value="" selected>홀 선택</option>
+					<c:forEach var="hdto" items="${harr }">
+					<option value="${hdto.hidx } ${hdto.name } ${hdto.pay } ${hdto.guest_num }">${hdto.name }(대관료 : ${hdto.pay } 최소보증인원 : ${hdto.guest_num })</option>
+					</c:forEach>
+				  </select>
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <label class="input-group-text" for="inputGroupSelect01">식사</label>
+				  <select name="fstr" class="form-select" id="inputGroupSelect01">
+				    <option value="" selected>식사 선택</option>
+					<c:forEach var="fdto" items="${farr }">
+					<option value="${fdto.fidx } ${fdto.name } ${fdto.pay }">${fdto.name }(식대 : ${fdto.pay })</option>
+					</c:forEach>
+				  </select>
+				</div>
+				<input type="hidden" name="cidx" value="${dto.cidx }">
+				<input type="hidden" name="kind" value="${dto.kind }">
+				<input type="hidden" name="img" value="${dto.img }">
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">업체명</span>
+				  <input type="text" name="name" value="${dto.cname }" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" readonly>
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">예약일</span>
+				  <input type="date" name="bk_date" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">예약시간</span>
+				  <input type="text" name="bk_time" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
+				</div>
+				
+				<button type="submit" class="btn btn-primary">예약하기</button>
+			</form>
+			</c:if>
+
+			<c:if test="${not (dto.kind eq '예식장') }">
+			<form action="notHallSubmit.do" method="post">
+				<input type="hidden" name="cidx" value="${dto.cidx }">
+				<input type="hidden" name="kind" value="${dto.kind }">
+				<input type="hidden" name="img" value="${dto.img }">
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">업체명</span>
+				  <input type="text" name="cname" value="${dto.cname }" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" readonly>
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">예약일</span>
+				  <input type="date" name="bk_date" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">예약시간</span>
+				  <input type="text" name="bk_time" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group mb-3" style="width: 50%;">
+				  <span class="input-group-text" id="basic-addon1">비용</span>
+				  <input type="text" name="pay" value="${dto.pay }" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly>
+				</div>
+				<button type="submit" class="btn btn-primary">예약하기</button>
+				
+			</form>
+			</c:if>
 			
-		</form>
+			<form action="com_like.do" method="post">
+				<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
+				<input type="hidden" name="cidx" value="${dto.cidx }">
+			<c:if test="${empty ldto }">
+				<button type="submit" class="btn btn-outline-primary">
+				☆즐겨찾기☆
+				</button>
+			</c:if>
+			<c:if test="${not empty ldto}">
+				<input type="hidden" name="lidx" value="${ldto.lidx }">
+				<button type="submit" class="btn btn-primary">
+				☆즐겨찾기☆
+				</button>
+			</c:if>
+			</form>
+		
 		</c:if>
 		</div>
 	    </div>
