@@ -49,20 +49,25 @@
 	color:#ae59f4;
 }
 
+.accordion-button {
+    color: black;
+    background-color: #f0ecfc;
+}
+
 .accordion-button:not(.collapsed) {
     color: black;
-    background-color: #fbf4ff;
+    background-color: #f0ecfc;
 }
 
 .accordion-button:focus {
     z-index: 3;
-    border-color: #ae59f4;
+    border-color: #f0ecfc;
     outline: 0;
     box-shadow: 0px 0px 5px 1px #ae59f4;
 }
 
 .fixed-bottom {
-	width: 70%;
+	width: 1280px;
 	margin: 0px auto;
 }
 

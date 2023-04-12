@@ -55,8 +55,12 @@ body{
 	border: 2px solid #e1e1e1;
 	width: 400px;
 	height: 250px;
-	padding-top: 10px;
+	padding-top: 15px;
 	padding-left: 10px;
+}
+
+.info_area span {
+	line-height: 30px;
 }
 
  .map_area{
@@ -102,7 +106,10 @@ textarea {
 	 resize:none;
 }
 
-
+.accordion-button {
+	padding: 20px 16px;
+    font-size: 22px;
+}
 </style>
 
 <title>Insert title here</title>
@@ -168,8 +175,9 @@ textarea {
 	<h3>상세정보</h3>
 	
 	<br>
-	소개 : ${dto.intro }
+	업체소개
 	<br>
+	<pre>${dto.intro }</pre>
 	<br>
 	
 <c:if test="${dto.kind eq '예식장' }">
@@ -190,10 +198,10 @@ textarea {
 	    <tr>
 	      <th scope="row">${status.count }</th>
 	      <td>${hdto.name }</td>
-	      <td>${hdto.pay }</td>
-	      <td>${hdto.time }</td>
-	      <td>${hdto.guest_num }</td>
-	      <td>${hdto.seat_num }</td>
+	      <td>${hdto.pay } 원</td>
+	      <td>${hdto.time } 시간</td>
+	      <td>${hdto.guest_num } 명</td>
+	      <td>${hdto.seat_num } 명</td>
 	    </tr>
 	</c:forEach>
 	  </tbody>
