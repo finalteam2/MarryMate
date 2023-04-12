@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.marry.book.model.BookDAO;
 import com.marry.book.model.BookDTO;
 import com.marry.book.model.BookListDTO;
+import com.marry.calender.model.BookinfoDTO;
 import com.marry.calender.model.CalendarDAO;
 import com.marry.calender.model.CalendarDAOImple;
 import com.marry.calender.model.ChecklistDAO;
@@ -68,6 +69,7 @@ public class CalendarContoller {
 	@Autowired
 	private MemberDAO memberDao;
 	
+	
 	@RequestMapping("/calendar.do")
 	public String calendar() {
 		return "calendar/calendar";
@@ -83,55 +85,51 @@ public class CalendarContoller {
 		int midx= (int) session.getAttribute("loginMidx");
 		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
 		List<PlanDTO> plist = planDao.planlistAll(midx);
-		List<BookListDTO> blist = contentDao.selectMemBook(midx);
+		//List<CompanyDTO> clist = calendarDao.bookInfoTwo(midx);
+		List<BookinfoDTO> booklist = calendarDao.booklistAll(midx);
 		
 		Calendar cal = Calendar.getInstance();
 	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
 	    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
 	    String thisMonth = sdf.format(cal.getTime());
 	    String month = sdf2.format(cal.getTime());
-			
-	    //List<PlanDTO> pdto = planDao.planlistAll(0);
-			
+		
 	    JSONArray jsonArray = new JSONArray();
 	    int allnum = 0;
 	    int paynum = 0;
 	    int reservnum = 0;
+	    for (BookinfoDTO bdto : booklist) {
+	    	
+	        JSONObject jsonObject = new JSONObject();
+	        
+	        jsonObject.put("start", bdto.getBookdate());
+	        jsonObject.put("end", bdto.getBookdate());
+	        jsonObject.put("title", bdto.getCname());
+	        jsonObject.put("backgroundColor", "#e3ac46");
+	        jsonObject.put("textColor","white" ); 
+	        jsonObject.put("borderColor", "#e3e3e3");
+	        jsonObject.put("borderWidth", "1px");
+	        jsonObject.put("className", bdto.getCname());
+
+	        jsonArray.add(jsonObject);
+		}
+	    
 	    for(PlanDTO dto: plist) {
 				
 	        JSONObject jsonObject = new JSONObject();
-				
-	        
 	        
 	        jsonObject.put("start", dto.getPdate());
 	        jsonObject.put("end", dto.getPdate());
 	        jsonObject.put("title", dto.getTitle());
 	        jsonObject.put("backgroundColor", "#ca9cfc");
-	        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
+	        jsonObject.put("textColor","white" ); 
 	        jsonObject.put("borderColor", "#e3e3e3");
 	        jsonObject.put("borderWidth", "1px");
-	        jsonObject.put("url", "calendarMain.do?midx="+dto.getMidx());
 	        jsonObject.put("className", dto.getTitle());
 
 	        jsonArray.add(jsonObject);
 	    }
-	    for (BookListDTO bdto : blist) {
-	    	
-	        JSONObject jsonObject = new JSONObject();
-	        
-	        jsonObject.put("start", bdto.getBk_date());
-	        jsonObject.put("end", bdto.getBk_date());
-	        jsonObject.put("title", bdto.getCname());
-	        jsonObject.put("backgroundColor", "#e3ac46");
-	        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
-	        jsonObject.put("borderColor", "#e3e3e3");
-	        jsonObject.put("borderWidth", "1px");
-	        jsonObject.put("className",  bdto.getCname());
 
-	        jsonArray.add(jsonObject);
-		}
-			  
-	    
 	    String jsonStr = jsonArray.toString();
 			
 	    ModelAndView mav = new ModelAndView();
@@ -144,7 +142,8 @@ public class CalendarContoller {
 	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
 	    mav.addObject("jsonArray", jsonArray);
 	    mav.addObject("planlists", plist);
-	    mav.addObject("booklists", blist);
+	    mav.addObject("booklists", booklist);
+	    //mav.addObject("comlists", clist);
 		mav.addObject("checklistItems", list);
 		mav.setViewName("calendar/calendarMain");
 		return mav;

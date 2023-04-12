@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marry.book.model.BookDTO;
+import com.marry.company.model.CompanyDTO;
 import com.marry.member.model.MemberDTO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,11 +70,14 @@ public class CalendarDAOImple implements CalendarDAO {
 
 
 	@Override
-	public List<BookDTO> bookInfo(int midx) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BookinfoDTO> booklistAll(int midx) {
+		return sqlMap.selectList("booklistAll", midx);
 	}
 
+	@Override
+	public List<CompanyDTO> bookInfoTwo(int midx) {
+		return sqlMap.selectList("booklistAlltwo", midx);
+	}
 	@Override
 	public List<BookDTO> moneyBook(int midx) {
 		// TODO Auto-generated method stub

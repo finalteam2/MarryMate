@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.marry.book.model.BookDTO;
+import com.marry.company.model.CompanyDTO;
 import com.marry.member.model.MemberDTO;
 
 public interface CalendarDAO {
@@ -14,7 +15,8 @@ public interface CalendarDAO {
 	public int calendarShow(int cidx);
 	public int date(String loginMD);
 	public Date dateInfo(String loginMD);
-	public List<BookDTO> bookInfo(int midx);
+	public List<BookinfoDTO> booklistAll(int midx);
+	public List<CompanyDTO> bookInfoTwo(int midx);
 	public List<BookDTO> moneyBook(int midx);
 	public List<BookDTO> moneyLeft(int midx);
 	

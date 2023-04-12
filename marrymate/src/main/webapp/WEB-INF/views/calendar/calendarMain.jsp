@@ -407,7 +407,7 @@ $(function(){
 
 
 	<div style="padding-left: 65%">
-		<button type="button" id="checkadd" onclick="checkadd();">체크리스트
+		<button type="button" id="checkadd" onclick="checkadd();">새 체크리스트
 			등록</button>
 	</div>
 	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
@@ -501,7 +501,6 @@ $(function(){
 				<c:forEach var="bdto" items="${booklists}">
 					<tr>
 						<td>${bdto.bk_date}</td>
-						<td>${bdto.fname}</td>
 						<td>${bdto.cname}</td>
 						<td><input type="submit" value="삭제">
 						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
