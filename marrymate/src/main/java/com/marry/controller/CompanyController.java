@@ -92,7 +92,7 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("msg", msg);
-		mav.addObject("url", "myInfo_c.do");
+		mav.addObject("url", "index.do");
 		mav.setViewName("company/companyMsg");
 		return mav;
 		
