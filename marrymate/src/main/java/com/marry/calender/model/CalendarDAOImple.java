@@ -67,7 +67,11 @@ public class CalendarDAOImple implements CalendarDAO {
 	public Date dateInfo(String loginMD) {
 		return null;
 	}
-
+	
+	@Override
+	public List<BookDTO> bookcount(int midx) {
+		return sqlMap.selectList("bookcount", midx);
+	}
 
 	@Override
 	public List<BookinfoDTO> booklistAll(int midx) {

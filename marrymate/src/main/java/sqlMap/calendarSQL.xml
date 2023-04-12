@@ -6,4 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="booklistAll" parameterType="Integer" resultType="com.marry.calender.model.BookinfoDTO">
 	select bk_idx, midx, hidx, cidx, fidx, TO_CHAR(bk_date, 'YYYY-MM-DD') as bk_date, bk_time, bk_state, bookdate, hall_nothall, cname from bookinfo where midx = #{midx}
 	</select>
+	<select id="bookcount" parameterType="Integer" resultType="com.marry.calender.model.BookinfoDTO">
+	SELECT COUNT(*) AS count FROM bookinfo WHERE midx = #{midx}
+</select>
 </mapper>
