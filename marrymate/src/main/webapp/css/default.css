@@ -1,0 +1,25 @@
+body{
+  background: #FFD498;
+}
+
+.mainfont {
+  font-family: 'BinggraeSamanco', sans-serif;
+}
+
+#mainImg {
+  width: 50%;
+  height: auto;
+}
+
+#shareImg {
+  width: 50px;
+  height: auto;
+  margin-top : 10%
+}
+
+@font-face {
+    font-family: 'BinggraeSamanco';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

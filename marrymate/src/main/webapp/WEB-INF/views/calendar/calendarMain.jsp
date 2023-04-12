@@ -30,10 +30,7 @@
 <script src="/marrymate/js/jquery-ui.js"></script>
 <script src="/marrymate/js/CalendarJS.js"></script>
 <script src="/marrymate/js/swiper.min.js"></script>
-<script src="/marrymate/js/aos.js"></script>
-<script src="/marrymate/js/kakao.min.js"></script>
-<script src="/marrymate/js/commonUI.js"></script>
-<link href='fullcalendar.main.min.css' rel='stylesheet' />
+<link href='fullcalendar.main.min.css' rel='stylesheet'>
 <script src='ko.js'></script>
 <script src='fullcalendar.main.min.js'></script>
 <script
@@ -98,6 +95,7 @@ function addplan(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
 	window.open("planWrite.do","addplan", "width=400, height=400, left="+w+",top="+h);
+	opener.parent.location.reload();
 }
 
 function checkadd(){
@@ -128,6 +126,7 @@ function checkuse(){
 function checkAlladd(){
 
 }
+
 </script>
 <script type="text/javascript">
 
@@ -259,6 +258,14 @@ $(function(){
 					</div>
 				</div>
 			</div>
+	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+
+
+	<div style="padding-left: 90%">
+		<button type="button" id="planadd" onclick="addplan();">일정등록</button>
+	</div>
+	<br>
+	
 			<!-- 캘린더 시작  -->
 			<div id='calendar'></div>
 			<div id='popup'
@@ -268,80 +275,93 @@ $(function(){
 		</div>
 	</div>
 
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-
-
-	<div style="padding-left: 65%">
-		<button type="button" id="planadd" onclick="addplan();">일정등록</button>
-	</div>
-
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		  locale: "ko",
-		  initialView: 'dayGridMonth',
-		  headerToolbar: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-		  },
-		  googleCalendarApiKey: 'AIzaSyApQkLavc0ttR7NIRHvdf6ncX1DMc9OAhM',
-		  eventSources : [
-			  {
-				  googleCalendarId: '7bbd24c0dfa76e1a7c63eaaeb126d9bd0442f78cd7800e222947fccd06257cfc@group.calendar.google.com',
-				  backgroundColor : '#FF6D6D',
-	              textColor : '#FFFFFF'
-				  },{
-			  events: '/calendarMain.do/events',
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			  locale: "ko",
+			  initialView: 'dayGridMonth',
+			  headerToolbar: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+			  },
+			  titleFormat : function(date) {
+	                return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+	            },
+	            selectable : true,
+	            droppable : true,
+	            editable : true,
+	            nowIndicator : true,
+	            locale : 'ko',
+			  googleCalendarApiKey: 'AIzaSyAMOTvZ3EfZYlrlAY7kNu6Qpu9OGZ3lxOc',
+			  events: {
+			  googleCalendarId: 'bb5c88acec84ea534aeacba7d764371e7a104dd14994c27fabbf3eb5700a929f@group.calendar.google.com',
+			  className: 'gcal-event' // an option!
+			  },
+			  eventSources : [
+	                {
+	                    backgroundColor : '#FF6D6D',
+	                    textColor : '#FFFFFF'
+	                },
+	                {
+	                    events: ${svcJson},
+	    
+	                }
+
+	            ],
+			  eventClick: function(info) {
+				  let start_year = info.event.start.getUTCFullYear();
+				  let start_month = info.event.start.getMonth() + 1;
+				  let start_date = info.event.start.getUTCDate();
+				  let start_hour = info.event.start.getHours();
+				  let start_minute = info.event.start.getMinutes();
+				  let start_second = info.event.start.getSeconds();
+				  let end_hour = info.event.end.getHours();
+
+				  let start = start_year + "-" + start_month + "-" + start_date + " " + start_hour + "시 ~ " + end_hour + "시";
+
+				  let attends = "";
+				  info.event.extendedProps.attachments.forEach(function(item) {
+					  attends += "<div><a href='"+item.fileUrl+"' target='_blank'>[첨부파일]</a></div>"
+				  });
+
+				  if(!info.event.extendedProps.description) {
+					  info.event.extendedProps.description = "";
 				  }
-		  ],
-		  eventClick: function(info) {
-			  let start_year = info.event.start.getUTCFullYear();
-			  let start_month = info.event.start.getMonth() + 1;
-			  let start_date = info.event.start.getUTCDate();
-			  let start_hour = info.event.start.getHours();
-			  let start_minute = info.event.start.getMinutes();
-			  let start_second = info.event.start.getSeconds();
-			  let end_hour = info.event.end.getHours();
-
-			  let start = start_year + "-" + start_month + "-" + start_date + " " + start_hour + "시 ~ " + end_hour + "시";
-
-			  let attends = "";
-			  info.event.extendedProps.attachments.forEach(function(item) {
-				  attends += "<div><a href='"+item.fileUrl+"' target='_blank'>[첨부파일]</a></div>"
-			  });
-
-			  if(!info.event.extendedProps.description) {
-				  info.event.extendedProps.description = "";
+				  let contents = `
+					<div style='font-weight:bold; font-size:20px; margin-bottom:30px; text-align:center'>
+						${start}
+					</div>
+					<div style='font-size:18px; margin-bottom:20px'>
+						제목: ${info.event.title}
+					</div>
+					<div style='width:500px'>
+						${info.event.extendedProps.description}
+						${attends}
+					</div>
+				  `;
+				  
+				  $("#popup").html(contents);
+				  $("#popup").bPopup({
+					speed: 650,
+					transition: 'slideIn',
+					transitionClose: 'slideBack',
+					position: [($(document).width()-500)/2, 30] //x, y
+				  });
+				  info.jsEvent.stopPropagation();
+				  info.jsEvent.preventDefault();
+				  
 			  }
-			  let contents = `
-				<div style='font-weight:bold; font-size:20px; margin-bottom:30px; text-align:center'>
-					${start}
-				</div>
-				<div style='font-size:18px; margin-bottom:20px'>
-					제목: ${info.event.title}
-				</div>
-				<div style='width:500px'>
-					${info.event.extendedProps.description}
-					${attends}
-				</div>
-			  `;
-			  
-			  $("#popup").html(contents);
-			  $("#popup").bPopup({
-				speed: 650,
-				transition: 'slideIn',
-				transitionClose: 'slideBack',
-				position: [($(document).width()-500)/2, 30] //x, y
-			  });
-			  info.jsEvent.stopPropagation();
-			  info.jsEvent.preventDefault();
-		  }
+			 
+		});
+		calendar.render();
 	});
-	calendar.render();
-});
 </script>
 
 	<!--  -->
@@ -457,7 +477,41 @@ document.addEventListener('DOMContentLoaded', function() {
 			</tbody>
 		</table>
 	</form>
-
+	
+	<h3>
+		<a>예약 내역 테스트</a>
+	</h3>
+	<form action="planlistDel.do" method="post">
+	<input type="hidden" name="myp_idx" value="${dto.bk_idx}">
+		<table border="1" width="900" cellspacing="0">
+			<thead>
+				<tr>
+					<th>제목</th>
+					<th>일자</th>
+					<th>내용</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty booklists}">
+					<tr>
+						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="bdto" items="${booklists}">
+					<tr>
+						<td>${bdto.bk_date}</td>
+						<td>${bdto.fname}</td>
+						<td>${bdto.cname}</td>
+						<td><input type="submit" value="삭제">
+						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
+		
+<!-- 
 	<script type="text/javascript">
 function setCheckboxChecked(checkboxId) {
 	  var checkbox = document.getElementById(checkboxId);
@@ -487,7 +541,7 @@ if (checkedStatus === 'checked') {
 
 
 </script>
-
+ -->
 
 	<hr>
 

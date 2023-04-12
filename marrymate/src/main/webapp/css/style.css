@@ -10,6 +10,16 @@
 }
 
 
+body{
+	margin:0px;
+	padding:0px;
+	font-family: 'SUIT-Regular';
+	background:#fbf4ff;
+}
+video{
+	width:100%;
+}
+
 /*body 영역
 body section{
 	text-align: center;

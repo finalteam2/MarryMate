@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marry.book.model.BookDAO;
+import com.marry.book.model.BookDTO;
 import com.marry.book.model.BookListDTO;
 import com.marry.calender.model.CalendarDAO;
 import com.marry.calender.model.CalendarDAOImple;
@@ -38,6 +40,8 @@ import com.marry.calender.model.ChecklistDAOImple;
 import com.marry.calender.model.ChecklistDTO;
 import com.marry.calender.model.PlanDAO;
 import com.marry.calender.model.PlanDTO;
+import com.marry.company.model.CompanyDTO;
+import com.marry.company.model.ContentDAO;
 import com.marry.member.model.MemberDAO;
 import com.marry.member.model.MemberDTO;
 import com.marry.notification.model.NotificationDTO;
@@ -56,13 +60,22 @@ public class CalendarContoller {
 	private CalendarDAO calendarDao;
 	
 	@Autowired
+	private BookDAO bookDao;
+	
+	@Autowired
+	private ContentDAO contentDao;
+	
+	@Autowired
 	private MemberDAO memberDao;
 	
 	@RequestMapping("/calendar.do")
 	public String calendar() {
 		return "calendar/calendar";
 	}
-	
+	@RequestMapping("/mbti.do")
+	public String mbti() {
+		return "calendar/plan/mbti";
+	}
 
 	@RequestMapping("/calendarMain.do")
 	public ModelAndView calendarMain(
@@ -70,33 +83,55 @@ public class CalendarContoller {
 		int midx= (int) session.getAttribute("loginMidx");
 		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
 		List<PlanDTO> plist = planDao.planlistAll(midx);
-	    
+		List<BookListDTO> blist = contentDao.selectMemBook(midx);
+		
 		Calendar cal = Calendar.getInstance();
 	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
 	    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
 	    String thisMonth = sdf.format(cal.getTime());
 	    String month = sdf2.format(cal.getTime());
 			
-	    List<PlanDTO> pdto = planDao.planlistAll(0);
+	    //List<PlanDTO> pdto = planDao.planlistAll(0);
 			
 	    JSONArray jsonArray = new JSONArray();
 	    int allnum = 0;
 	    int paynum = 0;
 	    int reservnum = 0;
-	    for(PlanDTO dto: pdto) {
+	    for(PlanDTO dto: plist) {
 				
 	        JSONObject jsonObject = new JSONObject();
 				
-	        jsonObject.put("start", dto.getPdate()+":00");
-	        jsonObject.put("backgroundColor", "red");
+	        
+	        
+	        jsonObject.put("start", dto.getPdate());
+	        jsonObject.put("end", dto.getPdate());
+	        jsonObject.put("title", dto.getTitle());
+	        jsonObject.put("backgroundColor", "#ca9cfc");
 	        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
-	        jsonObject.put("borderColor", "red");
+	        jsonObject.put("borderColor", "#e3e3e3");
 	        jsonObject.put("borderWidth", "1px");
-	        jsonObject.put("url", dto.getMidx());
+	        jsonObject.put("url", "calendarMain.do?midx="+dto.getMidx());
 	        jsonObject.put("className", dto.getTitle());
 
 	        jsonArray.add(jsonObject);
 	    }
+	    for (BookListDTO bdto : blist) {
+	    	
+	        JSONObject jsonObject = new JSONObject();
+	        
+	        jsonObject.put("start", bdto.getBk_date());
+	        jsonObject.put("end", bdto.getBk_date());
+	        jsonObject.put("title", bdto.getCname());
+	        jsonObject.put("backgroundColor", "#e3ac46");
+	        jsonObject.put("textColor","white" ); // 폰트 색상을 지정
+	        jsonObject.put("borderColor", "#e3e3e3");
+	        jsonObject.put("borderWidth", "1px");
+	        jsonObject.put("className",  bdto.getCname());
+
+	        jsonArray.add(jsonObject);
+		}
+			  
+	    
 	    String jsonStr = jsonArray.toString();
 			
 	    ModelAndView mav = new ModelAndView();
@@ -105,10 +140,11 @@ public class CalendarContoller {
 	    mav.addObject("paynum",paynum);
 	    mav.addObject("reservnum",reservnum);
 	    mav.addObject("month",month);
-	    mav.addObject("svcDTO", pdto);
+	    mav.addObject("svcDTO", plist);
 	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
 	    mav.addObject("jsonArray", jsonArray);
 	    mav.addObject("planlists", plist);
+	    mav.addObject("booklists", blist);
 		mav.addObject("checklistItems", list);
 		mav.setViewName("calendar/calendarMain");
 		return mav;
@@ -119,14 +155,14 @@ public class CalendarContoller {
 			int midx= (int) session.getAttribute("loginMidx");
 			List<PlanDTO> plist = planDao.planlistAll(midx);
 		    
-			Calendar cal = Calendar.getInstance();
-		    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
-		    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
-		    String thisMonth = sdf.format(cal.getTime());
-		    String month = sdf2.format(cal.getTime());
+			//Calendar cal = Calendar.getInstance();
+		    //SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
+		    //SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
+		    //String thisMonth = sdf.format(cal.getTime());
+		    //String month = sdf2.format(cal.getTime());
 				
-		    List<PlanDTO> svcing = planDao.planlistAll(0);
-				
+		    //List<PlanDTO> svcing = planDao.planlistAll(0);
+			/*	
 		    JSONArray jsonArray = new JSONArray();
 		    int svcing_count = 0;
 		    int svc_count = 0;
@@ -147,15 +183,15 @@ public class CalendarContoller {
 		    String jsonStr = jsonArray.toString();
 				
 		    ModelAndView mav = new ModelAndView();
-		    
-		    mav.addObject("svcing_count",svcing_count);
-		    mav.addObject("svc_count",svc_count);
-		    mav.addObject("month",month);
-		    mav.addObject("planlists", plist);
-		    mav.addObject("svcDTO", svcing);
-		    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
-		    mav.addObject("jsonArray", jsonArray);
-		 
+		    */
+		    //mav.addObject("svcing_count",svcing_count);
+		    //mav.addObject("svc_count",svc_count);
+		    //mav.addObject("month",month);
+		   // mav.addObject("planlists", plist);
+		    //mav.addObject("svcDTO", svcing);
+		   // mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
+		   // mav.addObject("jsonArray", jsonArray);
+			ModelAndView mav = new ModelAndView();
 			mav.setViewName("calendar/calendarInfo");
 			return mav;
 		}

@@ -65,7 +65,7 @@ caption{
 </table>
 <div class="div1 ">
 	<button type="submit">저장</button>
-	<button type="button" onclick="self.close()">닫기</button>
+	<button type="button" onclick="self.close();">닫기</button>
 </div>
 </form>
 
