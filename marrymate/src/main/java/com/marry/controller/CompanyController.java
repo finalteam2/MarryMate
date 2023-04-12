@@ -60,21 +60,21 @@ public class CompanyController {
 		String img="";
 		
 		MultipartFile cnumfile=req.getFile("cnumfile");
-		if (cnumfile==null) {
-			cfile="nomal.png";
+		if (cnumfile != null && !cnumfile.isEmpty()) {
+			cfile = copyFile(cnumfile, "/img/cnumFile/");
 			dto.setCfile(cfile);
 		}else {
-			cfile = copyFile(cnumfile, "/img/cnumFile/");
+			cfile="nomal.png";
 			dto.setCfile(cfile);
 		}
 		
 		
 		MultipartFile bestimg=req.getFile("bestimg");
-		if (bestimg==null) {
-			img="nomal.png";
+		if (bestimg != null && !bestimg.isEmpty()) {
+			img = copyFile(bestimg, "/img/com_best/");
 			dto.setImg(img);
 		}else {
-			img = copyFile(bestimg, "/img/com_best/");
+			img="nomal.png";
 			dto.setImg(img);
 		}
 		
@@ -253,8 +253,7 @@ public class CompanyController {
 		String cidx=req.getParameter("cidx");
 		//mav.addObject("imgSrc", img);
 		MultipartFile upload=req.getFile("img");
-		if(upload==null) {
-		}else {
+		if(upload != null && !upload.isEmpty()) {
 			img = copyFile(upload, "/img/com_img/");
 			result += companyDao.imgInsert(cidx, img);
 		}
