@@ -238,7 +238,7 @@ public class ContentController {
 			for(int i = 0; i < arr.size(); i++) {
 				BookListDTO dto = arr.get(i);
 				if(dto.getIs_after() == 1 && dto.getBk_state() != 4) {
-					dto.setBk_state(5);
+					dto.setBk_state(6);
 				}
 				if(dto.getCkind().equals("예식장")) {
 					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
