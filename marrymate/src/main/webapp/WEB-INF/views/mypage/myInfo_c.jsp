@@ -152,8 +152,8 @@
 		    &nbsp;&nbsp;토<input class="form-check-input mt-0" type="checkbox" name="yoil6" value="토" aria-label="Checkbox for following text input">
 		    &nbsp;&nbsp;일<input class="form-check-input mt-0" type="checkbox" name="yoil7" value="일" aria-label="Checkbox for following text input">
 		  </div>
-		  <input type="time" class="form-control" aria-label="Text input with checkbox">
-		  <button class="btn btn-outline-secondary" type="button" id="button-addon2">예약 시간 추가</button>
+		  <input type="time" name="worktime" class="form-control" aria-label="Text input with checkbox">
+		  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">예약 시간 추가</button>
 		</div>
 		</form>
 				
@@ -211,7 +211,7 @@
 		      <th scope="col">예식시간(시간)</th>
 		      <th scope="col">대관료(원)</th>
 		      <th scope="col">보증인원(명)</th>
-		      <th scope="col" style="width: 70px;">정보수정</th>
+		      <th scope="col" style="width: 70px;">수정</th>
 		      <th scope="col" style="width: 70px;">삭제</th>
 		    </tr>
 		  </thead>
@@ -256,12 +256,12 @@
 		      <th scope="col">#</th>
 		      <th scope="col">식사종류</th>
 		      <th scope="col">식사가격</th>
-		      <th scope="col" style="width: 70px;">정보수정</th>
+		      <th scope="col" style="width: 70px;">수정</th>
 		      <th scope="col" style="width: 70px;">삭제</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		  <c:forEach var="food" items="${foodInfo }">
+		  <c:forEach varStatus="status" var="food" items="${foodInfo }">
 			<form name="foodInfoUpdate" action="foodUpdate.do">
 		    <input type="hidden" name="fidx" value=${food.fidx }>
 		    <tr>
