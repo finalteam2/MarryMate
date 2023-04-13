@@ -21,6 +21,19 @@
 .d-block {
 	object-fit: cover;
 }
+
+.imgbox {
+    width: 100px;
+    height: 100px; 
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+.profileimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>
 </head>
 
@@ -59,6 +72,36 @@ function handleVideoEnd() {
 
 <h1>main입니다.</h1>
 <h2>아래는 추후 수정 예정입니다!</h2>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    알람
+  <c:if test="${not empty cnt }">
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    ${cnt }
+    <span class="visually-hidden">unread messages</span>
+  </span>
+  </c:if>
+  </button>
+  <ul class="dropdown-menu">
+  <c:forEach varStatus="status" var="dto" items="${arr }">
+    <c:if test="${dto.checked eq 1 }">
+    <li><a href="goNoti.do?nidx=${dto.nidx }&page=${dto.page}"><span style="color:gray;">${dto.title }</span></a></li>
+    </c:if> 
+    <c:if test="${dto.checked eq 0 }">
+    <li><a href="goNoti.do?nidx=${dto.nidx }&page=${dto.page}"><span style="color:red;">${dto.title }</span></a></li>
+    </c:if> 
+  </c:forEach>
+  <c:if test="${not empty arr }">
+    <li><hr class="dropdown-divider"></li>
+  </c:if>
+    <li><a class="dropdown-item" href="checkNoti.do">알림 확인</a></li>
+  </ul>
+</div>
+
+
+
+
 <section id="mainevent">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">

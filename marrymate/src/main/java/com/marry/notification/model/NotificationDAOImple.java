@@ -28,7 +28,7 @@ public class NotificationDAOImple implements NotificationDAO {
 	}
 	@Override
 	public List<NotificationDTO> selectMemNoti(int midx) {
-		List<NotificationDTO> arr = sqlMap.selectList("selectComNoti", midx);
+		List<NotificationDTO> arr = sqlMap.selectList("selectMemNoti", midx);
 		return arr;
 	}
 	@Override

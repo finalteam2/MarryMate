@@ -42,37 +42,52 @@ public class NotificationController {
 	
 	//알림 수 확인 및 목록 조회
 	@RequestMapping("/checkNoti.do")
-	public ModelAndView ckNoti(HttpServletRequest req,
-			@RequestParam(value = "midx",defaultValue = "0")int midx,
-			@RequestParam(value = "cidx",defaultValue = "0")int cidx
+	public ModelAndView ckNoti(HttpServletRequest req
 			) {
-//		로그인 된 노티 확인용
-//		HttpSession session = req.getSession();
-//		try {
-//			midx = (int) session.getAttribute("loginMidx");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			// TODO: handle exception
-//		}
-//		try {
-//			cidx = (int) session.getAttribute("com_cidx");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			// TODO: handle exception
-//		}
+		HttpSession session = req.getSession();
+		int midx = 0;
+		int cidx = 0;
+		try {
+			Object st = session.getAttribute("loginMidx");
+			if(st != null) {
+				midx = (int)st;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			Object st = session.getAttribute("com_cidx");
+			if(st != null) {
+				cidx = (int)st;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		System.out.println("midx"+midx);
+//		System.out.println("cidx"+cidx);
+		
 		ModelAndView mav = new ModelAndView();
 		if (midx > 0) {
+//			System.out.println("midx 실행"+midx);
 			List<NotificationDTO> arr = notificationDao.selectMemNoti(midx);
+			for(int i = 0; i < arr.size(); i++) {
+				System.out.println(arr.get(i).getTitle());
+			}
 			int cnt = notificationDao.cntMemNoti(midx);
 			mav.addObject("arr", arr);
 			mav.addObject("cnt", cnt);
 		}else if(cidx > 0) {
+//			System.out.println("cidx 실행"+cidx);
 			List<NotificationDTO> arr = notificationDao.selectComNoti(cidx);
 			int cnt = notificationDao.cntComNoti(cidx);
+			for(int i = 0; i < arr.size(); i++) {
+				System.out.println(arr.get(i).getTitle());
+			}
 			mav.addObject("arr", arr);
 			mav.addObject("cnt", cnt);
 		}
-		mav.setViewName("test");
+		mav.setViewName("index");
 		return mav;
 	}
 	
@@ -85,6 +100,9 @@ public class NotificationController {
 		ModelAndView mav = new ModelAndView();
 		int result = notificationDao.checkNoti(nidx);
 		mav.addObject("msg", result>0?"성공":"실패");
+		if (page.length() == 0) {
+			page = "index.do";
+		}
 		mav.addObject("url", page);
 		mav.setViewName("company/companyMsg");
 		return mav;

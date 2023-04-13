@@ -16,7 +16,7 @@ public class NotificationDTO {
 	private String title;
 	private String content;
 	private String nkind;
-	private int activedate;
+	private Date activedate;
 	private Date sentdate;
 	private int checked;
 	
@@ -26,7 +26,7 @@ public class NotificationDTO {
 	}
 
 	public NotificationDTO(int nidx, int cidx, int midx, String recv, String page, String title, String content,
-			String nkind, int activedate, Date sentdate, int checked) {
+			String nkind, Date activedate, Date sentdate, int checked) {
 		super();
 		this.nidx = nidx;
 		this.cidx = cidx;
@@ -105,11 +105,11 @@ public class NotificationDTO {
 		this.nkind = nkind;
 	}
 
-	public int getActivedate() {
+	public Date getActivedate() {
 		return activedate;
 	}
 
-	public void setActivedate(int activedate) {
+	public void setActivedate(Date activedate) {
 		this.activedate = activedate;
 	}
 

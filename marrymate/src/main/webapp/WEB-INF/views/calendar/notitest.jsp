@@ -53,13 +53,7 @@ body {
 <form action="checkNoti.do" method="post">
 	<div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">cidx</span>
 	<input name="cidx" type="text" class="form-control" placeholder="cidx" aria-describedby="basic-addon1"></div>
-<button type="submit" class="btn btn-primary">checkNotiByCidx.do</button>
-</form>
-<hr>
-<form action="checkNoti.do" method="post">
-	<div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">midx</span>
-	<input name="midx" type="text" class="form-control" placeholder="cidx" aria-describedby="basic-addon1"></div>
-<button type="submit" class="btn btn-primary">checkNotiByMidx.do</button>
+<button type="submit" class="btn btn-primary">checkNoti.do</button>
 </form>
 <hr>
 
