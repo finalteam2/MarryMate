@@ -158,8 +158,9 @@
 	   book.*, company.cname, company.kind as ckind, company.pay as cpay, hall.pay as hpay, 
 	   food.pay as fpay, hall.guest_num as hnum, 
         case
-        when sysdate > book.bk_date then 1
-        else 0
+        when sysdate > book.bk_date 
+        	then 1
+        	else 0
         end as is_after 
     from
 	    book
@@ -190,8 +191,9 @@
        food.pay as fpay, company.pay as cpay,
        company.kind as ckind, 
         case
-        when sysdate > book.bk_date then 1
-        else 0
+        when sysdate > book.bk_date 
+        	then 1
+        	else 0
         end as is_after 
     from
 	    book

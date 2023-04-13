@@ -247,7 +247,7 @@ public class ContentController {
 			List<BookListDTO> arr = contentDao.selectMemBook(midx);
 			for(int i = 0; i < arr.size(); i++) {
 				BookListDTO dto = arr.get(i);
-				if(dto.getIs_after() == 1 && dto.getBk_state() != 4) {
+				if(dto.getIs_after() == 1 && dto.getBk_state() == 3) {
 					dto.setBk_state(6);
 				}
 				if(dto.getCkind().equals("예식장")) {
@@ -267,8 +267,8 @@ public class ContentController {
 			for(int i = 0; i < arr.size(); i++) {
 				BookListDTO dto = arr.get(i);
 //				System.out.println("is_after : "+dto.getIs_after());
-				if(dto.getIs_after() == 1 && dto.getBk_state() != 4) {
-					dto.setBk_state(5);
+				if(dto.getIs_after() == 1 && dto.getBk_state() == 3) {
+					dto.setBk_state(6);
 				}
 				if(dto.getCkind().equals("예식장")) {
 					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
@@ -326,6 +326,7 @@ public class ContentController {
 		return mav;
 	}
 	
+	//홀 삭제하기
 	@RequestMapping("/deleteHall.do")
 	public ModelAndView deleteHall(@RequestParam("hidx")int hidx) {
 		
@@ -338,6 +339,7 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
+	//식사 삭제하기
 	@RequestMapping("/deleteFood.do")
 	public ModelAndView deleteFood(@RequestParam("fidx")int fidx) {
 		
@@ -350,7 +352,8 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
-
+	
+	//취소 요청하기
 	@RequestMapping("/refundRequest.do")
 	public ModelAndView refundRequest(@RequestParam("bk_idx")int bk_idx) {
 		int result = contentDao.refundRequest(bk_idx);

@@ -44,7 +44,7 @@ div.allpage{
       
       <th scope="col">총 금액</th>
       <th scope="col">예약 상태</th>
-      <th scope="col">승인/취소</th>
+      <th scope="col">승인/거부</th>
     </tr>
   </thead>
   <tbody>
@@ -70,13 +70,13 @@ div.allpage{
 	</c:if>
       <td>${dto.allpay }</td>
 	  <td>
-		  <c:if test="${dto.bk_state eq 0}">결제전</c:if>
-		  <c:if test="${dto.bk_state eq 1}">예약대기</c:if>
-		  <c:if test="${dto.bk_state eq 2}">잔금대기</c:if>
-		  <c:if test="${dto.bk_state eq 3}">결제완료</c:if>
-		  <c:if test="${dto.bk_state eq 4}">예약취소</c:if>
-  		  <c:if test="${dto.bk_state eq 5}">취소대기</c:if>
-  		  <c:if test="${dto.bk_state eq 6}">이용완료</c:if>
+		  <c:if test="${dto.bk_state eq 0}"><span class="text-secondary">결제전</span></c:if>
+		  <c:if test="${dto.bk_state eq 1}"><span class="text-secondary">예약대기</span></c:if>
+		  <c:if test="${dto.bk_state eq 2}"><span class="text-success">잔금대기</span></c:if>
+		  <c:if test="${dto.bk_state eq 3}"><span class="text-primary">결제완료</span></c:if>
+		  <c:if test="${dto.bk_state eq 4}"><span class="text-danger">예약취소</span></c:if>
+  		  <c:if test="${dto.bk_state eq 5}"><span class="text-danger">취소대기</span></c:if>
+  		  <c:if test="${dto.bk_state eq 6}"><span class="text-muted">이용완료</span></c:if>
 	  </td>
 	  <td>
 	  <div class="btn-group" role="group" aria-label="Basic example">
@@ -93,11 +93,8 @@ div.allpage{
   	  	<!-- 결제 취소 신청 시 폼 부분 -->
   	  	<form action="refundRequest.do" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
-	  	  <c:if test="${dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4}">
-		  	  <button type="submit" class="btn btn-outline-secondary" disabled>취소</button>
-	  	  </c:if>
-	  	  <c:if test="${not (dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4 || dto.bk_state eq 1)}">
-			  <button type="submit" class="btn btn-outline-danger" >취소</button>
+	  	  <c:if test="${not (dto.bk_state eq 1)}">
+		  	  <button type="submit" class="btn btn-outline-secondary" disabled>거부</button>
 	  	  </c:if>
 	  	  <c:if test="${dto.bk_state eq 1}">
 			  <button type="submit" class="btn btn-outline-danger" >거부</button>
