@@ -171,16 +171,20 @@ public class ContentController {
 		int midx = 0;
 		int cidx = 0;
 		try {
-			midx = (int) session.getAttribute("loginMidx");
-			
+			Object st = session.getAttribute("loginMidx");
+			if(st != null) {
+				midx = (int)st;
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		try {
-			cidx = (int) session.getAttribute("com_cidx");
-			
+			Object st = session.getAttribute("com_cidx");
+			if(st != null) {
+				cidx = (int)st;
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		//로그인 유저에 따라 다른 방식으로 조회
@@ -221,12 +225,18 @@ public class ContentController {
 		int midx = 0;
 		int cidx = 0;
 		try {
-			midx = (int) session.getAttribute("loginMidx");
+			Object st = session.getAttribute("loginMidx");
+			if(st != null) {
+				midx = (int)st;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			cidx = (int) session.getAttribute("com_cidx");
+			Object st = session.getAttribute("com_cidx");
+			if(st != null) {
+				cidx = (int)st;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
