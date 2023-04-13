@@ -76,7 +76,8 @@ public class MypageController {
 		MemberDTO userInfo = mypageDao.myInfoSelect(dto);
 		try {
 			userInfo.setBirthday(userInfo.getBirthday().split(" ")[0]);
-			userInfo.setMarrydate(userInfo.getMarrydate().split(" ")[0]);
+			String marrydate = userInfo.getMarrydate()!=null&&userInfo.getMarrydate().length()!=0?userInfo.getMarrydate().split(" ")[0]:"";
+			userInfo.setMarrydate(marrydate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
