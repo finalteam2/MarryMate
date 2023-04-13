@@ -82,6 +82,12 @@ public class CalendarDAOImple implements CalendarDAO {
 	public List<CompanyDTO> bookInfoTwo(int midx) {
 		return sqlMap.selectList("booklistAlltwo", midx);
 	}
+	
+	@Override
+	public List<BookDTO> memberbook(int midx) {
+		return sqlMap.selectList("memberbook", midx);
+	}
+	
 	@Override
 	public List<BookDTO> moneyBook(int midx) {
 		// TODO Auto-generated method stub

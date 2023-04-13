@@ -14,9 +14,11 @@ public class BookinfoDTO {
 	private Date bookdate;
 	private int hall_nothall;
 	private String cname;
+	
 	public BookinfoDTO() {
 		super();
 	}
+	
 	public BookinfoDTO(int bk_idx, int midx, int hidx, int cidx, int fidx, Date bk_date, String bk_time, int bk_state,
 			Date bookdate, int hall_nothall, String cname) {
 		super();

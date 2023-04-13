@@ -274,7 +274,9 @@ $(function(){
 			</div>
 		</div>
 	</div>
-
+<div>
+${svcJson }<hr>${svcJson3 }<hr>${svcJson4 }<hr>
+</div>
 <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -310,11 +312,13 @@ $(function(){
 	                    textColor : '#FFFFFF'
 	                },
 	                {
-	                    events: ${svcJson},
+	                    events: ${svcJson4}
+	            
 	    
 	                }
 
 	            ],
+	            
 			  eventClick: function(info) {
 				  let start_year = info.event.start.getUTCFullYear();
 				  let start_month = info.event.start.getMonth() + 1;
@@ -477,7 +481,7 @@ $(function(){
 			</tbody>
 		</table>
 	</form>
-	
+	<!--  
 	<h3>
 		<a>예약 내역 테스트</a>
 	</h3>
@@ -499,6 +503,38 @@ $(function(){
 					</tr>
 				</c:if>
 				<c:forEach var="bdto" items="${booklists}">
+					<tr>
+						<td>${bdto.bk_date}</td>
+						<td>${bdto.cname}</td>
+						<td><input type="submit" value="삭제">
+						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
+	-->
+	<h3>
+		<a>예약 내역 테스트2(from bookdto)</a>
+	</h3>
+	<form action="planlistDel.do" method="post">
+	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
+		<table border="1" width="900" cellspacing="0">
+			<thead>
+				<tr>
+					<th>제목</th>
+					<th>일자</th>
+					<th>내용</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty blists}">
+					<tr>
+						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="bdto" items="${blists}">
 					<tr>
 						<td>${bdto.bk_date}</td>
 						<td>${bdto.cname}</td>

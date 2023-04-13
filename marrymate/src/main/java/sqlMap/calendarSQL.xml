@@ -7,6 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select bk_idx, midx, hidx, cidx, fidx, TO_CHAR(bk_date, 'YYYY-MM-DD') as bk_date, bk_time, bk_state, bookdate, hall_nothall, cname from bookinfo where midx = #{midx}
 	</select>
 	<select id="bookcount" parameterType="Integer" resultType="com.marry.calender.model.BookinfoDTO">
-	SELECT COUNT(*) AS count FROM bookinfo WHERE midx = #{midx}
-</select>
+	select count(*) as count from bookinfo where midx = #{midx}
+	</select>
+	<select id="memberbook" resultType="com.marry.book.model.BookDTO">
+	select book.bk_idx, book.midx, book.hidx, book.cidx, book.fidx, TO_CHAR(book.bk_date, 'YYYY-MM-DD') as bdate, book.bk_time, book.bk_state, book.bookdate, book.hall_nothall,  company.cname from book join company on book.cidx = company.cidx where book.midx = #{midx}
+	</select>
 </mapper>
