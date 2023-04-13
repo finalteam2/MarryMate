@@ -12,6 +12,42 @@
 <link href="/marrymate/css/style.css" rel="stylesheet">
 <link href="/marrymate/css/revboot.css" rel="stylesheet">
 <script src="js/companyContent.js"></script>
+<script src="/marrymate/js/httpRequest.js"></script>
+<script>
+function checkHallDate(){
+	var param = '';
+	param += 'cidx=' + ${dto.cidx};
+	var hstr = document.getElementById('hstr').value;
+	param += '&hstr=' + hstr;
+	var fstr = document.getElementById('fstr').value;
+	param += '&fstr=' + fstr;
+	var date = document.getElementById('selectdate').value;
+	param += '&date=' + date;
+	sendRequest('checkhall.do',param,'POST',checkHallDateResult);
+}
+
+function checkHallDateResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data = XHR.responseText;
+			data = JSON.parse(data);
+			var bkarr = data.bkarr;
+			var bktimeNode = document.getElementById('bktime');
+			bktimeNode.innerHTML = '<span class="input-group-text" id="basic-addon1">예약시간</span><select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">';
+			if(bkarr.length == 0){
+				bktimeNode.innerHTML += '<option>예약 가능한 시간이 없습니다</option>';
+			}else {
+				for(var i = 0; i < bkarr.length; i++){
+					var bk = bkarr[i];
+					bktimeNode.innerHTML  += '<option>' + bk.worktime + '</option>';
+				}
+			}
+			bktimeNode.innerHTML += '</select>';
+			
+		}
+	}
+}
+</script>
 <style>
 @font-face {
     font-family: 'SUIT-Regular';
@@ -117,6 +153,7 @@ textarea {
 </head>
 <body onload="mapLoad()">
 <%@include file="../header.jsp" %>
+<div id="myDiv"></div>
 <div class="allpage">
 	<p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
 	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -395,18 +432,18 @@ textarea {
 				<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
 				<div class="input-group mb-3" style="width: 50%;">
 				  <label class="input-group-text" for="inputGroupSelect01">웨딩홀</label>
-				  <select name="hstr" class="form-select" id="inputGroupSelect01">
+				  <select name="hstr" id="hstr" class="form-select" id="inputGroupSelect01">
 				    <option value="" selected>홀 선택</option>
-					<c:forEach var="hdto" items="${harr }">
+					<c:forEach var="hdto"  items="${harr }">
 					<option value="${hdto.hidx } ${hdto.name } ${hdto.pay } ${hdto.guest_num }">${hdto.name }(대관료 : ${hdto.pay } 최소보증인원 : ${hdto.guest_num })</option>
 					</c:forEach>
 				  </select>
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <label class="input-group-text" for="inputGroupSelect01">식사</label>
-				  <select name="fstr" class="form-select" id="inputGroupSelect01">
+				  <select name="fstr" id="fstr" class="form-select" id="inputGroupSelect01">
 				    <option value="" selected>식사 선택</option>
-					<c:forEach var="fdto" items="${farr }">
+					<c:forEach var="fdto"  items="${farr }">
 					<option value="${fdto.fidx } ${fdto.name } ${fdto.pay }">${fdto.name }(식대 : ${fdto.pay })</option>
 					</c:forEach>
 				  </select>
@@ -420,11 +457,13 @@ textarea {
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약일</span>
-				  <input type="date" name="bk_date" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+				  <input type="date" id="selectdate" name="bk_date" class="form-control" onchange="checkHallDate()" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약시간</span>
-				  <input type="text" name="bk_time" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
+				  <select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">
+					  <option selected>홀과 날짜를 먼저 선택해주세요</option>
+				  </select>
 				</div>
 				
 				<button type="submit" class="btn btn-primary">예약하기</button>
@@ -442,11 +481,12 @@ textarea {
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약일</span>
-				  <input type="date" name="bk_date" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+				  <input type="date" id="selectdate" name="bk_date" class="form-control" onchange="checkHallDate()" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
 				</div>
-				<div class="input-group mb-3" style="width: 50%;">
+				<div id="bktime" class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약시간</span>
-				  <input type="text" name="bk_time" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
+				  <select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">
+				  </select>
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">비용</span>

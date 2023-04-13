@@ -278,4 +278,28 @@
 	where 
 		bk_idx = #{bk_idx}
 	</update>
+	<select id="selectBookTime" parameterType="com.marry.company.model.Book_TimeDTO" resultType="com.marry.company.model.Book_TimeDTO">
+	select
+	    *
+	from
+	    book_time
+	where
+	    cidx = #{cidx}
+	    and
+	    yoil = #{yoil}
+	</select>
+	<select id="checkBook" parameterType="Map" resultType="Integer">
+	SELECT 
+		count(*)
+	FROM 
+		book
+	WHERE 
+		cidx = #{cidx}
+		and
+		TO_CHAR(bk_date, 'yyyy-mm-dd') = #{date}
+		and
+		bk_time = #{time}
+		and
+		hidx = #{hidx}
+	</select>
 </mapper>

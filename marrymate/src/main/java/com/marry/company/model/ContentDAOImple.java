@@ -1,7 +1,10 @@
 package com.marry.company.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.marry.book.model.BookDTO;
@@ -148,5 +151,19 @@ public class ContentDAOImple implements ContentDAO {
 		int result = sqlMap.update("refundRequest", bk_idx);
 		return result;
 	}
-	
+	@Override
+	public List<Book_TimeDTO> selectBookTime(Book_TimeDTO dto) {
+		List<Book_TimeDTO> arr = sqlMap.selectList("selectBookTime", dto);
+		return arr;
+	}
+	@Override
+	public int checkBook(int cidx, int hidx, String date, String time) {
+		Map<String, Object> map =  new HashMap<String, Object>();
+		map.put("cidx", cidx);
+		map.put("hidx", hidx);
+		map.put("date", date);
+		map.put("time", time);
+		int result = sqlMap.selectOne("checkBook", map);
+		return result;
+	}
 }

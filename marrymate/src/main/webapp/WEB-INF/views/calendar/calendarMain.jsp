@@ -35,15 +35,6 @@
 <script src='fullcalendar.main.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-	crossorigin="anonymous"></script>
 
 <script>
 var dday = new Date("${sessionScope.loginMD}").getTime();
@@ -77,7 +68,7 @@ setInterval(function() {
   var gap = dateonly - today;
   var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
 
-document.getElementById("dDayOnly").innerHTML = "D-" + day;
+document.getElementById("dDayOnly").innerHTML = "현재 D-" + day +"일 입니다!";
 }, 1000);
 
 var dayinfo = new Date("${sessionScope.loginMD}");
@@ -168,25 +159,46 @@ $(function(){
 	}
 });
 </script>
+
+<style type="text/css">
+.schedulewrapper{
+	text-align: center;
+}
+.myWeddingMenuWrap{
+	text-align: center;
+}
+.checklistwrap{
+	text-align: center;
+}
+.planlistwrap{
+	text-align: center;
+}
+.ddaygoal{
+	font-size: 28px;
+	font-weight: bold;
+	color: purple;
+}
+</style>
 </head>
 <body background="/marrymate/img/background.png">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div class="contentsArea full" id="goContent">
-
-		<div class="contentsTop"></div>
-
+		<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
 		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
 			style="width: 100%">
+		
 		<!--checkListTopWrap : s-->
 		<div class="checkListTopWrap">
 			<div class="inner">
+				
 				<div class="profileWrap">
+				
 					<!--profileArea : s-->
-					<div class="profileBox">
+	<div class="profileBox">
 						<div class="imgArea">
-							<c:if test="${!empty sessionScope.loginId}">
-								<div>${sessionScope.img}</div>
-							</c:if>
+							<c:forEach var="minfo" items="${myinfo}">
+							<img class="mypicture" src="/marrymate/img/member/${minfo.img}">
+						</c:forEach>
+						
 						</div>
 						<div class="txtArea">
 							<div class="nameArea">
@@ -214,7 +226,6 @@ $(function(){
 				<!--profileArea : e-->
 			</div>
 		</div>
-	</div>
 
 
 
@@ -223,49 +234,47 @@ $(function(){
 	<br>
 	<!--calendarShow-->
 
-	<div class="app-wrapper">
-		<div class="app-content pt-3 p-md-3 p-lg-4">
-			<div class="container pt-5">
-				<h3 class="text-center mb-4">전체 스케줄 보기</h3>
+	<div class="schedulewrapper">
+		<div class="schedulebox">
+			<div class="scheduleall">
+				<h3>전체 스케줄 보기</h3>
 
-				<div class="row g-4 mb-4 d-flex justify-content-center">
-					<div class="col-6 col-lg-3">
-						<div class="app-card app-card-stat shadow-sm h-100">
-							<div class="app-card-body p-3 p-lg-4">
-								<h4 class="stats-type mb-1">모든 일정</h4>
-								<div class="stats-figure">${ptotal}</div>
-								<div class="stats-meta text-success">건</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-lg-3">
-						<div class="app-card app-card-stat shadow-sm h-100">
-							<div class="app-card-body p-3 p-lg-4">
-								<h4 class="stats-type mb-1">모든 예약</h4>
-								<div class="stats-figure"><a href=#checklistMove>${btotal}</a></div>
-								<div class="stats-meta text-success">건</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-lg-3">
-						<div class="app-card app-card-stat shadow-sm h-100">
-							<div class="app-card-body p-3 p-lg-4">
-								<h4 class="stats-type mb-1">모든 체크리스트</h4>
-								<div class="stats-figure">${ctotal}</div>
-								<div class="stats-meta text-success">건</div>
-							</div>
-						</div>
-					</div>
+				<div>
+					   <div style="display: flex;">
+        <div style="flex: 1;">
+            <div class="scheduletotal">
+                <h4>모든 일정</h4>
+                <div class="stats">${ptotal}</div>
+                <div class="statsletter">건</div>
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <div class="booklisttotal">
+                <h4>모든 예약</h4>
+                <div class="stats">
+                    <a href=#checklistMove>${btotal}</a>
+                </div>
+                <div class="statsletter">건</div>
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <div class="checklisttotal">
+                <h4>모든 체크리스트</h4>
+                <div class="stats">${ctotal}</div>
+                <div class="statsletter">건</div>
+            </div>
+        </div>
+    </div>
 				</div>
 			</div>
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+			<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 
+<br><br>
+			<div style="padding-left: 90%">
+				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
+			</div>
+			<br>
 
-	<div style="padding-left: 90%">
-		<button type="button" id="planadd" onclick="addplan();">일정등록</button>
-	</div>
-	<br>
-	
 			<!-- 캘린더 시작  -->
 			<div id='calendar'></div>
 			<div id='popup'
@@ -275,10 +284,6 @@ $(function(){
 		</div>
 	</div>
 
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-		crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
@@ -367,59 +372,13 @@ $(function(){
 </script>
 
 
-	<div class="ddaygoal">
-		<div class="goal">
-			<strong><span class="d-day" id="dDayOnly"></span></strong>
-		</div>
-	</div>
-
-
-	<!-- checklist add/select -->
-	<div style="padding-left: 65%">
-		<button type="button" id="checkadd" onclick="checkadd();">새 체크리스트
-			등록</button>
-	</div>
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<div class="planlistwrap">
 	<h3>
-		<a id="checklistMove">모든 체크리스트</a>
-	</h3>
-	<form action="checklistDel.do" method="post">
-		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
-		<table border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty checklistItems}">
-					<tr>
-						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
-					</tr>
-				</c:if>
-				<c:forEach var="dto" items="${checklistItems}">
-					<tr>
-						<td>${dto.title}</td>
-						<td>${dto.dueday}</td>
-						<td>${dto.content}</td>
-						<td><input type="submit" value="삭제">
-						<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
-
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
-
-	<h3>
-		<a>일정 출력 테스트</a>
+		<a>Myplan</a>
 	</h3>
 	<form action="planlistDel.do" method="post">
-	<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
-		<table border="1" width="900" cellspacing="0">
+		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
+		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
 			<thead>
 				<tr>
 					<th>제목</th>
@@ -440,20 +399,66 @@ $(function(){
 						<td>${pdto.pdate}</td>
 						<td>${pdto.content}</td>
 						<td><input type="submit" value="삭제">
-						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+							<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
+	</div>
+	<br>
+	<!-- checklist add/select -->
+	<div class="checklistwrap">
+	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<h3 id="checklistitems">
+		<a id="checklistMove">모든 체크리스트</a>
+	</h3>
+	<div style="padding-left: 65%">
+		<button type="button" id="checkadd" onclick="checkadd();">새
+			체크리스트 등록</button>
+	</div>
+	<form action="checklistDel.do" method="post">
+		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
+		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
+			<thead>
+				<tr>
+					<th>제목</th>
+					<th>일자</th>
+					<th>내용</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty checklistItems}">
+					<tr>
+						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="dto" items="${checklistItems}">
+					<tr>
+						<td>${dto.title}</td>
+						<td>${dto.dueday}</td>
+						<td>${dto.content}</td>
+						<td><input type="submit" value="삭제">
+							<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
 
-
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
+	</div>
+	<br><br>
 	<hr>
-
+	<br><br>
 	<div class="myWeddingMenuWrap">
+		<div class="ddaygoal">
+		<div class="goal">
+			<strong><span class="d-day" id="dDayOnly"></span></strong>
+		</div>
+	</div>
 		<h2>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h2>
 	</div>
-
 	<div class="contestList">
 		<div class="checkListArea">
 			<div class="listRow" id="checkList300">
@@ -467,8 +472,8 @@ $(function(){
 					<li>
 						<div class="item on" data-seqno="1">
 							<div class="d-day" data-daydt="290">D-290</div>
-							<a href="javascript:void(0);" data-id="viewCheckList"
-								data-chkid="1" class="jsSWO01Ev tit " id="checklistitems">#양가인사</a>
+							<a href="#checklistitems" data-id="viewCheckList" data-chkid="1"
+								class="jsSWO01Ev tit " id="checklistitems">#양가인사</a>
 						</div>
 					</li>
 

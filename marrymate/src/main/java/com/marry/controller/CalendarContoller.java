@@ -45,6 +45,7 @@ import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.ContentDAO;
 import com.marry.member.model.MemberDAO;
 import com.marry.member.model.MemberDTO;
+import com.marry.mypage.model.MypageDAO;
 import com.marry.notification.model.NotificationDTO;
 
 @Controller
@@ -69,6 +70,9 @@ public class CalendarContoller {
 	@Autowired
 	private MemberDAO memberDao;
 	
+	@Autowired
+	private MypageDAO mypageDao;
+	
 	
 	@RequestMapping("/calendar.do")
 	public String calendar() {
@@ -91,6 +95,8 @@ public class CalendarContoller {
 		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
 		List<PlanDTO> plist = planDao.planlistAll(midx);
 		List<BookDTO> blist = calendarDao.memberbook(midx);
+		
+		List<MemberDTO> myinfo = calendarDao.myInfo(midx);
 
 		Calendar cal = Calendar.getInstance();
 	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
@@ -165,6 +171,8 @@ public class CalendarContoller {
 	    mav.addObject("ptotal", ptotal);
 	    mav.addObject("btotal", btotal);
 	    mav.addObject("ctotal", ctotal);
+	    
+	    mav.addObject("myinfo", myinfo);
 		mav.setViewName("calendar/calendarMain");
 		return mav;
 	}

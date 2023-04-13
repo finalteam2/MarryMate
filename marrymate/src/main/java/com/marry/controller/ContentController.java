@@ -1,6 +1,8 @@
 package com.marry.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookListDTO;
+import com.marry.company.model.Book_TimeDTO;
 import com.marry.company.model.Com_CsDTO;
 import com.marry.company.model.Com_ImgDTO;
 import com.marry.company.model.Com_LikeDTO;
@@ -393,4 +396,56 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
+	
+	//홀에서 달력 변경 시 예약 가능한 시간 정보 출력
+	@RequestMapping("checkhall.do")
+	public ModelAndView checkhall(
+			@RequestParam(value = "cidx",defaultValue = "0")int cidx,
+			@RequestParam(value = "hstr",defaultValue = "")String hstr,
+			@RequestParam(value = "fstr",defaultValue = "")String fstr,
+			@RequestParam(value = "date",defaultValue = "")String date
+			
+			) {
+//		System.out.println("cidx"+cidx);
+//		System.out.println("hstr"+hstr);
+		int hidx = Integer.parseInt(hstr.split(" ")[0]);
+//		System.out.println("hidx"+hidx);
+//		System.out.println("fstr"+fstr);
+		int fidx = Integer.parseInt(fstr.split(" ")[0]);
+//		System.out.println("fidx"+fidx);
+//		System.out.println("date"+date);
+		String yoil = StringToYoil(date);
+		System.out.println(yoil);
+		Book_TimeDTO dto = new Book_TimeDTO(0, cidx, yoil, "");
+		List<Book_TimeDTO> arr = contentDao.selectBookTime(dto);
+		int num = arr.size();
+		for(int i = num - 1; i >= 0 ; i--) {
+//			System.out.println(arr.get(i).getWorktime());
+			int result = contentDao.checkBook(cidx, hidx, date, arr.get(i).getWorktime());
+			if(result > 0) {
+				arr.remove(i);
+			}
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bkarr", arr);
+		mav.setViewName("finalJson");
+		return mav;
+	}
+	
+	//String으로 들어온 날짜 데이터를 요일로 변환시켜주는 메서드
+	 public String StringToYoil(String dateString) {
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // string 날짜의 형식 지정
+	        java.util.Date date = null;
+	        try {
+	            date = dateFormat.parse(dateString); // string 날짜를 Date 객체로 변환
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        Calendar calendar = Calendar.getInstance(); // Calendar 객체 생성
+	        calendar.setTime(date); // Date 객체를 사용하여 Calendar 객체 초기화
+	        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK); // 요일 가져오기
+	        String[] days = {"", "일", "월", "화", "수", "목", "금", "토"}; // 각 요일을 저장한 배열
+	        //System.out.println(days[dayOfWeek]); // 요일 출력
+	        return days[dayOfWeek];
+	    }
 }
