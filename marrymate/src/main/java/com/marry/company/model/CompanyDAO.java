@@ -6,6 +6,8 @@ public interface CompanyDAO {
 	
 	public CompanyDTO companyLogin(String id, String pwd);
 	
+	public int clevelCheck(String id, String pwd);
+	
 	public int timeInsert(Book_TimeDTO dto);
 	
 	public int foodInsert(FoodDTO dto);

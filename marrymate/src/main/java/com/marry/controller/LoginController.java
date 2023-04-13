@@ -93,28 +93,46 @@ public class LoginController {
 			mav.addObject("msg", "로그인 정보가 올바르지 않습니다.");
 			mav.addObject("url", "login.do");
 			mav.setViewName("login/loginMsg");
-			return mav;
 		}else {
+			int clevel=companyDao.clevelCheck(id, pwd);
+			System.out.println(clevel);
 			
-			if(comSaveid==null) {
-				Cookie ck=new Cookie("comSaveid", dto.getId());
-				ck.setMaxAge(0);
-				resp.addCookie(ck);
-			}else {
-				Cookie ck=new Cookie("comSaveid", dto.getId());
-				ck.setMaxAge(60*60*24*30);
-				resp.addCookie(ck);
+			if(clevel==1) {
+				System.out.println("1일때 실행됩니다.");
+				
+				if(comSaveid==null) {
+					Cookie ck=new Cookie("comSaveid", dto.getId());
+					ck.setMaxAge(0);
+					resp.addCookie(ck);
+				}else {
+					Cookie ck=new Cookie("comSaveid", dto.getId());
+					ck.setMaxAge(60*60*24*30);
+					resp.addCookie(ck);
+				}
+				
+				session.setAttribute("com_cidx", dto.getCidx());
+				session.setAttribute("com_id", dto.getId());
+				session.setAttribute("com_cname", dto.getCname());
+				
+				mav.addObject("msg", dto.getCname()+", 환영합니다.");
+				mav.addObject("url", "index.do");
+				mav.setViewName("login/loginMsg");
+				
+			}else if(clevel==0) {
+				System.out.println("0일때 실행됩니다.");
+				
+				mav.addObject("msg", "승인 대기중입니다. 승인이 완료되면 로그인 가능합니다.");
+				mav.addObject("url", "login.do");
+				mav.setViewName("login/loginMsg");
+			}else if(clevel==-1) {
+				System.out.println("-1일때 실행됩니다.");
+				
+				mav.addObject("msg", "승인이 거절되었습니다. 자세한 사항은 메일 참조 바랍니다.");
+				mav.addObject("url", "login.do");
+				mav.setViewName("login/loginMsg");
 			}
-			
-			session.setAttribute("com_cidx", dto.getCidx());
-			session.setAttribute("com_id", dto.getId());
-			session.setAttribute("com_cname", dto.getCname());
-			
-			mav.addObject("msg", dto.getCname()+", 환영합니다.");
-			mav.addObject("url", "index.do");
-			mav.setViewName("login/loginMsg");
-			return mav;
 		}
+		return mav;
 	}
 	
 	@RequestMapping("/logout.do")

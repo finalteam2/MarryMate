@@ -29,6 +29,14 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public int clevelCheck(String id, String pwd) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pwd", pwd);
+		return sqlMap.selectOne("clevelCheck", map);
+	}
+	
+	@Override
 	public int timeInsert(Book_TimeDTO dto) {
 		int count=sqlMap.insert("timeInsert", dto);
 		return count;

@@ -54,6 +54,7 @@
 		padding-top: 20px;
 		text-align: center;
 		border: 1px solid black;
+		background-color: white;
 		font-family: 'SUIT-Regular';
 	}
 	.teBox {
