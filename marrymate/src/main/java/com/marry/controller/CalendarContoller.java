@@ -87,25 +87,17 @@ public class CalendarContoller {
 	@RequestMapping("/calendarMain.do")
 	public ModelAndView calendarMain(
 			HttpSession session) {
-		System.out.println("tttt");
 		int midx= (int) session.getAttribute("loginMidx");
-		//List<CompanyDTO> clist = calendarDao.bookInfoTwo(midx);
-		
-		List<BookinfoDTO> booklist = calendarDao.booklistAll(midx);
-		//List<ChecklistDTO> list = checklistDao.checklistAll(midx);
+		List<ChecklistDTO> list = checklistDao.checklistAll(midx);
 		List<PlanDTO> plist = planDao.planlistAll(midx);
-		//List<BookListDTO> blist = contentDao.selectMemBook(midx);
 		List<BookDTO> blist = calendarDao.memberbook(midx);
 
-		
 		Calendar cal = Calendar.getInstance();
 	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
 	    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
 	    String thisMonth = sdf.format(cal.getTime());
 	    String month = sdf2.format(cal.getTime());
 		
-	    JSONArray jsonArray = new JSONArray();
-	    //JSONArray jsonArray2 = new JSONArray();
 	    JSONArray jsonArray3 = new JSONArray();
 	    JSONArray jsonArray4 = new JSONArray();
 	    
@@ -113,39 +105,6 @@ public class CalendarContoller {
 	    int paynum = 0;
 	    int reservnum = 0;
 	    
-	    
-	    for (BookinfoDTO bookdto : booklist) {
-	    	
-	        JSONObject jsonObject = new JSONObject();
-	        
-	        jsonObject.put("start", bookdto.getBookdate());
-	        jsonObject.put("end", bookdto.getBookdate());
-	        jsonObject.put("title", bookdto.getCname());
-	        jsonObject.put("backgroundColor", "#e3ac46");
-	        jsonObject.put("textColor","white" ); 
-	        jsonObject.put("borderColor", "#e3e3e3");
-	        jsonObject.put("borderWidth", "1px");
-	        jsonObject.put("className", bookdto.getCname());
-
-	        jsonArray.add(jsonObject);
-		}
-	    /*
-	    for(ChecklistDTO cdto: list) {
-			
-	        JSONObject jsonObject2 = new JSONObject();
-	        
-	        jsonObject2.put("start", cdto.getDueday());
-	        jsonObject2.put("end", cdto.getDueday());
-	        jsonObject2.put("title", cdto.getTitle());
-	        jsonObject2.put("backgroundColor", "#ca9cfc");
-	        jsonObject2.put("textColor","white" ); 
-	        jsonObject2.put("borderColor", "#e3e3e3");
-	        jsonObject2.put("borderWidth", "1px");
-	        jsonObject2.put("className", cdto.getTitle());
-
-	        jsonArray2.add(jsonObject2);
-	    }
-	    */
 	    for(PlanDTO dto: plist) {
 				
 	        JSONObject jsonObject3 = new JSONObject();
@@ -153,9 +112,9 @@ public class CalendarContoller {
 	        jsonObject3.put("start", dto.getPdate());
 	        jsonObject3.put("end", dto.getPdate());
 	        jsonObject3.put("title", dto.getTitle());
-	        jsonObject3.put("backgroundColor", "#ca9cfc");
-	        jsonObject3.put("textColor","white" ); 
-	        jsonObject3.put("borderColor", "#e3e3e3");
+	        jsonObject3.put("backgroundColor", "#E5CCFF");
+	        jsonObject3.put("textColor","black" ); 
+	        jsonObject3.put("borderColor", "#E5CCFF");
 	        jsonObject3.put("borderWidth", "1px");
 	        jsonObject3.put("className", dto.getTitle());
 
@@ -169,32 +128,23 @@ public class CalendarContoller {
 	        jsonObject4.put("start", bdto.getBdate());
 	        jsonObject4.put("end", bdto.getBdate());
 	        jsonObject4.put("title", bdto.getCname());
-	        jsonObject4.put("backgroundColor", "#ef3aa7");
-	        jsonObject4.put("textColor","white" ); 
-	        jsonObject4.put("borderColor", "#ef3aa7");
+	        jsonObject4.put("backgroundColor", "#FFE5CC");
+	        jsonObject4.put("textColor","black" ); 
+	        jsonObject4.put("borderColor", "#FFE5CC");
 	        jsonObject4.put("borderWidth", "1px");
 	        jsonObject4.put("className",  bdto.getCname());
 
 	        jsonArray4.add(jsonObject4);
 	    } 
 
-	    System.out.println("1번"+booklist.size());
-	    //System.out.println("2번"+list.size());
-	    System.out.println("3번"+plist.size());
-	    System.out.println("4번"+blist.size());
-
-	    System.out.println(1);
-	    String jsonStr = jsonArray.toString();
-	    System.out.println(2);
-	    //String jsonStr2 = jsonArray2.toString();
 	    String jsonStr3 = jsonArray3.toString();
-	    System.out.println(3);
 	    String jsonStr4 = jsonArray4.toString();
-	    System.out.println(4);
-	    System.out.println("aa="+jsonStr);
-	    System.out.println("bb="+jsonStr3);
-	    System.out.println("cc="+jsonStr4);
-			
+
+	    int ptotal=plist.size();
+	    int btotal=blist.size();
+	    int ctotal=list.size();
+	    
+	    
 	    ModelAndView mav = new ModelAndView();
 	    
 	    mav.addObject("allnum",allnum);
@@ -202,26 +152,22 @@ public class CalendarContoller {
 	    mav.addObject("reservnum",reservnum);
 	    mav.addObject("month",month);
 	    
-	    mav.addObject("svcJson", jsonStr); // jsonStr을 svcJson이라는 이름으로 전달
-	    //mav.addObject("svcJson2", jsonStr2);
 	    mav.addObject("svcJson3", jsonStr3);
 	    mav.addObject("svcJson4", jsonStr4);
-	    
-	    mav.addObject("jsonArray", jsonArray);
-	    //mav.addObject("jsonArray2", jsonArray2);
+	
 	    mav.addObject("jsonArray3", jsonArray3);
 	    mav.addObject("jsonArray4", jsonArray4);
-	    //mav.addObject("comlists", clist);
-	    
-	    mav.addObject("booklists", booklist);
-	    //mav.addObject("checklistItems", list);
+
+	    mav.addObject("checklistItems", list);
 	    mav.addObject("planlists", plist);
 	    mav.addObject("blists", blist);
+	    
+	    mav.addObject("ptotal", ptotal);
+	    mav.addObject("btotal", btotal);
+	    mav.addObject("ctotal", ctotal);
 		mav.setViewName("calendar/calendarMain");
 		return mav;
 	}
-	
-	
 	
 	@RequestMapping("/calendarInfo.do")
 	public String calendarInfo() {
@@ -232,7 +178,6 @@ public class CalendarContoller {
 	public String CalendarMainCom() {
 		return "calendar/calendarMainCom";
 	}
-	
 	
 	@RequestMapping(value = "/planWrite.do", method = RequestMethod.GET)
 	public String writeForm() {
@@ -271,7 +216,6 @@ public class CalendarContoller {
 		return mav;
 	}
 	
-	
 	@RequestMapping("/checklistDel.do")
 	public ModelAndView checklistDel(ChecklistDTO cdto) {
 		
@@ -284,7 +228,6 @@ public class CalendarContoller {
 		mav.setViewName("calendar/checklistMsg");
 		return mav;
 	}
-	
 	
 	@RequestMapping("/planlistDel.do" )
 	public ModelAndView planlistDel(PlanDTO pdto) {

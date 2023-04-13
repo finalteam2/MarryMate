@@ -3,10 +3,19 @@ package com.marry.notification.model;
 import java.sql.Date;
 
 public class NotificationDTO {
-
+	
+	////////////////////여기 보십시오!!!!!!!//////////////////////////
+	
 	//rev는 일반회원, 기업회원, 전체 3가지로 스트링으로 입력
 	//page는 경로
 	//nkind는 1~6은 일반회원 및 기업회원 예약알림, 지출&잔금알림, 글관련알림, 7은 관리자
+	//nkind 1: 일반회원 예약알림
+	//nkind 2: 일반회원 지출&잔금알림
+	//nkind 3: 일반회원 글관련알림
+	//nkind 4: 기업회원 예약알림
+	//nkind 5: 기업회원 지출&잔금알림
+	//nkind 6: 기업회원 글관련알림
+	//nkind 7: 관리자
 	
 	private int nidx;
 	private int cidx;
