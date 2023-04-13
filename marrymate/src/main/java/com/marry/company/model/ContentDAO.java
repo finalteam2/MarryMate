@@ -30,4 +30,5 @@ public interface ContentDAO {
 	public int insertFood(FoodDTO dto);
 	public int deleteHall(int hidx);
 	public int deletefood(int fidx);
+	public int refundRequest(int bk_idx);
 }

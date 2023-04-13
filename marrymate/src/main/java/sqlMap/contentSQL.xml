@@ -268,4 +268,12 @@
 	where
     	fidx = #{fidx}
 	</delete>
+	<update id="refundRequest" parameterType="Integer">
+	update 
+		book
+	set
+		bk_state = 5
+	where 
+		bk_idx = #{bk_idx}
+	</update>
 </mapper>

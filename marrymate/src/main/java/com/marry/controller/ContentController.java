@@ -340,4 +340,16 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
+
+	@RequestMapping("/refundRequest.do")
+	public ModelAndView refundRequest(@RequestParam("bk_idx")int bk_idx) {
+		int result = contentDao.refundRequest(bk_idx);
+		String msg=result>0?"취소 신청 완료":"취소 신청 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myBook.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+	}
 }

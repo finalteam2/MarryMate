@@ -143,4 +143,10 @@ public class ContentDAOImple implements ContentDAO {
 		return result;
 	}
 	
+	@Override
+	public int refundRequest(int bk_idx) {
+		int result = sqlMap.update("refundRequest", bk_idx);
+		return result;
+	}
+	
 }

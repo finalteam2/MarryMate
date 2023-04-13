@@ -80,6 +80,7 @@ div.allpage{
 	  </td>
 	  <td>
 	  <div class="btn-group" role="group" aria-label="Basic example">
+  	  	<!-- 결제 진행 시 폼 부분 -->
   	  	<form action="#" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
 	  	  <c:if test="${not (dto.bk_state eq 1)}">
@@ -89,16 +90,18 @@ div.allpage{
 			  <button type="button" onclick="" class="btn btn-outline-primary" >승인</button>
 	  	  </c:if>
 	  	</form>
-  	  	<form action="#" method="post">
+  	  	<!-- 결제 취소 신청 시 폼 부분 -->
+  	  	<form action="refundRequest.do" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+	  	  <input type="hidden" name="is_com" value="true">
 	  	  <c:if test="${dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4}">
-		  	  <button type="button" onclick="" class="btn btn-outline-secondary" disabled>취소</button>
+		  	  <button type="submit" class="btn btn-outline-secondary" disabled>취소</button>
 	  	  </c:if>
 	  	  <c:if test="${not (dto.bk_state eq 6 || dto.bk_state eq 5 || dto.bk_state eq 4 || dto.bk_state eq 1)}">
-			  <button type="button" onclick="" class="btn btn-outline-danger" >취소</button>
+			  <button type="submit" class="btn btn-outline-danger" >취소</button>
 	  	  </c:if>
 	  	  <c:if test="${dto.bk_state eq 1}">
-			  <button type="button" onclick="" class="btn btn-outline-danger" >거부</button>
+			  <button type="submit" class="btn btn-outline-danger" >거부</button>
 	  	  </c:if>
 	  	</form>	  	
 	  </div>
