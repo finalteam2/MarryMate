@@ -74,7 +74,7 @@ ul > li:last-child ul{
 		<div style="display: flex; align-items: center; margin-left: 40px;">
 			<div style="display: flex; margin-right: 10px;">
 				<a href="index.do"><img src="/marrymate/img/logo1.png"
-					style="width: 140px;"></a>
+					style="width: 180px;"></a>
 			</div>
 			<div style="display: flex; margin-right: 10px;">
 				<a href="allBook.do">통합예약</a>
@@ -121,7 +121,7 @@ ul > li:last-child ul{
 			<c:if
 				test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
 				<div class="menu">
-					<a><img src="/marrymate/img/user2.png" style="width: 40px;"></a>
+					<a><img src="/marrymate/img/user2.png" style="width: 30px;"></a>
 					<ul class="mbar">
 						<c:if test="${not empty sessionScope.loginId}">
 							<li><a href="myInfo_m.do">마이페이지</a></li>
@@ -142,7 +142,7 @@ ul > li:last-child ul{
 				</div>
 				<div class="noti" style="margin-left: 10px;">
 					<a href=""><img src="/marrymate/img/notification.png"
-						style="width: 40px;"></a>
+						style="width: 30px;"></a>
 				</div>
 			</c:if>
 		</div>
