@@ -302,7 +302,7 @@ $(function(){
 			  googleCalendarApiKey: 'AIzaSyAMOTvZ3EfZYlrlAY7kNu6Qpu9OGZ3lxOc',
 			  events: {
 			  googleCalendarId: 'bb5c88acec84ea534aeacba7d764371e7a104dd14994c27fabbf3eb5700a929f@group.calendar.google.com',
-			  className: 'gcal-event' // an option!
+			  className: 'gcal-event' 
 			  },
 			  eventSources : [
 	                {
@@ -366,55 +366,22 @@ $(function(){
 	});
 </script>
 
-	<!--  -->
 
-
-
-	<!--mainMyweddingAnimation : s-->
-
-	<div class="mainMyweddingAnimationScroll">
-		<!-- 
-		<div class="infoArea">
-			<ul>
-				<li><a href="javascript:void(0);" class="moveScroll"
-					data-target="chkst" data-chkst="01"> <span class="tit">
-							-PAST-<br class="onlyM">
-					</span> <span class="number"> <strong id="checkListChkCnt">
-						</strong> <span class="txt">${chk_cnt}건</span>
-					</span>
-				</a></li>
-				<li><a href="javascript:void(0);" class="moveScroll"
-					data-target="chkst" data-chkst="04"> <span class="tit">-PRESENT-<br
-							class="onlyM"></span> <span class="number"> <strong
-							id="checkListDoingCnt"> </strong> <span class="txt">0건</span>
-					</span>
-				</a></li>
-				<li><a href="javascript:void(0);" class="moveScroll"
-					data-target="chkst" data-chkst="03"> <span class="tit">-FUTURE-<br
-							class="onlyM"></span> <span class="number"> <strong
-							id="checkListReservCnt"> </strong> <span class="txt">17건</span>
-					</span>
-				</a></li>
-			</ul>
-		</div>
-	</div>
-		-->
 	<div class="ddaygoal">
 		<div class="goal">
 			<strong><span class="d-day" id="dDayOnly"></span></strong>
 		</div>
 	</div>
-</div>
+
+
 	<!-- checklist add/select -->
-
-
 	<div style="padding-left: 65%">
 		<button type="button" id="checkadd" onclick="checkadd();">새 체크리스트
 			등록</button>
 	</div>
 	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 	<h3>
-		<a>모든 체크리스트</a>
+		<a id="checklistMove">모든 체크리스트</a>
 	</h3>
 	<form action="checklistDel.do" method="post">
 		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
@@ -479,102 +446,7 @@ $(function(){
 			</tbody>
 		</table>
 	</form>
-	<!--  
-	<h3>
-		<a>예약 내역 테스트</a>
-	</h3>
-	<form action="planlistDel.do" method="post">
-	<input type="hidden" name="myp_idx" value="${dto.bk_idx}">
-		<table border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty booklists}">
-					<tr>
-						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
-					</tr>
-				</c:if>
-				<c:forEach var="bdto" items="${booklists}">
-					<tr>
-						<td>${bdto.bk_date}</td>
-						<td>${bdto.cname}</td>
-						<td><input type="submit" value="삭제">
-						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
-	-->
-	<h3>
-		<a id="checklistMove">예약 내역 테스트2(from bookdto)</a>
-	</h3>
-	<form action="planlistDel.do" method="post">
-	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
-		<table border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty blists}">
-					<tr>
-						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
-					</tr>
-				</c:if>
-				<c:forEach var="bdto" items="${blists}">
-					<tr>
-						<td>${bdto.bk_date}</td>
-						<td>${bdto.cname}</td>
-						<td><input type="submit" value="삭제">
-						<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
-		
-<!-- 
-	<script type="text/javascript">
-function setCheckboxChecked(checkboxId) {
-	  var checkbox = document.getElementById(checkboxId);
-	  if (checkbox) {
-	    checkbox.checked = true;
-	    checkbox.disabled = true;
 
-	    // Store checked status in localStorage
-	    localStorage.setItem(checkboxId, 'checked');
-	  }
-	}
-
-document.addEventListener('DOMContentLoaded', function() {
-	  for (var i = 0; i <= 17; i++) {
-	    var checkboxId = 'checklist' + i;
-	    setCheckboxChecked(checkboxId);
-	  }
-	});
-
-//Retrieve stored checked status from localStorage
-var checkedStatus = localStorage.getItem(checkboxId);
-
-if (checkedStatus === 'checked') {
-  // If checkbox was previously checked, set it as checked and disabled
-  setCheckboxChecked(checkboxId);
-}
-
-
-</script>
- -->
 
 	<hr>
 
