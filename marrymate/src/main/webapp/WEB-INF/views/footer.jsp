@@ -12,8 +12,8 @@
 }
 
 footer #foot1 {
-	background-color: #fff;
-	color: #9e9e9e;
+	background-color: #b7a2d5;
+	color: #fff;
 	font-size: 15px;
 }
 
@@ -33,10 +33,11 @@ footer #foot1 #foottop {
 footer #foottop {
 	margin: auto;
 	width: 1510px;
-	border: 2px solid #ECCC83;
+	border: 3px solid #ECCC83;
 	padding: 14px;
 	align-self: center;
 	font-size: 22px;
+	background-color: #fff;
 }
 
 footer label {
@@ -46,9 +47,17 @@ footer label {
 
 #foottop a {
 	text-decoration: none;
-	color: #333;
+	color: #b794eb;
 	margin-right: 60px;
 	font-size: 18px;
+	transition: color 2s;
+}
+
+#foottop a:hover {
+	color: #cc33ff;
+	font-weight: bold;
+  	content: '';
+   	border-bottom: solid 2px #cc33ff;
 }
 
 #foottop img {
@@ -60,7 +69,9 @@ footer label {
 </style>
 
 <footer>
+
 	<div id="foot1">
+		<br>
 		<div id="foottop">
 			<a href="">회사소개</a> <a href="">개인정보취급방침</a> <a href="">광고문의 및
 				제휴문의</a> <img src="/marrymate/img/kakao-talk.png"> <img
