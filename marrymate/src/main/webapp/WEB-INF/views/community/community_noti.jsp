@@ -54,17 +54,12 @@
 		}
 		
 		th:nth-child(2), td:nth-child(2) {
-			width: 30%;
+			width: 20%;
 		}
 		
 		th:nth-child(3), td:nth-child(3) {
-			width: 15%;
+			width: 10%;
 		}
-		
-		th:nth-child(4), td:nth-child(4) {
-			width: 15%;
-		}
-		
 		th:last-child, td:last-child {
 			width: 10%;
 		}
@@ -102,18 +97,17 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
-					<th>조회수</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="5" align="center">${pageStr}</td>
+					<td colspan="4" align="center">${pageStr}</td>
 				</tr>
 			</tfoot>
 			<tbody>
 				<c:if test="${empty listNoti}">
 					<tr>
-						<td colspan="5" align="center">등록된 게시글이 없습니다.</td>
+						<td colspan="4" align="center">등록된 게시글이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${listNoti}">
@@ -129,9 +123,8 @@
 								</c:if> ${dto.subject}
 							</a>
 						</td>
-						<td>${dto.nick}</td>
+						<td>관리자</td>
 						<td>${dto.writedate}</td>
-						<td>${dto.watch}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

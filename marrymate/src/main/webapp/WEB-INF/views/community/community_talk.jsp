@@ -105,20 +105,14 @@ tr.pink-bg {
 }
 
 #write-box {
-	position: absolute;
-	right: 160px;
-	top: 500px;
-	width: 100px;
+	width: 200px;
+	float: right;
 	background-color: #3498db;
 	border: 1px solid #d9d9d9;
 	border-radius: 5px;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	text-align: center;
-}
-
-#tableBox {
-	height: 500px;
 }
 </style>
 </head>
@@ -158,6 +152,11 @@ tr.pink-bg {
 				</tr>
 			</tfoot>
 			<tbody>
+				<c:if test="${empty listFixT}">
+					<tr>
+						<td colspan="6" align="center">등록된 게시글이 없습니다.</td>
+					</tr>
+				</c:if>
 				<c:forEach var="fix" items="${listFixT}" begin="0" end="1">
 					<tr class="pink-bg">
 						<td>인증</td>
@@ -222,10 +221,11 @@ tr.pink-bg {
 				</c:forEach>
 			</tbody>
 		</table>
+		<div id="write-box">
+			<a href="write.do" style="text-decoration: none; color: white;" onclick="return checkMidx()">글쓰기</a>
+		</div>
 	</div>
-	<div id="write-box">
-		<a href="write.do" style="text-decoration: none; color: white;" onclick="return checkMidx()">글쓰기</a>
-	</div>
+	<div style="clear: both;"></div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

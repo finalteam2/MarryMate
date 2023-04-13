@@ -141,7 +141,7 @@ function checkMidx() {
 	</div>
 	<div id="tableBox">
 	<h1>웨딩후기</h1>
-		<table>
+		<table class="noti">		
 			<thead>
 				<tr>
 					<th>번호</th>

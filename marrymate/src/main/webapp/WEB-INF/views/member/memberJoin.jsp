@@ -24,10 +24,14 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<section>
 		<article>
-			<h2>일반 회원가입</h2>
+			<h2>회원가입</h2>
 			<form name="memberJoin" action="memberJoin.do" method="post" onsubmit="return allCheckForm()">
 			<div class="box">
 				<div id="iBox">
+					<div class="button-container">
+						<a href="memberJoin.do" class="buttonOne">일반 회원가입</a>
+						<a href="companyJoin.do" class="buttonTwo">기업 회원가입</a>
+					</div>
 					<div class="hClear">이름</div>
 						<input type="text" name="name" placeholder="실명 입력"><br>
 								<div class="hTagBox">생년월일</div>

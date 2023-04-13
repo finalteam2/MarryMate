@@ -211,39 +211,29 @@
         return true;
     }
     $(function() {
-        $('#likeBtn').on('click', function() {
-          var bidx = ${dto.bidx};
-          var midx = ${sessionScope.loginMidx};
-          $.ajax({
-            url: 'best.do',
-            type: 'POST',
-            data: { midx: midx, bidx: bidx },
-            success: function(result) {
-              if (result == 'false') {
-                alert('이미 추천 혹은 비추천을 하였습니다.');
-              } else {
-                alert('추천하였습니다.');
-                location.reload();
-              }
-            },
-            error: function() {
-              alert('서버와의 통신에 실패하였습니다.');
-            }
-          });
-        });
+        $('#likeBtn, #dislikeBtn').on('click', function() {
+          var bidx = '${dto.bidx}';
+          var midx = '${sessionScope.loginMidx}';
+          var url = '';
+          var msg = '';
 
-        $('#dislikeBtn').on('click', function() {
-          var bidx = ${dto.bidx};
-          var midx = ${sessionScope.loginMidx};
+          if ($(this).attr('id') === 'likeBtn') {
+            url = 'best.do';
+            msg = '추천';
+          } else {
+            url = 'worst.do';
+            msg = '비추천';
+          }
+
           $.ajax({
-            url: 'worst.do',
+            url: url,
             type: 'POST',
             data: { midx: midx, bidx: bidx },
             success: function(result) {
               if (result == 'false') {
                 alert('이미 추천 혹은 비추천을 하였습니다.');
               } else {
-                alert('비추천하였습니다.');
+                alert(msg + '하였습니다.');
                 location.reload();
               }
             },

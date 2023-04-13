@@ -37,7 +37,7 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public ModelAndView writeSubmit(BbsDTO dto, MultipartHttpServletRequest req) {
+	public ModelAndView writeSubmit(BbsDTO dto, MultipartHttpServletRequest req,@RequestParam("midx")int midx) {
 		
 		String img="";
 		
@@ -55,10 +55,14 @@ public class BbsController {
 		int result=bbsDao.bbsWrite(dto);
 		String msg=result>0?"게시글 작성 완료":"게시글 작성 실패";
 		
+		bbsDao.getWritePoint(midx);
+		int point=bbsDao.getMemberPoint(midx);
+		bbsDao.writeInsertPoint(midx, point);
+		
 		ModelAndView mav=new ModelAndView();
-		//mav.addObject("msg", msg);
-		//mav.addObject("url", "index.do");
-		mav.setViewName("community/content");
+		mav.addObject("msg", msg);
+		mav.addObject("url", "allCommunity.do");
+		mav.setViewName("community/communityMsg");
 		return mav;
 		
 	}
@@ -90,7 +94,7 @@ public class BbsController {
 	public ModelAndView bbsNotiList(
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		int totalCnt=bbsDao.bbsTotalCount();
+		int totalCnt=bbsDao.bbsNotiCount();
 		int listSize=5;
 		int pageSize=5;
 		
@@ -111,7 +115,7 @@ public class BbsController {
 	public ModelAndView bbsAfterList(
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		int totalCnt=bbsDao.bbsTotalCount();
+		int totalCnt=bbsDao.bbsAfterCount();
 		int listSize=5;
 		int pageSize=5;
 		
@@ -121,6 +125,8 @@ public class BbsController {
 		List<BbsViewDTO> list=bbsDao.bbsAfterList(cp, listSize);
 		List<BbsViewDTO> listBest=bbsDao.bbsAfterBest();
 		List<BbsViewDTO> listFix=bbsDao.bbsAfterFix();
+		String msg=listFix==null?"AfterFix 데이터가 있습니다.":"AfterFix 데이터가 없습니다.";
+		System.out.println(msg);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listAfter", list);
@@ -136,7 +142,7 @@ public class BbsController {
 	public ModelAndView bbsTalkList(
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		
-		int totalCnt=bbsDao.bbsTotalCount();
+		int totalCnt=bbsDao.bbsTalkCount();
 		int listSize=5;
 		int pageSize=5;
 		
@@ -146,6 +152,8 @@ public class BbsController {
 		List<BbsViewDTO> list=bbsDao.bbsTalkList(cp, listSize);
 		List<BbsViewDTO> listBest=bbsDao.bbsTalkBest();
 		List<BbsViewDTO> listFix=bbsDao.bbsAfterFix();
+		String msg=listFix!=null?"TalkFix 데이터가 있습니다.":"TalkFix 데이터가 없습니다.";
+		System.out.println(msg);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listTalk", list);

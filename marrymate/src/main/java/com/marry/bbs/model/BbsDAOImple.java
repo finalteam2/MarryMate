@@ -20,6 +20,24 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
+	public int getWritePoint(int midx) {
+		return sqlMap.update("getWritePoint", midx);
+	}
+	
+	@Override
+	public int getMemberPoint(int midx) {
+		return sqlMap.selectOne("getMemberPoint", midx);
+	}
+	
+	@Override
+	public int writeInsertPoint(int midx, int point) {
+		Map map=new HashMap<String, Integer>();
+		map.put("midx", midx);
+		map.put("point", point);
+		return sqlMap.insert("writeInsertPoint", map);
+	}
+	
+	@Override
 	public int replyWrite(ReplyDTO dto) {
 		return sqlMap.insert("replyWrite", dto);
 	}
@@ -106,8 +124,18 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
-	public int bbsTotalCount() {
-		return sqlMap.selectOne("bbsTotalCount");
+	public int bbsNotiCount() {
+		return sqlMap.selectOne("bbsNotiCount");
+	}
+	
+	@Override
+	public int bbsAfterCount() {
+		return sqlMap.selectOne("bbsAfterCount");
+	}
+	
+	@Override
+	public int bbsTalkCount() {
+		return sqlMap.selectOne("bbsTalkCount");
 	}
 	
 	@Override

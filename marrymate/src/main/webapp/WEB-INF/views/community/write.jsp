@@ -190,6 +190,7 @@
 </script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<section>
 		<article>
 			<h2>게시글 작성</h2>
@@ -222,5 +223,6 @@
 			</form>
 		</article>
 	</section>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
