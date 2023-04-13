@@ -19,8 +19,8 @@ public interface CalendarDAO {
 	public List<BookinfoDTO> booklistAll(int midx);
 	public List<CompanyDTO> bookInfoTwo(int midx);
 	public List<BookDTO> memberbook(int midx);
-	public List<BookDTO> moneyBook(int midx);
-	public List<BookDTO> moneyLeft(int midx);
+	public List<MemberDTO> myInfo(int midx);
+	public List<MemberDTO> comInfo(int midx);
 	
 	
 }

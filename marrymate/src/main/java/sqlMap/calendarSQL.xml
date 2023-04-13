@@ -12,4 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="memberbook" resultType="com.marry.book.model.BookDTO">
 	select book.bk_idx, book.midx, book.hidx, book.cidx, book.fidx, TO_CHAR(book.bk_date, 'YYYY-MM-DD') as bdate, book.bk_time, book.bk_state, book.bookdate, book.hall_nothall,  company.cname from book join company on book.cidx = company.cidx where book.midx = #{midx}
 	</select>
+	<select id="myInfo" parameterType="Integer" resultType="com.marry.member.model.MemberDTO">
+    select * from member where midx=#{midx}
+    </select>
+    <select id="comInfo" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
+    select * from company where cidx=#{cidx}		 		
+    </select>
 </mapper>
