@@ -14,6 +14,19 @@
 	width: 640px;
 	margin: 0 auto;
 }
+.imgbox {
+    width: 200px;
+    height: 200px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+.profileimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -21,7 +34,9 @@
 <section>
 	<article class="sizefix">
 		<h2>My 정보수정</h2><br>
-		<img src="/marrymate/img/member/${userInfo.img }" class=" rounded float-start" alt="profile_img">
+		<div class="imgbox">
+		<img src="/marrymate/img/member/${userInfo.img }" class="profileimg rounded mx-auto d-block" alt="profile_img">
+		</div>
 		 <form name="imgChange" action="imgChange.do" method="post" enctype="multipart/form-data">
    		 <input type="hidden" name="midx" value=${sessionScope.loginMidx }>
 		 <div class="input-group">
@@ -33,6 +48,7 @@
 		 <hr>
 		 
 		<form name="myInfoUpdate" action="update.do">
+		
 			<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
 			<div class="input-group mb-3">
 			  <span class="input-group-text">이름</span>
@@ -41,6 +57,10 @@
 			<div class="input-group mb-3">
 			  <span class="input-group-text">아이디</span>
 			  <input type="text" name="id" value="${userInfo.id }" readonly required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text">비밀번호</span>
+			  <input type="password" name="pwd" value="${userInfo.pwd }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text">생년월일</span>
@@ -58,10 +78,6 @@
 			<div class="input-group mb-3">
 			  <span class="input-group-text">닉네임</span>
 			  <input type="text" name="nick" value="${userInfo.nick }" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-			</div>
-			<div class="input-group mb-3">
-			  <span class="input-group-text">비밀번호</span>
-			  <input type="password" name="pwd" value="${userInfo.pwd }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text">전화번호</span>
@@ -85,6 +101,8 @@
 			</div>
 			<button type="submit" class="btn btn-primary">정보수정</button>
 			<button type="button" class="btn btn-secondary" onclick="location.href='index.do'">메인으로</button>
+			<br>
+			<br>
 		</form>
 	</article>
 </section>

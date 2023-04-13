@@ -27,6 +27,7 @@
 		,sjuso=#{sjuso}
 		,curl=#{curl}
 		,intro=#{intro}
+		,pay=#{pay}
 		where cidx=#{cidx}
 	</update>
 	
