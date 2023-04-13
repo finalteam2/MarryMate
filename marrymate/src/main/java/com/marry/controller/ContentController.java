@@ -22,6 +22,8 @@ import com.marry.company.model.ContentDAOImple;
 import com.marry.company.model.FoodDTO;
 import com.marry.company.model.HallDTO;
 import com.marry.company.model.ReviewDTO;
+import com.marry.notification.model.NotificationDAOImple;
+import com.marry.notification.model.NotificationDTO;
 import com.marry.point.model.PointDTO;
 
 @Controller
@@ -29,6 +31,9 @@ public class ContentController {
 	
 	@Autowired
 	private ContentDAOImple contentDao;
+	
+	@Autowired
+	private NotificationDAOImple notificationDao;
 	
 	//업체 상세 페이지 접속
 	@RequestMapping(value = "/companyContent.do", method = RequestMethod.GET)
@@ -101,6 +106,8 @@ public class ContentController {
 		}
 		
 		if (result > 0) {
+			NotificationDTO ndto = new NotificationDTO(0, dto.getCidx(), 0, "", "/marrymate/companyContent.do?cidx="+dto.getCidx(), "새 리뷰가 있습니다", "", 3, null, null, 0);
+			notificationDao.insertNoti(ndto);
 			msg = "리뷰 작성 완료";
 		}else {
 			msg = "리뷰 작성 실패";
@@ -153,6 +160,8 @@ public class ContentController {
 		int cnt = contentDao.insertCom_cs(dto);
 		String msg = "";
 		if (cnt > 0) {
+			NotificationDTO ndto = new NotificationDTO(0, dto.getCidx(), 0, "", "qna.do", "새 문의가 있습니다", "", 3, null, null, 0);
+			notificationDao.insertNoti(ndto);
 			msg = "문의 등록 성공";
 		}else {
 			msg = "문의 등록 실패";
@@ -206,9 +215,11 @@ public class ContentController {
 		int result = contentDao.updateComCs(dto);
 		String msg = "";
 		if (result > 0) {
-			msg = "업데이트성공";
+			NotificationDTO ndto = new NotificationDTO(0, 0, dto.getMidx(), "", "qna.do", "내 문의가 답변되었습니다", "", 3, null, null, 0);
+			notificationDao.insertNoti(ndto);
+			msg = "답변 성공";
 		}else {
-			msg = "업데이트실패";
+			msg = "답변 실패";
 		}
 		mav.addObject("msg", msg);
 		mav.addObject("goUrl", "qna.do");
@@ -355,8 +366,25 @@ public class ContentController {
 	
 	//취소 요청하기
 	@RequestMapping("/refundRequest.do")
-	public ModelAndView refundRequest(@RequestParam("bk_idx")int bk_idx) {
+	public ModelAndView refundRequest(@RequestParam("bk_idx")int bk_idx,
+			@RequestParam(value = "midx",defaultValue = "0")int midx,
+			@RequestParam(value = "cidx",defaultValue = "0")int cidx
+			
+			
+			) {
 		int result = contentDao.refundRequest(bk_idx);
+		
+//		NotificationDTO ndto = new NotificationDTO();
+//		if(cidx > 0) {
+//			ndto.setCidx(cidx);
+//		}else if (midx > 0) {
+//			ndto.setMidx(midx);
+//		}
+//		ndto.setNkind(3);
+//		ndto.setPage("예약 취소 알림");
+//		ndto.setPage("myBook.do");
+//		notificationDao.insertNoti(ndto);
+		
 		String msg=result>0?"취소 신청 완료":"취소 신청 실패";
 		
 		ModelAndView mav=new ModelAndView();

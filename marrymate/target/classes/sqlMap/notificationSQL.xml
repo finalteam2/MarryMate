@@ -16,6 +16,7 @@
 		#{content},
 		#{nkind},
 		sysdate,
+		sysdate,
 		0
 	)
 	</insert>

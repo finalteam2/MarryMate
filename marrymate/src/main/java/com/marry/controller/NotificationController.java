@@ -71,9 +71,9 @@ public class NotificationController {
 		if (midx > 0) {
 //			System.out.println("midx 실행"+midx);
 			List<NotificationDTO> arr = notificationDao.selectMemNoti(midx);
-			for(int i = 0; i < arr.size(); i++) {
-				System.out.println(arr.get(i).getTitle());
-			}
+//			for(int i = 0; i < arr.size(); i++) {
+//				System.out.println(arr.get(i).getTitle());
+//			}
 			int cnt = notificationDao.cntMemNoti(midx);
 			mav.addObject("arr", arr);
 			mav.addObject("cnt", cnt);
@@ -81,9 +81,9 @@ public class NotificationController {
 //			System.out.println("cidx 실행"+cidx);
 			List<NotificationDTO> arr = notificationDao.selectComNoti(cidx);
 			int cnt = notificationDao.cntComNoti(cidx);
-			for(int i = 0; i < arr.size(); i++) {
-				System.out.println(arr.get(i).getTitle());
-			}
+//			for(int i = 0; i < arr.size(); i++) {
+//				System.out.println(arr.get(i).getTitle());
+//			}
 			mav.addObject("arr", arr);
 			mav.addObject("cnt", cnt);
 		}
@@ -99,12 +99,13 @@ public class NotificationController {
 			) {
 		ModelAndView mav = new ModelAndView();
 		int result = notificationDao.checkNoti(nidx);
-		mav.addObject("msg", result>0?"성공":"실패");
+//		mav.addObject("msg", result>0?"성공":"실패");
 		if (page.length() == 0) {
 			page = "index.do";
 		}
-		mav.addObject("url", page);
-		mav.setViewName("company/companyMsg");
+//		mav.addObject("url", page);
+//		mav.setViewName("company/companyMsg");
+		mav.setViewName("redirect:/"+page);
 		return mav;
 	}
 }

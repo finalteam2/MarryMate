@@ -76,6 +76,7 @@ article.sizefix{
 	<article class="">
 	<form action="qnaUpadate.do" method="post">
 	<input type="hidden" name="ccsidx" value="${dto.ccsidx }">
+	<input type="hidden" name="midx" value="${dto.midx }">
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="heading${status.count }">
 	      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.count }" aria-expanded="false" aria-controls="collapse${status.count }">

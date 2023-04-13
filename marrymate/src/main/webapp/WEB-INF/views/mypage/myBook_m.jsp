@@ -80,6 +80,7 @@ div.allpage{
 		  	<!-- 결제 취소 신청 시 폼 부분 -->
 	  	  	<form action="refundRequest.do" method="post">
 		  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+		  	  <input type="hidden" name="cidx" value="${dto.cidx }">
 		  	  <c:if test="${not (dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3)}">
 			  	  <button type="submit" class="btn btn-outline-secondary" disabled>취소</button>
 		  	  </c:if>
