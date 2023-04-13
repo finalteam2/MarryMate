@@ -27,6 +27,7 @@
 		notification
 	where
 		cidx = #{cidx}
+		
 	</select>
 	<select id="cntComNoti" resultType="Integer">
 	select
@@ -36,6 +37,7 @@
 	where
 		cidx = #{cidx}
 		and checked = 0
+        and sysdate > activedate
 	</select>
 	<select id="selectMemNoti" resultType="com.marry.notification.model.NotificationDTO">
 	select
@@ -53,6 +55,7 @@
 	where
 		midx = #{midx}
 		and checked = 0
+        and sysdate > activedate
 	</select>
 	<update id="checkNoti" parameterType="Integer">
 	update
