@@ -398,7 +398,7 @@ textarea {
 	  </div>
 	</c:forEach>
 	</div>
-	
+	<br>
 	<!-- Button trigger modal -->
 	<c:if test="${not empty sessionScope.loginMidx }">
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">문의하기</button>
