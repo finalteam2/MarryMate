@@ -46,7 +46,7 @@ function checkHallDateResult(){
 			}else {
 				for(var i = 0; i < bkarr.length; i++){
 					var bk = bkarr[i];
-					bktimeNode.innerHTML  += '<option>' + bk.worktime + '</option>';
+					bktimeNode.innerHTML  += '<option value="' + bk.worktime + '">' + bk.worktime + '</option>';
 				}
 			}
 			bktimeNode.innerHTML += '</select>';
@@ -469,7 +469,7 @@ textarea {
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약시간</span>
-				  <select id="bktime" class="form-control" aria-label="Default select example">
+				  <select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">
 					  <option selected>홀과 날짜를 먼저 선택해주세요</option>
 				  </select>
 				</div>
