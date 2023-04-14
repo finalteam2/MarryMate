@@ -1,6 +1,6 @@
 var totalPrice=0;
-var filterPriceMin=1;
-var filterPriceMax=295;
+var filterPriceMin=10000;
+var filterPriceMax=2950000;
 
 $( function() {
 	$( "#datepicker" ).datepicker({
@@ -16,61 +16,44 @@ $( function() {
 		prevText: "<"
 	});
 } );
+
 $( function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 1,
-      max: 295,
-      values: [ 1, 295 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val(ui.values[ 0 ]+"만원 ~ "+ui.values[ 1 ]+"만원");
-        filterPriceMin=ui.values[ 0 ];
-        filterPriceMax=ui.values[ 1 ];
-      }
-    });
-    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
-      "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
+	    $( "#slider-range" ).slider({
+	      range: true,
+	      min: 1,
+	      max: 295,
+	      values: [ 1, 295 ],
+	      slide: function( event, ui ) {
+	        $( "#amount" ).val(ui.values[ 0 ]+"만원 ~ "+ui.values[ 1 ]+"만원");
+	        filterPriceMin=ui.values[ 0 ]*10000;
+	        filterPriceMax=ui.values[ 1 ]*10000;
+	      }
+	    });
+	    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+	      "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
 } );
 
-function searchList(){
-	document.getElementById('order_one').checked=true;
-	var filterText=document.searchFm.filterText.value;
-	var strFilterDate=document.searchFm.filterDate.value;
-	var filterSido=document.searchFm.filterSido.value;
-	var filterCate=document.cateFm.filterCate.value;
-	
-	var param = '';
-	param+='filterText='+filterText;
-	param+='&strFilterDate='+strFilterDate;
-	param+='&filterSido='+filterSido;
-	param+='&filterPriceMin='+(filterPriceMin*10000);
-	param+='&filterPriceMax='+(filterPriceMax*10000);
-	param+='&filterCate='+filterCate;
-	
-	sendRequest('searchList.do',param,'GET',showListResult);
-}
-
-
-function orderList(num){
-	var filterOrder='이름순';
-	var filterCate=document.cateFm.filterCate.value;
-	switch(num){
-	case 1:filterOrder='이름순';
-	break;
-	case 2:filterOrder='조회순';
-	break;
-	case 3:filterOrder='낮은가격순';
-	break;
-	case 4:filterOrder='높은가격순';
-	}
-	var param = '';
-	param+='filterOrder='+filterOrder;
-	param+='&filterCate='+filterCate;
-	sendRequest('selectOrder.do',param,'GET',showListResult);
-}
-
-
 function cateList(num){
+
+	//가격 초기화
+	filterPriceMin=10000;
+	filterPriceMax=2950000;
+	$( function() {
+	    $( "#slider-range" ).slider({
+	      range: true,
+	      min: 1,
+	      max: 295,
+	      values: [ 1, 295 ],
+	      slide: function( event, ui ) {
+	        $( "#amount" ).val(ui.values[ 0 ]+"만원 ~ "+ui.values[ 1 ]+"만원");
+	        filterPriceMin=ui.values[ 0 ]*10000;
+	        filterPriceMax=ui.values[ 1 ]*10000;
+	      }
+	    });
+	    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+	      "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
+	});
+	
 	document.getElementById('order_one').checked=true;
 	var filterCate='스튜디오';
 	switch(num){
@@ -89,10 +72,71 @@ function cateList(num){
 	case 7:filterCate='축가';
 	}
 	document.getElementById('cate_title').innerHTML=filterCate;
+	
+	document.searchFm.filterDate.value='';
+	document.searchFm.filterText.value='';
+	
+	//시도 초기화
+	$('#filterSido').niceSelect();
+	$('#filterSido').find('option:first').prop('selected', true);
+	$('#filterSido').niceSelect('update');
+	
 	var param='filterCate='+filterCate;
 	sendRequest('selectCate.do',param,'GET',showListResult);
 }
+function orderList(num){
+	var filterOrder='이름순';
+	var filterCate=document.cateFm.filterCate.value;
+	var strFilterDate=document.searchFm.filterDate.value;
+	var filterText=document.searchFm.filterText.value;
+	var filterSido=document.searchFm.filterSido.value;
+	switch(num){
+	case 1:filterOrder='이름순';
+	break;
+	case 2:filterOrder='조회순';
+	break;
+	case 3:filterOrder='낮은가격순';
+	break;
+	case 4:filterOrder='높은가격순';
+	}
+	var param = '';
+	param+='filterOrder='+filterOrder;
+	param+='&filterCate='+filterCate;
+	param+='&strFilterDate='+strFilterDate;
+	param+='&filterText='+filterText;
+	param+='&filterSido='+filterSido;
+	param+='&filterPriceMin='+filterPriceMin;
+	param+='&filterPriceMax='+filterPriceMax;
+	sendRequest('searchList.do',param,'GET',showListResult);
+}
+function searchList(){
 
+	var filterOrder='';
+	if(document.getElementById('order_one').checked==true){
+		filterOrder='이름순';
+	}else if(document.getElementById('order_two').checked==true){
+		filterOrder='조회순';
+	}else if(document.getElementById('order_three').checked==true){
+		filterOrder='낮은가격순';
+	}else if(document.getElementById('order_four').checked==true){
+		filterOrder='높은가격순';
+	}
+	var strFilterDate=document.searchFm.filterDate.value;
+	var filterText=document.searchFm.filterText.value;
+	var filterSido=document.searchFm.filterSido.value;
+	var filterCate=document.cateFm.filterCate.value;
+	
+	var param = '';
+	param+='filterText='+filterText;
+	param+='&strFilterDate='+strFilterDate;
+	param+='&filterSido='+filterSido;
+	param+='&filterPriceMin='+filterPriceMin;
+	param+='&filterPriceMax='+filterPriceMax;
+	param+='&filterCate='+filterCate;
+	param+='&filterOrder='+filterOrder;
+	
+	sendRequest('searchList.do',param,'GET',showListResult);
+}
 
 function showListResult(){
 	if(XHR.readyState==4){
@@ -101,6 +145,14 @@ function showListResult(){
 			data=JSON.parse(data);
 			
 			var comList=data.comList;
+			
+			var bk_date_text='';	
+			var strFilterDate=data.strFilterDate;
+			if(typeof(strFilterDate)=='undefined' || strFilterDate==''){
+				bk_date_text='이용날짜';
+			}else{
+				bk_date_text=strFilterDate;
+			}
 			
 			//총 업체수
 			var comListLength=comList.length;
@@ -151,10 +203,13 @@ function showListResult(){
 					var td3Node=document.createElement('td');
 					td3Node.setAttribute('width','20%');
 					td3Node.setAttribute('align','right');
-					var dateNode=document.createElement('input');
-					dateNode.setAttribute('type','date');
-					dateNode.setAttribute('id','bk_date'+com.cidx);
-					td3Node.appendChild(dateNode);
+					var dateButtonNode=document.createElement('input');
+					dateButtonNode.setAttribute('id','bk_date'+com.cidx);
+					dateButtonNode.setAttribute('class','bk_date_button');
+					dateButtonNode.setAttribute('type','button');
+					dateButtonNode.setAttribute('value',bk_date_text);			
+					dateButtonNode.setAttribute('onclick','goCalendar()');					
+					td3Node.appendChild(dateButtonNode);
 									
 					var td4Node=document.createElement('td');
 					td4Node.setAttribute('class','bk_sido');
@@ -166,19 +221,25 @@ function showListResult(){
 								
 					var td5Node=document.createElement('td');
 					td5Node.setAttribute('align','right');
-					var selectNode=document.createElement('select');
-					selectNode.setAttribute('id','bk_time'+com.cidx);
-					var option1Node=document.createElement('option');
-					option1Node.setAttribute('value','12:00');
-					var option1TextNode = document.createTextNode('12:00');
-					option1Node.appendChild(option1TextNode);
-					var option2Node=document.createElement('option');
-					option2Node.setAttribute('value','14:00');
-					var option2TextNode = document.createTextNode('14:00');
-					option2Node.appendChild(option2TextNode);
-					selectNode.appendChild(option1Node);
-					selectNode.appendChild(option2Node);
-					td5Node.appendChild(selectNode);
+					
+					
+					if(!(bk_date_text=='이용날짜')){
+						var selectNode=document.createElement('select');
+						selectNode.setAttribute('id','bk_time'+com.cidx);
+						var option1Node=document.createElement('option');
+						option1Node.setAttribute('value','12:00');
+						var option1TextNode = document.createTextNode('12:00');
+						option1Node.appendChild(option1TextNode);
+						var option2Node=document.createElement('option');
+						option2Node.setAttribute('value','14:00');
+						var option2TextNode = document.createTextNode('14:00');
+						option2Node.appendChild(option2TextNode);
+						selectNode.appendChild(option1Node);
+						selectNode.appendChild(option2Node);
+						td5Node.appendChild(selectNode);
+					}
+					
+					
 					td5Node.appendChild(document.createElement('br'));
 					td5Node.appendChild(document.createElement('br'));
 					td5Node.appendChild(document.createElement('br'));
@@ -212,6 +273,9 @@ function showListResult(){
 			}
 		}
 	}
+}
+function goCalendar(){
+	document.getElementById('datepicker').focus();
 }
 
 

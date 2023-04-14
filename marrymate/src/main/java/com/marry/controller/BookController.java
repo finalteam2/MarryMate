@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marry.book.model.BookDAOImple;
+import com.marry.book.model.BookpayDTO;
 import com.marry.book.model.CartDTO;
 import com.marry.book.model.FilterDTO;
 import com.marry.book.model.HallDTO;
@@ -45,20 +47,6 @@ public class BookController {
 		return mav;
 	}
 	
-	/**통합예약내 정렬순선택시*/
-	@RequestMapping("/selectOrder.do")
-	public ModelAndView selectOrder(
-			@RequestParam(name = "filterOrder",defaultValue = "이름순")String filterOrder,
-			@RequestParam(name = "filterCate",defaultValue = "스튜디오")String filterCate) {
-		FilterDTO dto=new FilterDTO(filterOrder, filterCate);
-		List<CompanyDTO> arr=bookDao.orderBookList(dto);
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("comList",arr);
-		mav.setViewName("finalJson");
-		return mav;
-	}
-	
 	/**통합예약내 담기 클릭시*/
 	@RequestMapping("/addCart.do")
 	public ModelAndView addCart(
@@ -79,7 +67,8 @@ public class BookController {
 			@RequestParam(name = "filterSido",defaultValue = "")String beforeFilterSido,
 			@RequestParam(name = "filterPriceMin",defaultValue = "1")int filterPriceMin,
 			@RequestParam(name = "filterPriceMax",defaultValue = "295")int filterPriceMax,
-			@RequestParam(name = "filterCate",defaultValue = "스튜디오")String filterCate) {
+			@RequestParam(name = "filterCate",defaultValue = "스튜디오")String filterCate,
+			@RequestParam(name = "filterOrder",defaultValue = "")String filterOrder) {
 		
 		//검색어 설정
 		String filterText="%"+beforeFilterText+"%";
@@ -113,12 +102,13 @@ public class BookController {
 			filterDate = "일";
 		}
 		
-		FilterDTO dto=new FilterDTO(filterText, filterDate, filterSido, filterPriceMin, filterPriceMax, filterCate);
+		FilterDTO dto=new FilterDTO(filterText, filterDate, filterSido, filterPriceMin, filterPriceMax, filterOrder, filterCate);
 		
 		
 		List<CompanyDTO> arr=bookDao.searchBookList(dto);
 		
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("strFilterDate",strFilterDate);
 		mav.addObject("comList",arr);
 		mav.setViewName("finalJson");
 		return mav;
@@ -127,7 +117,7 @@ public class BookController {
 	/**홀제외 업체 정보 결제페이지로*/
 	@RequestMapping(value = "/notHallSubmit.do", method = RequestMethod.POST)
 	public ModelAndView notHallSubmit(HttpServletRequest req) {
-		
+				
 		String[] cidxs=req.getParameterValues("cidx");
 		String[] bk_dates=req.getParameterValues("bk_date");
 		String[] bk_times=req.getParameterValues("bk_time");
@@ -135,6 +125,10 @@ public class BookController {
 		String[] pays=req.getParameterValues("pay");
 		String[] cnames=req.getParameterValues("cname");
 		String[] kinds=req.getParameterValues("kind");
+		
+		HttpSession session=req.getSession();
+		int midx=(int)session.getAttribute("loginMidx");
+		int point=bookDao.memberPoint(midx);		
 		
 		List<CartDTO> cartList=new ArrayList<CartDTO>();
 		
@@ -145,6 +139,7 @@ public class BookController {
 
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("cartList", cartList);
+		mav.addObject("point", point);
 		mav.setViewName("book/payment");
 		return mav;
 	}
@@ -153,7 +148,8 @@ public class BookController {
 	@RequestMapping(value = "/hallSubmit.do", method = RequestMethod.POST)
 	public ModelAndView hallSubmit(HallDTO hallDto, 
 			@RequestParam(value = "hstr", required = false)String hstr,
-			@RequestParam(value = "fstr", required = false)String fstr) {
+			@RequestParam(value = "fstr", required = false)String fstr,
+			HttpServletRequest req) {
 		//홀, 식당 정보 문자열로 받아서 재설정
 		try {
 			String hdata[] =  hstr.split(" ");
@@ -181,54 +177,87 @@ public class BookController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("cidx:"+hallDto.getCidx());
-		System.out.println("hidx:"+hallDto.getHidx());
-		System.out.println("fidx:"+hallDto.getFidx());
-		System.out.println("h_name:"+hallDto.getH_name());
-		System.out.println("h_pay:"+hallDto.getH_pay());
-		System.out.println("guest_num:"+hallDto.getGuest_num());
-		System.out.println("f_name:"+hallDto.getF_name());
-		System.out.println("f_pay:"+hallDto.getF_pay());
-		System.out.println("bk_date:"+hallDto.getBk_date());
-		System.out.println("bk_time:"+hallDto.getBk_time());
-		System.out.println("kind:"+hallDto.getKind());
-		System.out.println("pay:"+hallDto.getPay());
-		System.out.println("img:"+hallDto.getImg());
-		System.out.println("name:"+hallDto.getName());
+		HttpSession session=req.getSession();
+		int midx=(int)session.getAttribute("loginMidx");
+		int point=bookDao.memberPoint(midx);	
 		
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("book/payment");
+		mav.addObject("hallDto", hallDto);
+		mav.addObject("point", point);
+		mav.setViewName("book/payment_h");
 		return mav;
 	}
 	
-	
-	/**결제시 결제정보받고 DB에 저장*/
-	@RequestMapping("/payment.do")
-	public ModelAndView payment(
-			@RequestParam(name = "midx",defaultValue = "")int midx,
-			@RequestParam(name = "cidx",defaultValue = "")int cidx,
-			@RequestParam(name = "bk_date",defaultValue = "")String bk_date,
-			@RequestParam(name = "bk_time",defaultValue = "")String bk_time,
-			@RequestParam(name = "hall_nothall",defaultValue = "")int hall_nothall,
-			@RequestParam(name = "pay_point",defaultValue = "")int pay_point,
-			@RequestParam(name = "pay_money",defaultValue = "")int pay_money) {
+	/**홀 제외 결제시 db 저장*/
+	@RequestMapping(value = "/notHallPay.do", method = RequestMethod.POST)
+	public ModelAndView notHallPay(HttpServletRequest req) {
+		
+		String[] midxs=req.getParameterValues("midx");
+		String[] cidxs=req.getParameterValues("cidx");
+		String[] bk_dates=req.getParameterValues("bk_date");
+		String[] bk_times=req.getParameterValues("bk_time");
+		String[] pay_points=req.getParameterValues("usePoint");
+		String[] pay_moneys=req.getParameterValues("finalPrice");	
+		
+		List<BookpayDTO> bookPayList=new ArrayList<BookpayDTO>();
 		
 		
-		System.out.println(midx);
-		System.out.println(cidx);
-		System.out.println(bk_date);
-		System.out.println(bk_time);
-		System.out.println(hall_nothall);
-		System.out.println(pay_point);
-		System.out.println(pay_money);
+		for(int i=0;i<cidxs.length;i++) {
+			if(i==0) {
+				BookpayDTO dto=new BookpayDTO(midxs[0], cidxs[i], bk_dates[i], bk_times[i], pay_points[0], pay_moneys[i]);
+				bookPayList.add(dto);
+			}else {				
+				BookpayDTO dto=new BookpayDTO(midxs[0], cidxs[i], bk_dates[i], bk_times[i], "0", pay_moneys[i]);
+				bookPayList.add(dto);
+			}
+		}
 		
-		
+		List<Integer> pay_idx=bookDao.notHallPay(bookPayList);
+
 		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("book/paymentResult");
+		mav.addObject("pay_idx", pay_idx);
+		mav.setViewName("finalJson");
 		return mav;
 	}
 	
+	/**홀 결제시 db 저장*/
+	@RequestMapping(value = "/hallPay.do", method = RequestMethod.POST)
+	public ModelAndView hallPay(HttpServletRequest req) {
+		
+		String[] midxs=req.getParameterValues("midx");
+		String[] cidxs=req.getParameterValues("cidx");
+		String[] bk_dates=req.getParameterValues("bk_date");
+		String[] bk_times=req.getParameterValues("bk_time");
+		String[] pay_points=req.getParameterValues("usePoint");
+		String[] pay_moneys=req.getParameterValues("finalPrice");
+		String[] hidxs=req.getParameterValues("hidx");
+		String[] fidxs=req.getParameterValues("fidx");
+		
+		List<BookpayDTO> bookPayList=new ArrayList<BookpayDTO>();
+		
+
+		BookpayDTO dto=new BookpayDTO(midxs[0], cidxs[0], bk_dates[0], bk_times[0], pay_points[0], pay_moneys[0], hidxs[0], fidxs[0]);
+		bookPayList.add(dto);
+
+		
+		List<Integer> pay_idx=bookDao.hallPay(bookPayList);
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pay_idx", pay_idx);
+		mav.setViewName("finalJson");
+		return mav;
+	}
+	
+	/**포인트내역 업데이트 및 알림*/
+	@RequestMapping("/pointUpdate.do")
+	public void pointUpdate(
+			@RequestParam(value = "midx", defaultValue = "")int midx ,
+			@RequestParam(value = "usePoint", defaultValue = "")int usePoint,
+			@RequestParam(value = "pay_idx", defaultValue = "")int pay_idx) {
+
+		bookDao.pointUpdate(midx, usePoint, pay_idx);
+		
+	}
 	
 	/**결제완료후 결제정보페이지로 이동*/
 	@RequestMapping("/payResult.do")

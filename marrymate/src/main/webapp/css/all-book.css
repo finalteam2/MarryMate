@@ -269,6 +269,9 @@ video{
 	font-weight:bold;
 	color:#494949;
 }
+.bk_date_button{
+    cursor:pointer;
+}
 .list_table .add_button{
 	background-color:#de2e5f;
 	border:1px solid #de2e5f;

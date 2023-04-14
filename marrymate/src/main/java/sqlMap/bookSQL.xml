@@ -13,35 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by
 			cname asc
 	</select>
-	<select id="orderList" parameterType="com.marry.book.model.FilterDTO" resultType="com.marry.company.model.CompanyDTO">
-		select
-			*
-		from
-			company
-		where
-			kind=#{filterCate} and clevel=1 and blind=0
-		order by
-			<if test="filterOrder=='이름순'">
-	 			cname asc, cidx desc
-	 		</if>
-	 		<if test="filterOrder=='조회순'">
-	 			watch desc, cidx desc
-	 		</if>
-	 		<if test="filterOrder=='낮은가격순'">
-	 			pay asc, cidx desc
-	 		</if>
-	 		<if test="filterOrder=='높은가격순'">
-	 			pay desc, cidx desc
-	 		</if>
-	</select>
-	<select id="addCart" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
-		select
-			*
-		from
-			company
-		where
-			cidx=#{cidx}
-	</select>
 	<select id="searchList" parameterType="com.marry.book.model.FilterDTO" resultType="com.marry.company.model.CompanyDTO">
 		select
 			company.cidx, kind, cname, sido, sigungu, pay, clevel, watch, blind, img
@@ -64,9 +35,122 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by
 			company.cidx, kind, cname, sido, sigungu, pay, clevel, watch, blind, img
 		order by
-			cname asc, company.cidx desc
+			<if test="filterOrder=='이름순'">
+	 			cname asc, company.cidx desc
+	 		</if>
+	 		<if test="filterOrder=='조회순'">
+	 			watch desc, company.cidx desc
+	 		</if>
+	 		<if test="filterOrder=='낮은가격순'">
+	 			pay asc, company.cidx desc
+	 		</if>
+	 		<if test="filterOrder=='높은가격순'">
+	 			pay desc, company.cidx desc
+	 		</if>
 	</select>
-	<insert id="bookInfo" parameterType="com.marry.book.model.BookDTO">
-		
+	<select id="addCart" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
+		select
+			*
+		from
+			company
+		where
+			cidx=#{cidx}
+	</select>
+	
+	
+	<insert id="notHallBookInfo" parameterType="com.marry.book.model.BookpayDTO">
+		insert
+			into
+		book
+			values(book_bk_idx.nextval, #{midx}, null, #{cidx}, null, #{bk_date}, #{bk_time}, 0, sysdate, 1)
 	</insert>
+	<select id="notHallSelectBk_idx" resultType="Integer">
+		select
+			bk_idx
+		from
+			book
+		where
+			bk_state=0
+	</select>
+	<update id="notHallUpdateBk_state">
+		update
+			book
+		set
+			bk_state=1
+		where
+			bk_state=0
+	</update>
+	<insert id="notHallPayInfo" parameterType="Map">
+		insert
+			into
+		payment
+			values(payment_pay_idx.nextval, #{bk_idx}, #{midx}, '카드', sysdate, '예약금', #{pay_point}, #{pay_money})
+	</insert>
+	<select id="notHallSelectPay_idx" parameterType="Integer" resultType="Integer">
+		select
+			pay_idx
+		from
+			payment
+		where
+			bk_idx=#{bk_idx}
+	</select>
+	
+	
+	<insert id="hallBookInfo" parameterType="com.marry.book.model.BookpayDTO">
+		insert
+			into
+		book
+			values(book_bk_idx.nextval, #{midx}, #{hidx}, #{cidx}, #{fidx}, #{bk_date}, #{bk_time}, 0, sysdate, 0)
+	</insert>
+	<select id="hallSelectBk_idx" resultType="Integer">
+		select
+			bk_idx
+		from
+			book
+		where
+			bk_state=0
+	</select>
+	<update id="hallUpdateBk_state">
+		update
+			book
+		set
+			bk_state=1
+		where
+			bk_state=0
+	</update>
+	<insert id="hallPayInfo" parameterType="Map">
+		insert
+			into
+		payment
+			values(payment_pay_idx.nextval, #{bk_idx}, #{midx}, '카드', sysdate, '예약금', #{pay_point}, #{pay_money})
+	</insert>
+	<select id="hallSelectPay_idx" parameterType="Integer" resultType="Integer">
+		select
+			pay_idx
+		from
+			payment
+		where
+			bk_idx=#{bk_idx}
+	</select>
+	
+	<insert id="comNoti" parameterType="com.marry.notification.model.NotificationDTO" >
+        insert into notification values(notification_nidx.nextval,#{cidx},null,null,'myBook.do','새 예약이 있습니다','',1,sysdate,sysdate,0)
+	</insert>
+	<insert id="memNoti" parameterType="com.marry.notification.model.NotificationDTO" >
+        insert into notification values(notification_nidx.nextval,null,#{midx},null,'myBook.do','잔금 결제 7일전','',1,to_date(#{ndate},'YYYY-MM-DD')-14,sysdate,0)
+	</insert>
+	
+	
+	<select id="memPoint" parameterType="Integer" resultType="Integer">
+		select point from member where midx=#{midx}
+	</select>
+	
+	<update id="memPointUpdate" parameterType="Map">
+		update member set point=#{p_total} where midx=#{midx}
+	</update>
+	
+	<insert id="memPointMinus" parameterType="com.marry.point.model.PointDTO" >
+		insert into point values(point_p_idx.nextval,#{midx},#{pay_idx},null,null,#{p_cal},sysdate,#{p_total},'예약금')
+	</insert>
+  
 </mapper>

@@ -57,7 +57,7 @@ function cartCheck(){
 			</div>
 			<div class="local_box">
 				<select id="filterSido" name="filterSido">
-					<option data-display="지역을 선택해주세요." value="" disabled selected>시/도</option>
+					<option id="defaultSido" value="" disabled selected>지역을 선택해주세요.</option>
 					<option value="서울">서울</option>
 					<option value="경기">경기</option>
 					<option value="인천">인천</option>

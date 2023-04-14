@@ -1,6 +1,6 @@
 package com.marry.notification.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class NotificationDTO {
 	
@@ -25,7 +25,10 @@ public class NotificationDTO {
 	private Date activedate;
 	private Date sentdate;
 	private int checked;
+	private String ndate;
 	
+	
+
 	public NotificationDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -45,6 +48,31 @@ public class NotificationDTO {
 		this.activedate = activedate;
 		this.sentdate = sentdate;
 		this.checked = checked;
+	}
+	
+	public NotificationDTO(int nidx, int cidx, int midx, String recv, String page, String title, String content,
+			int nkind, Date activedate, Date sentdate, int checked, String ndate) {
+		super();
+		this.nidx = nidx;
+		this.cidx = cidx;
+		this.midx = midx;
+		this.recv = recv;
+		this.page = page;
+		this.title = title;
+		this.content = content;
+		this.nkind = nkind;
+		this.activedate = activedate;
+		this.sentdate = sentdate;
+		this.checked = checked;
+		this.ndate = ndate;
+	}
+
+	public String getNdate() {
+		return ndate;
+	}
+
+	public void setNdate(String ndate) {
+		this.ndate = ndate;
 	}
 
 	public int getNidx() {
