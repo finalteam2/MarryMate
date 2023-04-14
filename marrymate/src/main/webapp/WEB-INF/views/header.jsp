@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 @font-face {
-    font-family: 'Cafe24ClassicType-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+    font-family: 'WandohopeR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeR.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -84,7 +84,7 @@ nav .titlebar{
 }
 
 .titlebar a{
-	font-family: 'Cafe24ClassicType-Regular';
+	font-family: 'WandohopeR';
 	text-decoration: none;
 	text-align: center;
 	font-size: 30px;
