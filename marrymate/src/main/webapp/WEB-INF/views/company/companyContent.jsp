@@ -154,6 +154,15 @@ textarea {
     font-size: 22px;
     background-color: #f0ecfc;
 }
+
+.cnameandlike {
+   	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
 </style>
 
 <title>Insert title here</title>
@@ -162,7 +171,27 @@ textarea {
 <%@include file="../header.jsp" %>
 <div id="myDiv"></div>
 <div class="allpage">
-	<p class="h1">${dto.cname }</p><small class="text-muted">${dto.kind }</small>
+	<div class="cnameandlike">
+		<p class="h1">${dto.cname }</p>
+		
+		<form action="com_like.do" method="post">
+			<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
+			<input type="hidden" name="cidx" value="${dto.cidx }">
+		<c:if test="${empty ldto }">
+			<button style="margin-right: 20px;" type="submit" class="btn btn-outline-primary">
+			즐겨찾기
+			</button>
+		</c:if>
+		<c:if test="${not empty ldto}">
+			<input type="hidden" name="lidx" value="${ldto.lidx }">
+			<button style="margin-right: 20px;" type="submit" class="btn btn-primary">
+			즐겨찾기
+			</button>
+		</c:if>
+		</form>
+	</div>
+	<small class="text-muted">${dto.kind }</small>
+	
 	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
 	  <div class="carousel-indicators">
 	    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -422,7 +451,7 @@ textarea {
 	  <div class="accordion-item">
 	    <h2 class="accordion-header" id="headingOne">
 	      <button class="accordion-button acbtm collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-	        메뉴 바
+	        실시간 예약
 	      </button>
 	    </h2>
 	    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -507,21 +536,7 @@ textarea {
 			</form>
 			</c:if>
 			
-			<form action="com_like.do" method="post">
-				<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
-				<input type="hidden" name="cidx" value="${dto.cidx }">
-			<c:if test="${empty ldto }">
-				<button type="submit" class="btn btn-outline-primary">
-				☆즐겨찾기☆
-				</button>
-			</c:if>
-			<c:if test="${not empty ldto}">
-				<input type="hidden" name="lidx" value="${ldto.lidx }">
-				<button type="submit" class="btn btn-primary">
-				☆즐겨찾기☆
-				</button>
-			</c:if>
-			</form>
+
 		
 		</c:if>
 		</div>
