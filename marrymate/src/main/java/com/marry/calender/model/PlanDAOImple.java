@@ -36,4 +36,20 @@ public class PlanDAOImple implements PlanDAO {
 		return sqlMap.selectList("planlistAll", midx);
 	}
 
+	@Override
+	public List<PlanDTO> planlistAllCom(int cidx) {
+		return sqlMap.selectList("planlistAllCom", cidx);
+	}
+	
+	@Override
+	public int planlistDelCom(int myp_idx) {
+		int count=sqlMap.delete("planlistDelCom", myp_idx);
+		return count;
+	}
+	
+	@Override
+	public int planWriteCom(PlanDTO dto) {
+		int count=sqlMap.insert("planWriteCom", dto);
+		return count;
+	}
 }

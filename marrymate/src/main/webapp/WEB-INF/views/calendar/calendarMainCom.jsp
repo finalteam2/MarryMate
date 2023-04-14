@@ -37,75 +37,30 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
 
 <script>
-var dday = new Date("${sessionScope.loginMD}").getTime();
-
-setInterval(function() {
-  var today = new Date().getTime();
-  var gap = dday - today;
-  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
-  var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
-  var sec = Math.ceil((gap % (1000 * 60)) / 1000);
-
-  document.getElementById("count").innerHTML = "예식 D-DAY까지 " + day + "일 " + hour + "시간 " + min + "분 " + sec + "초 남았습니다.";
-}, 1000);
- 
- 
-var date = new Date("${sessionScope.loginMD}").getTime();
-
-setInterval(function() {
-  var today = new Date().getTime();
-  var gap = date - today;
-  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
-
-document.getElementById("dDay").innerHTML = "D-" + day + "일 ♥";
-}, 1000);
-
-var dateonly = new Date("${sessionScope.loginMD}").getTime();
-
-setInterval(function() {
-  var today = new Date().getTime();
-  var gap = dateonly - today;
-  var day = Math.ceil(gap / (1000 * 60 * 60 * 24));
-
-document.getElementById("dDayOnly").innerHTML = "현재 D-" + day +"일 입니다!";
-}, 1000);
-
-var dayinfo = new Date("${sessionScope.loginMD}");
-
-setInterval(function() {
-    var dayOfWeek = dayinfo.getDay();
-    var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var dayName = dayNames[dayOfWeek]; // get the day name as a string
-
-    document.getElementById("day").innerHTML = dayName;
-});
-
-
 function addplan(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
-	window.open("planWrite.do","addplan", "width=400, height=400, left="+w+",top="+h);
+	window.open("planWriteCom.do","addplan", "width=400, height=400, left="+w+",top="+h);
 	opener.parent.location.reload();
 }
 
 function checkadd(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
-	window.open("checklistAdd.do","checkadd", "width=400, height=400, left="+w+",top="+h);
+	window.open("checklistAddCom.do","checkadd", "width=400, height=400, left="+w+",top="+h);
 }
 
 function checkdel(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
-	window.open("checklistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+	window.open("checklistDelCom.do","checkdel", "width=400, height=400, left="+w+",top="+h);
 }
 
 
 function plandel(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
-	window.open("planlistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+	window.open("planlistDelCom.do","checkdel", "width=400, height=400, left="+w+",top="+h);
 }
 
 
@@ -120,35 +75,6 @@ function checkAlladd(){
 
 </script>
 <script type="text/javascript">
-
-$(function(){
-	//스크롤이동
-	$(".moveScroll").click(function(e) {
-		var scrollY = 0;
-		if($(this).data('target') == 'chkid') {
-			var chkid = $(this).data('chkid')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else if($(this).data('target') == 'chkst') {
-			var chkst = $(this).data('chkst')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else {
-			scrollY = $(".checkListArea").offset().top;
-		}
-		//
-		$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
-	});
-	
-
 	
 	cookiedata = document.cookie;
 	if(cookiedata.indexOf("close=Y") < 0){
@@ -182,7 +108,7 @@ $(function(){
 </head>
 <body background="/marrymate/img/background.png">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-		<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
+		<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
 		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
 			style="width: 100%">
 		
@@ -195,31 +121,20 @@ $(function(){
 					<!--profileArea : s-->
 	<div class="profileBox">
 						<div class="imgArea">
-							<c:forEach var="minfo" items="${myinfo}">
-							<img class="mypicture" src="/marrymate/img/member/${minfo.img}">
+							<c:forEach var="cinfo" items="${cominfo}">
+							<img class="mypicture" src="/marrymate/img/member/${cinfo.img}">
 						</c:forEach>
 						
 						</div>
 						<div class="txtArea">
 							<div class="nameArea">
-								<c:if test="${!empty sessionScope.loginId}">
+								<c:if test="${!empty sessionScope.com_id}">
 									<div>
-										<strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick})
-										님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일
+										<strong> ${sessionScope.com_cname}</strong>
+										님 환영합니다.<br> 메리메이트와 똑똑한 일정 관리하세요!
 									</div>
 								</c:if>
 							</div>
-
-							<div class="weddingDay">
-								<span class="date"> <c:if
-										test="${!empty sessionScope.loginId}">
-										<div>${sessionScope.loginMD.substring(0, 10)}
-											&nbsp;<span id="day"></span>
-										</div>
-									</c:if>
-								</span> <span class="d-day" id="dDay"></span><br>
-							</div>
-							<div id="count"></div>
 						</div>
 					</div>
 				</div>
@@ -244,7 +159,9 @@ $(function(){
         <div style="flex: 1;">
             <div class="scheduletotal">
                 <h4>모든 일정</h4>
-                <div class="stats">${ptotal}</div>
+                <div class="stats">
+                <a href="planlistMove">${ptotalcom}</a>
+                </div>
                 <div class="statsletter">건</div>
             </div>
         </div>
@@ -252,7 +169,7 @@ $(function(){
             <div class="booklisttotal">
                 <h4>모든 예약</h4>
                 <div class="stats">
-                    <a href=#checklistMove>${btotal}</a>
+                    <a href="">${btotalcom}</a>
                 </div>
                 <div class="statsletter">건</div>
             </div>
@@ -260,14 +177,16 @@ $(function(){
         <div style="flex: 1;">
             <div class="checklisttotal">
                 <h4>모든 체크리스트</h4>
-                <div class="stats">${ctotal}</div>
+                <div class="stats">
+                <a href="checklistMove">${ctotalcom}</a>
+                </div>
                 <div class="statsletter">건</div>
             </div>
         </div>
     </div>
 				</div>
 			</div>
-			<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+			<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 
 <br><br>
 			<div style="padding-left: 90%">
@@ -277,9 +196,7 @@ $(function(){
 
 			<!-- 캘린더 시작  -->
 			<div id='calendar'></div>
-			<div id='popup'
-				style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">
-				<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+				<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 			</div>
 		</div>
 	</div>
@@ -290,7 +207,8 @@ $(function(){
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			  locale: "ko",
-			  initialView: 'dayGridMonth',
+			  plugins: [multiMonthPlugin],
+			  initialView: 'multiMonthYear',
 			  headerToolbar: {
 				left: 'prev,next today',
 				center: 'title',
@@ -304,9 +222,9 @@ $(function(){
 	            editable : true,
 	            nowIndicator : true,
 	            locale : 'ko',
-			  googleCalendarApiKey: 'AIzaSyAMOTvZ3EfZYlrlAY7kNu6Qpu9OGZ3lxOc',
+			  googleCalendarApiKey: 'AIzaSyCO9sIj6d33hsyqRRoYnZdwu3-_WNfBMyk',
 			  events: {
-			  googleCalendarId: 'bb5c88acec84ea534aeacba7d764371e7a104dd14994c27fabbf3eb5700a929f@group.calendar.google.com',
+			  googleCalendarId: '92c453036d926d54844360967e3143b0a9bbe21313f9d012acb49008e843afc2@group.calendar.google.com',
 			  className: 'gcal-event' 
 			  },
 			  eventSources : [
@@ -315,10 +233,10 @@ $(function(){
 	                    textColor : '#FFFFFF'
 	                },
 	                {
-	                    events: ${svcJson3}
+	                    events: ${svcJson}
 	                },
 	                {
-	                    events: ${svcJson4}
+	                    events: ${svcJson2}
 	                }
 	            ],
 	            
@@ -374,9 +292,9 @@ $(function(){
 
 	<div class="planlistwrap">
 	<h3>
-		<a>Myplan</a>
+		<a id="planlistMove">Company Plan</a>
 	</h3>
-	<form action="planlistDel.do" method="post">
+	<form action="planlistDelCom.do" method="post">
 		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
 			<thead>
@@ -388,12 +306,12 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${empty planlists}">
+				<c:if test="${empty planlistscom}">
 					<tr>
 						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:forEach var="pdto" items="${planlists}">
+				<c:forEach var="pdto" items="${planlistscom}">
 					<tr>
 						<td>${pdto.title}</td>
 						<td>${pdto.pdate}</td>
@@ -409,15 +327,15 @@ $(function(){
 	<br>
 	<!-- checklist add/select -->
 	<div class="checklistwrap">
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+	<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 	<h3 id="checklistitems">
-		<a id="checklistMove">모든 체크리스트</a>
+		<a id="checklistMove">Company Checklist</a>
 	</h3>
 	<div style="padding-left: 65%">
 		<button type="button" id="checkadd" onclick="checkadd();">새
 			체크리스트 등록</button>
 	</div>
-	<form action="checklistDel.do" method="post">
+	<form action="checklistDelCom.do" method="post">
 		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
 			<thead>
@@ -429,12 +347,12 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${empty checklistItems}">
+				<c:if test="${empty checklistItemscom}">
 					<tr>
 						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:forEach var="dto" items="${checklistItems}">
+				<c:forEach var="dto" items="${checklistItemscom}">
 					<tr>
 						<td>${dto.title}</td>
 						<td>${dto.dueday}</td>

@@ -9,4 +9,9 @@ public interface ChecklistDAO {
 	
 	public List<ChecklistDTO> checklistAll(int midx);
 	
+	public int checklistAddCom(ChecklistDTO cdto);
+	
+	public int checklistDelCom(int ch_idx);
+	
+	public List<ChecklistDTO> checklistAllCom(int cidx);
 }

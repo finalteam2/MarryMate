@@ -41,6 +41,7 @@ import com.marry.calender.model.ChecklistDAOImple;
 import com.marry.calender.model.ChecklistDTO;
 import com.marry.calender.model.PlanDAO;
 import com.marry.calender.model.PlanDTO;
+import com.marry.company.model.CompanyDAO;
 import com.marry.company.model.CompanyDTO;
 import com.marry.company.model.ContentDAO;
 import com.marry.member.model.MemberDAO;
@@ -73,11 +74,11 @@ public class CalendarContoller {
 	@Autowired
 	private MypageDAO mypageDao;
 	
+	@Autowired
+	private CompanyDAO companyDao;
 	
-	@RequestMapping("/calendar.do")
-	public String calendar() {
-		return "calendar/calendar";
-	}
+	
+
 	@RequestMapping("/mbti.do")
 	public String mbti() {
 		return "calendar/plan/mbti";
@@ -87,6 +88,11 @@ public class CalendarContoller {
 	public String notitest() {
 		return "calendar/notitest";
 	}
+	
+	@RequestMapping("/calendarInfo.do")
+	public String calendarInfo() {
+			return "calendar/calendarInfo";
+		}
 
 	@RequestMapping("/calendarMain.do")
 	public ModelAndView calendarMain(
@@ -176,16 +182,97 @@ public class CalendarContoller {
 		mav.setViewName("calendar/calendarMain");
 		return mav;
 	}
-	
-	@RequestMapping("/calendarInfo.do")
-	public String calendarInfo() {
-			return "calendar/calendarInfo";
-		}
-	
+
 	@RequestMapping("/calendarMainCom.do")
-	public String CalendarMainCom() {
-		return "calendar/calendarMainCom";
+	public ModelAndView CalendarMainCom(
+			HttpSession session) {
+		int cidx= (int) session.getAttribute("com_cidx");
+		List<ChecklistDTO> listcom = checklistDao.checklistAllCom(cidx);
+		List<PlanDTO> plistcom = planDao.planlistAllCom(cidx);
+		List<BookDTO> blistcom = calendarDao.memberbook(cidx);
+		
+		List<MemberDTO> cominfo = calendarDao.comInfo(cidx);
+
+		Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat sdf = new SimpleDateFormat("YY-MM-DD");
+	    SimpleDateFormat sdf2 = new SimpleDateFormat("M월");
+	    String thisMonth = sdf.format(cal.getTime());
+	    String month = sdf2.format(cal.getTime());
+		
+	    JSONArray jsonArray = new JSONArray();
+	    JSONArray jsonArray2 = new JSONArray();
+	    
+	    int allnum = 0;
+	    int paynum = 0;
+	    int reservnum = 0;
+	    
+	    for(PlanDTO dto: plistcom) {
+				
+	        JSONObject jsonObject = new JSONObject();
+	        
+	        jsonObject.put("start", dto.getPdate());
+	        jsonObject.put("end", dto.getPdate());
+	        jsonObject.put("title", dto.getTitle());
+	        jsonObject.put("backgroundColor", "#E5CCFF");
+	        jsonObject.put("textColor","black" ); 
+	        jsonObject.put("borderColor", "#E5CCFF");
+	        jsonObject.put("borderWidth", "1px");
+	        jsonObject.put("className", dto.getTitle());
+
+	        jsonArray.add(jsonObject);
+	    }
+	    
+	    for(BookDTO bdto: blistcom) {
+			
+	        JSONObject jsonObject2 = new JSONObject();
+	        
+	        jsonObject2.put("start", bdto.getBdate());
+	        jsonObject2.put("end", bdto.getBdate());
+	        jsonObject2.put("title", bdto.getCname());
+	        jsonObject2.put("backgroundColor", "#FFE5CC");
+	        jsonObject2.put("textColor","black" ); 
+	        jsonObject2.put("borderColor", "#FFE5CC");
+	        jsonObject2.put("borderWidth", "1px");
+	        jsonObject2.put("className",  bdto.getCname());
+
+	        jsonArray2.add(jsonObject2);
+	    } 
+
+	    String jsonStr = jsonArray.toString();
+	    String jsonStr2 = jsonArray2.toString();
+
+	    int ptotalcom=plistcom.size();
+	    int btotalcom=blistcom.size();
+	    int ctotalcom=listcom.size();
+	    
+	    
+	    ModelAndView mav = new ModelAndView();
+	    
+	    mav.addObject("allnum",allnum);
+	    mav.addObject("paynum",paynum);
+	    mav.addObject("reservnum",reservnum);
+	    mav.addObject("month",month);
+	    
+	    mav.addObject("svcJson3", jsonStr);
+	    mav.addObject("svcJson4", jsonStr2);
+	
+	    mav.addObject("jsonArray3", jsonArray);
+	    mav.addObject("jsonArray4", jsonArray2);
+
+	    mav.addObject("checklistItemscom", listcom);
+	    mav.addObject("planlistscom", plistcom);
+	    mav.addObject("blistscom", blistcom);
+	    
+	    mav.addObject("ptotalcom", ptotalcom);
+	    mav.addObject("btotalcom", btotalcom);
+	    mav.addObject("ctotalcom", ctotalcom);
+	    
+	    mav.addObject("cominfo", cominfo);
+		mav.setViewName("calendar/calendarMainCom");
+		return mav;
 	}
+	
+	/*Member*/
 	
 	@RequestMapping(value = "/planWrite.do", method = RequestMethod.GET)
 	public String writeForm() {
@@ -249,5 +336,69 @@ public class CalendarContoller {
 		mav.setViewName("calendar/planlistMsg");
 		return mav;
 	}
-
+	
+	/*Company*/
+	
+	@RequestMapping(value = "/planWriteCom.do", method = RequestMethod.GET)
+	public String writeFormCom() {
+		return "calendar/plan/planWriteCom";
+	}
+	
+	@RequestMapping(value="/planWriteCom.do", method = RequestMethod.POST)
+	public ModelAndView planWriteCom(PlanDTO dto) {
+		
+		int result=planDao.planWriteCom(dto);
+		String msg=result>0?"일정 저장 완료":"일정 저장 실패";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "calendarMainCom.do");
+		mav.setViewName("calendar/plan/planMsg");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="/checklistAddCom.do", method = RequestMethod.GET)
+	public String checklistaddFormCom() {
+		return "calendar/checklistAddCom";
+	}
+	
+	@RequestMapping(value="/checklistAddCom.do", method = RequestMethod.POST)
+	public ModelAndView checklistAddCom(ChecklistDTO cdto) {
+		
+		int result=checklistDao.checklistAddCom(cdto);
+		String msg=result>0?"체크리스트 등록 완료!":"체크리스트 등록 실패!";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "calendarMainCom.do");
+		mav.setViewName("calendar/checklistMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/checklistDelCom.do")
+	public ModelAndView checklistDelCom(ChecklistDTO cdto) {
+		
+		int result=checklistDao.checklistDelCom(cdto.getCh_idx());
+		String msg=result>0?"체크리스트 삭제 완료!":"체크리스트 삭제 실패!";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "calendarMainCom.do");
+		mav.setViewName("calendar/checklistMsg");
+		return mav;
+	}
+	
+	@RequestMapping("/planlistDelCom.do" )
+	public ModelAndView planlistDelCom(PlanDTO pdto) {
+		
+		int result=planDao.planlistDelCom(pdto.getMyp_idx());
+		String msg=result>0?"일정 삭제 완료!":"일정 삭제 실패!";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("url", "calendarMainCom.do");
+		mav.setViewName("calendar/planlistMsg");
+		return mav;
+	}
 }

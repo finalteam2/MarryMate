@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values (
 		ch_idx.nextval,
 		#{midx},
+		null,
 		TO_DATE(#{dueday},'MM/DD/YYYY'),
 		#{title},
 		#{content},
@@ -20,6 +21,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select ch_idx, midx, TO_CHAR(dueday, 'YYYY-MM-DD') as dueday, title, content, onoff, checked from checklist where midx=#{midx}
 	</select>
 	<delete id="checklistDel" parameterType="Integer">
+		delete from checklist where ch_idx=#{ch_idx}
+	</delete>
+	<insert id="checklistAddCom" parameterType="com.marry.calender.model.ChecklistDTO">
+	insert into 
+		checklist
+	values (
+		ch_idx.nextval,
+		null,
+		#{cidx},
+		TO_DATE(#{dueday},'MM/DD/YYYY'),
+		#{title},
+		#{content},
+		1,
+		0
+		)
+	</insert>
+	<select id="checklistAllCom" parameterType="Integer" resultType="com.marry.calender.model.ChecklistDTO">
+		select ch_idx, cidx, TO_CHAR(dueday, 'YYYY-MM-DD') as dueday, title, content, onoff, checked from checklist where cidx=#{cidx}
+	</select>
+	<delete id="checklistDelCom" parameterType="Integer">
 		delete from checklist where ch_idx=#{ch_idx}
 	</delete>
 </mapper>

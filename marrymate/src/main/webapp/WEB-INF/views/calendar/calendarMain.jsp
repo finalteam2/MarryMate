@@ -121,34 +121,6 @@ function checkAlladd(){
 </script>
 <script type="text/javascript">
 
-$(function(){
-	//스크롤이동
-	$(".moveScroll").click(function(e) {
-		var scrollY = 0;
-		if($(this).data('target') == 'chkid') {
-			var chkid = $(this).data('chkid')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkid='"+chkid+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else if($(this).data('target') == 'chkst') {
-			var chkst = $(this).data('chkst')+'';
-			var findEl = $(".checkListArea .item").find("[data-chkst='"+chkst+"']");
-			if(findEl.length > 0) {
-				scrollY = $(findEl[0]).closest(".item").offset().top;
-			} else {
-				scrollY = $(".checkListArea").offset().top;
-			}
-		} else {
-			scrollY = $(".checkListArea").offset().top;
-		}
-		//
-		$( 'html, body' ).animate( { scrollTop : scrollY-50 }, 400 );
-	});
-	
-
 	
 	cookiedata = document.cookie;
 	if(cookiedata.indexOf("close=Y") < 0){
@@ -244,7 +216,9 @@ $(function(){
         <div style="flex: 1;">
             <div class="scheduletotal">
                 <h4>모든 일정</h4>
-                <div class="stats">${ptotal}</div>
+                <div class="stats">
+                <a href=#planlistMove>${ptotal}</a>
+                </div>
                 <div class="statsletter">건</div>
             </div>
         </div>
@@ -252,7 +226,7 @@ $(function(){
             <div class="booklisttotal">
                 <h4>모든 예약</h4>
                 <div class="stats">
-                    <a href=#checklistMove>${btotal}</a>
+                    <a href="myBook.do">${btotal}</a>
                 </div>
                 <div class="statsletter">건</div>
             </div>
@@ -260,7 +234,9 @@ $(function(){
         <div style="flex: 1;">
             <div class="checklisttotal">
                 <h4>모든 체크리스트</h4>
-                <div class="stats">${ctotal}</div>
+                 <div class="stats">
+                <a href=#planlistMove>${ctotal}</a>
+                </div>
                 <div class="statsletter">건</div>
             </div>
         </div>
@@ -374,7 +350,7 @@ $(function(){
 
 	<div class="planlistwrap">
 	<h3>
-		<a>Myplan</a>
+		<a id="planlistMove">Myplan</a>
 	</h3>
 	<form action="planlistDel.do" method="post">
 		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">

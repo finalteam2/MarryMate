@@ -403,7 +403,7 @@ video {
 	width: 240px;
 	position: relative;
 	margin: 150px 0 0 0;
-	padding: 300px 0 0 310px;
+	padding: 300px 0 0 305px;
 	flex: 0 0 auto; /* 이미지 요소의 크기를 고정으로 설정 */
   	margin-right: 10px; /* 이미지와 텍스트 사이의 간격 설정 */
 }

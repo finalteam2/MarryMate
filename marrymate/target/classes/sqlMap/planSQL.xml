@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values (
 		myp_idx.nextval,
 		#{midx},
+		null,
 		TO_DATE(#{pdate},'MM/DD/YYYY'),
 		#{title},
 		#{content}
@@ -19,5 +20,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<select id="planlistAll" parameterType="Integer" resultType="com.marry.calender.model.PlanDTO">
 		select myp_idx, midx, TO_CHAR(pdate, 'YYYY-MM-DD') as pdate, title, content from myplan where midx=#{midx}
+	</select>
+	<insert id="planWriteCom" parameterType="com.marry.calender.model.PlanDTO">
+	insert into 
+		myplan
+	values (
+		myp_idx.nextval,
+		null,
+		#{cidx},
+		TO_DATE(#{pdate},'MM/DD/YYYY'),
+		#{title},
+		#{content}
+		)
+	</insert>
+	<delete id="planDelCom" parameterType="Integer">
+		delete from myplan where myp_idx=#{myp_idx}
+	</delete>
+	<select id="planlistAllCom" parameterType="Integer" resultType="com.marry.calender.model.PlanDTO">
+		select myp_idx, cidx, TO_CHAR(pdate, 'YYYY-MM-DD') as pdate, title, content from myplan where cidx=#{cidx}
 	</select>
 </mapper>

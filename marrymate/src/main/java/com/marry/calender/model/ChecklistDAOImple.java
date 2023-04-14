@@ -33,6 +33,21 @@ public class ChecklistDAOImple implements ChecklistDAO {
 
 	}
 
+	@Override
+	public int checklistAddCom(ChecklistDTO cdto) {
+		int count=sqlMap.insert("checklistAddCom", cdto);
+		return count;
+	}
 	
+	@Override
+	public List<ChecklistDTO> checklistAllCom(int cidx) {
+		return sqlMap.selectList("checklistAllCom", cidx);
+	}
+	
+	@Override
+	public int checklistDelCom(int ch_idx) {
+		int count=sqlMap.delete("checklistDelCom", ch_idx);
+		return count;
+	}
 	
 }

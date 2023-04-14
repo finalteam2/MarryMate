@@ -6,6 +6,7 @@ public class ChecklistDTO {
 	
 	private int ch_idx;
 	private int midx;
+	private int cidx;
 	private String title;
 	private String dueday;
 	private String content;
@@ -16,10 +17,12 @@ public class ChecklistDTO {
 		super();
 	}
 
-	public ChecklistDTO(int ch_idx, int midx, String title, String dueday, String content, int onoff, int checked) {
+	public ChecklistDTO(int ch_idx, int midx, int cidx, String title, String dueday, String content, int onoff,
+			int checked) {
 		super();
 		this.ch_idx = ch_idx;
 		this.midx = midx;
+		this.cidx = cidx;
 		this.title = title;
 		this.dueday = dueday;
 		this.content = content;
@@ -41,6 +44,14 @@ public class ChecklistDTO {
 
 	public void setMidx(int midx) {
 		this.midx = midx;
+	}
+
+	public int getCidx() {
+		return cidx;
+	}
+
+	public void setCidx(int cidx) {
+		this.cidx = cidx;
 	}
 
 	public String getTitle() {
@@ -82,6 +93,7 @@ public class ChecklistDTO {
 	public void setChecked(int checked) {
 		this.checked = checked;
 	}
+
 	
 	
 	

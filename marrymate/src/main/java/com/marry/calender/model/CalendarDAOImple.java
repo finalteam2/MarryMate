@@ -94,8 +94,8 @@ public class CalendarDAOImple implements CalendarDAO {
 	}
 
 	@Override
-	public List<MemberDTO> comInfo(int midx) {
-		return sqlMap.selectList("comInfo", midx);
+	public List<MemberDTO> comInfo(int cidx) {
+		return sqlMap.selectList("comInfo", cidx);
 	}
 
 }
