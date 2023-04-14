@@ -98,8 +98,6 @@ public class LoginController {
 			System.out.println(clevel);
 			
 			if(clevel==1) {
-				System.out.println("1일때 실행됩니다.");
-				
 				if(comSaveid==null) {
 					Cookie ck=new Cookie("comSaveid", dto.getId());
 					ck.setMaxAge(0);
@@ -117,16 +115,11 @@ public class LoginController {
 				mav.addObject("msg", dto.getCname()+", 환영합니다.");
 				mav.addObject("url", "index.do");
 				mav.setViewName("login/loginMsg");
-				
 			}else if(clevel==0) {
-				System.out.println("0일때 실행됩니다.");
-				
 				mav.addObject("msg", "승인 대기중입니다. 승인이 완료되면 로그인 가능합니다.");
 				mav.addObject("url", "login.do");
 				mav.setViewName("login/loginMsg");
 			}else if(clevel==-1) {
-				System.out.println("-1일때 실행됩니다.");
-				
 				mav.addObject("msg", "승인이 거절되었습니다. 자세한 사항은 메일 참조 바랍니다.");
 				mav.addObject("url", "login.do");
 				mav.setViewName("login/loginMsg");
