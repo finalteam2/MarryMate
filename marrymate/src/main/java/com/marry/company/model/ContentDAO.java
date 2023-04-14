@@ -31,6 +31,7 @@ public interface ContentDAO {
 	public int deleteHall(int hidx);
 	public int deletefood(int fidx);
 	public int refundRequest(int bk_idx);
+	public int signBook(int bk_idx);
 	public List<Book_TimeDTO> selectBookTime(Book_TimeDTO dto);
 	public int checkBook(int cidx, int hidx, String date, String time);
 }

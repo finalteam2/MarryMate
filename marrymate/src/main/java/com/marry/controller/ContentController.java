@@ -263,6 +263,8 @@ public class ContentController {
 				BookListDTO dto = arr.get(i);
 				if(dto.getIs_after() == 1 && dto.getBk_state() == 3) {
 					dto.setBk_state(6);
+				}else if(dto.getIs_after() == 1 && dto.getBk_state() == 2) {
+					dto.setBk_state(7);
 				}
 				if(dto.getCkind().equals("예식장")) {
 					//System.out.println("대관료"+dto.getHpay()+"인원수"+dto.getHnum()+"식대"+dto.getFpay());
@@ -283,6 +285,8 @@ public class ContentController {
 //				System.out.println("is_after : "+dto.getIs_after());
 				if(dto.getIs_after() == 1 && dto.getBk_state() == 3) {
 					dto.setBk_state(6);
+				}else if(dto.getIs_after() == 1 && dto.getBk_state() == 2) {
+					dto.setBk_state(7);
 				}
 				if(dto.getCkind().equals("예식장")) {
 					dto.setAllpay(dto.getHpay()+dto.getHnum()*dto.getFpay());
@@ -376,18 +380,6 @@ public class ContentController {
 			
 			) {
 		int result = contentDao.refundRequest(bk_idx);
-		
-//		NotificationDTO ndto = new NotificationDTO();
-//		if(cidx > 0) {
-//			ndto.setCidx(cidx);
-//		}else if (midx > 0) {
-//			ndto.setMidx(midx);
-//		}
-//		ndto.setNkind(3);
-//		ndto.setPage("예약 취소 알림");
-//		ndto.setPage("myBook.do");
-//		notificationDao.insertNoti(ndto);
-		
 		String msg=result>0?"취소 신청 완료":"취소 신청 실패";
 		
 		ModelAndView mav=new ModelAndView();
@@ -396,6 +388,33 @@ public class ContentController {
 		mav.setViewName("/mypage/myPageMsg");
 		return mav;
 	}
+	
+	//예약 승인하기
+	@RequestMapping("/signBook.do")
+	public ModelAndView signBook(
+			@RequestParam("bk_idx")int bk_idx,
+			@RequestParam("midx")int midx
+			) {
+		int result = contentDao.signBook(bk_idx);
+		String msg = "";
+		if(result > 0) {
+			NotificationDTO ndto = new NotificationDTO(0, 0, midx, "", "myBook.do", "예약이 승인되었습니다", "", 1, null, null, 0);
+			notificationDao.insertNoti(ndto);
+			msg = "예약 승인 완료";
+			
+		}else {
+			msg = "예약 승인 실패";
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "myBook.do");
+		mav.setViewName("/mypage/myPageMsg");
+		return mav;
+		
+	}
+	
+	
 	
 	//홀에서 달력 변경 시 예약 가능한 시간 정보 출력
 	@RequestMapping("checkhall.do")

@@ -64,6 +64,7 @@ div.allpage{
 		  <c:if test="${dto.bk_state eq 4}"><span class="text-danger">예약취소</span></c:if>
   		  <c:if test="${dto.bk_state eq 5}"><span class="text-danger">취소대기</span></c:if>
   		  <c:if test="${dto.bk_state eq 6}"><span class="text-muted">이용완료</span></c:if>
+  		  <c:if test="${dto.bk_state eq 7}"><span class="text-danger">잔금미납</span></c:if>
 		  </td>
 		  <td>
 		  <div class="btn-group" role="group" aria-label="Basic example">

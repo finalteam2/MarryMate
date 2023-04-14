@@ -278,6 +278,16 @@
 	where 
 		bk_idx = #{bk_idx}
 	</update>
+	<update id="signBook" parameterType="Integer">
+	update 
+		book
+	set
+		bk_state = 2
+	where 
+		bk_idx = #{bk_idx}
+		and
+		bk_state = 1
+	</update>
 	<select id="selectBookTime" parameterType="com.marry.company.model.Book_TimeDTO" resultType="com.marry.company.model.Book_TimeDTO">
 	select
 	    *

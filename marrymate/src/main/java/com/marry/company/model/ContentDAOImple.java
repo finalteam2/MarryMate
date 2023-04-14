@@ -151,6 +151,13 @@ public class ContentDAOImple implements ContentDAO {
 		int result = sqlMap.update("refundRequest", bk_idx);
 		return result;
 	}
+	
+	@Override
+	public int signBook(int bk_idx) {
+		int result = sqlMap.update("signBook", bk_idx);
+		return result;
+	}
+	
 	@Override
 	public List<Book_TimeDTO> selectBookTime(Book_TimeDTO dto) {
 		List<Book_TimeDTO> arr = sqlMap.selectList("selectBookTime", dto);

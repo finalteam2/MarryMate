@@ -77,17 +77,19 @@ div.allpage{
 		  <c:if test="${dto.bk_state eq 4}"><span class="text-danger">예약취소</span></c:if>
   		  <c:if test="${dto.bk_state eq 5}"><span class="text-danger">취소대기</span></c:if>
   		  <c:if test="${dto.bk_state eq 6}"><span class="text-muted">이용완료</span></c:if>
+  		  <c:if test="${dto.bk_state eq 7}"><span class="text-danger">잔금미납</span></c:if>
 	  </td>
 	  <td>
 	  <div class="btn-group" role="group" aria-label="Basic example">
   	  	<!-- 결제 진행 시 폼 부분 -->
-  	  	<form action="#" method="post">
+  	  	<form action="signBook.do" method="post">
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+	  	  <input type="hidden" name="midx" value="${dto.midx }">
 	  	  <c:if test="${not (dto.bk_state eq 1)}">
 		  	  <button type="button" onclick="" class="btn btn-outline-secondary" disabled>승인</button>
 	  	  </c:if>
 	  	  <c:if test="${dto.bk_state eq 1}">
-			  <button type="button" onclick="" class="btn btn-outline-primary" >승인</button>
+			  <button type="submit" onclick="" class="btn btn-outline-primary" >승인</button>
 	  	  </c:if>
 	  	</form>
   	  	<!-- 결제 취소 신청 시 폼 부분 -->
@@ -95,7 +97,7 @@ div.allpage{
 	  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
 	  	  <input type="hidden" name="midx" value="${dto.midx }">
 	  	  <c:if test="${not (dto.bk_state eq 1)}">
-		  	  <button type="submit" class="btn btn-outline-secondary" disabled>거부</button>
+		  	  <button type="button" class="btn btn-outline-secondary" disabled>거부</button>
 	  	  </c:if>
 	  	  <c:if test="${dto.bk_state eq 1}">
 			  <button type="submit" class="btn btn-outline-danger" >거부</button>
