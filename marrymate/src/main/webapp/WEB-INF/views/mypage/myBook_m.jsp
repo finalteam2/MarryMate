@@ -68,27 +68,35 @@ div.allpage{
 		  </td>
 		  <td>
 		  <div class="btn-group" role="group" aria-label="Basic example">
-		  <!-- 결제 진행 시 폼 부분 -->
-	  	  	<form action="#" method="post">
+		    <!-- 결제 진행 시 폼 부분 -->
+		  	<c:if test="${not (dto.bk_state eq 2)}">
+			  <button type="button" onclick="" class="btn btn-outline-secondary" disabled>결제</button>
+		  	</c:if>
+	  	    
+	  	    <c:if test="${dto.bk_state eq 2}">
+	  	  	<form action="janPay.do" method="post">
 		  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
-		  	  <c:if test="${not (dto.bk_state eq 2)}">
-			  	  <button type="button" onclick="" class="btn btn-outline-secondary" disabled>결제</button>
+		  	  <input type="hidden" name="cidx" value="${dto.cidx }">
+		  	  <c:if test="${dto.ckind eq '예식장' }">
+		  	  <input type="hidden" name="hidx" value="${dto.hidx }">
+		  	  <input type="hidden" name="fidx" value="${dto.fidx }">
 		  	  </c:if>
-		  	  <c:if test="${dto.bk_state eq 2}">
+		  	  <input type="hidden" name="allpay" value="${dto.allpay }">
 				  <button type="button" onclick="" class="btn btn-outline-primary" >결제</button>
-		  	  </c:if>
 		  	</form>
+		  	</c:if>
 		  	<!-- 결제 취소 신청 시 폼 부분 -->
+	  	    <c:if test="${not (dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3)}">
+		  	  <button type="submit" class="btn btn-outline-secondary" disabled>취소</button>
+	  	    </c:if>
+
+		  	<c:if test="${dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3}">
 	  	  	<form action="refundRequest.do" method="post">
 		  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
 		  	  <input type="hidden" name="cidx" value="${dto.cidx }">
-		  	  <c:if test="${not (dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3)}">
-			  	  <button type="submit" class="btn btn-outline-secondary" disabled>취소</button>
-		  	  </c:if>
-		  	  <c:if test="${dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3}">
 				  <button type="submit" class="btn btn-outline-danger" >취소</button>
-		  	  </c:if>
 		  	</form>
+		  	</c:if>
 		  </div>
 		  </td>
 	    </tr>
