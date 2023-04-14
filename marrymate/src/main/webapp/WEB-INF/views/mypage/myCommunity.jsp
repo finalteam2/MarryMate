@@ -61,7 +61,6 @@ a{
 <section>
 	<article>
 		<h2>My 커뮤니티</h2>
-		<hr>
 		<br>
 		<div class="p">
 		<div class="s">
@@ -130,7 +129,6 @@ a{
 		</div>
 	</article>
 </section>
-<hr>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 </body>

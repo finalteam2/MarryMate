@@ -50,7 +50,6 @@ h2{
 <section>
 	<article>
 		<h2>My 포인트</h2>
-		<hr>
 		<br>
 		<div>
 			<br><br>
@@ -90,7 +89,6 @@ h2{
 				</tbody>
 			</table>
 			<br><br>
-			<hr>
 		</div>
 	</article>
 </section>
