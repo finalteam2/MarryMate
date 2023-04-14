@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>marrymate</title>
 <style>
+	body {
+		background-color: #fbf4ff;
+	}
 	article div input[type=text] {
 		width: 350px;
 		height: 30px;
@@ -42,6 +45,7 @@
 		appearance: none;
 	}
 	.box {
+		background-color: white;
 		width: 850px;
 		border: 1px solid black;
 		border-radius: 30px;

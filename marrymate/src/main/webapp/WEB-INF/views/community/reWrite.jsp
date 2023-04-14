@@ -194,9 +194,10 @@
 	<section>
 		<article>
 			<h2>게시글 작성</h2>
-			<form name="write" action="write.do" method="post" enctype="multipart/form-data">
+			<form name="write" action="reWrite.do" method="post" enctype="multipart/form-data">
 			<div class="box">
 				<div id="iBox">
+					<input type="hidden" name="bidx" value="${dto.bidx}">
 					<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 					<div class="hTagBox">카테고리</div>
 						<select name="kind" onchange="horseSelector(this)">

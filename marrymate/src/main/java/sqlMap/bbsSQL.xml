@@ -24,6 +24,18 @@
 			0
 		)
 	</insert>
+	<update id="bbsReWrite" parameterType="com.marry.bbs.model.BbsDTO">
+		update
+			bbs
+		set
+			kind=#{kind},
+			horse=#{horse},
+			subject=#{subject},
+			content=#{content},
+			img=#{img}
+		where
+			bidx=#{bidx}
+	</update>
 	<update id="getWritePoint" parameterType="int">
 		update member set point=point+500 where midx=#{midx}
 	</update>
@@ -48,7 +60,7 @@
 	<select id="bbsNotiList" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
 		select * from
 		(select rownum as rnum,a.* from
-		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' order by bidx desc) a) b
+		(select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' and blind=0 order by bidx desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
 	<select id="bbsAfterList" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
@@ -93,6 +105,15 @@
 		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 		order by best desc nulls last
 	</select>
+	<select id="bbsNotiFix" resultType="com.marry.bbs.model.BbsViewDTO">
+		select bbs.*, member.nick, sum(recommand.best) as best 
+		from bbs 
+		left join member on bbs.midx = member.midx 
+		left join recommand on bbs.bidx = recommand.bidx
+		where kind='공지사항' and topfix=1
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by best desc nulls last
+	</select>
 	<select id="bbsAfterFix" resultType="com.marry.bbs.model.BbsViewDTO">
 		select bbs.*, member.nick, sum(recommand.best) as best 
 		from bbs 
@@ -112,7 +133,7 @@
 		order by best desc nulls last
 	</select>
 	<select id="bbsNotiMini" resultType="com.marry.bbs.model.BbsViewDTO">
-		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' order by bidx desc
+		select bbs.*, member.nick from bbs join member on bbs.midx=member.midx(+) where kind='공지사항' and blind=0 order by bidx desc
 	</select>
 	<select id="bbsAfterMini" resultType="com.marry.bbs.model.BbsViewDTO">
 		select bbs.*, member.nick, sum(recommand.best) as best 
@@ -153,13 +174,8 @@
 			sysdate
 		)
 	</insert>
-	<select id="replyList" parameterType="int" resultType="com.marry.bbs.model.ReplyDTO">
-		select
-			*
-		from
-			reply
-		where
-			bidx=#{bidx}
+	<select id="replyList" parameterType="int" resultType="com.marry.bbs.model.ReplyViewDTO">
+		select reply.*,member.img from reply join member on reply.midx=member.midx(+) where bidx=#{bidx}
 	</select>
 	<select id="bbsNotiCount" resultType="int">
 		select count(*) from bbs where kind='공지사항'

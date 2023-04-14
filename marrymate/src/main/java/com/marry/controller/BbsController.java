@@ -21,6 +21,7 @@ import com.marry.bbs.model.BbsDAO;
 import com.marry.bbs.model.BbsDTO;
 import com.marry.bbs.model.BbsViewDTO;
 import com.marry.bbs.model.ReplyDTO;
+import com.marry.bbs.model.ReplyViewDTO;
 
 @Controller
 public class BbsController {
@@ -102,9 +103,11 @@ public class BbsController {
 				.makePage("notiList.do", totalCnt, listSize, pageSize, cp);
 		
 		List<BbsViewDTO> list=bbsDao.bbsNotiList(cp, listSize);
+		List<BbsViewDTO> listFix=bbsDao.bbsNotiFix();
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listNoti", list);
+		mav.addObject("listFixN", listFix);
 		mav.addObject("pageStr", pageStr);
 		mav.setViewName("community/community_noti");
 		return mav;
@@ -125,8 +128,6 @@ public class BbsController {
 		List<BbsViewDTO> list=bbsDao.bbsAfterList(cp, listSize);
 		List<BbsViewDTO> listBest=bbsDao.bbsAfterBest();
 		List<BbsViewDTO> listFix=bbsDao.bbsAfterFix();
-		String msg=listFix==null?"AfterFix 데이터가 있습니다.":"AfterFix 데이터가 없습니다.";
-		System.out.println(msg);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listAfter", list);
@@ -151,9 +152,7 @@ public class BbsController {
 		
 		List<BbsViewDTO> list=bbsDao.bbsTalkList(cp, listSize);
 		List<BbsViewDTO> listBest=bbsDao.bbsTalkBest();
-		List<BbsViewDTO> listFix=bbsDao.bbsAfterFix();
-		String msg=listFix!=null?"TalkFix 데이터가 있습니다.":"TalkFix 데이터가 없습니다.";
-		System.out.println(msg);
+		List<BbsViewDTO> listFix=bbsDao.bbsTalkFix();
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("listTalk", list);
@@ -186,7 +185,7 @@ public class BbsController {
 		
 		bbsDao.watchUp(bidx);
 		BbsViewDTO dto=bbsDao.bbsContent(bidx);
-		List<ReplyDTO> list=bbsDao.replyList(bidx);
+		List<ReplyViewDTO> list=bbsDao.replyList(bidx);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("dto", dto);
@@ -266,10 +265,10 @@ public class BbsController {
 			dto.setImg(img);
 		}
 		
-		int result=bbsDao.bbsWrite(dto);
+		bbsDao.bbsReWrite(dto);
 		
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("re");
+		mav.setViewName("community/allCommunity");
 		return mav;
 		
 	}

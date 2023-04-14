@@ -91,34 +91,20 @@ tr.pink-bg {
 	font-weight: bold;
 }
 
-#left-box {
-	position: absolute;
-	left: 20px;
-	top: 180px;
-	width: 100px;
-	background-color: #f2f2f2;
-	border: 1px solid #d9d9d9;
-	border-radius: 5px;
-	padding-bottom: 15px;
-	text-align: center;
-	font-weight: bold;
+.each td a {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-#write-box {
-	position: absolute;
-	right: 160px;
-	top: 500px;
-	width: 100px;
-	background-color: #3498db;
-	border: 1px solid #d9d9d9;
-	border-radius: 5px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	text-align: center;
+.each td a:last-child {
+  margin-right: 0;
 }
-
 #tableBox {
-	height: 500px;
+	height: 630px;
 }
 </style>
 </head>
@@ -133,12 +119,6 @@ function checkMidx() {
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div id="left-box">
-		<h4>게시판 이동</h4>
-		<a href="notiList.do">공지사항</a><br><br><br>
-		<a href="afterList.do">웨딩후기</a><br><br><br>
-		<a href="talkList.do">웨딩톡톡</a>
-	</div>
 	<div id="tableBox">
 	<h1>웨딩후기</h1>
 		<table class="noti">		
@@ -155,6 +135,17 @@ function checkMidx() {
 			<tfoot>
 				<tr>
 					<td colspan="6" align="center">${pageStr}</td>
+				</tr>
+				<tr class="each">
+					<td>게시판 이동</td>
+					<td colspan="2" align="center">
+					    <a href="notiList.do">공지사항</a>
+						<a href="afterList.do">웨딩후기</a>
+						<a href="talkList.do">웨딩톡톡</a>
+					</td>
+					<td colspan="3" align="center">
+						<a href="write.do" onclick="return checkMidx()">글쓰기</a>
+					</td>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -222,9 +213,6 @@ function checkMidx() {
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	<div id="write-box">
-		<a href="write.do" style="text-decoration: none; color: white;" onclick="return checkMidx()">글쓰기</a>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

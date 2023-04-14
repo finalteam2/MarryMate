@@ -6,6 +6,8 @@ public interface BbsDAO {
 	
 	public int bbsWrite(BbsDTO dto);
 	
+	public int bbsReWrite(BbsDTO dto);
+	
 	public int getWritePoint(int midx);
 	
 	public int getMemberPoint(int midx);
@@ -30,11 +32,13 @@ public interface BbsDAO {
 	
 	public List<BbsViewDTO> bbsTalkBest();
 	
+	public List<BbsViewDTO> bbsNotiFix();
+	
 	public List<BbsViewDTO> bbsAfterFix();
 	
 	public List<BbsViewDTO> bbsTalkFix();
 	
-	public List<ReplyDTO> replyList(int bidx);
+	public List<ReplyViewDTO> replyList(int bidx);
 	
 	public BbsViewDTO bbsContent(int bidx);
 	

@@ -152,7 +152,7 @@
 					<td colspan="4" align="center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
-			<c:forEach var="dto" items="${listNoti}" begin="0" end="1">
+			<c:forEach var="dto" items="${listNoti}" begin="0" end="2">
 				<tr>
 					<td>${dto.bidx}</td>
 					<c:url var="contentUrl" value="content.do">
@@ -165,7 +165,7 @@
 							</c:if> ${dto.subject}
 						</a>
 					</td>
-					<td>${dto.nick}</td>
+					<td>관리자</td>
 					<td>${dto.writedate}</td>
 				</tr>
 			</c:forEach>
@@ -189,7 +189,7 @@
 					<td colspan="6" align="center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
-			<c:forEach var="dto" items="${listAfter}" begin="0" end="1">
+			<c:forEach var="dto" items="${listAfter}" begin="0" end="2">
 				<tr>
 					<td>${dto.bidx}</td>
 					<c:url var="contentUrl" value="content.do">
@@ -228,7 +228,7 @@
 					<td colspan="6" align="center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
-			<c:forEach var="dto" items="${listTalk}" begin="0" end="1">
+			<c:forEach var="dto" items="${listTalk}" begin="0" end="2">
 				<tr>
 					<td>${dto.bidx}</td>
 					<c:url var="contentUrl" value="content.do">

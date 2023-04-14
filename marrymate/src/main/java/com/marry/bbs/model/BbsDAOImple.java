@@ -20,6 +20,11 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
+	public int bbsReWrite(BbsDTO dto) {
+		return sqlMap.update("bbsReWrite", dto);
+	}
+	
+	@Override
 	public int getWritePoint(int midx) {
 		return sqlMap.update("getWritePoint", midx);
 	}
@@ -109,12 +114,17 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
+	public List<BbsViewDTO> bbsNotiFix() {
+		return sqlMap.selectList("bbsNotiFix");
+	}
+	
+	@Override
 	public List<BbsViewDTO> bbsTalkFix() {
 		return sqlMap.selectList("bbsTalkFix");
 	}
 	
 	@Override
-	public List<ReplyDTO> replyList(int bidx) {
+	public List<ReplyViewDTO> replyList(int bidx) {
 		return sqlMap.selectList("replyList", bidx);
 	}
 	

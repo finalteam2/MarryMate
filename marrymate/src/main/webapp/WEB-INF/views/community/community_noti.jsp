@@ -63,31 +63,26 @@
 		th:last-child, td:last-child {
 			width: 10%;
 		}
-		#left-box {
-		    position: absolute;
-		    left: 20px;
-		    top: 180px;
-		    width: 100px;
-		    background-color: #f2f2f2;
-		    border: 1px solid #d9d9d9;
-		    border-radius: 5px;
-		    padding-bottom: 15px;
-		    text-align: center;
-		    font-weight: bold;
+		tr.pink-bg {
+			background-color: #FFE5E5;
+			font-weight: bold;
 		}
-		#tableBox {
-			height: 500px;
+		.each td a {
+		  display: inline-block;
+		  width: 30%;
+		  text-align: center;
+		  margin-right: 10px;
+		  font-weight: bold;
+		  font-size: 20px;
+		}
+		
+		.each td a:last-child {
+		  margin-right: 0;
 		}
 	</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div id="left-box">
-		<h4>게시판 이동</h4>
-		<a href="notiList.do">공지사항</a><br><br><br>
-		<a href="afterList.do">웨딩후기</a><br><br><br>
-		<a href="talkList.do">웨딩톡톡</a>
-	</div>
 	<div id="tableBox">
 	<h1>공지사항</h1>
 		<table>
@@ -103,8 +98,33 @@
 				<tr>
 					<td colspan="4" align="center">${pageStr}</td>
 				</tr>
+				<tr class="each">
+					<td>게시판 이동</td>
+					<td colspan="3" align="center">
+					    <a href="notiList.do">공지사항</a>
+						<a href="afterList.do">웨딩후기</a>
+						<a href="talkList.do">웨딩톡톡</a>
+					</td>
+				</tr>
 			</tfoot>
 			<tbody>
+				<c:forEach var="fix" items="${listFixN}" begin="0" end="1">
+					<tr class="pink-bg">
+						<td>필독</td>
+						<c:url var="contentUrl" value="content.do">
+							<c:param name="bidx">${fix.bidx}</c:param>
+						</c:url>
+						<td>
+							<a href="${contentUrl}" class="text-center">
+								<c:if test="${!empty fix.horse && '없음' ne fix.horse}">
+									[${fix.horse}]
+								</c:if> ${fix.subject}
+							</a>
+						</td>
+						<td>관리자</td>
+						<td>${fix.writedate}</td>
+					</tr>
+				</c:forEach>
 				<c:if test="${empty listNoti}">
 					<tr>
 						<td colspan="4" align="center">등록된 게시글이 없습니다.</td>
