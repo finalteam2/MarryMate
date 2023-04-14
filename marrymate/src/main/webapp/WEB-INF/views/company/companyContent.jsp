@@ -25,6 +25,13 @@ function checkHallDate(){
 	param += '&date=' + date;
 	sendRequest('checkhall.do',param,'POST',checkHallDateResult);
 }
+function checkEtcDate(){
+	var param = '';
+	param += 'cidx=' + ${dto.cidx};
+	var date = document.getElementById('selectdate').value;
+	param += '&date=' + date;
+	sendRequest('checkhall.do',param,'POST',checkHallDateResult);
+}
 
 function checkHallDateResult(){
 	if(XHR.readyState==4){
@@ -427,6 +434,7 @@ textarea {
 
 			
 			
+<!-- 예식장일 경우 하단 바 -->
 			<c:if test="${dto.kind eq '예식장' }">
 			<form action="hallSubmit.do" method="post">
 				<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
@@ -461,7 +469,7 @@ textarea {
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약시간</span>
-				  <select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">
+				  <select id="bktime" class="form-control" aria-label="Default select example">
 					  <option selected>홀과 날짜를 먼저 선택해주세요</option>
 				  </select>
 				</div>
@@ -470,6 +478,7 @@ textarea {
 			</form>
 			</c:if>
 
+<!-- 예식장이 아닐 경우 하단 바 -->
 			<c:if test="${not (dto.kind eq '예식장') }">
 			<form action="notHallSubmit.do" method="post">
 				<input type="hidden" name="cidx" value="${dto.cidx }">
@@ -481,11 +490,12 @@ textarea {
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약일</span>
-				  <input type="date" id="selectdate" name="bk_date" class="form-control" onchange="checkHallDate()" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+				  <input type="date" id="selectdate" name="bk_date" class="form-control" onchange="checkEtcDate()" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
 				</div>
-				<div id="bktime" class="input-group mb-3" style="width: 50%;">
+				<div class="input-group mb-3" style="width: 50%;">
 				  <span class="input-group-text" id="basic-addon1">예약시간</span>
 				  <select id="bktime" name="bk_time" class="form-control" aria-label="Default select example">
+					  <option selected>날짜를 먼저 선택해주세요</option>
 				  </select>
 				</div>
 				<div class="input-group mb-3" style="width: 50%;">

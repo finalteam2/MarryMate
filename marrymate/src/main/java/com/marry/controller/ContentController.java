@@ -401,19 +401,13 @@ public class ContentController {
 	@RequestMapping("checkhall.do")
 	public ModelAndView checkhall(
 			@RequestParam(value = "cidx",defaultValue = "0")int cidx,
-			@RequestParam(value = "hstr",defaultValue = "")String hstr,
-			@RequestParam(value = "fstr",defaultValue = "")String fstr,
-			@RequestParam(value = "date",defaultValue = "")String date
+			@RequestParam(value = "hstr",defaultValue = "0")String hstr,
+			@RequestParam(value = "fstr",defaultValue = "0")String fstr,
+			@RequestParam(value = "date",defaultValue = "0")String date
 			
 			) {
-//		System.out.println("cidx"+cidx);
-//		System.out.println("hstr"+hstr);
 		int hidx = Integer.parseInt(hstr.split(" ")[0]);
-//		System.out.println("hidx"+hidx);
-//		System.out.println("fstr"+fstr);
 		int fidx = Integer.parseInt(fstr.split(" ")[0]);
-//		System.out.println("fidx"+fidx);
-//		System.out.println("date"+date);
 		String yoil = StringToYoil(date);
 		System.out.println(yoil);
 		Book_TimeDTO dto = new Book_TimeDTO(0, cidx, yoil, "");
@@ -421,6 +415,7 @@ public class ContentController {
 		int num = arr.size();
 		for(int i = num - 1; i >= 0 ; i--) {
 //			System.out.println(arr.get(i).getWorktime());
+			//예약 취소 되면 다시 예약 가능하도록 
 			int result = contentDao.checkBook(cidx, hidx, date, arr.get(i).getWorktime());
 			if(result > 0) {
 				arr.remove(i);

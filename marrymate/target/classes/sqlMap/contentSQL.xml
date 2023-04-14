@@ -299,7 +299,9 @@
 		TO_CHAR(bk_date, 'yyyy-mm-dd') = #{date}
 		and
 		bk_time = #{time}
+		<if test="hidx != null and hidx != 0">
 		and
 		hidx = #{hidx}
+		</if>
 	</select>
 </mapper>
