@@ -95,7 +95,6 @@ public class LoginController {
 			mav.setViewName("login/loginMsg");
 		}else {
 			int clevel=companyDao.clevelCheck(id, pwd);
-			System.out.println(clevel);
 			
 			if(clevel==1) {
 				if(comSaveid==null) {
