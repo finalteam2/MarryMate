@@ -27,7 +27,7 @@
 		notification
 	where
 		cidx = #{cidx}
-		
+        and sysdate > activedate
 	</select>
 	<select id="cntComNoti" resultType="Integer">
 	select
@@ -46,6 +46,7 @@
 		notification
 	where
 		midx = #{midx}
+        and sysdate > activedate
 	</select>
 	<select id="cntMemNoti" resultType="Integer">
 	select
@@ -64,5 +65,6 @@
 		checked = 1
 	where 
 		nidx = #{nidx}
+        and sysdate > activedate
 	</update>
 </mapper>
