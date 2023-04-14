@@ -54,12 +54,7 @@ body{
 #chart{
 	float: left;
 	margin-left: 470px;
-	width:450px;
-	height:380px;
-}
-#chart2{
-	margin-left: 930px;
-	width:450px;
+	width:910px;
 	height:380px;
 }
 .tb_to{
@@ -80,10 +75,10 @@ body{
 }
 </style>
 <script>
-let xAxisData = ['22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
+let xAxisData = ['22.05','22.06','22.07','22.08','22.09','22.10','22.11','22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
 
 function drawChart () { 
-	let seriesData = [${traffic_m.get(0)},${traffic_m.get(1)},${traffic_m.get(2)},${traffic_m.get(3)},${traffic_m.get(4)}]; // 값 데이터 배열 생성
+	let seriesData = [1,2,3,4,5,6,7,8,9,8,7,6]; // 값 데이터 배열 생성
 	
 	var myChart = echarts.init(document.getElementById('chart'));
 	
@@ -98,29 +93,6 @@ function drawChart () {
 		series: [
 			{
 				data: seriesData, // 위에서 정의한 값 데이터
-				type: 'bar' // 버튼의 value 데이터 ('line' or 'bar')
-			}
-		]
-	};
-	myChart.setOption(option); // 차트 디스플레이
-}
-
-function drawChart2 () { 
-	let seriesData2 = [${traffic_c.get(0)},${traffic_c.get(1)},${traffic_c.get(2)},${traffic_c.get(3)},${traffic_c.get(4)}]; // 값 데이터 배열 생성
-	
-	var myChart = echarts.init(document.getElementById('chart2'));
-	
-	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
-		xAxis: {
-			type: 'category',
-			data: xAxisData // 위에서 정의한 X축 데이터
-		},
-		yAxis: {
-			type: 'value'
-		},
-		series: [
-			{
-				data: seriesData2, // 위에서 정의한 값 데이터
 				type: 'bar' // 버튼의 value 데이터 ('line' or 'bar')
 			}
 		]
@@ -195,25 +167,18 @@ function drawChart2 () {
 </table>
 <hr width="950" id="hr">
 <br>
-<form name="traffic">
+<form name="traffic_all">
 <table width="950" class="tb_to">
 	<tr>
 		<th>[일반회원] 회원가입 수</th>
-		<th>[기업회원] 회원가입 수</th>
 	</tr>
 	<tr id="dan">
-		<td align="right">(단위: 명)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td align="right">(단위: 명)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right">(단위: 명)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
 <div id="chart"></div>
-<div id="chart2"></div>
-<table width="950" class="tb_to">
-	<tr>
-		<th><a href="analytics_all.do"><input type="button" value="전체보기" class="bu_to"></a></th>
-		<th><input type="button" value="전체보기" class="bu_to"></th>
-	</tr>
-</table>
 </form>
 <br><br><br><br>
 <hr width="1200">

@@ -1,10 +1,14 @@
 package com.admin.bbs.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.admin.book.model.PaymentDTO;
+import com.admin.notification.model.NotificationDTO;
 
 public class BbsDAOImple implements BbsDAO {
 	

@@ -1,3 +1,4 @@
+
 package com.admin.company.model;
 
 import java.util.ArrayList;
@@ -32,6 +33,18 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public List<CompanyDTO> companyList_b(int cp, int listSize) {
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("companyList_b",map);
+		return dtos;
+	}
+	
+	@Override
 	public List<CompanyDTO> collectionList(int cp, int listSize, String kind) {
 		int start=(cp-1)*listSize+1;
 		int end=cp*listSize;
@@ -41,6 +54,18 @@ public class CompanyDAOImple implements CompanyDAO {
 		map.put("kind", kind);
 		
 		List<CompanyDTO> dtos=sqlMap.selectList("collectionList",map);
+		return dtos;
+	}
+	
+	@Override
+	public List<CompanyDTO> collectionList_b(int cp, int listSize) {
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("collectionList_b",map);
 		return dtos;
 	}
 	
@@ -89,6 +114,30 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public List<CompanyDTO> listSelect_cidx_b(int cidx) {
+		
+		CompanyDTO comDto=new CompanyDTO();
+		comDto.setCidx(cidx);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSelect_cidx_b",comDto);
+		return dtos;
+	}
+	
+	@Override
+	public List<CompanyDTO> listSelect_cname_b(int cp, int listSize, String selectText) {
+
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("cname", selectText);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSelect_cname_b",map);
+		return dtos;
+	}
+	
+	@Override
 	public int getTotalCnt(String kind) {
 		int count=sqlMap.selectOne("getTotalCnt",kind);
 		count=count==0?1:count;
@@ -103,6 +152,24 @@ public class CompanyDAOImple implements CompanyDAO {
 		map.put("cname", selectText);
 		
 		int count=sqlMap.selectOne("getTotalCnt_cn",map);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public int getTotalCnt_b() {
+		int count=sqlMap.selectOne("getTotalCnt_b");
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public int getTotalCnt_cn_b(String selectText) {
+		
+		Map map=new HashMap();
+		map.put("cname", selectText);
+		
+		int count=sqlMap.selectOne("getTotalCnt_cn_b",map);
 		count=count==0?1:count;
 		return count;
 	}
@@ -129,8 +196,20 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public void sghj(int cidx) {
+		sqlMap.update("sghj",cidx);
+	}
+	
+	@Override
 	public int getTotalCnt_com(String kind) {
 		int count=sqlMap.selectOne("getTotalCnt_com",kind);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public int getTotalCnt_com_b() {
+		int count=sqlMap.selectOne("getTotalCnt_com_b");
 		count=count==0?1:count;
 		return count;
 	}
@@ -164,6 +243,36 @@ public class CompanyDAOImple implements CompanyDAO {
 		map.put("cname", selectText);
 		
 		int count=sqlMap.selectOne("getTotalCnt_cname",map);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public List<CompanyDTO> listSel_cidx_b(int cidx) {
+		CompanyDTO comDto=new CompanyDTO();
+		comDto.setCidx(cidx);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSel_cidx_b",comDto);
+		return dtos;
+	}
+	@Override
+	public List<CompanyDTO> listSel_cname_b(int cp, int listSize, String selectText) {
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("cname", selectText);
+		
+		List<CompanyDTO> dtos=sqlMap.selectList("listSel_cname_b",map);
+		return dtos;
+	}
+	@Override
+	public int getTotalCnt_cname_b(String selectText) {
+		Map map=new HashMap();
+		map.put("cname", selectText);
+		
+		int count=sqlMap.selectOne("getTotalCnt_cname_b",map);
 		count=count==0?1:count;
 		return count;
 	}

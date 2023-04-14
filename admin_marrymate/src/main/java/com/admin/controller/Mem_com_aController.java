@@ -62,6 +62,26 @@ public class Mem_com_aController {
 		return mav;
 	}
 	
+	@RequestMapping("/companyList_b.do")
+	public ModelAndView companyList(@RequestParam(value="cp",defaultValue="1")int cp) {
+		
+		int totalCnt=companyDao.getTotalCnt_com_b();
+		int listSize=5;
+		int pageSize=5;
+		String pageStr=com.admin.page.module.PageModule_p.makePage("companyList_b.do",totalCnt,listSize,pageSize,cp);
+		
+		List<CompanyDTO> dtos=companyDao.companyList_b(cp,listSize);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("dtos",dtos);
+		mav.addObject("pageStr",pageStr);
+		mav.setViewName("com_b_a");
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping("/pop.do")
 	public ModelAndView pop(int midx) {
 		
@@ -99,7 +119,31 @@ public class Mem_com_aController {
 		
 		ModelAndView mav=new ModelAndView();
 		
-		notiDao.noti_all(recv,title,content);
+		if(recv.equals("일반회원")) {
+			List<Integer> midx=notiDao.selMidx();
+			
+			for(int i=0;i<midx.size();i++) {
+				notiDao.noti_mem(midx.get(i),recv,title,content);
+			}
+		}else if(recv.equals("기업회원")) {
+			List<Integer> cidx=notiDao.selCidx();
+			
+			for(int i=0;i<cidx.size();i++) {
+				notiDao.noti_com(cidx.get(i),recv,title,content);
+			}
+		}else if(recv.equals("전체")) {
+			List<Integer> midx=notiDao.selMidx();
+			
+			for(int i=0;i<midx.size();i++) {
+				notiDao.noti_mem(midx.get(i),recv,title,content);
+			}
+			
+			List<Integer> cidx=notiDao.selCidx();
+			
+			for(int i=0;i<cidx.size();i++) {
+				notiDao.noti_com(cidx.get(i),recv,title,content);
+			}
+		}
 		
 		mav.addObject("msg","["+recv+"] 에게 알림을 보냈습니다.");
 		mav.setViewName("adminClose");
@@ -161,6 +205,35 @@ public class Mem_com_aController {
 		}
 		
 		mav.setViewName("com_a");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/listSelect_com_b.do")
+	public ModelAndView listSelect_b(@RequestParam(value="cp",defaultValue="1")int cp, String selectType, String selectText) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		if(selectType.equals("업체번호")) {
+			
+			try {
+				int cidx=Integer.parseInt(selectText);
+				List<CompanyDTO> dtos=companyDao.listSel_cidx_b(cidx);
+				mav.addObject("dtos",dtos);
+			}catch(Exception e) {}
+			
+		}else if(selectType.equals("업체명")) {
+			int totalCnt=companyDao.getTotalCnt_cname_b(selectText);
+			int listSize=5;
+			int pageSize=5;
+			String pageStr=com.admin.page.module.PageModule_m_n.makePage("listSelect_com_b.do",totalCnt,listSize,pageSize,cp,selectType,selectText);
+			
+			List<CompanyDTO> dtos=companyDao.listSel_cname_b(cp,listSize,selectText);
+			mav.addObject("dtos",dtos);
+			mav.addObject("pageStr",pageStr);
+		}
+		
+		mav.setViewName("com_b_a");
 		
 		return mav;
 	}

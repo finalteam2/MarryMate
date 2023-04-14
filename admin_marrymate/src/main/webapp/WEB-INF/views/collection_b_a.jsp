@@ -44,15 +44,12 @@ body{
 	left: 250px;
 	margin: 0px auto;
 }
-#tb {
-	margin-left: 760px;
-}
-#hr{
-	margin-left: 450px;
+.tb {
+	margin-left: 500px;
 }
 #tb2 {
 	text-align: center;
-	margin-left: 570px;
+	margin-left: 610px;
 }
 
 #select {
@@ -79,9 +76,9 @@ body{
 	border-radius:5px;
 }
 
-.pg {
+#pg {
 	position: fixed;
-	bottom: 240px;
+	bottom: 205px;
 	left:55%;
 	transform:translateX(-50%);
 }
@@ -92,33 +89,54 @@ body{
 	left:50%;
 	transform:translateX(-50%);
 }
-#pop {
-	width:100px;
-	height:35px;
-	font-size:15px;
+
+#sghj {
+	width:65px;
+	height:25px;
+	font-size:13px;
 	font-weight:bold;
-	color:white;
-	background-color:#078b18;
-	border:0px;
-	border-radius:5px;
-}
-#pop2 {
-	width:100px;
-	height:35px;
-	font-size:15px;
-	font-weight:bold;
-	color:white;
-	background-color:#D53834;
+	color:#444444;
+	background-color:#cecece;
 	border:0px;
 	border-radius:5px;
 }
 </style>
+<script type="text/javascript" src="js/httpRequest.js"></script>
 <script>
-function popup(){
-	window.open('popup.do','popup','width=600,height=290,top=250,left=550');
+function bi(cidx){
+	
+	var TdNode=document.getElementById('bt_in'+cidx);
+	var TdChildNodes=TdNode.childNodes;
+	for(var i=TdChildNodes.length-1;i>=0;i--) {
+		var TdChildNode=TdChildNodes[i];
+		TdNode.removeChild(TdChildNode);
+	}
+	
+	var newInputNode=document.createElement('input');
+	newInputNode.setAttribute('type','button');
+	newInputNode.setAttribute('value','숨김해제');
+	newInputNode.setAttribute('id','sghj');
+	newInputNode.setAttribute('onclick','sghj('+cidx+');');
+	
+	var TdNode=document.getElementById('bt_in'+cidx);
+	
+	TdNode.appendChild(newInputNode);
 }
-function popup2(){
-	window.open('popup2.do','popup2','width=600,height=290,top=250,left=550');
+
+function sghj(cidx){
+	var param='cidx='+cidx;
+	sendRequest('sghj.do',param,'GET',sghjResult);
+}
+function sghjResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data=XHR.responseText;
+			data=JSON.parse(data);
+			
+			window.alert(data.msg);
+			location.href=data.goUrl;
+		}
+	}
 }
 </script>
 </head>
@@ -180,106 +198,59 @@ function popup2(){
 	</tr>
 </table>
 <br><br>
-<table height="50" id="tb">
+<table height="50" class="tb" align="center">
 	<tr>
-		<th width="150"><a href="pointMinusList.do">차감</a></th>
-		<th width="150"><a href="pointPlusList.do">적립</a></th>
+		<th width="90"><a href="collectionList.do?kind=예식장">예식장</a></th>
+		<th width="100"><a href="collectionList.do?kind=스튜디오">스튜디오</a></th>
+		<th width="90"><a href="collectionList.do?kind=드레스">드레스</a></th>
+		<th width="120"><a href="collectionList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="100"><a href="collectionList.do?kind=스냅DVD">스냅DVD</a></th>
+		<th width="70"><a href="collectionList.do?kind=주례">주례</a></th>
+		<th width="70"><a href="collectionList.do?kind=사회">사회</a></th>
+		<th width="70"><a href="collectionList.do?kind=축가">축가</a></th>
+		<th width="100"><a href="collectionList_b.do">숨김관리</a></th>
 	</tr>
 </table>
-<hr width="950" id="hr">
-<c:if test="${mp=='m'}">
+<hr width="850" class="tb">
 <br><br>
-<form name="pointMinusList" action="listSelect_p.do">
-<input type="hidden" name="mp" value="${mp}">
+<form name="collectionList" action="listSelect_b.do">
+<input type="hidden" name="kind" value="${param.kind}">
 <select name="selectType" id="select">
-	<option>회원번호</option>
-	<option>회원명</option>
+	<option>업체번호</option>
 	<option>업체명</option>
 </select>
 <input type="text" name="selectText" id="text" placeholder="검색">
 &nbsp;<input type="submit" value="검색" id="search">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 회수" id="pop2" onclick="popup2();">
 </form>
 <br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
+<table cellspacing="0" border="1" width="600" id="tb2">
 	<thead>
 		<tr>
-			<th>포인트번호</th>
-			<th>회원번호</th>
-			<th>회원명</th>
+			<th></th>
+			<th>카테고리</th>
+			<th>업체번호</th>
 			<th>업체명</th>
-			<th>차감날짜/시간</th>
-			<th>차감포인트</th>
-			<th>구분</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="7" align="center">포인트 차감 내역이 없습니다.</td>
+			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		<tr>
-			<td>${dto.p_idx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.name}</td>
-			<td><c:if test="${!empty dto.cname}">${dto.cname}</c:if><c:if test="${empty dto.cname}">-</c:if></td>
-			<td>${dto.p_date}</td>
-			<td>${dto.p_cal}</td>
-			<td>${dto.p_type}</td>
+		<tr style="height: 30px;">
+			<td width="30"><input type="button" onclick="bi(${dto.cidx});" style="height: 17px;"></td>
+			<td width="80">${dto.kind}</td>
+			<td width="80">${dto.cidx}</td>
+			<td width="315">${dto.cname}</td>
+			<td id="bt_in${dto.cidx}" class="bt_in"></td>
 		</tr>
 	</c:forEach>
 	</tbody>
 </table>
-<div class="pg">${pageStr}</div>
-</form>
-</c:if>
-<c:if test="${mp=='p'}">
-<br><br>
-<form name="pointPlusList" action="listSelect_p.do">
-<input type="hidden" name="mp" value="${mp}">
-<select name="selectType" id="select">
-	<option>회원번호</option>
-	<option>회원명</option>
-</select>
-<input type="text" name="selectText" id="text" placeholder="검색">
-&nbsp;<input type="submit" value="검색" id="search">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 지급" id="pop" onclick="popup();">
-</form>
-<br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
-	<thead>
-		<tr>
-			<th>포인트번호</th>
-			<th>회원번호</th>
-			<th>회원명</th>
-			<th>적립날짜/시간</th>
-			<th>적립포인트</th>
-			<th>구분</th>
-		</tr>
-	</thead>
-	<tbody>
-	<c:if test="${empty dtos}">
-		<tr>
-			<td colspan="6" align="center">포인트 적립 내역이 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:forEach var="dto" items="${dtos}">
-		<tr>
-			<td>${dto.p_idx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.name}</td>
-			<td>${dto.p_date}</td>
-			<td>${dto.p_cal}</td>
-			<td>${dto.p_type}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-<div class="pg">${pageStr}</div>
-</form>
-</c:if>
+<div id="pg">${pageStr}</div>
 <hr width="1200" id="hrf">
 </c:if>
 </body>

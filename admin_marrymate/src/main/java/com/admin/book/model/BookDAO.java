@@ -8,6 +8,8 @@ public interface BookDAO {
 	
 	public List<BookListDTO> bookList(int cp, int listSize, String kind);
 	
+	public List<BookListDTO> bookList_b(int cp, int listSize);
+	
 	public List<BookListDTO> listSel_bk_idx(String kind,int bk_idx);
 	
 	public List<BookListDTO> listSel_bk_midx(String kind,int midx);
@@ -22,8 +24,12 @@ public interface BookDAO {
 	
 	public int getTotalCnt_bk_cn(String kind, String selectText);
 	
+	public int getTotalCnt_bk_b();
+	
 	public BookDetailsDTO bookDetails(int bk_idx,String kind);
 	
 	public String pay_date(int bk_idx);
+	
+	public void cancle(int bk_idx,int midx);
 
 }

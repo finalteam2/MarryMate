@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.admin.notification.model.NotificationDTO;
+
 public class BookDAOImple implements BookDAO {
 	
 	private SqlSessionTemplate sqlMap;
@@ -36,6 +38,20 @@ public class BookDAOImple implements BookDAO {
 			List<BookListDTO> dtos=sqlMap.selectList("bookList",map);
 			return dtos;
 		}
+		
+	}
+	
+	@Override
+	public List<BookListDTO> bookList_b(int cp, int listSize) {
+		
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<BookListDTO> dtos=sqlMap.selectList("bookList_b",map);
+		return dtos;
 		
 	}
 	
@@ -174,6 +190,14 @@ public class BookDAOImple implements BookDAO {
 	}
 	
 	@Override
+	public int getTotalCnt_bk_b() {
+		
+		int count=sqlMap.selectOne("getTotalCnt_bk_b");
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
 	public BookDetailsDTO bookDetails(int bk_idx,String kind) {
 		Map map=new HashMap();
 		map.put("bk_idx", bk_idx);
@@ -202,5 +226,55 @@ public class BookDAOImple implements BookDAO {
 		}
 		
 		return pay_date;
+	}
+	
+	@Override
+	public void cancle(int bk_idx,int midx) {
+  		
+  		int count=sqlMap.selectOne("selectCount",bk_idx);
+  		
+  		if(count==1) {
+  			
+  			sqlMap.update("updateBook",bk_idx);
+  			
+  			int cidx=sqlMap.selectOne("selectCidx",bk_idx);
+  			
+  			PaymentDTO payDto=sqlMap.selectOne("selectPay",bk_idx);
+  			
+  			sqlMap.insert("insertRefund",payDto);
+  			
+  			int refund_idx=sqlMap.selectOne("selectRefund_idx",payDto.getPay_idx());
+  			
+  			int point=sqlMap.selectOne("selectPoint",midx);
+  			
+  			Map map=new HashMap();
+  			int p_total=point+payDto.getPay_point();
+  			map.put("p_total",p_total);
+  			map.put("midx",midx);
+  			
+  			sqlMap.update("updateMember",map);
+
+  			Map map2=new HashMap();
+  			map2.put("midx",midx);
+  			map2.put("refund_idx",refund_idx);
+  			map2.put("pay_point",payDto.getPay_point());
+  			map2.put("p_total",p_total);
+  			
+  			sqlMap.insert("insertPoint",map2);
+  			
+  			NotificationDTO notiDto=new NotificationDTO();
+  			notiDto.setCidx(cidx);
+  			notiDto.setMidx(midx);
+  			notiDto.setTitle("예약취소 안내");
+  			notiDto.setContent("예약번호:"+bk_idx+"번이 취소되었습니다.");
+  			
+  			sqlMap.insert("insertNotiCom",notiDto);
+  			
+  			sqlMap.insert("insertNotiMem",notiDto);
+  			
+  		}else if(count==2) {
+  
+  		}
+  		
 	}
 }

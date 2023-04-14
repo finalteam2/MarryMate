@@ -283,14 +283,15 @@ function sgResult(){
 <br><br>
 <table height="50" class="tb" align="center">
 	<tr>
-		<th width="100"><a href="collectionList.do?kind=예식장">예식장</a></th>
+		<th width="90"><a href="collectionList.do?kind=예식장">예식장</a></th>
 		<th width="100"><a href="collectionList.do?kind=스튜디오">스튜디오</a></th>
-		<th width="100"><a href="collectionList.do?kind=드레스">드레스</a></th>
+		<th width="90"><a href="collectionList.do?kind=드레스">드레스</a></th>
 		<th width="120"><a href="collectionList.do?kind=헤어메이크업">헤어/메이크업</a></th>
 		<th width="100"><a href="collectionList.do?kind=스냅DVD">스냅DVD</a></th>
-		<th width="100"><a href="collectionList.do?kind=주례">주례</a></th>
-		<th width="100"><a href="collectionList.do?kind=사회">사회</a></th>
-		<th width="100"><a href="collectionList.do?kind=축가">축가</a></th>
+		<th width="70"><a href="collectionList.do?kind=주례">주례</a></th>
+		<th width="70"><a href="collectionList.do?kind=사회">사회</a></th>
+		<th width="70"><a href="collectionList.do?kind=축가">축가</a></th>
+		<th width="100"><a href="collectionList_b.do">숨김관리</a></th>
 	</tr>
 </table>
 <hr width="850" class="tb">

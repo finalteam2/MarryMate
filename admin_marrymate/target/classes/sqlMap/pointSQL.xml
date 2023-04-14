@@ -7,16 +7,21 @@
   <select id="pointMinusList" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member,payment,book,company 
-  		where point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0 order by point.p_idx desc) a) b 
+  		from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where point.p_cal&lt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="pointPlusList" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member 
-  		where point.midx=member.midx and point.p_cal&gt;0 order by point.p_idx desc) a) b 
+  		from point
+  		left join member on point.midx=member.midx 
+  		where point.p_cal&gt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
@@ -31,68 +36,110 @@
   <select id="listSelect_midx_m" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member,payment,book,company 
-  		where point.midx=#{midx} and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0 order by point.p_idx desc) a) b 
+  		from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where point.midx=#{midx} and point.p_cal&lt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="listSelect_midx_p" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member 
-  		where point.midx=#{midx} and point.midx=member.midx and point.p_cal&gt;0 order by point.p_idx desc) a) b 
+  		from point
+  		left join member on point.midx=member.midx 
+  		where point.midx=#{midx} and point.p_cal&gt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="listSelect_name_m" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member,payment,book,company 
-  		where member.name like '%'||#{name}||'%' and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0 order by point.p_idx desc) a) b 
+  		from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where member.name like '%'||#{name}||'%' and point.p_cal&lt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="listSelect_name_p" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member 
-  		where member.name like '%'||#{name}||'%' and point.midx=member.midx and point.p_cal&gt;0 order by point.p_idx desc) a) b 
+  		from point
+  		left join member on point.midx=member.midx 
+  		where member.name like '%'||#{name}||'%' and point.p_cal&gt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="listSelect_cname_m" parameterType="Map" resultType="com.admin.point.model.PointListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select point.p_idx p_idx,point.midx midx,member.name name,company.cname cname,point.p_date p_date,point.p_cal p_cal,point.p_type p_type 
-  		from point,member,payment,book,company 
-  		where company.cname like '%'||#{cname}||'%' and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0 order by point.p_idx desc) a) b 
+  		from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where company.cname like '%'||#{cname}||'%' and point.p_cal&lt;0 order by point.p_idx desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="getTotalCnt_midx_m" parameterType="com.admin.point.model.PointDTO" resultType="Integer">
-  		select count(*) from point,member,payment,book,company 
-  		where point.midx=#{midx} and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0
+  		select count(*) from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where point.midx=#{midx} and point.p_cal&lt;0
   </select>
   
   <select id="getTotalCnt_midx_p" parameterType="com.admin.point.model.PointDTO" resultType="Integer">
-  		select count(*) from point,member where point.midx=#{midx} and point.midx=member.midx and point.p_cal&gt;0
+  		select count(*) from point
+  		left join member on point.midx=member.midx 
+  		where point.midx=#{midx} and point.p_cal&gt;0
   </select>
   
   <select id="getTotalCnt_name_m" parameterType="String" resultType="Integer">
-  		select count(*) from point,member,payment,book,company 
-  		where member.name like '%'||#{selectText}||'%' and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0
+  		select count(*) from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where member.name like '%'||#{name}||'%' and point.p_cal&lt;0
   </select>
   
   <select id="getTotalCnt_name_p" parameterType="String" resultType="Integer">
-  		select count(*) from point,member where member.name like '%'||#{selectText}||'%' and point.midx=member.midx and point.p_cal&gt;0
+  		select count(*) from point
+  		left join member on point.midx=member.midx 
+  		where member.name like '%'||#{name}||'%' and point.p_cal&gt;0
   </select>
   
   <select id="getTotalCnt_cname_m" parameterType="String" resultType="Integer">
-  		select count(*) from point,member,payment,book,company 
-  		where company.cname like '%'||#{selectText}||'%' and point.midx=member.midx and point.pay_idx=payment.pay_idx and payment.bk_idx=book.bk_idx and book.cidx=company.cidx and point.p_cal&lt;0
+  		select count(*) from point 
+		left join member on point.midx=member.midx 
+		left join payment on point.pay_idx=payment.pay_idx 
+		left join book on payment.bk_idx=book.bk_idx 
+		left join company on book.cidx=company.cidx 
+  		where company.cname like '%'||#{cname}||'%' and point.p_cal&lt;0
   </select>
   
   <insert id="pointPlus" parameterType="com.admin.point.model.PointDTO" >
   		insert into point values(point_p_idx.nextval,#{midx},null,null,null,#{p_cal},sysdate,#{p_total},'이벤트')
+  </insert>
+  
+  <insert id="pointMinus" parameterType="com.admin.point.model.PointDTO" >
+  		insert into point values(point_p_idx.nextval,#{midx},null,null,null,#{p_cal},sysdate,#{p_total},'기타')
+  </insert>
+  
+  <insert id="pointPlus_b" parameterType="com.admin.point.model.PointDTO" >
+  		insert into point values(point_p_idx.nextval,#{midx},null,null,null,#{p_cal},sysdate,#{p_total},'불량글철회')
+  </insert>
+  
+  <insert id="pointMinus_b" parameterType="com.admin.point.model.PointDTO" >
+  		insert into point values(point_p_idx.nextval,#{midx},null,null,null,#{p_cal},sysdate,#{p_total},'불량글등록')
   </insert>
   
   </mapper>

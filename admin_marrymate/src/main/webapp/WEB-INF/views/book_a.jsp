@@ -151,14 +151,15 @@ body{
 <br><br>
 <table height="50" class="tb">
 	<tr>
-		<th width="100"><a href="bookList.do?kind=예식장">예식장</a></th>
+		<th width="90"><a href="bookList.do?kind=예식장">예식장</a></th>
 		<th width="100"><a href="bookList.do?kind=스튜디오">스튜디오</a></th>
-		<th width="100"><a href="bookList.do?kind=드레스">드레스</a></th>
+		<th width="90"><a href="bookList.do?kind=드레스">드레스</a></th>
 		<th width="120"><a href="bookList.do?kind=헤어메이크업">헤어/메이크업</a></th>
 		<th width="100"><a href="bookList.do?kind=스냅DVD">스냅DVD</a></th>
-		<th width="100"><a href="bookList.do?kind=주례">주례</a></th>
-		<th width="100"><a href="bookList.do?kind=사회">사회</a></th>
-		<th width="100"><a href="bookList.do?kind=축가">축가</a></th>
+		<th width="70"><a href="bookList.do?kind=주례">주례</a></th>
+		<th width="70"><a href="bookList.do?kind=사회">사회</a></th>
+		<th width="70"><a href="bookList.do?kind=축가">축가</a></th>
+		<th width="100"><a href="bookList_b.do">취소관리</a></th>
 	</tr>
 </table>
 <hr width="850" class="tb">
@@ -198,7 +199,7 @@ body{
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
 		<tr style="height: 30px;">
-			<td><a href="bookDetails.do?bk_idx=${dto.bk_idx}&kind=${param.kind}">${dto.bk_idx}</a></td>
+			<td><a href="bookDetails.do?bk_state=${dto.bk_state}&bk_idx=${dto.bk_idx}&kind=${param.kind}">${dto.bk_idx}</a></td>
 			<td>${dto.midx}</td>
 			<td>${dto.name}</td>
 			<td>${dto.cname}</td>
@@ -208,9 +209,11 @@ body{
 			<td>
 			<c:if test="${dto.bk_state==0}">결제전</c:if>
 			<c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>
-			<c:if test="${dto.bk_state==2}"><label style="color:#28A4F6;">예약확정</label></c:if>
-			<c:if test="${dto.bk_state==3}">잔금 결제완료</c:if>
+			<c:if test="${dto.bk_state==2}"><label style="color:#feb916;">잔금대기</label></c:if>
+			<c:if test="${dto.bk_state==3}"><label style="color:#28A4F6;">잔금 결제완료</label></c:if>
 			<c:if test="${dto.bk_state==4}"><label style="color:#e34331;">예약취소</label></c:if>
+			<c:if test="${dto.bk_state==5}"><label style="color:#feb916;">취소대기</label></c:if>
+			<c:if test="${dto.bk_state==7}">이용완료</c:if>
 			</td>
 		</tr>
 	</c:forEach>

@@ -128,6 +128,11 @@ public class Point_aController {
 		return "popup";
 	}
 	
+	@RequestMapping("/popup2.do")
+	public String popup2() {
+		return "popup2";
+	}
+	
 	@RequestMapping("/pointPlus.do")
 	public ModelAndView pointPlus(String midx, String p_cal) {
 		
@@ -147,6 +152,30 @@ public class Point_aController {
 		}catch(Exception e) {
 			mav.addObject("msg","회원번호 or 포인트는 숫자만 입력하세요.");
 			mav.setViewName("popup");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/pointMinus.do")
+	public ModelAndView pointMinus(String midx, String p_cal) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		try {
+			int midx_i=Integer.parseInt(midx);
+			MemberDTO mdto=memberDao.memberInfo(midx_i);
+			
+			int p_cal_i=Integer.parseInt(p_cal);
+			
+			pointDao.pointMinus(midx_i,p_cal_i);
+			
+			mav.addObject("msg","회원번호: "+midx+" / 회원명: "+mdto.getName()+"님으로부터 "+p_cal+"포인트를 회수하였습니다.");
+			mav.setViewName("adminClose");
+			
+		}catch(Exception e) {
+			mav.addObject("msg","회원번호 or 포인트는 숫자만 입력하세요.");
+			mav.setViewName("popup2");
 		}
 		
 		return mav;

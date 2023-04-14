@@ -169,5 +169,65 @@ public class PointDAOImple implements PointDAO {
 		
 	}
 	
+	@Override
+	public void pointMinus(int midx, int p_cal) {
+		
+		MemberDTO mdto_s=sqlMap.selectOne("memberInfo",midx);
+		
+		int point=mdto_s.getPoint()+p_cal;
+		
+		MemberDTO mdto=new MemberDTO();
+		mdto.setMidx(midx);
+		mdto.setPoint(point);
+		sqlMap.update("memberUpd",mdto);
+		
+		PointDTO pdto=new PointDTO();
+		pdto.setMidx(midx);
+		pdto.setP_cal(p_cal);
+		pdto.setP_total(point);
+		sqlMap.insert("pointMinus",pdto);
+		
+	}
+	
+	@Override
+	public void pointPlus_b(int midx, int p_cal) {
+		
+		MemberDTO mdto_s=sqlMap.selectOne("memberInfo",midx);
+		
+		int point=mdto_s.getPoint()+p_cal;
+		
+		MemberDTO mdto=new MemberDTO();
+		mdto.setMidx(midx);
+		mdto.setPoint(point);
+		sqlMap.update("memberUpd",mdto);
+		
+		PointDTO pdto=new PointDTO();
+		pdto.setMidx(midx);
+		pdto.setP_cal(p_cal);
+		pdto.setP_total(point);
+		sqlMap.insert("pointPlus_b",pdto);
+		
+	}
+	
+	@Override
+	public void pointMinus_b(int midx, int p_cal) {
+		
+		MemberDTO mdto_s=sqlMap.selectOne("memberInfo",midx);
+		
+		int point=mdto_s.getPoint()+p_cal;
+		
+		MemberDTO mdto=new MemberDTO();
+		mdto.setMidx(midx);
+		mdto.setPoint(point);
+		sqlMap.update("memberUpd",mdto);
+		
+		PointDTO pdto=new PointDTO();
+		pdto.setMidx(midx);
+		pdto.setP_cal(p_cal);
+		pdto.setP_total(point);
+		sqlMap.insert("pointMinus_b",pdto);
+		
+	}
+	
 
 }

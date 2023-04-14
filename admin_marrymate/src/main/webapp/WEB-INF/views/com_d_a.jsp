@@ -175,7 +175,7 @@ body{
 		<th><a href="collectionList.do?kind=예식장">웨딩컬렉션 관리</a></th>
 	</tr>
 	<tr>
-		<th><a href="bookList.do?kind=예식장">예약관리</a></th>
+		<th><a href="book_a.do">예약관리</a></th>
 	</tr>
 	<tr>
 		<th><a href="bbsList.do?kind=공지사항">커뮤니티 관리</a></th>
@@ -304,7 +304,23 @@ body{
 	</tr>
 </table>
 </c:if>
-<c:if test="${clevel!=0}">
+<c:if test="${clevel==-1}">
+<table cellspacing="0" width="700" class="tb3">
+	<tr>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="ok.do?cidx=${comDto.cidx}&kind=${kind}"><input type="button" value="가입승인" id="butt1"></a>
+			
+		</td>
+		<td width="120">
+			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+		</td>
+	</tr>
+</table>
+</c:if>
+<c:if test="${clevel==1}">
 <table cellspacing="0" width="700" class="tb3">
 	<tr>
 		<td>

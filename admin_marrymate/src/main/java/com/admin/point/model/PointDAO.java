@@ -25,5 +25,11 @@ public interface PointDAO {
 	public int getTotalCnt_cname(String selectText);
 	
 	public void pointPlus(int midx, int p_cal);
+	
+	public void pointMinus(int midx, int p_cal);
+	
+	public void pointPlus_b(int midx, int p_cal);
+	
+	public void pointMinus_b(int midx, int p_cal);
 
 }

@@ -8,8 +8,20 @@
   		insert into notification values(notification_nidx.nextval,null,#{midx},null,null,#{title},#{content},7,sysdate,sysdate,0)
   </insert>
   
-  <insert id="noti_all" parameterType="com.admin.notification.model.NotificationDTO" >
-  		insert into notification values(notification_nidx.nextval,null,null,#{recv},null,#{title},#{content},7,sysdate,sysdate,0)
+  <select id="selMidx" resultType="Integer">
+  		select midx from member
+  </select>
+  
+  <select id="selCidx" resultType="Integer">
+  		select cidx from company
+  </select>
+  
+  <insert id="noti_mem" parameterType="com.admin.notification.model.NotificationDTO" >
+  		insert into notification values(notification_nidx.nextval,null,#{midx},#{recv},null,#{title},#{content},7,sysdate,sysdate,0)
+  </insert>
+  
+  <insert id="noti_com" parameterType="com.admin.notification.model.NotificationDTO" >
+  		insert into notification values(notification_nidx.nextval,#{cidx},null,#{recv},null,#{title},#{content},7,sysdate,sysdate,0)
   </insert>
   
   </mapper>

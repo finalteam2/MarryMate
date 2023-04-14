@@ -50,9 +50,16 @@ body{
 #hr{
 	margin-left: 450px;
 }
-#tb2 {
+.tb2 {
 	text-align: center;
-	margin-left: 570px;
+	margin-left: 520px;
+}
+#hr2 {
+	margin-left: 515px;
+}
+#tb3 {
+	text-align: center;
+	margin-left: 560px;
 }
 
 #select {
@@ -79,7 +86,7 @@ body{
 	border-radius:5px;
 }
 
-.pg {
+#pg {
 	position: fixed;
 	bottom: 240px;
 	left:55%;
@@ -92,35 +99,18 @@ body{
 	left:50%;
 	transform:translateX(-50%);
 }
-#pop {
-	width:100px;
-	height:35px;
-	font-size:15px;
+
+#butt {
+	width:65px;
+	height:25px;
+	font-size:13px;
 	font-weight:bold;
 	color:white;
 	background-color:#078b18;
 	border:0px;
 	border-radius:5px;
 }
-#pop2 {
-	width:100px;
-	height:35px;
-	font-size:15px;
-	font-weight:bold;
-	color:white;
-	background-color:#D53834;
-	border:0px;
-	border-radius:5px;
-}
 </style>
-<script>
-function popup(){
-	window.open('popup.do','popup','width=600,height=290,top=250,left=550');
-}
-function popup2(){
-	window.open('popup2.do','popup2','width=600,height=290,top=250,left=550');
-}
-</script>
 </head>
 <body width="1200">
 <c:if test="${empty sessionScope.name}">
@@ -182,104 +172,74 @@ function popup2(){
 <br><br>
 <table height="50" id="tb">
 	<tr>
-		<th width="150"><a href="pointMinusList.do">차감</a></th>
-		<th width="150"><a href="pointPlusList.do">적립</a></th>
+		<th width="150"><a href="memberList.do">일반회원</a></th>
+		<th width="150"><a href="companyList.do?kind=예식장">기업회원</a></th>
 	</tr>
 </table>
 <hr width="950" id="hr">
-<c:if test="${mp=='m'}">
 <br><br>
-<form name="pointMinusList" action="listSelect_p.do">
-<input type="hidden" name="mp" value="${mp}">
+<table height="50" class="tb2" align="center">
+	<tr>
+		<th width="85"><a href="companyList.do?kind=예식장">예식장</a></th>
+		<th width="95"><a href="companyList.do?kind=스튜디오">스튜디오</a></th>
+		<th width="85"><a href="companyList.do?kind=드레스">드레스</a></th>
+		<th width="115"><a href="companyList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="95"><a href="companyList.do?kind=스냅DVD">스냅DVD</a></th>
+		<th width="65"><a href="companyList.do?kind=주례">주례</a></th>
+		<th width="65"><a href="companyList.do?kind=사회">사회</a></th>
+		<th width="65"><a href="companyList.do?kind=축가">축가</a></th>
+		<th width="85"><a href="companyList_b.do?">승인관리</a></th>
+	</tr>
+</table>
+<hr width="820" id="hr2">
+<br><br>
+<form name="companySel" action="listSelect_com_b.do">
 <select name="selectType" id="select">
-	<option>회원번호</option>
-	<option>회원명</option>
+	<option>업체번호</option>
 	<option>업체명</option>
 </select>
 <input type="text" name="selectText" id="text" placeholder="검색">
 &nbsp;<input type="submit" value="검색" id="search">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 회수" id="pop2" onclick="popup2();">
 </form>
 <br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
+<table cellspacing="0" border="1" width="700" id="tb3">
 	<thead>
 		<tr>
-			<th>포인트번호</th>
-			<th>회원번호</th>
-			<th>회원명</th>
+			<th width="100">카테고리</th>
+			<th width="80">업체번호</th>
 			<th>업체명</th>
-			<th>차감날짜/시간</th>
-			<th>차감포인트</th>
-			<th>구분</th>
+			<th width="110">가입날짜/시간</th>
+			<th width="80">구분</th>
+			<th width="80">업체정보</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="7" align="center">포인트 차감 내역이 없습니다.</td>
+			<td colspan="5" align="center">등록된 기업이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		<tr>
-			<td>${dto.p_idx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.name}</td>
-			<td><c:if test="${!empty dto.cname}">${dto.cname}</c:if><c:if test="${empty dto.cname}">-</c:if></td>
-			<td>${dto.p_date}</td>
-			<td>${dto.p_cal}</td>
-			<td>${dto.p_type}</td>
-		</tr>
+	<form name="companyList" action="companyDetails.do">
+		<input type="hidden" name="kind" value="${param.kind}">
+		<input type="hidden" name="cidx" value="${dto.cidx}">
+		<input type="hidden" name="clevel" value="${dto.clevel}">
+			<tr>
+				<td>${dto.kind}</td>
+				<td>${dto.cidx}</td>
+				<td>${dto.cname}</td>
+				<td>${dto.joindate}</td>
+				<td>
+					<c:if test="${dto.clevel==0}"><label style="color:#feb916;">승인대기</label></c:if>
+					<c:if test="${dto.clevel==-1}"><label style="color:#e34331;">승인거부</label></c:if>
+				</td>
+				<td><input type="submit" value="정보 보기" id="butt"></td>
+			</tr>
+	</form>
 	</c:forEach>
 	</tbody>
 </table>
-<div class="pg">${pageStr}</div>
-</form>
-</c:if>
-<c:if test="${mp=='p'}">
-<br><br>
-<form name="pointPlusList" action="listSelect_p.do">
-<input type="hidden" name="mp" value="${mp}">
-<select name="selectType" id="select">
-	<option>회원번호</option>
-	<option>회원명</option>
-</select>
-<input type="text" name="selectText" id="text" placeholder="검색">
-&nbsp;<input type="submit" value="검색" id="search">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 지급" id="pop" onclick="popup();">
-</form>
-<br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
-	<thead>
-		<tr>
-			<th>포인트번호</th>
-			<th>회원번호</th>
-			<th>회원명</th>
-			<th>적립날짜/시간</th>
-			<th>적립포인트</th>
-			<th>구분</th>
-		</tr>
-	</thead>
-	<tbody>
-	<c:if test="${empty dtos}">
-		<tr>
-			<td colspan="6" align="center">포인트 적립 내역이 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:forEach var="dto" items="${dtos}">
-		<tr>
-			<td>${dto.p_idx}</td>
-			<td>${dto.midx}</td>
-			<td>${dto.name}</td>
-			<td>${dto.p_date}</td>
-			<td>${dto.p_cal}</td>
-			<td>${dto.p_type}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-<div class="pg">${pageStr}</div>
-</form>
-</c:if>
+<div id="pg">${pageStr}</div>
 <hr width="1200" id="hrf">
 </c:if>
 </body>

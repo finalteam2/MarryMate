@@ -9,8 +9,18 @@
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
+  <select id="companyList_b" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where clevel!=1 order by cidx) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
   <select id="collectionList" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
-  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} and clevel=1 order by blind, topfix desc, cname) a) b 
+  		select * from (select rownum as rnum,a.* from (select * from company where blind=0 and kind=#{kind} and clevel=1 order by topfix desc, cname) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="collectionList_b" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where blind=1 and clevel=1 order by cname) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
@@ -39,20 +49,37 @@
   </select>
   
   <select id="listSelect_cidx" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
-  		select * from company where kind=#{kind} and clevel=1 and cidx=#{cidx}
+  		select * from company where blind=0 and kind=#{kind} and clevel=1 and cidx=#{cidx}
   </select>
   
   <select id="listSelect_cname" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
-  		select * from (select rownum as rnum,a.* from (select * from company where kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%' order by blind, topfix desc, cname) a) b 
+  		select * from (select rownum as rnum,a.* from (select * from company where blind=0 and kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%' order by blind, topfix desc, cname) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="listSelect_cidx_b" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where blind=1 and clevel=1 and cidx=#{cidx}
+  </select>
+  
+  <select id="listSelect_cname_b" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where blind=1 and clevel=1 and cname like '%'||#{cname}||'%' order by blind, topfix desc, cname) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="getTotalCnt" parameterType="String" resultType="Integer">
-  		select count(*) from company where kind=#{kind} and clevel=1
+  		select count(*) from company where blind=0 and kind=#{kind} and clevel=1
   </select>
   
   <select id="getTotalCnt_cn" parameterType="Map" resultType="Integer">
-  		select count(*) from company where kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%'
+  		select count(*) from company where blind=0 and kind=#{kind} and clevel=1 and cname like '%'||#{cname}||'%'
+  </select>
+  
+  <select id="getTotalCnt_b" resultType="Integer">
+  		select count(*) from company where blind=1 and clevel=1
+  </select>
+  
+  <select id="getTotalCnt_cn_b" parameterType="Map" resultType="Integer">
+  		select count(*) from company where blind=1 and clevel=1 and cname like '%'||#{cname}||'%'
   </select>
   
   <select id="bi" parameterType="int" resultType="int">
@@ -71,8 +98,16 @@
   		update company set blind=1, topfix=0 where cidx=#{cidx}
   </update>
   
+  <update id="sghj" parameterType="int">
+  		update company set blind=0 where cidx=#{cidx}
+  </update>
+  
   <select id="getTotalCnt_com" parameterType="String" resultType="Integer">
   		select count(*) from company where kind=#{kind}
+  </select>
+  
+  <select id="getTotalCnt_com_b" resultType="Integer">
+  		select count(*) from company where clevel!=1
   </select>
   
   <select id="listSel_cidx" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
@@ -86,6 +121,19 @@
   
   <select id="getTotalCnt_cname" parameterType="Map" resultType="Integer">
   		select count(*) from company where kind=#{kind} and cname like '%'||#{cname}||'%'
+  </select>
+  
+  <select id="listSel_cidx_b" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
+  		select * from company where clevel!=1 and cidx=#{cidx}
+  </select>
+  
+  <select id="listSel_cname_b" parameterType="Map" resultType="com.admin.company.model.CompanyDTO">
+  		select * from (select rownum as rnum,a.* from (select * from company where clevel!=1 and cname like '%'||#{cname}||'%' order by cidx) a) b 
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  
+  <select id="getTotalCnt_cname_b" parameterType="Map" resultType="Integer">
+  		select count(*) from company where clevel!=1 and cname like '%'||#{cname}||'%'
   </select>
   
   <update id="companyOk" parameterType="int">

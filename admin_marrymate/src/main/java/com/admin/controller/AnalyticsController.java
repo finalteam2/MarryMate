@@ -54,6 +54,16 @@ public class AnalyticsController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/analytics_all.do")
+	public ModelAndView analytics_all() {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("analytics_all");
+		
+		return mav;
+	}
 
 
 }

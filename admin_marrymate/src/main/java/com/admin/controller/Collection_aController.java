@@ -39,6 +39,25 @@ public class Collection_aController {
 		return mav;
 	}
 	
+	@RequestMapping("/collectionList_b.do")
+	public ModelAndView collectionList_b(@RequestParam(value="cp",defaultValue="1")int cp) {
+		
+		int totalCnt=companyDao.getTotalCnt_b();
+		int listSize=10;
+		int pageSize=5;
+		String pageStr=com.admin.page.module.PageModule_p.makePage("collectionList_b.do",totalCnt,listSize,pageSize,cp);
+		
+		List<CompanyDTO> dtos=companyDao.collectionList_b(cp,listSize);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("dtos",dtos);
+		mav.addObject("pageStr",pageStr);
+		mav.setViewName("collection_b_a");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/listSelect.do")
 	public ModelAndView listSelect(@RequestParam(value="cp",defaultValue="1")int cp, String kind, String selectType, String selectText) {
 		
@@ -64,6 +83,35 @@ public class Collection_aController {
 		}
 		
 		mav.setViewName("collection_a");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/listSelect_b.do")
+	public ModelAndView listSelect_b(@RequestParam(value="cp",defaultValue="1")int cp, String selectType, String selectText) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		if(selectType.equals("업체번호")) {
+			
+			try {
+				int cidx=Integer.parseInt(selectText);
+				List<CompanyDTO> dtos=companyDao.listSelect_cidx_b(cidx);
+				mav.addObject("dtos",dtos);
+			}catch(Exception e) {}
+			
+		}else if(selectType.equals("업체명")) {
+			int totalCnt=companyDao.getTotalCnt_cn_b(selectText);
+			int listSize=10;
+			int pageSize=5;
+			String pageStr=com.admin.page.module.PageModule_m_n.makePage("listSelect_b.do",totalCnt,listSize,pageSize,cp,selectType,selectText);
+			
+			List<CompanyDTO> dtos=companyDao.listSelect_cname_b(cp,listSize,selectText);
+			mav.addObject("dtos",dtos);
+			mav.addObject("pageStr",pageStr);
+		}
+		
+		mav.setViewName("collection_b_a");
 		
 		return mav;
 	}
@@ -122,6 +170,21 @@ public class Collection_aController {
 		
 		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 [숨김처리]하였습니다.");
 		mav.addObject("goUrl","collectionList.do?kind="+dto.getKind());
+		mav.setViewName("finalJson");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/sghj.do")
+	public ModelAndView sghj(int cidx) {
+		
+		companyDao.sghj(cidx);
+		CompanyDTO dto=companyDao.companyInfo(cidx);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("msg","업체번호: "+cidx+"\n업체명: "+dto.getCname()+"을 [숨김해제]하였습니다.");
+		mav.addObject("goUrl","collectionList_b.do?kind="+dto.getKind());
 		mav.setViewName("finalJson");
 		
 		return mav;

@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.admin.bbs.model.*;
-import com.admin.notification.model.NotificationDAO;
+import com.admin.notification.model.*;
+import com.admin.point.model.*;
 
 @Controller
 public class Community_aController {
 	
 	@Autowired
 	private BbsDAO bbsDao;
+	
+	@Autowired
+	private PointDAO pointDao;
 	
 	@Autowired
 	private NotificationDAO notiDao;
@@ -117,7 +121,7 @@ public class Community_aController {
 			mav.addObject("pageStr",pageStr);
 		}
 		
-		mav.setViewName("community_a");
+		mav.setViewName("community_b_a");
 		
 		return mav;
 	}
@@ -232,8 +236,10 @@ public class Community_aController {
 		ModelAndView mav=new ModelAndView();
 		
 		bbsDao.heajae(bidx);
+		
+		pointDao.pointPlus_b(midx,500);
 
-		String title="[불량글 철회 안내]";
+		String title="불량글 철회 안내";
 		String content="게시글번호:"+bidx+"가 불량글에서 철회되었습니다.";
 		notiDao.noti(midx,title,content);
 		
@@ -251,7 +257,9 @@ public class Community_aController {
 		
 		bbsDao.ceolee(bidx);
 		
-		String title="[불량글 등록 안내]";
+		pointDao.pointMinus_b(midx,-500);
+		
+		String title="불량글 등록 안내";
 		String content="게시글번호:"+bidx+"가 불량글로 등록되었습니다.";
 		notiDao.noti(midx,title,content);
 		
