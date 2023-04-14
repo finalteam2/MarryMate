@@ -156,7 +156,7 @@
 	<select id="selectmembook" resultType="com.marry.book.model.BookListDTO">
 	select
 	   book.*, company.cname, company.kind as ckind, company.pay as cpay, hall.pay as hpay, 
-	   food.pay as fpay, hall.guest_num as hnum, 
+	   food.pay as fpay, hall.guest_num as hnum, member.midx as midx, company.cidx as cidx,
         case
         when sysdate > book.bk_date 
         	then 1
@@ -185,7 +185,7 @@
 	</select>
 	<select id="selectcombook" resultType="com.marry.book.model.BookListDTO">
 	select
-	   book.*, member.name as mname, 
+	   book.*, member.name as mname, member.midx as midx, company.cidx as cidx,
        hall.name as hname, hall.pay as hpay, 
        hall.guest_num as hnum, food.name as fname, 
        food.pay as fpay, company.pay as cpay,

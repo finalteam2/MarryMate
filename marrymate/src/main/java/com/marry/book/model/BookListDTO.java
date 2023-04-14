@@ -5,6 +5,8 @@ import java.sql.Date;
 public class BookListDTO {
 
 	private int bk_idx;
+	private int midx;
+	private int cidx;
 	private String cname;
 	private String mname;
 	private String hname;
@@ -26,15 +28,13 @@ public class BookListDTO {
 	}
 	
 
-
-
-
-
-	public BookListDTO(int bk_idx, String cname, String mname, String hname, String fname, String ckind, Date bk_date,
-			String bk_time, Date booktime, int cpay, int hpay, int fpay, int hnum, int allpay, int bk_state,
-			int is_after) {
+	public BookListDTO(int bk_idx, int midx, int cidx, String cname, String mname, String hname, String fname,
+			String ckind, Date bk_date, String bk_time, Date booktime, int cpay, int hpay, int fpay, int hnum,
+			int allpay, int bk_state, int is_after) {
 		super();
 		this.bk_idx = bk_idx;
+		this.midx = midx;
+		this.cidx = cidx;
 		this.cname = cname;
 		this.mname = mname;
 		this.hname = hname;
@@ -53,8 +53,24 @@ public class BookListDTO {
 	}
 
 
+	public int getMidx() {
+		return midx;
+	}
 
 
+	public void setMidx(int midx) {
+		this.midx = midx;
+	}
+
+
+	public int getCidx() {
+		return cidx;
+	}
+
+
+	public void setCidx(int cidx) {
+		this.cidx = cidx;
+	}
 
 
 	public int getIs_after() {
