@@ -409,7 +409,7 @@ public class ContentController {
 		int hidx = Integer.parseInt(hstr.split(" ")[0]);
 		int fidx = Integer.parseInt(fstr.split(" ")[0]);
 		String yoil = StringToYoil(date);
-		System.out.println(yoil);
+//		System.out.println(yoil);
 		Book_TimeDTO dto = new Book_TimeDTO(0, cidx, yoil, "");
 		List<Book_TimeDTO> arr = contentDao.selectBookTime(dto);
 		int num = arr.size();
