@@ -287,6 +287,8 @@
 	    cidx = #{cidx}
 	    and
 	    yoil = #{yoil}
+    order by
+    	worktime
 	</select>
 	<select id="checkBook" parameterType="Map" resultType="Integer">
 	SELECT 
@@ -299,6 +301,8 @@
 		TO_CHAR(bk_date, 'yyyy-mm-dd') = #{date}
 		and
 		bk_time = #{time}
+        and
+        bk_state != 4
 		<if test="hidx != null and hidx != 0">
 		and
 		hidx = #{hidx}

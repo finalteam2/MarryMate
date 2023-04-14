@@ -413,9 +413,10 @@ public class ContentController {
 		Book_TimeDTO dto = new Book_TimeDTO(0, cidx, yoil, "");
 		List<Book_TimeDTO> arr = contentDao.selectBookTime(dto);
 		int num = arr.size();
+		//정순으로 하면 지웠을때 건너뛰는 문제가 있어서 역순으로 해슴
 		for(int i = num - 1; i >= 0 ; i--) {
 //			System.out.println(arr.get(i).getWorktime());
-			//예약 취소 되면 다시 예약 가능하도록 
+			//그 시간, 날짜에 예약이 이미 되어있다면 선택되지 않도록 지운다
 			int result = contentDao.checkBook(cidx, hidx, date, arr.get(i).getWorktime());
 			if(result > 0) {
 				arr.remove(i);
