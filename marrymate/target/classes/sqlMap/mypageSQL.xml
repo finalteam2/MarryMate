@@ -75,7 +75,18 @@
     
     <select id="booktimeSelect" resultType="com.marry.company.model.Book_TimeDTO">
     	select * from book_time
-    	where cidx=#{cidx}		 		
+    	where cidx=#{cidx}
+    	ORDER BY 
+		  CASE yoil
+		    WHEN '월' THEN 1
+		    WHEN '화' THEN 2
+		    WHEN '수' THEN 3
+		    WHEN '목' THEN 4
+		    WHEN '금' THEN 5
+		    WHEN '토' THEN 6
+		    WHEN '일' THEN 7
+		  END,
+		worktime asc
     </select>
     <select id="comimgSelect" resultType="com.marry.company.model.Com_ImgDTO">
     	select * from com_img
