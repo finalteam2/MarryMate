@@ -7,10 +7,8 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-}    
-header{
-    font-family: 'SUIT-Regular';
 }
+ 
 .menu {
 	position: relative;
 	margin-left: 35px;
@@ -53,13 +51,16 @@ header{
 	border-bottom: none;
 }
 
-.menu a {
+.menu a,p {
 	display: block;
 	text-decoration: none;
 	color: #660099;
 	text-align: center;
 }
 
+p img {
+	
+}
 .menu a:hover {
 	background-color: #cc99ff;
 	color: #fff;
@@ -86,12 +87,13 @@ nav .navdiv{
 	padding: 20px;
 }
 .titlebar a{
+	font-family: 'SUIT-Regular';
 	text-decoration: none;
 	text-align: center;
 	font-size: 28px;
 	font-weight: bold;
 	color: black;
-	transition: color 0.3s;
+	transition: color 0.5s;
 	padding: 20px;
 	
 }
@@ -113,7 +115,6 @@ nav .navdiv{
     align-content: space-between;
     justify-content: flex-end;
     align-items: center;
-    padding: 24px;
 }
 .notificationheader{
 	margin: 10px;
@@ -128,6 +129,7 @@ nav .navdiv{
     align-items: center;
     height: 140px;
 }
+
 </style>
 
 <!-- header 영역 혹시 깨질까봐 우선 in-line으로 css적용해두었어요! -->
@@ -151,7 +153,7 @@ nav .navdiv{
 			<c:if
 				test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
 				<div class="menu">
-					<a><img src="/marrymate/img/user2.png" style="width: 30px;"></a>
+					<p><img src="/marrymate/img/user2.png" style="width: 30px;"></p>
 					<ul class="mbar">
 						<c:if test="${not empty sessionScope.loginId}">
 							<li><a href="myInfo_m.do">마이페이지</a></li>
@@ -171,7 +173,7 @@ nav .navdiv{
 					</ul>
 				</div>
 				<div class="notificationheader">
-					<a><img src="/marrymate/img/notification.png" style="width: 30px;"></a>
+					<p><img src="/marrymate/img/notification.png" style="width: 30px;"></p>
 				</div>
 			</c:if>
 		</div>
@@ -217,7 +219,7 @@ nav .navdiv{
 
 <script>
 	$(document).ready(function(){
-		$(".menu>a").click(function(){
+		$(".menu>p").click(function(){
 			var submenu = $(this).next("ul");
 			if(submenu.is(":visible")){
 				submenu.slideUp();
