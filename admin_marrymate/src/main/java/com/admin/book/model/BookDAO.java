@@ -28,6 +28,8 @@ public interface BookDAO {
 	
 	public BookDetailsDTO bookDetails(int bk_idx,String kind);
 	
+	public int cb(int bk_idx);
+	
 	public String pay_date(int bk_idx);
 	
 	public void cancle(int bk_idx,int midx);

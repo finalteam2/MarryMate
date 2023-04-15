@@ -37,6 +37,34 @@
   		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
   </select>
   
+  <select id="traffic77_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-5),'yy/mm')
+  </select>
+  
+  <select id="traffic66_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-6),'yy/mm')
+  </select>
+  
+  <select id="traffic55_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-7),'yy/mm')
+  </select>
+  
+  <select id="traffic44_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-8),'yy/mm')
+  </select>
+  
+  <select id="traffic33_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-9),'yy/mm')
+  </select>
+  
+  <select id="traffic22_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-10),'yy/mm')
+  </select>
+  
+  <select id="traffic11_m" resultType="Integer">
+  		select count(*) from member where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-11),'yy/mm')
+  </select>
+  
   <select id="getTotalCnt_mem" resultType="Integer">
   		select count(*) from member
   </select>

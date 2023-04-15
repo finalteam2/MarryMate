@@ -101,7 +101,7 @@ function drawChart () {
 }
 </script>
 </head>
-<body width="1200" onload="drawChart();drawChart2();">
+<body width="1200" onload="drawChart();">
 <c:if test="${empty sessionScope.name}">
 <script>
 	window.alert('로그인 후 이용가능합니다.');

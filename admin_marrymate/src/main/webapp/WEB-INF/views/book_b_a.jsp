@@ -199,7 +199,7 @@ body{
 	<c:forEach var="dto" items="${dtos}">
 	<input type="hidden" name="bk_idx" value="${dto.bk_idx}">
 		<tr style="height: 30px;">
-			<td><a href="bookDetails.do?bk_state=${dto.bk_state}&bk_idx=${dto.bk_idx}&kind=${kind}">${dto.bk_idx}</a></td>
+			<td><a href="bookDetails.do?bk_state=${dto.bk_state}&bk_idx=${dto.bk_idx}&kind=${kind}${dto.kind}">${dto.bk_idx}</a></td>
 			<td>${dto.midx}</td>
 			<td>${dto.name}</td>
 			<td>${dto.cname}</td>

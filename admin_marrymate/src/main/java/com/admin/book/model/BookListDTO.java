@@ -11,6 +11,7 @@ public class BookListDTO {
 	private int total_money;
 	private int bk_state;
 	private int is_after;
+	private String kind;
 	
 	public BookListDTO() {
 		super();
@@ -18,7 +19,7 @@ public class BookListDTO {
 	}
 
 	public BookListDTO(int bk_idx, int midx, String name,String cname, String bookdate, String bk_date_time,
-			int total_money, int bk_state, int is_after) {
+			int total_money, int bk_state, int is_after, String kind) {
 		super();
 		this.bk_idx = bk_idx;
 		this.midx = midx;
@@ -29,6 +30,7 @@ public class BookListDTO {
 		this.total_money = total_money;
 		this.bk_state = bk_state;
 		this.is_after = is_after;
+		this.kind = kind;
 	}
 
 	public int getBk_idx() {
@@ -101,6 +103,14 @@ public class BookListDTO {
 
 	public void setIs_after(int is_after) {
 		this.is_after = is_after;
+	}
+	
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 }

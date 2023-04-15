@@ -214,6 +214,13 @@ public class BookDAOImple implements BookDAO {
 	}
 	
 	@Override
+	public int cb(int bk_idx) {
+
+		int cb=sqlMap.selectOne("countBook",bk_idx);
+		return cb;
+	}
+	
+	@Override
 	public String pay_date(int bk_idx) {
 
 		int cb=sqlMap.selectOne("countBook",bk_idx);

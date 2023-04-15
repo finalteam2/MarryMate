@@ -188,7 +188,7 @@ body{
 		<th width="65"><a href="companyList.do?kind=주례">주례</a></th>
 		<th width="65"><a href="companyList.do?kind=사회">사회</a></th>
 		<th width="65"><a href="companyList.do?kind=축가">축가</a></th>
-		<th width="85"><a href="companyList_b.do?">승인관리</a></th>
+		<th width="85"><a href="companyList_b.do">승인관리</a></th>
 	</tr>
 </table>
 <hr width="820" id="hr2">

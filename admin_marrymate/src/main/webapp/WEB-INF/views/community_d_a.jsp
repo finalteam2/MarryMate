@@ -243,7 +243,7 @@ body{
 			</c:if>
 		</td>
 		<td width="120">
-			<a href="bbsList.do?kind=${dto.kind}"><input type="button" value="돌아가기" id="but"></a>
+			<input type="button" value="돌아가기" id="but" onclick="history.back();"></a>
 		</td>
 	</tr>
 </table>
@@ -263,7 +263,7 @@ body{
 			</c:if>
 		</td>
 		<td width="120">
-			<a href="bbsList.do?kind=${dto.kind}"><input type="button" value="돌아가기" id="but"></a>
+			<input type="button" value="돌아가기" id="but" onclick="history.back();">
 		</td>
 	</tr>
 </table>

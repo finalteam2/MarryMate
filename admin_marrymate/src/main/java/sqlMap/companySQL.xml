@@ -48,6 +48,34 @@
   		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-4),'yy/mm')
   </select>
   
+  <select id="traffic77_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-5),'yy/mm')
+  </select>
+  
+  <select id="traffic66_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-6),'yy/mm')
+  </select>
+  
+  <select id="traffic55_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-7),'yy/mm')
+  </select>
+  
+  <select id="traffic44_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-8),'yy/mm')
+  </select>
+  
+  <select id="traffic33_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-9),'yy/mm')
+  </select>
+  
+  <select id="traffic22_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-10),'yy/mm')
+  </select>
+  
+  <select id="traffic11_c" resultType="Integer">
+  		select count(*) from company where to_char(joindate,'yy/mm')=to_char(add_months(sysdate,-11),'yy/mm')
+  </select>
+  
   <select id="listSelect_cidx" parameterType="com.admin.company.model.CompanyDTO" resultType="com.admin.company.model.CompanyDTO">
   		select * from company where blind=0 and kind=#{kind} and clevel=1 and cidx=#{cidx}
   </select>

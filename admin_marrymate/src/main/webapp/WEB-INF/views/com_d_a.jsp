@@ -204,14 +204,15 @@ body{
 <br><br>
 <table height="50" class="tb2" align="center">
 	<tr>
-		<th width="95"><a href="companyList.do?kind=예식장">예식장</a></th>
+		<th width="85"><a href="companyList.do?kind=예식장">예식장</a></th>
 		<th width="95"><a href="companyList.do?kind=스튜디오">스튜디오</a></th>
-		<th width="95"><a href="companyList.do?kind=드레스">드레스</a></th>
-		<th width="120"><a href="companyList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="85"><a href="companyList.do?kind=드레스">드레스</a></th>
+		<th width="115"><a href="companyList.do?kind=헤어메이크업">헤어/메이크업</a></th>
 		<th width="95"><a href="companyList.do?kind=스냅DVD">스냅DVD</a></th>
-		<th width="95"><a href="companyList.do?kind=주례">주례</a></th>
-		<th width="95"><a href="companyList.do?kind=사회">사회</a></th>
-		<th width="95"><a href="companyList.do?kind=축가">축가</a></th>
+		<th width="65"><a href="companyList.do?kind=주례">주례</a></th>
+		<th width="65"><a href="companyList.do?kind=사회">사회</a></th>
+		<th width="65"><a href="companyList.do?kind=축가">축가</a></th>
+		<th width="85"><a href="companyList_b.do">승인관리</a></th>
 	</tr>
 </table>
 <hr width="820" id="hr2">
@@ -299,7 +300,7 @@ body{
 			
 		</td>
 		<td width="120">
-			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+			<input type="button" value="돌아가기" id="but" onclick="history.back();">
 		</td>
 	</tr>
 </table>
@@ -315,7 +316,7 @@ body{
 			
 		</td>
 		<td width="120">
-			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+			<input type="button" value="돌아가기" id="but" onclick="history.back();">
 		</td>
 	</tr>
 </table>
@@ -324,7 +325,7 @@ body{
 <table cellspacing="0" width="700" class="tb3">
 	<tr>
 		<td>
-			<a href="companyList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+			<input type="button" value="돌아가기" id="but" onclick="history.back();">
 		</td>
 	</tr>
 </table>

@@ -32,7 +32,7 @@
   <select id="bookList_b" parameterType="Map" resultType="com.admin.book.model.BookListDTO">
   		select * from (select rownum as rnum,a.* from (
   		select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state,
-  		case when sysdate > book.bk_date then 1 else 0 end as is_after 
+  		case when sysdate > book.bk_date then 1 else 0 end as is_after,company.kind kind 
   		from book 
   		left join member on book.midx=member.midx 
   		left join company on book.cidx=company.cidx 
@@ -192,7 +192,7 @@
   </select>
   
   <select id="getTotalCnt_bk_b" resultType="Integer">
-  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state 
+  		select count(*) from (select distinct book.bk_idx bk_idx,book.midx midx,member.name name,company.cname cname,book.bookdate bookdate,(book.bk_date||' '||book.bk_time) bk_date_time,(company.pay*hall.guest_num+hall.pay) total_money,book.bk_state bk_state,company.kind kind 
   		from book 
   		left join member on book.midx=member.midx 
   		left join company on book.cidx=company.cidx 

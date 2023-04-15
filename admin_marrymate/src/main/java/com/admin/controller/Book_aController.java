@@ -152,12 +152,15 @@ public class Book_aController {
 		
 		BookDetailsDTO dto=bookDao.bookDetails(bk_idx,kind);
 		
+		int cb=bookDao.cb(bk_idx);
+		
 		String pay_date=bookDao.pay_date(bk_idx);
 		
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("bk_state",bk_state);
 		mav.addObject("dto",dto);
+		mav.addObject("cb",cb);
 		mav.addObject("pay_date",pay_date);
 		mav.addObject("kind",kind);
 		mav.setViewName("book_d_a");

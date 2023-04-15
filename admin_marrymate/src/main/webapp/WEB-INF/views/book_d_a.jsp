@@ -193,14 +193,15 @@ body{
 <br><br>
 <table height="50" class="tb">
    <tr>
-      <th width="100"><a href="bookList.do?kind=예식장">예식장</a></th>
-      <th width="100"><a href="bookList.do?kind=스튜디오">스튜디오</a></th>
-      <th width="100"><a href="bookList.do?kind=드레스">드레스</a></th>
-      <th width="120"><a href="bookList.do?kind=헤어메이크업">헤어/메이크업</a></th>
-      <th width="100"><a href="bookList.do?kind=스냅DVD">스냅DVD</a></th>
-      <th width="100"><a href="bookList.do?kind=주례">주례</a></th>
-      <th width="100"><a href="bookList.do?kind=사회">사회</a></th>
-      <th width="100"><a href="bookList.do?kind=축가">축가</a></th>
+      <th width="90"><a href="bookList.do?kind=예식장">예식장</a></th>
+		<th width="100"><a href="bookList.do?kind=스튜디오">스튜디오</a></th>
+		<th width="90"><a href="bookList.do?kind=드레스">드레스</a></th>
+		<th width="120"><a href="bookList.do?kind=헤어메이크업">헤어/메이크업</a></th>
+		<th width="100"><a href="bookList.do?kind=스냅DVD">스냅DVD</a></th>
+		<th width="70"><a href="bookList.do?kind=주례">주례</a></th>
+		<th width="70"><a href="bookList.do?kind=사회">사회</a></th>
+		<th width="70"><a href="bookList.do?kind=축가">축가</a></th>
+		<th width="100"><a href="bookList_b.do">취소관리</a></th>
    </tr>
 </table>
 <hr width="850" class="tb">
@@ -216,7 +217,7 @@ body{
       <th>[업체번호] 업체명</th>
       <td>[${dto.cidx}] ${dto.cname}</td>
       <th>예약날짜/시간</th>
-      <td>${dto.bookdate}</td>
+      <td>${dto.bk_date_time}</td>
    </tr>
 </table>
 
@@ -244,11 +245,13 @@ body{
       <td>${dto.total_money}</td>
       <th>상태</th>
       <td>
-         <c:if test="${dto.bk_state==0}">결제전</c:if>
-         <c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>
-         <c:if test="${dto.bk_state==2}"><label style="color:#28A4F6;">예약확정</label></c:if>
-         <c:if test="${dto.bk_state==3}">잔금 결제완료</c:if>
-         <c:if test="${dto.bk_state==4}"><label style="color:#e34331;">예약취소</label></c:if>
+        <c:if test="${dto.bk_state==0}">결제전</c:if>
+		<c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>
+		<c:if test="${dto.bk_state==2}"><label style="color:#feb916;">잔금대기</label></c:if>
+		<c:if test="${dto.bk_state==3}"><label style="color:#28A4F6;">잔금 결제완료</label></c:if>
+		<c:if test="${dto.bk_state==4}"><label style="color:#e34331;">예약취소</label></c:if>
+		<c:if test="${dto.bk_state==5}"><label style="color:#feb916;">취소대기</label></c:if>
+		<c:if test="${dto.bk_state==7}">이용완료</c:if>
       </td>
    </tr>
    <c:if test="${dto.bk_state==0}">
@@ -261,7 +264,7 @@ body{
       <th>예약금 (포인트 사용금액)</th>
       <td>${dto.money1}</td>
       <th>결제날짜/시간</th>
-      <td>${dto.bk_date_time}</td>
+      <td>${dto.bookdate}</td>
    </tr>
    <tr style="height:30px;">
       <th>잔금</th>
@@ -275,7 +278,7 @@ body{
       <th>예약금 (포인트 사용금액)</th>
       <td>${dto.money1}</td>
       <th>결제날짜/시간</th>
-      <td>${dto.bk_date_time}</td>
+      <td>${dto.bookdate}</td>
    </tr>
    <tr style="height:30px;">
       <th>잔금</th>
@@ -289,7 +292,35 @@ body{
       <th>예약금 (포인트 사용금액)</th>
       <td>${dto.money1}</td>
       <th>결제날짜/시간</th>
-      <td>${dto.bk_date_time}</td>
+      <td>${dto.bookdate}</td>
+   </tr>
+   <tr style="height:30px;">
+      <th>잔금 (포인트 사용금액)</th>
+      <td>${dto.money2}</td>
+      <th>결제날짜/시간</th>
+      <td>${pay_date}</td>
+   </tr>
+   </c:if>s
+   <c:if test="${dto.bk_state==4 && cb==1}">
+   <tr style="height:30px;">
+      <th>예약금 (포인트 사용금액)</th>
+      <td>${dto.money1}</td>
+      <th>결제날짜/시간</th>
+      <td>${dto.bookdate}</td>
+   </tr>
+   <tr style="height:30px;">
+      <th>잔금</th>
+      <td>${dto.money2}</td>
+      <th>결제예정일</th>
+      <td>${pay_date}</td>
+   </tr>
+   </c:if>
+   <c:if test="${dto.bk_state==4 && cb==2}">
+   <tr style="height:30px;">
+      <th>예약금 (포인트 사용금액)</th>
+      <td>${dto.money1}</td>
+      <th>결제날짜/시간</th>
+      <td>${dto.bookdate}</td>
    </tr>
    <tr style="height:30px;">
       <th>잔금 (포인트 사용금액)</th>
@@ -298,9 +329,32 @@ body{
       <td>${pay_date}</td>
    </tr>
    </c:if>
-   <c:if test="${dto.bk_state==4}">
+   <c:if test="${dto.bk_state==5 && cb==1}">
    <tr style="height:30px;">
-      <td colspan="4" align="center">취소된 예약입니다.</td>
+      <th>예약금 (포인트 사용금액)</th>
+      <td>${dto.money1}</td>
+      <th>결제날짜/시간</th>
+      <td>${dto.bookdate}</td>
+   </tr>
+   <tr style="height:30px;">
+      <th>잔금</th>
+      <td>${dto.money2}</td>
+      <th>결제예정일</th>
+      <td>${pay_date}</td>
+   </tr>
+   </c:if>
+   <c:if test="${dto.bk_state==5 && cb==2}">
+   <tr style="height:30px;">
+      <th>예약금 (포인트 사용금액)</th>
+      <td>${dto.money1}</td>
+      <th>결제날짜/시간</th>
+      <td>${dto.bookdate}</td>
+   </tr>
+   <tr style="height:30px;">
+      <th>잔금 (포인트 사용금액)</th>
+      <td>${dto.money2}</td>
+      <th>결제날짜/시간</th>
+      <td>${pay_date}</td>
    </tr>
    </c:if>
 </table>
@@ -308,9 +362,23 @@ body{
 <br><br><br>
 <table cellspacing="0" width="700" class="tb3">
    <tr>
+    <c:if test="${dto.bk_state!=5}">
       <td>
-         <a href="bookList.do?kind=${kind}"><input type="button" value="돌아가기" id="but"></a>
+         <input type="button" value="돌아가기" id="but" onclick="history.back();"></a>
       </td>
+    </c:if>
+	<c:if test="${dto.bk_state==5}">
+        <td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="cancle.do?bk_idx=${dto.bk_idx}"><input type="button" value="취소확정" id="butt2"></a>
+			
+		</td>
+		<td width="120">
+			<input type="button" value="돌아가기" id="but" onclick="history.back();">
+		</td>
+	</c:if>
    </tr>
 </table>
 <br><br><br>
