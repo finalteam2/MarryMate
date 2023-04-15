@@ -548,5 +548,18 @@ textarea {
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
+<script>
+//날짜 범위 지정
+var today = new Date();
+var minDate = new Date();
+minDate.setDate(today.getDate() + 14);
+var maxDate = new Date();
+maxDate.setFullYear(today.getFullYear() + 1);
+//console.log(minDate.toISOString().slice(0,10));
+//console.log(maxDate.toISOString().slice(0,10));
+document.getElementById("selectdate").value = minDate.toISOString().slice(0,10);
+document.getElementById("selectdate").setAttribute("min", minDate.toISOString().slice(0,10));
+document.getElementById("selectdate").setAttribute("max", maxDate.toISOString().slice(0,10));
+</script>
 </body>
 </html>
