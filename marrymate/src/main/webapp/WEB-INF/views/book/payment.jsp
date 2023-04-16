@@ -101,7 +101,6 @@ function requestPay() {
 			        company : '㈜ 메리메이트'
 			    }, function (rsp) {
 			        if (rsp.success) {
-			           window.alert('결제에 성공하였습니다!');
 			           
 			           jQuery.ajax({
 			                url: "pointUpdate.do", 
@@ -114,9 +113,9 @@ function requestPay() {
 			              }).done(function (data) {
 			                // 가맹점 서버 결제 API 성공시 로직
 			                window.alert('ajax연동 성공!');
-			             	
 			              })
-			            
+			              window.alert('결제에 성공하였습니다.\n\n업체가 예약을 승인하면 알림을 보내드립니다.');
+		           			location.href='myBook.do';   
 			        } else {
 			           window.alert('결제에 실패하였습니다. 에러 내용: ' + rsp.error_msg);
 			        }

@@ -72,6 +72,8 @@ function cateList(num){
 	case 7:filterCate='축가';
 	}
 	document.getElementById('cate_title').innerHTML=filterCate;
+	document.getElementById('search_button').value='"'+filterCate+'" 검색하기';
+	
 	
 	document.searchFm.filterDate.value='';
 	document.searchFm.filterText.value='';
