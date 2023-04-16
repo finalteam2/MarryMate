@@ -16,6 +16,8 @@ public interface CompanyDAO {
 	
 	public List<Integer> traffic();
 	
+	public List<Integer> traffic_all();
+	
 	public List<CompanyDTO> listSelect_cidx(String kind, int cidx);
 	
 	public List<CompanyDTO> listSelect_cname(int cp, int listSize, String kind, String selectText);

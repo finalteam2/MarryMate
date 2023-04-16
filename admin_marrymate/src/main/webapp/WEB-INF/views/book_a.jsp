@@ -49,7 +49,7 @@ body{
 }
 #tb2 {
 	text-align: center;
-	margin-left: 525px;
+	margin-left: 495px;
 }
 
 #select {
@@ -177,7 +177,7 @@ body{
 </form>
 <br><br>
 <form name="bookList">
-<table cellspacing="0" border="1" width="800" id="tb2">
+<table cellspacing="0" border="1" width="860" id="tb2">
 	<thead>
 		<tr>
 			<th>예약번호</th>
@@ -186,14 +186,13 @@ body{
 			<th>업체명</th>
 			<th>예약날짜/시간</th>
 			<th>이용날짜/시간</th>
-			<th>금액</th>
 			<th>상태</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:if test="${empty dtos}">
 		<tr>
-			<td colspan="8" align="center">예약된 정보가 없습니다.</td>
+			<td colspan="7" align="center">예약된 정보가 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
@@ -205,7 +204,6 @@ body{
 			<td>${dto.cname}</td>
 			<td>${dto.bookdate}</td>
 			<td>${dto.bk_date_time}</td>
-			<td>${dto.total_money}</td>
 			<td>
 			<c:if test="${dto.bk_state==0}">결제전</c:if>
 			<c:if test="${dto.bk_state==1}"><label style="color:#feb916;">예약대기</label></c:if>

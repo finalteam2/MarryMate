@@ -43,6 +43,26 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	
 	@Override
+	public List<Integer> traffic_all() {
+		List<Integer> traffic_all=new ArrayList<Integer>();
+		
+		traffic_all.add(sqlMap.selectOne("traffic11_m"));
+		traffic_all.add(sqlMap.selectOne("traffic22_m"));
+		traffic_all.add(sqlMap.selectOne("traffic33_m"));
+		traffic_all.add(sqlMap.selectOne("traffic44_m"));
+		traffic_all.add(sqlMap.selectOne("traffic55_m"));
+		traffic_all.add(sqlMap.selectOne("traffic66_m"));
+		traffic_all.add(sqlMap.selectOne("traffic77_m"));
+		
+		traffic_all.add(sqlMap.selectOne("traffic1_m"));
+		traffic_all.add(sqlMap.selectOne("traffic2_m"));
+		traffic_all.add(sqlMap.selectOne("traffic3_m"));
+		traffic_all.add(sqlMap.selectOne("traffic4_m"));
+		traffic_all.add(sqlMap.selectOne("traffic5_m"));
+		return traffic_all;
+	}
+	
+	@Override
 	public MemberDTO memberInfo(int midx) {
 		MemberDTO dto=sqlMap.selectOne("memberInfo",midx);
 		return dto;

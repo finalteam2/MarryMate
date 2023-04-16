@@ -8,6 +8,8 @@ public interface MemberDAO {
 	
 	public List<Integer> traffic();
 	
+	public List<Integer> traffic_all();
+	
 	public MemberDTO memberInfo(int midx);
 	
 	public int getTotalCnt_mem();

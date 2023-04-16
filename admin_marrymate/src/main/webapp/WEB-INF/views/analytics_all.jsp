@@ -57,6 +57,12 @@ body{
 	width:910px;
 	height:380px;
 }
+#chart2{
+	float: left;
+	margin-left: 470px;
+	width:910px;
+	height:380px;
+}
 .tb_to{
 	margin-left: 450px;
 }
@@ -75,11 +81,20 @@ body{
 }
 </style>
 <script>
+function draw(){
+	drawChart ();
+	drawChart2 ();
+}
+
+
 let xAxisData = ['22.05','22.06','22.07','22.08','22.09','22.10','22.11','22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
 
 function drawChart () { 
-	let seriesData = [1,2,3,4,5,6,7,8,9,8,7,6]; // 값 데이터 배열 생성
 	
+		let seriesData = [${traffic_all_m.get(0)},${traffic_all_m.get(1)},${traffic_all_m.get(2)},${traffic_all_m.get(3)},${traffic_all_m.get(4)},
+		${traffic_all_m.get(5)},${traffic_all_m.get(6)},${traffic_all_m.get(7)},${traffic_all_m.get(8)},${traffic_all_m.get(9)},
+		${traffic_all_m.get(10)},${traffic_all_m.get(11)}]; // 값 데이터 배열 생성
+		
 	var myChart = echarts.init(document.getElementById('chart'));
 	
 	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
@@ -99,9 +114,35 @@ function drawChart () {
 	};
 	myChart.setOption(option); // 차트 디스플레이
 }
+
+function drawChart2 () { 
+	
+		let seriesData2 = [${traffic_all_c.get(0)},${traffic_all_c.get(1)},${traffic_all_c.get(2)},${traffic_all_c.get(3)},${traffic_all_c.get(4)},
+		${traffic_all_c.get(5)},${traffic_all_c.get(6)},${traffic_all_c.get(7)},${traffic_all_c.get(8)},${traffic_all_c.get(9)},
+		${traffic_all_c.get(10)},${traffic_all_c.get(11)}]; // 값 데이터 배열 생성
+	
+	var myChart = echarts.init(document.getElementById('chart2'));
+	
+	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
+		xAxis: {
+			type: 'category',
+			data: xAxisData // 위에서 정의한 X축 데이터
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				data: seriesData2, // 위에서 정의한 값 데이터
+				type: 'bar' // 버튼의 value 데이터 ('line' or 'bar')
+			}
+		]
+	};
+	myChart.setOption(option); // 차트 디스플레이
+}
 </script>
 </head>
-<body width="1200" onload="drawChart();">
+<body width="1200" onload="">
 <c:if test="${empty sessionScope.name}">
 <script>
 	window.alert('로그인 후 이용가능합니다.');
@@ -170,7 +211,10 @@ function drawChart () {
 <form name="traffic_all">
 <table width="950" class="tb_to">
 	<tr>
-		<th>[일반회원] 회원가입 수</th>
+		<th>
+		<c:if test="${mc=='m'}">[일반회원] 회원가입 수</c:if>
+		<c:if test="${mc=='c'}">[기업회원] 회원가입 수</c:if>
+		</th>
 	</tr>
 	<tr id="dan">
 		<td align="right">(단위: 명)
@@ -178,7 +222,8 @@ function drawChart () {
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
-<div id="chart"></div>
+<c:if test="${mc=='m'}"><div id="chart"></div></c:if>
+<c:if test="${mc=='c'}"><div id="chart2"></div></c:if>
 </form>
 <br><br><br><br>
 <hr width="1200">

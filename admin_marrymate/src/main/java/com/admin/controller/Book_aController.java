@@ -147,6 +147,84 @@ public class Book_aController {
 		return mav;
 	}
 	
+	@RequestMapping("/listSel_bk_b.do")
+	public ModelAndView listSelect_b(@RequestParam(value="cp",defaultValue="1")int cp, String selectType, String selectText) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		if(selectType.equals("예약번호")) {
+			
+			try {
+				int bk_idx=Integer.parseInt(selectText);
+				List<BookListDTO> dtos=bookDao.listSel_bk_idx_b(bk_idx);
+				
+				for(int i = 0; i < dtos.size(); i++) {
+					BookListDTO dto = dtos.get(i);
+					if(dto.getIs_after() == 1 && dto.getBk_state() ==3) {
+						dto.setBk_state(7);
+					}
+				}
+				
+				mav.addObject("dtos",dtos);
+			}catch(Exception e) {}
+			
+		}else if(selectType.equals("회원번호")) {
+			
+			try {
+				int midx=Integer.parseInt(selectText);
+				List<BookListDTO> dtos=bookDao.listSel_bk_midx_b(midx);
+				
+				for(int i = 0; i < dtos.size(); i++) {
+					BookListDTO dto = dtos.get(i);
+					if(dto.getIs_after() == 1 && dto.getBk_state() ==3) {
+						dto.setBk_state(7);
+					}
+				}
+				
+				mav.addObject("dtos",dtos);
+			}catch(Exception e) {}
+			
+		}else if(selectType.equals("회원명")) {
+			int totalCnt=bookDao.getTotalCnt_bk_n_b(selectText);
+			int listSize=10;
+			int pageSize=5;
+			String pageStr=com.admin.page.module.PageModule_m_n.makePage("listSel_bk.do",totalCnt,listSize,pageSize,cp,selectType,selectText);
+			
+			List<BookListDTO> dtos=bookDao.listSel_bk_name_b(cp,listSize,selectText);
+			
+			for(int i = 0; i < dtos.size(); i++) {
+				BookListDTO dto = dtos.get(i);
+				if(dto.getIs_after() == 1 && dto.getBk_state() ==3) {
+					dto.setBk_state(7);
+				}
+			}
+			
+			mav.addObject("dtos",dtos);
+			mav.addObject("pageStr",pageStr);
+		}else if(selectType.equals("업체명")) {
+			int totalCnt=bookDao.getTotalCnt_bk_cn_b(selectText);
+			int listSize=10;
+			int pageSize=5;
+			String pageStr=com.admin.page.module.PageModule_m_n.makePage("listSel_bk.do",totalCnt,listSize,pageSize,cp,selectType,selectText);
+			
+			List<BookListDTO> dtos=bookDao.listSel_bk_cname_b(cp,listSize,selectText);
+			
+			for(int i = 0; i < dtos.size(); i++) {
+				BookListDTO dto = dtos.get(i);
+				if(dto.getIs_after() == 1 && dto.getBk_state() ==3) {
+					dto.setBk_state(7);
+				}
+			}
+			
+			mav.addObject("dtos",dtos);
+			mav.addObject("pageStr",pageStr);
+		}
+		
+		mav.setViewName("book_b_a");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/bookDetails.do")
 	public ModelAndView bookDetails(int bk_state, int bk_idx, String kind) {
 		
@@ -169,9 +247,9 @@ public class Book_aController {
 	}
 	
 	@RequestMapping("/cancle.do")
-	public ModelAndView cancle(int bk_idx, int midx) {
+	public ModelAndView cancle(int bk_idx, int cidx, int midx) {
 		
-		bookDao.cancle(bk_idx,midx);
+		bookDao.cancle(bk_idx,cidx,midx);
 		
 		ModelAndView mav=new ModelAndView();
 		

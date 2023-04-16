@@ -210,8 +210,8 @@ function drawChart2 () {
 <div id="chart2"></div>
 <table width="950" class="tb_to">
 	<tr>
-		<th><a href="analytics_all.do"><input type="button" value="전체보기" class="bu_to"></a></th>
-		<th><input type="button" value="전체보기" class="bu_to"></th>
+		<th><a href="traffic_all.do?mc=m"><input type="button" value="전체보기" class="bu_to"></a></th>
+		<th><a href="traffic_all.do?mc=c"><input type="button" value="전체보기" class="bu_to"></a></th>
 	</tr>
 </table>
 </form>

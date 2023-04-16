@@ -56,5 +56,18 @@ public class PaymentDAOImple implements PaymentDAO {
 		amount_b.add((amount5_b+amount5_b2)/1000);
 		return amount_b;
 	}
+	
+	@Override
+	public List<PaymentDTO> amount_all(){
+		List<PaymentDTO> amount_all=sqlMap.selectList("amount_all");
+		return amount_all;
+		
+	}
+	
+	@Override
+	public List<RefundDTO> amount_all_b(){
+		List<RefundDTO> amount_all_b=sqlMap.selectList("amount_all_b");
+		return amount_all_b;
+	}
 
 }

@@ -88,6 +88,26 @@ public class CompanyDAOImple implements CompanyDAO {
 	}
 	
 	@Override
+	public List<Integer> traffic_all() {
+		List<Integer> traffic_all=new ArrayList<Integer>();
+		
+		traffic_all.add(sqlMap.selectOne("traffic11_c"));
+		traffic_all.add(sqlMap.selectOne("traffic22_c"));
+		traffic_all.add(sqlMap.selectOne("traffic33_c"));
+		traffic_all.add(sqlMap.selectOne("traffic44_c"));
+		traffic_all.add(sqlMap.selectOne("traffic55_c"));
+		traffic_all.add(sqlMap.selectOne("traffic66_c"));
+		traffic_all.add(sqlMap.selectOne("traffic77_c"));
+		
+		traffic_all.add(sqlMap.selectOne("traffic1_c"));
+		traffic_all.add(sqlMap.selectOne("traffic2_c"));
+		traffic_all.add(sqlMap.selectOne("traffic3_c"));
+		traffic_all.add(sqlMap.selectOne("traffic4_c"));
+		traffic_all.add(sqlMap.selectOne("traffic5_c"));
+		return traffic_all;
+	}
+	
+	@Override
 	public List<CompanyDTO> listSelect_cidx(String kind, int cidx) {
 		
 		CompanyDTO comDto=new CompanyDTO();

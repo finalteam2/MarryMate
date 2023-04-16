@@ -12,13 +12,14 @@ public class PaymentDTO {
 	private String pay_type;
 	private int pay_point;
 	private int pay_money;
+	private int pay_cal;
 	
 	public PaymentDTO() {
 		super();
 	}
 
 	public PaymentDTO(int pay_idx, int bk_idx, int midx, String pay_how, Date pay_date, String pay_type, int pay_point,
-			int pay_money) {
+			int pay_money, int pay_cal) {
 		super();
 		this.pay_idx = pay_idx;
 		this.bk_idx = bk_idx;
@@ -28,6 +29,7 @@ public class PaymentDTO {
 		this.pay_type = pay_type;
 		this.pay_point = pay_point;
 		this.pay_money = pay_money;
+		this.pay_cal = pay_cal;
 	}
 
 	public int getPay_idx() {
@@ -94,5 +96,12 @@ public class PaymentDTO {
 		this.pay_money = pay_money;
 	}
 	
+	public int getPay_cal() {
+		return pay_cal;
+	}
+
+	public void setPay_cal(int pay_cal) {
+		this.pay_cal = pay_cal;
+	}
 	
 }

@@ -1,5 +1,6 @@
 package com.admin.book.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,6 +139,54 @@ public class BookDAOImple implements BookDAO {
 	}
 	
 	@Override
+	public List<BookListDTO> listSel_bk_idx_b(int bk_idx) {
+		
+		Map map=new HashMap();
+		map.put("bk_idx",bk_idx);
+		
+		List<BookListDTO> dtos=sqlMap.selectList("listSel_bk_idx_b",map);
+		return dtos;
+	}
+	
+	@Override
+	public List<BookListDTO> listSel_bk_midx_b(int midx) {
+
+		Map map=new HashMap();
+		map.put("midx",midx);
+		
+		List<BookListDTO> dtos=sqlMap.selectList("listSel_bk_midx_b",map);
+		return dtos;
+	}
+	
+	@Override
+	public List<BookListDTO> listSel_bk_name_b(int cp, int listSize, String selectText) {
+
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("name", selectText);
+		
+		List<BookListDTO> dtos=sqlMap.selectList("listSel_bk_name_b",map);
+		return dtos;
+	}
+	
+	@Override
+	public List<BookListDTO> listSel_bk_cname_b(int cp, int listSize, String selectText) {
+
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("cname", selectText);
+		
+		List<BookListDTO> dtos=sqlMap.selectList("listSel_bk_cname_b",map);
+		return dtos;
+	}
+	
+	@Override
 	public int getTotalCnt_bk(String kind) {
 		
 		if(kind.equals("예식장")) {
@@ -198,6 +247,26 @@ public class BookDAOImple implements BookDAO {
 	}
 	
 	@Override
+	public int getTotalCnt_bk_n_b(String selectText) {
+		Map map=new HashMap();
+		map.put("name", selectText);
+		
+		int count=sqlMap.selectOne("getTotalCnt_bk_n_b",map);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public int getTotalCnt_bk_cn_b(String selectText) {
+		Map map=new HashMap();
+		map.put("cname", selectText);
+		
+		int count=sqlMap.selectOne("getTotalCnt_bk_cn_b",map);
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
 	public BookDetailsDTO bookDetails(int bk_idx,String kind) {
 		Map map=new HashMap();
 		map.put("bk_idx", bk_idx);
@@ -236,52 +305,56 @@ public class BookDAOImple implements BookDAO {
 	}
 	
 	@Override
-	public void cancle(int bk_idx,int midx) {
-  		
-  		int count=sqlMap.selectOne("selectCount",bk_idx);
-  		
-  		if(count==1) {
-  			
-  			sqlMap.update("updateBook",bk_idx);
-  			
-  			int cidx=sqlMap.selectOne("selectCidx",bk_idx);
-  			
-  			PaymentDTO payDto=sqlMap.selectOne("selectPay",bk_idx);
-  			
-  			sqlMap.insert("insertRefund",payDto);
-  			
-  			int refund_idx=sqlMap.selectOne("selectRefund_idx",payDto.getPay_idx());
-  			
-  			int point=sqlMap.selectOne("selectPoint",midx);
-  			
-  			Map map=new HashMap();
-  			int p_total=point+payDto.getPay_point();
-  			map.put("p_total",p_total);
-  			map.put("midx",midx);
-  			
-  			sqlMap.update("updateMember",map);
-
-  			Map map2=new HashMap();
-  			map2.put("midx",midx);
-  			map2.put("refund_idx",refund_idx);
-  			map2.put("pay_point",payDto.getPay_point());
-  			map2.put("p_total",p_total);
-  			
-  			sqlMap.insert("insertPoint",map2);
-  			
-  			NotificationDTO notiDto=new NotificationDTO();
-  			notiDto.setCidx(cidx);
-  			notiDto.setMidx(midx);
-  			notiDto.setTitle("예약취소 안내");
-  			notiDto.setContent("예약번호:"+bk_idx+"번이 취소되었습니다.");
-  			
-  			sqlMap.insert("insertNotiCom",notiDto);
-  			
-  			sqlMap.insert("insertNotiMem",notiDto);
-  			
-  		}else if(count==2) {
-  
-  		}
-  		
+	public void cancle(int bk_idx,int cidx,int midx) {
+		
+		sqlMap.update("updateBook",bk_idx);
+		
+		List<PaymentDTO> payDto=sqlMap.selectList("selectPay",bk_idx);
+		
+		for(int i=0;i<payDto.size();i++) {
+			sqlMap.insert("insertRefund",payDto.get(i));
+		}
+		
+		List<Integer> refund_idx=new ArrayList<Integer>();
+		for(int i=0;i<payDto.size();i++) {
+			refund_idx.add(sqlMap.selectOne("selectRefund_idx",payDto.get(i)));
+		}
+		
+		int point=sqlMap.selectOne("selectPoint",midx);
+		
+		for(int i=0;i<payDto.size();i++) {
+			point+=payDto.get(i).getPay_point();
+		}
+		
+		Map map1=new HashMap();
+		map1.put("point", point);
+		map1.put("midx", midx);
+		
+		int p_total=sqlMap.selectOne("selectPoint",midx);
+		
+		sqlMap.update("updatePoint",map1);
+		
+		for(int i=0;i<payDto.size();i++) {
+			
+			Map map2=new HashMap();
+			map2.put("midx", midx);
+			map2.put("refund_idx", refund_idx.get(i));
+			map2.put("p_cal", payDto.get(i).getPay_point());
+			
+			p_total+=payDto.get(i).getPay_point();
+			map2.put("p_total", p_total);
+			
+			sqlMap.insert("insertPoint",map2);
+			
+			map2.clear();
+		}
+		
+		Map map3=new HashMap();
+		map3.put("cidx", cidx);
+		map3.put("midx", midx);
+		map3.put("content", "예약번호:"+bk_idx+"이 취소되었습니다.");
+		
+		sqlMap.insert("insertNoti_c",map3);
+		sqlMap.insert("insertNoti_m",map3);
 	}
 }

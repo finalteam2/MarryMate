@@ -54,12 +54,13 @@ body{
 #chart{
 	float: left;
 	margin-left: 470px;
-	width:450px;
+	width:910px;
 	height:380px;
 }
 #chart2{
-	margin-left: 930px;
-	width:450px;
+	float: left;
+	margin-left: 470px;
+	width:910px;
 	height:380px;
 }
 .tb_to{
@@ -78,13 +79,33 @@ body{
 	border:0px;
 	border-radius:5px;
 }
+
+#but {
+	width:120px;
+	height:35px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#b8b8b8;
+	border:0px;
+	border-radius:5px;
+}
 </style>
 <script>
-let xAxisData = ['22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
+function draw(){
+	drawChart ();
+	drawChart2 ();
+}
+
+
+let xAxisData = ['22.05','22.06','22.07','22.08','22.09','22.10','22.11','22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
 
 function drawChart () { 
-	let seriesData = [${amount_s.get(0)},${amount_s.get(1)},${amount_s.get(2)},${amount_s.get(3)},${amount_s.get(4)}]; // 값 데이터 배열 생성
 	
+		let seriesData = [${traffic_all_m.get(0)},${traffic_all_m.get(1)},${traffic_all_m.get(2)},${traffic_all_m.get(3)},${traffic_all_m.get(4)},
+		${traffic_all_m.get(5)},${traffic_all_m.get(6)},${traffic_all_m.get(7)},${traffic_all_m.get(8)},${traffic_all_m.get(9)},
+		${traffic_all_m.get(10)},${traffic_all_m.get(11)}]; // 값 데이터 배열 생성
+		
 	var myChart = echarts.init(document.getElementById('chart'));
 	
 	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
@@ -106,7 +127,10 @@ function drawChart () {
 }
 
 function drawChart2 () { 
-	let seriesData2 = [${amount_b.get(0)},${amount_b.get(1)},${amount_b.get(2)},${amount_b.get(3)},${amount_b.get(4)}]; // 값 데이터 배열 생성
+	
+		let seriesData2 = [${traffic_all_c.get(0)},${traffic_all_c.get(1)},${traffic_all_c.get(2)},${traffic_all_c.get(3)},${traffic_all_c.get(4)},
+		${traffic_all_c.get(5)},${traffic_all_c.get(6)},${traffic_all_c.get(7)},${traffic_all_c.get(8)},${traffic_all_c.get(9)},
+		${traffic_all_c.get(10)},${traffic_all_c.get(11)}]; // 값 데이터 배열 생성
 	
 	var myChart = echarts.init(document.getElementById('chart2'));
 	
@@ -195,23 +219,25 @@ function drawChart2 () {
 </table>
 <hr width="950" id="hr">
 <br>
+<form name="traffic_all">
 <table width="950" class="tb_to">
 	<tr>
-		<th>수익</th>
-		<th>비용</th>
+		<th>
+		<c:if test="${mc=='m'}">[일반회원] 회원가입 수</c:if>
+		<c:if test="${mc=='c'}">[기업회원] 회원가입 수</c:if>
+		</th>
 	</tr>
 	<tr id="dan">
-		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right">(단위: 명)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
-<form name="amount">
-<div id="chart"></div>
-<div id="chart2"></div>
+<c:if test="${mc=='m'}"><div id="chart"></div></c:if>
+<c:if test="${mc=='c'}"><div id="chart2"></div></c:if>
 <table width="950" class="tb_to">
 	<tr>
-		<th><a href="amount_all.do?sb=s"><input type="button" value="내역보기" class="bu_to"></a></th>
-		<th><a href="amount_all.do?sb=b"><input type="button" value="내역보기" class="bu_to"></a></th>
+		<th><input type="button" value="돌아가기" id="but" onclick="history.back();"></th>
 	</tr>
 </table>
 </form>

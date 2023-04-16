@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.admin.book.model.*;
@@ -55,15 +56,42 @@ public class AnalyticsController {
 		return mav;
 	}
 	
-	@RequestMapping("/analytics_all.do")
-	public ModelAndView analytics_all() {
+	@RequestMapping("/traffic_all.do")
+	public ModelAndView traffic_all(String mc) {
+		
+		List<Integer> traffic_all_m=memberDao.traffic_all();
+		List<Integer> traffic_all_c=companyDao.traffic_all();
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.setViewName("analytics_all");
+		mav.addObject("mc",mc);
+		mav.addObject("traffic_all_m",traffic_all_m);
+		mav.addObject("traffic_all_c",traffic_all_c);
+		
+		if(mc.equals("m")) {
+			mav.setViewName("analytics_all_m");
+		}else if(mc.equals("c")) {
+			mav.setViewName("analytics_all_c");
+		}
 		
 		return mav;
 	}
-
+	
+	@RequestMapping("/amount_all.do")
+	public ModelAndView amount_all(@RequestParam(value="cp",defaultValue="1")int cp, String sb) {
+		
+		List<PaymentDTO> amount_all=paymentDao.amount_all();
+		List<RefundDTO> amount_all_b=paymentDao.amount_all_b();
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("sb",sb);
+		mav.addObject("amount_all",amount_all);
+		mav.addObject("amount_all_b",amount_all_b);
+		
+		mav.setViewName("analytics_list");
+		
+		return mav;
+	}
 
 }

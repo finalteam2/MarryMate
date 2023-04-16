@@ -78,58 +78,28 @@ body{
 	border:0px;
 	border-radius:5px;
 }
+
+.tb2 {
+	text-align: center;
+	margin-left: 520px;
+}
+#but {
+	width:120px;
+	height:35px;
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+	background-color:#b8b8b8;
+	border:0px;
+	border-radius:5px;
+}
+
+.tb3_h {
+	margin-left: 560px;
+}
 </style>
-<script>
-let xAxisData = ['22.12','23.01','23.02','23.03','23.04']; // x축 데이터 배열 생성
-
-function drawChart () { 
-	let seriesData = [${amount_s.get(0)},${amount_s.get(1)},${amount_s.get(2)},${amount_s.get(3)},${amount_s.get(4)}]; // 값 데이터 배열 생성
-	
-	var myChart = echarts.init(document.getElementById('chart'));
-	
-	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
-		xAxis: {
-			type: 'category',
-			data: xAxisData // 위에서 정의한 X축 데이터
-		},
-		yAxis: {
-			type: 'value'
-		},
-		series: [
-			{
-				data: seriesData, // 위에서 정의한 값 데이터
-				type: 'bar' // 버튼의 value 데이터 ('line' or 'bar')
-			}
-		]
-	};
-	myChart.setOption(option); // 차트 디스플레이
-}
-
-function drawChart2 () { 
-	let seriesData2 = [${amount_b.get(0)},${amount_b.get(1)},${amount_b.get(2)},${amount_b.get(3)},${amount_b.get(4)}]; // 값 데이터 배열 생성
-	
-	var myChart = echarts.init(document.getElementById('chart2'));
-	
-	option = { // 차트를 그리는데 활용 할 다양한 옵션 정의
-		xAxis: {
-			type: 'category',
-			data: xAxisData // 위에서 정의한 X축 데이터
-		},
-		yAxis: {
-			type: 'value'
-		},
-		series: [
-			{
-				data: seriesData2, // 위에서 정의한 값 데이터
-				type: 'bar' // 버튼의 value 데이터 ('line' or 'bar')
-			}
-		]
-	};
-	myChart.setOption(option); // 차트 디스플레이
-}
-</script>
 </head>
-<body width="1200" onload="drawChart();drawChart2();">
+<body width="1200">
 <c:if test="${empty sessionScope.name}">
 <script>
 	window.alert('로그인 후 이용가능합니다.');
@@ -197,21 +167,77 @@ function drawChart2 () {
 <br>
 <table width="950" class="tb_to">
 	<tr>
-		<th>수익</th>
-		<th>비용</th>
-	</tr>
-	<tr id="dan">
-		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td align="right">(단위: 1,000원)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<th>
+		<c:if test="${sb=='s'}">수익내역</c:if>
+		<c:if test="${sb=='b'}">비용내역</c:if>
+		</th>
 	</tr>
 </table>
-<form name="amount">
-<div id="chart"></div>
-<div id="chart2"></div>
+<c:if test="${sb=='s'}">
+<br>
+<table cellspacing="0" border="1" width="860" class="tb2">
+	<thead>
+		<tr>
+			<th width="200">결제날짜</th>
+			<th width="200">결제포인트</th>
+			<th width="200">결제금액</th>
+			<th>총 결제금액</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:forEach var="dto" items="${amount_all}">
+		<tr style="height: 30px;">
+			<td>${dto.pay_date}</td>
+			<td>${dto.pay_point}</td>
+			<td>${dto.pay_money}</td>
+			<td>${dto.pay_point+dto.pay_money}</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</c:if>
+<c:if test="${sb=='b'}">
+<h4 class="tb3_h">[정산내역]</h4>
+<table cellspacing="0" border="1" width="860" class="tb2">
+		<tr>
+			<th width="200">결제날짜</th>
+			<th width="200">결제포인트</th>
+			<th width="200">총 결제금액</th>
+			<th>정산금액</th>
+			
+		</tr>
+	<c:forEach var="pdto" items="${amount_all}">
+		<tr style="height: 30px;">
+			<td>${pdto.pay_date}</td>
+			<td>${pdto.pay_point}</td>
+			<td>${pdto.pay_point+pdto.pay_money}</td>
+			<td>${pdto.pay_cal}</td>
+		</tr>
+	</c:forEach>
+</table>
+<br>
+<h4 class="tb3_h">[환불내역]</h4>
+<table cellspacing="0" border="1" width="860" class="tb2">
+		<tr>
+			<th width="200">환불날짜</th>
+			<th width="200">환불포인트</th>
+			<th width="200">환불금액</th>
+			<th>총 환불금액</th>
+		</tr>
+	<c:forEach var="rdto" items="${amount_all_b}">
+		<tr style="height: 30px;">
+			<td>${rdto.rf_date}</td>
+			<td>${rdto.rf_point}</td>
+			<td>${rdto.rf_money}</td>
+			<td>${rdto.rf_point+rdto.rf_money}</td>
+		</tr>
+	</c:forEach>
+</table>
+</c:if>
+<br><br>
 <table width="950" class="tb_to">
 	<tr>
-		<th><a href="amount_all.do?sb=s"><input type="button" value="내역보기" class="bu_to"></a></th>
-		<th><a href="amount_all.do?sb=b"><input type="button" value="내역보기" class="bu_to"></a></th>
+		<th><input type="button" value="돌아가기" id="but" onclick="history.back();"></th>
 	</tr>
 </table>
 </form>

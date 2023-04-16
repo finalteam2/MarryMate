@@ -372,7 +372,7 @@ body{
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="cancle.do?bk_idx=${dto.bk_idx}"><input type="button" value="취소확정" id="butt2"></a>
+			<a href="cancle.do?bk_idx=${dto.bk_idx}&cidx=${dto.cidx}&midx=${dto.midx}"><input type="button" value="취소확정" id="butt2"></a>
 			
 		</td>
 		<td width="120">
