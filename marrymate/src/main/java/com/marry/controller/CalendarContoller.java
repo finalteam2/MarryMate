@@ -189,7 +189,7 @@ public class CalendarContoller {
 		int cidx= (int) session.getAttribute("com_cidx");
 		List<ChecklistDTO> listcom = checklistDao.checklistAllCom(cidx);
 		List<PlanDTO> plistcom = planDao.planlistAllCom(cidx);
-		List<BookDTO> blistcom = calendarDao.memberbook(cidx);
+		List<BookDTO> blistcom = calendarDao.memberbookCom(cidx);
 		
 		List<MemberDTO> cominfo = calendarDao.comInfo(cidx);
 
@@ -228,19 +228,25 @@ public class CalendarContoller {
 	        
 	        jsonObject2.put("start", bdto.getBdate());
 	        jsonObject2.put("end", bdto.getBdate());
-	        jsonObject2.put("title", bdto.getCname());
+	        jsonObject2.put("title", bdto.getName());
 	        jsonObject2.put("backgroundColor", "#FFE5CC");
 	        jsonObject2.put("textColor","black" ); 
 	        jsonObject2.put("borderColor", "#FFE5CC");
 	        jsonObject2.put("borderWidth", "1px");
-	        jsonObject2.put("className",  bdto.getCname());
+	        jsonObject2.put("className",  bdto.getName());
 
 	        jsonArray2.add(jsonObject2);
+	        System.err.println();
 	    } 
-
+	    
+	    
 	    String jsonStr = jsonArray.toString();
 	    String jsonStr2 = jsonArray2.toString();
 
+
+	    System.err.println(jsonStr);
+	    System.err.println(jsonStr2);
+	    
 	    int ptotalcom=plistcom.size();
 	    int btotalcom=blistcom.size();
 	    int ctotalcom=listcom.size();
@@ -253,11 +259,11 @@ public class CalendarContoller {
 	    mav.addObject("reservnum",reservnum);
 	    mav.addObject("month",month);
 	    
-	    mav.addObject("svcJson3", jsonStr);
-	    mav.addObject("svcJson4", jsonStr2);
+	    mav.addObject("svcJson", jsonStr);
+	    mav.addObject("svcJson2", jsonStr2);
 	
-	    mav.addObject("jsonArray3", jsonArray);
-	    mav.addObject("jsonArray4", jsonArray2);
+	    mav.addObject("jsonArray", jsonArray);
+	    mav.addObject("jsonArray2", jsonArray2);
 
 	    mav.addObject("checklistItemscom", listcom);
 	    mav.addObject("planlistscom", plistcom);

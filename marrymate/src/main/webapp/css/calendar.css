@@ -251,7 +251,8 @@ li{
 }
 
 body {
-	background: url("/marrymate/img/background.png")
+	background: url("/marrymate/img/background.png");
+	body: 0;
 }
 
 
@@ -372,7 +373,6 @@ video {
 	max-width: 1920px;
 	height: 1050px;
 	overflow: hidden;
-	background: url("/marrymate/img/imgframe.png");
 	background-size: cover;
 }
 
@@ -400,15 +400,15 @@ video {
 	display: flex;
 }
 .checkListTopWrap .profileWrap .profileBox .imgArea {
-	width: 240px;
+	width: 280px;
 	position: relative;
 	margin: 150px 0 0 0;
 	padding: 300px 0 0 305px;
-	flex: 0 0 auto; /* 이미지 요소의 크기를 고정으로 설정 */
+	display: flex;
   	margin-right: 10px; /* 이미지와 텍스트 사이의 간격 설정 */
 }
 .checkListTopWrap .profileWrap .profileBox .imgArea img {
-	width: 100%;
+	width: 80%;
 	top: 0;
 	left: 0;
 	border-radius: 25px;
@@ -496,9 +496,9 @@ video {
 }
 
 .checkListArea {
-	margin: x auto;
-	width: 100%;
-	padding: 5% 0 5% 7%;
+	margin: auto;
+	width: 90%;
+
 }
 
 .checkListArea .listRow {
