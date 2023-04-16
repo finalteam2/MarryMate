@@ -95,6 +95,16 @@ public class BbsController {
 		
 	}
 	
+	@RequestMapping("/deleteReply.do")
+	public String deleteReply(
+			@RequestParam("ridx")int ridx,
+			@RequestParam("bidx")int bidx) {
+		
+		bbsDao.deleteReply(ridx);
+		
+		return "redirect:/content.do?bidx="+bidx;
+	}
+	
 	@RequestMapping("/notiList.do")
 	public ModelAndView bbsNotiList(
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
@@ -184,6 +194,29 @@ public class BbsController {
 		
 	}
 	
+	@RequestMapping("/searchNoti.do")
+	public ModelAndView searchNoti(
+			@RequestParam("kind")String kind,
+			@RequestParam("content")String content,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		
+		int totalCnt=bbsDao.searchContentCount(kind, content);
+		int listSize=9;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("searchNoti.do", totalCnt, listSize, pageSize, cp);
+		List<BbsViewDTO> list=bbsDao.searchNoti(kind, content, cp, listSize);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("searchWord", content);
+		mav.setViewName("community/searchCommunity");
+		return mav;
+		
+	}
+	
 	@RequestMapping("/searchSubject.do")
 	public ModelAndView searchSubject(
 			@RequestParam("kind")String kind,
@@ -256,7 +289,6 @@ public class BbsController {
 		
 		bbsDao.watchUp(bidx);
 		BbsContentDTO dto=bbsDao.bbsContent(bidx);
-		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		List<ReplyViewDTO> list=bbsDao.replyList(bidx);
 		
 		ModelAndView mav=new ModelAndView();
@@ -322,7 +354,7 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value = "/reWrite.do", method = RequestMethod.POST)
-	public ModelAndView reWriteSubmit(BbsDTO dto, MultipartHttpServletRequest req) {
+	public ModelAndView reWriteSubmit(BbsDTO dto, @RequestParam("bidx")int bidx, MultipartHttpServletRequest req) {
 		
 		String img="";
 		
@@ -337,10 +369,13 @@ public class BbsController {
 			dto.setImg(img);
 		}
 		
-		bbsDao.bbsReWrite(dto);
+		int result=bbsDao.bbsReWrite(dto);
+		String msg=result>0?"게시글 수정 완료":"게시글 수정 실패";
 		
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("community/allCommunity");
+		mav.addObject("msg", msg);
+		mav.addObject("url", "content.do?bidx="+bidx);
+		mav.setViewName("community/communityMsg");
 		return mav;
 		
 	}

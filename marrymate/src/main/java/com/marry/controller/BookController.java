@@ -279,14 +279,4 @@ public class BookController {
 		bookDao.pointUpdate(midx, usePoint, pay_idx);
 		
 	}
-	
-	/**결제완료후 결제정보페이지로 이동*/
-	@RequestMapping("/payResult.do")
-	public ModelAndView payResult() {
-		
-		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("book/paymentResult");
-		return mav;
-	}
 }

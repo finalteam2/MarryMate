@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>marrymate</title>
 <style>
+	body {
+		background-color: #fbf4ff;
+		margin: 0;
+	}
 	article div input[type=text] {
 		width: 350px;
 		height: 30px;
@@ -47,6 +52,7 @@
 		border-radius: 30px;
 		margin: 0px auto;
 		margin-bottom: 50px;
+		background-color: white;
 	}
 	.hTagBox {
 		width: 120px;
@@ -201,13 +207,21 @@
 					<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 					<div class="hTagBox">카테고리</div>
 						<select name="kind" onchange="horseSelector(this)">
-							<option>선택</option>
-							<option value="웨딩후기">웨딩후기</option>
-							<option value="웨딩톡톡">웨딩톡톡</option>
+							<c:if test="${dto.kind eq '웨딩후기'}">
+								<option>선택</option>
+								<option value="웨딩후기" selected>웨딩후기</option>
+								<option value="웨딩톡톡">웨딩톡톡</option>
+							</c:if>
+							<c:if test="${dto.kind eq '웨딩톡톡'}">
+								<option>선택</option>
+								<option value="웨딩후기">웨딩후기</option>
+								<option value="웨딩톡톡" selected>웨딩톡톡</option>
+							</c:if>
 						</select><br>
 					<div class="hClear">말머리</div>
 						<select id="horseList" name="horse">
 							<option>선택</option>
+							<option value="${dto.horse}" selected>${dto.horse}</option>
 						</select><br>
 					<div class="hClear">제목</div>
 						<input type="text" name="subject" value="${dto.subject}"><br>

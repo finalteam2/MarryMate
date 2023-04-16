@@ -153,6 +153,18 @@
 		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 		order by bbs.bidx desc
 	</select>
+	<select id="searchNoti" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick, sum(recommand.best) as best 
+		from bbs 
+		left join member on bbs.midx = member.midx 
+		left join recommand on bbs.bidx = recommand.bidx
+		where kind=#{kind} and (subject like '%' || #{content} || '%' or content like '%' || #{content} || '%') and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
 	<select id="searchSubject" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
 		select * from
 		(select rownum as rnum,a.* from
@@ -228,9 +240,9 @@
 		  values(
 		    notification_nidx.nextval,
 		    0,
-		    #{midx},
+		    #{bidx},
 		    null,
-		    'content.do?bidx=' || #{bidx} ,
+		    'content.do?bidx=' || #{midx} ,
 		    '게시물에 댓글이 달렸습니다.',
 		    '이동해서 확인해주세요.',
 		    3,
@@ -242,6 +254,9 @@
 	<select id="replyList" parameterType="int" resultType="com.marry.bbs.model.ReplyViewDTO">
 		select reply.*,member.img from reply join member on reply.midx=member.midx(+) where bidx=#{bidx} order by writedate
 	</select>
+	<delete id="deleteReply" parameterType="int">
+		delete from reply where ridx=#{ridx}
+	</delete>
 	<select id="bbsNotiCount" resultType="int">
 		select count(*) from bbs where kind='공지사항'
 	</select>

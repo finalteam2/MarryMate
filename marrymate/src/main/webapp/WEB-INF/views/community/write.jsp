@@ -8,6 +8,7 @@
 <style>
 	body {
 		background-color: #fbf4ff;
+		margin: 0;
 	}
 	article div input[type=text] {
 		width: 350px;

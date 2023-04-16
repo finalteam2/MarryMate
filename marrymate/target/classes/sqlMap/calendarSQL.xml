@@ -18,4 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="comInfo" parameterType="Integer" resultType="com.marry.company.model.CompanyDTO">
     select * from company where cidx=#{cidx}		 		
     </select>
+    <select id="memberbookCom" resultType="com.marry.book.model.BookDTO">
+	select book.bk_idx, book.midx, book.hidx, book.cidx, book.fidx, TO_CHAR(book.bk_date, 'YYYY-MM-DD') as bdate, book.bk_time, book.bk_state, book.bookdate, book.hall_nothall, company.cname, member.name, member.id from book left join company on book.cidx = company.cidx left join member on book.midx = member.midx where book.cidx = #{cidx}
+	</select>
 </mapper>

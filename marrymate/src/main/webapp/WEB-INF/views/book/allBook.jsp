@@ -95,7 +95,7 @@ function cartCheck(){
 				</div>
 			</div>
 			<div class="button_box">
-				<input class="search_button" type="button" value="검색하기" onclick="searchList()">
+				<input id="search_button" class="search_button" type="button" onclick="searchList()">
 			</div>
 		</div>
 		</form>
