@@ -14,7 +14,7 @@
 <script src="/marrymate/js/httpRequest.js"></script>
 <script src="js/searchHall.js"></script>
 </head>
-<body onload="searchHall('1')">
+<body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
 	<h1>웨딩홀</h1>
@@ -89,5 +89,9 @@
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
+<script type="text/javascript">
+//검색 결과 불러오기
+searchHall('1');
+</script>
 </body>
 </html>

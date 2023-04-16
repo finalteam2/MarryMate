@@ -14,7 +14,7 @@
 <script src="/marrymate/js/httpRequest.js"></script>
 <script src="js/searchEtc.js"></script>
 </head>
-<body onload="searchEtc('1')">
+<body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
 	<h1>웨딩컬렉션</h1>
@@ -89,5 +89,9 @@
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
+<script type="text/javascript">
+//검색 결과 불러오기
+searchEtc('1');
+</script>
 </body>
 </html>

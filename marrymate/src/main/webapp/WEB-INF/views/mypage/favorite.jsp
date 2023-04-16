@@ -207,7 +207,7 @@ function searchResult(){
 }
 </script>
 </head>
-<body onload="searchLike();">
+<body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
 <section>
@@ -234,5 +234,9 @@ function searchResult(){
 </div>
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
+<script type="text/javascript">
+//검색 결과 불러오기
+searchLike();
+</script>
 </body>
 </html>

@@ -167,7 +167,7 @@ textarea {
 
 <title>Insert title here</title>
 </head>
-<body onload="mapLoad()">
+<body>
 <%@include file="../header.jsp" %>
 <div id="myDiv"></div>
 <div class="allpage">
@@ -549,6 +549,9 @@ textarea {
 <%@include file="../chatbot.jsp" %>
 <%@include file="../footer.jsp" %>
 <script>
+//맵 불러오기
+mapLoad();
+
 //날짜 범위 지정
 var today = new Date();
 var minDate = new Date();
@@ -560,6 +563,7 @@ maxDate.setFullYear(today.getFullYear() + 1);
 document.getElementById("selectdate").value = minDate.toISOString().slice(0,10);
 document.getElementById("selectdate").setAttribute("min", minDate.toISOString().slice(0,10));
 document.getElementById("selectdate").setAttribute("max", maxDate.toISOString().slice(0,10));
+
 </script>
 </body>
 </html>
