@@ -228,6 +228,15 @@ video{
 	width:50%;
 	margin-left:30px;
 	font-size:34px;
+	margin-bottom:6px;
+}
+#item_count{
+	color:#4e4e4e;
+	width:50%;
+	margin-left:30px;
+	font-size:18px;
+	font-weight: lighter;
+	margin-top:6px;
 }
 .alt_text{
 	width:70%;
@@ -271,6 +280,35 @@ video{
 }
 .bk_date_button{
     cursor:pointer;
+    background-color:#fff;
+    border-radius: 5px;
+    border:1px solid #d4d4d4;
+    background-image:url(/marrymate/img/calendar.png);
+	background-repeat:no-repeat;
+	background-position:92% center;
+	background-size:11px;
+	padding-right:24px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+.bk_time_select{
+	cursor:pointer;
+	border-radius: 5px;
+    border:1px solid #d4d4d4;
+    font-family: 'SUIT-Regular';
+    padding:1px;
+}
+.bk_time_select:focus{
+	outline: none;
+}
+.notBookAlert{
+	border:1px solid #d4d4d4;
+	background-color:#fff;
+	font-size:13px;
+	padding:3px;
+	border-radius: 5px;
+	color:#de2e5f;
+	font-weight: bold;
 }
 .list_table .add_button{
 	background-color:#de2e5f;

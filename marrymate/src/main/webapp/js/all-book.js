@@ -10,7 +10,7 @@ $( function() {
 		dateFormat: "yy-mm-dd",
 		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
 		dayNames: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ],
-		minDate: "+1",
+		minDate: "+14",
 		maxDate: "+365",
 		nextText: ">",
 		prevText: "<"
@@ -145,6 +145,7 @@ function showListResult(){
 			data=JSON.parse(data);
 			
 			var comList=data.comList;
+			var bookTimeLists=data.bookTimeLists;
 			
 			var bk_date_text='';	
 			var strFilterDate=data.strFilterDate;
@@ -156,6 +157,9 @@ function showListResult(){
 			
 			//총 업체수
 			var comListLength=comList.length;
+			
+			document.getElementById('item_count').innerHTML='(총 '+comListLength+'건)';
+			
 			
 			//기존 리스트 삭제
 			var containerNode=document.getElementById('list_container');
@@ -223,23 +227,37 @@ function showListResult(){
 					td5Node.setAttribute('align','right');
 					
 					
+					
 					if(!(bk_date_text=='이용날짜')){
-						var selectNode=document.createElement('select');
-						selectNode.setAttribute('id','bk_time'+com.cidx);
-						var option1Node=document.createElement('option');
-						option1Node.setAttribute('value','12:00');
-						var option1TextNode = document.createTextNode('12:00');
-						option1Node.appendChild(option1TextNode);
-						var option2Node=document.createElement('option');
-						option2Node.setAttribute('value','14:00');
-						var option2TextNode = document.createTextNode('14:00');
-						option2Node.appendChild(option2TextNode);
-						selectNode.appendChild(option1Node);
-						selectNode.appendChild(option2Node);
-						td5Node.appendChild(selectNode);
+						var bookTimeList=bookTimeLists[i];
+					
+						if(bookTimeList.length==0){
+							var labelNode=document.createElement('label');
+							labelNode.setAttribute('class','notBookAlert');
+							var labelTextNode = document.createTextNode('예약마감');
+							labelNode.appendChild(labelTextNode);
+							
+							td5Node.appendChild(labelNode);
+						}else{
+							var selectNode=document.createElement('select');
+							selectNode.setAttribute('id','bk_time'+com.cidx);
+							selectNode.setAttribute('class','bk_time_select');
+							
+							for(var j=0;j<bookTimeList.length;j++){
+								var optionNode=document.createElement('option');
+								optionNode.setAttribute('value',bookTimeList[j]);
+								var optionTextNode = document.createTextNode(bookTimeList[j]);
+								optionNode.appendChild(optionTextNode);
+								
+								selectNode.appendChild(optionNode);
+							}
+							
+							td5Node.appendChild(selectNode);
+						}
 					}
 					
-					
+
+
 					td5Node.appendChild(document.createElement('br'));
 					td5Node.appendChild(document.createElement('br'));
 					td5Node.appendChild(document.createElement('br'));

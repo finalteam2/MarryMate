@@ -12,4 +12,6 @@ public interface BookDAO {
 	public List<Integer> hallPay(List<BookpayDTO> bookPayList);
 	public void pointUpdate(int midx, int usePoint, int pay_idx);
 	public int memberPoint(int midx);
+	public List<String> bookTimeList(int cidx, String filterDate);
+	public List<String> exceptTimeList(int cidx, String strFilterDate);
 }

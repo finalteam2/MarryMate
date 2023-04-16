@@ -152,5 +152,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="memPointMinus" parameterType="com.marry.point.model.PointDTO" >
 		insert into point values(point_p_idx.nextval,#{midx},#{pay_idx},null,null,#{p_cal},sysdate,#{p_total},'예약금')
 	</insert>
+	
+	<select id="showBookTime" parameterType="Map" resultType="String">
+		select worktime from book_time where cidx=#{cidx} and yoil=#{filterDate} order by worktime
+	</select>
+	
+	<select id="exceptBookTime" parameterType="Map" resultType="String">
+		select bk_time from book where cidx=#{cidx} and bk_date=#{strFilterDate} and bk_state!=4 order by bk_time
+	</select>
   
 </mapper>

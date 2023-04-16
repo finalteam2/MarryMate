@@ -107,9 +107,30 @@ public class BookController {
 		
 		List<CompanyDTO> arr=bookDao.searchBookList(dto);
 		
+		
+		
+		List<List<String>> bookTimeLists=new ArrayList<List<String>>();
+		List<List<String>> exceptTimeLists=new ArrayList<List<String>>();
+		
+		
+		for(int i=0;i<arr.size();i++) {
+			List<String> bookTimes=bookDao.bookTimeList(arr.get(i).getCidx(), filterDate);
+			bookTimeLists.add(bookTimes);
+			List<String> exceptTimes=bookDao.exceptTimeList(arr.get(i).getCidx(), strFilterDate);
+			exceptTimeLists.add(exceptTimes);
+			for(int j=0;j<bookTimes.size();j++) {
+				for(int z=0;z<exceptTimes.size();z++) {
+					if(bookTimes.get(j).equals(exceptTimes.get(z))) {
+						bookTimes.remove(bookTimes.get(j));
+					}
+				}
+			}
+		}
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("strFilterDate",strFilterDate);
 		mav.addObject("comList",arr);
+		mav.addObject("bookTimeLists",bookTimeLists);
 		mav.setViewName("finalJson");
 		return mav;
 	}

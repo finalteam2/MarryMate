@@ -50,14 +50,14 @@ function cartCheck(){
 		<form name="searchFm">
 		<div class="top_box">
 			<div class="search_box">
-				<input class="search_input" type="text" name="filterText" placeholder="지역, 업체명을 입력해주세요.">
+				<input class="search_input" type="text" name="filterText" placeholder="지역, 업체명을 입력해주세요">
 			</div>
 			<div class="calendar_box">
-				<input type="text" id="datepicker" name="filterDate" placeholder="이용날짜를 선택해주세요." readonly>
+				<input type="text" id="datepicker" name="filterDate" placeholder="이용날짜 (당일기준 14일 후 부터 가능)" readonly>
 			</div>
 			<div class="local_box">
 				<select id="filterSido" name="filterSido">
-					<option id="defaultSido" value="" disabled selected>지역을 선택해주세요.</option>
+					<option id="defaultSido" value="" disabled selected>지역 (시/도)</option>
 					<option value="서울">서울</option>
 					<option value="경기">경기</option>
 					<option value="인천">인천</option>
@@ -116,10 +116,13 @@ function cartCheck(){
 			<h2 id="cate_title" class="cate_title">
 			
 			</h2>
+			<h3 id="item_count">
+			
+			</h3>
 			<hr style="width:93%;border:1px solid #6c6c6c;">
 			<div id="list_container">
 			
-			</div>			
+			</div>
 			<hr style="width:93%;border:1px solid #6c6c6c;">
 			</div>
 		</div>

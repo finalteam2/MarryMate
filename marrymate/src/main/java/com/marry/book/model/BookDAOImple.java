@@ -160,4 +160,33 @@ public class BookDAOImple implements BookDAO {
 		int point=sqlMap.selectOne("memPoint", midx);
 		return point;
 	}
+	
+	/**예약가능시간 출력*/
+	@Override
+	public List<String> bookTimeList(int cidx, String filterDate) {
+		
+		Map map=new HashMap();
+		map.put("cidx", cidx);
+		map.put("filterDate", filterDate);
+		
+		List<String> bookTimes=new ArrayList<String>();
+		
+		bookTimes=sqlMap.selectList("showBookTime", map);
+		return bookTimes;
+	}
+	
+	/**이미 예약한시간 출력 막기*/
+	@Override
+	public List<String> exceptTimeList(int cidx, String strFilterDate) {
+		
+		Map map=new HashMap();
+		map.put("cidx", cidx);
+		map.put("strFilterDate", strFilterDate);
+		
+		List<String> exceptTimes=new ArrayList<String>();
+		
+		exceptTimes=sqlMap.selectList("exceptBookTime", map);
+		
+		return exceptTimes;
+	}
 }
