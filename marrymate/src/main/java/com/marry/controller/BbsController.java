@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marry.bbs.model.BbsContentDTO;
 import com.marry.bbs.model.BbsDAO;
 import com.marry.bbs.model.BbsDTO;
 import com.marry.bbs.model.BbsViewDTO;
@@ -86,6 +87,9 @@ public class BbsController {
 	public String replyWrite(ReplyDTO dto, @RequestParam("bidx")int bidx) {
 		
 		bbsDao.replyWrite(dto);
+		
+		int midx=bbsDao.getWriteMember(bidx);
+		bbsDao.replyNoti(bidx, midx);
 		
 		return "redirect:/content.do?bidx="+bidx;
 		
@@ -180,11 +184,79 @@ public class BbsController {
 		
 	}
 	
+	@RequestMapping("/searchSubject.do")
+	public ModelAndView searchSubject(
+			@RequestParam("kind")String kind,
+			@RequestParam("subject")String subject,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		
+		int totalCnt=bbsDao.searchSubjectCount(kind, subject);
+		int listSize=9;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("searchSubject.do", totalCnt, listSize, pageSize, cp);
+		List<BbsViewDTO> list=bbsDao.searchSubject(kind, subject, cp, listSize);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("searchWord", subject);
+		mav.setViewName("community/searchCommunity");
+		return mav;
+		
+	}
+	
+	@RequestMapping("/searchWriter.do")
+	public ModelAndView searchWriter(
+			@RequestParam("kind")String kind,
+			@RequestParam("nick")String nick,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		
+		int totalCnt=bbsDao.searchWriterCount(kind, nick);
+		int listSize=9;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("searchWriter.do", totalCnt, listSize, pageSize, cp);
+		List<BbsViewDTO> list=bbsDao.searchWriter(kind, nick, cp, listSize);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("searchWord", nick);
+		mav.setViewName("community/searchCommunity");
+		return mav;
+	}
+	@RequestMapping("/searchContent.do")
+	public ModelAndView searchContent(
+			@RequestParam("kind")String kind,
+			@RequestParam("content")String content,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		
+		int totalCnt=bbsDao.searchContentCount(kind, content);
+		int listSize=9;
+		int pageSize=5;
+		
+		String pageStr=com.marry.page.module.pageModule_normal
+				.makePage("searchContent.do", totalCnt, listSize, pageSize, cp);
+		List<BbsViewDTO> list=bbsDao.searchContent(kind, content, cp, pageSize);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("searchWord", content);
+		mav.setViewName("community/searchCommunity");
+		return mav;
+		
+	}
+	
 	@RequestMapping("/content.do")
 	public ModelAndView content(@RequestParam("bidx")int bidx) {
 		
 		bbsDao.watchUp(bidx);
-		BbsViewDTO dto=bbsDao.bbsContent(bidx);
+		BbsContentDTO dto=bbsDao.bbsContent(bidx);
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		List<ReplyViewDTO> list=bbsDao.replyList(bidx);
 		
 		ModelAndView mav=new ModelAndView();
@@ -240,7 +312,7 @@ public class BbsController {
 	@RequestMapping(value = "/reWrite.do", method = RequestMethod.GET)
 	public ModelAndView reWriteForm(@RequestParam("bidx")int bidx) {
 		
-		BbsViewDTO dto=bbsDao.bbsContent(bidx);
+		BbsContentDTO dto=bbsDao.bbsContent(bidx);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("dto", dto);

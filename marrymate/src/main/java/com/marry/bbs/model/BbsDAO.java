@@ -16,6 +16,10 @@ public interface BbsDAO {
 	
 	public int replyWrite(ReplyDTO dto);
 	
+	public int getWriteMember(int bidx);
+	
+	public int replyNoti(int midx, int bidx);
+	
 	public List<BbsViewDTO> bbsNotiList(int cp, int ls);
 	
 	public List<BbsViewDTO> bbsAfterList(int cp, int ls);
@@ -38,9 +42,21 @@ public interface BbsDAO {
 	
 	public List<BbsViewDTO> bbsTalkFix();
 	
+	public List<BbsViewDTO> searchSubject(String kind, String subject, int cp, int ls);
+	
+	public int searchSubjectCount(String kind, String subject);
+	
+	public List<BbsViewDTO> searchWriter(String kind, String nick, int cp, int ls);
+	
+	public int searchWriterCount(String kind, String nick);
+	
+	public List<BbsViewDTO> searchContent(String kind, String content, int cp, int ls);
+	
+	public int searchContentCount(String kind, String content);
+	
 	public List<ReplyViewDTO> replyList(int bidx);
 	
-	public BbsViewDTO bbsContent(int bidx);
+	public BbsContentDTO bbsContent(int bidx);
 	
 	public int bbsNotiCount();
 	

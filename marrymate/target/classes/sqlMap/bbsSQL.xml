@@ -153,13 +153,58 @@
 		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 		order by bbs.bidx desc
 	</select>
-	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsViewDTO">
-		select bbs.*, member.nick, sum(recommand.best) as best, sum(recommand.worst) as worst 
+	<select id="searchSubject" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick, sum(recommand.best) as best 
+		from bbs 
+		left join member on bbs.midx = member.midx 
+		left join recommand on bbs.bidx = recommand.bidx
+		where kind=#{kind} and subject like '%' || #{subject} || '%' and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="searchSubjectCount" parameterType="Map" resultType="int">
+		select count(*) from bbs where kind=#{kind} and subject like '%' || #{subject} || '%' and blind=0
+	</select>
+	<select id="searchWriter" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick, sum(recommand.best) as best 
+		from bbs 
+		left join member on bbs.midx = member.midx 
+		left join recommand on bbs.bidx = recommand.bidx
+		where kind=#{kind} and member.nick=#{nick} and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="searchWriterCount" parameterType="Map" resultType="int">
+		select count(*) from bbs join member on bbs.midx=member.midx where kind=#{kind} and member.nick=#{nick} and blind=0
+	</select>
+	<select id="searchContent" parameterType="Map" resultType="com.marry.bbs.model.BbsViewDTO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select bbs.*, member.nick, sum(recommand.best) as best 
+		from bbs 
+		left join member on bbs.midx = member.midx 
+		left join recommand on bbs.bidx = recommand.bidx
+		where kind=#{kind} and (subject like '%' || #{content} || '%' or content like '%' || #{content} || '%') and blind=0
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		order by bbs.bidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="searchContentCount" parameterType="Map" resultType="int">
+		select count(*) from bbs where kind=#{kind} and (subject like '%' || #{content} || '%' or content like '%' || #{content} || '%') and blind=0
+	</select>
+	<select id="bbsContent" parameterType="int" resultType="com.marry.bbs.model.BbsContentDTO">
+		select bbs.*, member.nick, member.img as memimg, sum(recommand.best) as best, sum(recommand.worst) as worst 
 		from bbs 
 		left join member on bbs.midx = member.midx 
 		left join recommand on bbs.bidx = recommand.bidx
 		where bbs.bidx=#{bidx}
-		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
+		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick, member.img
 	</select>
 	<insert id="replyWrite" parameterType="com.marry.bbs.model.ReplyDTO">
 		insert into
@@ -174,8 +219,28 @@
 			sysdate
 		)
 	</insert>
+	<select id="getWriteMember" parameterType="int" resultType="int">
+		select midx from bbs where bidx=#{bidx}
+	</select>
+	<insert id="replyNoti" parameterType="map">
+		  insert into 
+		  	notification
+		  values(
+		    notification_nidx.nextval,
+		    0,
+		    #{midx},
+		    null,
+		    'content.do?bidx=' || #{bidx} ,
+		    '게시물에 댓글이 달렸습니다.',
+		    '이동해서 확인해주세요.',
+		    3,
+		    sysdate,
+		    sysdate,
+		    0
+		  )
+	</insert>
 	<select id="replyList" parameterType="int" resultType="com.marry.bbs.model.ReplyViewDTO">
-		select reply.*,member.img from reply join member on reply.midx=member.midx(+) where bidx=#{bidx}
+		select reply.*,member.img from reply join member on reply.midx=member.midx(+) where bidx=#{bidx} order by writedate
 	</select>
 	<select id="bbsNotiCount" resultType="int">
 		select count(*) from bbs where kind='공지사항'

@@ -221,6 +221,7 @@ comment-wrapper {
 }
 
 .image {
+	border-radius: 15px;
 	float: left;
 	margin-right: 10px;
 	width: 100px;
@@ -229,6 +230,21 @@ comment-wrapper {
 }
 
 .image img {
+	width: 100%;
+	height: auto;
+}
+
+.subImg {
+	border: 1px solid black;
+	border-radius: 15px;
+	float: right;
+	margin-right: 10px;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+
+.subImg img {
 	width: 100%;
 	height: auto;
 }
@@ -301,7 +317,16 @@ comment-wrapper {
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div class="board">
 		<div class="post">
-			<div class="title">${dto.subject}</div>
+			<div class="title">
+				<c:if test="${!empty dto.horse && '없음' ne dto.horse}">
+					[${dto.horse}]
+				</c:if>${dto.subject}
+				<c:if test="${!dto.kind eq '공지사항'}">
+					<div class="subImg">
+						<img alt="게시물 이미지" src="/marrymate/img/member/${dto.memimg}">
+					</div>
+				</c:if>
+			</div>
 			<c:choose>
 				<c:when test="${dto.kind eq '공지사항'}">
 					<div class="author">작성자: 관리자</div>
@@ -317,9 +342,11 @@ comment-wrapper {
 
 				</c:when>
 				<c:otherwise>
-					<div id="imgBox">
-						<img alt="게시물 이미지" src="/marrymate/img/bbs_img/${dto.img}">
-					</div>
+					<c:if test="${!dto.kind eq '공지사항'}">
+						<div id="imgBox">
+							<img alt="게시물 이미지" src="/marrymate/img/bbs_img/${dto.img}">
+						</div>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
@@ -353,11 +380,11 @@ comment-wrapper {
 					
 					<c:forEach var="reply" items="${list}">
 						<div class="comment-wrapper">
-							<div class="comment" style="overflow: hidden;">
-							    <div class="image" style="float: left; margin-right: 10px;">
-							        <img alt="멤버 이미지" src="/marrymate/img/member/${reply.img}">
-							    </div>
-							    <div class="content" style="float: left;">
+							<div class="comment">
+								<div class="image">
+									<img alt="멤버 이미지" src="/marrymate/img/member/${reply.img}">
+								</div>
+							    <div class="content">
 							        <div class="author">작성자: ${reply.nick}</div>
 							        <div class="date">작성일: ${reply.writedate}</div>
 							        <div class="text">${reply.content}</div>

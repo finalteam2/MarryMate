@@ -36,7 +36,7 @@ public class BbsDAOImple implements BbsDAO {
 	
 	@Override
 	public int writeInsertPoint(int midx, int point) {
-		Map map=new HashMap<String, Integer>();
+		Map map=new HashMap<String, String>();
 		map.put("midx", midx);
 		map.put("point", point);
 		return sqlMap.insert("writeInsertPoint", map);
@@ -45,6 +45,19 @@ public class BbsDAOImple implements BbsDAO {
 	@Override
 	public int replyWrite(ReplyDTO dto) {
 		return sqlMap.insert("replyWrite", dto);
+	}
+	
+	@Override
+	public int getWriteMember(int bidx) {
+		return sqlMap.selectOne("getWriteMember", bidx);
+	}
+	
+	@Override
+	public int replyNoti(int midx, int bidx) {
+		Map map=new HashMap<String, Integer>();
+		map.put("midx", midx);
+		map.put("bidx", bidx);
+		return sqlMap.insert("replyNoti", map);
 	}
 	
 	@Override
@@ -124,12 +137,72 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
+	public List<BbsViewDTO> searchSubject(String kind, String subject, int cp, int ls) {
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("subject", subject);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlMap.selectList("searchSubject", map);
+	}
+	
+	@Override
+	public int searchSubjectCount(String kind, String subject) {
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("subject", subject);
+		return sqlMap.selectOne("searchSubjectCount", map);
+	}
+	
+	@Override
+	public List<BbsViewDTO> searchWriter(String kind, String nick, int cp, int ls) {
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("nick", nick);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlMap.selectList("searchWriter", map);
+	}
+	
+	@Override
+	public int searchWriterCount(String kind, String nick) {
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("nick", nick);
+		return sqlMap.selectOne("searchWriterCount", map);
+	}
+	
+	@Override
+	public List<BbsViewDTO> searchContent(String kind, String content, int cp, int ls) {
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("content", content);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlMap.selectList("searchContent", map);
+	}
+	
+	@Override
+	public int searchContentCount(String kind, String content) {
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("content", content);
+		return sqlMap.selectOne("searchContentCount", map);
+	}
+	
+	@Override
 	public List<ReplyViewDTO> replyList(int bidx) {
 		return sqlMap.selectList("replyList", bidx);
 	}
 	
 	@Override
-	public BbsViewDTO bbsContent(int bidx) {
+	public BbsContentDTO bbsContent(int bidx) {
 		return sqlMap.selectOne("bbsContent", bidx);
 	}
 	
