@@ -7,6 +7,8 @@ public class BookListDTO {
 	private int bk_idx;
 	private int midx;
 	private int cidx;
+	private int hidx;
+	private int fidx;
 	private String cname;
 	private String mname;
 	private String hname;
@@ -28,13 +30,16 @@ public class BookListDTO {
 	}
 	
 
-	public BookListDTO(int bk_idx, int midx, int cidx, String cname, String mname, String hname, String fname,
-			String ckind, Date bk_date, String bk_time, Date booktime, int cpay, int hpay, int fpay, int hnum,
-			int allpay, int bk_state, int is_after) {
+
+	public BookListDTO(int bk_idx, int midx, int cidx, int hidx, int fidx, String cname, String mname, String hname,
+			String fname, String ckind, Date bk_date, String bk_time, Date booktime, int cpay, int hpay, int fpay,
+			int hnum, int allpay, int bk_state, int is_after) {
 		super();
 		this.bk_idx = bk_idx;
 		this.midx = midx;
 		this.cidx = cidx;
+		this.hidx = hidx;
+		this.fidx = fidx;
 		this.cname = cname;
 		this.mname = mname;
 		this.hname = hname;
@@ -51,6 +56,31 @@ public class BookListDTO {
 		this.bk_state = bk_state;
 		this.is_after = is_after;
 	}
+
+
+	
+	public int getHidx() {
+		return hidx;
+	}
+
+
+
+	public void setHidx(int hidx) {
+		this.hidx = hidx;
+	}
+
+
+
+	public int getFidx() {
+		return fidx;
+	}
+
+
+
+	public void setFidx(int fidx) {
+		this.fidx = fidx;
+	}
+
 
 
 	public int getMidx() {

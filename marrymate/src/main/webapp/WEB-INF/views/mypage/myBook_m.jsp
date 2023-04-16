@@ -74,16 +74,24 @@ div.allpage{
 		  	</c:if>
 	  	    
 	  	    <c:if test="${dto.bk_state eq 2}">
-	  	  	<form action="janPay.do" method="post">
-		  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
-		  	  <input type="hidden" name="cidx" value="${dto.cidx }">
-		  	  <c:if test="${dto.ckind eq '예식장' }">
-		  	  <input type="hidden" name="hidx" value="${dto.hidx }">
-		  	  <input type="hidden" name="fidx" value="${dto.fidx }">
-		  	  </c:if>
-		  	  <input type="hidden" name="allpay" value="${dto.allpay }">
+	  	    	<c:if test="${dto.ckind eq '예식장' }">
+		  	  	<form action="hallJanPay.do" method="post">
+			  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+			  	  <input type="hidden" name="cidx" value="${dto.cidx }">
+			  	  <input type="hidden" name="hidx" value="${dto.hidx }">
+			  	  <input type="hidden" name="fidx" value="${dto.fidx }">
+			  	  <input type="hidden" name="allpay" value="${dto.allpay }">
 				  <button type="button" onclick="" class="btn btn-outline-primary" >결제</button>
-		  	</form>
+			  	</form>
+		  		</c:if>
+	  	    	<c:if test="${not dto.ckind eq '예식장' }">
+		  	  	<form action="notHallJanPay.do" method="post">
+			  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
+			  	  <input type="hidden" name="cidx" value="${dto.cidx }">
+			  	  <input type="hidden" name="allpay" value="${dto.allpay }">
+				  <button type="button" onclick="" class="btn btn-outline-primary" >결제</button>
+			  	</form>
+		  		</c:if>
 		  	</c:if>
 		  	<!-- 결제 취소 신청 시 폼 부분 -->
 	  	    <c:if test="${not (dto.bk_state eq 1 || dto.bk_state eq 2 || dto.bk_state eq 3)}">
