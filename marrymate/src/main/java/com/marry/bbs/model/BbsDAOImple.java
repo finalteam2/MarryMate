@@ -137,6 +137,18 @@ public class BbsDAOImple implements BbsDAO {
 	}
 	
 	@Override
+	public List<BbsViewDTO> searchNoti(String kind, String content, int cp, int ls) {
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("kind", kind);
+		map.put("content", content);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlMap.selectList("searchNoti", map);
+	}
+	
+	@Override
 	public List<BbsViewDTO> searchSubject(String kind, String subject, int cp, int ls) {
 		int start=(cp-1)*ls+1;
 		int end=cp*ls;
@@ -199,6 +211,11 @@ public class BbsDAOImple implements BbsDAO {
 	@Override
 	public List<ReplyViewDTO> replyList(int bidx) {
 		return sqlMap.selectList("replyList", bidx);
+	}
+	
+	@Override
+	public int deleteReply(int ridx) {
+		return sqlMap.delete("deleteReply", ridx);
 	}
 	
 	@Override

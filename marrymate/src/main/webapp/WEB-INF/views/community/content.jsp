@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <style>
 body {
 	background-color: #fbf4ff;
+	margin: 0;
 }
 
 .board {
@@ -106,6 +108,10 @@ comment-wrapper {
 	font-size: 16px;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.comment textarea {
+	resize: none;
 }
 
 .button-container {
@@ -221,7 +227,7 @@ comment-wrapper {
 }
 
 .image {
-	border-radius: 15px;
+	border-radius: 50px;
 	float: left;
 	margin-right: 10px;
 	width: 100px;
@@ -235,8 +241,7 @@ comment-wrapper {
 }
 
 .subImg {
-	border: 1px solid black;
-	border-radius: 15px;
+	border-radius: 50px;
 	float: right;
 	margin-right: 10px;
 	width: 100px;
@@ -251,66 +256,81 @@ comment-wrapper {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	function checkReply() {
-	    if(confirm('댓글을 작성하시겠습니까?')) {
-	        if ('${sessionScope.loginMidx}' === '') {
-	            alert('로그인 후 이용가능합니다.');
-	            return false;
-	        }
-	        return true;
-	    }
-	    else {
-	        return false;
-	    }
-	}
-    function checkReWrite() {
-        if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
-            alert('작성자만 수정이 가능합니다.');
+function checkReply() {
+    if (confirm('댓글을 작성하시겠습니까?')) {
+        if ('${sessionScope.loginMidx}' === '') {
+            alert('로그인 후 이용가능합니다.');
             return false;
         }
         return true;
+    } else {
+        return false;
     }
-    function checkDelete() {
-        if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
-            alert('작성자만 삭제 가능합니다.');
-            return false;
-        }
-        confirm('게시글을 삭제하시겠습니까?');
-        return true;
-    }
-    $(function() {
-        $('#likeBtn, #dislikeBtn').on('click', function() {
-          var bidx = '${dto.bidx}';
-          var midx = '${sessionScope.loginMidx}';
-          var url = '';
-          var msg = '';
+}
 
-          if ($(this).attr('id') === 'likeBtn') {
+function checkReWrite() {
+    if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
+        alert('작성자만 수정이 가능합니다.');
+        return false;
+    }
+    return true;
+}
+
+function checkDelete() {
+    if ('${dto.midx}' !== '${sessionScope.loginMidx}') {
+        alert('작성자만 삭제 가능합니다.');
+        return false;
+    }
+    if (confirm('게시글을 삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkDeleteReply() {
+    if (confirm('댓글을 삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+$(function() {
+    $('#likeBtn, #dislikeBtn').on('click', function() {
+        var bidx = '${dto.bidx}';
+        var midx = '${sessionScope.loginMidx}';
+        var url = '';
+        var msg = '';
+
+        if ($(this).attr('id') === 'likeBtn') {
             url = 'best.do';
             msg = '추천';
-          } else {
+        } else {
             url = 'worst.do';
             msg = '비추천';
-          }
+        }
 
-          $.ajax({
+        $.ajax({
             url: url,
             type: 'POST',
             data: { midx: midx, bidx: bidx },
             success: function(result) {
-              if (result == 'false') {
-                alert('이미 추천 혹은 비추천을 하였습니다.');
-              } else {
-                alert(msg + '하였습니다.');
-                location.reload();
-              }
+                if (result == 'false') {
+                    alert('이미 추천 혹은 비추천을 하였습니다.');
+                } else {
+                    alert(msg + '하였습니다.');
+                    location.reload();
+                }
             },
             error: function() {
-              alert('서버와의 통신에 실패하였습니다.');
+                alert('서버와의 통신에 실패하였습니다.');
             }
-          });
         });
-      });
+    });
+});
+
 </script>
 </head>
 <body>
@@ -321,11 +341,16 @@ comment-wrapper {
 				<c:if test="${!empty dto.horse && '없음' ne dto.horse}">
 					[${dto.horse}]
 				</c:if>${dto.subject}
-				<c:if test="${!dto.kind eq '공지사항'}">
-					<div class="subImg">
-						<img alt="게시물 이미지" src="/marrymate/img/member/${dto.memimg}">
-					</div>
-				</c:if>
+				<c:choose>
+					<c:when test="${dto.kind eq '공지사항'}">
+					
+					</c:when>
+					<c:otherwise>
+						<div class="subImg">
+							<img alt="멤버 이미지" src="/marrymate/img/member/${dto.memimg}">
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<c:choose>
 				<c:when test="${dto.kind eq '공지사항'}">
@@ -336,17 +361,18 @@ comment-wrapper {
 				</c:otherwise>
 			</c:choose>
 			<div class="date">작성일: ${dto.writedate}</div>
-			<div class="content">${dto.content}</div>
+			<div class="content">${dto.content.replaceAll('\\n', '<br>')}</div>
 			<c:choose>
 				<c:when test="${dto.img eq '없음'}">
 
 				</c:when>
+				<c:when test="${dto.kind eq '공지사항'}">
+					
+				</c:when>
 				<c:otherwise>
-					<c:if test="${!dto.kind eq '공지사항'}">
-						<div id="imgBox">
-							<img alt="게시물 이미지" src="/marrymate/img/bbs_img/${dto.img}">
-						</div>
-					</c:if>
+					<div id="imgBox">
+						<img alt="게시물 이미지" src="/marrymate/img/bbs_img/${dto.img}">
+					</div>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
@@ -387,7 +413,16 @@ comment-wrapper {
 							    <div class="content">
 							        <div class="author">작성자: ${reply.nick}</div>
 							        <div class="date">작성일: ${reply.writedate}</div>
-							        <div class="text">${reply.content}</div>
+							        <div class="text">${reply.content.replaceAll('\\n', '<br>')}</div>
+							        <c:if test="${reply.midx == sessionScope.loginMidx}">
+								        <div style="text-align: right;">
+								        	<form id="deleteReply" name="deleteReply" action="deleteReply.do" method="post" onsubmit="return checkDeleteReply()">
+								        		<input type="hidden" name="ridx" value="${reply.ridx}">
+								        		<input type="hidden" name="bidx" value="${param.bidx}">
+								        		<input type="submit" value="삭제">
+								        	</form>
+								        </div>
+							        </c:if>
 							    </div>
 							</div>				
 						</div>

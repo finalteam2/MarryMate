@@ -9,6 +9,7 @@
 <style>
 body {
 	background-color: #fbf4ff;
+	margin: 0;
 }
 
 h1 {
@@ -232,7 +233,7 @@ tr.pink-bg {
 					<tr class="green-bg">
 						<td>인기</td>
 						<c:url var="contentUrl" value="content.do">
-							<c:param name="bidx">${dto.bidx}</c:param>
+							<c:param name="bidx">${best.bidx}</c:param>
 						</c:url>
 						<td>
 							<a href="${contentUrl}" class="text-center">

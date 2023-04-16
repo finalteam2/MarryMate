@@ -9,6 +9,7 @@
 	<style>
 		body {
 			background-color: #fbf4ff;
+			margin: 0;
 		}
 		h1 {
 			color: #333333;
@@ -79,8 +80,60 @@
 		.each td a:last-child {
 		  margin-right: 0;
 		}
+		#searchBar {
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  margin-bottom: 30px;
+		}
+		
+		#searchBar select {
+		  font-size: 18px;
+		  padding: 10px;
+		  margin-right: 10px;
+		  border: 1px solid #ccc;
+		  border-radius: 5px;
+		}
+		
+		#searchBar input[type="text"] {
+		  font-size: 18px;
+		  padding: 10px;
+		  border: 1px solid #ccc;
+		  border-radius: 5px;
+		}
+		
+		#searchBar input[type="submit"] {
+		  font-size: 18px;
+		  padding: 10px;
+		  background-color: #007bff;
+		  color: #fff;
+		  border: none;
+		  border-radius: 5px;
+		  cursor: pointer;
+		}
+		
+		#searchBar input[type="submit"]:hover {
+		  background-color: #0069d9;
+		}
 	</style>
 </head>
+<script>
+function createInputField() {
+    var searchOption = document.getElementsByName("search")[0].value;
+    var hiddenField = document.getElementById("hidden-field");
+    var inputField = document.getElementById("input-field");
+    var submitField = document.getElementById("submit-field");
+
+    if (searchOption == "") {
+      inputField.innerHTML = '';
+    } else if (searchOption == "content") {
+      hiddenField.innerHTML = '<input type="hidden" name="kind" value="공지사항">';  
+      inputField.innerHTML = '<input type="text" name="content" placeholder="제목 또는 내용 입력">';
+      submitField.innerHTML = '<input type="submit" value="검색">';
+      document.getElementById("search-form").action = "searchNoti.do";
+    }
+  }
+</script>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div id="tableBox">
@@ -149,6 +202,17 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<div id="searchBar">
+		<form method="get" id="search-form">
+			<select name="search" onchange="createInputField()">
+				<option value="" selected>공지사항 검색</option>
+				<option value="content">제목+내용</option>
+			</select>
+			<div id="hidden-field" style="display: inline;"></div>
+			<div id="input-field" style="display: inline;"></div>
+			<div id="submit-field" style="display: inline;"></div>
+		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>

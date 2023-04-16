@@ -42,6 +42,8 @@ public interface BbsDAO {
 	
 	public List<BbsViewDTO> bbsTalkFix();
 	
+	public List<BbsViewDTO> searchNoti(String kind, String content, int cp, int ls);
+	
 	public List<BbsViewDTO> searchSubject(String kind, String subject, int cp, int ls);
 	
 	public int searchSubjectCount(String kind, String subject);
@@ -55,6 +57,8 @@ public interface BbsDAO {
 	public int searchContentCount(String kind, String content);
 	
 	public List<ReplyViewDTO> replyList(int bidx);
+	
+	public int deleteReply(int ridx);
 	
 	public BbsContentDTO bbsContent(int bidx);
 	
