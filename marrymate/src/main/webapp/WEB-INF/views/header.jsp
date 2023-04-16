@@ -3,15 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 @font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-family: 'TAEBAEKmilkyway';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
- 
+@font-face {
+    font-family: 'Hahmlet-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .menu {
 	position: relative;
-	margin-left: 35px;
+	margin-left: 40px;
 }
 
 .mbar {
@@ -58,9 +64,6 @@
 	text-align: center;
 }
 
-p img {
-	
-}
 .menu a:hover {
 	background-color: #cc99ff;
 	color: #fff;
@@ -80,14 +83,13 @@ ul > li:last-child ul{
 
 nav{
 	height: 200px;
-	padding: 10px;
 }
 
 nav .navdiv{
 	padding: 20px;
 }
 .titlebar a{
-	font-family: 'SUIT-Regular';
+    font-family: 'TAEBAEKmilkyway';
 	text-decoration: none;
 	text-align: center;
 	font-size: 28px;
@@ -132,7 +134,6 @@ nav .navdiv{
 
 </style>
 
-<!-- header 영역 혹시 깨질까봐 우선 in-line으로 css적용해두었어요! -->
 <header style="justify-content: space-between;" id="header">
 		<div class="loginboxheader">
 			<c:if

@@ -98,6 +98,11 @@ function checkadd(){
 function checkdel(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
+    if (confirm('삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
 	window.open("checklistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
 }
 
@@ -150,6 +155,27 @@ function checkAlladd(){
 	font-weight: bold;
 	color: purple;
 }
+.titlecss{
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 30px;
+}
+.bigtitle{
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 38px;
+}
+.titlecss{
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 30px;
+}
+.scheduleall h4{
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 28px;
+	font-weight: bold;
+}
 </style>
 </head>
 <body background="/marrymate/img/background.png">
@@ -168,7 +194,12 @@ function checkAlladd(){
 	<div class="profileBox">
 						<div class="imgArea">
 							<c:forEach var="minfo" items="${myinfo}">
-							<img class="mypicture" src="/marrymate/img/member/${minfo.img}">
+							<div style="position: relative;">
+								 <img class="photoframe" src="/marrymate/img/imgbox.png">
+								 <div style="position: absolute; top: 50px; left: 50px;">
+        <img class="mypicture" src="/marrymate/img/member/${minfo.img}">
+    </div>
+							</div>
 						</c:forEach>
 						
 						</div>
@@ -209,8 +240,7 @@ function checkAlladd(){
 	<div class="schedulewrapper">
 		<div class="schedulebox">
 			<div class="scheduleall">
-				<h3>전체 스케줄 보기</h3>
-
+				<div class="bigtitle">전체 스케줄 보기</div>
 				<div>
 					   <div style="display: flex;">
         <div style="flex: 1;">
@@ -245,7 +275,7 @@ function checkAlladd(){
 			</div>
 			<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 
-<br><br>
+<br><br><br><br><br><br>
 			<div style="padding-left: 90%">
 				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
 			</div>
@@ -347,11 +377,11 @@ function checkAlladd(){
 	});
 </script>
 
-
+	<br><br>
 	<div class="planlistwrap">
-	<h3>
+	<div class="titlecss">
 		<a id="planlistMove">Myplan</a>
-	</h3>
+	</div>
 	<form action="planlistDel.do" method="post">
 		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
@@ -375,20 +405,27 @@ function checkAlladd(){
 						<td>${pdto.pdate}</td>
 						<td>${pdto.content}</td>
 						<td><input type="submit" value="삭제">
-							<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+							<input type="hidden" name="ridx" value="${pdto.myp_idx}">
+							<button type="button" id="checkdel" onclick="return checkdel()">삭제</button></td>
 					</tr>
+						<c:url var="deleteplan" value="checklistDel.do">
+							<c:param name="myp_idx">${pdto.myp_idx}</c:param>
+						</c:url>
+						<a href="${deleteplan}"	onclick="return checkDel()">삭제</a>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
+		${pdto.myp_idx}
 	</div>
-	<br>
+	<br><br><br>
+	
 	<!-- checklist add/select -->
 	<div class="checklistwrap">
 	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-	<h3 id="checklistitems">
+	<div class="titlecss" id="checklistitems">
 		<a id="checklistMove">모든 체크리스트</a>
-	</h3>
+	</div>
 	<div style="padding-left: 65%">
 		<button type="button" id="checkadd" onclick="checkadd();">새
 			체크리스트 등록</button>

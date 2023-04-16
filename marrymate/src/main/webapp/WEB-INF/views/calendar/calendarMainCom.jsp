@@ -109,7 +109,7 @@ function checkAlladd(){
 <body background="/marrymate/img/background.png">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 		<input type="hidden" name="cidx" value=${sessionScope.com_cidx }>
-		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
+		<img id="Caltopmem" src="/marrymate/img/caltop.png"
 			style="width: 100%">
 		
 		<!--checkListTopWrap : s-->
@@ -197,7 +197,6 @@ function checkAlladd(){
 			<!-- 캘린더 시작  -->
 			<div id='calendar'></div>
 				<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
-			</div>
 		</div>
 	</div>
 
@@ -207,8 +206,7 @@ function checkAlladd(){
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			  locale: "ko",
-			  plugins: [multiMonthPlugin],
-			  initialView: 'multiMonthYear',
+			  initialView: 'dayGridMonth',
 			  headerToolbar: {
 				left: 'prev,next today',
 				center: 'title',
@@ -222,7 +220,7 @@ function checkAlladd(){
 	            editable : true,
 	            nowIndicator : true,
 	            locale : 'ko',
-			  googleCalendarApiKey: 'AIzaSyCO9sIj6d33hsyqRRoYnZdwu3-_WNfBMyk',
+			  googleCalendarApiKey: 'AIzaSyA3tB9fPFzCBAcmTdPXfM9Da4bOnJ6GE8Q',
 			  events: {
 			  googleCalendarId: '92c453036d926d54844360967e3143b0a9bbe21313f9d012acb49008e843afc2@group.calendar.google.com',
 			  className: 'gcal-event' 
@@ -317,7 +315,7 @@ function checkAlladd(){
 						<td>${pdto.pdate}</td>
 						<td>${pdto.content}</td>
 						<td><input type="submit" value="삭제">
-							<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
+							<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -358,7 +356,7 @@ function checkAlladd(){
 						<td>${dto.dueday}</td>
 						<td>${dto.content}</td>
 						<td><input type="submit" value="삭제">
-							<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
+							<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
 
 					</tr>
 				</c:forEach>

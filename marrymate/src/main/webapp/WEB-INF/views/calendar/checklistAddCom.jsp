@@ -47,7 +47,7 @@ caption{
 }
 </style>
 <body>
-<form name="form" method="post" action="checklistAdd.do" enctype="multipart/form-data">
+<form name="form" method="post" action="checklistAddCom.do" enctype="multipart/form-data">
 <input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 <table>
 <caption>체크리스트 추가</caption>

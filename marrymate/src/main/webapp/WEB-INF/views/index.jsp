@@ -34,6 +34,9 @@
     height: 100%;
     object-fit: cover;
 }
+video{
+	width: 100%;
+}
 </style>
 </head>
 
@@ -64,12 +67,7 @@ function handleVideoEnd() {
     <video id="video" muted autoplay onended="handleVideoEnd()">
 		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
-
-
-
 <%@include file="header.jsp" %>
-
-
 <h1>main입니다.</h1>
 <h2>아래는 추후 수정 예정입니다!</h2>
 
@@ -114,7 +112,7 @@ function handleVideoEnd() {
       <img src="/marrymate/img/ex1.png" class="d-block w-100" alt="웨딩의 모든것 배너">
     </div>
     <div class="carousel-item">
-      <img src="/marrymate/img/ex2.png" class="d-block w-100" alt="웨딩 단어 테스트 배너">
+      <a href="weddingtest.do"><img src="/marrymate/img/ex2.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
     </div>
     <div class="carousel-item">
       <img src="/marrymate/img/ex3.png" class="d-block w-100" alt="웨딩 캘린더 배너">

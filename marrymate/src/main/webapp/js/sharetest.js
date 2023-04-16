@@ -1,12 +1,15 @@
-const url = 'https://hanguel-spelling-test.github.io/';
+/**
+ * 
+ */
+ const url = 'http://localhost:9090';
 
 function setShare() {
   var resultImg = document.querySelector('#resultImg');
   var resultAlt = resultImg.firstElementChild.alt;
-  const shareTitle = '한국어능력고사 결과';
+  const shareTitle = '웨딩능력고사 결과';
   const shareDes = infoList[resultAlt - 1].name;
-  const shareImage = url + 'img/lv' + resultAlt + '.png';
-  const shareURL = url + 'page/result-' + resultAlt + '.html';
+  const shareImage = url + '/marrymate/img/result' + resultAlt + '.png';
+  const shareURL = url + '/marrymate/result' + resultAlt + '.do';
 
     Kakao.Link.sendDefault({
     objectType: 'feed',

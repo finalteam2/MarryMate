@@ -16,13 +16,14 @@ public class BookDTO {
 	private int hall_nothall;
 	private String cname;
 	private String bdate;
+	private String name;
 	
 	public BookDTO() {
 		super();
 	}
 
 	public BookDTO(int bk_idx, int midx, int hidx, int cidx, int fidx, Date bk_date, String bk_time, int bk_state,
-			Date bookdate, int hall_nothall, String cname, String bdate) {
+			Date bookdate, int hall_nothall, String cname, String bdate, String name) {
 		super();
 		this.bk_idx = bk_idx;
 		this.midx = midx;
@@ -35,6 +36,7 @@ public class BookDTO {
 		this.bookdate = bookdate;
 		this.hall_nothall = hall_nothall;
 		this.cname = cname;
+		this.name = name;
 	}
 
 	public int getBk_idx() {
@@ -133,5 +135,12 @@ public class BookDTO {
 		this.bdate = bdate;
 	}
 	
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.cname = name;
+	}
+
 }

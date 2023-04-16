@@ -1,4 +1,7 @@
-const main = document.querySelector("#main");
+/**
+ * 
+ */
+ const main = document.querySelector("#main");
 const qna = document.querySelector("#qna");
 const result = document.querySelector("#result");
 const status = document.querySelector("#statusNum");
@@ -45,7 +48,7 @@ function setResult(){
   let point = calResult();
   var resultImg = document.createElement('img');
   const imgDiv = document.querySelector('#resultImg');
-  var imgURL = './img/test' + point + '.png';
+  var imgURL = '/marrymate/img/result' + point + '.png';
   resultImg.src = imgURL;
   resultImg.alt = point;
   resultImg.classList.add('img-fluid');
@@ -132,7 +135,7 @@ function begin() {
 }
 
 function again() {
-  location.href = "https://hanguel-spelling-test.github.io/"; 
+  location.href = "http://localhost:9090/marrymate/weddingtest.do"; 
 }
 
 function copyToClipboard(val) {
@@ -145,7 +148,7 @@ function copyToClipboard(val) {
 }
 
 function copy() {
-  copyToClipboard('https://hanguel-spelling-test.github.io/');
+  copyToClipboard('http://localhost:9090/marrymate/weddingtest.do');
   alert('링크가 복사되었습니다!');
 }
 

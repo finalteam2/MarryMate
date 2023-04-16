@@ -46,7 +46,7 @@ caption{
 }
 </style>
 <body>
-<form name="form" method="post" action="planWrite.do" enctype="multipart/form-data">
+<form name="form" method="post" action="planWriteCom.do" enctype="multipart/form-data">
 <input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 <table>
 <caption>일정등록</caption>

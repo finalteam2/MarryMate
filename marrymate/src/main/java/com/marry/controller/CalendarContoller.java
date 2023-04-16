@@ -76,12 +76,35 @@ public class CalendarContoller {
 	
 	@Autowired
 	private CompanyDAO companyDao;
+
 	
 	
 
-	@RequestMapping("/mbti.do")
+	@RequestMapping("/weddingtest.do")
 	public String mbti() {
-		return "calendar/plan/mbti";
+		return "calendar/plan/weddingtest";
+	}
+	
+	@RequestMapping("/result1.do")
+	public String result1() {
+		return "calendar/plan/result1";
+	}
+	
+	@RequestMapping("/result2.do")
+	public String result2() {
+		return "calendar/plan/result2";
+	}
+	@RequestMapping("/result3.do")
+	public String result3() {
+		return "calendar/plan/result3";
+	}
+	@RequestMapping("/result4.do")
+	public String result4() {
+		return "calendar/plan/result4";
+	}
+	@RequestMapping("/result5.do")
+	public String result5() {
+		return "calendar/plan/result5";
 	}
 	
 	@RequestMapping("/notitest.do")
@@ -190,6 +213,7 @@ public class CalendarContoller {
 		List<ChecklistDTO> listcom = checklistDao.checklistAllCom(cidx);
 		List<PlanDTO> plistcom = planDao.planlistAllCom(cidx);
 		List<BookDTO> blistcom = calendarDao.memberbookCom(cidx);
+		List<BookListDTO> booklistcom=contentDao.selectComBook(cidx);
 		
 		List<MemberDTO> cominfo = calendarDao.comInfo(cidx);
 
@@ -221,7 +245,7 @@ public class CalendarContoller {
 
 	        jsonArray.add(jsonObject);
 	    }
-	    
+	    /*
 	    for(BookDTO bdto: blistcom) {
 			
 	        JSONObject jsonObject2 = new JSONObject();
@@ -236,19 +260,34 @@ public class CalendarContoller {
 	        jsonObject2.put("className",  bdto.getName());
 
 	        jsonArray2.add(jsonObject2);
-	        System.err.println();
+	        System.out.println(bdto.getName());
+	    }*/ 
+	    
+	    for(BookListDTO bookdto: booklistcom) {
+			
+	        JSONObject jsonObject2 = new JSONObject();
+	        
+	        jsonObject2.put("start", bookdto.getBk_date());
+	        jsonObject2.put("end", bookdto.getBk_date());
+	        jsonObject2.put("title", bookdto.getMname());
+	        jsonObject2.put("backgroundColor", "#FFE5CC");
+	        jsonObject2.put("textColor","black" ); 
+	        jsonObject2.put("borderColor", "#FFE5CC");
+	        jsonObject2.put("borderWidth", "1px");
+	        jsonObject2.put("className", bookdto.getMname());
+
+	        jsonArray2.add(jsonObject2);
 	    } 
 	    
 	    
 	    String jsonStr = jsonArray.toString();
 	    String jsonStr2 = jsonArray2.toString();
-
-
-	    System.err.println(jsonStr);
-	    System.err.println(jsonStr2);
+	    
+	    System.out.println(jsonStr);
+	    System.out.println(jsonStr2);
 	    
 	    int ptotalcom=plistcom.size();
-	    int btotalcom=blistcom.size();
+	    int btotalcom=booklistcom.size();
 	    int ctotalcom=listcom.size();
 	    
 	    
@@ -267,7 +306,7 @@ public class CalendarContoller {
 
 	    mav.addObject("checklistItemscom", listcom);
 	    mav.addObject("planlistscom", plistcom);
-	    mav.addObject("blistscom", blistcom);
+	    mav.addObject("booklistscom", booklistcom);
 	    
 	    mav.addObject("ptotalcom", ptotalcom);
 	    mav.addObject("btotalcom", btotalcom);
