@@ -51,8 +51,9 @@ function requestPay() {
 	for (var i = 0; i < itemPriceElements.length; i++) {
 		if(i==0){
 			itemPrice.push(itemPriceElements[i].value*0.2-usePoint);
+		}else{
+			itemPrice.push(itemPriceElements[i].value*0.2);
 		}
-		itemPrice.push(itemPriceElements[i].value*0.2);
 	}
 		$.ajax({
 			  type: 'POST',
