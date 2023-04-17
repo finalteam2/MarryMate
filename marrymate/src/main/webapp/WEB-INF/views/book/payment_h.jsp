@@ -53,26 +53,25 @@ function payResult(){
 		if(XHR.status==200){
 			var data=XHR.responseText;
 			data=JSON.parse(data);
-			
-			//변수들 선언
+			   
+			 //변수들 선언
 			   var loginName='${sessionScope.loginName}';
 			   var loginTel='${sessionScope.loginTel}';
 			   var loginJuso='${sessionScope.loginJuso}';   
 			   var strMidx='${sessionScope.loginMidx}';
 			   //midx:parseInt
 			   var midx=parseInt(strMidx);
-			   
-
-			   var bk_cname=document.getElementById('bk_cname').firstChild.nodeValue;
-			   
-			   var strFinalPrice=document.getElementById('finalPrice').firstChild.nodeValue;
-			   //finalPrice:parseInt
-			   var finalPrice=parseInt(strFinalPrice);
-			   var strUsePoint=document.getElementById('usePoint').firstChild.nodeValue;
-			   //usePoint:parseInt
-			   var usePoint=parseInt(strUsePoint);
-			
-				var pay_idx=data.pay_idx;
+				
+				 var bk_cname=document.getElementById('bk_cname').firstChild.nodeValue;
+				   
+				   var strFinalPrice=document.getElementById('finalPrice').firstChild.nodeValue;
+				   //finalPrice:parseInt
+				   var finalPrice=parseInt(strFinalPrice);
+				   var strUsePoint=document.getElementById('usePoint').firstChild.nodeValue;
+				   //usePoint:parseInt
+				   var usePoint=parseInt(strUsePoint);
+				
+					var pay_idx=parseInt(data.pay_idx);
 				
 					IMP.request_pay({
 				        pg : 'kcp.T0000',
@@ -86,7 +85,7 @@ function payResult(){
 				        company : '㈜ 메리메이트'
 				    }, function (rsp) {
 				        if (rsp.success) {
-				           
+				        	
 				           jQuery.ajax({
 				                url: "bookPointUpdate.do", 
 				                method: "POST",

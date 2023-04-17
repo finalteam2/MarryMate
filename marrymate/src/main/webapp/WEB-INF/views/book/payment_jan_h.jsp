@@ -86,7 +86,7 @@ function payResult(){
 				        company : '㈜ 메리메이트'
 				    }, function (rsp) {
 				        if (rsp.success) {
-				           
+				        	
 				           jQuery.ajax({
 				                url: "janPointUpdate.do", 
 				                method: "POST",
