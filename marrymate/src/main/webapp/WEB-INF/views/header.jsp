@@ -59,6 +59,7 @@ window.onload = function () {
 		<div class="notificationheader" id="notigroup">
 			<span class="notification-count">6</span>
 		</div>
+		<span class="notification-count">6</span>
 	</div>
 	<div>
 		<nav class="iamnav">
