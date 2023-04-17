@@ -25,7 +25,8 @@ public class BookpayDTO {
 	public void setFidx(String fidx) {
 		this.fidx = fidx;
 	}
-
+	
+	
 	public BookpayDTO(String midx, String cidx, String bk_date, String bk_time, String usePoint, String finalPrice,
 			String hidx, String fidx) {
 		super();

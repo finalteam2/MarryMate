@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			payment
 		where
-			bk_idx=#{bk_idx}
+			bk_idx=#{bk_idx} and pay_type='예약금'
 	</select>
 	
 	
@@ -130,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from
 			payment
 		where
-			bk_idx=#{bk_idx}
+			bk_idx=#{bk_idx} and pay_type='예약금'
 	</select>
 	
 	<insert id="comNoti" parameterType="com.marry.notification.model.NotificationDTO" >
@@ -149,8 +149,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set point=#{p_total} where midx=#{midx}
 	</update>
 	
-	<insert id="memPointMinus" parameterType="com.marry.point.model.PointDTO" >
+	<insert id="memBookPointMinus" parameterType="com.marry.point.model.PointDTO" >
 		insert into point values(point_p_idx.nextval,#{midx},#{pay_idx},null,null,#{p_cal},sysdate,#{p_total},'예약금')
+	</insert>
+	<insert id="memJanPointMinus" parameterType="com.marry.point.model.PointDTO" >
+		insert into point values(point_p_idx.nextval,#{midx},#{pay_idx},null,null,#{p_cal},sysdate,#{p_total},'잔금')
 	</insert>
 	
 	<select id="showBookTime" parameterType="Map" resultType="String">
@@ -160,5 +163,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="exceptBookTime" parameterType="Map" resultType="String">
 		select bk_time from book where cidx=#{cidx} and bk_date=#{strFilterDate} and bk_state!=4 order by bk_time
 	</select>
+	
+	<select id="janPayInfo" parameterType="Integer" resultType="com.marry.book.model.BookpayDTO">
+		select * from book,payment where book.bk_idx=payment.bk_idx and book.bk_idx=#{bk_idx}
+	</select>
+	
+	<select id="janHallInfo" parameterType="Integer" resultType="com.marry.company.model.HallDTO">
+		select * from hall where hidx=#{hidx}
+	</select>
+	<select id="janFoodInfo" parameterType="Integer" resultType="com.marry.company.model.FoodDTO">
+		select * from food where fidx=#{fidx}
+	</select>
+	
+	<update id="updateBkState3" parameterType="Integer">
+		update book set bk_state=3 where bk_idx=#{bk_idx} and bk_state=2
+	</update>
+	<insert id="insertJanPayInfo" parameterType="Map">
+		insert into payment values(payment_pay_idx.nextval,#{bk_idx},#{midx},'카드',sysdate,'잔금',#{usePoint},#{finalPrice})
+	</insert>
+	<select id="janGetPayIdx" parameterType="Integer" resultType="Integer">
+		select
+			pay_idx
+		from
+			payment
+		where
+			bk_idx=#{bk_idx} and pay_type='잔금'
+	</select>
+	<insert id="janPayNoti" parameterType="Integer" >
+        insert into notification values(notification_nidx.nextval,#{cidx},null,null,'myBook.do','잔금이 결제되었습니다','',1,sysdate,sysdate,0)
+	</insert>
   
 </mapper>

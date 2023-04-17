@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+   margin:0px;
+   padding:0px;
+   font-family: 'SUIT-Regular';
+   background:#fbf4ff;
+}
+video{
+   width:100%;
+}
+.bg_box{
+   position:relative;
+   width:100%;
+   height:320px;
+   overflow:hidden;
+   margin:0px auto;
+   outline:none;
+   border:none;
+}
+.bg_text{
+   position:absolute;
+   top:3%;
+   left:50%;
+   transform:translate(-50%,-3%);
+   color:#fff;
+}
+.title{
+   text-align:center;
+   font-size:43px;
+   margin-bottom:0px;
+   font-weight:bold;
+}
+.sub_title{
+   text-align:center;
+   font-size:22px;
+   margin-top:20px;
+}
+.box_title{
+   width:80%;
+   margin-left:5%;
+   margin-top:40px;
+   font-size:22px;
+}
+.janPay_container{
+	border:1px solid #e1e1e1;
+	position:absolute;
+	top:23%;
+	left:50%;
+	transform:translateX(-50%);
+	width:55%;
+	background:#fff;
+	border-radius:10px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+.janItem_box{
+	width:85.5%;
+	margin:0px auto;
+	border-radius:5px;
+	border:1px solid rgba(0, 0, 0, 0.175);
+	padding:14px 20px;
+	background-color:#f8f7f9;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+}
+.janItem_table{
+   border-radius:5px;
+   border:1px solid rgba(0, 0, 0, 0.175);
+   background-color:#fff;
+   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+   border-spacing:13px;
+   font-size:17px;
+   width:100%;
+   margin:6px auto;
+}
+.janItem_table .company_img{
+   width:105px;
+   height:125px;
+   border-radius:6px;
+   border:1px solid rgba(0, 0, 0, 0.175);
+   object-fit: cover;
+}
+.janItem_table .small_text{
+   font-size:14px;
+}
+.janItem_table .bold_text{
+   font-weight:bold;
+   color:#303030;
+   font-size:19px;
+}
+.janItem_table .itemPrice{
+   font-weight:bold;
+   color:#303030;
+   font-size:19px;
+}
+.janItem_table #bk_cname{
+   font-size:20px;
+}
+.janPay_box{
+	position:relative;
+	width:85.5%;
+	height:300px;
+	margin:0px auto;
+	border-radius:5px;
+	border:1px solid rgba(0, 0, 0, 0.175);
+	padding:14px 20px;
+	background-color:#f8f7f9;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+}
+.usePoint_box{
+   position:absolute;
+   top:50%;
+   transform:translateY(-50%);
+   width:46%;
+   height:72%;
+   border:1px solid rgba(0, 0, 0, 0.175);
+   border-radius:5px;
+   background-color:#fff;
+}
+.usePoint_table{
+   border-spacing:12px;
+   position:absolute;
+   font-size:18px;
+   width:95%;
+   height:64%;
+   top:10%;
+   left:70%;
+   transform:translateX(-70%);
+}
+.bold_text{
+   font-weight:bold;
+   color:#303030;
+}
+.usePoint_input{
+   width:50%;
+   height:65%;
+   font-size:14px;
+   border:1px solid #2d2532;
+   border-radius:3px;
+   padding-left:6px;
+   background-color:#f8f7f9;
+}
+.usePoint_input:focus{
+   outline: none;
+}
+.allUsePoint_box{
+   position:absolute;
+   top:56.5%;
+   left:72%;
+}
+.allUsePoint_button{
+   cursor:pointer;
+   border:1px solid #4a3d52;
+   background-color:#574761;
+   border-radius:4px;
+   color:#fff;
+   font-size:12px;
+   padding:3px 6px;
+}
+.afterPoint_h2{
+   position:absolute;
+   top:75%;
+   left:50%;
+   transform:translateX(-50%);
+   font-size:16px;
+   width:90%;
+   text-align:center;
+   color:#ff6868;
+}
+.calPrice_box{
+   position:absolute;
+   top:7.5%;
+   left:51%;
+   width:46%;
+   height:85%;
+   border:1px solid rgba(0, 0, 0, 0.175);
+   border-radius:5px;
+   background-color:#fff;
+}
+.calPrice_table{
+   text-align:right;
+   margin:0px auto;
+   margin-top:6px;
+   width:85%;
+   border-spacing:7px;
+}
+.bold_text2{
+   font-weight:bold;
+   color:#303030;
+   font-size:19.5px;
+}
+.light_text{
+   font-size:14.5px;
+   color:rgba(0, 0, 0, 0.8);
+}
+.finalPrice_text{
+   position:absolute;
+   top:70%;
+   text-align:center;
+   width:100%;
+   font-size:28px;
+   color:#3f52fa;
+}
+.payInfo_box{
+   width:85.5%;
+   margin:0px auto;
+   border-radius:5px;
+   border:1px solid rgba(0, 0, 0, 0.175);
+   padding:14px 20px;
+   background-color:#f8f7f9;
+   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+}
+.payButton_box{
+   width:45%;
+   height:75px;
+   margin:90px auto;
+}
+.payButton{
+   width:100%;
+   height:100%;
+   border-radius:8px;
+   background:#5392f9;
+   border:none;
+   color:#fff;
+   font-size:25px;
+   font-weight:bold;
+   cursor:pointer;
+   font-family: 'SUIT-Regular';
+}
+.payButton:hover{
+   background:#74a6fa;
+   transition: all 0.4s;
+}

@@ -103,7 +103,7 @@ function requestPay() {
 			        if (rsp.success) {
 			           
 			           jQuery.ajax({
-			                url: "pointUpdate.do", 
+			                url: "bookPointUpdate.do", 
 			                method: "POST",
 			                data: {
 			                	midx:midx,
@@ -126,8 +126,6 @@ function requestPay() {
 			  }
 			});
 	}
-	
-
 </script>
 </head>
 <body onload="showLoad()">
@@ -158,7 +156,7 @@ function requestPay() {
                </tr>
             </table>
          </div>
-         <h1 class="box_title">상품 정보</h1>
+         <h1 class="box_title">예약 정보</h1>
          <div class="itemInfo_box">
             
             
