@@ -71,6 +71,9 @@ function notiResult(){
 						}		
 				}
 				htmlStr += '</ul>';
+				if(notiCnt != null){
+					htmlStr += '<span class="notification-count">' + notiCnt + '</span>';
+				}
 			}
 			notiNode.innerHTML = htmlStr;
 		}
