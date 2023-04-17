@@ -20,7 +20,8 @@
 		h4 {
 			text-align: center;
 		}
-		table {
+		
+		.viewTable {
 			margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 70px;
@@ -32,52 +33,69 @@
 			border-radius: 5px;
 			background-color: #ffffff;
 		}
-		th, td {
+		
+		.viewTable th, .viewTable td {
 			padding: 10px;
 			font-size: 16px;
 			color: #333333;
 			border: 1px solid #d9d9d9;
 		}
-		th {
+		
+		.viewTable th {
 			background-color: #f2f2f2;
 			font-weight: bold;
 			text-align: center;
 		}
-		td {
+		
+		.viewTable td {
 			text-align: center;
 		}
-		td a {
+		
+		.viewTable td a {
 			color: #333333;
 			text-decoration: none;
 		}
-		td a:hover {
+		
+		.viewTable td a:hover {
 			color: #555555;
 			text-decoration: underline;
 		}
-		th:first-child, td:first-child {
+		
+		.viewTable th:first-child, .viewTable td:first-child {
 			width: 10%;
 		}
 		
-		th:nth-child(2), td:nth-child(2) {
+		.viewTable th:nth-child(2), .viewTable td:nth-child(2) {
 			width: 30%;
 		}
 		
-		th:nth-child(3), td:nth-child(3) {
-			width: 10%;
-		}
-		
-		th:nth-child(4), td:nth-child(4) {
+		.viewTable th:nth-child(3), .viewTable td:nth-child(3) {
 			width: 15%;
 		}
 		
-		th:nth-child(5), td:nth-child(5) {
+		.viewTable th:nth-child(4), .viewTable td:nth-child(4) {
+			width: 15%;
+		}
+		
+		.viewTable th:nth-child(5), .viewTable td:nth-child(5) {
 			width: 5%;
 		}
 		
-		th:last-child, td:last-child {
+		.viewTable th:last-child, .viewTable td:last-child {
 			width: 5%;
 		}
-		.noti table {
+		
+		.viewTable tr.green-bg {
+			background-color: #C5E1A5;
+			font-weight: bold;
+		}
+		
+		.viewTable tr.pink-bg {
+			background-color: #FFE5E5;
+			font-weight: bold;
+		}
+		
+		.viewNoti {
 			margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 70px;
@@ -90,47 +108,52 @@
 			background-color: #ffffff;
 		}
 		
-		.noti th, .noti td {
+		.viewNoti th, .viewNoti td {
 			padding: 10px;
 			font-size: 16px;
 			color: #333333;
 			border: 1px solid #d9d9d9;
 		}
 		
-		.noti th {
+		.viewNoti th {
 			background-color: #f2f2f2;
 			font-weight: bold;
 			text-align: center;
 		}
 		
-		.noti td {
+		.viewNoti td {
 			text-align: center;
 		}
 		
-		.noti td a {
+		.viewNoti td a {
 			color: #333333;
 			text-decoration: none;
 		}
 		
-		.noti td a:hover {
+		.viewNoti td a:hover {
 			color: #555555;
 			text-decoration: underline;
 		}
 		
-		.noti th:first-child, .noti td:first-child {
+		.viewNoti th:first-child, .viewNoti td:first-child {
 			width: 10%;
 		}
 		
-		.noti th:nth-child(2), .noti td:nth-child(2) {
+		.viewNoti th:nth-child(2), .viewNoti td:nth-child(2) {
 			width: 20%;
 		}
 		
-		.noti th:nth-child(3), .noti td:nth-child(3) {
+		.viewNoti th:nth-child(3), .viewNoti td:nth-child(3) {
 			width: 10%;
 		}
 		
-		.noti th:last-child, .noti td:last-child {
+		.viewNoti th:last-child, .viewNoti td:last-child {
 			width: 10%;
+		}
+		
+		.viewNoti tr.pink-bg {
+			background-color: #FFE5E5;
+			font-weight: bold;
 		}
 	</style>
 </head>
@@ -138,7 +161,7 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h1>커뮤니티</h1>
 	<h4><a href="notiList.do">공지사항</a></h4>
-	<table class="noti">
+	<table class="viewNoti">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -173,7 +196,7 @@
 		</tbody>
 	</table>
 	<h4><a href="afterList.do">웨딩후기</a></h4>
-	<table>
+	<table class="viewTable">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -212,7 +235,7 @@
 		</tbody>
 	</table>
 	<h4><a href="talkList.do">웨딩톡톡</a></h4>
-	<table>
+	<table class="viewTable">
 		<thead>
 			<tr>
 				<th>번호</th>

@@ -20,7 +20,7 @@ h1 {
 	margin-top: 50px;
 }
 
-table {
+.viewTable {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 70px;
@@ -33,63 +33,63 @@ table {
 	background-color: #ffffff;
 }
 
-th, td {
+.viewTable th, .viewTable td {
 	padding: 10px;
 	font-size: 16px;
 	color: #333333;
 	border: 1px solid #d9d9d9;
 }
 
-th {
+.viewTable th {
 	background-color: #f2f2f2;
 	font-weight: bold;
 	text-align: center;
 }
 
-td {
+.viewTable td {
 	text-align: center;
 }
 
-td a {
+.viewTable td a {
 	color: #333333;
 	text-decoration: none;
 }
 
-td a:hover {
+.viewTable td a:hover {
 	color: #555555;
 	text-decoration: underline;
 }
 
-th:first-child, td:first-child {
+.viewTable th:first-child, .viewTable td:first-child {
 	width: 10%;
 }
 
-th:nth-child(2), td:nth-child(2) {
+.viewTable th:nth-child(2), .viewTable td:nth-child(2) {
 	width: 30%;
 }
 
-th:nth-child(3), td:nth-child(3) {
+.viewTable th:nth-child(3), .viewTable td:nth-child(3) {
 	width: 15%;
 }
 
-th:nth-child(4), td:nth-child(4) {
+.viewTable th:nth-child(4), .viewTable td:nth-child(4) {
 	width: 15%;
 }
 
-th:nth-child(5), td:nth-child(5) {
+.viewTable th:nth-child(5), .viewTable td:nth-child(5) {
 	width: 5%;
 }
 
-th:last-child, td:last-child {
+.viewTable th:last-child, .viewTable td:last-child {
 	width: 5%;
 }
 
-tr.green-bg {
+.viewTable tr.green-bg {
 	background-color: #C5E1A5;
 	font-weight: bold;
 }
 
-tr.pink-bg {
+.viewTable tr.pink-bg {
 	background-color: #FFE5E5;
 	font-weight: bold;
 }
@@ -186,7 +186,7 @@ tr.pink-bg {
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div id="tableBox">
 		<h1>웨딩톡톡</h1>
-		<table>
+		<table class="viewTable">
 			<thead>
 				<tr>
 					<th>번호</th>

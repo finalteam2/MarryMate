@@ -16,7 +16,8 @@
 			text-align: center;
 			margin-top: 50px;
 		}
-		table {
+		
+		.viewNoti {
 			margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 70px;
@@ -28,46 +29,55 @@
 			border-radius: 5px;
 			background-color: #ffffff;
 		}
-		th, td {
+		
+		.viewNoti th, .viewNoti td {
 			padding: 10px;
 			font-size: 16px;
 			color: #333333;
 			border: 1px solid #d9d9d9;
 		}
-		th {
+		
+		.viewNoti th {
 			background-color: #f2f2f2;
 			font-weight: bold;
 			text-align: center;
 		}
-		td {
+		
+		.viewNoti td {
 			text-align: center;
 		}
-		td a {
+		
+		.viewNoti td a {
 			color: #333333;
 			text-decoration: none;
 		}
-		td a:hover {
+		
+		.viewNoti td a:hover {
 			color: #555555;
 			text-decoration: underline;
 		}
-		th:first-child, td:first-child {
+		
+		.viewNoti th:first-child, .viewNoti td:first-child {
 			width: 10%;
 		}
 		
-		th:nth-child(2), td:nth-child(2) {
+		.viewNoti th:nth-child(2), .viewNoti td:nth-child(2) {
 			width: 20%;
 		}
 		
-		th:nth-child(3), td:nth-child(3) {
+		.viewNoti th:nth-child(3), .viewNoti td:nth-child(3) {
 			width: 10%;
 		}
-		th:last-child, td:last-child {
+		
+		.viewNoti th:last-child, .viewNoti td:last-child {
 			width: 10%;
 		}
-		tr.pink-bg {
+		
+		.viewNoti tr.pink-bg {
 			background-color: #FFE5E5;
 			font-weight: bold;
 		}
+
 		.each td a {
 		  display: inline-block;
 		  width: 30%;
@@ -138,7 +148,7 @@ function createInputField() {
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div id="tableBox">
 	<h1>공지사항</h1>
-		<table>
+		<table class="viewNoti">
 			<thead>
 				<tr>
 					<th>번호</th>
