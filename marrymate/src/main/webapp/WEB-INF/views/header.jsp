@@ -12,7 +12,6 @@ window.onload = function () {
 
 </script>
 <!-- 알림 자바스크립트 -->
-<script src="js/checkNoti.js"></script>
 <header style="justify-content: space-between;" id="header">
 	<div class="loginboxheader">
 		<c:if
@@ -131,5 +130,5 @@ window.onload = function () {
 </script>
 <!-- 알림 실행하는거 (맨밑에 해놔야댐) -->
 <script>
-checkNoti();
+//checkNoti();
 </script>

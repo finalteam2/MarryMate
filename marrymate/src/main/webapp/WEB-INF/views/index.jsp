@@ -41,8 +41,6 @@ video{
 </head>
 
 <body>
-<!-- 알림 자바스크립트 -->
-<script src="js/checkNoti.js"></script>
 
 <script>
 
@@ -99,8 +97,6 @@ function getCookie(name) {
 <%@include file="header.jsp" %>
 <h1>main입니다.</h1>
 
-<!-- 알림 기준 div -->
-<div id="notigroup" class="btn-group"></div>
 
 <section id="mainevent">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -144,10 +140,6 @@ function getCookie(name) {
 
 <%@include file="chatbot.jsp" %>
 <%@include file="footer.jsp" %>
-<!-- 알림 실행하는거 (맨밑에 해놔야댐) -->
-<script>
-checkNoti();
-</script>
 
 </body>
 </html>

@@ -8,50 +8,27 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/marrymate/css/chatbot.css">
 <link rel="stylesheet" href="/marrymate/css/chat.css">
-</head>
-<body>
-<div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
-<div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
-
-<div class="background">
-	<div class="window">
-    	<div class="popup">
-			<div id="close">
-				<table align="right">
-					<tr height="65">
-						<th width="260" align="left">상담챗</th>
-						<td width="50">
-							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30" onclick="rs();">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="wrap">
-			    <table width="300" height="540" align="center" id="tb">
-			    	<tr id="tr">
-			    		<td>
-			    		<div id="chat_p" style="width:320px;height:360px;overflow:auto;">
-							<div class="chat ch1" id="st">
-						    	<div class="icon"><img src="/marrymate/img/chatbot_profile.png" alt="chatbot" width="40" height="40"></div>
-						    	<div class="textbox">무엇을 도와드릴까요?</div>
-							</div>
-							<div id="user_chat"></div>
-						</div>
-						</td>
-					</tr>
-					<tr id="tr2">
-						<td>
-							<div id="questions"></div>
-				        </td>
-				     </tr>
-				     <input type="hidden" id="tx">
-			    </table>
-			</div>
-        </div>
-	</div>
-</div>
 <script>
-var XHR3 =null;
+var XHR3 = null;
+
+var midx = sessionStorage.getItem("loginMidx");
+var cidx = sessionStorage.getItem("com_cidx");
+
+if(midx !== null){
+//	console.log('midx' + midx);
+}else {
+//	console.log('midx 없음');
+	midx = 0;
+//	console.log('midx' + midx);
+}
+if(cidx !== null){
+//	console.log('cidx' + cidx);
+}else {
+//	console.log('cidx 없음');
+	cidx = 0;
+//	console.log('cidx' + cidx);
+}
+
 
 function getXHR3(){
 	if(window.ActiveXObject){
@@ -88,11 +65,11 @@ function sendRequest3(url, param, method, callback){
 }
 
 function rn(){
-	if(${not empty sessionScope.loginMidx}){
-		var param='midx='+${sessionScope.loginMidx};
+	if(midx != 0){
+		var param='midx='+midx;
 		sendRequest3('readNum_m.do',param,'GET',rnResult);
-	}else if(${not empty sessionScope.com_cidx}){
-		var param='cidx='+${sessionScope.com_cidx};
+	}else if(cidx != 0){
+		var param='cidx='+cidx;
 		sendRequest3('readNum_c.do',param,'GET',rnResult);
 	}
 }
@@ -225,12 +202,12 @@ function anResult(){
 }
 
 function chat_tx(){
-	if(${(empty sessionScope.loginMidx) && (empty sessionScope.com_cidx)}){
+	if(midx == 0 || cidx == 0){
 		window.alert('로그인 후 이용가능합니다.');
 		location.href='index.do';
 	}else{
 		
-		if(${not empty sessionScope.loginMidx}){
+		if(mdix != 0){
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
 			for(var i=DivChildNodes.length-1;i>=0;i--) {
@@ -264,7 +241,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='midx='+${sessionScope.loginMidx};
+			var param='midx=' + midx;
 			sendRequest3('load_m.do',param,'GET',ctResult);
 		}else{
 			
@@ -301,7 +278,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='cidx='+${sessionScope.com_cidx};
+			var param='cidx='+ cidx;
 			sendRequest3('load_c.do',param,'GET',ctResult);
 		}
 	}
@@ -310,9 +287,9 @@ function chat_tx(){
 function press(e){
     if(e.keyCode == 13){
     	
-    	if(${not empty sessionScope.loginMidx}){
+    	if(midx != 0){
 	    	var param='';
-	    	param+='midx='+${sessionScope.loginMidx};
+	    	param+='midx='+midx;
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest3('content_m.do',param,'GET',ctResult);
 	    	
@@ -320,7 +297,7 @@ function press(e){
     	}else{
     		
     		var param='';
-	    	param+='cidx='+${sessionScope.com_cidx};
+	    	param+='cidx='+cidx;
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest3('content_c.do',param,'GET',ctResult);
 	    	
@@ -402,10 +379,52 @@ function rs(){
 		DivNode.removeChild(DivChildNode);
 	}
 }
+</script>
+</head>
+<body>
+<div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
+<div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
 
+<div class="background">
+	<div class="window">
+    	<div class="popup">
+			<div id="close">
+				<table align="right">
+					<tr height="65">
+						<th width="260" align="left">상담챗</th>
+						<td width="50">
+							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30" onclick="rs();">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="wrap">
+			    <table width="300" height="540" align="center" id="tb">
+			    	<tr id="tr">
+			    		<td>
+			    		<div id="chat_p" style="width:320px;height:360px;overflow:auto;">
+							<div class="chat ch1" id="st">
+						    	<div class="icon"><img src="/marrymate/img/chatbot_profile.png" alt="chatbot" width="40" height="40"></div>
+						    	<div class="textbox">무엇을 도와드릴까요?</div>
+							</div>
+							<div id="user_chat"></div>
+						</div>
+						</td>
+					</tr>
+					<tr id="tr2">
+						<td>
+							<div id="questions"></div>
+				        </td>
+				     </tr>
+				     <input type="hidden" id="tx">
+			    </table>
+			</div>
+        </div>
+	</div>
+</div>
+<script>
 document.querySelector("#chatshow").addEventListener("click", chatshow);
 document.querySelector("#close").addEventListener("click", close);
-
 rn();
 </script>
 </body>
