@@ -164,7 +164,7 @@
 		border-bottom: 2px dashed black;
 	}
 	#jBox {
-		width: 350px;
+		width: 500px;
 		height: 60px;
 		margin-left: auto;
 		margin-right: auto;
@@ -232,7 +232,8 @@
 				</div>
 				<div id="jBox">
 					<input type="submit" class="w-btn-outline w-btn-red-outline" value="작성완료">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시쓰기">
+					<input type="reset" class="w-btn-outline w-btn-red-outline" value="다시쓰기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="w-btn-outline w-btn-red-outline" onclick="window.history.back()" value="취소하기">
 				</div>
 				</div>
 			</form>
