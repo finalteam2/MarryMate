@@ -58,10 +58,16 @@ function notiResult(){
 				for(var i = 0; i < notiArr.length; i++){
 					var noti = notiArr[i];
 					//알람 하나씩 추가
+						var notipage = '';
+						if(noti.page != null){
+							notipage = noti.page;
+						}
+						
+					
 						if(noti.checked == 1){
-							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:gray;">' + noti.title + '</span></a></li>';
+							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + notipage + '"><span style="color:gray;">' + noti.title + '</span></a></li>';
 						}else if(noti.checked == 0){
-							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:red;">' + noti.title + '</span></a></li>';
+							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + notipage + '"><span style="color:red;">' + noti.title + '</span></a></li>';
 						}		
 				}
 				htmlStr += '</ul>';
