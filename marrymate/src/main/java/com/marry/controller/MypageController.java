@@ -144,7 +144,7 @@ public class MypageController {
 	}
 		
 	@RequestMapping("/myCommunity.do")
-	public ModelAndView comSelect(HttpServletRequest req) {
+	public ModelAndView myCommunity(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		int midx = (Integer) session.getAttribute("loginMidx");
 		ModelAndView mav = new ModelAndView();
