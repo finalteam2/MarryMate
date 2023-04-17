@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/marrymate/css/chatbot.css">
 <link rel="stylesheet" href="/marrymate/css/chat.css">
-<script type="text/javascript" src="js/httpRequest.js"></script>
 </head>
 <body>
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
@@ -59,19 +58,56 @@
 	</div>
 </div>
 <script>
+var XHR3 =null;
+
+function getXHR3(){
+	if(window.ActiveXObject){
+		return new ActiveXObject('Msxml2.XMLHTTP');
+	}else if(window.XMLHttpRequest){
+		return new XMLHttpRequest();
+	}else {
+		return null;
+	}
+}
+
+function sendRequest3(url, param, method, callback){
+	XHR3 = getXHR3();
+	
+	var newMethod = method?method:'GET';
+	if (newMethod != 'GET' && newMethod != 'POST'){
+		newMethod = 'GET';
+	}
+	
+	var newParam = (param == null || param == '')?null:param;
+	
+	var newUrl = url;
+	
+	if(newMethod == 'GET' && newParam != null){
+		newUrl = newUrl + '?' + newParam;
+	
+	}
+	
+	XHR3.onreadystatechange=callback;
+	XHR3.open(newMethod,newUrl,true);
+	XHR3.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	XHR3.send(newMethod=='POST'?newParam:null);
+
+}
+
+
 function rn(){
 	if(${sessionScope.loginMidx!=0}){
 		var param='midx='+${sessionScope.loginMidx};
-		sendRequest('readNum_m.do',param,'GET',rnResult);
+		sendRequest3('readNum_m.do',param,'GET',rnResult);
 	}else if(${sessionScope.com_cidx!=0}){
 		var param='cidx='+${sessionScope.com_cidx};
-		sendRequest('readNum_c.do',param,'GET',rnResult);
+		sendRequest3('readNum_c.do',param,'GET',rnResult);
 	}
 }
 function rnResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data=XHR.responseText;
+	if(XHR3.readyState==4){
+		if(XHR3.status==200){
+			var data=XHR3.responseText;
 			data=JSON.parse(data);
 			
 			var read=data.read;
@@ -100,12 +136,12 @@ function chatshow() {
 
 function qs(){
 	document.getElementById('tx').focus();
-	sendRequest('questions.do',null,'GET',qsResult);
+	sendRequest3('questions.do',null,'GET',qsResult);
 }
 function qsResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data=XHR.responseText;
+	if(XHR3.readyState==4){
+		if(XHR3.status==200){
+			var data=XHR3.responseText;
 			data=JSON.parse(data);
 			
 			var dtos=data.dtos;
@@ -150,12 +186,12 @@ function qsResult(){
 
 function an(acsidx){
 	var param='acsidx='+acsidx;
-	sendRequest('answer.do',param,'GET',anResult);
+	sendRequest3('answer.do',param,'GET',anResult);
 }
 function anResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data=XHR.responseText;
+	if(XHR3.readyState==4){
+		if(XHR3.status==200){
+			var data=XHR3.responseText;
 			data=JSON.parse(data);
 			
 			var dto=data.dto;
@@ -237,7 +273,7 @@ function chat_tx(){
 			document.getElementById('tx').focus();
 			
 			var param='midx='+${sessionScope.loginMidx};
-			sendRequest('load_m.do',param,'GET',ctResult);
+			sendRequest3('load_m.do',param,'GET',ctResult);
 		}else{
 			
 			var DivNode=document.getElementById('user_chat');
@@ -274,7 +310,7 @@ function chat_tx(){
 			document.getElementById('tx').focus();
 			
 			var param='cidx='+${sessionScope.com_cidx};
-			sendRequest('load_c.do',param,'GET',ctResult);
+			sendRequest3('load_c.do',param,'GET',ctResult);
 		}
 	}
 }
@@ -286,7 +322,7 @@ function press(e){
 	    	var param='';
 	    	param+='midx='+${sessionScope.loginMidx};
 			param+='&content='+document.getElementById('tx').value;
-			sendRequest('content_m.do',param,'GET',ctResult);
+			sendRequest3('content_m.do',param,'GET',ctResult);
 	    	
 	        document.getElementById('tx').value='';
     	}else{
@@ -294,15 +330,15 @@ function press(e){
     		var param='';
 	    	param+='cidx='+${sessionScope.com_cidx};
 			param+='&content='+document.getElementById('tx').value;
-			sendRequest('content_c.do',param,'GET',ctResult);
+			sendRequest3('content_c.do',param,'GET',ctResult);
 	    	
 	        document.getElementById('tx').value='';
     	}
     }
 }
 function ctResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
+	if(XHR3.readyState==4){
+		if(XHR3.status==200){
 			
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
@@ -311,7 +347,7 @@ function ctResult(){
 				DivNode.removeChild(DivChildNode);
 			}
 			
-			var data=XHR.responseText;
+			var data=XHR3.responseText;
 			data=JSON.parse(data);
 			
 			var dtos=data.dtos;
