@@ -68,26 +68,26 @@ public class NotificationController {
 //		System.out.println("cidx"+cidx);
 		
 		ModelAndView mav = new ModelAndView();
+		List<NotificationDTO> arr = null;
+		int cnt = 0;
 		if (midx > 0) {
-//			System.out.println("midx 실행"+midx);
-			List<NotificationDTO> arr = notificationDao.selectMemNoti(midx);
-//			for(int i = 0; i < arr.size(); i++) {
-//				System.out.println(arr.get(i).getTitle());
-//			}
-			int cnt = notificationDao.cntMemNoti(midx);
-			mav.addObject("arr", arr);
-			mav.addObject("cnt", cnt);
+			System.out.println("midx 실행"+midx);
+			arr = notificationDao.selectMemNoti(midx);
+			for(int i = 0; i < arr.size(); i++) {
+				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
+			}
+			cnt = notificationDao.cntMemNoti(midx);
 		}else if(cidx > 0) {
-//			System.out.println("cidx 실행"+cidx);
-			List<NotificationDTO> arr = notificationDao.selectComNoti(cidx);
-			int cnt = notificationDao.cntComNoti(cidx);
-//			for(int i = 0; i < arr.size(); i++) {
-//				System.out.println(arr.get(i).getTitle());
-//			}
-			mav.addObject("arr", arr);
-			mav.addObject("cnt", cnt);
+			System.out.println("cidx 실행"+cidx);
+			arr = notificationDao.selectComNoti(cidx);
+			cnt = notificationDao.cntComNoti(cidx);
+			for(int i = 0; i < arr.size(); i++) {
+				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
+			}
 		}
-		mav.setViewName("index");
+		mav.addObject("notiArr", arr);
+		mav.addObject("notiCnt", cnt);
+		mav.setViewName("finalJson");
 		return mav;
 	}
 	

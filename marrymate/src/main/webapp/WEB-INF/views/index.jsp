@@ -41,6 +41,45 @@ video{
 </head>
 
 <body>
+<script src="/marrymate/js/httpRequest.js"></script>
+<script>
+function checkNoti(){
+	var param = '';
+	sendRequest('checkNoti.do',param,'POST',notiResult);
+}
+function notiResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data = XHR.responseText;
+			data = JSON.parse(data);
+			var notiArr = data.notiArr;
+			var notiCnt = data.notiCnt;
+			
+			var notiNode = document.getElementById('notigroup');
+			
+			//새 알람
+			var htmlStr = ''
+			htmlStr += '<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">알람';
+			htmlStr += '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' + notiCnt;
+			htmlStr += '<span class="visually-hidden">unread messages</span></span></button>';
+			htmlStr += '<ul id="notiUl" class="dropdown-menu">';
+			
+			for(var i = 0; i < notiArr.length; i++){
+				var noti = notiArr[i];
+				//알람 하나씩 추가
+					if(noti.checked == 1){
+						htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:gray;">' + noti.title + '</span></a></li>';
+					}else if(noti.checked == 0){
+						htmlStr += ' <li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:red;">' + noti.title + '</span></a></li>';
+					}		
+			}
+			htmlStr += '</ul>';
+			notiNode.innerHTML = htmlStr;
+		}
+	}
+}
+</script>
+
 <script>
 $(window).load(function () {
     $('body').sakura();
@@ -70,32 +109,10 @@ function handleVideoEnd() {
 <%@include file="header.jsp" %>
 <h1>main입니다.</h1>
 <h2>아래는 추후 수정 예정입니다!</h2>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    알람
-  <c:if test="${not empty cnt }">
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    ${cnt }
-    <span class="visually-hidden">unread messages</span>
-  </span>
-  </c:if>
-  </button>
-  <ul class="dropdown-menu">
-  <c:forEach varStatus="status" var="dto" items="${arr }">
-    <c:if test="${dto.checked eq 1 }">
-    <li><a href="goNoti.do?nidx=${dto.nidx }&page=${dto.page}"><span style="color:gray;">${dto.title }</span></a></li>
-    </c:if> 
-    <c:if test="${dto.checked eq 0 }">
-    <li><a href="goNoti.do?nidx=${dto.nidx }&page=${dto.page}"><span style="color:red;">${dto.title }</span></a></li>
-    </c:if> 
-  </c:forEach>
-  <c:if test="${not empty arr }">
-    <li><hr class="dropdown-divider"></li>
-  </c:if>
-    <li><a class="dropdown-item" href="checkNoti.do">알림 확인</a></li>
-  </ul>
+<div id="notigroup" class="btn-group">
 </div>
+
+
 
 
 
@@ -132,5 +149,9 @@ function handleVideoEnd() {
 
 <%@include file="chatbot.jsp" %>
 <%@include file="footer.jsp" %>
+<script>
+checkNoti();
+</script>
+
 </body>
 </html>
