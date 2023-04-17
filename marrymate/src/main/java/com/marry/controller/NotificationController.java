@@ -71,19 +71,19 @@ public class NotificationController {
 		List<NotificationDTO> arr = null;
 		int cnt = 0;
 		if (midx > 0) {
-			System.out.println("midx 실행"+midx);
+//			System.out.println("midx 실행"+midx);
 			arr = notificationDao.selectMemNoti(midx);
-			for(int i = 0; i < arr.size(); i++) {
-				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
-			}
+//			for(int i = 0; i < arr.size(); i++) {
+//				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
+//			}
 			cnt = notificationDao.cntMemNoti(midx);
 		}else if(cidx > 0) {
-			System.out.println("cidx 실행"+cidx);
+//			System.out.println("cidx 실행"+cidx);
 			arr = notificationDao.selectComNoti(cidx);
 			cnt = notificationDao.cntComNoti(cidx);
-			for(int i = 0; i < arr.size(); i++) {
-				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
-			}
+//			for(int i = 0; i < arr.size(); i++) {
+//				System.out.println(arr.get(i).getTitle() + arr.get(i).getChecked());
+//			}
 		}
 		mav.addObject("notiArr", arr);
 		mav.addObject("notiCnt", cnt);
