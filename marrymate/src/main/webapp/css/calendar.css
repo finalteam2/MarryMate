@@ -256,25 +256,11 @@ body {
 }
 
 
-.ththeadya{
-	border: 1px solid #cccccc;
-	width: 140px;
-	height: 100px;
-	align-self: center;
-	text-align: center;
-}
-
 .caldate .trth{
 	text-align: center;
 	font-size: 28px;
 }
-.theadya{
-	border: 1px solid #cccccc;
-	width: 200px;
-	height: 150px;
-	align-self: center;
-	font-size: 25px;
-}
+
 
 .calendarshow{
 	font-family: 'SUIT-Regular';
@@ -400,7 +386,6 @@ video {
 	display: flex;
 }
 
-
 .checkListTopWrap .profileWrap .profileBox .imgArea {
 	width: 280px;
 	position: relative;
@@ -412,8 +397,8 @@ video {
 
 
 .checkListTopWrap .profileWrap .profileBox .txtArea {
-	margin: 0 0 0 12%;
-	padding: 10% 0 0 0;
+	margin: 0 0 0 8%;
+	padding: 31% 0 0 0;
 	flex: 1; /* 텍스트 요소가 남은 공간을 모두 차지하도록 설정 */
 }
 

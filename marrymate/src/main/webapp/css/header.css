@@ -126,6 +126,22 @@
 .notificationheader:hover ul {
 	display: block;
 }
+
+.notification-count {
+  position: absolute;
+  z-index: 1;
+  top: -12px;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  line-height: 10px;
+  font-size: 15px;
+  border-radius: 50%;
+  background-color: #8000ff;
+  color: #fff;
+  animation: zoom 3s 3s both infinite;
+}
+
 ul > li:last-child ul{
     right: 5px;
     left: auto;
@@ -138,6 +154,12 @@ nav{
 
 nav .navdiv{
 	padding: 20px;
+}
+
+.loginbar{
+	text-decoration: none;
+	color: black;
+	margin-left: 10px;
 }
 .titlebar a{
     font-family: 'TAEBAEKmilkyway';
@@ -162,7 +184,7 @@ nav .navdiv{
 	align-items: right;
 	display: flex;
     align-content: space-between;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }
 .loginboxheader .mypimg{

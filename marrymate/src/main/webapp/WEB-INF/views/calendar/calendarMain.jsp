@@ -401,16 +401,16 @@ function checkAlladd(){
 		<div class="titlecss">
 			<a id="planlistMove">Myplan</a>
 		</div>
+		<br>
 		<form action="planlistDel.do" method="post">
 			<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 			<table style="margin-left: auto; margin-right: auto;" border="1"
 				width="900" cellspacing="0">
-				<thead style="width: 120px; height: 80px;">
+				<thead style="width: 120px; height: 60px;">
 					<tr>
 						<th>제목</th>
 						<th>일자</th>
-						<th>내용</th>
-						<th></th>
+						<th colspan="2">내용</th>
 					</tr>
 				</thead>
 				<tbody style="width: 120px; height: 150px;">
@@ -423,15 +423,14 @@ function checkAlladd(){
 						<tr>
 							<td>${pdto.title}</td>
 							<td>${pdto.pdate}</td>
-							<td>${pdto.content}</td>
-							<td><input type="submit" value="삭제"> <input
+							<td>${pdto.content}<input type="submit" value="삭제"> <input
 								type="hidden" name="ridx" value="${pdto.myp_idx}">
-								<button type="button" id="checkdel" onclick="return checkdel()">삭제</button></td>
+								<a href="${deleteplan}" ><button type="button" id="plandel" onclick="return plandel()">삭제</button></a>
+								</td>
 						</tr>
-						<c:url var="deleteplan" value="checklistDel.do">
+						<c:url var="deleteplan" value="planlistDel.do">
 							<c:param name="myp_idx">${pdto.myp_idx}</c:param>
 						</c:url>
-						<a href="${deleteplan}" onclick="return checkDel()">삭제</a>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -446,7 +445,7 @@ function checkAlladd(){
 	<div class="checklistwrap">
 		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 		<div class="titlecss" id="checklistitems">
-			<a id="checklistMove">모든 체크리스트</a>
+			<a id="checklistMove">My Checklist</a>
 		</div>
 		<div style="padding-left: 65%">
 			<button type="button" id="checkadd" onclick="checkadd();">새
@@ -456,12 +455,11 @@ function checkAlladd(){
 			<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 			<table style="margin-left: auto; margin-right: auto;" border="1"
 				width="900" cellspacing="0">
-				<thead style="width: 120px; height: 80px;">
+				<thead style="width: 120px; height: 60px;">
 					<tr>
 						<th>제목</th>
 						<th>일자</th>
-						<th>내용</th>
-						<th></th>
+						<th colspan="2">내용</th>
 					</tr>
 				</thead>
 				<tbody style="width: 120px; height: 150px;">
@@ -474,8 +472,7 @@ function checkAlladd(){
 						<tr>
 							<td>${dto.title}</td>
 							<td>${dto.dueday}</td>
-							<td>${dto.content}</td>
-							<td><input type="submit" value="삭제">
+							<td>${dto.content}<input type="submit" value="삭제">
 								<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
 
 						</tr>

@@ -18,7 +18,7 @@ window.onload = function () {
 	<div class="loginboxheader">
 		<c:if
 			test="${empty sessionScope.loginId && empty sessionScope.com_id}">
-			<div>
+			<div class="loginbar">
 				<a href="login.do">로그인</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="l"
 					href="memberJoin.do">회원가입</a>
 			</div>
@@ -57,6 +57,7 @@ window.onload = function () {
 		</div>
 
 		<div class="notificationheader" id="notigroup">
+			<span class="notification-count">6</span>
 		</div>
 	</div>
 	<div>

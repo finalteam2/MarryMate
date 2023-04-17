@@ -37,11 +37,19 @@
 video{
 	width: 100%;
 }
+.titlebar a{
+	font-family: 'WandohopeR';
+	text-decoration: none;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: black;
+	transition: color 1s;
+}
 </style>
 </head>
 
 <body>
-
 <script>
 
 $(window).load(function () {
@@ -69,7 +77,6 @@ function handleVideoEnd() {
     }, 40);
 }
 </script>
-
     <video id="video" muted autoplay onended="handleVideoEnd()">
 		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
