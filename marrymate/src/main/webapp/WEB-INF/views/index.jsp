@@ -41,44 +41,8 @@ video{
 </head>
 
 <body>
-<script src="/marrymate/js/httpRequest.js"></script>
-<script>
-function checkNoti(){
-	var param = '';
-	sendRequest('checkNoti.do',param,'POST',notiResult);
-}
-function notiResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data = XHR.responseText;
-			data = JSON.parse(data);
-			var notiArr = data.notiArr;
-			var notiCnt = data.notiCnt;
-			
-			var notiNode = document.getElementById('notigroup');
-			
-			//새 알람
-			var htmlStr = ''
-			htmlStr += '<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">알람';
-			htmlStr += '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' + notiCnt;
-			htmlStr += '<span class="visually-hidden">unread messages</span></span></button>';
-			htmlStr += '<ul id="notiUl" class="dropdown-menu">';
-			
-			for(var i = 0; i < notiArr.length; i++){
-				var noti = notiArr[i];
-				//알람 하나씩 추가
-					if(noti.checked == 1){
-						htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:gray;">' + noti.title + '</span></a></li>';
-					}else if(noti.checked == 0){
-						htmlStr += ' <li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:red;">' + noti.title + '</span></a></li>';
-					}		
-			}
-			htmlStr += '</ul>';
-			notiNode.innerHTML = htmlStr;
-		}
-	}
-}
-</script>
+<!-- 알림 자바스크립트 -->
+<script src="js/checkNoti.js"></script>
 
 <script>
 $(window).load(function () {
@@ -109,11 +73,9 @@ function handleVideoEnd() {
 <%@include file="header.jsp" %>
 <h1>main입니다.</h1>
 <h2>아래는 추후 수정 예정입니다!</h2>
-<div id="notigroup" class="btn-group">
-</div>
 
-
-
+<!-- 알림 기준 div -->
+<div id="notigroup" class="btn-group"></div>
 
 
 
@@ -149,6 +111,7 @@ function handleVideoEnd() {
 
 <%@include file="chatbot.jsp" %>
 <%@include file="footer.jsp" %>
+<!-- 알림 실행하는거 (맨밑에 해놔야댐) -->
 <script>
 checkNoti();
 </script>
