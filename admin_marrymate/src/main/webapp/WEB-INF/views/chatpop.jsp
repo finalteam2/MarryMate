@@ -253,6 +253,8 @@ function chat_tx(){
 	document.getElementById('tx').focus();
 
 	document.getElementById('chat_p').scrollTo(0,document.getElementById('chat_p').scrollHeight);
+	
+	opener.location.reload();
 }
 
 function press(e){
@@ -325,6 +327,7 @@ function ctResult(){
 			}
 			document.getElementById('chat_p').scrollTo(0,document.getElementById('chat_p').scrollHeight);
 		}
+		opener.location.reload();
 	}
 }
 </script>

@@ -365,6 +365,7 @@ function ctResult(){
 }
 
 function close() {
+	location.reload();
 	document.querySelector(".background").className = "background";
 }
 
