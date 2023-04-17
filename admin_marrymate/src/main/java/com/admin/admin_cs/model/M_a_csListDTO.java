@@ -30,7 +30,7 @@ public class M_a_csListDTO {
 		return midx;
 	}
 
-	public void setMidx(int Midx) {
+	public void setMidx(int midx) {
 		this.midx = midx;
 	}
 

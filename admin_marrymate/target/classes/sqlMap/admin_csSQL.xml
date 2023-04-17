@@ -5,7 +5,11 @@
   <mapper namespace="com.admin.admin_cs">
   
   <select id="m_a_cs_List" resultType="com.admin.admin_cs.model.M_a_csListDTO">
-  		select m.midx midx, member.img img,member.name name,r.rnum rnum,m_a_cs.content content,m_a_cs.time time from member,m_a_cs,(select midx,count(*) rnum from m_a_cs where type=1 and read=0 group by midx) r, (select midx,max(maidx) maidx from m_a_cs group by midx) m where member.midx=m.midx and m.midx=r.midx and m_a_cs.maidx=m.maidx order by time desc
+  		select m.midx midx, member.img img,member.name name,r.rnum rnum,m_a_cs.content content,m_a_cs.time time 
+  		from member,m_a_cs,(select midx,max(maidx) maidx from m_a_cs group by midx) m 
+		left join (select midx,count(*) rnum from m_a_cs where type=1 and read=0 group by midx) r on m.midx=r.midx 
+		where m_a_cs.maidx=m.maidx and member.midx=m.midx 
+		order by time desc
   </select>
   
    <insert id="sendContent_m" parameterType="com.admin.admin_cs.model.M_a_csDTO">
@@ -21,7 +25,11 @@
   </update>
   
   <select id="c_a_cs_List" resultType="com.admin.admin_cs.model.C_a_csListDTO">
-  		select c.cidx cidx, company.img img,company.cname cname,r.rnum rnum,c_a_cs.content content,c_a_cs.time time from company,c_a_cs,(select cidx,count(*) rNum from c_a_cs where type=1 and read=0 group by cidx) r, (select cidx,max(caidx) caidx from c_a_cs group by cidx) c where company.cidx=c.cidx and c.cidx=r.cidx and c_a_cs.caidx=c.caidx order by time desc
+  		select c.cidx cidx, company.img img,company.cname cname,r.rnum rnum,c_a_cs.content content,c_a_cs.time time 
+  		from company,c_a_cs,(select cidx,max(caidx) caidx from c_a_cs group by cidx) c 
+  		left join (select cidx,count(*) rNum from c_a_cs where type=1 and read=0 group by cidx) r on c.cidx=r.cidx 
+  		where c_a_cs.caidx=c.caidx and company.cidx=c.cidx 
+		order by time desc
   </select>
   
   <insert id="sendContent_c" parameterType="com.admin.admin_cs.model.C_a_csDTO">

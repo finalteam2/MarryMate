@@ -52,7 +52,7 @@ body{
 }
 #tb2 {
 	text-align: center;
-	margin-left: 570px;
+	margin-left: 520px;
 }
 
 #select {
@@ -201,7 +201,7 @@ function popup2(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 회수" id="pop2" onclick="popup2();">
 </form>
 <br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
+<table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
 			<th>포인트번호</th>
@@ -248,7 +248,7 @@ function popup2(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="포인트 지급" id="pop" onclick="popup();">
 </form>
 <br><br>
-<table cellspacing="0" border="1" width="700" id="tb2">
+<table cellspacing="0" border="1" width="800" id="tb2">
 	<thead>
 		<tr>
 			<th>포인트번호</th>

@@ -221,7 +221,7 @@ body{
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
 	<form name="companyList" action="companyDetails.do">
-		<input type="hidden" name="kind" value="${param.kind}">
+		<input type="hidden" name="kind" value="${dto.kind}">
 		<input type="hidden" name="cidx" value="${dto.cidx}">
 		<input type="hidden" name="clevel" value="${dto.clevel}">
 			<tr>

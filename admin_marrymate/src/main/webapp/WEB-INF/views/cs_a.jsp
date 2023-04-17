@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<%session.setAttribute("midx",0); %>
-<%session.setAttribute("cidx",0); %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body{
-    background: #fbf4ff;
+.up {
+	position: fixed;
+	bottom: 150px;
+	right: 65px;
 }
 
 .background {
@@ -31,6 +29,10 @@ body{
 .chatshow {
 	opacity: 1;
 	z-index: 1000;
+	
+	position: fixed;
+	bottom: 60px;
+	right: 60px;
 }
 
 .window {
@@ -50,6 +52,11 @@ body{
 	border-radius:20px;
 }
 
+#alr{
+	position: fixed;
+	bottom: 113px;
+	right: 65px;
+}
 .al{
 	font-size: 15px;
 	text-align: center;
@@ -135,7 +142,6 @@ body{
 }
 #tr {
 	vertical-align : top;
-	height: 500px;
 }
 #tr2 {
 	vertical-align : bottom;
@@ -181,6 +187,10 @@ body{
 #chat_p {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+body{
+    background: #fbf4ff;
 }
 
 .label{
@@ -232,7 +242,22 @@ body{
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 }
+
+#hrf {
+	position: fixed;
+	bottom: 100px;
+	left:50%;
+	transform:translateX(-50%);
+}
 </style>
+<script>
+function chatpop_m(midx){
+	window.open('chatpop_m.do?midx='+midx,'chatpop','width=321,height=545,top=250,left=1100');
+}
+function chatpop_c(cidx){
+	window.open('chatpop_c.do?cidx='+cidx,'chatpop','width=321,height=545,top=250,left=1100');
+}
+</script>
 </head>
 <body width="1200">
 <c:if test="${empty sessionScope.name}">
@@ -306,8 +331,8 @@ body{
 	<tbody>
 	<c:forEach var="dto" items="${m_a_cs_List}">
 		<tr>
-			<td width="60" class="td"><div id="chatshow${dto.midx}" class="chatshow"><img src="/marrymate/img/member/${dto.img}" width="50" height="50"></div></td>
-			<td width="200" class="td">${dto.name}&nbsp;&nbsp;&nbsp;<label id="al${dto.midx}" class="al">${dto.rnum}</label></td>
+			<td width="60" class="td"><img src="/marrymate/img/member/${dto.img}" width="50" height="50" onclick="chatpop_m(${dto.midx});"></td>
+			<td width="200" class="td">${dto.name}&nbsp;&nbsp;&nbsp;<c:if test="${dto.rnum!=0}"><label id="al${dto.midx}" class="al">${dto.rnum}</label></c:if></td>
 			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
 			<td width="150" class="td">${dto.time}</td>
 		</tr>
@@ -322,8 +347,8 @@ body{
 	<tbody>
 	<c:forEach var="dto" items="${c_a_cs_List}">
 		<tr>
-			<td width="60" class="td"><div id="chatshow${dto.cidx}" class="chatshow"><img src="/marrymate/img/com_best/${dto.img}" width="50" height="50" onclick="chat_tx(${dto.cidx});"></div></td>
-			<td width="200" class="td">${dto.cname}&nbsp;&nbsp;&nbsp;<label id="al${dto.cidx}" class="al">${dto.rnum}</label></td>
+			<td width="60" class="td"><img src="/marrymate/img/com_best/${dto.img}" width="50" height="50" onclick="chatpop_c(${dto.cidx});"></td>
+			<td width="200" class="td">${dto.cname}&nbsp;&nbsp;&nbsp;<c:if test="${dto.rnum!=0}"><label id="al${dto.cidx}" class="al">${dto.rnum}</label></c:if></td>
 			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
 			<td width="150" class="td">${dto.time}</td>
 		</tr>
@@ -332,153 +357,7 @@ body{
 </table>
 </form>
 </c:if>
-<br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-
-<div class="background">
-	<div class="window">
-    	<div class="popup">
-			<div id="close">
-				<table align="right">
-					<tr height="65">
-						<th width="260" align="left">상담챗</th>
-						<td width="50">
-							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30" onclick="rs();">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="wrap">
-			    <table width="300" height="540" align="center" id="tb">
-			    	<tr id="tr">
-			    		<td>
-			    		<div id="chat_p" style="width:320px;height:360px;overflow:auto;">
-							<div id="user_chat"></div>
-						</div>
-						</td>
-					</tr>
-					<tr id="tr3">
-						<td><input type="text" id="tx" name="chatWindow" placeholder="메세지 보내기" onkeypress="press(event);"></td>
-					</tr>
-			    </table>
-			</div>
-        </div>
-	</div>
-</div>
-
-<script>
-function chatshow() {
-    document.querySelector(".background").className = "background chatshow";
-}
-
-function chat_tx(midx,cidx){
-	
-		if(midx!=0){
-			document.getElementById('tx').focus();
-			
-			var param='midx='+midx;
-			sendRequest('load_m.do',param,'GET',ctResult);
-			
-		}else if(cidx!=0){
-			
-			document.getElementById('tx').focus();
-			
-			var param='cidx='+cidx;
-			sendRequest('load_c.do',param,'GET',ctResult);
-		}
-}
-
-function press(e){
-    if(e.keyCode == 13){
-    	
-    	if(${sessionScope.midx}!=0}){
-	    	var param='';
-	    	param+='midx='+${sessionScope.midx};
-			param+='&content='+document.getElementById('tx').value;
-			sendRequest('content_m.do',param,'GET',ctResult);
-	    	
-	        document.getElementById('tx').value='';
-    	}else if(${sessionScope.cidx}!=0}){
-    		
-    		var param='';
-	    	param+='cidx='+${sessionScope.cidx};
-			param+='&content='+document.getElementById('tx').value;
-			sendRequest('content_c.do',param,'GET',ctResult);
-	    	
-	        document.getElementById('tx').value='';
-    	}
-    }
-}
-function ctResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			
-			var DivNode=document.getElementById('user_chat');
-			var DivChildNodes=DivNode.childNodes;
-			for(var i=DivChildNodes.length-1;i>=0;i--) {
-				var DivChildNode=DivChildNodes[i];
-				DivNode.removeChild(DivChildNode);
-			}
-			
-			var data=XHR.responseText;
-			data=JSON.parse(data);
-			
-			var dtos=data.dtos;
-			
-			for(var i=0;i<dtos.length;i++){
-				
-				if(dtos[i].type==2){
-					
-					var newDivNode=document.createElement('div');
-					newDivNode.setAttribute('class','chat ch2');
-					var newDivNode_in=document.createElement('div');
-					newDivNode_in.setAttribute('class','textbox');
-					var newDivTextNode=document.createTextNode(dtos[i].content);
-					
-					newDivNode_in.appendChild(newDivTextNode);
-					newDivNode.appendChild(newDivNode_in);
-					
-					var DivNode=document.getElementById('user_chat');
-					DivNode.appendChild(newDivNode);
-					
-				}else{
-					
-					var newDivNode=document.createElement('div');
-					newDivNode.setAttribute('class','chat ch1');
-					var newDivNode_in=document.createElement('div');
-					newDivNode_in.setAttribute('class','textbox');
-					var newDivTextNode=document.createTextNode(dtos[i].content);
-					
-					newDivNode_in.appendChild(newDivTextNode);
-					newDivNode.appendChild(newDivNode_in);
-					
-					var DivNode=document.getElementById('user_chat');
-					DivNode.appendChild(newDivNode);
-				}
-			}
-			document.getElementById('chat_p').scrollTo(0,document.getElementById('chat_p').scrollHeight);
-		}
-	}
-}
-
-function close() {
-	document.querySelector(".background").className = "background";
-}
-
-function rs(){
-	
-	if(${sessionScope.midx}!=0}){
-		document.getElementById('alr'+midx).remove();
-	}else if(${sessionScope.cidx}!=0}){
-		document.getElementById('alr'+cidx).remove();
-	}
-}
-
-document.querySelector("#chatshow1").addEventListener("click", chatshow);
-document.querySelector("#close").addEventListener("click", close);
-</script>
-<hr width="1200">
+<hr width="1200" id="hrf">
 </c:if>
 </body>
 </html>

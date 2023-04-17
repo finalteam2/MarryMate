@@ -14,13 +14,8 @@
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
 <div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
 
-<c:if test="${empty sessionScope.loginMidx}">
-<%session.setAttribute("loginMidx",0); %>
-</c:if>
-<c:if test="${empty sessionScope.com_cidx}">
-<%session.setAttribute("com_cidx",0); %>
-</c:if>
 
+ 
 <div class="background">
 	<div class="window">
     	<div class="popup">

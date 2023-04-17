@@ -10,12 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.admin.admin_cs.model.*;
+import com.admin.member.model.*;
+import com.admin.company.model.*;
 
 @Controller
 public class Admin_csController {
 	
 	@Autowired
 	private Admin_csDAO admin_csDao;
+	
+	@Autowired
+	private MemberDAO memberDao;
+	
+	@Autowired
+	private CompanyDAO companyDao;
 	
 	@RequestMapping("/cs_a_m.do")
 	public ModelAndView cs_a_m() {
@@ -60,9 +68,7 @@ public class Admin_csController {
 	}
 	
 	@RequestMapping("/load_m.do")
-	public ModelAndView loadContent_m(int midx,HttpSession session) {
-		
-		session.setAttribute("midx",midx);
+	public ModelAndView loadContent_m(int midx) {
 		
 		admin_csDao.read_m(midx);
 		List<M_a_csDTO> dtos=admin_csDao.loadContent_m(midx);
@@ -90,9 +96,7 @@ public class Admin_csController {
 	}
 	
 	@RequestMapping("/load_c.do")
-	public ModelAndView loadContent_c(int cidx,HttpSession session) {
-		
-		session.setAttribute("cidx",cidx);
+	public ModelAndView loadContent_c(int cidx) {
 		
 		admin_csDao.read_c(cidx);
 		List<C_a_csDTO> dtos=admin_csDao.loadContent_c(cidx);
@@ -101,6 +105,44 @@ public class Admin_csController {
 		
 		mav.addObject("dtos",dtos);
 		mav.setViewName("finalJson");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/chatpop_m.do")
+	public ModelAndView chatpop_m(int midx) {
+		
+		MemberDTO mdto=memberDao.memberInfo(midx);
+		
+		admin_csDao.read_m(midx);
+		List<M_a_csDTO> dtos=admin_csDao.loadContent_m(midx);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("mdto",mdto);
+		
+		mav.addObject("midx",midx);
+		mav.addObject("dtos",dtos);
+		mav.setViewName("chatpop");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/chatpop_c.do")
+	public ModelAndView chatpop_c(int cidx) {
+		
+		CompanyDTO cdto=companyDao.companyInfo(cidx);
+		
+		admin_csDao.read_c(cidx);
+		List<C_a_csDTO> dtos=admin_csDao.loadContent_c(cidx);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("cdto",cdto);
+		
+		mav.addObject("cidx",cidx);
+		mav.addObject("dtos",dtos);
+		mav.setViewName("chatpop");
 		
 		return mav;
 	}
