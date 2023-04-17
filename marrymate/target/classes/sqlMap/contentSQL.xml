@@ -182,6 +182,8 @@
 	    book.fidx = food.fidx
 	where
 	    book.midx = #{midx}
+    order by
+    	book.bk_idx desc 
 	</select>
 	<select id="selectcombook" resultType="com.marry.book.model.BookListDTO">
 	select
@@ -215,6 +217,8 @@
 	    book.fidx = food.fidx
    	where
    		book.cidx = #{cidx}
+    order by
+    	book.bk_idx desc
 	</select>
 	<select id="selectpoint" resultType="com.marry.point.model.PointDTO">
 	select
