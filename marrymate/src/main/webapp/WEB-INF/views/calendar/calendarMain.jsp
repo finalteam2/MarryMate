@@ -138,97 +138,110 @@ function checkAlladd(){
 </script>
 
 <style type="text/css">
-.schedulewrapper{
+.schedulewrapper {
 	text-align: center;
 }
-.myWeddingMenuWrap{
+
+.myWeddingMenuWrap {
 	text-align: center;
 }
-.checklistwrap{
+
+.checklistwrap {
 	text-align: center;
 }
-.planlistwrap{
+
+.planlistwrap {
 	text-align: center;
 }
-.ddaygoal{
+
+.ddaygoal {
 	font-size: 28px;
 	font-weight: bold;
 	color: purple;
 }
-.titlecss{
+
+.titlecss {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 30px;
 }
-.bigtitle{
+
+.bigtitle {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 38px;
 }
-.titlecss{
+
+.titlecss {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 30px;
 }
-.scheduleall h4{
+
+.scheduleall h4 {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 28px;
 	font-weight: bold;
+}
+
+#calendar {
+	max-width: 1350px;
+	margin: 0px auto;
 }
 </style>
 </head>
 <body background="/marrymate/img/background.png">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-		<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
-		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
-			style="width: 100%">
-		
-		<!--checkListTopWrap : s-->
-		<div class="checkListTopWrap">
-			<div class="inner">
-				
-				<div class="profileWrap">
-				
-					<!--profileArea : s-->
-	<div class="profileBox">
-						<div class="imgArea">
-							<c:forEach var="minfo" items="${myinfo}">
+	<input type="hidden" name="midx" value=${sessionScope.loginMidx }>
+	<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
+		style="width: 100%">
+
+	<!--checkListTopWrap : s-->
+	<div class="checkListTopWrap">
+		<div class="inner">
+
+			<div class="profileWrap">
+
+				<!--profileArea : s-->
+				<div class="profileBox">
+					<div class="imgArea">
+						<c:forEach var="minfo" items="${myinfo}">
 							<div style="position: relative;">
-								 <img class="photoframe" src="/marrymate/img/imgbox.png">
-								 <div style="position: absolute; top: 50px; left: 50px;">
-        <img class="mypicture" src="/marrymate/img/member/${minfo.img}">
-    </div>
+								<img class="photoframe" src="/marrymate/img/imgbox.png" style="width:340px;">
+								<div style="position: absolute; top: 112px; left: 70px;">
+									<img class="mypicture" src="/marrymate/img/member/${minfo.img}" style="width:200px;">
+								</div>
 							</div>
 						</c:forEach>
-						
+
+					</div>
+					<div class="txtArea">
+						<div class="nameArea">
+							<c:if test="${!empty sessionScope.loginId}">
+								<div>
+									<strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick})
+									님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일
+								</div>
+							</c:if>
 						</div>
-						<div class="txtArea">
-							<div class="nameArea">
-								<c:if test="${!empty sessionScope.loginId}">
-									<div>
-										<strong> ${sessionScope.loginName}</strong>(${sessionScope.loginNick})
-										님 & <strong>${sessionScope.loginPname}</strong> 님 결혼예정일
+
+						<div class="weddingDay">
+							<span class="date"> <c:if
+									test="${!empty sessionScope.loginId}">
+									<div>${sessionScope.loginMD.substring(0, 10)}
+										&nbsp;<span id="day"></span>
 									</div>
 								</c:if>
-							</div>
-
-							<div class="weddingDay">
-								<span class="date"> <c:if
-										test="${!empty sessionScope.loginId}">
-										<div>${sessionScope.loginMD.substring(0, 10)}
-											&nbsp;<span id="day"></span>
-										</div>
-									</c:if>
-								</span> <span class="d-day" id="dDay"></span><br>
-							</div>
-							<div id="count"></div>
+							</span> <span class="d-day" id="dDay"></span><br>
 						</div>
+						<div id="count"></div>
 					</div>
 				</div>
-				<!--profileArea : e-->
 			</div>
+			<!--profileArea : e-->
 		</div>
+	</div>
 
 
 
@@ -242,40 +255,45 @@ function checkAlladd(){
 			<div class="scheduleall">
 				<div class="bigtitle">전체 스케줄 보기</div>
 				<div>
-					   <div style="display: flex;">
-        <div style="flex: 1;">
-            <div class="scheduletotal">
-                <h4>모든 일정</h4>
-                <div class="stats">
-                <a href=#planlistMove>${ptotal}</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-        <div style="flex: 1;">
-            <div class="booklisttotal">
-                <h4>모든 예약</h4>
-                <div class="stats">
-                    <a href="myBook.do">${btotal}</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-        <div style="flex: 1;">
-            <div class="checklisttotal">
-                <h4>모든 체크리스트</h4>
-                 <div class="stats">
-                <a href=#planlistMove>${ctotal}</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-    </div>
+					<div style="display: flex;">
+						<div style="flex: 1;">
+							<div class="scheduletotal">
+								<h4>모든 일정</h4>
+								<div class="stats">
+									<a href=#planlistMove>${ptotal}</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="booklisttotal">
+								<h4>모든 예약</h4>
+								<div class="stats">
+									<a href="myBook.do">${btotal}</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="checklisttotal">
+								<h4>모든 체크리스트</h4>
+								<div class="stats">
+									<a href=#planlistMove>${ctotal}</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 
-<br><br><br><br><br><br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<div style="padding-left: 90%">
 				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
 			</div>
@@ -377,99 +395,106 @@ function checkAlladd(){
 	});
 </script>
 
-	<br><br>
+	<br>
+	<br>
 	<div class="planlistwrap">
-	<div class="titlecss">
-		<a id="planlistMove">Myplan</a>
-	</div>
-	<form action="planlistDel.do" method="post">
-		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
-		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty planlists}">
+		<div class="titlecss">
+			<a id="planlistMove">Myplan</a>
+		</div>
+		<form action="planlistDel.do" method="post">
+			<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
+			<table style="margin-left: auto; margin-right: auto;" border="1"
+				width="900" cellspacing="0">
+				<thead style="width: 120px; height: 80px;">
 					<tr>
-						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+						<th>제목</th>
+						<th>일자</th>
+						<th>내용</th>
+						<th></th>
 					</tr>
-				</c:if>
-				<c:forEach var="pdto" items="${planlists}">
-					<tr>
-						<td>${pdto.title}</td>
-						<td>${pdto.pdate}</td>
-						<td>${pdto.content}</td>
-						<td><input type="submit" value="삭제">
-							<input type="hidden" name="ridx" value="${pdto.myp_idx}">
-							<button type="button" id="checkdel" onclick="return checkdel()">삭제</button></td>
-					</tr>
+				</thead>
+				<tbody style="width: 120px; height: 150px;">
+					<c:if test="${empty planlists}">
+						<tr>
+							<td colspan="4" align="center">등록된 일정이 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:forEach var="pdto" items="${planlists}">
+						<tr>
+							<td>${pdto.title}</td>
+							<td>${pdto.pdate}</td>
+							<td>${pdto.content}</td>
+							<td><input type="submit" value="삭제"> <input
+								type="hidden" name="ridx" value="${pdto.myp_idx}">
+								<button type="button" id="checkdel" onclick="return checkdel()">삭제</button></td>
+						</tr>
 						<c:url var="deleteplan" value="checklistDel.do">
 							<c:param name="myp_idx">${pdto.myp_idx}</c:param>
 						</c:url>
-						<a href="${deleteplan}"	onclick="return checkDel()">삭제</a>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
+						<a href="${deleteplan}" onclick="return checkDel()">삭제</a>
+					</c:forEach>
+				</tbody>
+			</table>
+		</form>
 		${pdto.myp_idx}
 	</div>
-	<br><br><br>
-	
+	<br>
+	<br>
+	<br>
+
 	<!-- checklist add/select -->
 	<div class="checklistwrap">
-	<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-	<div class="titlecss" id="checklistitems">
-		<a id="checklistMove">모든 체크리스트</a>
-	</div>
-	<div style="padding-left: 65%">
-		<button type="button" id="checkadd" onclick="checkadd();">새
-			체크리스트 등록</button>
-	</div>
-	<form action="checklistDel.do" method="post">
-		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
-		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty checklistItems}">
+		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
+		<div class="titlecss" id="checklistitems">
+			<a id="checklistMove">모든 체크리스트</a>
+		</div>
+		<div style="padding-left: 65%">
+			<button type="button" id="checkadd" onclick="checkadd();">새
+				체크리스트 등록</button>
+		</div>
+		<form action="checklistDel.do" method="post">
+			<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
+			<table style="margin-left: auto; margin-right: auto;" border="1"
+				width="900" cellspacing="0">
+				<thead style="width: 120px; height: 80px;">
 					<tr>
-						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+						<th>제목</th>
+						<th>일자</th>
+						<th>내용</th>
+						<th></th>
 					</tr>
-				</c:if>
-				<c:forEach var="dto" items="${checklistItems}">
-					<tr>
-						<td>${dto.title}</td>
-						<td>${dto.dueday}</td>
-						<td>${dto.content}</td>
-						<td><input type="submit" value="삭제">
-							<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
+				</thead>
+				<tbody style="width: 120px; height: 150px;">
+					<c:if test="${empty checklistItems}">
+						<tr>
+							<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:forEach var="dto" items="${checklistItems}">
+						<tr>
+							<td>${dto.title}</td>
+							<td>${dto.dueday}</td>
+							<td>${dto.content}</td>
+							<td><input type="submit" value="삭제">
+								<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
 
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</form>
 	</div>
-	<br><br>
+	<br>
+	<br>
 	<hr>
-	<br><br>
+	<br>
+	<br>
 	<div class="myWeddingMenuWrap">
 		<div class="ddaygoal">
-		<div class="goal">
-			<strong><span class="d-day" id="dDayOnly"></span></strong>
+			<div class="goal">
+				<strong><span class="d-day" id="dDayOnly"></span></strong>
+			</div>
 		</div>
-	</div>
 		<h2>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h2>
 	</div>
 	<div class="contestList">

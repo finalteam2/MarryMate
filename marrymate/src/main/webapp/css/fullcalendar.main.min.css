@@ -79,12 +79,16 @@
 }
 
 .fc th {
-	text-align: center
+	text-align: center;
+	width: 140px;
+	height: 100px;
 }
 
 .fc td, .fc th {
 	vertical-align: top;
-	padding: 0
+	padding: 0;
+	width: 140px;
+	height: 200px;
 }
 
 .fc .fc-button, .fc .fc-button .fc-icon, .fc .fc-button-group, .fc .fc-timegrid-slot-label
