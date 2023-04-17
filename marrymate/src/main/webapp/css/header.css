@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'TAEBAEKmilkyway';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Hahmlet-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.menu {
+	position: relative;
+	
+}
+.notificationheader {
+	position: relative;
+}
+
+.mbar {
+	position: absolute;
+	left: -100%;
+	background-color: #fff; 
+	display: none;
+}
+
+.mbar li {
+	list-style-type: none;
+	padding: 7px;
+	left: -100%;
+	border-bottom: 1px solid #ddd; /* Add any desired border style */
+}
+
+.notibar {
+	position: absolute;
+	left: -100%;
+	background-color: #fff; 
+	display: none;
+}
+
+.notibar li {
+	list-style-type: none;
+	padding: 7px;
+	left: 0;
+	border-bottom: 1px solid #ddd; /* Add any desired border style */
+}
+	
+.menu ul {
+	position: absolute;
+	top: 100%;
+	z-index: 1;
+	display: none;
+	background-color: #fff;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	min-width: 110px;
+}
+
+.menu li {
+	display: block;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.menu li:last-child {
+	border-bottom: none;
+}
+
+.menu a,p {
+	display: block;
+	text-decoration: none;
+	color: #660099;
+	text-align: center;
+}
+
+.menu a:hover {
+	background-color: #cc99ff;
+	color: #fff;
+}
+
+.menu:hover ul {
+	display: block;
+}
+/**/
+.notificationheader ul {
+	position: absolute;
+	top: 100%;
+	z-index: 1;
+	display: none;
+	background-color: #fff;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	min-width: 110px;
+}
+
+.notificationheader li {
+	display: block;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.notificationheader li:last-child {
+	border-bottom: none;
+}
+
+.notificationheader a,p {
+	display: block;
+	text-decoration: none;
+	color: #660099;
+	text-align: center;
+}
+
+.notificationheader a:hover {
+	background-color: #cc99ff;
+	color: #fff;
+}
+
+.notificationheader:hover ul {
+	display: block;
+}
+ul > li:last-child ul{
+    right: 5px;
+    left: auto;
+ 	top: 10px;   
+}
+
+nav{
+	height: 200px;
+}
+
+nav .navdiv{
+	padding: 20px;
+}
+.titlebar a{
+    font-family: 'TAEBAEKmilkyway';
+	text-decoration: none;
+	text-align: center;
+	font-size: 28px;
+	font-weight: bold;
+	color: black;
+	transition: color 0.5s;
+	padding: 20px;
+	
+}
+
+.titlebar a:hover{
+	color: #eccc83;
+}
+
+.loginboxheader{
+	height: 50px;
+	background-color: #b7a2d5;
+	align-content: right;
+	align-items: right;
+	display: flex;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+}
+.loginboxheader .mypimg{
+	margin-right: 10px;
+	margin-top: 18px;
+}
+
+.loginboxheader .notiimg{
+	margin-right: 40px;
+	margin-top: 18px;
+}
+.iamnav{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+    align-content: center;
+    align-items: center;
+    height: 140px;
+}
+

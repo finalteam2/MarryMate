@@ -117,6 +117,11 @@ public class CalendarContoller {
 			return "calendar/calendarInfo";
 		}
 
+	@RequestMapping("/weddingInfo.do")
+	public String weddingInfo() {
+			return "calendar/weddingInfo";
+		}
+	
 	@RequestMapping("/calendarMain.do")
 	public ModelAndView calendarMain(
 			HttpSession session) {
@@ -262,29 +267,26 @@ public class CalendarContoller {
 	        jsonArray2.add(jsonObject2);
 	        System.out.println(bdto.getName());
 	    }*/ 
-	    
-	    for(BookListDTO bookdto: booklistcom) {
-			
-	        JSONObject jsonObject2 = new JSONObject();
-	        
-	        jsonObject2.put("start", bookdto.getBk_date());
-	        jsonObject2.put("end", bookdto.getBk_date());
-	        jsonObject2.put("title", bookdto.getMname());
-	        jsonObject2.put("backgroundColor", "#FFE5CC");
-	        jsonObject2.put("textColor","black" ); 
-	        jsonObject2.put("borderColor", "#FFE5CC");
-	        jsonObject2.put("borderWidth", "1px");
-	        jsonObject2.put("className", bookdto.getMname());
-
-	        jsonArray2.add(jsonObject2);
-	    } 
-	    
+	    for(BookDTO bdto: blistcom) {
+		    for(BookListDTO bookdto: booklistcom) {
+				
+		        JSONObject jsonObject2 = new JSONObject();
+		        
+		        jsonObject2.put("start", bdto.getBdate());
+		        jsonObject2.put("end", bdto.getBdate());
+		        jsonObject2.put("title", bookdto.getMname()+"님 예약일");
+		        jsonObject2.put("backgroundColor", "#FFE5CC");
+		        jsonObject2.put("textColor","black" ); 
+		        jsonObject2.put("borderColor", "#FFE5CC");
+		        jsonObject2.put("borderWidth", "1px");
+		        jsonObject2.put("className", bookdto.getMname());
+	
+		        jsonArray2.add(jsonObject2);
+		    } 
+	    }
 	    
 	    String jsonStr = jsonArray.toString();
 	    String jsonStr2 = jsonArray2.toString();
-	    
-	    System.out.println(jsonStr);
-	    System.out.println(jsonStr2);
 	    
 	    int ptotalcom=plistcom.size();
 	    int btotalcom=booklistcom.size();

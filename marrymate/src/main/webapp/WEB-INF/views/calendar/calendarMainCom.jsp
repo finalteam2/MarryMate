@@ -122,7 +122,6 @@ function checkAlladd(){
 	<div class="profileBox">
 						<div class="imgArea">
 							<c:forEach var="cinfo" items="${cominfo}">
-							<img class="mypicture" src="/marrymate/img/member/${cinfo.img}">
 						</c:forEach>
 						
 						</div>
@@ -199,7 +198,6 @@ function checkAlladd(){
 				<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 		</div>
 	</div>
-
 
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {

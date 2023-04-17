@@ -19,25 +19,25 @@ footer #foot1 {
 
 footer #foot2 {
 	margin: auto;
-	width: 1510px;
+	width: 100%;
 	line-height: 25px;
 }
 
 footer #foot1 #foottop {
 	margin: auto;
-	width: 1510px;
+	width: 100%;
 	line-height: 25px;
 	text-align: center;
 }
 
 footer #foottop {
 	margin: auto;
-	width: 1510px;
+	width: 99%;
 	border: 3px solid #ECCC83;
-	padding: 14px;
 	align-self: center;
 	font-size: 22px;
 	background-color: #fff;
+	height: 55px;
 }
 
 footer label {

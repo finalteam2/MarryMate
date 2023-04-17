@@ -45,6 +45,7 @@ video{
 <script src="js/checkNoti.js"></script>
 
 <script>
+
 $(window).load(function () {
     $('body').sakura();
 });
@@ -63,21 +64,43 @@ function handleVideoEnd() {
             clearInterval(fadeOut);
             video.style.display = "none";
             header.style.display = "block";
+            
+            // Set a cookie to remember that the video has been played
+            document.cookie = "videoPlayed=true; expires=" + new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toUTCString() + "; path=/";
         }
     }, 40);
 }
 </script>
+
     <video id="video" muted autoplay onended="handleVideoEnd()">
 		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
+<script type="text/javascript">
+var videoPlayed = getCookie("videoPlayed");
+if (videoPlayed === "true") {
+    // Video has been played within the last 24 hours, hide it
+    var video = document.getElementById('video');
+    video.style.display = "none";
+    var header = document.getElementById('header');
+    header.style.display = "block";
+}
+
+function getCookie(name) {
+    var cookieArr = document.cookie.split("; ");
+    for (var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0]) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+</script>
 <%@include file="header.jsp" %>
 <h1>main입니다.</h1>
-<h2>아래는 추후 수정 예정입니다!</h2>
 
 <!-- 알림 기준 div -->
 <div id="notigroup" class="btn-group"></div>
-
-
 
 <section id="mainevent">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -88,13 +111,13 @@ function handleVideoEnd() {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/marrymate/img/ex1.png" class="d-block w-100" alt="웨딩의 모든것 배너">
+      <a href="weddingtest.do"><img src="/marrymate/img/ex2.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
     </div>
     <div class="carousel-item">
       <a href="weddingtest.do"><img src="/marrymate/img/ex2.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
     </div>
     <div class="carousel-item">
-      <img src="/marrymate/img/ex3.png" class="d-block w-100" alt="웨딩 캘린더 배너">
+      <a href="weddingtest.do"><img src="/marrymate/img/ex2.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -107,6 +130,16 @@ function handleVideoEnd() {
   </button>
 </div>
 
+</section>
+<section>
+   <div>
+      <a href="weddingInfo.do"><img src="/marrymate/img/ex1.png" alt="웨딩의 모든것 배너"></a>
+    </div>
+</section>
+<section>
+   <div>
+      <a href="calendarInfo.do"><img src="/marrymate/img/ex3.png" alt="웨딩의 캘린더 배너"></a>
+    </div>
 </section>
 
 <%@include file="chatbot.jsp" %>
