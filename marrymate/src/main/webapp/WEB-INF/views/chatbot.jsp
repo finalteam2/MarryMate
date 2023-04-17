@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<%
-int midx=0;
-int cidx=0;
-%>
-<c:if test="${!empty sessionScope.loginMidx}">
-<%midx=(int)session.getAttribute("loginMidx"); %>
-</c:if>
-<c:if test="${!empty sessionScope.com_cidx}">
-<%cidx=(int)session.getAttribute("com_cidx"); %>
-</c:if>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +10,16 @@ int cidx=0;
 <link rel="stylesheet" href="/marrymate/css/chat.css">
 <script type="text/javascript" src="js/httpRequest.js"></script>
 </head>
-<body onload="rn();">
+<body>
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
 <div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
+
+<c:if test="${empty sessionScope.loginMidx}">
+<%session.setAttribute("loginMidx",0); %>
+</c:if>
+<c:if test="${empty sessionScope.com_cidx}">
+<%session.setAttribute("com_cidx",0); %>
+</c:if>
 
 <div class="background">
 	<div class="window">
@@ -65,11 +60,11 @@ int cidx=0;
 </div>
 <script>
 function rn(){
-	if(${midx!=0}){
-		var param='midx='+${midx};
+	if(${sessionScope.loginMidx!=0}){
+		var param='midx='+${sessionScope.loginMidx};
 		sendRequest('readNum_m.do',param,'GET',rnResult);
-	}else if(${cidx!=0}){
-		var param='cidx='+${cidx};
+	}else if(${sessionScope.com_cidx!=0}){
+		var param='cidx='+${sessionScope.com_cidx};
 		sendRequest('readNum_c.do',param,'GET',rnResult);
 	}
 }
@@ -202,12 +197,12 @@ function anResult(){
 }
 
 function chat_tx(){
-	if(${midx==0 && cidx==0}){
+	if(${sessionScope.loginMidx==0 && sessionScope.com_cidx==0}){
 		window.alert('로그인 후 이용가능합니다.');
 		location.href='index.do';
 	}else{
 		
-		if(${midx!=0}){
+		if(${sessionScope.loginMidx!=0}){
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
 			for(var i=DivChildNodes.length-1;i>=0;i--) {
@@ -241,7 +236,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='midx='+${midx};
+			var param='midx='+${sessionScope.loginMidx};
 			sendRequest('load_m.do',param,'GET',ctResult);
 		}else{
 			
@@ -278,7 +273,7 @@ function chat_tx(){
 			
 			document.getElementById('tx').focus();
 			
-			var param='cidx='+${cidx};
+			var param='cidx='+${sessionScope.com_cidx};
 			sendRequest('load_c.do',param,'GET',ctResult);
 		}
 	}
@@ -287,9 +282,9 @@ function chat_tx(){
 function press(e){
     if(e.keyCode == 13){
     	
-    	if(${midx!=0}){
+    	if(${sessionScope.loginMidx!=0}){
 	    	var param='';
-	    	param+='midx='+${midx};
+	    	param+='midx='+${sessionScope.loginMidx};
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest('content_m.do',param,'GET',ctResult);
 	    	
@@ -297,7 +292,7 @@ function press(e){
     	}else{
     		
     		var param='';
-	    	param+='cidx='+${cidx};
+	    	param+='cidx='+${sessionScope.com_cidx};
 			param+='&content='+document.getElementById('tx').value;
 			sendRequest('content_c.do',param,'GET',ctResult);
 	    	
@@ -372,14 +367,6 @@ function close() {
 
 function rs(){
 	
-	if(${midx!=0}){
-		var param='midx='+${midx};
-		sendRequest('readNum_m.do',param,'GET',rsResult);
-	}else if(${cidx!=0}){
-		var param='cidx='+${cidx};
-		sendRequest('readNum_c.do',param,'GET',rsResult);
-	}
-	
 	var DivNode=document.getElementById('questions');
 	var DivChildNodes=DivNode.childNodes;
 	for(var i=DivChildNodes.length-1;i>=0;i--) {
@@ -387,23 +374,11 @@ function rs(){
 		DivNode.removeChild(DivChildNode);
 	}
 }
-function rsResult(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data=XHR.responseText;
-			data=JSON.parse(data);
-			
-			var read=data.read;
-			
-			if(read==0){
-				document.getElementById('alr').remove();
-			}
-		}
-	}
-}
 
 document.querySelector("#chatshow").addEventListener("click", chatshow);
 document.querySelector("#close").addEventListener("click", close);
+
+rn();
 </script>
 </body>
 </html>

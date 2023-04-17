@@ -306,7 +306,7 @@ body{
 	<tbody>
 	<c:forEach var="dto" items="${m_a_cs_List}">
 		<tr>
-			<td width="60" class="td"><div id="chatshow" class="chatshow"><img src="/marrymate/img/member/${dto.img}" width="50" height="50" onclick="chat_tx(${dto.midx});"></div></td>
+			<td width="60" class="td"><div id="chatshow${dto.midx}" class="chatshow"><img src="/marrymate/img/member/${dto.img}" width="50" height="50"></div></td>
 			<td width="200" class="td">${dto.name}&nbsp;&nbsp;&nbsp;<label id="al${dto.midx}" class="al">${dto.rnum}</label></td>
 			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
 			<td width="150" class="td">${dto.time}</td>
@@ -322,7 +322,7 @@ body{
 	<tbody>
 	<c:forEach var="dto" items="${c_a_cs_List}">
 		<tr>
-			<td width="60" class="td"><div id="chatshow" class="chatshow"><img src="/marrymate/img/com_best/${dto.img}" width="50" height="50" onclick="chat_tx(${dto.cidx});"></div></td>
+			<td width="60" class="td"><div id="chatshow${dto.cidx}" class="chatshow"><img src="/marrymate/img/com_best/${dto.img}" width="50" height="50" onclick="chat_tx(${dto.cidx});"></div></td>
 			<td width="200" class="td">${dto.cname}&nbsp;&nbsp;&nbsp;<label id="al${dto.cidx}" class="al">${dto.rnum}</label></td>
 			<td align="left" class="td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
 			<td width="150" class="td">${dto.time}</td>
@@ -387,7 +387,6 @@ function chat_tx(midx,cidx){
 			var param='cidx='+cidx;
 			sendRequest('load_c.do',param,'GET',ctResult);
 		}
-	}
 }
 
 function press(e){
@@ -476,7 +475,7 @@ function rs(){
 	}
 }
 
-document.querySelector("#chatshow").addEventListener("click", chatshow);
+document.querySelector("#chatshow1").addEventListener("click", chatshow);
 document.querySelector("#close").addEventListener("click", close);
 </script>
 <hr width="1200">

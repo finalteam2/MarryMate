@@ -81,9 +81,9 @@ body{
 
 .tb2 {
 	text-align: center;
-	margin-left: 520px;
+	margin-left: 500px;
 }
-#but {
+#but_back {
 	width:120px;
 	height:35px;
 	font-size:16px;
@@ -92,10 +92,28 @@ body{
 	background-color:#b8b8b8;
 	border:0px;
 	border-radius:5px;
+	position: fixed;
+	bottom: 200px;
+	left:57%;
+	transform:translateX(-50%);
+}
+
+#hrf {
+	position: fixed;
+	bottom: 100px;
+	left:50%;
+	transform:translateX(-50%);
 }
 
 .tb3_h {
 	margin-left: 560px;
+}
+
+#pg {
+	position: fixed;
+	bottom: 265px;
+	left:57%;
+	transform:translateX(-50%);
 }
 </style>
 </head>
@@ -164,15 +182,14 @@ body{
 	</tr>
 </table>
 <hr width="950" id="hr">
+<c:if test="${sb=='s'}">
 <br>
 <table width="950" class="tb_to">
 	<tr>
-		<th>
-		<c:if test="${sb=='s'}">수익내역</c:if>
-		<c:if test="${sb=='b'}">비용내역</c:if>
-		</th>
+		<th>수익내역</th>
 	</tr>
 </table>
+</c:if>
 <c:if test="${sb=='s'}">
 <br>
 <table cellspacing="0" border="1" width="860" class="tb2">
@@ -195,9 +212,15 @@ body{
 	</c:forEach>
 	</tbody>
 </table>
+<div id="pg">${pageStr_all}</div>
 </c:if>
-<c:if test="${sb=='b'}">
-<h4 class="tb3_h">[정산내역]</h4>
+<c:if test="${sb=='b1'}">
+<table height="70" id="tb">
+	<tr>
+		<th width="150"><a href="amount_all.do?sb=b1">[정산내역]</a></th>
+		<th width="150"><a href="amount_all.do?sb=b2">[환불내역]</a></th>
+	</tr>
+</table>
 <table cellspacing="0" border="1" width="860" class="tb2">
 		<tr>
 			<th width="200">결제날짜</th>
@@ -215,8 +238,15 @@ body{
 		</tr>
 	</c:forEach>
 </table>
-<br>
-<h4 class="tb3_h">[환불내역]</h4>
+<div id="pg">${pageStr_all}</div>
+</c:if>
+<c:if test="${sb=='b2'}">
+<table height="70" id="tb">
+	<tr>
+		<th width="150"><a href="amount_all.do?sb=b1">[정산내역]</a></th>
+		<th width="150"><a href="amount_all.do?sb=b2">[환불내역]</a></th>
+	</tr>
+</table>
 <table cellspacing="0" border="1" width="860" class="tb2">
 		<tr>
 			<th width="200">환불날짜</th>
@@ -233,16 +263,17 @@ body{
 		</tr>
 	</c:forEach>
 </table>
+<div id="pg">${pageStr_all_b}</div>
 </c:if>
-<br><br>
+<br><br><br><br>
 <table width="950" class="tb_to">
 	<tr>
-		<th><input type="button" value="돌아가기" id="but" onclick="history.back();"></th>
+		<th><a href="amount.do"><input type="button" value="돌아가기" id="but_back"></a></th>
 	</tr>
 </table>
 </form>
-<br><br><br><br>
-<hr width="1200">
+<br><br><br>
+<hr width="1200" id="hrf">
 </c:if>
 </body>
 </html>

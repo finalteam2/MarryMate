@@ -211,7 +211,7 @@ function drawChart2 () {
 <table width="950" class="tb_to">
 	<tr>
 		<th><a href="amount_all.do?sb=s"><input type="button" value="내역보기" class="bu_to"></a></th>
-		<th><a href="amount_all.do?sb=b"><input type="button" value="내역보기" class="bu_to"></a></th>
+		<th><a href="amount_all.do?sb=b1"><input type="button" value="내역보기" class="bu_to"></a></th>
 	</tr>
 </table>
 </form>

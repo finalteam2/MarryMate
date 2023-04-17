@@ -80,8 +80,15 @@ public class AnalyticsController {
 	@RequestMapping("/amount_all.do")
 	public ModelAndView amount_all(@RequestParam(value="cp",defaultValue="1")int cp, String sb) {
 		
-		List<PaymentDTO> amount_all=paymentDao.amount_all();
-		List<RefundDTO> amount_all_b=paymentDao.amount_all_b();
+		int totalCnt_all=paymentDao.getTotalCnt_all();
+		int totalCnt_all_b=paymentDao.getTotalCnt_all_b();
+		int listSize=10;
+		int pageSize=5;
+		String pageStr_all=com.admin.page.module.PageModule_sb.makePage("amount_all.do",totalCnt_all,listSize,pageSize,cp,sb);
+		String pageStr_all_b=com.admin.page.module.PageModule_sb.makePage("amount_all.do",totalCnt_all_b,listSize,pageSize,cp,sb);
+		
+		List<PaymentDTO> amount_all=paymentDao.amount_all(cp,listSize);
+		List<RefundDTO> amount_all_b=paymentDao.amount_all_b(cp,listSize);
 		
 		ModelAndView mav=new ModelAndView();
 		
@@ -89,6 +96,8 @@ public class AnalyticsController {
 		mav.addObject("amount_all",amount_all);
 		mav.addObject("amount_all_b",amount_all_b);
 		
+		mav.addObject("pageStr_all",pageStr_all);
+		mav.addObject("pageStr_all_b",pageStr_all_b);
 		mav.setViewName("analytics_list");
 		
 		return mav;

@@ -1,7 +1,9 @@
 package com.admin.book.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -58,16 +60,42 @@ public class PaymentDAOImple implements PaymentDAO {
 	}
 	
 	@Override
-	public List<PaymentDTO> amount_all(){
-		List<PaymentDTO> amount_all=sqlMap.selectList("amount_all");
+	public List<PaymentDTO> amount_all(int cp, int listSize){
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<PaymentDTO> amount_all=sqlMap.selectList("amount_all",map);
 		return amount_all;
 		
 	}
 	
 	@Override
-	public List<RefundDTO> amount_all_b(){
-		List<RefundDTO> amount_all_b=sqlMap.selectList("amount_all_b");
+	public List<RefundDTO> amount_all_b(int cp, int listSize){
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		Map map=new HashMap();
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<RefundDTO> amount_all_b=sqlMap.selectList("amount_all_b",map);
 		return amount_all_b;
+	}
+	
+	@Override
+	public int getTotalCnt_all() {
+		int count=sqlMap.selectOne("getTotalCnt_all");
+		count=count==0?1:count;
+		return count;
+	}
+	
+	@Override
+	public int getTotalCnt_all_b() {
+		int count=sqlMap.selectOne("getTotalCnt_all_b");
+		count=count==0?1:count;
+		return count;
 	}
 
 }
