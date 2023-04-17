@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -288,6 +290,7 @@ tr.pink-bg {
 			<div id="submit-field" style="display: inline;"></div>
 		</form>
 	</div>
+	<%@include file="/WEB-INF/views/chatbot.jsp" %>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -288,6 +288,7 @@ tr.pink-bg {
 			<div id="submit-field" style="display: inline;"></div>
 		</form>
 	</div>
+	<%@include file="/WEB-INF/views/chatbot.jsp" %>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

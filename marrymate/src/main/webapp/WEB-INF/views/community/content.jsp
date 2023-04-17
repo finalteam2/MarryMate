@@ -170,7 +170,7 @@ comment-wrapper {
 	align-items: center;
 	font-size: 14px;
 	color: #666;
-	width: 100px;
+	width: 110px;
 	height: 30px;
 }
 
@@ -192,7 +192,7 @@ comment-wrapper {
 	align-items: center;
 	font-size: 14px;
 	color: #666;
-	width: 100px;
+	width: 110px;
 	height: 30px;
 }
 
@@ -360,7 +360,7 @@ $(function() {
 					<div class="author">작성자: ${dto.nick}</div>
 				</c:otherwise>
 			</c:choose>
-			<div class="date">작성일: ${dto.writedate}</div>
+			<div class="date">작성일: ${dto.writedate}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수: ${dto.watch}</div>
 			<div class="content">${dto.content.replaceAll('\\n', '<br>')}</div>
 			<c:choose>
 				<c:when test="${dto.img eq '없음'}">
@@ -434,7 +434,7 @@ $(function() {
 								<input type="hidden" name="id" value="${sessionScope.loginId}">
 								<input type="hidden" id="author" name="nick" value="${sessionScope.loginNick}" readonly><br>
 								<label for="comment">댓글 내용</label><br>
-								<textarea id="comment" name="content"></textarea>
+								<textarea id="comment" name="content" placeholder="댓글을 작성해주세요"></textarea>
 								<input type="submit" value="댓글 작성" onclick="return checkReply()">
 							</form>
 						</div>
@@ -443,6 +443,7 @@ $(function() {
 			</c:choose>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/views/chatbot.jsp" %>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
