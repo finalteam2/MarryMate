@@ -32,6 +32,12 @@ article div input[type=password]::placeholder {
 	font-size: 10px;
 }
 
+body {
+	background-color: #fbf4ff;
+	margin: 0;
+	padding: 0;
+}
+
 h2 {
 	font-size: 32px;
 	text-align: center;
@@ -61,6 +67,7 @@ select {
 	border-radius: 30px;
 	margin: 0px auto;
 	margin-bottom: 50px;
+	background-color: white;
 }
 
 .hTagBox {

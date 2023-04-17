@@ -26,9 +26,9 @@
 		    	</otherwise>
 		    </choose>
 		    <choose>
-		    	<when test="gname!=null">
-		    		5000,
-		    	</when>
+		    	<when test="gname != null and !gname.trim().isEmpty()">
+				    5000,
+				</when>
 		    	<otherwise>
 		    		0,
 		    	</otherwise>

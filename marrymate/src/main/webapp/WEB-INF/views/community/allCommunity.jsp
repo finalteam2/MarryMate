@@ -229,7 +229,7 @@
 					<td>${dto.nick}</td>
 					<td>${dto.writedate}</td>
 					<td>${dto.watch}</td>
-					<td>0</td>
+					<td>${dto.best}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -268,7 +268,7 @@
 					<td>${dto.nick}</td>
 					<td>${dto.writedate}</td>
 					<td>${dto.watch}</td>
-					<td>0</td>
+					<td>${dto.best}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -92,7 +92,7 @@
 		from bbs 
 		left join member on bbs.midx = member.midx 
 		left join recommand on bbs.bidx = recommand.bidx
-		where kind='웨딩후기' and blind=0
+		where kind='웨딩후기' and blind=0 and best>0
 		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 		order by best desc nulls last
 	</select>
@@ -101,7 +101,7 @@
 		from bbs 
 		left join member on bbs.midx = member.midx 
 		left join recommand on bbs.bidx = recommand.bidx
-		where kind='웨딩톡톡' and blind=0
+		where kind='웨딩톡톡' and blind=0 and best>0
 		group by bbs.bidx, bbs.midx, bbs.kind, bbs.horse, bbs.subject, bbs.content, bbs.writedate, bbs.img, bbs.ref, bbs.stair, bbs.step, bbs.watch, bbs.blind, bbs.topfix, bbs.admin, member.nick
 		order by best desc nulls last
 	</select>

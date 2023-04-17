@@ -173,6 +173,7 @@
 		    });
 		</script>
 	</div>
+	<%@include file="/WEB-INF/views/chatbot.jsp" %>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
