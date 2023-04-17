@@ -49,12 +49,12 @@
   </select>
   
   <select id="amount_all" parameterType="Map" resultType="com.admin.book.model.PaymentDTO">
-  		select * from (select rownum as rnum,a.* from (select pay_date,pay_point,pay_money,(pay_point+pay_money)*0.9 pay_cal from payment order by pay_idx) a) b 
+  		select * from (select rownum as rnum,a.* from (select pay_date,pay_point,pay_money,(pay_point+pay_money)*0.9 pay_cal from payment order by pay_date desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
   <select id="amount_all_b" parameterType="Map" resultType="com.admin.book.model.RefundDTO">
-  		select * from (select rownum as rnum,a.* from (select rf_date,rf_point,rf_money from refund order by refund_idx) a) b 
+  		select * from (select rownum as rnum,a.* from (select rf_date,rf_point,rf_money from refund order by rf_date desc) a) b 
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   
