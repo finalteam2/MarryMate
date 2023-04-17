@@ -226,6 +226,12 @@ comment-wrapper {
 	height: auto;
 }
 
+#backBox {
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
 .image {
 	border-radius: 50px;
 	float: left;
@@ -377,7 +383,9 @@ $(function() {
 			</c:choose>
 			<c:choose>
 				<c:when test="${dto.kind eq '공지사항'}">
-
+					<div id="backBox">
+						<a href="#" class="button" onclick="window.history.back()">목록</a>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div id="likeDis">
@@ -403,7 +411,6 @@ $(function() {
 						<a href="${deleteUrl}" class="button button-delete"
 							onclick="return checkDelete()">삭제</a>
 					</div>
-					
 					<c:forEach var="reply" items="${list}">
 						<div class="comment-wrapper">
 							<div class="comment">
