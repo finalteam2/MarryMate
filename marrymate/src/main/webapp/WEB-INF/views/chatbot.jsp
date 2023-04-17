@@ -18,9 +18,6 @@ var strCidx='${sessionScope.com_cidx}';
 var midx = 0;
 var cidx = 0;
 
-console.log('strMidx' + strMidx);
-console.log('strCidx' + strCidx);
-
 if(strMidx != ''){
 	midx=parseInt(strMidx);
 }
@@ -28,9 +25,6 @@ if(strCidx != ''){
 	cidx=parseInt(strCidx);
 }
 
-
-console.log('midx' + midx);
-console.log('cidx' + cidx);
 
 
 

@@ -70,11 +70,6 @@ h2{
 					</c:if>
 					<c:forEach var="dto" items="${arr }">
 					<tr>
-						<c:if test="${dto.p_cal==0 }">
-							<tr>
-							<td colspan="3">포인트 잔액이 0원 입니다.</td>
-							</tr>
-						</c:if>
 						<c:if test="${dto.p_cal!=0 }">
 						<td>${dto.p_date }</td>
 						<c:if test="${dto.p_cal>0 }">
