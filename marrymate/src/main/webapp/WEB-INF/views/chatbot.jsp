@@ -13,13 +13,6 @@
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
 <div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
 
-<c:if test="${empty sessionScope.loginMidx}">
-<%session.setAttribute("loginMidx",0); %>
-</c:if>
-<c:if test="${empty sessionScope.com_cidx}">
-<%session.setAttribute("com_cidx",0); %>
-</c:if>
-
 <div class="background">
 	<div class="window">
     	<div class="popup">
@@ -94,12 +87,11 @@ function sendRequest3(url, param, method, callback){
 
 }
 
-
 function rn(){
-	if(${sessionScope.loginMidx!=0}){
+	if(${not empty sessionScope.loginMidx}){
 		var param='midx='+${sessionScope.loginMidx};
 		sendRequest3('readNum_m.do',param,'GET',rnResult);
-	}else if(${sessionScope.com_cidx!=0}){
+	}else if(${not empty sessionScope.com_cidx}){
 		var param='cidx='+${sessionScope.com_cidx};
 		sendRequest3('readNum_c.do',param,'GET',rnResult);
 	}
@@ -233,12 +225,12 @@ function anResult(){
 }
 
 function chat_tx(){
-	if(${sessionScope.loginMidx==0 && sessionScope.com_cidx==0}){
+	if(${(empty sessionScope.loginMidx) && (empty sessionScope.com_cidx)}){
 		window.alert('로그인 후 이용가능합니다.');
 		location.href='index.do';
 	}else{
 		
-		if(${sessionScope.loginMidx!=0}){
+		if(${not empty sessionScope.loginMidx}){
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
 			for(var i=DivChildNodes.length-1;i>=0;i--) {
@@ -318,7 +310,7 @@ function chat_tx(){
 function press(e){
     if(e.keyCode == 13){
     	
-    	if(${sessionScope.loginMidx!=0}){
+    	if(${not empty sessionScope.loginMidx}){
 	    	var param='';
 	    	param+='midx='+${sessionScope.loginMidx};
 			param+='&content='+document.getElementById('tx').value;
