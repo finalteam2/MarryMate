@@ -88,7 +88,7 @@ function payResult(){
 				        if (rsp.success) {
 				           
 				           jQuery.ajax({
-				                url: "pointUpdate.do", 
+				                url: "bookPointUpdate.do", 
 				                method: "POST",
 				                data: {
 				                	midx:midx,
@@ -139,7 +139,7 @@ function payResult(){
                </tr>
             </table>
          </div>
-         <h1 class="box_title">상품 정보</h1>
+         <h1 class="box_title">예약 정보</h1>
          <div class="itemInfo_box">
             
 	            <c:set var="hdto" value="${hallDto }"></c:set>
@@ -178,13 +178,13 @@ function payResult(){
 						</td>
 					</tr>
 					<tr>
-						<td>${hdto.h_name }(대관료 : ${hdto.h_pay } 최소보증인원 : ${hdto.guest_num })</td>
+						<td>${hdto.h_name } (대관료 : ${hdto.h_pay } 원 / 최소보증인원 : ${hdto.guest_num } 명)</td>
 						<td align="right">
 							<span class="small_text">가격</span>&nbsp;&nbsp;&nbsp;<span class="itemPrice">${hdto.pay }</span> 원
 						</td>
 					</tr>
 					<tr>
-						<td>${hdto.f_name }(식대 : ${hdto.f_pay })</td>
+						<td>${hdto.f_name } (식대 : ${hdto.f_pay } 원)</td>
 						<td align="right">가격 = 예약금(20%) + 잔금(80%)</td>
 					</tr>
                </table>

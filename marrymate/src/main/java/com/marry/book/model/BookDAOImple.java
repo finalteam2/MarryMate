@@ -8,6 +8,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.marry.company.model.CompanyDTO;
+import com.marry.company.model.FoodDTO;
 import com.marry.notification.model.NotificationDTO;
 import com.marry.point.model.PointDTO;
 
@@ -127,9 +128,9 @@ public class BookDAOImple implements BookDAO {
 		return pay_idx;
 	}
 	
-	/**결제시 포인트내역 업데이트*/
+	/**예약금 결제시 포인트내역 업데이트*/
 	@Override
-	public void pointUpdate(int midx, int usePoint, int pay_idx) {
+	public void bookPointUpdate(int midx, int usePoint, int pay_idx) {
 		
 		int point=sqlMap.selectOne("memPoint", midx);
 		int p_total=point-usePoint;
@@ -150,8 +151,33 @@ public class BookDAOImple implements BookDAO {
 		pointDto.setP_cal(calUsePoint);
 		pointDto.setP_total(p_total);
 		
-		sqlMap.insert("memPointMinus", pointDto);
+		sqlMap.insert("memBookPointMinus", pointDto);
+	}
+	
+	/**잔금 결제시 포인트내역 업데이트*/
+	@Override
+	public void janPointUpdate(int midx, int usePoint, int pay_idx) {
 		
+		int point=sqlMap.selectOne("memPoint", midx);
+		int p_total=point-usePoint;
+		
+		
+		Map map=new HashMap();
+		
+		map.put("p_total", p_total);
+		map.put("midx", midx);
+		
+		sqlMap.update("memPointUpdate", map);
+		
+		int calUsePoint=-usePoint;
+		
+		PointDTO pointDto=new PointDTO();
+		pointDto.setMidx(midx);
+		pointDto.setPay_idx(pay_idx);
+		pointDto.setP_cal(calUsePoint);
+		pointDto.setP_total(p_total);
+		
+		sqlMap.insert("memJanPointMinus", pointDto);
 	}
 	
 	/**멤버 보유포인트 가져오기*/
@@ -188,5 +214,60 @@ public class BookDAOImple implements BookDAO {
 		exceptTimes=sqlMap.selectList("exceptBookTime", map);
 		
 		return exceptTimes;
+	}
+	
+	/**홀 제외 잔금 필요한정보 추출*/
+	@Override
+	public BookpayDTO janPayInfos(int bk_idx) {
+		
+		BookpayDTO dto=sqlMap.selectOne("janPayInfo", bk_idx);
+		
+		return dto;
+	}
+	
+	/**잔금결제시 홀 예약정보*/
+	@Override
+	public com.marry.company.model.HallDTO bookHallInfo(int hidx) {
+		com.marry.company.model.HallDTO dto=sqlMap.selectOne("janHallInfo", hidx);
+		return dto;
+	}
+	
+	/**잔금결제시 푸드 예약정보*/
+	@Override
+	public FoodDTO bookFoodInfo(int fidx) {
+		FoodDTO dto=sqlMap.selectOne("janFoodInfo", fidx);
+		return dto;
+	}
+	
+	/**잔금결제시 bk_state 3으로*/
+	@Override
+	public void updateBkState(int bk_idx) {
+		sqlMap.update("updateBkState3", bk_idx);
+	}
+	
+	/**홀 제외 잔금 결제시 payment 저장*/
+	@Override
+	public void insertJanPay(int bk_idx, int midx, int usePoint, int finalPrice) {
+		
+		Map map=new HashMap();
+		map.put("bk_idx", bk_idx);
+		map.put("midx", midx);
+		map.put("usePoint", usePoint);
+		map.put("finalPrice", finalPrice);
+			
+		sqlMap.insert("insertJanPayInfo", map);
+	}
+	
+	/**홀 제외 잔금 결제 업체에게 알림*/
+	@Override
+	public void janNoti(int cidx) {
+		sqlMap.insert("janPayNoti", cidx);
+	}
+	
+	/**홀 제외 잔금 결제시 pay_idx 가져오기*/
+	@Override
+	public int janPayIdx(int bk_idx) {
+		int pay_idx=sqlMap.selectOne("janGetPayIdx", bk_idx);
+		return pay_idx;
 	}
 }

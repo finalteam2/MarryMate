@@ -22,6 +22,7 @@ import com.marry.book.model.CartDTO;
 import com.marry.book.model.FilterDTO;
 import com.marry.book.model.HallDTO;
 import com.marry.company.model.CompanyDTO;
+import com.marry.company.model.FoodDTO;
 
 @Controller
 public class BookController {
@@ -269,14 +270,150 @@ public class BookController {
 		return mav;
 	}
 	
-	/**포인트내역 업데이트 및 알림*/
-	@RequestMapping("/pointUpdate.do")
-	public void pointUpdate(
+	/**예약금 결제시 포인트내역 업데이트 및 알림*/
+	@RequestMapping("/bookPointUpdate.do")
+	public void bookPointUpdate(
 			@RequestParam(value = "midx", defaultValue = "")int midx ,
 			@RequestParam(value = "usePoint", defaultValue = "")int usePoint,
 			@RequestParam(value = "pay_idx", defaultValue = "")int pay_idx) {
 
-		bookDao.pointUpdate(midx, usePoint, pay_idx);
+		bookDao.bookPointUpdate(midx, usePoint, pay_idx);
+	}
+	
+	/**잔금 결제시 포인트내역 업데이트 및 알림*/
+	@RequestMapping("/janPointUpdate.do")
+	public void janPointUpdate(
+			@RequestParam(value = "midx", defaultValue = "")int midx ,
+			@RequestParam(value = "usePoint", defaultValue = "")int usePoint,
+			@RequestParam(value = "pay_idx", defaultValue = "")int pay_idx) {
+
+		bookDao.janPointUpdate(midx, usePoint, pay_idx);
+	}
+	
+	/**홀 제외 잔금 결제 파라미터 넘기기*/
+	@RequestMapping(value = "/notHallJanPay.do", method = RequestMethod.POST)
+	public ModelAndView notHallJanPay(
+			@RequestParam(value = "bk_idx", defaultValue = "")int bk_idx,
+			@RequestParam(value = "cidx", defaultValue = "")int cidx,
+			HttpServletRequest req) {
 		
+		HttpSession session=req.getSession();
+		int midx=(int)session.getAttribute("loginMidx");
+		int point=bookDao.memberPoint(midx);
+		
+		BookpayDTO bookPayDto=bookDao.janPayInfos(bk_idx);
+		CompanyDTO comDto=bookDao.addBookCart(cidx);
+		
+		int bookPrice=(int)(comDto.getPay()*0.2);
+		int janPrice=(int)(comDto.getPay()*0.8);
+		
+		String bk_date=bookPayDto.getBk_date().substring(0, 10);
+		
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bk_idx", bk_idx);
+		mav.addObject("bookPayDto", bookPayDto);
+		mav.addObject("bookPrice", bookPrice);
+		mav.addObject("janPrice", janPrice);
+		mav.addObject("bk_date", bk_date);
+		mav.addObject("comDto", comDto);
+		mav.addObject("point", point);
+		mav.setViewName("book/payment_jan");
+		return mav;
+	}
+	
+	/**홀 제외 잔금 결제시 DB 저장*/
+	@RequestMapping(value = "/notHallJanPayment.do", method = RequestMethod.POST)
+	public ModelAndView notHallJanPayment(
+			@RequestParam(value = "midx", defaultValue = "")int midx,
+			@RequestParam(value = "cidx", defaultValue = "")int cidx,
+			@RequestParam(value = "bk_date", defaultValue = "")String bk_date,
+			@RequestParam(value = "bk_time", defaultValue = "")String bk_time,
+			@RequestParam(value = "usePoint", defaultValue = "")int usePoint,
+			@RequestParam(value = "finalPrice", defaultValue = "")int finalPrice,
+			@RequestParam(value = "bk_idx", defaultValue = "")int bk_idx) {
+		
+		
+		//bk_state 3으로 update
+		bookDao.updateBkState(bk_idx);
+		//payment DB 저장
+		bookDao.insertJanPay(bk_idx, midx, usePoint, finalPrice);
+		//pay_idx 가져오기
+		int pay_idx=bookDao.janPayIdx(bk_idx);
+		//잔금결제시 업체에게 알림보내기
+		bookDao.janNoti(cidx);
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pay_idx", pay_idx);
+		mav.setViewName("finalJson");
+		return mav;
+	}
+	
+	/**홀 잔금 결제 파라미터 넘기기*/
+	@RequestMapping(value = "/hallJanPay.do", method = RequestMethod.POST)
+	public ModelAndView hallJanPay(
+			@RequestParam(value = "bk_idx", defaultValue = "")int bk_idx,
+			@RequestParam(value = "cidx", defaultValue = "")int cidx,
+			@RequestParam(value = "hidx", defaultValue = "")int hidx,
+			@RequestParam(value = "fidx", defaultValue = "")int fidx,
+			@RequestParam(value = "allpay", defaultValue = "")int allpay,
+			HttpServletRequest req) {
+		
+		HttpSession session=req.getSession();
+		int midx=(int)session.getAttribute("loginMidx");
+		int point=bookDao.memberPoint(midx);
+		
+		com.marry.company.model.HallDTO hallDto=bookDao.bookHallInfo(hidx);
+		FoodDTO foodDto=bookDao.bookFoodInfo(fidx);
+		BookpayDTO bookPayDto=bookDao.janPayInfos(bk_idx);
+		CompanyDTO comDto=bookDao.addBookCart(cidx);
+		
+		int bookPrice=(int)(allpay*0.2);
+		int janPrice=(int)(allpay*0.8);
+		
+		String bk_date=bookPayDto.getBk_date().substring(0, 10);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bk_idx", bk_idx);
+		mav.addObject("foodDto", foodDto);
+		mav.addObject("hallDto", hallDto);
+		mav.addObject("bookPayDto", bookPayDto);
+		mav.addObject("bk_date", bk_date);
+		mav.addObject("comDto", comDto);
+		mav.addObject("allpay", allpay);
+		mav.addObject("bookPrice", bookPrice);
+		mav.addObject("janPrice", janPrice);
+		mav.addObject("point", point);
+		mav.setViewName("book/payment_jan_h");
+		return mav;
+	}
+	
+	/**홀 잔금 결제시 DB 저장*/
+	@RequestMapping(value = "/hallJanPayment.do", method = RequestMethod.POST)
+	public ModelAndView hallJanPayment(
+			@RequestParam(value = "midx", defaultValue = "")int midx,
+			@RequestParam(value = "cidx", defaultValue = "")int cidx,
+			@RequestParam(value = "bk_date", defaultValue = "")String bk_date,
+			@RequestParam(value = "bk_time", defaultValue = "")String bk_time,
+			@RequestParam(value = "usePoint", defaultValue = "")int usePoint,
+			@RequestParam(value = "finalPrice", defaultValue = "")int finalPrice,
+			@RequestParam(value = "bk_idx", defaultValue = "")int bk_idx,
+			@RequestParam(value = "hidx", defaultValue = "")int hidx,
+			@RequestParam(value = "fidx", defaultValue = "")int fidx) {
+		
+		
+		//bk_state 3으로 update
+		bookDao.updateBkState(bk_idx);
+		//payment DB 저장
+		bookDao.insertJanPay(bk_idx, midx, usePoint, finalPrice);
+		//pay_idx 가져오기
+		int pay_idx=bookDao.janPayIdx(bk_idx);
+		//잔금결제시 업체에게 알림보내기
+		bookDao.janNoti(cidx);
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pay_idx", pay_idx);
+		mav.setViewName("finalJson");
+		return mav;
 	}
 }

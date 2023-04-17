@@ -88,7 +88,6 @@ div.allpage{
 		  	  	<form action="notHallJanPay.do" method="post">
 			  	  <input type="hidden" name="bk_idx" value="${dto.bk_idx }">
 			  	  <input type="hidden" name="cidx" value="${dto.cidx }">
-			  	  <input type="hidden" name="allpay" value="${dto.allpay }">
 				  <button type="submit" class="btn btn-outline-primary" >결제</button>
 			  	</form>
 		  		</c:if>
