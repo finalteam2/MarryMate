@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="/marrymate/css/header.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/checkNoti.js"></script>
 <script type="text/javascript">
+
 /*
 window.onload = function () {
     var el = document.getElementById("notificationheader");
@@ -55,15 +57,6 @@ window.onload = function () {
 		</div>
 
 		<div class="notificationheader" id="notigroup">
-			<p>
-				<img class="notiimg" src="/marrymate/img/notification.png" style="width: 28px;">
-			</p>
-
-			<ul class="notibar">
-				<li><a href="#">test</a></li>
-				<li><a href="#">test</a></li>
-				<li><a href="#">test</a></li>
-			</ul>
 		</div>
 	</div>
 	<div>
@@ -130,5 +123,5 @@ window.onload = function () {
 </script>
 <!-- 알림 실행하는거 (맨밑에 해놔야댐) -->
 <script>
-//checkNoti();
+checkNoti();
 </script>

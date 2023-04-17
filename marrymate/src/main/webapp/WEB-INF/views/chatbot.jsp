@@ -11,23 +11,27 @@
 <script>
 var XHR3 = null;
 
-var midx = sessionStorage.getItem("loginMidx");
-var cidx = sessionStorage.getItem("com_cidx");
+//변수들 선언
+var strMidx='${sessionScope.loginMidx}';
+var strCidx='${sessionScope.com_cidx}';
+//midx:parseInt
+var midx = 0;
+var cidx = 0;
 
-if(midx !== null){
-//	console.log('midx' + midx);
-}else {
-//	console.log('midx 없음');
-	midx = 0;
-//	console.log('midx' + midx);
+console.log('strMidx' + strMidx);
+console.log('strCidx' + strCidx);
+
+if(strMidx != ''){
+	midx=parseInt(strMidx);
 }
-if(cidx !== null){
-//	console.log('cidx' + cidx);
-}else {
-//	console.log('cidx 없음');
-	cidx = 0;
-//	console.log('cidx' + cidx);
+if(strCidx != ''){
+	cidx=parseInt(strCidx);
 }
+
+
+console.log('midx' + midx);
+console.log('cidx' + cidx);
+
 
 
 function getXHR3(){
@@ -202,12 +206,12 @@ function anResult(){
 }
 
 function chat_tx(){
-	if(midx == 0 || cidx == 0){
+	if(midx == 0 && cidx == 0){
 		window.alert('로그인 후 이용가능합니다.');
 		location.href='index.do';
 	}else{
 		
-		if(mdix != 0){
+		if(midx != 0){
 			var DivNode=document.getElementById('user_chat');
 			var DivChildNodes=DivNode.childNodes;
 			for(var i=DivChildNodes.length-1;i>=0;i--) {

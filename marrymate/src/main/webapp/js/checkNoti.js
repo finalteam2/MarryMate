@@ -50,22 +50,22 @@ function notiResult(){
 			
 			//새 알람
 			var htmlStr = ''
-			htmlStr += '<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">알람';
-			htmlStr += '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' + notiCnt;
-			htmlStr += '<span class="visually-hidden">unread messages</span></span></button>';
-			htmlStr += '<ul id="notiUl" class="dropdown-menu">';
+			htmlStr += '<p id="notiimg">';
+			htmlStr += '<img class="notiimg" src="/marrymate/img/notification.png" style="width: 28px;">';
+			htmlStr += '</p>';
 			if (notiArr != null){
+				htmlStr += '<ul class="notibar">';
 				for(var i = 0; i < notiArr.length; i++){
 					var noti = notiArr[i];
 					//알람 하나씩 추가
 						if(noti.checked == 1){
 							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:gray;">' + noti.title + '</span></a></li>';
 						}else if(noti.checked == 0){
-							htmlStr += ' <li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:red;">' + noti.title + '</span></a></li>';
+							htmlStr += '<li><a href="goNoti.do?nidx=' + noti.nidx + '&page=' + noti.page + '"><span style="color:red;">' + noti.title + '</span></a></li>';
 						}		
 				}
+				htmlStr += '</ul>';
 			}
-			htmlStr += '</ul>';
 			notiNode.innerHTML = htmlStr;
 		}
 	}
