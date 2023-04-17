@@ -108,7 +108,7 @@ public class ContentController {
 		}
 		
 		if (result > 0) {
-			NotificationDTO ndto = new NotificationDTO(0, dto.getCidx(), 0, "", "/marrymate/companyContent.do?cidx="+dto.getCidx(), "새 리뷰가 있습니다", "", 3, null, null, 0);
+			NotificationDTO ndto = new NotificationDTO(0, dto.getCidx(), 0, "", "companyContent.do?cidx="+dto.getCidx(), "새 리뷰가 있습니다", "", 3, null, null, 0);
 			notificationDao.insertNoti(ndto);
 			msg = "리뷰 작성 완료";
 		}else {
