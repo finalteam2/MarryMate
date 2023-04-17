@@ -7,16 +7,16 @@ p{
 }
 
 #titlefont{
-    font-size: 35px;
+    font-size: 38px;
     margin-bottom: 30px;
 }
 
 #subfont{
-  font-size: 20px;
+  font-size: 22px;
 }
 
 #tagfont{
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .startBtn {
@@ -26,25 +26,25 @@ p{
   width: 250px;
   height: 50px;
   border: 0px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .startBtn:hover, .startBtn:focus{
-  background-color: bisque;
+  background-color: #753cc1;
   color: whitesmoke;
 }
 
 #toc-content {
   display: none;
-  font-size: 20px;
+  font-size: 23px;
 }
 
 #toc-toggle {
   display: block;
   width: 150px;
   cursor: pointer;
-  color: #2962ff;
-  font-size: 20px;
+  color: #ebcd3f;
+  font-size: 22px;
 }
 
 #toc-toggle:hover {
@@ -53,14 +53,14 @@ p{
 
 #license {
   margin-top: 25px;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 #toc-toggle2 {
   width: 150px;
   cursor: pointer;
-  color: #2962ff;
-  font-size: 20px;
+  color: #ebcd3f;
+  font-size: 22px;
 }
 
 #toc-toggle2:hover {

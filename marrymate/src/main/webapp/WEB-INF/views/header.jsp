@@ -18,14 +18,14 @@ window.onload = function () {
 	<div class="loginboxheader">
 		<c:if
 			test="${empty sessionScope.loginId && empty sessionScope.com_id}">
-			<div class="loginbar">
+			<div class="loginbar1">
 				<a href="login.do">로그인</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="l"
 					href="memberJoin.do">회원가입</a>
 			</div>
 		</c:if>
 		<c:if
 			test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
-			<div style="display: flex; margin-right: 10px;">
+			<div class="loginbar2" style="display: flex; margin-right: 10px;">
 				<a>${sessionScope.com_cname}${sessionScope.loginName} 님 접속중 |
 					&nbsp;</a><a id="l" href="logout.do">로그아웃</a>
 			</div>
@@ -34,7 +34,7 @@ window.onload = function () {
 			test="${empty sessionScope.loginId && empty sessionScope.com_id}">
 		</c:if>
 
-		<div class="menu">
+		&nbsp;&nbsp;&nbsp;&nbsp;<div class="menu">
 			<p>
 				<img class="mypimg" src="/marrymate/img/user2.png" style="width: 28px;">
 			</p>

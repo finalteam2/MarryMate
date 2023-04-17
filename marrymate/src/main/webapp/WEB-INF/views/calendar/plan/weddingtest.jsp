@@ -41,7 +41,19 @@
 
 
 </head>
-
+<style>
+.mypurplebutton{
+		font-weight: 700;
+        color: #664e96;
+        border-color: white;
+        background: white;
+}
+.mypurplebutton:hover {
+        color: white;
+        background: #664e96;
+        border-color: white;
+    }
+</style>
 <body>
     <div class="container">
         <section id="main" class="mainfont mx-auto my-5 py-4 px-3">
@@ -111,12 +123,13 @@
                 20. 식전영상<br>
             </div>
 				<br>
+					<a href="index.do"><button type="button" class="mypurplebutton" value="메인으로 돌아가기"></button></a>
+				<br>
    			<!--sns 공유-->
             <img id="shareImg" src="/marrymate/img/kakao-talk.png" onclick="js:setShare()">
             <img id="shareImg" src="/marrymate/img/facebook.png" onclick="js:shareFacebook()" />
             <img id="shareImg" src="/marrymate/img/twitter.png" onclick="js:shareTwitter()" />
             <img id="shareImg" src="/marrymate/img/link.png" onclick="js:copy()" />
-
             <!--저작권 -->
 				<br><br><br><br>
                 Copyrightⓒ2023 by MarryMate.

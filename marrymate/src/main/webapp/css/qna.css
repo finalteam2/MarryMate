@@ -33,7 +33,7 @@
 }
 
 .answerList:hover, .answerList:focus {
-  background-color: bisque;
+  background-color: #753cc1;
   color: whitesmoke;
 } 
 
@@ -47,11 +47,11 @@
 .statusBar {
   height: 100%;
   border-radius: 25px;
-  background: #d6d6eb;
-  background: -moz-linear-gradient(top,  #d6d6eb 0%, #ed9017 100%); 
-  background: -webkit-linear-gradient(top,  #d6d6eb 0%,#ed9017 100%);
-  background: linear-gradient(to bottom,  #d6d6eb 0%,#ed9017 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6eb', endColorstr='#ed9017',GradientType=0 );
+  background: #e4d6f1;
+  background: -moz-linear-gradient(top,  #e4d6f1 0%, #9855f2 100%); 
+  background: -webkit-linear-gradient(top,  #e4d6f1 0%,#9855f2 100%);
+  background: linear-gradient(to bottom,  #e4d6f1 0%,#9855f2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4d6f1', endColorstr='#9855f2',GradientType=0 );
 }
 
 .statusNum{

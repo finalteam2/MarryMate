@@ -19,30 +19,36 @@ footer #foot1 {
 
 footer #foot2 {
 	margin: auto;
-	width: 100%;
-	line-height: 25px;
+    width: 80%;
+    line-height: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
 }
 
-footer #foot1 #foottop {
-	margin: auto;
-	width: 100%;
-	line-height: 25px;
-	text-align: center;
-}
 
 footer #foottop {
 	margin: auto;
-	width: 99%;
-	border: 3px solid #ECCC83;
-	align-self: center;
-	font-size: 22px;
-	background-color: #fff;
-	height: 55px;
+    width: 99.6%;
+    border: 3px solid #ECCC83;
+    align-self: center;
+    font-size: 22px;
+    background-color: #fff;
+    height: 55px;
+    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
 }
 
 footer label {
-	font-size: 18px;
-	margin-left: 740px;
+	font-size: 16px;
+    margin-left: 1050px;
 }
 
 #foottop a {
@@ -64,7 +70,7 @@ footer label {
 	width: 35px;
 	margin-right: 5px;
 	text-align: right;
-	 
+	justify-content: center;
 }
 </style>
 
@@ -74,7 +80,9 @@ footer label {
 		<br>
 		<div id="foottop">
 			<a href="">회사소개</a> <a href="">개인정보취급방침</a> <a href="">광고문의 및
-				제휴문의</a> <img src="/marrymate/img/kakao-talk.png"> <img
+				제휴문의</a> 
+			
+				<img src="/marrymate/img/kakao-talk.png"> <img
 				src="/marrymate/img/instagram.png"> <img
 				src="/marrymate/img/facebook.png">
 		</div>

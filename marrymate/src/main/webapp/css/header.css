@@ -138,7 +138,7 @@
     font-size: 15px;
     text-align: center;
     border-radius: 50%;
-    background-color: #8000ff;
+    background-color: #ff4927;
     color: #fff;
     animation: zoom 3s 3s both infinite;
 }
@@ -154,24 +154,23 @@ nav{
 }
 
 nav .navdiv{
-	padding: 20px;
+	margin-left: 120px;
 }
 
-.loginbar{
+.loginbar1, .loginbar2{
 	text-decoration: none;
 	color: black;
-	margin-left: 10px;
 }
 .titlebar a{
     font-family: 'TAEBAEKmilkyway';
 	text-decoration: none;
 	text-align: center;
-	font-size: 28px;
+	font-size: 24px;
 	font-weight: bold;
 	color: black;
 	transition: color 0.5s;
-	padding: 20px;
-	
+	padding: 30px;
+	margin-left: 10px;
 }
 
 .titlebar a:hover{
@@ -201,10 +200,9 @@ nav .navdiv{
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    border-bottom: 1px solid black;
-    margin-bottom: 30px;
+    border-bottom: 3px solid #b7a2d5;
     align-content: center;
     align-items: center;
-    height: 140px;
+    height: 130px;
 }
 

@@ -11,12 +11,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/marrymate/css/calendar.css">
 <link href='/marrymate/css/fullcalendar.main.min.css' rel='stylesheet' />
 <script src='/marrymate/js/ko.js'></script>
 <script src='/marrymate/js/fullcalendar.main.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
-<link rel="stylesheet" href="/marrymate/css/calendar.css">
 <link rel="stylesheet" href="/marrymate/css/date-picker.css">
 <link rel="stylesheet" href="/marrymate/css/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
@@ -29,86 +29,69 @@
 <script src='fullcalendar.main.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.min.js"></script>
+
 <style type="text/css">
-.schedulewrapper{
+.schedulewrapper {
 	text-align: center;
 }
-.myWeddingMenuWrap{
+
+.myWeddingMenuWrap {
 	text-align: center;
 }
-.checklistwrap{
+
+.checklistwrap {
 	text-align: center;
 }
-.planlistwrap{
+
+.planlistwrap {
 	text-align: center;
 }
-.ddaygoal{
+
+.ddaygoal {
 	font-size: 28px;
 	font-weight: bold;
 	color: purple;
 }
-.titlecss{
+
+.titlecss {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 30px;
 }
-.bigtitle{
+
+.bigtitle {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 38px;
 }
-.titlecss{
+
+.titlecss {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 30px;
 }
-.scheduleall h4{
+
+.scheduleall h4 {
 	color: #5706b0;
 	font-family: 'SUIT-Regular';
 	font-size: 28px;
 	font-weight: bold;
+}
+
+#calendar {
+	max-width: 1350px;
+	margin: 0px auto;
 }
 </style>
 </head>
 <body background="/marrymate/img/background.png">
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-		<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
-			style="width: 100%">
-		
-		<!--checkListTopWrap : s-->
-		<div class="checkListTopWrap">
-			<div class="inner">
-				
-				<div class="profileWrap">
-				
-					<!--profileArea : s-->
-	<div class="profileBox">
-						<div class="imgArea">
-							<div style="position: relative;">
-								 <img class="photoframe" src="/marrymate/img/imgbox.png">
-							</div>
-						
-						</div>
-						<div class="txtArea">
-							<div class="nameArea">
-									<div>
-										<strong>김철수</strong>
-										님 & <strong>이영희</strong> 님 결혼예정일
-									</div>
-							</div>
+	<img id="Caltopmem" src="/marrymate/img/caltopmem.png"
+		style="width: 100%">
 
-							<div class="weddingDay">
-										<div>2024년 3월 20일
-											&nbsp;<span id="day"></span>
-										</div>
-<span class="d-day" id="dDay"></span><br>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--profileArea : e-->
-			</div>
-		</div>
+	<br>
+	<img src="/marrymate/img/infoadd.png" style="width: 100%">
+
 
 	<br>
 	<br>
@@ -119,69 +102,65 @@
 			<div class="scheduleall">
 				<div class="bigtitle">전체 스케줄 보기</div>
 				<div>
-					   <div style="display: flex;">
-        <div style="flex: 1;">
-            <div class="scheduletotal">
-                <h4>모든 일정</h4>
-                <div class="stats">
-                <a href=#planlistMove>3</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-        <div style="flex: 1;">
-            <div class="booklisttotal">
-                <h4>모든 예약</h4>
-                <div class="stats">
-                    <a href="myBook.do">4</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-        <div style="flex: 1;">
-            <div class="checklisttotal">
-                <h4>모든 체크리스트</h4>
-                 <div class="stats">
-                <a href=#planlistMove>7</a>
-                </div>
-                <div class="statsletter">건</div>
-            </div>
-        </div>
-    </div>
+					<div style="display: flex;">
+						<div style="flex: 1;">
+							<div class="scheduletotal">
+								<h4>모든 일정</h4>
+								<div class="stats">
+									<a href=#planlistMove>3</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="booklisttotal">
+								<h4>모든 예약</h4>
+								<div class="stats">
+									<a href=#planlistMove>4</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="checklisttotal">
+								<h4>모든 체크리스트</h4>
+								<div class="stats">
+									<a href=#planlistMove>7</a>
+								</div>
+								<div class="statsletter">건</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 
-<br><br><br><br><br><br>
-			<div style="padding-left: 90%">
-				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
-			</div>
-			<br>
+			<br> <br> <br> <br> <br> <br>
 
-			<!-- 캘린더 시작  -->
-			<div id='calendar'></div>
-			<div id='popup'
-				style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">
-				<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
-			</div>
 		</div>
 	</div>
-	<br><br>
+	<br>
 	<div class="planlistwrap">
-	<div class="titlecss">
-		<a id="planlistMove">Myplan</a>
-	</div>
-	<form>
-		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+		<div class="titlecss">
+			<a id="planlistMove">Myplan</a>
+		</div>
+		<br>
+		<div style="padding-left: 40%">
+			<button type="button" id="planadd" onclick="addplan();">일정등록</button>
+		</div>
+		<br><br>
+		<form>
+			<table style="margin-left: auto; margin-right: auto;" border="1"
+				width="900" cellspacing="0">
+				<thead>
+					<tr>
+						<th>제목</th>
+						<th>일자</th>
+						<th>내용</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 					<tr>
 					<tr>
 						<td>드레스샵 찾아보기</td>
@@ -190,32 +169,38 @@
 						<td><input type="submit" value="삭제">
 							<button type="button">삭제</button></td>
 					</tr>
-			</tbody>
-		</table>
-	</form>
+				</tbody>
+			</table>
+		</form>
 	</div>
-	<br><br><br>
-	
+	<br>
+	<br>
+	<br>
+
 	<!-- checklist add/select -->
 	<div class="checklistwrap">
-	<input type="hidden" name="midx">
-	<div class="titlecss" id="checklistitems">
-		<a id="checklistMove">모든 체크리스트</a>
-	</div>
-	<div style="padding-left: 65%">
-		<button type="button">새 체크리스트 등록</button>
-	</div>
-	<form>
-		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>일자</th>
-					<th>내용</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+		<input type="hidden" name="midx">
+		<div class="titlecss" id="checklistitems">
+			<a id="checklistMove">모든 체크리스트</a>
+		</div>
+		<br>
+		<div style="padding-left: 40%">
+			<button type="button">새 체크리스트 등록</button>
+		</div>
+		<br>
+		<br>
+		<form>
+			<table style="margin-left: auto; margin-right: auto;" border="1"
+				width="900" cellspacing="0">
+				<thead>
+					<tr>
+						<th>제목</th>
+						<th>일자</th>
+						<th>내용</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 					<tr>
 						<td>상견례</td>
 						<td>2023-10-22</td>
@@ -223,19 +208,21 @@
 						<td><input type="submit" value="삭제">
 							<button type="button">삭제</button></td>
 					</tr>
-			</tbody>
-		</table>
-	</form>
+				</tbody>
+			</table>
+		</form>
 	</div>
-	<br><br>
+	<br>
+	<br>
 	<hr>
-	<br><br>
+	<br>
+	<br>
 	<div class="myWeddingMenuWrap">
 		<div class="ddaygoal">
-		<div class="goal">
-			<strong><span class="d-day" id="dDayOnly"></span></strong>
+			<div class="goal">
+				<strong><span class="d-day" id="dDayOnly"></span></strong>
+			</div>
 		</div>
-	</div>
 		<h2>나만의 체크리스트를 추가할 수 있어요!</h2>
 	</div>
 	<div class="contestList">
