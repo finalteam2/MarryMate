@@ -146,7 +146,6 @@ function createInputField() {
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div id="tableBox">
 	<h1>공지사항</h1>
 		<table class="viewNoti">
 			<thead>
@@ -212,7 +211,6 @@ function createInputField() {
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
 	<div id="searchBar">
 		<form method="get" id="search-form">
 			<select name="search" onchange="createInputField()">

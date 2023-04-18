@@ -105,9 +105,6 @@ h1 {
 	margin-right: 0;
 }
 
-#tableBox {
-	height: 630px;
-}
 
 #searchBar {
   display: flex;
@@ -182,7 +179,6 @@ h1 {
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div id="tableBox">
 		<h1>웨딩후기</h1>
 		<table class="viewTable">
 			<thead>
@@ -274,7 +270,6 @@ h1 {
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
 	<div id="searchBar">
 		<form method="get" id="search-form">
 			<select name="search" onchange="createInputField()">

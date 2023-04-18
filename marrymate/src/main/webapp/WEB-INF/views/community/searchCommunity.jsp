@@ -153,10 +153,6 @@ h1 {
 	font-weight: bold;
 }
 
-#tableBox {
-	height: 630px;
-}
-
 #backBox {
 	text-align: center;
 }
@@ -178,7 +174,6 @@ h1 {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-	<div id="tableBox">
 	<h1>"<div style="display:inline">${searchWord}</div>"으로 검색된 결과</h1>
 	<c:choose>
 		<c:when test="${dto.kind eq '웨딩톡톡'}">
@@ -343,7 +338,6 @@ h1 {
 		<div id="backBox">
 			<a href="#" class="back-to-board" onclick="window.history.back()">게시판으로 돌아가기</a>
 		</div>
-	</div>
 	<%@include file="/WEB-INF/views/chatbot.jsp" %>
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
