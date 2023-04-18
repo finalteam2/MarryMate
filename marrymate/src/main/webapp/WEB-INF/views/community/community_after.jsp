@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>웨딩후기</title>
 <style>
 body {
 	background-color: #fbf4ff;

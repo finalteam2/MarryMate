@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>MarryMate</title>
+	<title>커뮤니티</title>
 	<style>
 		body {
 			background-color: #fbf4ff;
