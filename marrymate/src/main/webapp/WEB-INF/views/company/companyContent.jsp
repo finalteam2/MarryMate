@@ -163,6 +163,9 @@ textarea {
     align-items: center;
 }
 
+.carousel-control-prev, .carousel-control-next{
+	background-color: rgba(128, 128, 128, 0.4);
+}
 </style>
 
 <title>Insert title here</title>
