@@ -198,7 +198,7 @@ function getCookie(name) {
 		</h1>
 
 		<h3>
-			간단한 테스트를<br class="none">통해 내 지식을 테스트 할 수 있습니다.
+			간단한 테스트를 통해<br class="none">내 지식을 테스트 할 수 있습니다.
 		</h3>
 	</div>
 	
