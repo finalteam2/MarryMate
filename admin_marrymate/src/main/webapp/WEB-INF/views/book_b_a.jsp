@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약관리</title>
 <style>
 body{
     background: #fbf4ff;

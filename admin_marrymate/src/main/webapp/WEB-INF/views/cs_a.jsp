@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의관리</title>
 <style>
 .up {
 	position: fixed;

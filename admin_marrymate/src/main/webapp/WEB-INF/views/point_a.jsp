@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트관리</title>
 <style>
 body{
     background: #fbf4ff;

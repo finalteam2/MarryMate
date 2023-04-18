@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>웨딩컬렉션 관리</title>
 <style>
 body{
     background: #fbf4ff;
