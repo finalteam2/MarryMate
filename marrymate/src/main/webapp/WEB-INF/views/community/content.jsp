@@ -384,7 +384,7 @@ $(function() {
 			<c:choose>
 				<c:when test="${dto.kind eq '공지사항'}">
 					<div id="backBox">
-						<a href="#" class="button" onclick="window.history.back()">목록</a>
+						<a href="notiList.do" class="button">목록</a>
 					</div>
 				</c:when>
 				<c:otherwise>
