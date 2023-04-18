@@ -193,7 +193,7 @@ public class CompanyController {
 		}
 		
 		String yoil7=req.getParameter("yoil7");
-		if(yoil7==null || yoil4.equals("")) {
+		if(yoil7==null || yoil7.equals("")) {
 			
 		}else {
 			dto.setYoil(yoil7);
