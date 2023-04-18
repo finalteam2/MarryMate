@@ -140,6 +140,7 @@ function getCookie(name) {
 }
 </script>
 	<%@include file="header.jsp"%>
+	<br><br><br><br><br>
 	<div id="subVisual" class="sub">
 		<div class="visualTit">
 			<h1 class="animated fadeIn delay-1s">Your Wedding Guide,
