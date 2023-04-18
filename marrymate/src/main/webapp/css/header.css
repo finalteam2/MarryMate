@@ -140,7 +140,7 @@
     border-radius: 50%;
     background-color: #ff4927;
     color: #fff;
-    animation: zoom 3s 3s both infinite;
+
 }
 
 ul > li:last-child ul{

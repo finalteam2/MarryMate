@@ -123,7 +123,7 @@
                 20. 식전영상<br>
             </div>
 				<br>
-					<a href="index.do"><button type="button" class="mypurplebutton" value="메인으로 돌아가기"></button></a>
+					<a href="index.do"><button type="button" class="mypurplebutton">메인으로 돌아가기</button></a>
 				<br>
    			<!--sns 공유-->
             <img id="shareImg" src="/marrymate/img/kakao-talk.png" onclick="js:setShare()">

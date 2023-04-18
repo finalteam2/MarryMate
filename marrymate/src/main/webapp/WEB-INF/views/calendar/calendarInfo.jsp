@@ -82,6 +82,17 @@
 	max-width: 1350px;
 	margin: 0px auto;
 }
+.mypurplebutton{
+		font-weight: 700;
+        color: #664e96;
+        border-color: white;
+        background: white;
+}
+.mypurplebutton:hover {
+        color: white;
+        background: #664e96;
+        border-color: white;
+    }
 </style>
 </head>
 <body background="/marrymate/img/background.png">
@@ -145,29 +156,29 @@
 			<a id="planlistMove">Myplan</a>
 		</div>
 		<br>
-		<div style="padding-left: 40%">
-			<button type="button" id="planadd" onclick="addplan();">일정등록</button>
+		<div style="padding-left: 42%">
+			<button type="button" class="mypurplebutton">새 일정 등록</button>
 		</div>
 		<br><br>
 		<form>
 			<table style="margin-left: auto; margin-right: auto;" border="1"
 				width="900" cellspacing="0">
-				<thead>
+				<thead style="height: 70px;">
 					<tr>
 						<th>제목</th>
 						<th>일자</th>
-						<th>내용</th>
-						<th></th>
+						<th colspan="2">내용</th>
+						
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="height: 120px;">
 					<tr>
 					<tr>
 						<td>드레스샵 찾아보기</td>
 						<td>2023-11-02</td>
 						<td>드레스샵 5개 찾아보기</td>
-						<td><input type="submit" value="삭제">
-							<button type="button">삭제</button></td>
+						<td>
+							<button type="button" class="mypurplebutton">삭제</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -185,28 +196,27 @@
 		</div>
 		<br>
 		<div style="padding-left: 40%">
-			<button type="button">새 체크리스트 등록</button>
+			<button type="button" class="mypurplebutton">새 체크리스트 등록</button>
 		</div>
 		<br>
 		<br>
 		<form>
 			<table style="margin-left: auto; margin-right: auto;" border="1"
 				width="900" cellspacing="0">
-				<thead>
+				<thead style="height: 70px;">
 					<tr>
 						<th>제목</th>
 						<th>일자</th>
-						<th>내용</th>
-						<th></th>
+						<th colspan="2">내용</th>
+					
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="height: 120px;">
 					<tr>
 						<td>상견례</td>
 						<td>2023-10-22</td>
 						<td>광화문 경복궁 18:00</td>
-						<td><input type="submit" value="삭제">
-							<button type="button">삭제</button></td>
+						<td><button type="button" class="mypurplebutton">삭제</button></td>
 					</tr>
 				</tbody>
 			</table>

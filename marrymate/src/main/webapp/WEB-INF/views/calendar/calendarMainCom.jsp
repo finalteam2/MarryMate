@@ -41,7 +41,6 @@ function addplan(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
 	window.open("planWriteCom.do","addplan", "width=400, height=400, left="+w+",top="+h);
-	opener.parent.location.reload();
 }
 
 function checkadd(){
@@ -51,28 +50,20 @@ function checkadd(){
 }
 
 function checkdel(){
-	var w = (window.screen.width/2)-200;
-	var h = (window.screen.height/2)-200;
-	window.open("checklistDelCom.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+    if (confirm('삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
 }
-
 
 function plandel(){
-	var w = (window.screen.width/2)-200;
-	var h = (window.screen.height/2)-200;
-	window.open("planlistDelCom.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+    if (confirm('삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
 }
-
-
-function checkuse(){
-	window.open("checklistShow.do","checkuse");
-}
-
-
-function checkAlladd(){
-
-}
-
 </script>
 <script type="text/javascript">
 	
@@ -87,23 +78,77 @@ function checkAlladd(){
 </script>
 
 <style type="text/css">
-.schedulewrapper{
+.schedulewrapper {
 	text-align: center;
 }
-.myWeddingMenuWrap{
+
+.myWeddingMenuWrap {
 	text-align: center;
 }
-.checklistwrap{
+
+.checklistwrap {
 	text-align: center;
 }
-.planlistwrap{
+
+.planlistwrap {
 	text-align: center;
 }
-.ddaygoal{
+
+.ddaygoal {
 	font-size: 28px;
 	font-weight: bold;
 	color: purple;
 }
+
+.titlecss {
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 30px;
+}
+
+.bigtitle {
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 38px;
+}
+
+.titlecss {
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 30px;
+}
+
+.scheduleall h4 {
+	color: #5706b0;
+	font-family: 'SUIT-Regular';
+	font-size: 28px;
+	font-weight: bold;
+}
+
+#calendar {
+	max-width: 1350px;
+	margin: 0px auto;
+}
+
+.stats a{
+	font-size: 28px;
+	
+}
+.statsletter{
+	font-size: 27px;
+}
+
+.mypurplebutton{
+		font-weight: 700;
+        color: #664e96;
+        border-color: white;
+        background: white;
+}
+.mypurplebutton:hover {
+        color: white;
+        background: #664e96;
+        border-color: white;
+    }
 </style>
 </head>
 <body background="/marrymate/img/background.png">
@@ -122,8 +167,14 @@ function checkAlladd(){
 	<div class="profileBox">
 						<div class="imgArea">
 							<c:forEach var="cinfo" items="${cominfo}">
-						</c:forEach>
 						
+							<div style="position: relative;">
+								<img class="photoframe" src="/marrymate/img/imgbox.png" style="width:340px;">
+								<div style="position: absolute; top: 112px; left: 70px;">
+									<img class="mypicture" src="/marrymate/img/member/${cinfo.img}" style="width:200px;">
+								</div>
+							</div>
+						</c:forEach>
 						</div>
 						<div class="txtArea">
 							<div class="nameArea">
@@ -142,8 +193,6 @@ function checkAlladd(){
 		</div>
 
 
-
-
 	<br>
 	<br>
 	<!--calendarShow-->
@@ -151,7 +200,7 @@ function checkAlladd(){
 	<div class="schedulewrapper">
 		<div class="schedulebox">
 			<div class="scheduleall">
-				<h3>전체 스케줄 보기</h3>
+				<div class="bigtitle">전체 스케줄 보기</div>
 
 				<div>
 					   <div style="display: flex;">
@@ -187,10 +236,11 @@ function checkAlladd(){
 			</div>
 			<input type="hidden" name="cidx" value="${sessionScope.com_cidx}">
 
-<br><br>
-			<div style="padding-left: 90%">
-				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
-			</div>
+	<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<br>
 
 			<!-- 캘린더 시작  -->
@@ -285,41 +335,51 @@ function checkAlladd(){
 	});
 </script>
 
-
+	<br><br><br>
 	<div class="planlistwrap">
 	<h3>
 		<a id="planlistMove">Company Plan</a>
-	</h3>
+	</h3><br>
+	<div style="padding-left: 48%">
+				<button type="button" id="planadd" class="mypurplebutton" onclick="addplan();">일정등록</button>
+			</div><br><br>
 	<form action="planlistDelCom.do" method="post">
 		<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
+			<thead style="width: 120px; height: 60px;">
 				<tr>
 					<th>제목</th>
 					<th>일자</th>
-					<th>내용</th>
-					<th></th>
+					<th colspan="2">내용</th>
+					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="width: 120px; height: 150px;">
 				<c:if test="${empty planlistscom}">
 					<tr>
 						<td colspan="4" align="center">등록된 일정이 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:forEach var="pdto" items="${planlistscom}">
-					<tr>
-						<td>${pdto.title}</td>
-						<td>${pdto.pdate}</td>
-						<td>${pdto.content}</td>
-						<td><input type="submit" value="삭제">
-							<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
-					</tr>
-				</c:forEach>
+					<c:forEach var="pdto" items="${planlistscom}">
+						<tr>
+							<td>${pdto.title}</td>
+							<td>${pdto.pdate}</td>
+							<td>${pdto.content}
+							<c:url var="goplandelete" value="planlistDelCom.do">
+							<c:param name="myp_idx">${pdto.myp_idx}</c:param>
+							</c:url>
+								<a href="${goplandelete}" class="button button-delete"
+							onclick="return plandel()">삭제</a></td>
+						</tr>
+					</c:forEach>
 			</tbody>
 		</table>
 	</form>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<!-- checklist add/select -->
 	<div class="checklistwrap">
@@ -327,37 +387,39 @@ function checkAlladd(){
 	<h3 id="checklistitems">
 		<a id="checklistMove">Company Checklist</a>
 	</h3>
-	<div style="padding-left: 65%">
-		<button type="button" id="checkadd" onclick="checkadd();">새
+	<div style="padding-left: 45%">
+		<button type="button" id="checkadd" class="mypurplebutton" onclick="checkadd();">새
 			체크리스트 등록</button>
-	</div>
+	</div><br><br>
 	<form action="checklistDelCom.do" method="post">
 		<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 		<table style="margin-left:auto; margin-right:auto;" border="1" width="900" cellspacing="0">
-			<thead>
+			<thead style="width: 120px; height: 60px;">
 				<tr>
 					<th>제목</th>
 					<th>일자</th>
-					<th>내용</th>
-					<th></th>
+					<th colspan="2">내용</th>
+					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="width: 120px; height: 150px;">
 				<c:if test="${empty checklistItemscom}">
 					<tr>
 						<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:forEach var="dto" items="${checklistItemscom}">
-					<tr>
-						<td>${dto.title}</td>
-						<td>${dto.dueday}</td>
-						<td>${dto.content}</td>
-						<td><input type="submit" value="삭제">
-							<button type="button" id="checkdel" onclick="checkdel();">삭제</button></td>
-
-					</tr>
-				</c:forEach>
+				<c:forEach var="cdto" items="${checklistItemscom}">
+						<tr>
+							<td>${cdto.title}</td>
+							<td>${cdto.dueday}</td>
+							<td>${cdto.content}
+							<c:url var="godelete" value="checklistDelCom.do">
+							<c:param name="ch_idx">${cdto.ch_idx}</c:param>
+							</c:url>
+								<a href="${godelete}" class="button button-delete"
+							onclick="return checkdel()">삭제</a></td>
+						</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</form>

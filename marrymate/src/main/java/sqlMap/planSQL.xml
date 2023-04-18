@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content}
 		)
 	</insert>
-	<delete id="planDel" parameterType="Integer">
+	<delete id="planlistDel" parameterType="Integer">
 		delete from myplan where myp_idx=#{myp_idx}
 	</delete>
 	<select id="planlistAll" parameterType="Integer" resultType="com.marry.calender.model.PlanDTO">
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content}
 		)
 	</insert>
-	<delete id="planDelCom" parameterType="Integer">
+	<delete id="planlistDelCom" parameterType="Integer">
 		delete from myplan where myp_idx=#{myp_idx}
 	</delete>
 	<select id="planlistAllCom" parameterType="Integer" resultType="com.marry.calender.model.PlanDTO">

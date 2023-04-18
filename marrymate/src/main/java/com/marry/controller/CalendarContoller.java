@@ -380,7 +380,7 @@ public class CalendarContoller {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.addObject("url", "calendarMain.do");
-		mav.setViewName("calendar/planlistMsg");
+		mav.setViewName("calendar/plan/planMsg");
 		return mav;
 	}
 	
@@ -445,7 +445,7 @@ public class CalendarContoller {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.addObject("url", "calendarMainCom.do");
-		mav.setViewName("calendar/planlistMsg");
+		mav.setViewName("calendar/plan/planMsg");
 		return mav;
 	}
 }

@@ -81,12 +81,10 @@ setInterval(function() {
     document.getElementById("day").innerHTML = dayName;
 });
 
-
 function addplan(){
 	var w = (window.screen.width/2)-200;
 	var h = (window.screen.height/2)-200;
 	window.open("planWrite.do","addplan", "width=400, height=400, left="+w+",top="+h);
-	opener.parent.location.reload();
 }
 
 function checkadd(){
@@ -96,33 +94,20 @@ function checkadd(){
 }
 
 function checkdel(){
-	var w = (window.screen.width/2)-200;
-	var h = (window.screen.height/2)-200;
     if (confirm('삭제하시겠습니까?')) {
         return true;
     } else {
         return false;
     }
-	window.open("checklistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
 }
-
 
 function plandel(){
-	var w = (window.screen.width/2)-200;
-	var h = (window.screen.height/2)-200;
-	window.open("planlistDel.do","checkdel", "width=400, height=400, left="+w+",top="+h);
+    if (confirm('삭제하시겠습니까?')) {
+        return true;
+    } else {
+        return false;
+    }
 }
-
-
-function checkuse(){
-	window.open("checklistShow.do","checkuse");
-}
-
-
-function checkAlladd(){
-
-}
-
 </script>
 <script type="text/javascript">
 
@@ -189,6 +174,26 @@ function checkAlladd(){
 	max-width: 1350px;
 	margin: 0px auto;
 }
+
+.stats a{
+	font-size: 28px;
+	
+}
+.statsletter{
+	font-size: 27px;
+}
+
+.mypurplebutton{
+		font-weight: 700;
+        color: #664e96;
+        border-color: white;
+        background: white;
+}
+.mypurplebutton:hover {
+        color: white;
+        background: #664e96;
+        border-color: white;
+    }
 </style>
 </head>
 <body background="/marrymate/img/background.png">
@@ -227,23 +232,27 @@ function checkAlladd(){
 						</div>
 
 						<div class="weddingDay">
-							<span class="date"> <c:if
-									test="${!empty sessionScope.loginId}">
+							<span class="date"> 
+							<c:if test="${!empty sessionScope.loginMD}">
 									<div>${sessionScope.loginMD.substring(0, 10)}
 										&nbsp;<span id="day"></span>
+										<span class="d-day" id="dDay"></span><br>
+									<div id="count"></div>
 									</div>
-								</c:if>
-							</span> <span class="d-day" id="dDay"></span><br>
+							</c:if>
+							</span> 
+							<c:if test="${empty sessionScope.loginMD}">
+									<div>예식 날짜가 정해지지 않았습니다.
+										&nbsp;
+									</div>
+							</c:if>
 						</div>
-						<div id="count"></div>
 					</div>
 				</div>
 			</div>
 			<!--profileArea : e-->
 		</div>
 	</div>
-
-
 
 
 	<br>
@@ -294,15 +303,9 @@ function checkAlladd(){
 			<br>
 			<br>
 			<br>
-			<div style="padding-left: 90%">
-				<button type="button" id="planadd" onclick="addplan();">일정등록</button>
-			</div>
-			<br>
 
 			<!-- 캘린더 시작  -->
 			<div id='calendar'></div>
-			<div id='popup'
-				style="width: 500px; height: 600px; display: none; background-color: white; padding: 20px; border-radius: 14px; border: 2px solid #eeeeee">
 				<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 			</div>
 		</div>
@@ -397,11 +400,15 @@ function checkAlladd(){
 
 	<br>
 	<br>
+	<br>
 	<div class="planlistwrap">
 		<div class="titlecss">
 			<a id="planlistMove">Myplan</a>
 		</div>
 		<br>
+		<div style="padding-left: 48%">
+				<button type="button" id="planadd" class="mypurplebutton" onclick="addplan();">새 일정 등록</button>
+			</div><br><br>
 		<form action="planlistDel.do" method="post">
 			<input type="hidden" name="myp_idx" value="${dto.myp_idx}">
 			<table style="margin-left: auto; margin-right: auto;" border="1"
@@ -423,20 +430,33 @@ function checkAlladd(){
 						<tr>
 							<td>${pdto.title}</td>
 							<td>${pdto.pdate}</td>
-							<td>${pdto.content}<input type="submit" value="삭제"> <input
-								type="hidden" name="ridx" value="${pdto.myp_idx}">
-								<a href="${deleteplan}" ><button type="button" id="plandel" onclick="return plandel()">삭제</button></a>
-								</td>
-						</tr>
-						<c:url var="deleteplan" value="planlistDel.do">
+							<td>${pdto.content}
+							<c:url var="goplandelete" value="planlistDel.do">
 							<c:param name="myp_idx">${pdto.myp_idx}</c:param>
-						</c:url>
+							</c:url>
+								<a href="${goplandelete}" class="button button-delete"
+							onclick="return plandel()">삭제</a></td>
+						</tr>
+					</c:forEach>
+					
+					<c:forEach var="cdto" items="${checklistItems}">
+						<tr>
+							<td>${cdto.title}</td>
+							<td>${cdto.dueday}</td>
+							<td>${cdto.content}
+							<c:url var="godelete" value="checklistDel.do">
+							<c:param name="ch_idx">${cdto.ch_idx}</c:param>
+							</c:url>
+								<a href="${godelete}" class="button button-delete"
+							onclick="return checkdel()">삭제</a></td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</form>
-		${pdto.myp_idx}
 	</div>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>
@@ -446,11 +466,12 @@ function checkAlladd(){
 		<input type="hidden" name="midx" value="${sessionScope.loginMidx}">
 		<div class="titlecss" id="checklistitems">
 			<a id="checklistMove">My Checklist</a>
-		</div>
-		<div style="padding-left: 65%">
-			<button type="button" id="checkadd" onclick="checkadd();">새
+		</div><br>
+		<div style="padding-left: 45%">
+			<button type="button" id="checkadd" class="mypurplebutton" onclick="checkadd();">새
 				체크리스트 등록</button>
 		</div>
+		<br><br>
 		<form action="checklistDel.do" method="post">
 			<input type="hidden" name="ch_idx" value="${dto.ch_idx}">
 			<table style="margin-left: auto; margin-right: auto;" border="1"
@@ -468,13 +489,17 @@ function checkAlladd(){
 							<td colspan="4" align="center">등록된 체크리스트가 없습니다.</td>
 						</tr>
 					</c:if>
-					<c:forEach var="dto" items="${checklistItems}">
+					
+					<c:forEach var="cdto" items="${checklistItems}">
 						<tr>
-							<td>${dto.title}</td>
-							<td>${dto.dueday}</td>
-							<td>${dto.content}<input type="submit" value="삭제">
-								<button type="button" id="plandel" onclick="plandel();">삭제</button></td>
-
+							<td>${cdto.title}</td>
+							<td>${cdto.dueday}</td>
+							<td>${cdto.content}
+							<c:url var="godelete" value="checklistDel.do">
+							<c:param name="ch_idx">${cdto.ch_idx}</c:param>
+							</c:url>
+								<a href="${godelete}" class="button button-delete"
+							onclick="return checkdel()">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -489,7 +514,12 @@ function checkAlladd(){
 	<div class="myWeddingMenuWrap">
 		<div class="ddaygoal">
 			<div class="goal">
-				<strong><span class="d-day" id="dDayOnly"></span></strong>
+				<c:if test="${!empty sessionScope.loginMD}">
+					<strong><span class="d-day" id="dDayOnly"></span></strong>
+				</c:if>
+				<c:if test="${empty sessionScope.loginMD}">
+					<strong><span>예식 날짜가 정해지지 않았습니다.</span></strong>
+				</c:if>
 			</div>
 		</div>
 		<h2>아래 예시를 참고하여 나만의 체크리스트를 추가해보세요!</h2>
