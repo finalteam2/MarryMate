@@ -33,8 +33,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -64,8 +64,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 210px;
-	right: 280px;
+	bottom: 100px;
+	right: 40px;
 	margin: 0px auto;
 }
 
@@ -312,7 +312,7 @@ function pop_bbs(){
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		<c:if test="${dto.topfix==1}"><tr style="background-color: lightyellow; height: 30px;"></c:if>
+		<c:if test="${dto.topfix==1}"><tr style="background-color: yellow; height: 30px;"></c:if>
 		<c:if test="${dto.topfix==0}"><c:if test="${dto.blind==0}"><tr style="height: 30px;"></c:if></c:if>
 		<c:if test="${dto.blind==1}"><tr style="background-color: lightgray; height: 30px;"></c:if>
 			<td width="30"><input type="button" onclick="bi_bbs(${dto.bidx});" style="height: 17px;"></td>
@@ -352,7 +352,7 @@ function pop_bbs(){
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		<c:if test="${dto.topfix==1}"><tr style="background-color: lightyellow; height: 30px;"></c:if>
+		<c:if test="${dto.topfix==1}"><tr style="background-color: yellow; height: 30px;"></c:if>
 		<c:if test="${dto.topfix==0}"><c:if test="${dto.blind==0}"><tr style="height: 30px;"></c:if></c:if>
 		<c:if test="${dto.blind==1}"><tr style="background-color: lightgray; height: 30px;"></c:if>
 			<td width="30"><input type="button" onclick="bi_bbs(${dto.bidx});" style="height: 17px;"></td>
@@ -372,8 +372,11 @@ function pop_bbs(){
 </table>
 </form>
 </c:if>
-<div id="pg">${pageStr}</div>
-<hr width="1200" id="hrf">
+<br><br>
+<div style="margin-left:55%;">${pageStr}</div>
+<br><br><br>
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>

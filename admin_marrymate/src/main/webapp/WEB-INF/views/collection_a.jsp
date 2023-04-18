@@ -33,8 +33,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -322,7 +322,7 @@ function sgResult(){
 		</tr>
 	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		<c:if test="${dto.topfix==1}"><tr style="background-color: lightyellow; height: 30px;"></c:if>
+		<c:if test="${dto.topfix==1}"><tr style="background-color: yellow; height: 30px;"></c:if>
 		<c:if test="${dto.topfix==0}"><c:if test="${dto.blind==0}"><tr style="height: 30px;"></c:if></c:if>
 		<c:if test="${dto.blind==1}"><tr style="background-color: lightgray; height: 30px;"></c:if>
 			<td width="30"><input type="button" onclick="bi(${dto.cidx});" style="height: 17px;"></td>
@@ -338,8 +338,11 @@ function sgResult(){
 	</c:forEach>
 	</tbody>
 </table>
-<div id="pg">${pageStr}</div>
-<hr width="1200" id="hrf">
+<br><br>
+<div style="margin-left:50%;">${pageStr}</div>
+<br><br><br>
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>

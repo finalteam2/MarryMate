@@ -34,8 +34,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -92,10 +92,7 @@ body{
 	background-color:#b8b8b8;
 	border:0px;
 	border-radius:5px;
-	position: fixed;
-	bottom: 200px;
-	left:57%;
-	transform:translateX(-50%);
+	
 }
 
 #hrf {
@@ -212,7 +209,8 @@ body{
 	</c:forEach>
 	</tbody>
 </table>
-<div id="pg">${pageStr_all}</div>
+<br><br>
+<div style="margin-left:53%;">${pageStr_all}</div>
 </c:if>
 <c:if test="${sb=='b1'}">
 <table height="70" id="tb">
@@ -238,7 +236,8 @@ body{
 		</tr>
 	</c:forEach>
 </table>
-<div id="pg">${pageStr_all}</div>
+<br><br>
+<div style="margin-left:53%;">${pageStr_all}</div>
 </c:if>
 <c:if test="${sb=='b2'}">
 <table height="70" id="tb">
@@ -263,9 +262,10 @@ body{
 		</tr>
 	</c:forEach>
 </table>
-<div id="pg">${pageStr_all_b}</div>
+<br><br>
+<div style="margin-left:55%;">${pageStr_all_b}</div>
 </c:if>
-<br><br><br><br>
+<br><br><br>
 <table width="950" class="tb_to">
 	<tr>
 		<th><a href="amount.do"><input type="button" value="돌아가기" id="but_back"></a></th>
@@ -273,7 +273,8 @@ body{
 </table>
 </form>
 <br><br><br>
-<hr width="1200" id="hrf">
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>

@@ -382,7 +382,7 @@ function rs(){
 </head>
 <body>
 <div class="up"><a href="#header"><img src="/marrymate/img/up.png" alt="up" width="60" height="60"></a></div>
-<div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();"></div>
+<div id="chatshow" class="chatshow"><img src="/marrymate/img/chatbot.png" alt="chatbot" width="70" height="70" onclick="qs();" style="cursor: pointer"></div>
 
 <div class="background">
 	<div class="window">
@@ -392,7 +392,7 @@ function rs(){
 					<tr height="65">
 						<th width="260" align="left">상담챗</th>
 						<td width="50">
-							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30" onclick="rs();">
+							<img src="/admin_marrymate/img/x_button.png" alt="x_button" width="30" height="30" onclick="rs();" style="cursor: pointer">
 						</td>
 					</tr>
 				</table>

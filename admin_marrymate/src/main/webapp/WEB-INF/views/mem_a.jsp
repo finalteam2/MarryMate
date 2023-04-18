@@ -33,8 +33,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -233,8 +233,11 @@ function pop_all(){
 	</tbody>
 </table>
 </form>
-<div id="pg">${pageStr}</div>
-<hr width="1200" id="hrf">
+<br><br>
+<div style="margin-left:50%;">${pageStr}</div>
+<br><br><br>
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>

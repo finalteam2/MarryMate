@@ -33,8 +33,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -223,7 +223,7 @@ body{
 		<td colspan="3">${dto.subject}</td>
 	</tr>
 	<tr style="height: 200px;">
-		<td colspan="4">${dto.content}</td>
+		<td colspan="4">${dto.content.replaceAll('\\n','<br>')}</td>
 	</tr>
 </table>
 
@@ -268,7 +268,9 @@ body{
 	</tr>
 </table>
 </c:if>
-<hr width="1200" id="hrf">
+<br><br><br>
+<hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>

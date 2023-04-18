@@ -215,8 +215,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -252,10 +252,10 @@ body{
 </style>
 <script>
 function chatpop_m(midx){
-	window.open('chatpop_m.do?midx='+midx,'chatpop','width=321,height=545,top=250,left=1100');
+	window.open('chatpop_m.do?midx='+midx,'chatpop','width=321,height=561,top=250,left=1100');
 }
 function chatpop_c(cidx){
-	window.open('chatpop_c.do?cidx='+cidx,'chatpop','width=321,height=545,top=250,left=1100');
+	window.open('chatpop_c.do?cidx='+cidx,'chatpop','width=321,height=561,top=250,left=1100');
 }
 </script>
 </head>

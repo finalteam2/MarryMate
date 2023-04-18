@@ -34,8 +34,8 @@ body{
 	border:0px;
 	border-radius:5px;
 	position: fixed;
-	bottom: 150px;
-	right: 280px;
+	bottom: 40px;
+	right: 40px;
 	margin: 0px auto;
 }
 #menu{
@@ -225,8 +225,9 @@ function drawChart2 () {
 <c:if test="${mc=='m'}"><div id="chart"></div></c:if>
 <c:if test="${mc=='c'}"><div id="chart2"></div></c:if>
 </form>
-<br><br><br><br>
+<br><br><br>
 <hr width="1200">
+<br><br>
 </c:if>
 </body>
 </html>
