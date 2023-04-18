@@ -140,7 +140,7 @@ function getCookie(name) {
 }
 </script>
 	<%@include file="header.jsp"%>
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br>
 	<div id="subVisual" class="sub">
 		<div class="visualTit">
 			<h1 class="animated fadeIn delay-1s">Your Wedding Guide,
@@ -150,7 +150,7 @@ function getCookie(name) {
 		<div class="img"
 			style="background-image: url('/marrymate/img/mainsample.png');"></div>
 	</div>
-
+	<br><br>
 
 
 <div id="sectionHead" class="cf sub">
@@ -170,7 +170,7 @@ function getCookie(name) {
 				alt="웨딩의 모든것 배너"></a>
 		</div>
 	</section>
-	
+	<br><br>
 	
 	<div id="sectionHead" class="cf sub">
 		<h2>Marrymate Calendar Service</h2>
@@ -189,16 +189,16 @@ function getCookie(name) {
 				alt="웨딩 캘린더 배너"></a>
 		</div>
 	</section>
-
+	<br><br>
 
 	<div id="sectionHead" class="cf sub">
-		<h2>Marrymate Hall Gallery</h2>
+		<h2>Marrymate Weddingtest</h2>
 		<h1 class="line">
-			<span>예식장 <strong>갤러리</strong></span>
+			<span>웨딩 <strong>능력고사</strong></span>
 		</h1>
 
 		<h3>
-			다양한 예식장을<br class="none">검색해보실 수 있습니다.
+			간단한 테스트를<br class="none">통해 내 지식을 테스트 할 수 있습니다.
 		</h3>
 	</div>
 	
