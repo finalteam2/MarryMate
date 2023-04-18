@@ -399,7 +399,12 @@ $(function() {
 						</button>
 					</div>
 					<div class="button-container">
-						<a href="#" class="button" onclick="window.history.back()">목록</a>
+						<c:if test="${dto.kind eq '웨딩후기'}">
+							<a href="afterList.do" class="button">목록</a>
+						</c:if>
+						<c:if test="${dto.kind eq '웨딩톡톡'}">
+							<a href="talkList.do" class="button">목록</a>
+						</c:if>
 						<c:url var="reWriteUrl" value="reWrite.do">
 							<c:param name="bidx">${dto.bidx}</c:param>
 						</c:url>
