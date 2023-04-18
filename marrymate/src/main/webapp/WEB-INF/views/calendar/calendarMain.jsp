@@ -439,18 +439,6 @@ function plandel(){
 						</tr>
 					</c:forEach>
 					
-					<c:forEach var="cdto" items="${checklistItems}">
-						<tr>
-							<td>${cdto.title}</td>
-							<td>${cdto.dueday}</td>
-							<td>${cdto.content}
-							<c:url var="godelete" value="checklistDel.do">
-							<c:param name="ch_idx">${cdto.ch_idx}</c:param>
-							</c:url>
-								<a href="${godelete}" class="button button-delete"
-							onclick="return checkdel()">삭제</a></td>
-						</tr>
-					</c:forEach>
 				</tbody>
 			</table>
 		</form>

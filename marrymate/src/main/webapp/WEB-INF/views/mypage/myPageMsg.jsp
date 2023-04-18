@@ -3,5 +3,4 @@
 <script>
 window.alert('${msg}');
 location.href='${goUrl}';
-window.location.reload();
 </script>
