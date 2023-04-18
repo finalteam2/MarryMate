@@ -81,7 +81,7 @@ public class CalendarContoller {
 	
 
 	@RequestMapping("/weddingtest.do")
-	public String mbti() {
+	public String weddingtest() {
 		return "calendar/plan/weddingtest";
 	}
 	
