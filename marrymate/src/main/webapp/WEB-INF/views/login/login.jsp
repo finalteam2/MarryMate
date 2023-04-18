@@ -41,6 +41,14 @@
 		font-size: 17px;
 		font-family: 'SUIT-Regular';
 	}
+	#moBox a {
+		text-decoration: none;
+		font-weight: bold;
+		color: black;
+	}
+	#moBox a:hover {
+		text-decoration: underline;
+	}
 	#ct {
 		text-align: center;
 		font-family: 'SUIT-Regular';
@@ -53,7 +61,7 @@
 		margin-bottom: 100px;
 		padding-top: 20px;
 		text-align: center;
-		border: 2px solid gray;
+		border: 2px solid #e3e3e3;
 		border-radius: 30px;
 		background-color: white;
 		font-family: 'SUIT-Regular';
@@ -62,7 +70,8 @@
 		width: 200px;
 		height: 30px;
 		text-align: center;
-		margin: auto;
+		margin-left: auto;
+		margin-right: auto;
 		padding-top: 10px;
 		padding-bottom: 5px;
 		font-size: 20px;
@@ -72,13 +81,18 @@
 	.cc {
 		width: 200px;
 		height: 50px;
-		font-size: 15px;
+		margin-top: 15px;
+		font-size: 17px;
 		font-weight: bold;
 		border: 0;
+		border-radius: 12px;
+		background-color: #5392f9;
+		color:#fff;
 	}
 	.cc:hover {
 		border: 0;
-		background-color: blue;
+		background:#74a6fa;
+		transition: all 0.4s;
 		color: white;
 		cursor: pointer;
 	}
@@ -98,28 +112,47 @@
 		width: 230px;
 		height: 30px;
 		font-size: 17px;
-		border: 1px solid black;
-		border-radius: 12px;
+		border: 1px solid gray;
+		border-radius: 5px;
 		text-align: center;
 		font-family: 'SUIT-Regular';
 		}
+	form div input[type=text]:focus{
+		outline:none;
+	}
+	
+	form div input[type=text]:hover, form div input[type=text]:active, form div input[type=text]:focus{
+		border-color: #cf30fe;
+		transition: all 0.4s;
+	}
+		
 	form div input[type=password] {
 		width: 230px;
 		height: 30px;
 		font-size: 17px;
-		border: 1px solid black;
-		border-radius: 12px;
+		border: 1px solid gray;
+		border-radius: 5px;
 		text-align: center;
 		font-family: 'SUIT-Regular';
 		}
+		
+	form div input[type=password]:focus {
+		outline:none;
+	}
+	
+	form div input[type=password]:hover, form div input[type=password]:active, form div input[type=password]:focus{
+		border-color: #cf30fe;
+		transition: all 0.4s;
+	}
+	
 	form div [type=text]::placeholder {
 		font-family: sans-serif; 
-		font-size: 10px;
+		font-size: 13px;
 		font-family: 'SUIT-Regular';
 	}
 	form div [type=password]::placeholder {
 		font-family: sans-serif; 
-		font-size: 10px;
+		font-size: 13px;
 		font-family: 'SUIT-Regular';
 	}
 </style>
@@ -136,6 +169,7 @@
 		            <div class="teBox">ID</div><input type="text" name="id" placeholder="아이디 입력" value="${cookie.saveid.value}">
 		            <div id="reBox"><input type="checkbox" name="saveid" ${empty cookie.saveid.value?'':'checked' }>ID 기억하기</div>
 		            <div class="teBox">Password</div><input type="password" name="pwd" placeholder="비밀번호 입력">
+		            <br>
 		            <div id="goBox"><input type="submit" value="로그인" class="cc"></div>
 		            <div id="moBox">
 		                회원이 아니라면?&nbsp;&nbsp;<a href="memberJoin.do">회원가입</a>
