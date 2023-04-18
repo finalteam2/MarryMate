@@ -183,7 +183,7 @@ h1 {
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div id="tableBox">
-		<h1>웨딩톡톡</h1>
+		<h1>웨딩후기</h1>
 		<table class="viewTable">
 			<thead>
 				<tr>
