@@ -48,7 +48,18 @@ function searchResult(){
 			  var childNode = childNodes[i];
 			  eNode.removeChild(childNode);
 			}
-			
+			if (hlist == null || hlist.length == 0){
+				hNode.setAttribute('class','');
+				hNode.innerHTML += '<br><h5>즐겨찾기된 업체가 없습니다.</h5>';
+			}
+			if (slist == null || hlist.length == 0){
+				sNode.setAttribute('class','');
+				sNode.innerHTML += '<br><h5>즐겨찾기된 업체가 없습니다.</h5>';
+			}
+			if (elist == null || elist.length == 0){
+				eNode.setAttribute('class','');
+				eNode.innerHTML += '<br><h5>즐겨찾기된 업체가 없습니다.</h5>';
+			}
 			
 			//홀 검색결과
 			for(var i = 0; i < hlist.length; i++){
@@ -215,19 +226,16 @@ function searchResult(){
 	<h2 align="left" style="color: #660099; font-weight: bold;">즐 겨 찾 기</h2>
 	<br>
 	<article>
-	<hr>
 	<h3 align="left">예식장</h3>
 	<div id="halldiv" class="condiv"></div>
 	<hr>
 	</article>
 	<article>
-	<hr>
 	<h3 align="left">스드메</h3>
 	<div id="sdmdiv" class="condiv"></div>
 	<hr>
 	</article>
 	<article>
-	<hr>
 	<h3 align="left">기타</h3>
 	<div id="etcdiv" class="condiv"></div>
 	<hr>
