@@ -13,6 +13,12 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
 header{
 	background: #ffffff;
@@ -167,7 +173,19 @@ nav .navdiv{
 
 .loginbar1, .loginbar2{
    text-decoration: none;
-   color: black;
+   color: black;   
+   font-size: 15px;
+   font-family: 'SUIT-Regular';
+}
+
+.loginbar1 a{
+   text-decoration: none;
+   color: black;   
+}
+
+.loginbar1 a:hover{
+   color: #0d6efd;   
+   text-decoration: none;
 }
 .titlebar a{
     font-family: 'TAEBAEKmilkyway';
@@ -213,13 +231,4 @@ nav .navdiv{
     align-content: center;
     align-items: center;
     height: 130px;
-}
-
-.black_a{
-   color: black;   
-   text-decoration: none;
-}
-.black_a:hover{
-   color: #0d6efd;   
-   text-decoration: none;
 }

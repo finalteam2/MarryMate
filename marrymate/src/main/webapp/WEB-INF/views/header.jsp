@@ -18,8 +18,7 @@ window.onload = function () {
 		<c:if
 			test="${empty sessionScope.loginId && empty sessionScope.com_id}">
 			<div class="loginbar1">
-				<a href="login.do" class="black_a">로그인</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
-					id="l" href="memberJoin.do" class="black_a">회원가입</a>
+				<a href="login.do" class="black_a">로그인</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="memberJoin.do" class="black_a">회원가입</a>
 			</div>
 		</c:if>
 		<c:if
