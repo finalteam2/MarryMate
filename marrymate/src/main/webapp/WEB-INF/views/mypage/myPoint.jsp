@@ -42,7 +42,7 @@ article table tbody td{
 }
 h2{
 	font-family: 'SUIT-Regular';
-	margin-left: 10%;
+	margin-left: 20%;
 }
 </style>
 </head>
