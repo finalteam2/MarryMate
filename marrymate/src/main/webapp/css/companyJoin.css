@@ -5,7 +5,7 @@ article div input[type=text] {
 	height: 30px;
 	font-size: 17px;
 	border: 1px solid black;
-	border-radius: 12px;
+	border-radius: 5px;
 	text-align: center;
 }
 
@@ -14,7 +14,7 @@ article div input[type=password] {
 	height: 30px;
 	font-size: 15px;
 	border: 1px solid black;
-	border-radius: 12px;
+	border-radius: 5px;
 	text-align: center;
 }
 
@@ -63,8 +63,9 @@ select {
 
 .box {
 	width: 850px;
-	border: 1px solid black;
-	border-radius: 30px;
+	border: 1px solid #e3e3e3;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+	border-radius: 20px;
 	margin: 0px auto;
 	margin-bottom: 50px;
 	background-color: white;
@@ -158,7 +159,7 @@ select {
 	height: 30px;
 	line-height: 30px;
 	padding: 5px 10px;
-	background-color: #4CAF50;
+	background-color: #ae59f4;
 	color: #fff;
 	text-decoration: none;
 	margin-right: 10px;
@@ -240,7 +241,7 @@ select {
 .cc:hover {
 	border: 0;
 	border-radius: 12px;
-	background-color: blue;
+	background-color: #5392f9;
 	color: white;
 	cursor: pointer;
 }

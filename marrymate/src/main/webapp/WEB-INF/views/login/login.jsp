@@ -55,14 +55,14 @@
 	}
 	#toBox {
 		width: 500px;
-		height: 400px;
+		height: 450px;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 100px;
 		padding-top: 20px;
 		text-align: center;
 		border: 2px solid #e3e3e3;
-		border-radius: 30px;
+		border-radius: 20px;
 		background-color: white;
 		font-family: 'SUIT-Regular';
 	}
@@ -99,6 +99,32 @@
 	.cc:active {
 		background: black;
 		color: white;
+	}
+	.select {
+		padding-top: 24px;
+	}
+	.select input[type=radio]{
+	    display: none;
+	}
+	.select input[type=radio]+label{
+	    display: inline-block;
+	    cursor: pointer;
+	    height: 30px;
+	    width: 108px;
+	    border: 1px solid #d0d0d0;
+	    border-radius: 5px;
+	    line-height: 30px;
+	    text-align: center;
+	    font-weight:bold;
+	    font-size:13px;
+	}
+	.select input[type=radio]+label{
+	    background-color: #f4f4f4;
+	    color: #333;
+	}
+	.select input[type=radio]:checked+label{
+	    background-color: #ae59f4;
+	    color: #fff;
 	}
 	body {
 		background-color: #fbf4ff;
@@ -161,8 +187,10 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<h2>로그인</h2>
 	<div id="toBox">
-		<input type="radio" name="userType" value="normal" checked>일반회원
-		<input type="radio" name="userType" value="company">기업회원
+		  <div class="select">
+		     <input type="radio" id="select" name="shop" value="normal" checked><label for="select">일반회원</label>
+		     <input type="radio" id="select2" name="shop" value="company"><label for="select2">기업회원</label>
+		</div>
 		<form name="login" id="normalForm" action="login.do" method="post">
 		    <div id="loBox">
 		        <div id="idBox">
