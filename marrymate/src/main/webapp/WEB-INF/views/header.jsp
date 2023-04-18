@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="/marrymate/css/header.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/checkNoti.js"></script>
 <script type="text/javascript">
 
