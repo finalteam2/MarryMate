@@ -210,8 +210,10 @@ function searchResult(){
 <body>
 <%@include file="../header.jsp" %>
 <div class="allpage">
+<br><br>
 <section>
-	<h2 align="left">즐 겨 찾 기</h2>
+	<h2 align="left" style="color: #660099; font-weight: bold;">즐 겨 찾 기</h2>
+	<br>
 	<article>
 	<hr>
 	<h3 align="left">예식장</h3>
