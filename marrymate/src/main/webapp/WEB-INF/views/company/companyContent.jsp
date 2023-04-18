@@ -46,7 +46,11 @@ function checkHallDateResult(){
 			}else {
 				for(var i = 0; i < bkarr.length; i++){
 					var bk = bkarr[i];
-					bktimeNode.innerHTML  += '<option value="' + bk.worktime + '">' + bk.worktime + '</option>';
+					if (bk.bktime_idx > 0){
+						bktimeNode.innerHTML  += '<option value="' + bk.worktime + '">' + bk.worktime + '</option>';
+					}else {
+						bktimeNode.innerHTML  += '<option disabled>' + bk.worktime + '(예약 완료)</option>';
+					}
 				}
 			}
 			bktimeNode.innerHTML += '</select>';

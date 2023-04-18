@@ -437,7 +437,7 @@ public class ContentController {
 			//그 시간, 날짜에 예약이 이미 되어있다면 선택되지 않도록 지운다
 			int result = contentDao.checkBook(cidx, hidx, date, arr.get(i).getWorktime());
 			if(result > 0) {
-				arr.remove(i);
+				arr.get(i).setBktime_idx(0);;
 			}
 		}
 		ModelAndView mav = new ModelAndView();
