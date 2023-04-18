@@ -53,7 +53,8 @@
 		margin-bottom: 100px;
 		padding-top: 20px;
 		text-align: center;
-		border: 1px solid black;
+		border: 2px solid gray;
+		border-radius: 30px;
 		background-color: white;
 		font-family: 'SUIT-Regular';
 	}
