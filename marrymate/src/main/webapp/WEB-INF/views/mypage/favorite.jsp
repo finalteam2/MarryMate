@@ -52,7 +52,7 @@ function searchResult(){
 				hNode.setAttribute('class','');
 				hNode.innerHTML += '<br><h5>즐겨찾기된 업체가 없습니다.</h5>';
 			}
-			if (slist == null || hlist.length == 0){
+			if (slist == null || slist.length == 0){
 				sNode.setAttribute('class','');
 				sNode.innerHTML += '<br><h5>즐겨찾기된 업체가 없습니다.</h5>';
 			}
