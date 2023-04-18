@@ -48,6 +48,7 @@
 
 video {
 	width: 100%;
+
 }
 
 .titlebar a {
@@ -85,6 +86,15 @@ video {
 	align-items: center;
 	text-align: center;
 }
+.videodiv{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1400;
+	background-color: black;
+	display: flex;
+	align-items: center;
+}
 </style>
 </head>
 
@@ -98,6 +108,7 @@ $(window).load(function () {
 
 function handleVideoEnd() {
     var video = document.getElementById('video');
+    var videodiv = document.getElementById('videodiv');
     var header = document.getElementById('header');
     var opacity = 1;
     
@@ -105,9 +116,11 @@ function handleVideoEnd() {
         if (opacity > 0) {
             opacity -= 0.1;
             video.style.opacity = opacity;
+            videodiv.style.opacity = opacity;
         } else {
             clearInterval(fadeOut);
             video.style.display = "none";
+            videodiv.style.display = "none";
 
             
             // Set a cookie to remember that the video has been played
@@ -116,9 +129,11 @@ function handleVideoEnd() {
     }, 40);
 }
 </script>
+<div class="videodiv" id="videodiv">
 	<video id="video" muted autoplay onended="handleVideoEnd()">
 		<source src="/marrymate/video/mainvi.mp4" type="video/mp4">
 	</video>
+</div>
 	<script type="text/javascript">
 var videoPlayed = getCookie("videoPlayed");
 if (videoPlayed === "true") {
