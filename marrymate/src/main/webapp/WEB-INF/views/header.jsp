@@ -27,7 +27,7 @@ window.onload = function () {
 			test="${not empty sessionScope.loginId || not empty sessionScope.com_id}">
 			<div class="loginbar2" style="display: flex; margin-right: 10px;">
 				<a>${sessionScope.com_cname}${sessionScope.loginName} 님 접속중 |
-					&nbsp;</a><a id="l" href="logout.do" class="black_a">로그아웃</a>
+					&nbsp;</a><a href="logout.do" class="black_a">로그아웃</a>
 			</div>
 		</c:if>
 		<c:if

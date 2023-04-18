@@ -140,7 +140,7 @@ function getCookie(name) {
 }
 </script>
 	<%@include file="header.jsp"%>
-	<br><br><br><br><br><br><br>
+	
 	<div id="subVisual" class="sub">
 		<div class="visualTit">
 			<h1 class="animated fadeIn delay-1s">Your Wedding Guide,
@@ -209,39 +209,6 @@ function getCookie(name) {
 				alt="웨딩 테스트 배너"></a>
 		</div>
 	</section>
-
-	
-<!-- 
-<section id="mainevent">
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <a href="weddingtest.do"><img src="/marrymate/img/mainadd5.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
-    </div>
-    <div class="carousel-item">
-      <a href="weddingtest.do"><img src="/marrymate/img/mainadd3.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
-    </div>
-    <div class="carousel-item">
-      <a href="weddingtest.do"><img src="/marrymate/img/mainadd3.png" class="d-block w-100" alt="웨딩 단어 테스트 배너"></a>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-</section>
--->
 
 	<%@include file="chatbot.jsp"%>
 	<%@include file="footer.jsp"%>

@@ -33,6 +33,7 @@
 <%@include file="../header.jsp" %>
 <section>
 	<article class="sizefix">
+	<br>
 		<h2>My 정보수정</h2><br>
 		<div class="imgbox">
 		<img src="/marrymate/img/com_best/${comInfo.img }" class="profileimg rounded mx-auto d-block" alt="profile_img">

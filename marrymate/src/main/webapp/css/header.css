@@ -20,10 +20,12 @@ header{
 
 .menu {
    position: relative;
+   margin-right: 10px;
    
 }
 .notificationheader {
    position: relative;
+   margin-right: 5px;
 }
 
 .mbar {
@@ -57,7 +59,7 @@ header{
 .menu ul {
    position: absolute;
    top: 100%;
-   z-index: 1;
+   z-index: 999;
    display: none;
    background-color: #fff;
    padding: 0;
@@ -96,14 +98,15 @@ header{
 .notificationheader ul {
    position: absolute;
    top: 100%;
-   z-index: 1;
+   z-index: 999;
    display: none;
    background-color: #fff;
    padding: 0;
    margin: 0;
    border: 1px solid #ccc;
    border-radius: 8px;
-   min-width: 120px;
+   min-width: 130px;
+
 }
 
 .notificationheader li {
@@ -134,9 +137,9 @@ header{
 
 .notification-count {
     position: absolute;
-    z-index: 1;
+    z-index: 999;
     top: 18px;
-    right: 38px;
+    right: 78px;
     width: 20px;
     height: 20px;
     line-height: 20px;
@@ -188,9 +191,10 @@ nav .navdiv{
    align-content: right;
    align-items: right;
    display: flex;
-    align-content: space-between;
-    justify-content: flex-end;
-    align-items: center;
+   align-content: space-between;
+   justify-content: flex-end;
+   align-items: center;
+   
 }
 .loginboxheader .mypimg{
    margin-right: 10px;
@@ -198,7 +202,7 @@ nav .navdiv{
 }
 
 .loginboxheader .notiimg{
-   margin-right: 40px;
+   margin-right: 90px;
    margin-top: 10px;
 }
 .iamnav{
