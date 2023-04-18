@@ -48,6 +48,7 @@ h2{
 </head>
 <body>
 <%@include file="../header.jsp" %>
+<br>
 <section>
 	<article>
 		<h2>My 포인트</h2>
