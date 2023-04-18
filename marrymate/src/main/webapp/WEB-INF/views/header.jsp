@@ -43,17 +43,17 @@ window.onload = function () {
 			<ul class="mbar">
 				<c:if test="${not empty sessionScope.loginId}">
 					<li><a href="myInfo_m.do">마이페이지</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.com_id}">
-					<li><a href="myInfo_c.do">마이페이지</a></li>
-					<li><a href="companyContent.do?cidx=${sessionScope.com_cidx }">상세페이지</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.loginId}">
 					<li><a href="myBook.do">예약내역</a></li>
 					<li><a href="qna.do">문의내역</a></li>
 					<li><a href="favorite.do">즐겨찾기</a></li>
 					<li><a href="myCommunity.do">커뮤니티</a></li>
 					<li><a href="myPoint.do">포인트</a></li>
+				</c:if>
+				<c:if test="${not empty sessionScope.com_id}">
+					<li><a href="myInfo_c.do">마이페이지</a></li>
+					<li><a href="companyContent.do?cidx=${sessionScope.com_cidx }">상세페이지</a></li>
+					<li><a href="myBook.do">예약내역</a></li>
+					<li><a href="qna.do">문의내역</a></li>
 				</c:if>
 			</ul>
 		</div>
