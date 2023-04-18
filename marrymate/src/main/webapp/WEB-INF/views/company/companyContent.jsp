@@ -122,6 +122,18 @@ body{
   font-size:20px;
   color:#ccc;
 }
+.like_star_active{
+  font-size:40px;
+  color:#fc0;
+}
+.like_star{
+  font-size:40px;
+  color:#ccc;
+}
+
+.like_star:hover{
+  color:#f90;
+}
 .star-rating {
   display:flex;
   flex-direction: row-reverse;
@@ -172,7 +184,7 @@ textarea {
 }
 </style>
 
-<title>Insert title here</title>
+<title>${dto.cname }</title>
 </head>
 <body>
 <%@include file="../header.jsp" %>
@@ -181,19 +193,23 @@ textarea {
 	<div class="cnameandlike">
 		<p class="h1">${dto.cname }</p>
 		
-		<form action="com_like.do" method="post">
+		
+		
+		<form id="comlike" action="com_like.do" method="post">
 			<input type="hidden" name="midx" value="${sessionScope.loginMidx }">
 			<input type="hidden" name="cidx" value="${dto.cidx }">
 		<c:if test="${empty ldto }">
-			<button style="margin-right: 20px;" type="submit" class="btn btn-outline-primary">
-			즐겨찾기
-			</button>
+			<a onclick="document.getElementById('comlike').submit();">
+			<label style="margin-right:30px; cursor: pointer; line-height: 40px;" class="like_star">&#9733;</label><br style="height: 0px; line-height: 0px">
+			</a>
+			<label style="font-size:12px; line-height: 12px;">즐겨찾기</label>
 		</c:if>
 		<c:if test="${not empty ldto}">
 			<input type="hidden" name="lidx" value="${ldto.lidx }">
-			<button style="margin-right: 20px;" type="submit" class="btn btn-primary">
-			즐겨찾기
-			</button>
+			<a onclick="document.getElementById('comlike').submit();">
+			<label style="margin-right:30px; cursor: pointer; line-height: 40px;" class="like_star_active">&#9733;</label><br style="height: 0px; line-height: 0px">
+			</a>
+			<label style="font-size:12px; line-height: 12px;">즐겨찾기</label>
 		</c:if>
 		</form>
 	</div>
