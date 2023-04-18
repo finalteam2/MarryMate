@@ -140,7 +140,7 @@ if (videoPlayed === "true") {
     // Video has been played within the last 24 hours, hide it
     var video = document.getElementById('video');
     video.style.display = "none";
-
+    videodiv.style.display = "none";
 }
 
 function getCookie(name) {
