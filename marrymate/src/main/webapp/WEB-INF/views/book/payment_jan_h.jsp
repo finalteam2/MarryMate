@@ -167,14 +167,16 @@ function payResult(){
 						</td>
 					</tr>
 					<tr>
-						<td>${hallDto.name } (대관료 : ${hallDto.pay } 원 / 최소보증인원 : ${hallDto.guest_num } 명)</td>
+						<td>${hallDto.name } (대관료 : <span class="bold_text" style="font-size:18px;">${hallDto.pay }</span> 원 / 최소보증인원 : <span class="bold_text" style="font-size:18px;">${hallDto.guest_num }</span> 명)</td>
 						<td align="right">
 							<span class="small_text">가격</span>&nbsp;&nbsp;&nbsp;<span class="itemPrice">${allpay }</span> 원
 						</td>
 					</tr>
 					<tr>
-						<td>${foodDto.name } (식대 : ${foodDto.pay } 원)</td>
-						<td align="right">가격 = 예약금(20%) + 잔금(80%)</td>
+						<td>${foodDto.name } (식대 : <span class="bold_text" style="font-size:18px;">${foodDto.pay }</span> 원)</td>
+						<td align="right">
+							<span style="font-size:15px;">가격 =</span> <span class="bold_text" style="font-size:16px;"><mark>대관료</mark> + (<mark>최소보증인원</mark> * <mark>식대</mark>)</span>
+						</td>
 					</tr>
 	             </table>
 	             
@@ -236,6 +238,47 @@ function payResult(){
 	         <div class="payButton_box">
 	            <button onclick="requestPay()" id="payButton" class="payButton">${janPrice } 원 결제하기</button>
 	         </div>
+		</div>
+	</article>
+	<article>
+		<div class="leftMenu_container">
+			<div class="goMain_box">
+				<a href="index.do"><img class="goMain_img" src="/marrymate/img/logo2.png" alt="Logo"></a>
+			</div>
+			<hr style="border:1px solid #dedede;">
+			<div class="menuLogin_box">
+				<c:if test="${!empty sessionScope.loginNick}">
+					<span class="menuLogin_nick">${sessionScope.loginNick }</span>&nbsp;&nbsp;<span style="font-size:14.5px;">님</span>
+				</c:if>
+				<c:if test="${empty sessionScope.loginNick}">
+					<button class="goLogin_button" onclick="goLogin()">로그인</button>
+				</c:if>
+			</div>
+			<div class="leftMenu_box">
+				<a href="allBook.do"><label class="leftMenu_title">통합예약</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<a href="searchHall.do"><label class="leftMenu_title">웨딩홀</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<a href="searchEtc.do"><label class="leftMenu_title">웨딩컬렉션</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<c:if test="${!empty sessionScope.loginNick}">
+					<a href="calendarMain.do"><label class="leftMenu_title">웨딩캘린더</label></a>
+				</c:if>
+				<c:if test="${empty sessionScope.loginNick}">
+					<a href="calendarInfo.do"><label class="leftMenu_title">웨딩캘린더</label></a>
+				</c:if>
+			</div>
+			<div class="leftMenu_box">
+				<a href="allCommunity.do"><label class="leftMenu_title">커뮤니티</label></a>
+			</div>
+			<div class="go_box">
+				<img class="go_img" src="/marrymate/img/goHome.png" alt="Home" onclick="javascript:location.href='index.do';">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="go_img" src="/marrymate/img/goBack.png" alt="Back" onclick="javascript:history.back()">
+			</div>
 		</div>
 	</article>
 </section>

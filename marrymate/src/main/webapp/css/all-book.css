@@ -42,6 +42,90 @@ video{
 	font-size:22px;
 	margin-top:20px;
 }
+.leftMenu_container{
+	border:1px solid #d4d4d4;
+	border-radius:8px;
+	position: fixed;
+	top:50%;
+	left:3.2%;
+	transform:translateY(-50%);
+	width:11%;
+	height:53.5%;
+	background-color:#fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.goMain_box{
+	margin:6px auto;
+	width:95%;
+}
+.goMain_img{
+	width:100%;
+}
+.menuLogin_box{
+	text-align: center;
+	border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    background-color: #f8f7f9;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+	width:85%;
+	margin:0px auto;
+	margin-top:14px;
+	margin-bottom:18px;
+	padding-top:9px;
+	padding-bottom:9px;
+}
+.menuLogin_nick{
+	font-size:16px;
+	font-weight: bold;
+	color:#353535;
+}
+.goLogin_button{
+    border: none;
+    background-color: #f8f7f9;
+	width:100%;
+	cursor:pointer;
+	font-family: 'SUIT-Regular';
+	font-size:18px;
+	transition:all 0.4s;
+}
+.goLogin_button:hover{
+	color:#8911ec;
+}
+.leftMenu_box{
+	width:75%;
+	margin:14px auto;
+}
+.leftMenu_box a{
+	text-decoration: none;
+	color:black;
+	transition: color 0.4s;
+}
+.leftMenu_box a:hover{
+	color: #eccc83;
+}
+.leftMenu_title{
+	font-size:20px;
+	cursor:pointer;
+}
+.go_box{
+	width:75%;
+	height:9.7%;
+	position: absolute;
+	top:100%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	background-color: #e35179;
+    border: 1px solid #de2e5f;
+    border-radius: 30px;
+    color: #fff;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.go_img{
+	width:17%;
+	cursor: pointer;
+}
 .top_box{
 	border:1px solid #e1e1e1;
 	position:absolute;

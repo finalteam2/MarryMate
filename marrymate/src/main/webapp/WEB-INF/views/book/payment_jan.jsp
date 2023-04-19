@@ -219,6 +219,47 @@ function payResult(){
 	         </div>
 		</div>
 	</article>
+	<article>
+		<div class="leftMenu_container">
+			<div class="goMain_box">
+				<a href="index.do"><img class="goMain_img" src="/marrymate/img/logo2.png" alt="Logo"></a>
+			</div>
+			<hr style="border:1px solid #dedede;">
+			<div class="menuLogin_box">
+				<c:if test="${!empty sessionScope.loginNick}">
+					<span class="menuLogin_nick">${sessionScope.loginNick }</span>&nbsp;&nbsp;<span style="font-size:14.5px;">님</span>
+				</c:if>
+				<c:if test="${empty sessionScope.loginNick}">
+					<button class="goLogin_button" onclick="goLogin()">로그인</button>
+				</c:if>
+			</div>
+			<div class="leftMenu_box">
+				<a href="allBook.do"><label class="leftMenu_title">통합예약</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<a href="searchHall.do"><label class="leftMenu_title">웨딩홀</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<a href="searchEtc.do"><label class="leftMenu_title">웨딩컬렉션</label></a>
+			</div>
+			<div class="leftMenu_box">
+				<c:if test="${!empty sessionScope.loginNick}">
+					<a href="calendarMain.do"><label class="leftMenu_title">웨딩캘린더</label></a>
+				</c:if>
+				<c:if test="${empty sessionScope.loginNick}">
+					<a href="calendarInfo.do"><label class="leftMenu_title">웨딩캘린더</label></a>
+				</c:if>
+			</div>
+			<div class="leftMenu_box">
+				<a href="allCommunity.do"><label class="leftMenu_title">커뮤니티</label></a>
+			</div>
+			<div class="go_box">
+				<img class="go_img" src="/marrymate/img/goHome.png" alt="Home" onclick="javascript:location.href='index.do';">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="go_img" src="/marrymate/img/goBack.png" alt="Back" onclick="javascript:history.back()">
+			</div>
+		</div>
+	</article>
 </section>
 
 <%@include file="../chatbot.jsp" %>

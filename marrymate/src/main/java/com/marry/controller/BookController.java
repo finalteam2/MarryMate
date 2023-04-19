@@ -60,7 +60,7 @@ public class BookController {
 		return mav;
 	}
 	
-	/**통합예약내 조건 통합검색시*/
+	/**통합예약내 필터검색 & 정렬*/
 	@RequestMapping("/searchList.do")
 	public ModelAndView searchList(
 			@RequestParam(name = "filterText",defaultValue = "")String beforeFilterText,
@@ -210,7 +210,7 @@ public class BookController {
 		return mav;
 	}
 	
-	/**홀 제외 결제시 db 저장*/
+	/**예약금 홀 제외 결제시 db 저장*/
 	@RequestMapping(value = "/notHallPay.do", method = RequestMethod.POST)
 	public ModelAndView notHallPay(HttpServletRequest req) {
 		
@@ -242,7 +242,7 @@ public class BookController {
 		return mav;
 	}
 	
-	/**홀 결제시 db 저장*/
+	/**예약금 홀 결제시 db 저장*/
 	@RequestMapping(value = "/hallPay.do", method = RequestMethod.POST)
 	public ModelAndView hallPay(HttpServletRequest req) {
 		
