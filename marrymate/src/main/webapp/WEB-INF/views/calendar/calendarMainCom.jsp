@@ -171,7 +171,7 @@ function plandel(){
 							<div style="position: relative;">
 								<img class="photoframe" src="/marrymate/img/imgbox.png" style="width:340px;">
 								<div style="position: absolute; top: 112px; left: 70px;">
-									<img class="mypicture" src="/marrymate/img/member/${cinfo.img}" style="width:200px;">
+									<img class="mypicture" src="/marrymate/img/com_best/${cinfo.img}" style="width:200px;">
 								</div>
 							</div>
 						</c:forEach>
@@ -217,7 +217,7 @@ function plandel(){
             <div class="booklisttotal">
                 <h4>모든 예약</h4>
                 <div class="stats">
-                    <a href="">${btotalcom}</a>
+                    <a href="myBook.do">${btotalcom}</a>
                 </div>
                 <div class="statsletter">건</div>
             </div>
